@@ -32,10 +32,12 @@ class Quest(models.Model):
     countdown = models.PositiveIntegerField(default=7) # expiry date for looking for offers
     location1 = models.ForeignKey(Location, related_name='im_in') # I'm in ________
     location2 = models.ForeignKey(Location, related_name='need_stuff_from') # and I need stuff from ________
+    postal_code = models.CharField(max_length=32)
     bounty = models.PositiveIntegerField()  # and I'm offering $_______
     description = models.TextField()
     attachement = models.ImageField(upload_to='images/quest/', height_field=4000, width_field=4000)
     recommended = models.BooleanField(default=False) # Best Quests for homepage
+    bid_count = models.PositiveIntegerField(default=0)
 
     def __unicode__(self):  # Python 3: def __str__(self):
         string = "id: \t" + str(self.id) + ",\n\tI'm in " + self.location1.location + " and I need stuff from " + self.location2.location + " and I'm offering $" + str(self.bounty) + ".\n"
@@ -50,6 +52,7 @@ class OfferBid(models.Model):
     pub_date = models.DateTimeField('date published')
     location1 = models.ForeignKey(Location, related_name='im_going_to_bid')   # I'm going to ________
     location2 = models.ForeignKey(Location, related_name='from_bid')   # from ________
+    postal_code = models.CharField(max_length=32)
     countdown = models.PositiveIntegerField() # in ___ days
     description = models.TextField()
     attachement = models.ImageField(upload_to='images/offer_bid/', height_field=4000, width_field=4000)
@@ -69,10 +72,13 @@ class Offer(models.Model):
     pub_date = models.DateTimeField('date published')
     location1 = models.ForeignKey(Location, related_name='im_going_to')   # I'm going to ________
     location2 = models.ForeignKey(Location, related_name='from')   # from ________
+    postal_code = models.CharField(max_length=32)
     countdown = models.PositiveIntegerField() # in ___ days
+    
     description = models.TextField()
     attachement = models.ImageField(upload_to='images/offer/', height_field=4000, width_field=4000)
     recommended = models.BooleanField(default=False) # Best Offers for homepage
+    bid_count = models.PositiveIntegerField(default=0)
 
     def __unicode__(self):  # Python 3: def __str__(self):
         string = "id: \t" + str(self.id) + ",\n\tI'm going to " + self.location1.location + " from " + self.location2.location + " in " + str(self.countdown) + " days.\n"
@@ -88,6 +94,7 @@ class QuestBid(models.Model):
     countdown = models.PositiveIntegerField(default=7) # expiry date for looking for offers
     location1 = models.ForeignKey(Location, related_name='im_in_bid') # I'm in ________
     location2 = models.ForeignKey(Location, related_name='need_stuff_from_bid') # and I need stuff from ________
+    postal_code = models.CharField(max_length=32)
     bounty = models.PositiveIntegerField()  # and I'm offering $_______
     description = models.TextField()
     attachement = models.ImageField(upload_to='images/questbid/', height_field=4000, width_field=4000)

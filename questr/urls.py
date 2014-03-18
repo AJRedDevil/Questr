@@ -10,5 +10,6 @@ urlpatterns = patterns('',
 
     url(r'^$', include('en.urls')),
     url(r'^en/', include('en.urls')),
+    url(r'^user/', include('en.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
