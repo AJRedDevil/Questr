@@ -1,4 +1,5 @@
 from django import forms
+from django.db import models
 
-class ContactForm(forms.Form):
-    email = forms.EmailField()
+class Contact(models.Model):
+	email = models.EmailField()

@@ -12,5 +12,5 @@ urlpatterns = patterns('',
     url(r'^en/', include('en.urls')),
     url(r'^user/', include('en.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^beta/', include('beta.urls')),
+    url(r'^beta/', include('beta.urls', namespace="beta")),
 )

@@ -4,5 +4,5 @@ from beta import views
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
-    url(r'^join/', views.join, name='index'),
+    url(r'^join_beta/', views.join_beta, name='join_beta'),
 )
