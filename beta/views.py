@@ -8,8 +8,10 @@ def index(request):
 
 # def is_valid_email():
 	
-
 def join_beta(request):
 	new_user = Contact( email = request.POST['email'])
 	new_user.save()
-	return HttpResponseRedirect(reverse('beta:index'))
+	return HttpResponseRedirect(reverse('beta:thankyou'))
+	
+def thankyou(request):
+    return render(request, 'beta/thankyou.html')

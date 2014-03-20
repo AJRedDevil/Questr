@@ -63,6 +63,7 @@ input {
 	font-size: 16pt;
 	font-weight: lighter;
 	border-radius: 10px;
+	padding-left: 10px;
 }
 
 input[type=submit] {
@@ -75,8 +76,6 @@ input[type=submit] {
 input[type=submit]:hover {
 	background-color: rgba(150,150,150,0.3);
 }
-
-
 
 ::-webkit-input-placeholder {
    color: rgba(250,250,250,0.9);
