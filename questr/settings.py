@@ -36,9 +36,16 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'en',
     'beta',
+    'registration',
 )
+
+# for django-registration
+ACCOUNT_ACTIVATION_DAYS = 7 
+SITE_ID = 1
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
