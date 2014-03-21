@@ -14,10 +14,10 @@
 
 	{% if user.is_authenticated %}
 	Logged in: {{ user.username }} 
-	(<a href="{% url 'auth_logout' %}">Log out</a> | 
-	<a href="{% url 'auth_password_change' %}">Change password</a>)
+	(<a href="{% url 'registration:auth_logout' %}">Log out</a> | 
+	<a href="{% url 'registration:auth_password_change' %}">Change password</a>)
 	{% else %}
-	<a href="{% url 'auth_login' %}">Log in</a>
+	<a href="{% url 'registration:auth_login' %}">Log in</a>
 	{% endif %}
 	<hr />
         {% endblock %}
