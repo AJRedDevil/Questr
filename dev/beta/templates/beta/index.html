@@ -159,10 +159,8 @@
 			<div class="col-lg-6 col-lg-offset-3">
 			<h1>Sign Up To Be A Beta Tester</h1>
 				<img src=" {% static 'assets/img/ser02.png' %}" width="180" alt="">
-				<form class="form-inline" role="form">
-				  <div class="form-group">
-				    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter your email address">
-				  </div>
+				<form class="form-inline" action="{% url 'beta:join_beta' %}" method="post">
+				    <input type="email" class="form-control" name="email" placeholder="Enter your email address">
 				  <button type="submit" class="btn btn-warning btn-lg">Invite Me!</button>
 				</form>					
 			</div>
