@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'questr.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^$', include('beta.urls')),
+    url(r'^$', include('en.urls')),
     url(r'^en/', include('en.urls', namespace="en")),
     url(r'^user/', include('en.urls')),
     url(r'^admin/', include(admin.site.urls)),

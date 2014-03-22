@@ -28,6 +28,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '127.0.0.1:8000', 'localhost:8000', '
 
 
 # Application definition
+import mailchimp
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -37,7 +38,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'beta',
+    'mailchimp',
 )
+
+# MAILCHIMP_API_KEY = 44521cd4e74f54005bdff4ff7bf98e52-us8
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
