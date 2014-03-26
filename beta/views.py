@@ -8,6 +8,9 @@ import mailchimp
 
 def index(request):
     return render(request, 'beta/index.html')
+
+def thankyou(request):
+    return render(request, 'beta/thankyou.html')
 	
 def join(request):
 	m = mailchimp.Mailchimp('as44521cd4e74f54005bdff4ff7bf98e52-us8')

@@ -1,5 +1,5 @@
 body {
-  background-color: #f2f2f2;
+  background-color: #f3f3f3;
     font-family: 'Lato', sans-serif;
     font-weight: 300;
     font-size: 16px;
@@ -8,6 +8,23 @@ body {
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
 }
+
+.btn {
+	border: rgba(255,255,255,0);
+	background: #FFA107;
+	-moz-box-shadow:    inset 0px -4px 0px 0px #FA8C24;
+	-webkit-box-shadow: inset 0px -4px 0px 0px #FA8C24;
+	box-shadow:         inset 0px -4px 0px 0px #FA8C24;	
+}
+
+.btn:hover {
+	border: rgba(255,255,255,0);
+	background: #FA8C24;
+	-moz-box-shadow:    inset 0px 0px 0px 0px rgba(255,255,255,0);
+	-webkit-box-shadow: inset 0px 0px 0px 0px rgba(255,255,255,0);
+	box-shadow:         0px 0px 0px rgba(255,255,255,0);	
+}
+
 
 /* Titles */
 h1, h2, h3, h4, h5, h6 {
@@ -53,7 +70,6 @@ a {
     -o-transition: color 0.1s ease-in, background 0.1s ease-in;
     transition: color 0.1s ease-in, background 0.1s ease-in;
 }
-
 a:hover,
 a:focus {
     color: #7b7b7b;
@@ -79,8 +95,13 @@ a:after {
     padding: 0;
 }
 
+
+h3 ul li {
+	text-align: center;
+}
+
 .navbar-default {
-	background-color: #3498db;
+	background-color: #5f97d8;
 	border-color: transparent;
 }
 
@@ -110,11 +131,20 @@ i {
 	color: #3498db; 
 }
 
+.profile {
+	padding-top: 10px;
+	min-width: 300px;
+	min-height: 80%;
+	display: inline-block;
+	position: relative;
+	background: #ffffff;
+}
+
 
 /* HeaderWrap */
 #headerwrap {
 	background-image: url(../assets/img/header.png) no-repeat center center;
-	background-color: #3498db;
+	background-color: #5f97d8;
 	margin-top: -20px;
 	padding-top:200px;
 	background-attachment: relative;
@@ -141,4 +171,8 @@ i {
 	font-size: 45px;
 	font-weight: 300;
 	letter-spacing: 1px;
+}
+
+#percentage {
+	float: right;
 }
