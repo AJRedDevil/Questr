@@ -63,16 +63,14 @@ WSGI_APPLICATION = 'questr.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        "default": {
+        'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        "USER": "questr",
-        "PASSWORD": "",
-        "HOST": "localhost",
-        "PORT": "",
+        'NAME': 'questr',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '',
         }
     }
-}
 
 # import dj_database_url
 # DATABASES['default'] =  dj_database_url.config("django.db.backends.postgresql_psycopg2")
