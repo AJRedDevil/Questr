@@ -24,6 +24,9 @@ Icon
 __pycache__/
 *.py[cod]
 
+# Local Settings
+local_settings.py
+
 # C extensions
 *.so
 
