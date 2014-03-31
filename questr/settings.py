@@ -20,15 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'yh)#xk2m_eonio29tzp8^tx2f_+!%a_@x5j!7m0uvta0h&86f%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['.questr.co']
+# ALLOWED_HOSTS = ['.questr.co']
+ALLOWED_HOSTS = ['*']
 
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -43,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'beta',
     'mailchimp',
 )
 
@@ -66,15 +65,17 @@ WSGI_APPLICATION = 'questr.wsgi.application'
 DATABASES = {
     'default': {
         "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "",
-        "USER": "",
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        "USER": "questr",
         "PASSWORD": "",
-        "HOST": "",
+        "HOST": "localhost",
         "PORT": "",
         }
     }
 }
+
+# import dj_database_url
+# DATABASES['default'] =  dj_database_url.config("django.db.backends.postgresql_psycopg2")
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -96,9 +97,10 @@ USE_TZ = True
 import os
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
+STATIC_URL = '/beta/static/'
 
 STATICFILES_DIRS = (
     os.path.join(PROJECT_PATH, 'static'),
 )
 
+import local_setting
