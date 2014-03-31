@@ -20,13 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'yh)#xk2m_eonio29tzp8^tx2f_+!%a_@x5j!7m0uvta0h&86f%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = False
 
-TEMPLATE_DEBUG = True
+# TEMPLATE_DEBUG = False
 
 # ALLOWED_HOSTS = ['.questr.co']
-ALLOWED_HOSTS = ['*']
-
+# ALLOWED_HOSTS = ['*']
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -58,23 +57,6 @@ ROOT_URLCONF = 'questr.urls'
 
 WSGI_APPLICATION = 'questr.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
-DATABASES = {
-        'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'questr',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
-        }
-    }
-
-# import dj_database_url
-# DATABASES['default'] =  dj_database_url.config("django.db.backends.postgresql_psycopg2")
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -92,13 +74,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 # Static asset configuration
+
 import os
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/beta/static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(PROJECT_PATH, 'static'),
 )
 
-import local_setting
+# All local configurations in local_setting
+try:
+    from local_setting import *
+except ImportError:
+    pass   
