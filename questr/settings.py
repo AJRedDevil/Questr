@@ -22,12 +22,22 @@ SECRET_KEY = 'yh)#xk2m_eonio29tzp8^tx2f_+!%a_@x5j!7m0uvta0h&86f%'
 #Append Slash to all cals
 APPEND_SLASH = True
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
+DEBUG = False
 
-# TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = False
 
 # ALLOWED_HOSTS = ['.questr.co']
-# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']
+
+DATABASES = {
+"default": {
+   "ENGINE": "django.db.backends.postgresql_psycopg2",
+    }
+}
+#Database Settings
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
