@@ -24,7 +24,7 @@ __pycache__/
 *.py[cod]
 
 # Local Settings
-local_settings.py
+local_setting.py
 # staticfiles
 staticfiles
 
