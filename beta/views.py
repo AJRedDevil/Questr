@@ -28,7 +28,7 @@ def join(request):
 				mailchimp_handler.ping()										
 				response = mailchimp_handler.subscribe(email)
 				if not response:
-					messageResponse = "You have already been subscribed"
+					messageResponse = "You have already been subscribed!"
 					return render(request, 'beta/index.html', locals())
 
 				messageResponse = "Thanks for joining us.<br>Please check your mailbox.</b>"
@@ -42,6 +42,6 @@ def join(request):
 			messageResponse="Please provide with a valid email address!"
 			return render(request, 'beta/index.html', locals())
 	else:
-		messageResponse = "Please enter the email address"
+		messageResponse = "Please enter an email address!"
 		return render(request, 'beta/index.html', locals())
 
