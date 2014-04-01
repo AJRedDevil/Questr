@@ -11,7 +11,8 @@ from models import Contact
 from libs import mailchimp_handler, validations
 
 def index(request):
-    return render(request, 'beta/index.html')
+	messageResponse = "World's first<br>peer-to-peer courier.<br>Coming soon."
+	return render(request, 'beta/index.html', locals())
 
 # def thankyou(request):
 # 	messageResponse = "Thanks for joining us.<br>Please check your mailbox.</b>"
@@ -35,16 +36,15 @@ def join(request):
 					new_user.save()
 					
 					messageResponse = "Thanks for joining us.<br>Please check your mailbox.</b>"
-					# return HttpResponseRedirect(reverse('beta:thankyou'))	
 					return render(request, 'beta/thankyou.html', locals())
 			except mailchimp.Error, e:
 				# Error for 
 				log.debug(str(e))
-				messageResponse = "Something went wrong"
-				return render(request, 'beta/thankyou.html', locals())
+				messageResponse = "Something went wrong! We're looking onto it!"
+				return render(request, 'beta/index.html', locals())
 		else:
 			messageResponse="Please provide with a valid email address!"
-			return render(request, 'beta/thankyou.html', locals())
+			return render(request, 'beta/index.html', locals())
 	else:
 		messageResponse = "Please enter the email address"
 		return render(request, 'beta/index.html', locals())
