@@ -6,7 +6,6 @@
 # Icon must ends with two \r.
 Icon
 
-
 # Thumbnails
 ._*
 
@@ -23,6 +22,12 @@ Icon
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+
+# Local Settings
+local_setting.py
+Procfile.dev
+# staticfiles
+
 
 # C extensions
 *.so
@@ -62,6 +67,9 @@ coverage.xml
 # Django stuff:
 *.log
 *.pot
+
+#Foreman stuff:
+.env
 
 # Sphinx documentation
 docs/_build/
