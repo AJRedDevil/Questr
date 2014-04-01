@@ -17,15 +17,31 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'rh!a_v1c(d$lvyfjjw%@@%la%tq6)hxb4!9697ho*#=-0&x9uu'
+SECRET_KEY = os.environ['LOCAL_SECRET_KEY']
 
+#Append Slash to all cals
+APPEND_SLASH = True
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '127.0.0.1:8000', 'localhost:8000', '*',]
+# ALLOWED_HOSTS = ['.questr.co']
+ALLOWED_HOSTS = ['*']
 
+DATABASES = {
+"default": {
+   "ENGINE": "django.db.backends.postgresql_psycopg2",
+    }
+}
+#Database Settings for heroku
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+>>>>>>> dev
 
 # Application definition
 import mailchimp
@@ -41,8 +57,6 @@ INSTALLED_APPS = (
     'mailchimp',
 )
 
-# MAILCHIMP_API_KEY = 44521cd4e74f54005bdff4ff7bf98e52-us8
-
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,18 +69,6 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'questr.urls'
 
 WSGI_APPLICATION = 'questr.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -83,11 +85,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-
-STATIC_URL = '/static/'
-
-
 # Static asset configuration
+
 import os
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
@@ -96,3 +95,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_PATH, 'static'),
 )
+# All local configurations in local_setting
+try:
+    from local_setting import *
+except ImportError:
+    pass   
