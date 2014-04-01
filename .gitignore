@@ -68,6 +68,9 @@ coverage.xml
 *.log
 *.pot
 
+#Foreman stuff:
+.env
+
 # Sphinx documentation
 docs/_build/
 

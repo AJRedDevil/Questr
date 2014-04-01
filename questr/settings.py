@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'yh)#xk2m_eonio29tzp8^tx2f_+!%a_@x5j!7m0uvta0h&86f%'
+SECRET_KEY = os.environ['LOCAL_SECRET_KEY']
 
 #Append Slash to all cals
 APPEND_SLASH = True

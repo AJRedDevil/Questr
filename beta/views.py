@@ -5,9 +5,10 @@ from django.contrib import messages
 from django.template import RequestContext, loader
 from models import Contact
 import mailchimp
+import os
 
-API_KEY = "0bcdb957ee18611ed49045a5a1df196d-us8"
-LIST_ID = "7f3d74a524"
+API_KEY = os.environ['MAILCHIMP_API_KEY']
+LIST_ID = os.environ['MAILCHIMP_BETA_INVITATION_LIST_ID']
 
 def index(request):
     return render(request, 'beta/index.html')
