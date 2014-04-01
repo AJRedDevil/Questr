@@ -39,7 +39,7 @@ def join(request):
 				messageResponse = "Something went wrong! We're looking onto it!"
 				return render(request, 'beta/index.html', locals())
 		else:
-			messageResponse="Please provide with a valid email address!"
+			messageResponse="Please provide us with a valid email address!"
 			return render(request, 'beta/index.html', locals())
 	else:
 		messageResponse = "Please enter an email address!"
