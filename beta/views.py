@@ -7,7 +7,7 @@ from django.contrib import messages
 
 import mailchimp
 import logging as log
-from models import Contact
+# from models import Contact
 from libs import mailchimp_handler, validations
 
 def index(request):
@@ -25,18 +25,14 @@ def join(request):
 	if email:
 		if validations.is_valid_email(email):
 			try:
+				mailchimp_handler.ping()										
 				response = mailchimp_handler.subscribe(email)
 				if not response:
 					messageResponse = "You have already been subscribed"
 					return render(request, 'beta/index.html', locals())
-				else:
-					mailchimp_handler.ping()
-					
-					new_user = Contact( email = email)
-					new_user.save()
-					
-					messageResponse = "Thanks for joining us.<br>Please check your mailbox.</b>"
-					return render(request, 'beta/thankyou.html', locals())
+
+				messageResponse = "Thanks for joining us.<br>Please check your mailbox.</b>"
+				return render(request, 'beta/thankyou.html', locals())
 			except mailchimp.Error, e:
 				# Error for 
 				log.debug(str(e))
