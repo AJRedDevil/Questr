@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'beta',
     'mailchimp',
+    'users',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -94,6 +95,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_PATH, 'static'),
 )
+
+# Add our own UserProfile as the backend auth module
+AUTH_USER_MODEL = 'users.UserProfile'
+
 # All local configurations in local_setting
 try:
     from local_setting import *
