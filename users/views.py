@@ -6,8 +6,8 @@ from django.contrib.auth import logout as auth_logout
 def logout(request):
     """Logs out user"""
     auth_logout(request)
-    return render(request, 'user/signup.html', locals())
-
+    return redirect('index')
+    
 def login(request):
     """Home view, displays login mechanism"""
     if request.user.is_authenticated():
