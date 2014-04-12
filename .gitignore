@@ -75,3 +75,6 @@ coverage.xml
 docs/_build/
 
 ##### Python/Django end #####
+
+##### Questr ####
+localtemplates/

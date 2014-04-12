@@ -18,6 +18,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['LOCAL_SECRET_KEY']
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ['SOCIAL_AUTH_FACEBOOK_KEY']
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ['SOCIAL_AUTH_FACEBOOK_SECRET']
 
 #Append Slash to all cals
 APPEND_SLASH = True
@@ -50,8 +52,10 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
     'beta',
     'mailchimp',
     'users',
@@ -97,7 +101,40 @@ STATICFILES_DIRS = (
 )
 
 # Add our own UserProfile as the backend auth module
-AUTH_USER_MODEL = 'users.UserProfile'
+AUTH_USER_MODEL = 'users.QuestrUserProfile'
+
+
+# For Social Network Authentication
+# User Model
+LOGIN_URL = '/user/login/'
+# LOGIN_ERROR_URL = '/user/login/'
+LOGIN_REDIRECT_URL = '/user/profile/'
+SOCIAL_AUTH_USER_MODEL = 'users.QuestrUserProfile'
+SOCIAL_AUTH_PIPELINE = (
+        'social.pipeline.social_auth.social_details',
+        'social.pipeline.social_auth.social_uid',
+        'social.pipeline.social_auth.auth_allowed',
+        'social.pipeline.social_auth.social_user',
+        'social.pipeline.user.get_username',
+        'social.pipeline.user.create_user',
+        'social.pipeline.mail.mail_validation',
+        'social.pipeline.social_auth.associate_user',
+        'social.pipeline.social_auth.load_extra_data',
+        'social.pipeline.user.user_details'
+    )
+
+# Auth Backend
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.twitter.TwitterOAuth',
+    'social.backends.google.GoogleOAuth2',
+    )
+
+#Template context processors for social auth
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
+)
 
 # All local configurations in local_setting
 try:

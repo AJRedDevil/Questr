@@ -1,12 +1,13 @@
 from django.conf.urls import patterns, include, url
 
-from django.contrib import admin
-admin.autodiscover()
+# from views import * as mainview
+from users.views import login
+import views as mainview
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'questr.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
     url(r'^$', include('beta.urls')),
     url(r'^beta/', include('beta.urls')),
+    url(r'^user/', include('users.urls')),
 )
+
