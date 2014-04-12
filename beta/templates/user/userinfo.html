@@ -1,0 +1,14 @@
+<title>{{user.first_name}}'s Profile</title>
+{% block content %}
+<p>{{fname}} {{lname}}'s Profile Information</p>
+{%if email%}
+<p>Email Address</p><b>{{email}}</b>
+{%endif%}
+<p>BioGraphy</p><b>{{bio}}</b>
+<p>Email Verified?</p><b>{{email_verified}}</b>
+<p>Is Account Active?</p><b>{{is_active}}</b>
+<p>Account Status</p><b>{{account_status}}</b>
+<p>Last Online</p><b>{{last_online}}</b>
+<p>User Since</p><b>{{user_since}}</b>
+<p>Avatar</p><b>{{avatar}}</b>
+{% endblock %}
