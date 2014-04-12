@@ -37,6 +37,7 @@ def isActive(status):
 def isEmailVerified(status):
     return "Yes" if status else "No"
 
+@login_required
 def getUserInfo(request, username):
     # from projects import getInvolvedProjects,getAdminProjects
     try:
