@@ -1,0 +1,4 @@
+AuthName "Staging Site" 
+AuthType Basic
+AuthUserFile .htpasswd
+Require valid-user 

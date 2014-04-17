@@ -1,5 +1,19 @@
-<title>{{user.first_name}}'s Dashboard</title>
+{% extends "user/homepage.html" %}
 {% block content %}
-<p>You are logged in as {{ user.username }}!</p>
-<p><a href={% url "logout" %}>Click here to Logout</a>
-<{% endblock %}
+<p>{{fname}} {{lname}}'s Profile Information</p>
+{%if email%}
+<p>Email Address</p><b>{{email}}</b>
+{%endif%}
+<p>BioGraphy</p><b>{{bio}}</b>
+{% if not email_verified %}
+    <p>{{email}}</p>
+{% else %}
+    <p>Email Not Verified:<a href="#"> Click here to send a verification link</a></p>
+{% endif %}
+<p>Is Account Active?</p><b>{{is_active}}</b>
+<p>Account Status</p><b>{{account_status}}</b>
+<p>Last Online</p><b>{{last_online}}</b>
+<p>User Since</p><b>{{user_since}}</b>
+<p>Avatar</p><b>{{avatar}}</b>
+<p><a href={% url "editprofile" %}>Edit Profile</a>
+{% endblock %}

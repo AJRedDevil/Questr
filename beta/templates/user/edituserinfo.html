@@ -1,0 +1,11 @@
+{% extends "user/homepage.html" %}
+{% block content %}
+<p>{{messageresponse}}</p>
+<form action="" method="POST">
+    {% csrf_token %}
+        {{user_form.as_p}}
+        <input type="submit" value="Save Profile" name="save">
+</form>
+{% endblock content %}
+
+

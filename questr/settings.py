@@ -108,7 +108,7 @@ AUTH_USER_MODEL = 'users.QuestrUserProfile'
 # User Model
 LOGIN_URL = '/user/login/'
 # LOGIN_ERROR_URL = '/user/login/'
-LOGIN_REDIRECT_URL = '/user/profile/'
+LOGIN_REDIRECT_URL = '/user/home/'
 SOCIAL_AUTH_USER_MODEL = 'users.QuestrUserProfile'
 SOCIAL_AUTH_PIPELINE = (
         'social.pipeline.social_auth.social_details',
