@@ -135,6 +135,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'social.apps.django_app.context_processors.backends',
     'social.apps.django_app.context_processors.login_redirect',
 )
+TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
+TEMPLATE_DIRS = (TEMPLATE_PATH)
 
 # All local configurations in local_setting
 try:

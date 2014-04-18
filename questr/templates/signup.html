@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+{% load staticfiles %}
 <html lang="en">
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
@@ -16,9 +16,9 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <!-- Le styles -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/base.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/bootstrap-responsive.min.css' %}" rel="stylesheet">
 </head>
 
 <body id="start">
@@ -123,20 +123,20 @@
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
                             <input class="form-control input-lg" name=
-                            "firstname" placeholder="First Name" type="text"
+                            "first_name" placeholder="First Name" type="text"
                             value="">
                         </div>
 
                         <div class="col-xs-6 col-md-6">
                             <input class="form-control input-lg" name=
-                            "lastname" placeholder="Last Name" type="text"
+                            "last_name" placeholder="Last Name" type="text"
                             value="">
                         </div>
                     </div><input class="form-control input-lg" name="email"
                     placeholder="Your Email" type="text" value=""><input class=
-                    "form-control input-lg" name="password" placeholder=
+                    "form-control input-lg" name="password1" placeholder=
                     "Password" type="password" value=""><input class=
-                    "form-control input-lg" name="confirm_password"
+                    "form-control input-lg" name="password2"
                     placeholder="Confirm Password" type="password" value="">
                     <label>Birth Date</label>
 
@@ -656,6 +656,6 @@
     </div><!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/libs/jquery.js"></script><script src="bootstrap/js/bootstrap.min.js"></script><script src="js/base.js" type="text/javascript"></script>
+    <script src="{% static 'js/libs/jquery.js' %}"></script><script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script><script src="{% static 'js/base.js' %}" type="text/javascript"></script>
 </body>
 </html>
