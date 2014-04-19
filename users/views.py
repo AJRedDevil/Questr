@@ -35,7 +35,7 @@ def signup(request):
         user_form = QuestrUserCreationForm(request.POST)
         if user_form.is_valid():
             userdata = user_form.save()
-            authenticate(username=userdata.username, password=userdata.password)
+            authenticate(username=userdata.email, password=userdata.password)
             userdata.backend='django.contrib.auth.backends.ModelBackend'
             auth_login(request, userdata)
             return redirect('home')
@@ -93,7 +93,7 @@ def getUserInfo(request, username):
     else:
         lname = user.last_name
         fname = user.first_name
-        if not user.privacytoggle:            
+        if not user.privacy:            
             email = user.email
         bio = user.biography
         email_verified = isEmailVerified(user.email_status)

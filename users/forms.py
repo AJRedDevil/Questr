@@ -13,12 +13,12 @@ class QuestrUserChangeForm(UserChangeForm):
             del self.fields['password']
 
             #changed label for form items
-        self.fields['privacytoggle'].label = "Privacy"
+        self.fields['privacy'].label = "Privacy"
         self.fields['biography'].label = "Your biography"
 
     class Meta:
         model = QuestrUserProfile
-        fields = ['first_name','last_name','username','email','phone','biography','privacytoggle']
+        fields = ['first_name','last_name','username','email','phone','biography','privacy']
         exclude = ('username.help_text',)
 
 
