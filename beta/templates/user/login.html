@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Questr - Home</title>
+    <meta content=
+    "Responsive example integrating Twitter Bootstrap and jQuery Masonry" name=
+    "description">
+    <meta content="Maurizio Conventi" name="author">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- Le styles -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/bootstrap-responsive.min.css' %}" rel="stylesheet">
+</head>
+
+<body id="start">
+    <!-- This is the overlay DIV that is displayed while loading a new page -->
+
+    <div id="loader"></div>
+
+    <div class="container navbar-container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <nav class="navbar navbar-default navbar-static-top">
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand"href="#">Brand</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id=
+                    "bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Link</a></li>
+
+                            <li><a href="#">Link</a></li>
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle=
+                                "dropdown" href="#">Dropdown</a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+
+                                    <li><a href="#">Another action</a></li>
+
+                                    <li><a href="#">Something else
+                                    here</a></li>
+
+                                    <li><a href="#">Separated link</a></li>
+
+                                    <li><a href="#">One more separated
+                                    link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <form class="navbar-form navbar-left">{% csrf_token %}
+                            <div class="form-group">
+                                <input class="form-control" type="text">
+                            </div><button class="btn btn-default" type=
+                            "submit">Submit</button>
+                        </form>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">Link</a></li>
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle=
+                                "dropdown" href="#">Dropdown</a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+
+                                    <li><a href="#">Another action</a></li>
+
+                                    <li><a href="#">Something else
+                                    here</a></li>
+
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div><!-- End of main navbar -->
+        <!-- Secondary navbar:  holds search, Quests, and Questrs -->
+
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <nav class="navbar navbar-default navbar-static-top secondary-nav">
+                    <div class="navbar-header"></div>
+                    <center>
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="#">Quests</a>
+                        </li>
+                        <li><a href="#">Questrs</a></li>
+                    </ul>
+                </center>
+                </nav>
+            </div>
+        </div><!-- End of Secondary navbar -->
+    </div><!-- End of navbar-container -->
+
+    <div class="container" id="wrap">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <form accept-charset="utf-8" action="" class="form" method="post"> {% csrf_token %}
+                    <legend>Login</legend>
+                        <input class="form-control input-lg" name="username"placeholder="Your Username" type="text" value="">
+                        {% if auth_form.username.errors %}
+                            {{ auth_form.username.errors }}
+                        {% endif %}
+                        <input class="form-control input-lg" name="password" placeholder="Password" type="password" value="">
+                        {% if auth_form.password.errors %}
+                            {{ auth_form.password.errors }}
+                        {% endif %}
+                        {% if auth_form.errors %}
+                            {{ auth_form.non_field_errors }}
+                        {% endif %}
+                    <button class= "btn btn-lg btn-primary btn-block signup-btn" type="submit">Start a quest</button>
+                </form>
+                OR <a href="/user/signup">Signup!</a>
+                <p><a href="{% url 'social:begin' 'facebook' %}"><img src="http://developers.facebook.com/images/devsite/login-button.png"></a><br /></p>
+            </div>
+        </div>
+    </div><!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/libs/jquery.js' %}"></script><script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script><script src="{% static 'js/base.js' %}" type="text/javascript"></script>
+</body>
+</html>

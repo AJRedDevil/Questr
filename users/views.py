@@ -5,20 +5,26 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from django.http import Http404
 from .models import QuestrUserProfile
-from .forms import QuestrUserChangeForm, QuestrUserCreationForm
+from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm
 import logging
 
 # Create your views here.
 def logout(request):
     """Logs out user"""
     auth_logout(request)
-    return redirect('index')
+    return redirect('user')
     
 def login(request):
     """Home view, displays login mechanism"""
     if request.user.is_authenticated():
         return redirect('home')
-    return render(request, 'user/signup.html', locals())
+    if request.method == "POST":   
+        auth_form = QuestrLocalAuthenticationForm(data=request.POST)
+        if auth_form.is_valid():
+            logging.warn("is valid")
+            auth_login(request, auth_form.get_user())
+            return redirect('home')
+    return render(request, 'user/login.html', locals())
 
 def signup(request):
     """Signup, if request == POST, creates the user"""
