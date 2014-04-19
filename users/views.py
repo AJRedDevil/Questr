@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 from django.http import Http404
 from .models import QuestrUserProfile
 from .forms import QuestrUserChangeForm, QuestrUserCreationForm
-
+import logging
 
 # Create your views here.
 def logout(request):
@@ -25,7 +25,6 @@ def signup(request):
     if request.method == "POST":
         user_form = QuestrUserCreationForm(request.POST)
         if user_form.is_valid():
-            user_form.check_password_match()
             userdata = user_form.save()
             authenticate(username=userdata.username, password=userdata.password)
             userdata.backend='django.contrib.auth.backends.ModelBackend'
@@ -33,6 +32,7 @@ def signup(request):
             return redirect('home')
         return render(request, 'signup.html', locals())
     else:
+        user_form = QuestrUserCreationForm()
         return render(request, 'signup.html', locals())
 
 @login_required
