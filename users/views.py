@@ -12,23 +12,26 @@ import logging
 def logout(request):
     """Logs out user"""
     auth_logout(request)
+    nextlink="signup"
     return redirect('user')
     
 def login(request):
     """Home view, displays login mechanism"""
+    nextlink="signup"
     if request.user.is_authenticated():
         return redirect('home')
     if request.method == "POST":   
         auth_form = QuestrLocalAuthenticationForm(data=request.POST)
         if auth_form.is_valid():
-            logging.warn("is valid")
             auth_login(request, auth_form.get_user())
             return redirect('home')
-    return render(request, 'user/login.html', locals())
+    return render(request, 'login.html', locals())
 
 def signup(request):
     """Signup, if request == POST, creates the user"""
+    nextlink="login"
     if request.method == "POST":
+        nextlink="login"
         user_form = QuestrUserCreationForm(request.POST)
         if user_form.is_valid():
             userdata = user_form.save()
@@ -44,6 +47,7 @@ def signup(request):
 @login_required
 def home(request):
     """Post login this is returned and displays user's home page"""
+    nextlink="settings"
     return render(request,'user/homepage.html', locals())
 
 @login_required

@@ -1,0 +1,26 @@
+{% extends "mainbase.html" %}
+{% block userform %}    
+    <div class="container" id="wrap">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <form accept-charset="utf-8" action="" class="form" method="post"> {% csrf_token %}
+                    <legend>Login</legend>
+                        <input class="form-control input-lg" name="username"placeholder="Your Username" type="text" value="">
+                        {% if auth_form.username.errors %}
+                            {{ auth_form.username.errors }}
+                        {% endif %}
+                        <input class="form-control input-lg" name="password" placeholder="Password" type="password" value="">
+                        {% if auth_form.password.errors %}
+                            {{ auth_form.password.errors }}
+                        {% endif %}
+                        {% if auth_form.errors %}
+                            {{ auth_form.non_field_errors }}
+                        {% endif %}
+                    <button class= "btn btn-lg btn-primary btn-block signup-btn" type="submit">Start a quest</button>
+                </form>
+                OR <a href="/user/signup">Signup!</a>
+                <p><a href="{% url 'social:begin' 'facebook' %}"><img src="http://developers.facebook.com/images/devsite/login-button.png"></a><br /></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
