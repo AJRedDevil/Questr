@@ -109,6 +109,7 @@ AUTH_USER_MODEL = 'users.QuestrUserProfile'
 LOGIN_URL = '/user/login/'
 # LOGIN_ERROR_URL = '/user/login/'
 LOGIN_REDIRECT_URL = '/user/home/'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/beta/'
 SOCIAL_AUTH_USER_MODEL = 'users.QuestrUserProfile'
 SOCIAL_AUTH_PIPELINE = (
         'social.pipeline.social_auth.social_details',
@@ -126,8 +127,7 @@ SOCIAL_AUTH_PIPELINE = (
 # Auth Backend
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
-    'social.backends.twitter.TwitterOAuth',
-    'social.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
     )
 
 #Template context processors for social auth

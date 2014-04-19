@@ -9,5 +9,5 @@ class QuestrUserProfile(AbstractUser):
     avatar_file_name = models.CharField(_('avatar_file_name'),max_length=765, blank=True)
     biography = models.TextField(_('biography'),max_length=9999, blank=True)
     account_status = models.IntegerField(_('account_status'), max_length=1, blank=True, default=1)
-    password_status = models.BooleanField(default=False, blank=False)
-    privacyToggle = models.BooleanField(default=False, blank=False)
+    privacytoggle = models.BooleanField(default=False, blank=False)
+    gender = models.CharField(max_length=1, blank=False)

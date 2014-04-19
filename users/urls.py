@@ -5,6 +5,7 @@ import views as userviews
 urlpatterns = patterns('',
     url(r'', include('social.apps.django_app.urls', namespace='social')),
     url(r'^$', userviews.login, name='user'),
+    url(r'^signup/$', userviews.signup, name='signup'),
     url(r'^login/$', userviews.login, name='login'),
     url(r'^home/$', userviews.home, name='home'),
     url(r'^profile/$', userviews.profile, name='profile'),

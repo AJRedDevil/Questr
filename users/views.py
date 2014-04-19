@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import authenticate
 from django.http import Http404
 from .models import QuestrUserProfile
-from .forms import QuestrUserProfileForm
+from .forms import QuestrUserChangeForm, QuestrUserCreationForm
+
 
 # Create your views here.
 def logout(request):
@@ -16,6 +19,21 @@ def login(request):
     if request.user.is_authenticated():
         return redirect('home')
     return render(request, 'user/signup.html', locals())
+
+def signup(request):
+    """Signup, if request == POST, creates the user"""
+    if request.method == "POST":
+        user_form = QuestrUserCreationForm(request.POST)
+        if user_form.is_valid():
+            user_form.check_password_match()
+            userdata = user_form.save()
+            authenticate(username=userdata.username, password=userdata.password)
+            userdata.backend='django.contrib.auth.backends.ModelBackend'
+            auth_login(request, userdata)
+            return redirect('home')
+        return render(request, 'signup.html', locals())
+    else:
+        return render(request, 'signup.html', locals())
 
 @login_required
 def home(request):
@@ -65,7 +83,7 @@ def getUserInfo(request, username):
     else:
         lname = user.last_name
         fname = user.first_name
-        if not user.privacyToggle:            
+        if not user.privacytoggle:            
             email = user.email
         bio = user.biography
         email_verified = isEmailVerified(user.email_status)
@@ -82,7 +100,7 @@ def getUserInfo(request, username):
 def editUserInfo(request):
     if request.method == "POST":
         try:
-            user_form = QuestrUserProfileForm(request.POST, instance=request.user)
+            user_form = QuestrUserChangeForm(request.POST, instance=request.user)
         except QuestrUserProfile.DoesNotExist:
             raise Http404
             return render(request,'error_pages/404.html', locals())        
@@ -92,7 +110,7 @@ def editUserInfo(request):
             return render(request, "user/edituserinfo.html",locals())
     else:
         try:
-            user_form = QuestrUserProfileForm(instance=request.user)
+            user_form = QuestrUserChangeForm(instance=request.user)
             return render(request, "user/edituserinfo.html",locals())
         except QuestrUserProfile.DoesNotExist:
             raise Http404

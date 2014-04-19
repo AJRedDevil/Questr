@@ -61,7 +61,7 @@
                             </li>
                         </ul>
 
-                        <form class="navbar-form navbar-left">
+                        <form class="navbar-form navbar-left">{% csrf_token %}
                             <div class="form-group">
                                 <input class="form-control" type="text">
                             </div><button class="btn btn-default" type=
@@ -113,31 +113,25 @@
     <div class="container" id="wrap">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <form accept-charset="utf-8" action="r" class="form" method=
-                "post">
+                <form accept-charset="utf-8" action="" class="form" method="post"> {% csrf_token %}
                     <legend>Sign Up</legend>
 
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
-                            <input class="form-control input-lg" name=
-                            "first_name" placeholder="First Name" type="text"
-                            value="">
+                            <input class="form-control input-lg" name="first_name" placeholder="First Name" type="text" value="">
                         </div>
 
                         <div class="col-xs-6 col-md-6">
-                            <input class="form-control input-lg" name=
-                            "last_name" placeholder="Last Name" type="text"
-                            value="">
+                            <input class="form-control input-lg" name="last_name" placeholder="Last Name" type="text" value="">
                         </div>
-                    </div><input class="form-control input-lg" name="email"
-                    placeholder="Your Email" type="text" value=""><input class=
-                    "form-control input-lg" name="password1" placeholder=
-                    "Password" type="password" value=""><input class=
-                    "form-control input-lg" name="password2"
-                    placeholder="Confirm Password" type="password" value="">
+                    </div>
+                        <input class="form-control input-lg" name="email" placeholder="Your Email" type="text" value="">
+                        <input class="form-control input-lg" name="username"placeholder="Your Username" type="text" value="">
+                        <input class="form-control input-lg" name="password1" placeholder="Password" type="password" value="">
+                        <input class="form-control input-lg" name="password2" placeholder="Confirm Password" type="password" value="">
                     <label>Birth Date</label>
 
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-xs-4 col-md-4">
                             <select class="form-control input-lg" name="month">
                                 <option value="01">
@@ -637,16 +631,16 @@
                                 </option>
                             </select>
                         </div>
-                    </div><label>Gender :</label> <label class=
-                    "radio-inline"><input id="male" name="gender" type="radio"
-                    value="M"> Male</label> <label class=
-                    "radio-inline"><input id="female" name="gender" type=
-                    "radio" value="F"> Female</label><br>
-                    <span class="help-block">By clicking Create my account, you
-                    agree to our Terms and that you have read our Data Use
-                    Policy, including our Cookie Use.</span> <button class=
-                    "btn btn-lg btn-primary btn-block signup-btn" type=
-                    "submit">Create my account</button>
+                    </div> -->
+                        <label>Gender :</label>
+                            <label class="radio-inline">
+                                <input id="male" name="gender" type="radio" value="M">Male
+                            </label>
+                            <label class="radio-inline">
+                            <input id="female" name="gender" type="radio" value="F"> Female
+                            </label><br>
+                    <span class="help-block">By clicking Create my account, you agree to our Terms and that you have read our Data Use Policy, including our Cookie Use.</span> 
+                    <button class= "btn btn-lg btn-primary btn-block signup-btn" type="submit">Create my account</button>
                 </form>
             </div>
         </div>
