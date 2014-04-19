@@ -3,7 +3,12 @@
 <p>{{messageresponse}}</p>
 <form action="" method="POST">
     {% csrf_token %}
-        {{user_form.as_p}}
+		<input name="first_name" placeholder="First Name" type="text" value={{ user_data.first_name }}>
+		<input name="last_name" placeholder="Last Name" type="text" value={{ user_data.last_name }}>
+		<input name="username" placeholder="Your Username" type="text" value={{ user_data.username }}>
+		<input name="email" placeholder="Your Email" type="text" value={{ user_data.email }}>
+		<input name="bio" placeholder="Your Biography" type="text" value="">
+		<input name="phone" placeholder="Your Phone" type="text" value="">
         <input type="submit" value="Save Profile" name="save">
 </form>
 {% endblock content %}
