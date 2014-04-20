@@ -112,7 +112,7 @@ LOGIN_REDIRECT_URL = '/user/home/'
 # SOCIAL_AUTH_LOGIN_ERROR_URL = '/beta/'
 SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 SOCIAL_AUTH_USER_MODEL = 'users.QuestrUserProfile'
-SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email','first_name', 'last_name']
+SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email','first_name','last_name','username',]
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_PIPELINE = (
         'social.pipeline.social_auth.social_details',
@@ -122,7 +122,6 @@ SOCIAL_AUTH_PIPELINE = (
         'social.pipeline.user.get_username',
         'users.pipeline.required_fields',
         'users.pipeline.create_user',
-        # 'social.pipeline.user.create_user',
         'social.pipeline.mail.mail_validation',
         'social.pipeline.social_auth.associate_user',
         'social.pipeline.social_auth.load_extra_data',

@@ -21,7 +21,8 @@ def required_fields(strategy, details, user=None, is_new=False, *args, **kwargs)
             return
         else:
             kwargs['request'].session['details'] = details
-            return redirect('saveprofile')
+            # return redirect('saveprofile') # commented for later use
+            return
 
 
 def create_user(strategy, details, response, uid, user=None, *args, **kwargs):

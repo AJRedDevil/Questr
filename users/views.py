@@ -127,20 +127,19 @@ def editUserInfo(request):
             return render(request,'error_pages/404.html', locals())
     return render(request, "user/edituserinfo.html",locals())
 
-def saveUserInfo(request):
-    user_data = request.session.get('details')
-    if request.method == "POST":
-        request.session['first_name'] = request.POST.get('first_name')
-        request.session['last_name'] = request.POST.get('last_name')
-        request.session['username'] = request.POST.get('username')
-        request.session['email'] = request.POST.get('email')
-        request.session['biography'] = request.POST.get('bio')
-        request.session['phone'] = request.POST.get('phone')
-        backend = request.session['partial_pipeline']['backend']
-        return redirect('social:complete', backend=backend)
-    else:
-        return render(request, "user/edituserinfo.html",locals())
-
+## the below has been commented for later use ##
+# def saveUserInfo(request):
+#     user_data = request.session.get('details')
+#     if request.method == "POST":
+#         logging.warn(request.session['details']['username'])
+#         request.session['first_name'] = request.session['details']['first_name']
+#         request.session['last_name'] = request.session['details']['last_name']
+#         request.session['username'] = request.session['details']['username']
+#         request.session['email'] = request.session['details']['email']
+#         backend = request.session['partial_pipeline']['backend']
+#         return redirect('social:complete', backend=backend)
+#     else:
+#         return render(request, "user/edituserinfo.html",locals())
 
 
 
