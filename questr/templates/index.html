@@ -1,141 +1,14 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questr - Home</title>
-    <meta name="description" content="Responsive example integrating Twitter Bootstrap and jQuery Masonry">
-    <meta name="author" content="Maurizio Conventi">
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Le styles -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/base.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
-</head>
-
-  <body id="start">
-  
-  <!-- This is the overlay DIV that is displayed while loading a new page -->
-	<div id="loader"></div>
-
-
- <div class="container navbar-container">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			
-			
-			<nav class="navbar navbar-default navbar-static-top" role="navigation">
-				<div class="navbar-header">
-					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">Brand</a>
-				</div>
-				
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li class="active">
-							<a href="#">Link</a>
-						</li>
-						<li>
-							<a href="#">Link</a>
-						</li>
-						<li class="dropdown">
-							 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="#">Action</a>
-								</li>
-								<li>
-									<a href="#">Another action</a>
-								</li>
-								<li>
-									<a href="#">Something else here</a>
-								</li>
-								<li class="divider">
-								</li>
-								<li>
-									<a href="#">Separated link</a>
-								</li>
-								<li class="divider">
-								</li>
-								<li>
-									<a href="#">One more separated link</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-					<form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" />
-						</div> <button type="submit" class="btn btn-default">Submit</button>
-					</form>
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<a href="#">Link</a>
-						</li>
-											
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>						
-							
-							<ul class="dropdown-menu">
-								<li>
-									<a href="#">Action</a>
-								</li>
-								<li>
-									<a href="#">Another action</a>
-								</li>
-								<li>
-									<a href="#">Something else here</a>
-								</li>
-								<li class="divider">
-								</li>
-								<li>
-									<a href="#">Separated link</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>				
-			</nav>		
-		</div>
-	</div>	<!-- End of main navbar -->		
-	
-	<!-- Secondary navbar:  holds search, Quests, and Questrs -->
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<nav class="navbar navbar-default navbar-static-top secondary-nav" role="navigation">
-				<div class="navbar-header"></div>
-											
-				<center>
-				<ul class="nav navbar-nav">
-										
-					<li class="active">
-						<a href="#">Quests</a>
-					</li>
-					<li>
-						<a href="#">Questrs</a>
-					</li>						
-				</ul>
-				</center>															
-			</nav>		
-		</div>
-	</div>	<!-- End of Secondary navbar -->
-</div>	<!-- End of navbar-container -->         
-
-      
-           
-        <!-- This is the main container (#scroll-container) -->
+{% extends "mainbase.html" %}
+{% load staticfiles %}
+{% block content %}
+<!-- This is the main container (#scroll-container) -->
 		<div id="scroll-container">
             <div id="content">
-                                           
               	<!-- Single post -->
                 <div class="feature">             
                 	<div class="picture">
 						<a class="image" title="Title" href="#">				
-							<img src="img/pup.jpg">
+							<img src={% static 'img/pup.jpg' %}>
 						</a>
 						
 						<div class="item-content">
@@ -161,15 +34,13 @@
 							</div>	<!-- End of meta -->
 						</div>	<!-- End of item-content -->
                 	</div>	<!-- End of picture -->
-                </div>	<!-- End of feature -->
-                
-                
-                
-                <!-- Single post -->
+                </div>	<!-- End of feature -->       
+                                                         
+              	<!-- Single post -->
                 <div class="feature">             
                 	<div class="picture">
 						<a class="image" title="Title" href="#">				
-							<img src="img/pup.jpg">
+							<img src={% static 'img/pup.jpg' %}>
 						</a>
 						
 						<div class="item-content">
@@ -195,14 +66,13 @@
 							</div>	<!-- End of meta -->
 						</div>	<!-- End of item-content -->
                 	</div>	<!-- End of picture -->
-                </div>	<!-- End of feature -->
-                
-                
-                <!-- Single post -->
+                </div>	<!-- End of feature -->  
+                                                         
+              	<!-- Single post -->
                 <div class="feature">             
                 	<div class="picture">
 						<a class="image" title="Title" href="#">				
-							<img src="img/pup.jpg">
+							<img src={% static 'img/pup.jpg' %}>
 						</a>
 						
 						<div class="item-content">
@@ -228,16 +98,13 @@
 							</div>	<!-- End of meta -->
 						</div>	<!-- End of item-content -->
                 	</div>	<!-- End of picture -->
-                </div>	<!-- End of feature -->
-                
-                
-                
-                
-                <!-- Single post -->
+                </div>	<!-- End of feature -->  
+                                                          
+              	<!-- Single post -->
                 <div class="feature">             
                 	<div class="picture">
 						<a class="image" title="Title" href="#">				
-							<img src="img/pup.jpg">
+							<img src={% static 'img/pup.jpg' %}>
 						</a>
 						
 						<div class="item-content">
@@ -263,16 +130,13 @@
 							</div>	<!-- End of meta -->
 						</div>	<!-- End of item-content -->
                 	</div>	<!-- End of picture -->
-                </div>	<!-- End of feature -->
-                
-                
-                
-                
-                <!-- Single post -->
+                </div>	<!-- End of feature -->  
+                                                          
+              	<!-- Single post -->
                 <div class="feature">             
                 	<div class="picture">
 						<a class="image" title="Title" href="#">				
-							<img src="img/pup.jpg">
+							<img src={% static 'img/pup.jpg' %}>
 						</a>
 						
 						<div class="item-content">
@@ -298,16 +162,13 @@
 							</div>	<!-- End of meta -->
 						</div>	<!-- End of item-content -->
                 	</div>	<!-- End of picture -->
-                </div>	<!-- End of feature -->
-                
-                
-                
-                
-                <!-- Single post -->
+                </div>	<!-- End of feature -->  
+                                                          
+              	<!-- Single post -->
                 <div class="feature">             
                 	<div class="picture">
 						<a class="image" title="Title" href="#">				
-							<img src="img/pup.jpg">
+							<img src={% static 'img/pup.jpg' %}>
 						</a>
 						
 						<div class="item-content">
@@ -333,16 +194,13 @@
 							</div>	<!-- End of meta -->
 						</div>	<!-- End of item-content -->
                 	</div>	<!-- End of picture -->
-                </div>	<!-- End of feature -->
-                
-                
-                
-                
-                <!-- Single post -->
+                </div>	<!-- End of feature -->  
+                                                          
+              	<!-- Single post -->
                 <div class="feature">             
                 	<div class="picture">
 						<a class="image" title="Title" href="#">				
-							<img src="img/pup.jpg">
+							<img src={% static 'img/pup.jpg' %}>
 						</a>
 						
 						<div class="item-content">
@@ -368,16 +226,13 @@
 							</div>	<!-- End of meta -->
 						</div>	<!-- End of item-content -->
                 	</div>	<!-- End of picture -->
-                </div>	<!-- End of feature -->
-                
-                
-                
-                
-                <!-- Single post -->
+                </div>	<!-- End of feature -->  
+                                                          
+              	<!-- Single post -->
                 <div class="feature">             
                 	<div class="picture">
 						<a class="image" title="Title" href="#">				
-							<img src="img/pup.jpg">
+							<img src={% static 'img/pup.jpg' %}>
 						</a>
 						
 						<div class="item-content">
@@ -403,16 +258,13 @@
 							</div>	<!-- End of meta -->
 						</div>	<!-- End of item-content -->
                 	</div>	<!-- End of picture -->
-                </div>	<!-- End of feature -->
-                
-                
-                
-                
-                <!-- Single post -->
+                </div>	<!-- End of feature -->  
+                                                          
+              	<!-- Single post -->
                 <div class="feature">             
                 	<div class="picture">
 						<a class="image" title="Title" href="#">				
-							<img src="img/pup.jpg">
+							<img src={% static 'img/pup.jpg' %}>
 						</a>
 						
 						<div class="item-content">
@@ -438,16 +290,13 @@
 							</div>	<!-- End of meta -->
 						</div>	<!-- End of item-content -->
                 	</div>	<!-- End of picture -->
-                </div>	<!-- End of feature -->
-
-
-
-
-                <!-- Single post -->
+                </div>	<!-- End of feature -->  
+                                                          
+              	<!-- Single post -->
                 <div class="feature">             
                 	<div class="picture">
 						<a class="image" title="Title" href="#">				
-							<img src="img/pup.jpg">
+							<img src={% static 'img/pup.jpg' %}>
 						</a>
 						
 						<div class="item-content">
@@ -473,16 +322,13 @@
 							</div>	<!-- End of meta -->
 						</div>	<!-- End of item-content -->
                 	</div>	<!-- End of picture -->
-                </div>	<!-- End of feature -->
-                
-                
-                
-                
-                <!-- Single post -->
+                </div>	<!-- End of feature -->  
+                                                          
+              	<!-- Single post -->
                 <div class="feature">             
                 	<div class="picture">
 						<a class="image" title="Title" href="#">				
-							<img src="img/pup.jpg">
+							<img src={% static 'img/pup.jpg' %}>
 						</a>
 						
 						<div class="item-content">
@@ -508,16 +354,13 @@
 							</div>	<!-- End of meta -->
 						</div>	<!-- End of item-content -->
                 	</div>	<!-- End of picture -->
-                </div>	<!-- End of feature -->
-                
-                
-                
-                
-                <!-- Single post -->
+                </div>	<!-- End of feature -->  
+                                                          
+              	<!-- Single post -->
                 <div class="feature">             
                 	<div class="picture">
 						<a class="image" title="Title" href="#">				
-							<img src="img/pup.jpg">
+							<img src={% static 'img/pup.jpg' %}>
 						</a>
 						
 						<div class="item-content">
@@ -543,32 +386,25 @@
 							</div>	<!-- End of meta -->
 						</div>	<!-- End of item-content -->
                 	</div>	<!-- End of picture -->
-                </div>	<!-- End of feature -->
-              
-                
-                     
-                                                
+                </div>	<!-- End of feature -->  
             </div>	<!-- End of content -->         
          </div>	<!-- End of scroll-container -->
-
-		
 <div id="pages">
     <a href="index.html"></a>
-    <a href="page2.html"></a>
-    <a href="page3.html"></a>
-    <a href="page4.html"></a>
-    <a href="page5.html"></a>
-    <a href="page6.html"></a>
+    <a href="loadpage/page2.html"></a>
+    <a href="loadpage/page3.html"></a>
+    <a href="loadpage/page4.html"></a>
+    <a href="loadpage/page5.html"></a>
+    <a href="loadpage/page6.html"></a>
 </div>
-	
-
+{% endblock content %}
+{% block scripts %}
 	<!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/libs/jquery.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="js/libs/jquery.masonry.min.js"></script>
-    <script src="js/base.js" type="text/javascript"></script>
-    <script src="js/script.js" type="text/javascript"></script>
-</body>
-</html>
+    <script src={% static 'js/libs/jquery.js' %}></script>
+    <script src={% static 'bootstrap/js/bootstrap.min.js' %}></script>
+    <script src={% static 'js/libs/jquery.masonry.min.js' %}></script>
+    <script src={% static 'js/base.js' %} type="text/javascript"></script>
+    <script src={% static 'js/script.js' %} type="text/javascript"></script>
+{% endblock scripts %}

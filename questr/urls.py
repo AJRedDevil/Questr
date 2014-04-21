@@ -6,7 +6,8 @@ import views as mainview
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', include('beta.urls')),
+    url(r'^$', mainview.index, name="index"),
+    url(r'loadpage/(?P<template>[-_\w/.]+)$', mainview.loadPage, ),    
     url(r'^beta/', include('beta.urls')),
     url(r'^user/', include('users.urls')),
 )
