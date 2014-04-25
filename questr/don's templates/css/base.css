@@ -34,17 +34,31 @@ h1, h2, h3, h4, h5, h6 {
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 2px 1px rgba(0, 0, 0, 0.1), 0 3px 1px rgba(0, 0, 0, 0.05);
 	text-shadow: 0 1px 0 #DDDDDD;
  }
+
  
  .feature .description {
-	 white-space: normal;
-	 height: 80px;
+	/* code for ellipsis */
+	 overflow: hidden;
+	height: 100px;
+	line-height: 25px;
+	text-overflow: ellipsis;
+	width: auto;
+	/* end */ 
+	
+	 margin: 0 5px;
  }
+ 
+ 
+ .ellipsis {
+  
+}
  
  
  .feature .title {
 	 overflow: hidden;
 	 text-overflow: ellipsis;
 	 white-space: nowrap;
+	 margin: 0 5px;
  }
  
  

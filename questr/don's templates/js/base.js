@@ -6,6 +6,7 @@ $(document).ready(function(){
     //Init jQuery Masonry layout
     init_masonry();
    
+   
 });
 
 
