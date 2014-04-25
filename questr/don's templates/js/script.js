@@ -32,6 +32,7 @@ jQuery(document).ready(function() {
 			if(loaded[pages[current+1]] <= 1)
 				loadMoreContent(current+1);
 		}
+		init_masonry();
 	});
 
 	//loads the next page and append it to the content with a fadeIn effect. 
