@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5, h6 {
  .feature .description {
 	/* code for ellipsis */
 	 overflow: hidden;
-	height: 100px;
+	height: 80px;
 	line-height: 25px;
 	text-overflow: ellipsis;
 	width: auto;
@@ -97,9 +97,9 @@ footer {
 }
 
 .secondary-nav .navbar-nav li {
-	float: none;
 	text-align: center;
 	display: inline-block;
+	background: aqua;
 }
 /****************/
 
