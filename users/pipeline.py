@@ -1,8 +1,15 @@
-from django.shortcuts import render, redirect
 
-from social.pipeline.partial import partial
 
 import logging
+from django.core.files.base import ContentFile
+from django.shortcuts import render, redirect
+from django.utils import timezone
+from requests import request, HTTPError
+from social.pipeline.partial import partial
+
+from .models import QuestrUserProfile as User
+
+
 
 @partial
 def required_fields(strategy, details, user=None, is_new=False, *args, **kwargs):
@@ -40,3 +47,29 @@ def create_user(strategy, details, response, uid, user=None, *args, **kwargs):
         'is_new': True,
         'user': strategy.create_user(**fields)
     }
+
+def __get_formated_datetime(_datetime):
+    return _datetime.strftime("%d%m%Y%H%M%S")
+
+def __get_current_datetime():
+    now = timezone.now()
+    return __get_formated_datetime(now)
+
+def __get_avatar_file_name(profile):
+    _filename = '{0}_{1}_{2}.jpg'.format(profile.id, __get_formated_datetime(profile.date_joined), __get_current_datetime())
+    return _filename
+
+
+def save_profile_picture(strategy, user, response, details, is_new=False,*args,**kwargs):
+    if strategy.backend.name == 'facebook':
+        profile = User.objects.get(email=user)
+        url = 'http://graph.facebook.com/{0}/picture'.format(response['id'])
+        try:
+            response = request('GET', url, params={'type': 'large'})
+            response.raise_for_status()
+            profile.avatar_file_name.save(__get_avatar_file_name(profile),
+                                       ContentFile(response.content))
+            profile.save()
+            response.raise_for_status()
+        except HTTPError:
+            pass

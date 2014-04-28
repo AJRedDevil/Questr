@@ -95,6 +95,7 @@ import os
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+MEDIA_ROOT = 'media'
 
 STATICFILES_DIRS = (
     os.path.join(PROJECT_PATH, 'static'),
@@ -122,6 +123,7 @@ SOCIAL_AUTH_PIPELINE = (
         'social.pipeline.user.get_username',
         'users.pipeline.required_fields',
         'users.pipeline.create_user',
+        'users.pipeline.save_profile_picture',
         'social.pipeline.mail.mail_validation',
         'social.pipeline.social_auth.associate_user',
         'social.pipeline.social_auth.load_extra_data',

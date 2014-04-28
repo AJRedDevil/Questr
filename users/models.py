@@ -1,5 +1,7 @@
-from django.db import models
+
+
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 import logging
@@ -38,7 +40,7 @@ class QuestrUserProfile(AbstractBaseUser):
     email_status = models.BooleanField(_('email_status'), default=False, blank=False)
     phone = models.CharField(_('phone'), max_length=15, blank=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-    avatar_file_name = models.CharField(_('avatar_file_name'),max_length=765, blank=True)
+    avatar_file_name = models.ImageField(upload_to='ppsize')
     biography = models.TextField(_('biography'),max_length=9999, blank=True)
     account_status = models.IntegerField(_('account_status'), max_length=1, blank=True, default=1)
     privacy = models.BooleanField(default=False, blank=False)
