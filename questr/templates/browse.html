@@ -1,0 +1,34 @@
+{% extends "mainbase.html" %}
+{% load staticfiles %}
+{% block content %}
+    <div class="container">
+        <div class="row" id="blog">
+            <div class="col-md-10 blogShort">
+                <h1>Title 1</h1><img alt="post img" class=
+                "pull-left img-responsive thumb margin10 img-thumbnail" src=
+                "http://www.kaczmarek-photo.com/wp-content/uploads/2012/06/guinnes-150x150.jpg">
+                <em>This snippet use <a href=
+                "http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation"
+                target="_blank">Sexy Sidebar Navigation</a></em>
+
+                <article>
+                    <p>Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the industry's
+                    standard dummy text ever since the 1500s, when an unknown
+                    printer took a galley of type and scrambled it to make a
+                    type specimen book. It has survived not only</p>
+                </article>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block scripts %}
+	<!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src={% static 'js/libs/jquery.js' %}></script>
+    <script src={% static 'bootstrap/js/bootstrap.min.js' %}></script>
+    <script src={% static 'js/libs/jquery.masonry.min.js' %}></script>
+    <script src={% static 'js/base.js' %}></script>
+    <script src={% static 'js/script.js' %}</script>
+{% endblock scripts %}

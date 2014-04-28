@@ -15,7 +15,7 @@ jQuery(document).ready(function() {
 		loaded[$(this).attr('href')] = 0; //initialize all the pages to be loaded to 0. It means that they are not yet been loaded.
 	});
 
-	//on scroll gets when bottom of the page is reached and calls the function do load more content
+	//on scroll gets when bottom of the page is reached and calls the function do load more 
 	$(window).scroll(function(e){
 		//Not always the pos == h statement is verified, expecially on mobile devices, that's why a 300px of margin are assumed.
 		if($(window).scrollTop() + $(window).height() >= $(document).height() - 300) {
@@ -32,6 +32,7 @@ jQuery(document).ready(function() {
 			if(loaded[pages[current+1]] <= 1)
 				loadMoreContent(current+1);
 		}
+		init_masonry();
 	});
 
 	//loads the next page and append it to the content with a fadeIn effect. 

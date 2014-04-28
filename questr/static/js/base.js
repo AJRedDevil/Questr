@@ -5,21 +5,15 @@
 $(document).ready(function(){
     //Init jQuery Masonry layout
     init_masonry();
-
-    //Select menu init
-    $("#collapsed-navbar ."+$('body').attr('class')).attr('selected', 'selected');
-
-    //Select menu onchange
-    $("#collapsed-navbar").change(function () {
-        window.location = $(this).val();
-    });
+   
+   
 });
 
 
-function init_masonry(){
-    var $container = $('#content');
+function init_masonry() {
+    var $container = $('.content');
 
-    var gutter = 12;
+    var gutter = 20;
     var min_width = 250;
     $container.imagesLoaded( function(){
         $container.masonry({
@@ -42,3 +36,4 @@ function init_masonry(){
         });
     });
 }
+
