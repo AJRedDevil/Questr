@@ -1,14 +1,11 @@
-
-
 import logging
 from django.core.files.base import ContentFile
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from requests import request, HTTPError
 from social.pipeline.partial import partial
-
+from .views import userExists, emailExists
 from .models import QuestrUserProfile as User
-
 
 
 @partial
@@ -16,8 +13,7 @@ def required_fields(strategy, details, user=None, is_new=False, *args, **kwargs)
     if user and user.email and user.first_name and user.last_name:
         return
     elif is_new:
-        required_fields = ['first_name', 'last_name' , 'username','email',
-                            'biography', 'phone']
+        required_fields = ['first_name', 'last_name' , 'displayname', 'email']
         __all_present = True
         for field in required_fields:
             if not strategy.session_get(field):
@@ -25,16 +21,23 @@ def required_fields(strategy, details, user=None, is_new=False, *args, **kwargs)
         if __all_present:
             for field in required_fields:
                 details[field] = strategy.session_pop(field)
+            # redirect if user exists
+            if userExists(details['displayname']):
+                logging.warn("userExists")
+                return redirect('saveprofile')
+            # redirect if email exists
+            if emailExists(details['email']):
+                logging.warn("emailExists")
+                return redirect('saveprofile')      
+
             return
         else:
             kwargs['request'].session['details'] = details
-            # return redirect('saveprofile') # commented for later use
-            return
+            return redirect('saveprofile') # commented for later use
 
 
 def create_user(strategy, details, response, uid, user=None, *args, **kwargs):
-    USER_FIELDS = ['username', 'email', 'first_name', 'last_name']
-
+    USER_FIELDS = ['email', 'first_name', 'last_name', 'displayname']
     if user:
         return {'is_new': False}
     fields = dict((name, kwargs.get(name) or details.get(name))

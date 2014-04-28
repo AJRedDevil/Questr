@@ -33,7 +33,7 @@ class QuestrUserManager(BaseUserManager):
 
 class QuestrUserProfile(AbstractBaseUser):
     id = models.AutoField(_('id'), primary_key=True)
-    username = models.CharField(_('username'), max_length=30, blank=False, unique=True)
+    displayname = models.CharField(_('displayname'), max_length=30, null=False, blank=False, unique=True)
     first_name = models.CharField(_('first_name'), max_length=30, blank=False)
     last_name = models.CharField(_('last_name'), max_length=30, blank=False)
     email = models.EmailField(_('email'), max_length=100, blank=False, null=False, unique=True)
@@ -47,7 +47,7 @@ class QuestrUserProfile(AbstractBaseUser):
     gender = models.CharField(max_length=1, blank=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name','last_name','username']
+    REQUIRED_FIELDS = ['first_name','last_name','displayname']
 
     is_active = models.BooleanField(default=True)
 

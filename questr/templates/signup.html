@@ -18,9 +18,9 @@
                         {% if user_form.email.errors %}
                             {{user_form.email.errors}}
                         {% endif %}
-                        <input class="form-control input-lg" name="username"placeholder="Your Username" type="text" value="">
-                        {% if user_form.username.errors %}
-                            {{user_form.username.errors}}
+                        <input class="form-control input-lg" name="displayname"placeholder="Your Username" type="text" value="">
+                        {% if user_form.displayname.errors %}
+                            {{user_form.displayname.errors}}
                         {% endif %}
                         <input class="form-control input-lg" name="password1" placeholder="Password" type="password" value="">
                         <input class="form-control input-lg" name="password2" placeholder="Confirm Password" type="password" value="">
