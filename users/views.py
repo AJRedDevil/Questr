@@ -5,7 +5,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from django.http import Http404
 from .models import QuestrUserProfile
-from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm
+from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, QuestrSocialSignupForm
 import logging
 
 # Create your views here.
@@ -13,7 +13,7 @@ def logout(request):
     """Logs out user"""
     auth_logout(request)
     nextlink="signup"
-    return redirect('user')
+    return redirect('index')
     
 def login(request):
     """Home view, displays login mechanism"""
@@ -54,10 +54,11 @@ def home(request):
 def profile(request):
     """Post login this is returned and displays user's home page"""
     user = request.user
+    displayname = user.displayname
     lname = user.last_name
     fname = user.first_name
     email = user.email
-    bio = user.biography
+    biography = user.biography
     email_verified = isEmailVerified(user.email_status)
     is_active = isActive(user.is_active)
     account_status = getAccountStatus(user.account_status)
@@ -82,11 +83,27 @@ def isActive(status):
 def isEmailVerified(status):
     return "Yes" if status else "No"
 
+def userExists(user):
+    try:
+        user = QuestrUserProfile.objects.get(displayname=user)
+    except QuestrUserProfile.DoesNotExist:
+        return False
+    if user:
+        return True
+
+def emailExists(email):
+    try:
+        user = QuestrUserProfile.objects.get(email=email)
+    except QuestrUserProfile.DoesNotExist:
+        return False
+    if user:
+        return True
+
 @login_required
-def getUserInfo(request, username):
+def getUserInfo(request, displayname):
     '''This is used to display user's public profile'''
     try:
-        user = QuestrUserProfile.objects.get(username=username)
+        user = QuestrUserProfile.objects.get(displayname=displayname)
     except QuestrUserProfile.DoesNotExist:
         raise Http404
         return render(request,'error_pages/404.html')
@@ -128,18 +145,20 @@ def editUserInfo(request):
     return render(request, "user/edituserinfo.html",locals())
 
 ## the below has been commented for later use ##
-# def saveUserInfo(request):
-#     user_data = request.session.get('details')
-#     if request.method == "POST":
-#         logging.warn(request.session['details']['username'])
-#         request.session['first_name'] = request.session['details']['first_name']
-#         request.session['last_name'] = request.session['details']['last_name']
-#         request.session['username'] = request.session['details']['username']
-#         request.session['email'] = request.session['details']['email']
-#         backend = request.session['partial_pipeline']['backend']
-#         return redirect('social:complete', backend=backend)
-#     else:
-#         return render(request, "user/edituserinfo.html",locals())
+def saveUserInfo(request):
+    user_data = request.session.get('details')
+    if request.method == "POST":
+        user_form = QuestrSocialSignupForm(request.POST)
+        if user_form.is_valid():
+            request.session['first_name'] = request.POST['first_name']
+            request.session['last_name'] = request.POST['last_name']
+            request.session['email'] = request.POST['email']
+            request.session['displayname'] = request.POST['displayname']        
+            backend = request.session['partial_pipeline']['backend']
+            return redirect('social:complete', backend=backend)
+        return render(request, "user/edituserinfo.html",locals())
+    else:
+        return render(request, "user/edituserinfo.html",locals())
 
 
 

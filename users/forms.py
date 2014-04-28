@@ -21,6 +21,15 @@ class QuestrUserChangeForm(UserChangeForm):
         fields = ['first_name','last_name','username','email','phone','biography','privacy']
         exclude = ('username.help_text',)
 
+class QuestrSocialSignupForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(forms.ModelForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = QuestrUserProfile
+        fields = ['first_name','last_name','displayname','email']
+        exclude = ('username.help_text',)
+
 
 class QuestrUserCreationForm(forms.ModelForm):
     """
@@ -30,7 +39,7 @@ class QuestrUserCreationForm(forms.ModelForm):
         'duplicate_username': _("A user with that username already exists."),
         'password_mismatch': _("The two password fields didn't match."),
     }
-    username = forms.RegexField(label=_("Username"), max_length=30,
+    displayname = forms.RegexField(label=_("Username"), max_length=30,
         regex=r'^[\w.\.+-]+$',
         help_text=_("Required. 30 characters or fewer. Letters, digits and "
                       "./+/-/_ only."),
@@ -45,12 +54,12 @@ class QuestrUserCreationForm(forms.ModelForm):
 
     class Meta:
         model = QuestrUserProfile
-        fields = ['first_name','last_name','username','email',]
+        fields = ['first_name','last_name','displayname','email',]
         widget = {
             'first_name' : forms.TextInput(attrs = { 'placeholder': 'First Name'}),
             'last_name' : forms.TextInput(attrs = { 'placeholder': 'Last Name'}),
             'email' : forms.TextInput(attrs = { 'placeholder': 'Email Address: me@example.com'}),
-            'username' : forms.TextInput(attrs = { 'placeholder': 'Username: Can contain .,+,- OR _'}),
+            'displayname' : forms.TextInput(attrs = { 'placeholder': 'displayname: Can contain .,+,- OR _'}),
             'password1' : forms.PasswordInput(attrs = { 'placeholder': 'Password'}),
             'password2' : forms.PasswordInput(attrs = { 'placeholder': 'Confirm Password'}),
         }
@@ -58,11 +67,11 @@ class QuestrUserCreationForm(forms.ModelForm):
     def clean_username(self):
         # Since User.username is unique, this check is redundant,
         # but it sets a nicer error message than the ORM. See #13147.
-        username = self.cleaned_data["username"]
+        displayname = self.cleaned_data["displayname"]
         try:
-            QuestrUserProfile._default_manager.get(username=username)
+            QuestrUserProfile._default_manager.get(displayname=displayname)
         except QuestrUserProfile.DoesNotExist:
-            return username
+            return displayname
         raise forms.ValidationError(
             self.error_messages['duplicate_username'],
             code='duplicate_username',
