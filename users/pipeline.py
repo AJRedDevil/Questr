@@ -54,12 +54,8 @@ def create_user(strategy, details, response, uid, user=None, *args, **kwargs):
 def __get_formated_datetime(_datetime):
     return _datetime.strftime("%d%m%Y%H%M%S")
 
-def __get_current_datetime():
-    now = timezone.now()
-    return __get_formated_datetime(now)
-
 def __get_avatar_file_name(profile):
-    _filename = '{0}_{1}_{2}.jpg'.format(profile.id, __get_formated_datetime(profile.date_joined), __get_current_datetime())
+    _filename = '{0}_{1}.jpg'.format(profile.id, __get_formated_datetime(profile.date_joined))
     return _filename
 
 
