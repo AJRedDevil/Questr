@@ -5,7 +5,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from django.http import Http404
 from .models import QuestrUserProfile
-from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, QuestrSocialSignupForm
+from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, QuestrSocialSignupForm, CreatePasswordForm
 import logging
 
 # Create your views here.
@@ -52,7 +52,7 @@ def home(request):
 
 @login_required
 def profile(request):
-    """Post login this is returned and displays user's home page"""
+    """This displays user's profile page"""
     user = request.user
     displayname = user.displayname
     lname = user.last_name
@@ -65,6 +65,7 @@ def profile(request):
     last_online = user.last_login
     user_since = user.date_joined
     avatar = user.avatar_file_name
+    password = passwordExists(request.user)
     return render(request,'user/profile.html', locals())
 
 @login_required
@@ -78,12 +79,15 @@ def getAccountStatus(status_id):
         return status_list[status_id]
 
 def isActive(status):
+    """Returns if the account is active for the user"""
     return "Yes" if status else "No"
 
 def isEmailVerified(status):
+    """Returns if the email of the user has been verified"""
     return "Yes" if status else "No"
 
 def userExists(user):
+    """Checks if the user by the provided displayname exists already"""
     try:
         user = QuestrUserProfile.objects.get(displayname=user)
     except QuestrUserProfile.DoesNotExist:
@@ -91,7 +95,12 @@ def userExists(user):
     if user:
         return True
 
+def passwordExists(user):
+    """Checks if the user has created a password for himself, passwords created by PSA are unusable"""
+    return user.has_usable_password()
+        
 def emailExists(email):
+    """Checks if the user with the provided email exists already"""
     try:
         user = QuestrUserProfile.objects.get(email=email)
     except QuestrUserProfile.DoesNotExist:
@@ -125,6 +134,7 @@ def getUserInfo(request, displayname):
 
 @login_required
 def editUserInfo(request):
+    """Change's user's personal settings"""
     if request.method == "POST":
         try:
             user_form = QuestrUserChangeForm(request.POST, instance=request.user)
@@ -144,8 +154,26 @@ def editUserInfo(request):
             return render(request,'error_pages/404.html', locals())
     return render(request, "user/edituserinfo.html",locals())
 
-## the below has been commented for later use ##
+@login_required
+def createPassword(request):
+    """Create the user's password"""
+    if passwordExists(request.user):
+        return redirect('home')
+    if request.method == "POST":
+        try:
+            user_form = CreatePasswordForm(request.POST, instance=request.user)
+        except QuestrUserProfile.DoesNotExist:
+            raise Http404
+            return render(request,'error_pages/404.html', locals())        
+        if user_form.is_valid():
+            user_form.save()
+            return redirect('home')
+        logging.warn(user_form.errors)
+    message="Create Password"
+    return render(request, "change_passwd.html", locals())
+
 def saveUserInfo(request):
+    """This save's additional user info post the social login is successfull"""
     user_data = request.session.get('details')
     if request.method == "POST":
         user_form = QuestrSocialSignupForm(request.POST)

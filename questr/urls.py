@@ -1,6 +1,6 @@
+from django.conf import settings
 from django.conf.urls import patterns, include, url
-
-# from views import * as mainview
+from django.conf.urls.static import static 
 from users.views import login
 import views as mainview
 
@@ -10,5 +10,4 @@ urlpatterns = patterns('',
     url(r'loadpage/(?P<template>[-_\w/.]+)$', mainview.loadPage, ),    
     url(r'^beta/', include('beta.urls')),
     url(r'^user/', include('users.urls')),
-)
-
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

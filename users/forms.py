@@ -33,7 +33,7 @@ class QuestrSocialSignupForm(forms.ModelForm):
 
 class QuestrUserCreationForm(forms.ModelForm):
     """
-    A form that creates a user, with no privileges, from the given data
+    A form that creates a user, from the given data
     """
     error_messages = {
         'duplicate_username': _("A user with that username already exists."),
@@ -154,3 +154,42 @@ class QuestrLocalAuthenticationForm(forms.Form):
 
     def get_user(self):
         return self.user_cache
+
+class CreatePasswordForm(forms.ModelForm):
+    """
+    A form that creates a password for socially logged in user so they can login through email 
+    """
+    error_messages = {
+        'password_mismatch': _("The two password fields didn't match."),
+    }
+    password = forms.CharField(label=_("Password"),
+        widget=forms.PasswordInput)
+    password2 = forms.CharField(label=_("Password confirmation"),
+        widget=forms.PasswordInput,
+        help_text=_("Enter the same password as above, for verification."))
+
+    class Meta:
+        model = QuestrUserProfile
+        fields = ['password']
+
+        widget = {
+            'password' : forms.PasswordInput(attrs = { 'placeholder': 'Password'}),
+            'password2' : forms.PasswordInput(attrs = { 'placeholder': 'Confirm Password'}),
+        }
+
+    def clean_password2(self):
+        password = self.cleaned_data.get("password")
+        password2 = self.cleaned_data.get("password2")
+        if password and password2 and password != password2:
+            raise forms.ValidationError(
+                self.error_messages['password_mismatch'],
+                code='password_mismatch',
+            )
+        return password2
+
+    def save(self, commit=True):
+        user = super(CreatePasswordForm, self).save(commit=False)
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+        return user
