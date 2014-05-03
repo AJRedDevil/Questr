@@ -3,6 +3,7 @@ import json
 from django.core.files.base import ContentFile
 from django.shortcuts import render, redirect
 from django.utils import timezone
+from django.conf import settings
 from requests import request, HTTPError
 from social.pipeline.partial import partial
 from .views import userExists, emailExists
@@ -61,6 +62,7 @@ def __get_avatar_file_name(profile):
 
 
 def save_profile_picture(strategy, user, response, details, is_new=False,*args,**kwargs):
+    defaultQuestrProfileImage=settings.STATIC_URL+'/img/default.png'
     if strategy.backend.name == 'facebook':
         profile = User.objects.get(email=user)
         try:
@@ -71,12 +73,15 @@ def save_profile_picture(strategy, user, response, details, is_new=False,*args,*
             ppIsDefault = data['picture']['data']['is_silhouette']
             if not ppIsDefault:
                 ppUrl = data['picture']['data']['url']
-                profilePic = request('GET', ppUrl)
-                profile.avatar_file_name.save(__get_avatar_file_name(profile),
-                                           ContentFile(profilePic.content))
+                # This is done temporary, once we have S3 available we'd be using the below
+                # profilePic = request('GET', ppUrl)
+                # profile.avatar_file_name.save(__get_avatar_file_name(profile),
+                #                            ContentFile(profilePic.content))
+                profile.avatar_file_name=ppUrl
                 profile.save()
             else:
-                pass
+                profile.avatar_file_name=defaultQuestrProfileImage
+                profile.save()
         except HTTPError:
             pass
     if strategy.backend.name == 'twitter':
@@ -87,10 +92,14 @@ def save_profile_picture(strategy, user, response, details, is_new=False,*args,*
                 ppUrl = response.get('profile_image_url', '').replace('_normal', '')
                 response = request('GET', ppUrl)
                 response.raise_for_status()
-                profile.avatar_file_name.save(__get_avatar_file_name(profile),
-                                       ContentFile(response.content))
+                # This is done temporary, once we have S3 available we'd be using the below
+                # profile.avatar_file_name.save(__get_avatar_file_name(profile),
+                #                        ContentFile(response.content))
+                logging.warn(ppUrl)
+                profile.avatar_file_name=ppUrl
                 profile.save()
             else:
-                pass
+                profile.avatar_file_name=defaultQuestrProfileImage
+                profile.save()
         except HTTPError:
             pass
