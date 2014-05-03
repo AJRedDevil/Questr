@@ -72,3 +72,14 @@ def save_profile_picture(strategy, user, response, details, is_new=False,*args,*
             response.raise_for_status()
         except HTTPError:
             pass
+    if strategy.backend.name == 'twitter':
+        profile = User.objects.get(email=user)
+        url = response.get('profile_image_url', '').replace('_normal', '')
+        try:
+            response = request('GET', url, params={'type': 'large'})
+            response.raise_for_status()
+            profile.avatar_file_name.save(__get_avatar_file_name(profile),
+                                       ContentFile(response.content))
+            profile.save()
+        except HTTPError:
+            pass
