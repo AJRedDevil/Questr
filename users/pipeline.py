@@ -10,7 +10,7 @@ from .models import QuestrUserProfile as User
 
 @partial
 def required_fields(strategy, details, user=None, is_new=False, *args, **kwargs):
-    if user and user.email and user.first_name and user.last_name:
+    if user and user.email:
         return
     elif is_new:
         required_fields = ['first_name', 'last_name' , 'displayname', 'email']

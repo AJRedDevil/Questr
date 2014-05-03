@@ -20,6 +20,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = os.environ['LOCAL_SECRET_KEY']
 SOCIAL_AUTH_FACEBOOK_KEY = os.environ['SOCIAL_AUTH_FACEBOOK_KEY']
 SOCIAL_AUTH_FACEBOOK_SECRET = os.environ['SOCIAL_AUTH_FACEBOOK_SECRET']
+SOCIAL_AUTH_TWITTER_KEY = os.environ['SOCIAL_AUTH_TWITTER_KEY']
+SOCIAL_AUTH_TWITTER_SECRET = os.environ['SOCIAL_AUTH_TWITTER_SECRET'] 
 
 #Append Slash to all cals
 APPEND_SLASH = True
@@ -134,6 +136,7 @@ SOCIAL_AUTH_PIPELINE = (
 # Auth Backend
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
+    'social.backends.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend',
     )
 
