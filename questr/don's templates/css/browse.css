@@ -1,15 +1,34 @@
-.blogShort{ 
-	border-bottom:1px solid #ddd;	
+
+.browsePost { 
+	border-bottom:1px solid #ddd;
+	height: 110px;	
 }
 
+.browsePost .description {
+	height: 80px;
+}
+
+.browsePost .image {
+	 width: auto;
+	 height: 100px;
+}
+
+.container {
+	padding-left: 0;
+	margin-left: 0;
+}
+
+
 .ad{
-	background: #333; padding: 10%; height: 300px;
+	background: #333; padding: 0%; height: 300px;
 }
 
 .nav-sidebar { 
     width: 100%;
-    padding: 8px 0; 
+    padding: 0px 0; 
     border-right: 1px solid #ddd;
+    margin-left: 0;
+   
 }
 .nav-sidebar a {
     color: #333;

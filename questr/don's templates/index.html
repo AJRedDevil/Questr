@@ -84,14 +84,10 @@
         <div class="row clearfix">
             <div class="col-md-12 column">
                 <nav class= "navbar navbar-default navbar-static-top secondary-nav">
-                    <div class="navbar-header"></div>
-<center>
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Quests</a></li>
-
                         <li><a href="#">Questrs</a></li>
                     </ul>
-</center>
                 </nav>
             </div>
         </div><!-- End of Secondary navbar -->
@@ -178,8 +174,7 @@
             </div>
         </div>
     </div><!-- End of login modal -->
-    <!-- Sign Up modal -->
-
+   
     <div class="modal fade" id="signupModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -221,55 +216,36 @@
                             </div>
                         </div>
 
-                        <div class="row omb_row-sm-offset-3">
-                            <div class="col-xs-12 col-sm-6">
-                                <form action="" autocomplete="off" class=
-                                "omb_loginForm" method="post">
-                                    <div class="input-group">
-                                        <input class="form-control" name=
-                                        "firstname" placeholder="First Name"
-                                        type="text"> <input class=
-                                        "form-control" name="lastname"
-                                        placeholder="Last Name" type="text">
-                                    </div>
+                        
+                        
+                        <form data-toggle="validator" role="form" class="signup">
+  <div class="form-group">
+    <label for="inputName" class="control-label">Name</label>
+    <input type="text" class="form-control" id="inputName" placeholder="Cina Saffary" required>
+  </div>
+  <div class="form-group">
+    <label for="inputEmail" class="control-label">Email</label>
+    <input type="email" class="form-control" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
+    <div class="help-block with-errors"></div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword" class="control-label">Password</label>
+    <div class="form-group col-sm-6">
+      <input type="password" data-toggle="validator" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
+      <span class="help-block">Minimum of 6 characters</span>
+    </div>
+    <div class="form-group col-sm-6">
+      <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Confirm" required>
+      <div class="help-block with-errors"></div>
+    </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
 
-                                    <div class="input-group">
-                                        <input class="form-control" name=
-                                        "username" placeholder="Username" type=
-                                        "text">
-                                    </div>
-
-                                    <div class="input-group">
-                                        <input class="form-control" name=
-                                        "username" placeholder="email address"
-                                        type="text">
-                                    </div>
-
-                                    <div class="input-group">
-                                        <input class="form-control" name=
-                                        "password" placeholder="Password" type=
-                                        "password"> <input class="form-control"
-                                        name="password" placeholder=
-                                        "Verify Password" type="password">
-                                    </div><span class="help-block">Password
-                                    error</span> <button class=
-                                    "btn btn-lg btn-primary btn-block" type=
-                                    "submit">Sign Up</button>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="row omb_row-sm-offset-3">
-                            <div class="col-xs-12 col-sm-3">
-                                <label class="checkbox"><input type="checkbox"
-                                value="remember-me">Remember Me</label>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-3">
-                                <p class="omb_forgotPwd"><a href="#">Forgot
-                                password?</a></p>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
 
@@ -457,6 +433,7 @@
                 </div><!-- End of picture -->
             </div><!-- End of feature -->
             <!-- Single post -->
+
 
             <div class="feature">
                 <div class="picture">

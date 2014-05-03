@@ -49,10 +49,6 @@ h1, h2, h3, h4, h5, h6 {
  }
  
  
- .ellipsis {
-  
-}
- 
  
  .feature .title {
 	 overflow: hidden;
@@ -72,8 +68,6 @@ footer {
  }
  
 
-
-
 /******************/
 .navbar-container {
 	margin: 0;
@@ -90,16 +84,14 @@ footer {
 
 .secondary-nav {
 	z-index: 0;
-}
-
-.secondary-nav .navbar-nav {
-	width: 100%;
-}
-
-.secondary-nav .navbar-nav li {
 	text-align: center;
+	display: block;
+	float: none;
+}
+
+.secondary-nav ul {
 	display: inline-block;
-	background: aqua;
+    float: none;
 }
 /****************/
 
