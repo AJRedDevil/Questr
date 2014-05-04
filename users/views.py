@@ -168,7 +168,6 @@ def createPassword(request):
         if user_form.is_valid():
             user_form.save()
             return redirect('home')
-        logging.warn(user_form.errors)
     message="Create Password"
     return render(request, "change_passwd.html", locals())
 

@@ -95,7 +95,6 @@ def save_profile_picture(strategy, user, response, details, is_new=False,*args,*
                 # This is done temporary, once we have S3 available we'd be using the below
                 # profile.avatar_file_name.save(__get_avatar_file_name(profile),
                 #                        ContentFile(response.content))
-                logging.warn(ppUrl)
                 profile.avatar_file_name=ppUrl
                 profile.save()
             else:
@@ -103,3 +102,9 @@ def save_profile_picture(strategy, user, response, details, is_new=False,*args,*
                 profile.save()
         except HTTPError:
             pass
+    if strategy.backend.name == 'google-oauth2':
+        profile = User.objects.get(email=user)
+        # setting user's profile picture to default incase of google plus as it doesn't provide
+        # any way to check if the user has a default profile pic or not
+        profile.avatar_file_name=defaultQuestrProfileImage
+        profile.save()
