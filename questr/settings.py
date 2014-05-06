@@ -21,6 +21,11 @@ SECRET_KEY = os.environ['LOCAL_SECRET_KEY']
 SOCIAL_AUTH_FACEBOOK_KEY = os.environ['SOCIAL_AUTH_FACEBOOK_KEY']
 SOCIAL_AUTH_FACEBOOK_SECRET = os.environ['SOCIAL_AUTH_FACEBOOK_SECRET']
 
+# Mandrill API Key
+# MANDRILL_API_KEY = os.environ['MANDRILL_API_KEY']
+MANDRILL_API_KEY = os.environ['MANDRILL_TEST_API_KEY']
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+
 #Append Slash to all cals
 APPEND_SLASH = True
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -59,6 +64,7 @@ INSTALLED_APPS = (
     'beta',
     'mailchimp',
     'users',
+    'djrill',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -86,6 +92,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Questr Url
+QUESTR_URL = "http://questr.com"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
