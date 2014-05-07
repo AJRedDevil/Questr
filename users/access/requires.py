@@ -5,7 +5,7 @@ from django.shortcuts import render
 from users.models import QuestrUserProfile, QuestrToken
 
 def verified(a_view):
-	"""
+	""" 
 	email verification decorator; redirects with to the home page with verfication message.
 	"""
 	def _wrapped_function(request, *args, **kwargs):
