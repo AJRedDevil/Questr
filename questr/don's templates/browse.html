@@ -23,6 +23,8 @@
 </head>
 
 <body>
+
+	<!-- Main Navbar -->
 	<div class="container navbar-container">
         <div class="row clearfix">
             <div class="col-md-12 column">
@@ -82,8 +84,10 @@
                 </nav>                    
             </div>
         </div><!-- End of main navbar -->
+       
+       
+       
         <!-- Secondary navbar:  holds search, Quests, and Questrs -->
-
         <div class="row clearfix">
             <div class="col-md-12 column">
                 <nav class=
@@ -98,8 +102,11 @@
                 </nav>
             </div>
         </div><!-- End of Secondary navbar -->
-    </div><!-- End of navbar-container --><!-- Login modal -->
-
+    </div><!-- End of navbar-container -->
+    
+    
+    
+    <!-- Login modal -->
     <div class="modal fade" id="loginModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -107,7 +114,7 @@
                     <button class="close" data-dismiss="modal" type=
                     "button">×</button>
 
-                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    <h4 class="modal-title" id="myModalLabel">Login</h4>
                 </div>
 
                 <div class="modal-body">
@@ -140,44 +147,21 @@
                                 <span class="omb_spanOr">or</span>
                             </div>
                         </div>
-
-                        <div class="row omb_row-sm-offset-3">
-                            <div class="col-xs-12 col-sm-6">
-                                <form action="" autocomplete="off" class=
-                                "omb_loginForm" method="post">
-                                    <div class="input-group">
-                                        <input class="form-control" name=
-                                        "username" placeholder="email address"
-                                        type="text">
-                                    </div>
-
-                                    <div class="input-group">
-                                        <input class="form-control" name=
-                                        "password" placeholder="Password" type=
-                                        "password">
-                                    </div><span class="help-block">Password
-                                    error</span> 
-                                    <div class="col-sm-12">
-<span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Passwords Match
-</div>
-                                    <button class=
-                                    "btn btn-lg btn-primary btn-block" type=
-                                    "submit">Login</button>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="row omb_row-sm-offset-3">
-                            <div class="col-xs-12 col-sm-3">
-                                <label class="checkbox"><input type="checkbox"
-                                value="remember-me">Remember Me</label>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-3">
-                                <p class="omb_forgotPwd"><a href="#">Forgot
-                                password?</a></p>
-                            </div>
-                        </div>
+             
+						  <!-- Login with Username and Password --> 
+						   <form role="form" data-toggle="validator" class="signin">
+							   <div class="form-group">
+    <label for="inputEmail" class="control-label">Email</label>
+    <input type="email" class="form-control" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
+    <div class="help-block with-errors"></div>
+  </div>
+						   
+						  <div class="form-group">
+						    <label for="exampleInputPassword1">Password <a href="/sessions/forgot_password">(forgot password)</a></label>
+						    <input type="password" class="form-control" style="border-radius:0px" id="exampleInputPassword1" placeholder="Password">
+						  </div>
+						  <button type="submit" class="btn btn-sm btn-default">Sign in</button>
+						</form>	<!-- End of Login with Username and Password -->
                     </div>
                 </div>
 
@@ -185,8 +169,10 @@
             </div>
         </div>
     </div><!-- End of login modal -->
+    
+    
+    
     <!-- Sign Up modal -->
-
     <div class="modal fade" id="signupModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -232,8 +218,14 @@
                         
                         <form data-toggle="validator" role="form" class="signup">
   <div class="form-group">
-    <label for="inputName" class="control-label">Name</label>
-    <input type="text" class="form-control" id="inputName" placeholder="Cina Saffary" required>
+    <label for="firstName" class="control-label">First Name</label>
+    <input type="text" class="form-control" id="inputFirst" placeholder="First Name" required>
+    <label for="lastName" class="control-label">Last Name</label>
+    <input type="text" class="form-control" id="inputLast" placeholder="Last Name" required>
+  </div>
+  <div class="form-group">
+    <label for="username" class="control-label">Username</label>
+    <input type="text" class="form-control" id="username" placeholder="Username" required>
   </div>
   <div class="form-group">
     <label for="inputEmail" class="control-label">Email</label>
@@ -242,6 +234,7 @@
   </div>
   <div class="form-group">
     <label for="inputPassword" class="control-label">Password</label>
+    <br>
     <div class="form-group col-sm-6">
       <input type="password" data-toggle="validator" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
       <span class="help-block">Minimum of 6 characters</span>
@@ -287,9 +280,117 @@
 			<h4>Seeking Items In:</h4>
             	<div class="btn-group">
 				 
-				 <button class="btn btn-default">Country</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button></div>
+				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      Country
+      <span class="caret"></span>
+    </button>
+				 	<ul class="dropdown-menu">
+				 		<li value=""></li>
+    						<li value="AR">Argentina</li>
+    						<li value="AU">Australia</li>
+    						<li value="AT">Austria</li>
+    						<li value="BY">Belarus</li>
+    						<li value="BE">Belgium</li>
+    						<li value="BA">Bosnia and Herzegovina</li>
+    						<li value="BR">Brazil</li>
+    						<li value="BG">Bulgaria</li>
+    						<li value="CA">Canada</li>
+    						<li value="CL">Chile</li>
+    						<li value="CN">China</li>
+    						<li value="CO">Colombia</li>
+    						<li value="CR">Costa Rica</li>
+    						<li value="HR">Croatia</li>
+    						<li value="CU">Cuba</li>
+    						<li value="CY">Cyprus</li>
+    						<li value="CZ">Czech Republic</li>
+    						<li value="DK">Denmark</li>
+    						<li value="DO">Dominican Republic</li>
+    						<li value="EG">Egypt</li>
+    						<li value="EE">Estonia</li>
+    						<li value="FI">Finland</li>
+    						<li value="FR">France</li>
+    						<li value="GE">Georgia</li>
+    						<li value="DE">Germany</li>
+    						<li value="GI">Gibraltar</li>
+    						<li value="GR">Greece</li>
+    						<li value="HK">Hong Kong S.A.R., China</li>
+    						<li value="HU">Hungary</li>
+    						<li value="IS">Iceland</li>
+    						<li value="IN">India</li>
+    						<li value="ID">Indonesia</li>
+    						<li value="IR">Iran</li>
+    						<li value="IQ">Iraq</li>
+    						<li value="IE">Ireland</li>
+    						<li value="IL">Israel</li>
+    						<li value="IT">Italy</li>
+    						<li value="JM">Jamaica</li>
+    						<li value="JP">Japan</li>
+    						<li value="KZ">Kazakhstan</li>
+    						<li value="KW">Kuwait</li>
+    						<li value="KG">Kyrgyzstan</li>
+    						<li value="LA">Laos</li>
+    						<li value="LV">Latvia</li>
+    						<li value="LB">Lebanon</li>
+    						<li value="LT">Lithuania</li>
+    						<li value="LU">Luxembourg</li>
+    						<li value="MK">Macedonia</li>
+    						<li value="MY">Malaysia</li>
+    						<li value="MT">Malta</li>
+    						<li value="MX">Mexico</li>
+    						<li value="MD">Moldova</li>
+    						<li value="MC">Monaco</li>
+    						<li value="ME">Montenegro</li>
+    						<li value="MA">Morocco</li>
+    						<li value="NL">Netherlands</li>
+    						<li value="NZ">New Zealand</li>
+    						<li value="NI">Nicaragua</li>
+    						<li value="KP">North Korea</li>
+    						<li value="NO">Norway</li>
+    						<li value="PK">Pakistan</li>
+    						<li value="PS">Palestinian Territory</li>
+    						<li value="PE">Peru</li>
+    						<li value="PH">Philippines</li>
+    						<li value="PL">Poland</li>
+    						<li value="PT">Portugal</li>
+    						<li value="PR">Puerto Rico</li>
+    						<li value="QA">Qatar</li>
+    						<li value="RO">Romania</li>
+    						<li value="RU">Russia</li>
+    						<li value="SA">Saudi Arabia</li>
+    						<li value="RS">Serbia</li>
+    						<li value="SG">Singapore</li>
+    						<li value="SK">Slovakia</li>
+    						<li value="SI">Slovenia</li>
+    						<li value="ZA">South Africa</li>
+    						<li value="KR">South Korea</li>
+    						<li value="ES">Spain</li>
+    						<li value="LK">Sri Lanka</li>
+    						<li value="SE">Sweden</li>
+    						<li value="CH">Switzerland</li>
+    						<li value="TW">Taiwan</li>
+    						<li value="TH">Thailand</li>
+    						<li value="TN">Tunisia</li>
+    						<li value="TR">Turkey</li>
+    						<li value="UA">Ukraine</li>
+    						<li value="AE">United Arab Emirates</li>
+    						<li value="GB">United Kingdom</li>
+    						<li value="US">USA</li>
+    						<li value="UZ">Uzbekistan</li>
+    						<li value="VN">Vietnam</li>
+				 	</ul>
+				 </div>
+				 
+				 
+				 
+				 
 				 <div class="btn-group">
-				 <button class="btn btn-default">Province / State</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button></div>
+				 <button class="btn btn-default">Province / State</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+				 	<ul class="dropdown-menu">
+					 	<li><a href="#">aids</a></li>
+					 	<li>aids2</li>
+					 	<li>aids3</li>
+				 	</ul>
+				 </div>
 				 <div class="btn-group">
 				 <button class="btn btn-default">City</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>	 </div>
 				 <h4>Offering</h4>
@@ -589,9 +690,10 @@
     <script src="./js/bootstrap-ellipsis.js"></script>
     <script src="./js/validator.min.js"></script>
     
-    <script>
+  <script>
 	    $('.description').ellipsis({maxLine: 3, fixedWidth: 200})
 	    $('.signup').validator('validate')
+	    $('.signin').validator('validate')    
     </script>
 </body>
 </html>
