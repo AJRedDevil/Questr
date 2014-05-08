@@ -1,32 +1,4 @@
-html {overflow-x: hidden;}
- 
-body {
-	font-family: Arial, sans-serif;
-	color: #393939;
-	font-size: 16px;
-	padding: 0px;
-	margin: 0;
- }
- 
-footer {
-	font-family: 'TeXGyreCursorRegular', Arial, sans-serif;
-	border-top: 1px solid #ddd;
-	margin-top: 35px;
-	padding-top: 6px;
-	text-align: center;
-	font-size: 12px;
-}
- 
- 
-h1, h2, h3, h4, h5, h6 {
-	font-weight: normal;
-	font-family: 'TeXGyreCursorRegular', Arial, sans-serif;
-	letter-spacing: 0;
- }
- 
- 
- 
- /************** Login/Signup Modal *****************/
+/************** Login/Signup Modal *****************/
 
 @media (min-width: 768px) {
     .omb_row-sm-offset-3 div:first-child[class*="col-"] {
@@ -36,7 +8,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .omb_login .omb_authTitle {
     text-align: center;
-	line-height: 300%;
+	line-height: 500%;
 }
 	
 .omb_login .omb_socialButtons a {
@@ -93,31 +65,3 @@ h1, h2, h3, h4, h5, h6 {
  	}		
 }
 /************** End of Login Modal *****************/
- 
- 
-/*************** Primary Navbar ***************/
-.navbar-container {
-	margin: 0;
-	padding: 0;
-	width: 100%;
-}
-
-.navbar {
-	width: 100%;
-	margin: 0;
-	padding: 0;
-	z-index: 999;
-}
-
-/*************** Secondary Navbar ***************/
-.secondary-nav {
-	z-index: 0;
-	text-align: center;
-	display: block;
-	float: none;
-}
-
-.secondary-nav ul {
-	display: inline-block;
-    float: none;
-}

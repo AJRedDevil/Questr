@@ -72,171 +72,14 @@
                         
                         	<li><a href="#">Browse</a></li>
                         
-                            <li><a data-target="#loginModal" data-toggle=
-                            "modal" href="#">Login</a></li>
+                            <li><a href="#">Login</a></li>
 
-                            <li><a data-target="#signupModal" data-toggle=
-                            "modal" href="#">Sign Up</a></li>
+                            <li><a href="#">Sign Up</a></li>
                         </ul>
                     </div>
                 </nav>                    
             </div>
         </div><!-- End of main navbar -->
-       
-    
-    <!-- Login modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal" type=
-                    "button">×</button>
-
-                    <h4 class="modal-title" id="myModalLabel">Login</h4>
-                </div>
-
-                <div class="modal-body">
-                    <div class="omb_login">
-                        <h3 class="omb_authTitle">Login</h3>
-
-                        <div class="row omb_row-sm-offset-3 omb_socialButtons">
-                            <div class="col-xs-4 col-sm-2">
-                                <a class=
-                                "btn btn-lg btn-block omb_btn-facebook" href=
-                                "#"><span class="hidden-xs">Facebook</span></a>
-                            </div>
-
-                            <div class="col-xs-4 col-sm-2">
-                                <a class="btn btn-lg btn-block omb_btn-twitter"
-                                href="#"><span class=
-                                "hidden-xs">Twitter</span></a>
-                            </div>
-
-                            <div class="col-xs-4 col-sm-2">
-                                <a class="btn btn-lg btn-block omb_btn-google"
-                                href="#"><span class=
-                                "hidden-xs">Google+</span></a>
-                            </div>
-                        </div>
-
-                        <div class="row omb_row-sm-offset-3 omb_loginOr">
-                            <div class="col-xs-12 col-sm-6">
-                                <hr class="omb_hrOr">
-                                <span class="omb_spanOr">or</span>
-                            </div>
-                        </div>
-             
-						  <!-- Login with Username and Password --> 
-						   <form role="form" data-toggle="validator" class="signin">
-							   <div class="form-group">
-    <label for="inputEmail" class="control-label">Email</label>
-    <input type="email" class="form-control" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
-    <div class="help-block with-errors"></div>
-  </div>
-						   
-						  <div class="form-group">
-						    <label for="exampleInputPassword1">Password <a href="/sessions/forgot_password">(forgot password)</a></label>
-						    <input type="password" class="form-control" style="border-radius:0px" id="exampleInputPassword1" placeholder="Password">
-						  </div>
-						  <button type="submit" class="btn btn-sm btn-default">Sign in</button>
-						</form>	<!-- End of Login with Username and Password -->
-                    </div>
-                </div>
-
-                <div class="modal-footer"></div>
-            </div>
-        </div>
-    </div><!-- End of login modal -->
-    
-    
-    
-    <!-- Sign Up modal -->
-    <div class="modal fade" id="signupModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal" type=
-                    "button">×</button>
-
-                    <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
-                </div>
-
-                <div class="modal-body">
-                    <div class="omb_login">
-                        <h3 class="omb_authTitle">Using</h3>
-
-                        <div class="row omb_row-sm-offset-3 omb_socialButtons">
-                            <div class="col-xs-4 col-sm-2">
-                                <a class=
-                                "btn btn-lg btn-block omb_btn-facebook" href=
-                                "#"><span class="hidden-xs">Facebook</span></a>
-                            </div>
-
-                            <div class="col-xs-4 col-sm-2">
-                                <a class="btn btn-lg btn-block omb_btn-twitter"
-                                href="#"><span class=
-                                "hidden-xs">Twitter</span></a>
-                            </div>
-
-                            <div class="col-xs-4 col-sm-2">
-                                <a class="btn btn-lg btn-block omb_btn-google"
-                                href="#"><span class=
-                                "hidden-xs">Google+</span></a>
-                            </div>
-                        </div>
-
-                        <div class="row omb_row-sm-offset-3 omb_loginOr">
-                            <div class="col-xs-12 col-sm-6">
-                                <hr class="omb_hrOr">
-                                <span class="omb_spanOr">or</span>
-                            </div>
-                        </div>
-
-                        
-                        
-                        <form data-toggle="validator" role="form" class="signup">
-  <div class="form-group">
-    <label for="firstName" class="control-label">First Name</label>
-    <input type="text" class="form-control" id="inputFirst" placeholder="First Name" required>
-    <label for="lastName" class="control-label">Last Name</label>
-    <input type="text" class="form-control" id="inputLast" placeholder="Last Name" required>
-  </div>
-  <div class="form-group">
-    <label for="username" class="control-label">Username</label>
-    <input type="text" class="form-control" id="username" placeholder="Username" required>
-  </div>
-  <div class="form-group">
-    <label for="inputEmail" class="control-label">Email</label>
-    <input type="email" class="form-control" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
-    <div class="help-block with-errors"></div>
-  </div>
-  <div class="form-group">
-    <label for="inputPassword" class="control-label">Password</label>
-    <br>
-    <div class="form-group col-sm-6">
-      <input type="password" data-toggle="validator" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
-      <span class="help-block">Minimum of 6 characters</span>
-    </div>
-    <div class="form-group col-sm-6">
-      <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Confirm" required>
-      <div class="help-block with-errors"></div>
-    </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </div>
-</form>
-
-                       
-                    </div>
-                </div>
-
-                <div class="modal-footer"></div>
-            </div>
-        </div>
-    </div><!-- End of Sign Up modal -->
-
 
 
 
@@ -266,7 +109,7 @@
           <a href="#" class="list-group-item">
                 <div class="media col-md-3">
                     <figure class="pull-left">
-                        <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-circle postPic" />
+                        <img alt="140x140" src="http://lorempixel.com/140/140/" class="postPic" />
                     </figure>
                 </div>
                 <div class="col-md-6">
@@ -284,7 +127,7 @@
           <a href="#" class="list-group-item">
                 <div class="media col-md-3">
                     <figure class="pull-left">
-                        <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-circle postPic" />
+                        <img alt="140x140" src="http://lorempixel.com/140/140/" class="postPic" />
                     </figure>
                 </div>
                 <div class="col-md-6">
@@ -302,7 +145,7 @@
           <a href="#" class="list-group-item">
                 <div class="media col-md-3">
                     <figure class="pull-left">
-                        <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-circle postPic" />
+                        <img alt="140x140" src="http://lorempixel.com/140/140/" class="postPic" />
                     </figure>
                 </div>
                 <div class="col-md-6">

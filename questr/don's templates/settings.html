@@ -33,9 +33,6 @@
 <body>
 	
 	
-	
-	
-	
 	<!-- Main Navbar -->
 	<div class="container navbar-container">
         <div class="row clearfix">
@@ -86,194 +83,14 @@
                         
                         	<li><a href="#">Browse</a></li>
                         
-                            <li><a data-target="#loginModal" data-toggle=
-                            "modal" href="#">Login</a></li>
+                            <li><a href="#">Login</a></li>
 
-                            <li><a data-target="#signupModal" data-toggle=
-                            "modal" href="#">Sign Up</a></li>
+                            <li><a href="#">Sign Up</a></li>
                         </ul>
                     </div>
                 </nav>                    
             </div>
         </div><!-- End of main navbar -->
-       
-       
-       
-    
-    
-    <!-- Login modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal" type=
-                    "button">×</button>
-
-                    <h4 class="modal-title" id="myModalLabel">Login</h4>
-                </div>
-
-                <div class="modal-body">
-                    <div class="omb_login">
-                        <h3 class="omb_authTitle">Login</h3>
-
-                        <div class="row omb_row-sm-offset-3 omb_socialButtons">
-                            <div class="col-xs-4 col-sm-2">
-                                <a class=
-                                "btn btn-lg btn-block omb_btn-facebook" href=
-                                "#"><span class="hidden-xs">Facebook</span></a>
-                            </div>
-
-                            <div class="col-xs-4 col-sm-2">
-                                <a class="btn btn-lg btn-block omb_btn-twitter"
-                                href="#"><span class=
-                                "hidden-xs">Twitter</span></a>
-                            </div>
-
-                            <div class="col-xs-4 col-sm-2">
-                                <a class="btn btn-lg btn-block omb_btn-google"
-                                href="#"><span class=
-                                "hidden-xs">Google+</span></a>
-                            </div>
-                        </div>
-
-                        <div class="row omb_row-sm-offset-3 omb_loginOr">
-                            <div class="col-xs-12 col-sm-6">
-                                <hr class="omb_hrOr">
-                                <span class="omb_spanOr">or</span>
-                            </div>
-                        </div>
-             
-						  <!-- Login with Username and Password --> 
-						   <form role="form" data-toggle="validator" class="signin">
-							   <div class="form-group">
-    <label for="inputEmail" class="control-label">Email</label>
-    <input type="email" class="form-control" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
-    <div class="help-block with-errors"></div>
-  </div>
-						   
-						  <div class="form-group">
-						    <label for="exampleInputPassword1">Password <a href="/sessions/forgot_password">(forgot password)</a></label>
-						    <input type="password" class="form-control" style="border-radius:0px" id="exampleInputPassword1" placeholder="Password">
-						  </div>
-						  <button type="submit" class="btn btn-sm btn-default">Sign in</button>
-						</form>	<!-- End of Login with Username and Password -->
-                    </div>
-                </div>
-
-                <div class="modal-footer"></div>
-            </div>
-        </div>
-    </div><!-- End of login modal -->
-    
-    
-    
-    <!-- Sign Up modal -->
-    <div class="modal fade" id="signupModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal" type=
-                    "button">×</button>
-
-                    <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
-                </div>
-
-                <div class="modal-body">
-                    <div class="omb_login">
-                        <h3 class="omb_authTitle">Using</h3>
-
-                        <div class="row omb_row-sm-offset-3 omb_socialButtons">
-                            <div class="col-xs-4 col-sm-2">
-                                <a class=
-                                "btn btn-lg btn-block omb_btn-facebook" href=
-                                "#"><span class="hidden-xs">Facebook</span></a>
-                            </div>
-
-                            <div class="col-xs-4 col-sm-2">
-                                <a class="btn btn-lg btn-block omb_btn-twitter"
-                                href="#"><span class=
-                                "hidden-xs">Twitter</span></a>
-                            </div>
-
-                            <div class="col-xs-4 col-sm-2">
-                                <a class="btn btn-lg btn-block omb_btn-google"
-                                href="#"><span class=
-                                "hidden-xs">Google+</span></a>
-                            </div>
-                        </div>
-
-                        <div class="row omb_row-sm-offset-3 omb_loginOr">
-                            <div class="col-xs-12 col-sm-6">
-                                <hr class="omb_hrOr">
-                                <span class="omb_spanOr">or</span>
-                            </div>
-                        </div>
-
-                        
-                        
-                        <form data-toggle="validator" role="form" class="signup">
-  <div class="form-group">
-    <label for="firstName" class="control-label">First Name</label>
-    <input type="text" class="form-control" id="inputFirst" placeholder="First Name" required>
-    <label for="lastName" class="control-label">Last Name</label>
-    <input type="text" class="form-control" id="inputLast" placeholder="Last Name" required>
-  </div>
-  <div class="form-group">
-    <label for="username" class="control-label">Username</label>
-    <input type="text" class="form-control" id="username" placeholder="Username" required>
-  </div>
-  <div class="form-group">
-    <label for="inputEmail" class="control-label">Email</label>
-    <input type="email" class="form-control" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
-    <div class="help-block with-errors"></div>
-  </div>
-  <div class="form-group">
-    <label for="inputPassword" class="control-label">Password</label>
-    <br>
-    <div class="form-group col-sm-6">
-      <input type="password" data-toggle="validator" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
-      <span class="help-block">Minimum of 6 characters</span>
-    </div>
-    <div class="form-group col-sm-6">
-      <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Confirm" required>
-      <div class="help-block with-errors"></div>
-    </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </div>
-</form>
-
-                       
-                    </div>
-                </div>
-
-                <div class="modal-footer"></div>
-            </div>
-        </div>
-    </div><!-- End of Sign Up modal -->
-
-
-
-
-
-<div class="container">
-	<div class="row">
-		<!-- Profile -->
-		<div class="col-md-3">	
-    	 <div class="well profile">
-	    	 <img src="http://www.localcrimenews.com/wp-content/uploads/2013/07/default-user-icon-profile.png" alt="" class="img-circle img-responsive">
-	    	 <h2>Don Vo</h2>
-	    	 <p><strong>Location: </strong> Toronto, Ontario, Canada </p>
-                    <p><strong>Quests Completed: </strong> 4 </p>
-                    <p><strong>Quests Posted: </strong> 1 </p>                             
-    	 </div>                 
-		</div>	<!-- End of Profile -->		
-	</div>
-</div>
-
-
 
 
 <div class="container">
@@ -294,51 +111,46 @@
 <!-- tab content -->
 <div class="tab-content">
 <div class="tab-pane active text-style" id="tab1">
-  <h2>Lorem ipsum</h2>
+  <h2>Account</h2>
        <p>
-         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-         standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make 
-         a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining 
-         essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-         and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.  
+         Change your general account settings here.  
        </p>
        <hr>  
         <div class="span8">
-    		<form action="billing" method="post" class="form-horizontal" id="billingform" accept-charset="utf-8">
+    		<form method="post" class="form-horizontal" accept-charset="utf-8">
+    			
     			<div class="control-group">
-    				<label for="email" class="control-label">	
-    					Billing E-Mail 
+    				<label for="username" class="control-label">	
+    					Username
     				</label>
-    				<div class="controls">
-    					<input name="email" type="email" value="" id="email">
-    					<span class="help-inline">  Where should we send invoices?</span>
-    				</div>
-    			</div>
-     
-    			<div class="control-group">
-    				<label for="address" class="control-label">	
-    					Street Address
-    				</label>
-    				<div class="controls"><input name="address" placeholder="W 123 Street" type="text" value="" id="address"><span class="help-inline">  Street Name and/or apartment number</span>
-    				</div>
-    			</div>
-     
-    			<div class="control-group">
-    				<label for="zip" class="control-label">	
-    					Zip Code
-    				</label>
-    				<div class="controls"><input name="zip" type="text" value="" id="zip">
-    				</div>
-    			</div>
-     
-    			<div class="control-group">
-    				<label for="city" class="control-label">	
-    					City
-    				</label>
-    				<div class="controls"><input name="city" type="text" value="" id="city">
+    				<div class="controls"><input name="username" type="text" value="donvvo" id="username"><span class="help-inline"></span>
     				</div>
     			</div>
     			
+    			<div class="control-group"> 				
+    				<label for="email" class="control-label">	
+    					E-Mail 
+    				</label>
+    				<div class="controls">
+    					<input name="email" type="email" value="vietcavo@gmail.com" id="email">
+    					<span class="help-inline"></span>
+    				</div>
+    			</div>
+      				
+    			<div class="control-group"> 				
+    				<label for="email" class="control-label">	
+    					Language 
+    				</label>
+    				<div class="controls">
+    					
+    					<span class="help-inline"></span>
+    				</div>
+    			</div>
+      			
+      			
+      				
+      				
+      				
     			<div class="control-group">
     				<label for="country" class="control-label">	
     					Country
@@ -440,9 +252,46 @@
     					</select>
     				</div>
     			</div>
+    			
+    			
+    			<div class="control-group">
+    				<label for="province" class="control-label">	
+    					State / Province
+    				</label>
+    				<div class="controls">
+    					<select name="province" id="province">
+    						<option value="">
+	    						
+	    						
+	    						
+    						</option>
+    					</select>
+    				</div>
+    			</div>
+    			
+    			
+    			<div class="control-group">
+    				<label for="city" class="control-label">	
+    					City
+    				</label>
+    				<div class="controls">
+    					<select name="city" id="city">
+    						<option value="">
+	    						
+	    						
+	    						
+    						</option>
+    					</select>
+    				</div>
+    			</div>
+    			
+    			
+    			
+    			
+    			
      
     			<div class="form-actions">
-    				<button type="submit" class="btn btn-large btn-primary">Save Billing Address</button>
+    				<button type="submit" class="btn btn-large btn-primary">Save</button>
     			</div>
     		</form>
     	</div> <!-- .span8 -->
@@ -487,7 +336,8 @@
     <script>
 	    $('.description').ellipsis({maxLine: 3, fixedWidth: 200})
 	    $('.signup').validator('validate')
-	    $('.signin').validator('validate')    
+	    $('.signin').validator('validate')  
+    });  
     </script>
 </body>
 </html>
