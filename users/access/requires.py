@@ -38,7 +38,6 @@ def is_alive(a_view):
 				# check whether the token is alive and take dedcision
 				if token:
 					if token.is_alive():
-						logging.warn("Alive")
 						return a_view(request, *args, **kwargs)
 					else:
 						success = False

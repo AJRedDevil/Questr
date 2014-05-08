@@ -31,6 +31,6 @@ def send_verification_email(email, verf_link):
     try:
         msg = __get_verification_template(email, verf_link)
         logging.warn("Assumption email Sent")
-        # msg.send()
+        msg.send()
     except Exception, e:
         logging.exception(str(e))

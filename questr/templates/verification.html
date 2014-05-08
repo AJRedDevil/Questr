@@ -1,10 +1,10 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
 {% block content %}
-	{% if not success %}
+	{% if message %}
 		<p>{{ message }}</p>
 	{% else %}
-		<p>Please verify your email <a href="/user/verifymail">verify</a></p>
+		<p>An email has been sent to your inbox. Please check. Click here to resend!<a href="/user/verifymail">verify</a></p>
 	{% endif %}
     
 {% endblock content %}

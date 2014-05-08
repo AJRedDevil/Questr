@@ -45,6 +45,7 @@ def signup(request):
             authenticate(username=userdata.email, password=userdata.password)
             userdata.backend='django.contrib.auth.backends.ModelBackend'
             auth_login(request, userdata)
+            send_verfication_mail(userdata)
             return redirect('home')
         return render(request, 'signup.html', locals())
     else:
@@ -66,7 +67,7 @@ def __get_verification_url(user=None):
         verf_link = "{0}/user/email/confirm/{1}?questr_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_user_code(), token_id)
     return verf_link
 
-def __send_verfication_mail(user):
+def send_verfication_mail(user):
     """
         Sends the verification email to the user
     """
@@ -74,7 +75,7 @@ def __send_verfication_mail(user):
     mailing.send_verification_email(user.email, verf_link)
 
 @login_required
-def send_verification_email(request):
+def resend_verification_email(request):
     """
         Sends a email verification link to the corresponding email address
     """
@@ -83,7 +84,7 @@ def send_verification_email(request):
         try:
             user = QuestrUserProfile.objects.get(email=user_email)
             if user and not user.email_status:
-                __send_verfication_mail(user)
+                send_verfication_mail(user)
         except QuestrUserProfile.DoesNotExist:
             return redirect('home')
     return redirect('home')
@@ -237,7 +238,7 @@ def verify_email(request, user_code):
     if user_code:
         try:
             transcational = UserTransactional.objects.get(user_code__regex=r'^%s' % user_code)
-            if transcational and transcational.status:
+            if transcational and not transcational.status:
                 try:
                     user = QuestrUserProfile.objects.get(id=transcational.id)
                     if user:

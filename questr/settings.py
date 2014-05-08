@@ -22,8 +22,7 @@ SOCIAL_AUTH_FACEBOOK_KEY = os.environ['SOCIAL_AUTH_FACEBOOK_KEY']
 SOCIAL_AUTH_FACEBOOK_SECRET = os.environ['SOCIAL_AUTH_FACEBOOK_SECRET']
 
 # Mandrill API Key
-# MANDRILL_API_KEY = os.environ['MANDRILL_API_KEY']
-MANDRILL_API_KEY = os.environ['MANDRILL_TEST_API_KEY']
+MANDRILL_API_KEY = os.environ['MANDRILL_API_KEY']
 EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 
 #Append Slash to all cals
@@ -93,13 +92,11 @@ USE_L10N = True
 USE_TZ = True
 
 # Questr Url
-QUESTR_URL = "http://questr.com"
+QUESTR_URL = "http://www.questr.co"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 # Static asset configuration
-
-import os
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
