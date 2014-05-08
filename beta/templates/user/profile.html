@@ -1,7 +1,7 @@
 {% extends "user/homepage.html" %}
 {% block content %}
 <p>{{fname}} {{lname}}'s Profile Information</p>
-<p>Profile Image</p><p> <img src="/media/{{avatar}}"></img></p>
+<p>Profile Image</p><p> <img src="{{avatar}}"></img></p>
 {%if email%}
 <p>Email Address</p><b>{{email}}</b>
 {%endif%}
