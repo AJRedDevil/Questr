@@ -1,18 +1,25 @@
-from django.shortcuts import render, redirect
+
+
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from django.http import Http404
-from .models import QuestrUserProfile
+from django.shortcuts import render, redirect
+from .models import QuestrUserProfile, UserTransactional, QuestrToken
 from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, QuestrSocialSignupForm, CreatePasswordForm
 import logging
+
+from  access.requires import verified, is_alive
+from contrib import mailing
+
 
 # Create your views here.
 def logout(request):
     """Logs out user"""
     auth_logout(request)
-    nextlink="signup"
+    # nextlink="signup"
     return redirect('index')
     
 def login(request):
@@ -38,13 +45,52 @@ def signup(request):
             authenticate(username=userdata.email, password=userdata.password)
             userdata.backend='django.contrib.auth.backends.ModelBackend'
             auth_login(request, userdata)
+            send_verfication_mail(userdata)
             return redirect('home')
         return render(request, 'signup.html', locals())
     else:
         user_form = QuestrUserCreationForm()
         return render(request, 'signup.html', locals())
 
+
+def __get_verification_url(user=None): 
+    """
+        Returns the verification url.
+    """
+    verf_link = ""
+    if user:
+        transcational = UserTransactional(id=user.id, email=user.email)
+        transcational.save()
+        token_id = transcational.get_token_id()
+        questr_token = QuestrToken(token_id=token_id)
+        questr_token.save()
+        verf_link = "{0}/user/email/confirm/{1}?questr_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_user_code(), token_id)
+    return verf_link
+
+def send_verfication_mail(user):
+    """
+        Sends the verification email to the user
+    """
+    verf_link = __get_verification_url(user)
+    mailing.send_verification_email(user.email, verf_link)
+
 @login_required
+def resend_verification_email(request):
+    """
+        Sends a email verification link to the corresponding email address
+    """
+    if request.user.is_authenticated():
+        user_email = request.user
+        try:
+            user = QuestrUserProfile.objects.get(email=user_email)
+            if user and not user.email_status:
+                send_verfication_mail(user)
+        except QuestrUserProfile.DoesNotExist:
+            return redirect('home')
+    return redirect('home')
+
+@login_required
+@verified
 def home(request):
     """Post login this is returned and displays user's home page"""
     nextlink="settings"
@@ -67,10 +113,6 @@ def profile(request):
     avatar = user.avatar_file_name
     password = passwordExists(request.user)
     return render(request,'user/profile.html', locals())
-
-@login_required
-def settings(request):
-    pass
 
 def getAccountStatus(status_id):
     '''Get account status of user'''
@@ -188,6 +230,25 @@ def saveUserInfo(request):
     else:
         return render(request, "user/edituserinfo.html",locals())
 
-
-
+@is_alive
+def verify_email(request, user_code):
+    """
+        Verifies email of the user and redirect to the home page
+    """
+    if user_code:
+        try:
+            transcational = UserTransactional.objects.get(user_code__regex=r'^%s' % user_code)
+            if transcational and not transcational.status:
+                try:
+                    user = QuestrUserProfile.objects.get(id=transcational.id)
+                    if user:
+                        user.email_status = True
+                        user.save()
+                        transcational.status = True
+                        transcational.save()
+                except User.DoesNotExist:
+                    return redirect('home')
+        except UserTransactional.DoesNotExist:
+            return redirect('home')
+    return redirect('home')
 

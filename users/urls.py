@@ -15,4 +15,6 @@ urlpatterns = patterns('',
     url(r'^settings/$', userviews.profile, name='settings'),
     url(r'^logout/$', userviews.logout, name='logout'),
     url(r'^(?P<displayname>[-_\w/.]+)/$', userviews.getUserInfo, name='getUserInfo'),
+    url(r'^verifymail$', userviews.resend_verification_email, name='verify_Email'),
+    url(r'^email/confirm/(?P<user_code>[\w\d]+)', userviews.verify_email),
 )
