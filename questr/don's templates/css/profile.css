@@ -2,6 +2,14 @@
 {
     display: inline-block;
     }
+    
+.profile .displayName {
+	font-size: large;
+	display: inline-block;
+	width: 100%;
+}
+
+    
 figcaption.ratings
 {
     margin-top:20px;
@@ -41,6 +49,7 @@ a.list-group-item.active small {
 .stars {
     margin:20px auto 1px;    
 }
+
 
 /*************** Questr Module ******************/
 .postPic {
