@@ -1,0 +1,58 @@
+html {overflow-x: hidden;}
+ 
+body {
+	font-family: Arial, sans-serif;
+	color: #393939;
+	font-size: 16px;
+	padding: 0px;
+	margin: 0;
+ }
+ 
+footer {
+	font-family: 'TeXGyreCursorRegular', Arial, sans-serif;
+	border-top: 1px solid #ddd;
+	margin-top: 35px;
+	padding-top: 6px;
+	text-align: center;
+	font-size: 12px;
+}
+ 
+ 
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	font-family: 'TeXGyreCursorRegular', Arial, sans-serif;
+	letter-spacing: 0;
+ }
+ 
+/*************** Primary Navbar ***************/
+.navbar-container {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.navbar {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	z-index: 999;
+}
+
+/*************** Secondary Navbar ***************/
+.secondary-nav {
+	z-index: 0;
+	text-align: center;
+	display: block;
+	float: none;
+}
+
+.secondary-nav ul {
+	display: inline-block;
+    float: none;
+}
+
+/*************** Well ***************/
+.well {
+	background: #e6e6e6;
+	border-color: rgba(255,255,255,0); 
+}

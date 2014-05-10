@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+
+    <title>Questr - Browse</title>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+
+	<!-- Bootstrap, JQuery, Awesome Fonts -->
+	<link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="./bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<link href="./css/bootstrap-ellipsis.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Custom CSS -->
+	<link href="./css/theme.css" rel="stylesheet">
+	<link href="./css/profile.css" rel="stylesheet">
+	<link href="./css/settings.css" rel="stylesheet">
+
+	<!-- Custom Javascript -->
+	<script src="./js/validator.js"></script>
+
+</head>
+
+<body>
+
+
+	<!-- Main Navbar -->
+	<div class="container navbar-container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <nav class="navbar navbar-default navbar-static-top">
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-target=
+                        "#bs-example-navbar-collapse-1" data-toggle="collapse"
+                        type="button"><span class="sr-only">Toggle
+                        navigation</span></button> <a class="navbar-brand"
+                        href="#">QUESTR</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id=
+                    "bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">                      
+                           
+                           <!--
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle=
+                                "dropdown" href="#">Dropdown</a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+
+                                    <li><a href="#">Another action</a></li>
+
+                                    <li><a href="#">Something else
+                                    here</a></li>
+
+                                    <li><a href="#">Separated link</a></li>
+
+                                    <li><a href="#">One more separated
+                                    link</a></li>
+                                </ul>
+                            </li> -->
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        	<li><form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form></li>
+                        
+                        	<li><a href="#">Browse</a></li>
+                        
+                            <li><a href="#">Login</a></li>
+
+                            <li><a href="#">Sign Up</a></li>
+                        </ul>
+                    </div>
+                </nav>                    
+            </div>
+        </div><!-- End of main navbar -->
+
+
+<div class="container">
+	<div class="col-sm-2">
+    <nav class="nav-sidebar">
+		<ul class="nav tabs well">
+          <li class="active"><a href="#tab1" data-toggle="tab">Account</a></li>
+          <li class=""><a href="#tab2" data-toggle="tab">Password</a></li>
+          <li class=""><a href="#tab3" data-toggle="tab">Email Notifications</a></li>                               
+		</ul>
+	</nav>
+</div>
+<!-- tab content -->
+<div class="tab-content">
+<div class="tab-pane active text-style" id="tab1">
+	<div class="container">
+	<div class="row">
+      <div class="col-md-6">
+        <div class="well well-sm">
+          <form class="form-horizontal" action="" method="post">
+          <fieldset>
+            <legend class="text-center">Change your general settings here</legend>
+    
+            <!-- Username -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Username</label>
+              <div class="col-md-8">
+                <input id="username" name="username" type="text" placeholder="" class="form-control" value="donvvo">
+              </div>
+            </div>
+            
+            <!-- Email -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Email</label>
+              <div class="col-md-8">
+                <input id="email" name="email" type="text" placeholder="" class="form-control" value="vietcavo@gmail.com">
+              </div>
+            </div>
+                        
+            <!-- Language -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Language</label>
+              <div class="col-md-8">
+                <div class="btn-group">			 
+				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> English <span class="caret"></span> </button>
+				 	<ul class="dropdown-menu">
+				 		<li value=""></li>
+    						<li value="EN">English</li>
+    						<li value="FR">French</li>						
+				 	</ul>
+				 </div>	<!-- End of btn-group -->			 
+              </div>	
+            </div>	<!-- End of Form group -->
+            
+            
+            <!-- Location -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">City</label>
+              <div class="col-md-8">
+                <div class="btn-group">			 
+				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> Toronto <span class="caret"></span> </button>
+				 	<ul class="dropdown-menu">
+				 		<li value=""></li>
+    						<li value="TO">Toronto</li>
+    						<li value="OK">Oakville</li>						
+				 	</ul>
+				 </div>	<!-- End of btn-group -->			 
+              </div>	
+            </div>	<!-- End of Form group -->
+    
+            <!-- Form actions -->
+            <div class="form-group">
+              <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary btn-md">Save</button>
+              </div>
+            </div>
+          </fieldset>
+          </form>
+        </div>
+      </div>
+	</div>
+</div>
+</div>	<!-- End of tab-pane -->
+
+
+
+<div class="tab-pane text-style" id="tab2">
+	<div class="container">
+	<div class="row">
+      <div class="col-md-6">
+        <div class="well well-sm">
+          <form class="form-horizontal" action="" method="post">
+          <fieldset>
+            <legend class="text-center">Change your password here</legend>
+    
+            <!-- Current Password -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Current password</label>
+              <div class="col-md-8">
+                <input id="currentPass" name="currentPass" type="text" placeholder="Enter your current password here" class="form-control">
+              </div>
+            </div>
+           
+    
+            <!-- New Password -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">New password</label>
+              <div class="col-md-8">
+                <input id="newPass" name="newPass" type="text" placeholder="Enter your new password here" class="form-control">
+              </div>
+            </div>
+            
+            <!-- Retype New Password -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name"></label>
+              <div class="col-md-8">
+                <input id="retypePass" name="retypePass" type="text" placeholder="Retype your password here" class="form-control">
+              </div>
+            </div>
+
+            <!-- Form actions -->
+            <div class="form-group">
+              <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary btn-md">Save</button>
+              </div>
+            </div>
+          </fieldset>
+          </form>
+        </div>
+      </div>
+	</div>
+</div>  	         
+</div>	<!-- End of tab-pane -->
+
+<div class="tab-pane text-style" id="tab3">
+  <h2></h2>
+  <p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum 
+    iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla 
+    facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit 
+    augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,</p>
+    <hr>
+   
+</div>
+</div>
+    
+    
+</div>
+
+
+
+
+
+
+
+        
+    
+    <script src="./js/libs/jquery.js"></script>
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap-ellipsis.js"></script>
+    <script src="./js/validator.min.js"></script>
+    
+    <script>
+	    $('.description').ellipsis({maxLine: 3, fixedWidth: 200})
+	    $('.signup').validator('validate')
+	    $('.signin').validator('validate')  
+    });  
+    </script>
+</body>
+</html>

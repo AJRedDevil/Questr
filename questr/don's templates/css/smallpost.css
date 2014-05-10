@@ -1,0 +1,29 @@
+    
+    
+a.list-group-item {
+	height:auto;
+	min-height: 120px;
+}
+
+a.list-group-item.active small {
+    color:#fff;
+}
+
+.stars {
+    margin:20px auto 1px;    
+}
+
+
+/*************** Questr Module ******************/
+.postPic {
+	width: 90px;
+	height: 90px;
+}
+
+.postTitle {
+	
+}
+
+.postDesc {
+	
+}

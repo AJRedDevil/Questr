@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+
+    <title>Questr - Signup</title>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+     <meta content="width=device-width, initial-scale=1" name="viewport">
+  
+  <!-- Bootstrap, JQuery, Awesome Fonts -->
+	<link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="./bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<link href="./css/bootstrap-ellipsis.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+	
+	<!-- Custom CSS -->
+	<link href="./css/theme.css" rel="stylesheet">
+	<link href="./css/sign.css" rel="stylesheet">
+	
+	<!-- Custom Javascript -->
+	<script src="./js/validator.js"></script>
+
+</head>
+
+<body>
+
+	<!-- Main Navbar -->
+	<div class="container navbar-container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <nav class="navbar navbar-default navbar-static-top">
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-target=
+                        "#bs-example-navbar-collapse-1" data-toggle="collapse"
+                        type="button"><span class="sr-only">Toggle
+                        navigation</span></button> <a class="navbar-brand"
+                        href="#">QUESTR</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id=
+                    "bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">                      
+                           
+                           <!--
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle=
+                                "dropdown" href="#">Dropdown</a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+
+                                    <li><a href="#">Another action</a></li>
+
+                                    <li><a href="#">Something else
+                                    here</a></li>
+
+                                    <li><a href="#">Separated link</a></li>
+
+                                    <li><a href="#">One more separated
+                                    link</a></li>
+                                </ul>
+                            </li> -->
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                        
+                        
+                        	<li><form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form></li>
+                        
+                        	<li><a href="#">Browse</a></li>
+                        
+                            <li><a href="#">Login</a></li>
+
+                            <li><a href="#">Sign Up</a></li>
+                        </ul>
+                    </div>
+                </nav>                    
+            </div>
+        </div><!-- End of main navbar -->
+       
+
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-8 col-md-offset-2 column">
+			<div class="omb_login">
+                        <h3 class="omb_authTitle">Signing up is so easy!</h3>
+
+                        <div class="row omb_row-sm-offset-3 omb_socialButtons">
+                            <div class="col-xs-4 col-sm-2">
+                                <a class=
+                                "btn btn-lg btn-block omb_btn-facebook" href=
+                                "#"><span class="hidden-xs">Facebook</span></a>
+                            </div>
+
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-lg btn-block omb_btn-twitter"
+                                href="#"><span class=
+                                "hidden-xs">Twitter</span></a>
+                            </div>
+
+                            <div class="col-xs-4 col-sm-2">
+                                <a class="btn btn-lg btn-block omb_btn-google"
+                                href="#"><span class=
+                                "hidden-xs">Google+</span></a>
+                            </div>
+                        </div>
+
+                        <div class="row omb_row-sm-offset-3 omb_loginOr">
+                            <div class="col-xs-12 col-sm-6">
+                                <hr class="omb_hrOr">
+                                <span class="omb_spanOr">or</span>
+                            </div>
+                        </div>
+            </div>
+		</div>
+	</div>
+</div>
+	
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-8 col-md-offset-2 column">
+			<form data-toggle="validator" role="form" class="signup">
+			  <div class="form-group">
+			    <label for="firstName" class="control-label">First Name</label>
+			    <input type="text" class="form-control" id="inputFirst" placeholder="" required>
+			    <label for="lastName" class="control-label">Last Name</label>
+			    <input type="text" class="form-control" id="inputLast" placeholder="" required>
+			  </div>
+			  <div class="form-group">
+			    <label for="username" class="control-label">Username</label>
+			    <input type="text" class="form-control" id="username" placeholder="" required>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputEmail" class="control-label">Email</label>
+			    <input type="email" class="form-control" id="inputEmail" placeholder="" data-error="Bruh, that email address is invalid" required>
+			    <div class="help-block with-errors"></div>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputPassword" class="control-label">Password</label>
+			    <br>
+			    <div class="form-group col-sm-6">
+			      <input type="password" data-toggle="validator" data-minlength="6" class="form-control" id="inputPassword" placeholder="" required>
+			      <span class="help-block">Minimum of 6 characters</span>
+			    </div>
+			    <div class="form-group col-sm-6">
+			      <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Type it again" required>
+			      <div class="help-block with-errors"></div>
+			    </div>
+			    </div>
+			  </div>
+			  <div class="form-group col-sm-12">
+			    <center><button type="submit" class="btn btn-primary">Submit</button></center>
+			  </div>
+			</form>
+		</div>
+	</div>
+</div>
+
+       
+       
+    
+    <script src="./js/libs/jquery.js"></script>
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap-ellipsis.js"></script>
+    <script src="./js/validator.min.js"></script>
+    
+  <script>
+	    $('.description').ellipsis({maxLine: 3, fixedWidth: 200})
+	    $('.signup').validator('validate')
+	    $('.signin').validator('validate')    
+    </script>
+</body>
+</html>
