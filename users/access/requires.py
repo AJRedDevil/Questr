@@ -17,10 +17,10 @@ def verified(a_view):
 					if user.email_status:
 						return a_view(request, *args, **kwargs)
 					else:
-						return render(request, 'verification.html', locals())
+						return render(request, 'thankyou.html', locals())
 				success = False
 				message = "User not Found"
-				return render(request, 'verification.html', locals())
+				return render(request, 'thankyou.html', locals())
 			except QuestrUserProfile.DoesNotExist:
 				return render(request,'error_pages/something_broke.html', locals())
 		return render(request, 'login.html', locals())

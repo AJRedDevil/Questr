@@ -25,6 +25,8 @@ def logout(request):
 def login(request):
     """Home view, displays login mechanism"""
     nextlink="signup"
+    level="signin"
+    ## if authenticated redirect to user's homepage directly ##
     if request.user.is_authenticated():
         return redirect('home')
     if request.method == "POST":   
@@ -32,11 +34,14 @@ def login(request):
         if auth_form.is_valid():
             auth_login(request, auth_form.get_user())
             return redirect('home')
-    return render(request, 'login.html', locals())
+    return render(request, 'signin.html', locals())
 
 def signup(request):
     """Signup, if request == POST, creates the user"""
     nextlink="login"
+    ## if authenticated redirect to user's homepage directly ##
+    if request.user.is_authenticated():
+        return redirect('home')
     if request.method == "POST":
         nextlink="login"
         user_form = QuestrUserCreationForm(request.POST)
@@ -46,7 +51,7 @@ def signup(request):
             userdata.backend='django.contrib.auth.backends.ModelBackend'
             auth_login(request, userdata)
             send_verfication_mail(userdata)
-            return redirect('home')
+            return render(request, 'thankyou.html', locals())
         return render(request, 'signup.html', locals())
     else:
         user_form = QuestrUserCreationForm()
@@ -112,7 +117,7 @@ def profile(request):
     user_since = user.date_joined
     avatar = user.avatar_file_name
     password = passwordExists(request.user)
-    return render(request,'user/profile.html', locals())
+    return render(request,'profile.html', locals())
 
 def getAccountStatus(status_id):
     '''Get account status of user'''
@@ -157,7 +162,7 @@ def getUserInfo(request, displayname):
         user = QuestrUserProfile.objects.get(displayname=displayname)
     except QuestrUserProfile.DoesNotExist:
         raise Http404
-        return render(request,'error_pages/404.html')
+        return render(request,'404.html')
     else:
         lname = user.last_name
         fname = user.first_name
@@ -182,7 +187,7 @@ def editUserInfo(request):
             user_form = QuestrUserChangeForm(request.POST, instance=request.user)
         except QuestrUserProfile.DoesNotExist:
             raise Http404
-            return render(request,'error_pages/404.html', locals())        
+            return render(request,'404.html', locals())        
         if user_form.is_valid():
             user_form.save()
             messageresponse = "Your profile has been upated"
@@ -193,7 +198,7 @@ def editUserInfo(request):
             return render(request, "user/edituserinfo.html",locals())
         except QuestrUserProfile.DoesNotExist:
             raise Http404
-            return render(request,'error_pages/404.html', locals())
+            return render(request,'404.html', locals())
     return render(request, "user/edituserinfo.html",locals())
 
 @login_required
@@ -206,7 +211,7 @@ def createPassword(request):
             user_form = CreatePasswordForm(request.POST, instance=request.user)
         except QuestrUserProfile.DoesNotExist:
             raise Http404
-            return render(request,'error_pages/404.html', locals())        
+            return render(request,'404.html', locals())        
         if user_form.is_valid():
             user_form.save()
             return redirect('home')

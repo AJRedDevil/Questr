@@ -1,0 +1,229 @@
+{% extends "mainbase.html" %}
+{% load staticfiles %}
+{% block localhead %}
+    <link href={% static "css/theme.css" %} rel="stylesheet">
+    <link href={% static "css/profile.css" %} rel="stylesheet">
+    <link href={% static "css/smallpost.css" %} rel="stylesheet">
+    <!-- Custom Javascript -->
+    <script src={% static "js/validator.js" %}></script>  
+{% endblock localhead %}
+{% block content %}
+<div class="container">
+    <div class="row">
+
+        <!-- Profile -->
+        <div class="col-md-3">  
+         <div class="well profile">
+             <center><img src="{{avatar}}" alt="" class="img-circle img-responsive"></center>
+             
+             <br>
+             <div class="btn-group">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle displayName" data-toggle="dropdown" style="min-width:200px;">
+                  {{fname}} {{lname}}
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Personal Message</a></li>
+                  <li><a href="#">Report</a></li>
+                </ul>
+              </div>
+            </div>
+            
+            
+             <p><strong>Location: </strong> Toronto, Ontario, Canada </p>
+                    <p><strong>Quests Completed: </strong> {{quests_complete}} </p>
+                    <p><strong>Quests Posted: </strong> {{questes_posted}} </p>  
+                    <p><strong>Trust Rank: </strong> {{ranking}}% </p>                           
+         </div>                 
+        </div>  <!-- End of Profile -->
+    
+    
+    
+    
+    
+    <!-- Current Quests -->
+    <div class="col-md-9">
+        <!-- Tab menu -->
+       <div class="col-md-12 column well">  
+            <div class="tabbable" id="tabs-84205">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#panel-535112" data-toggle="tab">Quests</a>
+                    </li>
+                    <li>
+                        <a href="#panel-670038" data-toggle="tab">Availability</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="panel-535112">
+                        <!-- Quest Post -->
+          <a href="#" class="list-group-item">
+                <div class="media col-md-3">
+                    <figure class="pull-left">
+                        <img alt="140x140" src="http://lorempixel.com/140/140/" class="postPic" />
+                    </figure>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="list-group-item-heading postTitle"> I NEED SOME SOCKS </h4>
+                    <p class="list-group-item-text postDesc"> Eu eum corpora torquatos, ne postea constituto mea, quo tale lorem facer no. Ut sed odio appetere partiendo, quo meliore salutandi ex. Vix an sanctus vivendo, sed vocibus accumsan petentium ea. 
+                        Sed integre saperet at, no nec debet erant, quo dico incorrupte comprehensam ut. Et minimum consulatu ius, an dolores iracundia est, oportere vituperata interpretaris sea an. Sed id error quando indoctum, mel suas saperet at.                         
+                    </p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <h2>  </h2>        
+                </div>
+          </a>    <!-- End of quest post -->
+          
+          <!-- Quest Post -->
+          <a href="#" class="list-group-item">
+                <div class="media col-md-3">
+                    <figure class="pull-left">
+                        <img alt="140x140" src="http://lorempixel.com/140/140/" class="postPic" />
+                    </figure>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="list-group-item-heading postTitle"> GREEN TEA POCKIES </h4>
+                    <p class="list-group-item-text postDesc"> Eu eum corpora torquatos, ne postea constituto mea, quo tale lorem facer no. Ut sed odio appetere partiendo, quo meliore salutandi ex. Vix an sanctus vivendo, sed vocibus accumsan petentium ea. 
+                        Sed integre saperet at, no nec debet erant, quo dico incorrupte comprehensam ut. Et minimum consulatu ius, an dolores iracundia est, oportere vituperata interpretaris sea an. Sed id error quando indoctum, mel suas saperet at.                         
+                    </p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <h2>  </h2>
+                </div>
+          </a>  <!-- End of quest post -->
+               
+          <!-- Quest Post -->
+          <a href="#" class="list-group-item">
+                <div class="media col-md-3">
+                    <figure class="pull-left">
+                        <img alt="140x140" src="http://lorempixel.com/140/140/" class="postPic" />
+                    </figure>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="list-group-item-heading postTitle"> A Quest </h4>
+                    <p class="list-group-item-text postDesc"> Eu eum corpora torquatos, ne postea constituto mea, quo tale lorem facer no. Ut sed odio appetere partiendo, quo meliore salutandi ex. Vix an sanctus vivendo, sed vocibus accumsan petentium ea. 
+                        Sed integre saperet at, no nec debet erant, quo dico incorrupte comprehensam ut. Et minimum consulatu ius, an dolores iracundia est, oportere vituperata interpretaris sea an. Sed id error quando indoctum, mel suas saperet at.                         
+                    </p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <h2>  </h2>
+                </div>
+          </a>  <!-- End of quest post -->    
+ 
+          
+          <!-- Quest Post -->
+          <a href="#" class="list-group-item" style="min-height: 45px;">
+                <div class="media col-md-3">
+                    <figure class="pull-left">
+                        
+                    </figure>
+                </div>
+                <div class="col-md-6">
+                    <center><h4 class="list-group-item-heading postTitle"> More... </h4></center>
+                </div>
+                <div class="col-md-3 text-center">
+                   
+                </div>
+          </a>  <!-- End of quest post -->
+                    </div>
+                    <div class="tab-pane" id="panel-670038">
+                        
+                        
+                        <!-- Availability Post -->
+                          <a href="#" class="list-group-item">
+                                <div class="media col-md-3">
+                                    <figure class="pull-left">
+                                        <img alt="140x140" src="http://www.localcrimenews.com/wp-content/uploads/2013/07/default-user-icon-profile.png" class="img-circle postPic" />
+                                    </figure>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 class="list-group-item-heading postTitle"> San Francisco June 21-24 </h4>
+                                    <p class="list-group-item-text postDesc"> Eu eum corpora torquatos, ne postea constituto mea, quo tale lorem facer no. Ut sed odio appetere partiendo, quo meliore salutandi ex. Vix an sanctus vivendo, sed vocibus accumsan petentium ea. 
+                                        Sed integre saperet at, no nec debet erant, quo dico incorrupte comprehensam ut. Et minimum consulatu ius, an dolores iracundia est, oportere vituperata interpretaris sea an. Sed id error quando indoctum, mel suas saperet at.                         
+                                    </p>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <h2>  </h2>
+                                </div>
+                          </a>  <!-- End of availability post -->
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>  <!-- End of Current Quests -->          
+    </div>  <!-- End of row -->
+</div>  <!-- End of container -->
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="well">
+        <h1 class="text-center">Reviews of Don Vo's Service As a Questr</h1>
+        <div class="list-group">
+           
+          <!-- Review Post -->
+          <a href="#" class="list-group-item">
+                <div class="media col-md-3">
+                    <figure class="pull-left">
+                        <img alt="140x140" src="http://img004.lazygirls.info/people/amber_montana/amber_montana_instagram_selfie_6p3qzqIw.sized.jpg" class="img-circle postPic" />
+                    </figure>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="list-group-item-heading postTitle"> Thanks a ton! </h4>
+                    <p class="list-group-item-text postDesc"> Don Vo is amazing, he gave it to me quick and fast ;).  Definitely trustworthy!  A+++                         
+                    </p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <h2> 100% </h2>
+                </div>
+          </a>  <!-- End of Current Quests -->  
+         
+          <!-- Review Post -->
+          <a href="#" class="list-group-item">
+                <div class="media col-md-3">
+                    <figure class="pull-left">
+                        <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-circle profile-picture postPic" />
+                    </figure>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="list-group-item-heading postTitle"> Review of a previous Quest </h4>
+                    <p class="list-group-item-text postDesc"> YEAH, HE'S OK. Eu eum corpora torquatos, ne postea constituto mea, quo tale lorem facer no. Ut sed odio appetere partiendo, quo meliore salutandi ex. Vix an sanctus vivendo, sed vocibus accumsan petentium ea. 
+                        Sed integre saperet at, no nec debet erant, quo dico incorrupte comprehensam ut. Et minimum consulatu ius, an dolores iracundia est, oportere vituperata interpretaris sea an. Sed id error quando indoctum, mel suas saperet at.                         
+                    </p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <h2> 98% </h2>
+                    
+                    <!--
+                    <div class="stars">
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                    </div>
+                    <p> Average 3.9 <small> / </small> 5 </p>
+                    -->
+                </div>
+          </a>  <!-- End of Current Quests -->      
+ 
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+<script src={% static "js/libs/jquery.js" %}></script>
+    <script src={% static "bootstrap/js/bootstrap.min.js" %}></script>
+    <script src={% static "js/bootstrap-ellipsis.js" %}></script>
+    <script src={% static "js/validator.min.js" %}></script>
+    
+   <script>
+        $('.postDesc').ellipsis({maxLine: 3, fixedWidth: 200})
+        $('.signup').validator('validate')
+        $('.signin').validator('validate')    
+    </script>
+{% endblock scripts %}

@@ -62,7 +62,7 @@ def __get_avatar_file_name(profile):
 
 
 def save_profile_picture(strategy, user, response, details, is_new=False,*args,**kwargs):
-    defaultQuestrProfileImage=settings.STATIC_URL+'/img/default.png'
+    defaultQuestrProfileImage=settings.STATIC_URL+'img/default.png'
     if strategy.backend.name == 'facebook':
         profile = User.objects.get(email=user)
         try:

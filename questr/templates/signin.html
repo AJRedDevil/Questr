@@ -1,11 +1,13 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
+    <!-- Custom CSS -->
     <link href={% static "css/sign.css" %} rel="stylesheet">
+    <!-- Custom Javascript -->
     <script src={% static "js/validator.js" %}></script>
 
 {% endblock localhead %}
-{% block content%}
+{% block content %}    
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-8 col-md-offset-2 colum">
@@ -58,54 +60,34 @@
         </div>
     </div>
 </div>
-
-
+    
 <div class="container">
     <div class="row clearfix">
-        <div class="col-md-8 col-md-offset-2 column">
-            <form data-toggle="validator" role="form" class="signup" action="" method="post">{% csrf_token %}
-              <div class="form-group">
-                <label for="firstName" class="control-label">First Name</label>
-                <input type="text" class="form-control" name="first_name" id="inputFirst" placeholder="" required>
-                <label for="lastName" class="control-label">Last Name</label>
-                <input type="text" class="form-control" name="last_name" id="inputLast" placeholder="" required>
-              </div>
-              <div class="form-group">
-                <label for="username" class="control-label">Username</label>
-                <input type="text" class="form-control" name="displayname" id="username" placeholder="" required>
-                {% if user_form.displayname.errors %}
-                    {{user_form.displayname.errors}}
-                {% endif %}
-              </div>
-              <div class="form-group">
-                <label for="inputEmail" class="control-label">Email</label>
-                <input type="email" class="form-control" name="email" id="inputEmail" placeholder="" data-error="Bruh, that email address is invalid" required>
-                <div class="help-block with-errors"></div>
-                {% if user_form.email.errors %}
-                    {{user_form.email.errors}}
-                {% endif %}
-              </div>
-              <div class="form-group">
-                <label for="inputPassword" class="control-label">Password</label>
-                <br>
-                <div class="form-group col-sm-6">
-                  <input type="password" data-toggle="validator" data-minlength="6" class="form-control" name="password1" id="inputPassword" placeholder="" required>
-                  <span class="help-block">Minimum of 6 characters</span>
-                </div>
-                <div class="form-group col-sm-6">
-                  <input type="password" class="form-control" name="password2" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Type it again" required>
-                  <div class="help-block with-errors"></div>
-                  {% if user_form.password2.errors %}
-                      {{user_form.password2.errors}}
-                  {% endif %}
-                </div>
-                </div>
-              </div>
-              <div class="form-group col-sm-12">
-                <center><button type="submit" class="btn btn-primary">Submit</button></center>
-              </div>
-            </form>
+        <div class="col-md-8 col-md-offset-2 colum">
+            <!-- Login with Username and Password --> 
+                           <form role="form" data-toggle="validator" class="signin" action="" method="post">{% csrf_token %}
+                               <div class="form-group">
+                                <label for="inputEmail" class="control-label">Email</label>
+                                    <input type="email" class="form-control" name="username" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
+                                    {% if auth_form.username.errors %}
+                                        {{ auth_form.username.errors }}
+                                    {% endif %}
+                                <div class="help-block with-errors"></div>
+                              </div>
+                           
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Password <a href="/sessions/forgot_password">(forgot password)</a></label>
+                            <input type="password" class="form-control" name="password" style="border-radius:0px" id="exampleInputPassword1" placeholder="Password">
+                            {% if auth_form.password.errors %}
+                                {{ auth_form.password.errors }}
+                            {% endif %}
+                            {% if auth_form.errors %}
+                                {{ auth_form.non_field_errors }}
+                            {% endif %}
+                          </div>
+                          <button type="submit" class="btn btn-sm btn-default">Sign in</button>
+                        </form> <!-- End of Login with Username and Password -->
         </div>
     </div>
 </div>
-{% endblock %}    
+{% endblock %}

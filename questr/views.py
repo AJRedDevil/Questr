@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 def index(request):
     nextlink = "login"
+    level="public"
     # plus_id = getattr(settings, 'SOCIAL_AUTH_GOOGLE_PLUS_KEY', None) ###disabled google plus##
     # plus_scope = ' '.join(GooglePlusAuth.DEFAULT_SCOPE) ###disabled google plus##
     return render(request, 'index.html', locals())
