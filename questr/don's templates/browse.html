@@ -23,6 +23,7 @@
 		<!-- Custom CSS -->
 		<link href="./css/theme.css" rel="stylesheet">
 		 <link href="./css/browse.css" rel="stylesheet">
+		 <link href="./css/smallpost.css" rel="stylesheet">
 				
 		<!-- Custom Javascript -->
 		<script src="./js/validator.js"></script>
@@ -114,390 +115,136 @@
     <div class="container">
         <div class="row">
         
-        	<div class="col-sm-2 paddingTop20 sidebarCol">
-            <nav class="nav-sidebar">
-            	<h4>Located In:</h4>
+        	<div class="col-md-2">
+            <nav class="nav-sidebar well">
+            	
             	<div class="btn-group">
+				  	<h4>Search In</h4>
+				   			 
+				    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				      City
+				      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu">
+				      <li><a href="#">Dropdown link</a></li>
+				      <li><a href="#">Dropdown link</a></li>
+				    </ul>		    
+				 </div>
+            	
 				 
-				 <button class="btn btn-default">Country</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button></div>
+				
+				
 				 <div class="btn-group">
-				 <button class="btn btn-default">Province / State</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button></div>
-				 <div class="btn-group">
-				 <button class="btn btn-default">City</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button></div>
-					
-			<h4>Seeking Items In:</h4>
-            	<div class="btn-group">
-				 
-				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      Country
-      <span class="caret"></span>
-    </button>
-				 	<ul class="dropdown-menu">
-				 		<li value=""></li>
-    						<li value="AR">Argentina</li>
-    						<li value="AU">Australia</li>
-    						<li value="AT">Austria</li>
-    						<li value="BY">Belarus</li>
-    						<li value="BE">Belgium</li>
-    						<li value="BA">Bosnia and Herzegovina</li>
-    						<li value="BR">Brazil</li>
-    						<li value="BG">Bulgaria</li>
-    						<li value="CA">Canada</li>
-    						<li value="CL">Chile</li>
-    						<li value="CN">China</li>
-    						<li value="CO">Colombia</li>
-    						<li value="CR">Costa Rica</li>
-    						<li value="HR">Croatia</li>
-    						<li value="CU">Cuba</li>
-    						<li value="CY">Cyprus</li>
-    						<li value="CZ">Czech Republic</li>
-    						<li value="DK">Denmark</li>
-    						<li value="DO">Dominican Republic</li>
-    						<li value="EG">Egypt</li>
-    						<li value="EE">Estonia</li>
-    						<li value="FI">Finland</li>
-    						<li value="FR">France</li>
-    						<li value="GE">Georgia</li>
-    						<li value="DE">Germany</li>
-    						<li value="GI">Gibraltar</li>
-    						<li value="GR">Greece</li>
-    						<li value="HK">Hong Kong S.A.R., China</li>
-    						<li value="HU">Hungary</li>
-    						<li value="IS">Iceland</li>
-    						<li value="IN">India</li>
-    						<li value="ID">Indonesia</li>
-    						<li value="IR">Iran</li>
-    						<li value="IQ">Iraq</li>
-    						<li value="IE">Ireland</li>
-    						<li value="IL">Israel</li>
-    						<li value="IT">Italy</li>
-    						<li value="JM">Jamaica</li>
-    						<li value="JP">Japan</li>
-    						<li value="KZ">Kazakhstan</li>
-    						<li value="KW">Kuwait</li>
-    						<li value="KG">Kyrgyzstan</li>
-    						<li value="LA">Laos</li>
-    						<li value="LV">Latvia</li>
-    						<li value="LB">Lebanon</li>
-    						<li value="LT">Lithuania</li>
-    						<li value="LU">Luxembourg</li>
-    						<li value="MK">Macedonia</li>
-    						<li value="MY">Malaysia</li>
-    						<li value="MT">Malta</li>
-    						<li value="MX">Mexico</li>
-    						<li value="MD">Moldova</li>
-    						<li value="MC">Monaco</li>
-    						<li value="ME">Montenegro</li>
-    						<li value="MA">Morocco</li>
-    						<li value="NL">Netherlands</li>
-    						<li value="NZ">New Zealand</li>
-    						<li value="NI">Nicaragua</li>
-    						<li value="KP">North Korea</li>
-    						<li value="NO">Norway</li>
-    						<li value="PK">Pakistan</li>
-    						<li value="PS">Palestinian Territory</li>
-    						<li value="PE">Peru</li>
-    						<li value="PH">Philippines</li>
-    						<li value="PL">Poland</li>
-    						<li value="PT">Portugal</li>
-    						<li value="PR">Puerto Rico</li>
-    						<li value="QA">Qatar</li>
-    						<li value="RO">Romania</li>
-    						<li value="RU">Russia</li>
-    						<li value="SA">Saudi Arabia</li>
-    						<li value="RS">Serbia</li>
-    						<li value="SG">Singapore</li>
-    						<li value="SK">Slovakia</li>
-    						<li value="SI">Slovenia</li>
-    						<li value="ZA">South Africa</li>
-    						<li value="KR">South Korea</li>
-    						<li value="ES">Spain</li>
-    						<li value="LK">Sri Lanka</li>
-    						<li value="SE">Sweden</li>
-    						<li value="CH">Switzerland</li>
-    						<li value="TW">Taiwan</li>
-    						<li value="TH">Thailand</li>
-    						<li value="TN">Tunisia</li>
-    						<li value="TR">Turkey</li>
-    						<li value="UA">Ukraine</li>
-    						<li value="AE">United Arab Emirates</li>
-    						<li value="GB">United Kingdom</li>
-    						<li value="US">USA</li>
-    						<li value="UZ">Uzbekistan</li>
-    						<li value="VN">Vietnam</li>
-				 	</ul>
+				  	<h4>Need Item By</h4>
+				   			 
+				    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				      Day
+				      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu">
+				      <li><a href="#">Dropdown link</a></li>
+				      <li><a href="#">Dropdown link</a></li>
+				    </ul>
+				    
+				    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				      Month
+				      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu">
+				      <li><a href="#">Dropdown link</a></li>
+				      <li><a href="#">Dropdown link</a></li>
+				    </ul>			    
+				    
+				    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				      Year
+				      <span class="caret"></span>
+				    </button>
+				    <ul class="dropdown-menu">
+				      <li><a href="#">Dropdown link</a></li>
+				      <li><a href="#">Dropdown link</a></li>
+				    </ul>
+				    
 				 </div>
 				 
-				 
-				 
+				 				
+				<div class="input-group input-group-sm offer">
+					<h4>Offer</h4>				  
+					<div class="col-md-6">
+				  		<input type="text" class="form-control textInput" placeholder="min">
+					</div>
+					<div class="col-md-6">
+				  		<input type="text" class="form-control textInput" placeholder="max">
+					</div>
+				</div>
 				 
 				 <div class="btn-group">
-				 <button class="btn btn-default">Province / State</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
-				 	<ul class="dropdown-menu">
-					 	<li><a href="#">aids</a></li>
-					 	<li>aids2</li>
-					 	<li>aids3</li>
-				 	</ul>
+					 <button type="button" class="btn btn-default">Search</button>
 				 </div>
-				 <div class="btn-group">
-				 <button class="btn btn-default">City</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>	 </div>
-				 <h4>Offering</h4>
 				 
-				 <div class="btn-group">
-				 <button class="btn btn-default">$</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>	 </div><br>
-				 <button type="button" class="btn btn-default">Search</button>
 				 
             </nav>
-                      <div><h2 class="ad">Ad goes here</h2></div>
-                      <div><h2 class="ad">Ad goes here</h2></div>
-                      <div><h2 class="ad">Ad goes here</h2></div>
-                                     
-        </div>	<!--  -->
-                  
-            <div class="col-md-10 browsePost">             
-                <img alt="post img" class=
-                "image pull-left img-responsive thumb margin10 img-thumbnail" src=
-                "http://i.dailymail.co.uk/i/pix/2013/06/04/article-2335636-1A2573D5000005DC-340_964x611.jpg">              
-                	
-                <h4 class="title">Title</h4>
-                <div class="col-md-6 description">
-                    <p>Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only</p>  
-                </div>                      
-            </div>	<!-- End of browsePost -->
-            
-                        
-            <div class="col-md-10 browsePost">             
-                <img alt="post img" class=
-                "image pull-left img-responsive thumb margin10 img-thumbnail" src=
-                "http://i.dailymail.co.uk/i/pix/2013/06/04/article-2335636-1A2573D5000005DC-340_964x611.jpg">              
-                	
-                <h4 class="title">Title</h4>
-                <div class="col-md-6 description">
-                    <p>Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only</p>  
-                </div>       
-                <div class="col-md-4"><p>AIDS</p></div> 
-            </div>	<!-- End of browsePost -->
-            
-            
-            
-            <div class="col-md-10 browsePost">             
-                <img alt="post img" class=
-                "image pull-left img-responsive thumb margin10 img-thumbnail" src=
-                "http://i.dailymail.co.uk/i/pix/2013/06/04/article-2335636-1A2573D5000005DC-340_964x611.jpg">              
-                	
-                <h4 class="title">Title</h4>
-                <div class="col-md-6 description">
-                    <p>Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only</p>  
-                </div>       
-                <div class="col-md-4"><p>AIDS</p></div> 
-            </div>	<!-- End of browsePost -->
-            
-            
-            
-            <div class="col-md-10 browsePost">             
-                <img alt="post img" class=
-                "image pull-left img-responsive thumb margin10 img-thumbnail" src=
-                "http://i.dailymail.co.uk/i/pix/2013/06/04/article-2335636-1A2573D5000005DC-340_964x611.jpg">              
-                	
-                <h4 class="title">Title</h4>
-                <div class="col-md-6 description">
-                    <p>Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only</p>  
-                </div>       
-                <div class="col-md-4"><p>AIDS</p></div> 
-            </div>	<!-- End of browsePost -->
-            
-            
-            
-            
-            <div class="col-md-10 browsePost">             
-                <img alt="post img" class=
-                "image pull-left img-responsive thumb margin10 img-thumbnail" src=
-                "http://i.dailymail.co.uk/i/pix/2013/06/04/article-2335636-1A2573D5000005DC-340_964x611.jpg">              
-                	
-                <h4 class="title">Title</h4>
-                <div class="col-md-6 description">
-                    <p>Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only</p>  
-                </div>       
-                <div class="col-md-4"><p>AIDS</p></div> 
-            </div>	<!-- End of browsePost -->
-            
-            
-            
-            
-            
-            <div class="col-md-10 browsePost">             
-                <img alt="post img" class=
-                "image pull-left img-responsive thumb margin10 img-thumbnail" src=
-                "http://i.dailymail.co.uk/i/pix/2013/06/04/article-2335636-1A2573D5000005DC-340_964x611.jpg">              
-                	
-                <h4 class="title">Title</h4>
-                <div class="col-md-6 description">
-                    <p>Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only</p>  
-                </div>       
-                <div class="col-md-4"><p>AIDS</p></div> 
-            </div>	<!-- End of browsePost -->
-            
-            
-            
-            <div class="col-md-10 browsePost">             
-                <img alt="post img" class=
-                "image pull-left img-responsive thumb margin10 img-thumbnail" src=
-                "http://i.dailymail.co.uk/i/pix/2013/06/04/article-2335636-1A2573D5000005DC-340_964x611.jpg">              
-                	
-                <h4 class="title">Title</h4>
-                <div class="col-md-6 description">
-                    <p>Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only</p>  
-                </div>       
-                <div class="col-md-4"><p>AIDS</p></div> 
-            </div>	<!-- End of browsePost -->
-            
-            
-            
-            
-            
-            <div class="col-md-10 browsePost">             
-                <img alt="post img" class=
-                "image pull-left img-responsive thumb margin10 img-thumbnail" src=
-                "http://i.dailymail.co.uk/i/pix/2013/06/04/article-2335636-1A2573D5000005DC-340_964x611.jpg">              
-                	
-                <h4 class="title">Title</h4>
-                <div class="col-md-6 description">
-                    <p>Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only</p>  
-                </div>       
-                <div class="col-md-4"><p>AIDS</p></div> 
-            </div>	<!-- End of browsePost -->
-            
-            
-            
-            
-            
-            
-            
-            <div class="col-md-10 browsePost">             
-                <img alt="post img" class=
-                "image pull-left img-responsive thumb margin10 img-thumbnail" src=
-                "http://i.dailymail.co.uk/i/pix/2013/06/04/article-2335636-1A2573D5000005DC-340_964x611.jpg">              
-                	
-                <h4 class="title">Title</h4>
-                <div class="col-md-6 description">
-                    <p>Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only</p>  
-                </div>       
-                <div class="col-md-4"><p>AIDS</p></div> 
-            </div>	<!-- End of browsePost -->
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            <div class="col-md-10 browsePost">             
-                <img alt="post img" class=
-                "image pull-left img-responsive thumb margin10 img-thumbnail" src=
-                "http://i.dailymail.co.uk/i/pix/2013/06/04/article-2335636-1A2573D5000005DC-340_964x611.jpg">              
-                	
-                <h4 class="title">Title</h4>
-                <div class="col-md-6 description">
-                    <p>Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only</p>  
-                </div>       
-                <div class="col-md-4"><p>AIDS</p></div> 
-            </div>	<!-- End of browsePost -->
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            <div class="col-md-10 browsePost">             
-                <img alt="post img" class=
-                "image pull-left img-responsive thumb margin10 img-thumbnail" src=
-                "http://i.dailymail.co.uk/i/pix/2013/06/04/article-2335636-1A2573D5000005DC-340_964x611.jpg">              
-                	
-                <h4 class="title">Title</h4>
-                <div class="col-md-6 description">
-                    <p>Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only</p>  
-                </div>       
-                <div class="col-md-4"><p>AIDS</p></div> 
-            </div>	<!-- End of browsePost -->
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            <div class="col-md-10 browsePost">             
-                <img alt="post img" class=
-                "image pull-left img-responsive thumb margin10 img-thumbnail" src=
-                "http://i.dailymail.co.uk/i/pix/2013/06/04/article-2335636-1A2573D5000005DC-340_964x611.jpg">              
-                	
-                <h4 class="title">Title</h4>
-                <div class="col-md-6 description">
-                    <p>Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only</p>  
-                </div>       
-                <div class="col-md-4"><p>AIDS</p></div> 
-            </div>	<!-- End of browsePost -->
+                            
+        </div>	<!-- End of col -->
+      
+         
+        
+       
+    <div class="col-md-10">
+		<div class="well">
+        
+        <div class="list-group">
+           
+          <!-- Review Post -->
+          <a href="#" class="list-group-item">
+                <div class="media col-md-2">
+                    <figure class="pull-left">
+                        <img alt="140x140" src="http://img004.lazygirls.info/people/amber_montana/amber_montana_instagram_selfie_6p3qzqIw.sized.jpg" class="postPic" />
+                    </figure>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="list-group-item-heading postTitle"> Item </h4>
+                    <p class="list-group-item-text postDesc"> Im looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thing                         
+                    </p>
+                </div>
+                <div class="col-md-2 text-center">
+                	<p>$10</p>
+                </div>
+                <div class="col-md-2 text-center">
+                    <p>June 20, 2014</p>
+                </div>
+          </a>	<!-- End of Current Quests -->	
+         
+          <!-- Review Post -->
+          <a href="#" class="list-group-item">
+                <div class="media col-md-2">
+                    <figure class="pull-left">
+                        <img alt="140x140" src="http://www.diabetesmine.com/wp-content/uploads/2012/05/chocolate-milk.jpg" class="postPic" />
+                    </figure>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="list-group-item-heading postTitle"> Im looking for this thing</h4>
+                    <p class="list-group-item-text postDesc"> Im looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thing                        
+                    </p>
+                </div>
+                <div class="col-md-2 text-center">
+                	<p>$10</p>
+                </div>
+                <div class="col-md-2 text-center">
+                    <p>June 20, 2014</p>
+                </div>
+          </a>	<!-- End of Current Quests -->	    
  
-            
-                              
-        </div>	<!-- End of row -->         
-    </div>	<!-- end of container -->
+        </div>
+        </div>
+	</div>
+</div>                        
+        </div>	<!-- End of column -->         
+    
+    
+    
+    
+    
+    
     
     
     <div class="container">
@@ -539,7 +286,7 @@
     <script src="./js/validator.min.js"></script>
     
   <script>
-	    $('.description').ellipsis({maxLine: 3, fixedWidth: 200})
+	    $('.postDesc').ellipsis({maxLine: 3, fixedWidth: 200})
 	    $('.signup').validator('validate')
 	    $('.signin').validator('validate')    
     </script>

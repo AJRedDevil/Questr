@@ -34,34 +34,4 @@ span.tags
     padding: 2px 4px;
 }
 
-      
-    
-    
-a.list-group-item {
-	height:auto;
-	min-height: 120px;
-}
-
-a.list-group-item.active small {
-    color:#fff;
-}
-
-.stars {
-    margin:20px auto 1px;    
-}
-
-
-/*************** Questr Module ******************/
-.postPic {
-	width: 100px;
-	height: 100px;
-}
-
-.postTitle {
-	
-}
-
-.postDesc {
-	
-}
-
+ 
