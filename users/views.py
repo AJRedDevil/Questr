@@ -72,7 +72,7 @@ def send_verfication_mail(user):
         Sends the verification email to the user
     """
     verf_link = __get_verification_url(user)
-    mailing.send_verification_email(user.email, verf_link)
+    mailing.send_verification_email(user, verf_link)
 
 @login_required
 def resend_verification_email(request):

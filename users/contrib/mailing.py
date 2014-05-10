@@ -1,35 +1,37 @@
 
 
 import logging
-from django.core.mail import EmailMultiAlternatives#, send_mail
+from django.core.mail import EmailMessage
 
 
-def __get_verification_template(email, verf_link, attach_alternative=False):
+def __get_verification_template(template_name, first_name, email, verf_link):
     """
     Returns the template for email verification.
     """
-    email_template = EmailMultiAlternatives(
-        subject="Questr email verification",
-        body="Welcome to the world of peer to peer delivery service.Please click this link {0} to confirm your verification and connect with questerians.".format(verf_link),
-        from_email="Questr <questr@dev.co>",
+    ##Email Template Init###
+    email_template = EmailMessage(
+        subject="Please verify your email!",
+        from_email="Questr <hello@questr.co>",
         to=[email],
-        headers={'Reply-To': "Service <support@questr.com>"}
+        headers={'Reply-To': "Questr <hello@questr.co>"}
         )
-    if attach_alternative:
-        email_template.attach_alternative("<p>Test test</p>", "text/html")
 
-        # Optional Mandrill-specific extensions:
-        email_template.tags = ["one tag", "two tag", "red tag", "blue tag"]
-        # email_template.metadata = {'user_id': "8675309"}
+    ###List Email Template###
+    email_template.template_name = template_name
+
+    ###List Email Tags to be used###
+    email_template.global_merge_vars = { 'VERF_LINK'  : verf_link, 'COMPANY' : 'Questr Co', 'FIRST_NAME' : first_name , }
 
     return email_template
 
-def send_verification_email(email, verf_link):
+def send_verification_email(user, verf_link):
     """
     Send a verification email to the user.
     """
+    ##Mailchimp Template Name##
+    template_name = "Welcome_Email"
     try:
-        msg = __get_verification_template(email, verf_link)
+        msg = __get_verification_template(template_name, user.first_name, user.email, verf_link)
         logging.warn("Assumption email Sent")
         msg.send()
     except Exception, e:
