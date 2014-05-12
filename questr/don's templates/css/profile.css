@@ -35,3 +35,12 @@ span.tags
 }
 
  
+ 
+/*********** Tab Menu ************/
+.tabbable li.active a {
+	
+} 
+
+.tabbable li a:hover {
+	
+} 
