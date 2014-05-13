@@ -16,6 +16,7 @@ footer {
 	padding-top: 6px;
 	text-align: center;
 	font-size: 12px;
+	background: white;
 }
  
  
@@ -26,15 +27,14 @@ h1, h2, h3, h4, h5, h6 {
  }
 
 
+/*************** Theme colour & details ********************/
 li a:link {
 	color: #777777;
 }
 
 li a:hover {
-	color: #333333;
+	color: #5f97d8;
 }
-
-
 
 .navbar-default .navbar-nav > .active {
     color: #000;
@@ -46,10 +46,7 @@ li a:hover {
       color: #5f97d8;
       background: white;
  }
- 
-.navbar-default .navbar-brand {
-	color: #5f97d8;
-}
+
  
 /*************** Primary Navbar ***************/
 .navbar-container {
@@ -69,14 +66,63 @@ li a:hover {
 	background: white;
 }
 
-.navbar li.active a {
-	background: aqua;
-	color: aqua;
+
+.navbar-default a:link {
+	color: #777777;
 }
 
-.navbar a:hover {
+.navbar-default a:hover {
 	color: #5f97d8;	
 }
+
+.navbar .profileImg {
+	width: 30px;
+	height: 30px;
+	margin: 0;
+	padding: 0;
+}
+
+.navbar .nonProfile {
+	line-height: 30px;
+}
+
+.navbar .form-control {
+	height: 45px;
+}
+
+.navbar-default .navbar-brand:link {
+	color: #5f97d8;
+	 font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+    
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+.navbar-default .navbar-brand:hover {
+	color: #54a3fd;
+	font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+    
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;	
+}
+
+
 
 /*************** Secondary Navbar ***************/
 .secondary-nav {
@@ -121,20 +167,23 @@ li a:hover {
 
 /*************** Well ***************/
 .well {
-	background: #efefef;
+	background: #FAFAFA;
 	border-color: rgba(255,255,255,0); 
 }
 
 
 /************* Buttons ************/
-.btn-group .btn-default {
+.btn, .btn-default, .btn-group .btn-default {
 	color: #777777;
+	background: white;
+	border-color: grey;
 }
 
-.btn-group .btn-default:hover {
+.btn:hover, .btn-default:hover, .btn-group .btn-default:hover {
 	color: #333333;
 	background: white;
 }
+
 
 /******** Pagination ************/
 .pagination li a {
@@ -151,5 +200,10 @@ li a:hover {
 	border-color: grey;
 }
 
+
+/********* Dropdown *********/
+.dropdown-menu {
+	text-align: center;
+}
 
 
