@@ -7,6 +7,87 @@
      <link href={% static "css/bootstrap-ellipsis.css" %} rel="stylesheet">
 {% endblock localhead %}
 {% block content %}
+    <div class="container">
+        <div class="row">
+        
+            <div class="col-md-2">
+            <nav class="nav-sidebar well">
+                
+                <div class="btn-group">
+                    <h4>Search In</h4>
+                             
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        City
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Dropdown link</a></li>
+                      <li><a href="#">Dropdown link</a></li>
+                    </ul>           
+                 </div>
+                
+                 
+                
+                
+                 <div class="btn-group">
+                    <h4>Need Item By</h4>
+                             
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Day
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Dropdown link</a></li>
+                      <li><a href="#">Dropdown link</a></li>
+                    </ul>
+                 </div>
+                 
+                 <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Month
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Dropdown link</a></li>
+                      <li><a href="#">Dropdown link</a></li>
+                    </ul>               
+                 </div>
+                    
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Year
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Dropdown link</a></li>
+                      <li><a href="#">Dropdown link</a></li>
+                    </ul>
+                    
+                 </div>
+                 
+                                
+                <div class="input-group input-group-sm offer">
+                    <h4>Offer</h4>                
+                    <div class="col-md-6">
+                        <input type="text" class="form-control textInput" placeholder="min">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control textInput" placeholder="max">
+                    </div>
+                </div>
+                 
+                 <div class="btn-group">
+                     <button type="button" class="btn btn-default">Search</button>
+                 </div>
+                 
+                 
+            </nav>
+                            
+        </div>  <!-- End of col -->
+      
+         
+        
+       
     <div class="col-md-10">
         <div class="well">
         
@@ -73,7 +154,7 @@
                     <a href="#">1</a>
                 </li>
                 <li>
-                    <a href="/loadpage/browse_2.html">2</a>
+                    <a href="./browsePages/2.html">2</a>
                 </li>
                 <li>
                     <a href="#">3</a>
@@ -92,6 +173,7 @@
         </div>
     </div>
 </div>
+    
 {% endblock content %}
 {% block scripts %}
 	<!-- Le javascript
