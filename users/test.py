@@ -24,12 +24,8 @@ def logout(request):
     
 def login(request):
     """Home view, displays login mechanism"""
-    nav_link_1 = "/user/login"
-    nav_link_1_label = "login"
-    nav_link_2 = "/user/signup"
-    nav_link_2_label ="signup"
-    nav_link_3 = "#"
-    nav_link_3_label ="about us"
+    nextlink="signup"
+    level="signin"
     ## if authenticated redirect to user's homepage directly ##
     if request.user.is_authenticated():
         return redirect('home')
@@ -42,12 +38,7 @@ def login(request):
 
 def signup(request):
     """Signup, if request == POST, creates the user"""
-    nav_link_1 = "/user/login"
-    nav_link_1_label = "login"
-    nav_link_2 = "/user/signup"
-    nav_link_2_label ="signup"
-    nav_link_3 = "#"
-    nav_link_3_label ="about us"
+    nextlink="login"
     ## if authenticated redirect to user's homepage directly ##
     if request.user.is_authenticated():
         return redirect('home')
@@ -107,23 +98,11 @@ def resend_verification_email(request):
 @verified
 def home(request):
     """Post login this is returned and displays user's home page"""
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
-    return render(request,'homepage.html', locals())
+    return render(request,'user/homepage.html', locals())
 
 @login_required
 def profile(request):
     """This displays user's profile page"""
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
     user = request.user
     displayname = user.displayname
     lname = user.last_name
@@ -138,50 +117,6 @@ def profile(request):
     avatar = user.avatar_file_name
     password = passwordExists(request.user)
     return render(request,'profile.html', locals())
-
-@login_required
-def userSettings(request):
-    """Change's user's personal settings"""
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
-    try:
-        user = QuestrUserProfile.objects.get(email=request.user)
-        username = user.displayname
-        lname = user.last_name
-        fname = user.first_name
-        email = user.email
-    except QuestrUserProfile.DoesNotExist:
-        raise Http404
-        return render(request,'404.html', locals())    
-
-    logging.warn(request.POST)    
-
-    if request.method == "POST" and request.POST['formtype'] == "editdetails":
-        try:
-            user_form = QuestrUserChangeForm(request.POST, instance=request.user)
-        except QuestrUserProfile.DoesNotExist:
-            raise Http404
-            return render(request,'404.html', locals())        
-        if user_form.is_valid():
-            user_form.save()
-            return redirect('settings')
-
-    elif request.method == "POST" and request.POST['formtype'] == "changepassword":
-        pass
-
-    else:
-        try:
-            user_form = QuestrUserChangeForm(instance=request.user)
-            return render(request, "usersettings.html",locals())
-        except QuestrUserProfile.DoesNotExist:
-            raise Http404
-            return render(request,'404.html', locals())
-
-    return render(request, "usersettings.html",locals())
 
 def getAccountStatus(status_id):
     '''Get account status of user'''

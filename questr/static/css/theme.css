@@ -6,6 +6,7 @@ body {
 	font-size: 16px;
 	padding: 0px;
 	margin: 0;
+	background: #c2c2c2;
  }
  
 footer {
@@ -23,6 +24,31 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: 'TeXGyreCursorRegular', Arial, sans-serif;
 	letter-spacing: 0;
  }
+
+
+li a:link {
+	color: #777777;
+}
+
+li a:hover {
+	color: #333333;
+}
+
+
+.navbar-default .navbar-nav > .active {
+    color: #000;
+   background: #5f97d8;
+ }
+ .navbar-default .navbar-nav > .active > a, 
+ .navbar-default .navbar-nav > .active > a:hover, 
+ .navbar-default .navbar-nav > .active > a:focus {
+      color: #5f97d8;
+      background: white;
+ }
+ 
+.navbar-default .navbar-brand {
+	color: #5f97d8;
+}
  
 /*************** Primary Navbar ***************/
 .navbar-container {
@@ -34,8 +60,18 @@ h1, h2, h3, h4, h5, h6 {
 .navbar {
 	width: 100%;
 	margin: 0;
-	padding: 0;
+	padding: 0 15px;
 	z-index: 999;
+	background: white;
+}
+
+.navbar li.active a {
+	background: aqua;
+	color: aqua;
+}
+
+.navbar a:hover {
+	color: #5f97d8;	
 }
 
 /*************** Secondary Navbar ***************/
@@ -44,6 +80,9 @@ h1, h2, h3, h4, h5, h6 {
 	text-align: center;
 	display: block;
 	float: none;
+	border-color: rgba(255,255,255,0);
+	padding-bottom: 0;
+	margin-bottom: 0;
 }
 
 .secondary-nav ul {
@@ -51,8 +90,62 @@ h1, h2, h3, h4, h5, h6 {
     float: none;
 }
 
+.secondary-nav li {
+	margin-left: 17px;
+	margin-right: 17px;
+	padding-bottom: 0;
+}
+
+.secondary-nav li a {
+	padding-bottom: 0;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.secondary-nav li.active a {
+	border-bottom-style: solid;
+	border-bottom-width: 6px;
+	border-bottom-color: #5f97d8;
+}
+
+.secondary-nav li.active {
+}
+
+.secondary-nav li a:hover {
+	background: #5f97d8;
+}
+
 /*************** Well ***************/
 .well {
-	background: #e6e6e6;
+	background: #efefef;
 	border-color: rgba(255,255,255,0); 
 }
+
+
+/************* Buttons ************/
+.btn-group .btn-default {
+	color: #777777;
+}
+
+.btn-group .btn-default:hover {
+	color: #333333;
+	background: white;
+}
+
+/******** Pagination ************/
+.pagination li a {
+	color: #777777;
+}
+
+.pagination li a:hover {
+	color: #333333;
+	background: white;
+}
+
+.pagination li.active a, .pagination li.active a:hover {
+	background: grey;
+	border-color: grey;
+}
+
+
+

@@ -216,11 +216,6 @@
 </div>
 {% endblock content %}
 {% block scripts %}
-<script src={% static "js/libs/jquery.js" %}></script>
-    <script src={% static "bootstrap/js/bootstrap.min.js" %}></script>
-    <script src={% static "js/bootstrap-ellipsis.js" %}></script>
-    <script src={% static "js/validator.min.js" %}></script>
-    
    <script>
         $('.postDesc').ellipsis({maxLine: 3, fixedWidth: 200})
         $('.signup').validator('validate')

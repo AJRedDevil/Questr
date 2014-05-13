@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^beta/', include('beta.urls')),
     url(r'^user/', include('users.urls')),
     url(r'^quests/', mainview.quests ),
+    url(r'^quest/', mainview.quest ),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

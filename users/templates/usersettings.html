@@ -1,0 +1,178 @@
+{% extends "mainbase.html" %}
+{% load staticfiles %}
+{% block localhead %}
+    <!-- Custom CSS -->
+    <link href={% static "css/profile.css" %} rel="stylesheet">
+    <link href={% static "css/settings.css" %} rel="stylesheet">
+
+    <!-- Custom Javascript -->
+    <script src={% static "js/validator.js" %}></script>
+{% endblock localhead %}
+{% block content %}
+    <div class="container">
+    <div class="col-sm-2">
+    <nav class="nav-sidebar">
+        <ul class="nav tabs well">
+          <li class="active"><a href="#tab1" data-toggle="tab">Account</a></li>
+          <li class=""><a href="#tab2" data-toggle="tab">Password</a></li>
+          <li class=""><a href="#tab3" data-toggle="tab">Email Notifications</a></li>                               
+        </ul>
+    </nav>
+</div>
+<!-- tab content -->
+<div class="tab-content">
+<div class="tab-pane active text-style" id="tab1">
+    <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="well well-sm">
+          <form class="form-horizontal" action="" method="post">{% csrf_token %}
+            <input type="hidden" name="formtype" value="editdetails">
+          <fieldset>
+            <legend class="text-center">Change your general settings here</legend>
+
+            <!-- FirstName -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">First Name</label>
+              <div class="col-md-8">
+                <input id="first_name" name="first_name" type="text" placeholder="" class="form-control" value={{fname}}>
+              </div>
+
+              <label class="col-md-4 control-label" for="name">Last Name</label>
+              <div class="col-md-8">
+                <input id="last_name" name="last_name" type="text" placeholder="" class="form-control" value={{lname}}>
+              </div>
+            </div>
+    
+            <!-- Username -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Username</label>
+              <div class="col-md-8">
+                <input id="displayname" name="displayname" type="text" placeholder="" class="form-control" value={{username}}>
+              </div>
+            </div>
+            {% if user_form.displayname.errors %}
+                {{ user_form.displayname.errors }}
+            {% endif %}
+            <!-- Email -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Email</label>
+              <div class="col-md-8">
+                <input id="email" name="email" type="text" placeholder="" class="form-control" value={{email}}>
+              </div>
+            </div>
+            {% if user_form.email.errors %}
+                {{ user_form.email.errors }}
+            {% endif %}            
+            <!-- Language -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Language</label>
+              <div class="col-md-8">
+                <div class="btn-group">          
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> English <span class="caret"></span> </button>
+                    <ul class="dropdown-menu">
+                        <li value=""></li>
+                            <li value="EN">English</li>
+                            <li value="FR">French</li>                      
+                    </ul>
+                 </div> <!-- End of btn-group -->            
+              </div>    
+            </div>  <!-- End of Form group -->
+            
+            
+            <!-- Location -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">City</label>
+              <div class="col-md-8">
+                <div class="btn-group">          
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> Toronto <span class="caret"></span> </button>
+                    <ul class="dropdown-menu">
+                        <li value=""></li>
+                            <li value="TO">Toronto</li>
+                            <li value="OK">Oakville</li>                        
+                    </ul>
+                 </div> <!-- End of btn-group -->            
+              </div>    
+            </div>  <!-- End of Form group -->
+    
+            <!-- Form actions -->
+            <div class="form-group">
+              <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary btn-md">Save</button>
+              </div>
+            </div>
+          </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+</div>  <!-- End of tab-pane -->
+
+<div class="tab-pane text-style" id="tab2">
+    <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="well well-sm">
+          <form class="form-horizontal" action="" method="post"> {% csrf_token %}
+            <input type="hidden" name="formtype" value="changepassword">
+          <fieldset>
+            <legend class="text-center">Change your password here</legend>
+    
+            <!-- Current Password -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Current password</label>
+              <div class="col-md-8">
+                <input id="password" name="password" type="password" placeholder="Enter your current password here" class="form-control">
+              </div>
+            </div>
+           {% if user_form.password.errors %}
+               {{user_form.password.errors}}
+           {% endif %}
+    
+            <!-- New Password -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">New password</label>
+              <div class="col-md-8">
+                <input id="password1" name="password1" type="password" placeholder="Enter your new password here" class="form-control">
+              </div>
+            </div>
+            
+            <!-- Retype New Password -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name"></label>
+              <div class="col-md-8">
+                <input id="password2" name="password2" type="password" placeholder="Retype your password here" class="form-control">
+              </div>
+            </div>
+            {% if user_form.password2.errors %}
+                {{user_form.password2.errors}}
+            {% endif %}
+            <!-- Form actions -->
+            <div class="form-group">
+              <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary btn-md">Save</button>
+              </div>
+            </div>
+          </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>               
+</div>  <!-- End of tab-pane -->
+
+<div class="tab-pane text-style" id="tab3">
+  <h2></h2>
+  <p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum 
+    iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla 
+    facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit 
+    augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,</p>
+    <hr>
+   
+</div>
+</div>
+</div>
+{% endblock content %}
+{% block scripts %}
+{% endblock scripts %}

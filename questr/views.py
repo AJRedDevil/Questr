@@ -1,11 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 # from django.conf import settings
 # from social.backends.google import GooglePlusAuth ###disabled google plus##
 
 def index(request):
-    nextlink = "login"
-    level="public"
+    if request.user.is_authenticated():
+        return redirect('home')
+    nav_link_1 = "/user/login"
+    nav_link_1_label = "login"
+    nav_link_2 = "/user/signup"
+    nav_link_2_label ="signup"
+    nav_link_3 = "#"
+    nav_link_3_label ="about us"
     # plus_id = getattr(settings, 'SOCIAL_AUTH_GOOGLE_PLUS_KEY', None) ###disabled google plus##
     # plus_scope = ' '.join(GooglePlusAuth.DEFAULT_SCOPE) ###disabled google plus##
     return render(request, 'index.html', locals())
@@ -15,4 +21,17 @@ def loadPage(request, template):
 
 @login_required
 def quests(request):
+    nav_link_1 = "/user/login"
+    nav_link_1_label = "login"
+    nav_link_2 = "/user/signup"
+    nav_link_2_label ="signup"
+    pagetype="browse"
     return render(request, 'browse.html', locals())
+
+@login_required
+def quest(request):
+    nav_link_1 = "/user/login"
+    nav_link_1_label = "login"
+    nav_link_2 = "/user/signup"
+    nav_link_2_label ="signup"
+    return render(request, 'quest.html', locals())    
