@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% block localhead %}
 <link href={% static "css/feature.css" %} rel="stylesheet">
+
 {% endblock localhead %}
 {% block content %}
 <!-- This is the main container (#scroll-container) -->
@@ -524,8 +525,6 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src={% static 'js/libs/jquery.js' %}></script>
-    <script src={% static 'bootstrap/js/bootstrap.min.js' %}></script>
     <script src={% static 'js/libs/jquery.masonry.min.js' %}></script>
     <script src={% static 'js/base.js' %}></script>
     <script src={% static 'js/script.js' %}></script>

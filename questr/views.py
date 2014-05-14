@@ -21,17 +21,25 @@ def loadPage(request, template):
 
 @login_required
 def quests(request):
-    nav_link_1 = "/user/login"
-    nav_link_1_label = "login"
-    nav_link_2 = "/user/signup"
-    nav_link_2_label ="signup"
-    pagetype="browse"
+    pagetype="loggedin"
+    secondnav="listquestsecondnav"
+    user = request.user
+    nav_link_1 = "/user/profile"
+    nav_link_1_label = "my profile"
+    nav_link_2 = "/user/settings"
+    nav_link_2_label ="settings"
+    nav_link_3 = "/user/logout"
+    nav_link_3_label ="logout"
     return render(request, 'browse.html', locals())
 
 @login_required
 def quest(request):
-    nav_link_1 = "/user/login"
-    nav_link_1_label = "login"
-    nav_link_2 = "/user/signup"
-    nav_link_2_label ="signup"
+    pagetype="loggedin"
+    user = request.user
+    nav_link_1 = "/user/profile"
+    nav_link_1_label = "my profile"
+    nav_link_2 = "/user/settings"
+    nav_link_2_label ="settings"
+    nav_link_3 = "/user/logout"
+    nav_link_3_label ="logout"
     return render(request, 'quest.html', locals())    

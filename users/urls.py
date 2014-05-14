@@ -9,7 +9,6 @@ urlpatterns = patterns('',
     url(r'^login/$', userviews.login, name='login'),
     url(r'^home/$', userviews.home, name='home'),
     url(r'^profile/$', userviews.profile, name='profile'),
-    url(r'^profile/edit$', userviews.editUserInfo, name='editprofile'),
     url(r'^profile/save/.*', userviews.saveUserInfo, name='saveprofile'), # commented for later use
     url(r'^createpassword/$', userviews.createPassword, name='createpassword'),
     url(r'^settings/$', userviews.userSettings, name='settings'),

@@ -11,7 +11,7 @@ from .models import QuestrUserProfile, UserTransactional, QuestrToken
 from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, QuestrSocialSignupForm, CreatePasswordForm
 import logging
 
-from  access.requires import verified, is_alive
+from access.requires import verified, is_alive
 from contrib import mailing
 
 
@@ -24,6 +24,7 @@ def logout(request):
     
 def login(request):
     """Home view, displays login mechanism"""
+    pagetype="public"
     nav_link_1 = "/user/login"
     nav_link_1_label = "login"
     nav_link_2 = "/user/signup"
@@ -42,6 +43,7 @@ def login(request):
 
 def signup(request):
     """Signup, if request == POST, creates the user"""
+    pagetype="public"
     nav_link_1 = "/user/login"
     nav_link_1_label = "login"
     nav_link_2 = "/user/signup"
@@ -52,7 +54,6 @@ def signup(request):
     if request.user.is_authenticated():
         return redirect('home')
     if request.method == "POST":
-        nextlink="login"
         user_form = QuestrUserCreationForm(request.POST)
         if user_form.is_valid():
             userdata = user_form.save()
@@ -107,6 +108,9 @@ def resend_verification_email(request):
 @verified
 def home(request):
     """Post login this is returned and displays user's home page"""
+    pagetype="loggedin"
+    secondnav="homepage"
+    user = request.user
     nav_link_1 = "/user/profile"
     nav_link_1_label = "my profile"
     nav_link_2 = "/user/settings"
@@ -118,47 +122,34 @@ def home(request):
 @login_required
 def profile(request):
     """This displays user's profile page"""
+    pagetype="loggedin"
+    user = request.user
     nav_link_1 = "/user/profile"
     nav_link_1_label = "my profile"
     nav_link_2 = "/user/settings"
     nav_link_2_label ="settings"
     nav_link_3 = "/user/logout"
     nav_link_3_label ="logout"
-    user = request.user
-    displayname = user.displayname
-    lname = user.last_name
-    fname = user.first_name
-    email = user.email
-    biography = user.biography
-    email_verified = isEmailVerified(user.email_status)
-    is_active = isActive(user.is_active)
-    account_status = getAccountStatus(user.account_status)
-    last_online = user.last_login
-    user_since = user.date_joined
-    avatar = user.avatar_file_name
-    password = passwordExists(request.user)
     return render(request,'profile.html', locals())
 
 @login_required
 def userSettings(request):
     """Change's user's personal settings"""
+    pagetype="loggedin"
+    user = request.user
     nav_link_1 = "/user/profile"
     nav_link_1_label = "my profile"
     nav_link_2 = "/user/settings"
     nav_link_2_label ="settings"
     nav_link_3 = "/user/logout"
     nav_link_3_label ="logout"
+    password = passwordExists(user)
+
     try:
         user = QuestrUserProfile.objects.get(email=request.user)
-        username = user.displayname
-        lname = user.last_name
-        fname = user.first_name
-        email = user.email
     except QuestrUserProfile.DoesNotExist:
         raise Http404
-        return render(request,'404.html', locals())    
-
-    logging.warn(request.POST)    
+        return render(request,'404.html', locals())
 
     if request.method == "POST" and request.POST['formtype'] == "editdetails":
         try:
@@ -222,48 +213,21 @@ def emailExists(email):
 @login_required
 def getUserInfo(request, displayname):
     '''This is used to display user's public profile'''
+    pagetype="loggedin"
+    user = request.user
+    nav_link_1 = "/user/profile"
+    nav_link_1_label = "my profile"
+    nav_link_2 = "/user/settings"
+    nav_link_2_label ="settings"
+    nav_link_3 = "/user/logout"
+    nav_link_3_label ="logout"
     try:
-        user = QuestrUserProfile.objects.get(displayname=displayname)
+        publicuser = QuestrUserProfile.objects.get(displayname=displayname)
     except QuestrUserProfile.DoesNotExist:
         raise Http404
         return render(request,'404.html')
-    else:
-        lname = user.last_name
-        fname = user.first_name
-        if not user.privacy:            
-            email = user.email
-        bio = user.biography
-        email_verified = isEmailVerified(user.email_status)
-        is_active = isActive(user.is_active)
-        account_status = getAccountStatus(user.account_status)
-        last_online = user.last_login
-        user_since = user.date_joined
-        avatar = user.avatar_file_name
-        # questsOpened = getQuestsOpened(user)
-        # offersPlaced = getOffersPlaced(user)
-    return render(request,'user/userinfo.html', locals())
 
-@login_required
-def editUserInfo(request):
-    """Change's user's personal settings"""
-    if request.method == "POST":
-        try:
-            user_form = QuestrUserChangeForm(request.POST, instance=request.user)
-        except QuestrUserProfile.DoesNotExist:
-            raise Http404
-            return render(request,'404.html', locals())        
-        if user_form.is_valid():
-            user_form.save()
-            messageresponse = "Your profile has been upated"
-            return render(request, "user/edituserinfo.html",locals())
-    else:
-        try:
-            user_form = QuestrUserChangeForm(instance=request.user)
-            return render(request, "user/edituserinfo.html",locals())
-        except QuestrUserProfile.DoesNotExist:
-            raise Http404
-            return render(request,'404.html', locals())
-    return render(request, "user/edituserinfo.html",locals())
+    return render(request,'publicprofile.html', locals())
 
 @login_required
 def createPassword(request):

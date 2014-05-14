@@ -35,12 +35,12 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="name">First Name</label>
               <div class="col-md-8">
-                <input id="first_name" name="first_name" type="text" placeholder="" class="form-control" value={{fname}}>
+                <input id="first_name" name="first_name" type="text" placeholder="" class="form-control" value={{user.first_name}}>
               </div>
 
               <label class="col-md-4 control-label" for="name">Last Name</label>
               <div class="col-md-8">
-                <input id="last_name" name="last_name" type="text" placeholder="" class="form-control" value={{lname}}>
+                <input id="last_name" name="last_name" type="text" placeholder="" class="form-control" value={{user.last_name}}>
               </div>
             </div>
     
@@ -48,7 +48,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="name">Username</label>
               <div class="col-md-8">
-                <input id="displayname" name="displayname" type="text" placeholder="" class="form-control" value={{username}}>
+                <input id="displayname" name="displayname" type="text" placeholder="" class="form-control" value={{user.displayname}}>
               </div>
             </div>
             {% if user_form.displayname.errors %}
@@ -58,7 +58,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="name">Email</label>
               <div class="col-md-8">
-                <input id="email" name="email" type="text" placeholder="" class="form-control" value={{email}}>
+                <input id="email" name="email" type="text" placeholder="" class="form-control" value={{user.email}}>
               </div>
             </div>
             {% if user_form.email.errors %}
@@ -114,48 +114,53 @@
     <div class="row">
       <div class="col-md-6">
         <div class="well well-sm">
-          <form class="form-horizontal" action="" method="post"> {% csrf_token %}
-            <input type="hidden" name="formtype" value="changepassword">
-          <fieldset>
-            <legend class="text-center">Change your password here</legend>
-    
-            <!-- Current Password -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="name">Current password</label>
-              <div class="col-md-8">
-                <input id="password" name="password" type="password" placeholder="Enter your current password here" class="form-control">
-              </div>
-            </div>
-           {% if user_form.password.errors %}
-               {{user_form.password.errors}}
-           {% endif %}
-    
-            <!-- New Password -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="name">New password</label>
-              <div class="col-md-8">
-                <input id="password1" name="password1" type="password" placeholder="Enter your new password here" class="form-control">
-              </div>
-            </div>
+          {% if password %}
+            <form class="form-horizontal" action="" method="post"> {% csrf_token %}
+              <input type="hidden" name="formtype" value="changepassword">
+            <fieldset>
+              <legend class="text-center">Change your password here</legend>
             
-            <!-- Retype New Password -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="name"></label>
-              <div class="col-md-8">
-                <input id="password2" name="password2" type="password" placeholder="Retype your password here" class="form-control">
+              <!-- Current Password -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="name">Current password</label>
+                <div class="col-md-8">
+                  <input id="password" name="password" type="password" placeholder="Enter your current password here" class="form-control">
+                </div>
               </div>
-            </div>
-            {% if user_form.password2.errors %}
-                {{user_form.password2.errors}}
-            {% endif %}
-            <!-- Form actions -->
-            <div class="form-group">
-              <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-primary btn-md">Save</button>
+             {% if user_form.password.errors %}
+                 {{user_form.password.errors}}
+             {% endif %}
+            
+              <!-- New Password -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="name">New password</label>
+                <div class="col-md-8">
+                  <input id="password1" name="password1" type="password" placeholder="Enter your new password here" class="form-control">
+                </div>
               </div>
-            </div>
-          </fieldset>
-          </form>
+              
+              <!-- Retype New Password -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="name"></label>
+                <div class="col-md-8">
+                  <input id="password2" name="password2" type="password" placeholder="Retype your password here" class="form-control">
+                </div>
+              </div>
+              {% if user_form.password2.errors %}
+                  {{user_form.password2.errors}}
+              {% endif %}
+              <!-- Form actions -->
+              <div class="form-group">
+                <div class="col-md-12 text-center">
+                  <button type="submit" class="btn btn-primary btn-md">Save</button>
+                </div>
+              </div>
+            </fieldset>
+            </form>
+          {% else %}
+              You do not have a password yet. Please click <a href="/user/createpassword">here</a> to create a password !
+          {% endif %}
+
         </div>
       </div>
     </div>
