@@ -51,7 +51,7 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body style="height:100%; background-color: #5f97d8;">
   
 	<!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top">
@@ -96,98 +96,8 @@
 	</div><!-- /headerwrap -->
 	
 	
-	<div class="container">
-		<div class="row mt centered">
-			<div class="col-lg-8 col-lg-offset-2">
-				<h1>What is Questr?</h1>
-							
-				<h3 >Questr is the new way to get your orders to you.<br>
-				<br>
-				<br>
-				Questr helps you:
-				</h3>
-				
-				<h3>
-					<ul style="list-style:none;">
-						<li><h2>1</h2></li>
-						<li>Receive packages as fast as the most expensive <br>shipping option for a fraction of the cost.</li>
-						<li><br></li>
-						<li><h2>2</h2></li>
-						<li>Make money while you travel.</li>		
-						
-					</ul>
-				</h3>
-				
-			</div>
-		</div><!-- /row -->
-		<hr>
-	</div><!-- /container -->
-		
-		
-		
-	<div class="container">
-		<div class="row mt centered">
-		<h1>How does it work?</h1>
-		
-		<div class="col-lg-6">		
-			<img class="img-circle" src="{% static 'assets/img/person2.png' %}" width="180" alt="">	
-			<h4>1.  Find Something You Want</h4>
-			<p>Megan, a Questr in Canada, is looking to buy some vegemite. <br> She checks online, and prices go for 600% of what vegemite would normally go for in Australia! (Not including shipping!)</p>
-		</div><!--/col-lg-6 -->
-			<div class="col-lg-6">
-				<img src="{% static 'assets/img/POSTQUEST.png' %}" width="180" alt="">
-				<h4>2.  Post A Quest</h4>
-				<p>Megan posts a Quest, offering a reward for anyone travelling from Australia to Canada willing to bring her some vegemite.</p>
-			
-		</div><!--/col-lg-6 -->
-	</div><!-- /row -->
-			
-					
-		<div class="row mt centered">
-			<div class="col-lg-6">
-				<img class="img-circle" src="{% static 'assets/img/person1.png' %}" width="180" alt="">
-				<h4>3.  Challenge Accepted</h4>
-				<p>Jen is travelling from Australia to Canada, and still has plenty of space in her suitcase. She accepts the Quest to bring Megan her vegemite.</p>					
-			</div><!--/col-lg-6 -->
 
-			<div class="col-lg-6">
-				<img class="img-circle" src="{% static 'assets/img/meetup.png' %}" width="180" alt="">
-				<h4>4.  Meet Up</h4>
-				<p>Megan is happy, because she received her package for a fraction of the cost and time.  Jen is happy, because she made some money travelling.</p>
-			</div><!--/col-lg-6 -->
-		</div><!-- /row -->
-		
 
-	
-
-	<div class="container">
-		<hr>
-		<div class="row centered">
-			<div class="col-lg-6 col-lg-offset-3">
-			<h1>Sign Up To Be A Beta Tester</h1><br>
-				<img src="{% static 'assets/img/ser02.png' %}" width="180" alt="">
-					<form action="/beta/join" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" novalidate>
-						{% csrf_token %}
-					<br>
-					<input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="Enter your email address" required>
-    				<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-    				<style="position: absolute; left: -5000px;" input type="text" name="b_2dd229ae45dbf10c17fd6fec4_7f3d74a524" value="">
-					<input type="submit" value="Invite me!" name="subscribe" id="mc-embedded-subscribe" class="btn btn-warning btn-lg">
-				</form>					
-			</div>
-			<div class="col-lg-3"></div>
-		</div><!-- /row -->
-		<hr>
-		<center>
-		<!-- Facebook like button -->
-		<a href="https://www.facebook.com/questrco" target="_blank"><img src="{% static 'assets/img/Facebook.png' %}" width="30" height="auto"></a>
-		<!-- Twitter like button -->
-		<a href="https://twitter.com/questrco" target="_blank"><img src="{% static 'assets/img/Twitter.png' %}" width="30" height="auto"></a>
-		</center>
-		
-		<p class="centered">Questr - 2014</p>
-	</div><!-- /container -->
-	
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
