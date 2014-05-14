@@ -82,6 +82,16 @@ li a:hover {
 	padding: 0;
 }
 
+.navbar span.glyphicon-plus-sign {
+	font-size: 30px;
+	color: rgba(96,152,217,0.82);	
+}
+
+.navbar span.glyphicon-plus-sign:hover {
+	font-size: 30px;
+	color: #5f97d8;
+}
+
 .navbar .nonProfile {
 	line-height: 30px;
 }
