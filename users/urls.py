@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^profile/save/.*', userviews.saveUserInfo, name='saveprofile'), # commented for later use
     url(r'^createpassword/$', userviews.createPassword, name='createpassword'),
     url(r'^settings/$', userviews.userSettings, name='settings'),
+    url(r'^settings/password$', userviews.changePassword, name='changepassword'),
     url(r'^logout/$', userviews.logout, name='logout'),
     url(r'^(?P<displayname>[-_\w/.]+)/$', userviews.getUserInfo, name='getUserInfo'),
     url(r'^verifymail$', userviews.resend_verification_email, name='verify_Email'),

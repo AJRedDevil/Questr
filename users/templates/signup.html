@@ -1,9 +1,10 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
-    <link href={% static "css/sign.css" %} rel="stylesheet">
-    <script src={% static "js/validator.js" %}></script>
-
+  <!-- Custom CSS -->
+  <link href={% static "css/sign.css" %} rel="stylesheet">
+  <!-- Custom Javascript -->
+  <script src={% static "js/validator.js" %}></script>
 {% endblock localhead %}
 {% block content%}
 <div class="container">
