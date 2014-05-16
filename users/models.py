@@ -41,7 +41,7 @@ class QuestrUserProfile(AbstractBaseUser):
     email_status = models.BooleanField(_('email_status'), default=False, blank=False)
     phone = models.CharField(_('phone'), max_length=15, blank=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-    avatar_file_name = models.ImageField(upload_to='ppsize')
+    avatar_file_name = models.ImageField(max_length=9999, upload_to='ppsize')
     biography = models.TextField(_('biography'),max_length=9999, blank=True)
     account_status = models.IntegerField(_('account_status'), max_length=1, blank=True, default=1)
     privacy = models.BooleanField(default=False, blank=False)
