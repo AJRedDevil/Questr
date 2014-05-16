@@ -6,7 +6,7 @@
  
  /* Feature posts */
 .feature {
-	width: 250px;
+	width: 200px;
 	display: inline-block;
 	vertical-align: top;
 	margin-bottom: 12px;
@@ -44,7 +44,10 @@
  
  
 .content {
-	margin: 40px;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-left: 65px;
+	margin-right: 65px;
 }
 
 
