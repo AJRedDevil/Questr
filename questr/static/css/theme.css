@@ -62,6 +62,7 @@ li a:hover {
 	margin: 0;
 	padding: 0 15px;
 	z-index: 999;
+	background: white;
 }
 
 .navbar-default li a, .navbar-default li a .glyphicon {
@@ -146,8 +147,6 @@ li a:hover {
 	padding: 0;
 	margin-bottom: 0;
 	margin-top: 0;
-	margin-left: auto;
-	margin-right: auto;
 	display: block;
 }
 
@@ -156,13 +155,13 @@ li a:hover {
 	display: inline;
     float: none;
     padding: 0;
-    background: aqua;
     position: absolute;
 }
 
 .secondary-nav li {
 	padding-bottom: 0;
 	display: inline;
+	background: aqua;
 }
 
 .secondary-nav li a:link {
@@ -178,9 +177,6 @@ li a:hover {
 	border-bottom-style: solid;
 	border-bottom-width: 6px;
 	border-bottom-color: #5f97d8;
-}
-
-.secondary-nav li.active {
 }
 
 .secondary-nav li a:hover {
@@ -229,3 +225,13 @@ li a:hover {
 }
 
 
+/******** Navbar toggle **********/
+.navbar-default .navbar-toggle {
+  border-color: #5f97d8;
+  background: white;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #5f97d8;
+}
