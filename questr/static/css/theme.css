@@ -66,9 +66,8 @@ li a:hover {
 .navbar-default li a, .navbar-default li a .glyphicon {
 	margin: 0;
 	padding-bottom: 0;
-	background: aqua;
-	padding-top: 6px;
 }
+
 
 .navbar-default li a.userMenu {
 	padding-top: 11px;
@@ -91,12 +90,12 @@ li a:hover {
 }
 
 .navbar span.glyphicon-plus-sign {
-	font-size: 25px;
+	font-size: 20px;
 	color: rgba(96,152,217,0.82);	
 }
 
 .navbar span.glyphicon-plus-sign:hover {
-	font-size: 25px;
+	font-size: 20px;
 	color: #5f97d8;
 }
 

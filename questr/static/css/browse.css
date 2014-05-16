@@ -11,3 +11,17 @@
 .offer .textInput {
 	min-width: 54px;
 }
+
+
+.list-group-item p {
+	width: 100%;
+}
+
+
+.list-group-item .col-md-4 p span.money {
+	text-align: center;
+}
+
+.list-group-item .col-md-4 p span.postDate {
+	float: right;
+} 
