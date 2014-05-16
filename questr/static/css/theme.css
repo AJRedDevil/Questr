@@ -46,7 +46,6 @@ li a:hover {
       color: #5f97d8;
       background: white;
  }
-
  
 /*************** Primary Navbar ***************/
 .navbar-container {
@@ -66,6 +65,15 @@ li a:hover {
 	background: white;
 }
 
+.navbar-default li a, .navbar-default li a .glyphicon {
+	margin: 0;
+	padding-bottom: 0;
+}
+
+.navbar-default li a.userMenu {
+	padding-top: 11px;
+}
+
 
 .navbar-default a:link {
 	color: #777777;
@@ -83,24 +91,20 @@ li a:hover {
 }
 
 .navbar span.glyphicon-plus-sign {
-	font-size: 30px;
+	font-size: 20px;
 	color: rgba(96,152,217,0.82);	
 }
 
 .navbar span.glyphicon-plus-sign:hover {
-	font-size: 30px;
+	font-size: 20px;
 	color: #5f97d8;
 }
 
 .navbar .nonProfile {
-	line-height: 30px;
+
 }
 
-.navbar .form-control {
-	height: 45px;
-}
-
-.navbar-default .navbar-brand:link {
+.navbar-default .navbar-brand {
 	color: #5f97d8;
 	 font-family: 'Lato', sans-serif;
     font-weight: 300;
@@ -136,39 +140,43 @@ li a:hover {
 
 /*************** Secondary Navbar ***************/
 .secondary-nav {
+	width: 100%;
 	z-index: 0;
 	text-align: center;
-	display: block;
-	float: none;
 	border-color: rgba(255,255,255,0);
-	padding-bottom: 0;
+	padding: 0;
 	margin-bottom: 0;
+	margin-top: 0;
+	display: block;
 }
 
-.secondary-nav ul {
-	display: inline-block;
+.secondary-nav ul.navbar-nav {
+	list-style: none;
+	display: inline;
     float: none;
+    padding: 0;
+    position: absolute;
 }
 
 .secondary-nav li {
-	margin-left: 17px;
-	margin-right: 17px;
 	padding-bottom: 0;
+	display: inline;
+	background: aqua;
 }
 
-.secondary-nav li a {
+.secondary-nav li a:link {
 	padding-bottom: 0;
 	padding-left: 0;
 	padding-right: 0;
+	padding-top: 10px;
+	margin: 0;
+	text-decoration: none;
 }
 
 .secondary-nav li.active a {
 	border-bottom-style: solid;
 	border-bottom-width: 6px;
 	border-bottom-color: #5f97d8;
-}
-
-.secondary-nav li.active {
 }
 
 .secondary-nav li a:hover {
@@ -217,3 +225,13 @@ li a:hover {
 }
 
 
+/******** Navbar toggle **********/
+.navbar-default .navbar-toggle {
+  border-color: #5f97d8;
+  background: white;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #5f97d8;
+}
