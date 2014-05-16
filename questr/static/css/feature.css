@@ -18,8 +18,7 @@ img {
 	-moz-border-left-colors: none;
 	-moz-border-right-colors: none;
 	-moz-border-top-colors: none;
-	background-color: white;
-	background: linear-gradient(to bottom, #F6F6F6 0%, #EAEAEA 100%) repeat scroll 0 0 transparent;
+	background: white;
 	border-radius: 2px 2px 2px 2px;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 2px 1px rgba(0, 0, 0, 0.1), 0 3px 1px rgba(0, 0, 0, 0.05);
 	text-shadow: 0 1px 0 #DDDDDD;
@@ -32,11 +31,9 @@ img {
 	line-height: 25px;
 	text-overflow: ellipsis;
 	width: auto;
-	/* end */ 
-	
+	/* end */ 	
 	 margin: 0 5px;
  }
- 
  
  .feature .title {
 	 overflow: hidden;
@@ -59,7 +56,6 @@ img {
 #pages {
     display: none;
 }
-
 
 #loader {
 	display: none;

@@ -19,13 +19,11 @@ footer {
 	background: white;
 }
  
- 
 h1, h2, h3, h4, h5, h6 {
 	font-weight: normal;
 	font-family: 'TeXGyreCursorRegular', Arial, sans-serif;
 	letter-spacing: 0;
  }
-
 
 /*************** Theme colour & details ********************/
 li a:link {
@@ -68,6 +66,8 @@ li a:hover {
 .navbar-default li a, .navbar-default li a .glyphicon {
 	margin: 0;
 	padding-bottom: 0;
+	background: aqua;
+	padding-top: 6px;
 }
 
 .navbar-default li a.userMenu {
@@ -91,12 +91,12 @@ li a:hover {
 }
 
 .navbar span.glyphicon-plus-sign {
-	font-size: 20px;
+	font-size: 25px;
 	color: rgba(96,152,217,0.82);	
 }
 
 .navbar span.glyphicon-plus-sign:hover {
-	font-size: 20px;
+	font-size: 25px;
 	color: #5f97d8;
 }
 
