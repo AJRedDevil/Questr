@@ -184,7 +184,7 @@ li a:hover {
 
 /*************** Well ***************/
 .well {
-	background: #FAFAFA;
+	background: white;
 	border-color: rgba(255,255,255,0); 
 }
 
