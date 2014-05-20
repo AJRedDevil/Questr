@@ -109,7 +109,7 @@ def resend_verification_email(request):
 def home(request):
     """Post login this is returned and displays user's home page"""
     pagetype="loggedin"
-    secondnav="homepage"
+    secondnav="listquestsecondnav"
     user = request.user
     nav_link_1 = "/user/profile"
     nav_link_1_label = "my profile"
