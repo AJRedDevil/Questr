@@ -34,18 +34,18 @@ class QuestrUserManager(BaseUserManager):
 
 class QuestrUserProfile(AbstractBaseUser):
     id = models.AutoField(_('id'), primary_key=True)
-    displayname = models.CharField(_('displayname'), max_length=30, null=False, blank=False, unique=True)
-    first_name = models.CharField(_('first_name'), max_length=30, blank=False)
-    last_name = models.CharField(_('last_name'), max_length=30, blank=False)
-    email = models.EmailField(_('email'), max_length=100, blank=False, null=False, unique=True)
-    email_status = models.BooleanField(_('email_status'), default=False, blank=False)
+    displayname = models.CharField(_('displayname'), max_length=30, unique=True)
+    first_name = models.CharField(_('first_name'), max_length=30)
+    last_name = models.CharField(_('last_name'), max_length=30)
+    email = models.EmailField(_('email'), max_length=100, unique=True)
+    email_status = models.BooleanField(_('email_status'), default=False)
     phone = models.CharField(_('phone'), max_length=15, blank=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     avatar_file_name = models.ImageField(max_length=9999, upload_to='ppsize')
     biography = models.TextField(_('biography'),max_length=9999, blank=True)
     account_status = models.IntegerField(_('account_status'), max_length=1, blank=True, default=1)
-    privacy = models.BooleanField(default=False, blank=False)
-    gender = models.CharField(max_length=1, blank=False)
+    privacy = models.BooleanField(default=False)
+    gender = models.CharField(max_length=1)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name','displayname']
@@ -60,9 +60,9 @@ class QuestrUserProfile(AbstractBaseUser):
 # User transactionl model
 class UserTransactional(models.Model):
     id = models.IntegerField(_('id'), primary_key=True)
-    user_code = models.CharField(_('user_code'), max_length=64, null=False, unique=True)
-    email = models.EmailField(_('email'), max_length=100, blank=False, null=False, unique=True)
-    status = models.BooleanField(_('status'), default=False, blank=False)
+    user_code = models.CharField(_('user_code'), max_length=64, unique=True)
+    email = models.EmailField(_('email'), max_length=100, unique=True)
+    status = models.BooleanField(_('status'), default=False)
 
     def generate_hash(self):
         return hashlib.sha256(str(self.email)).hexdigest()
