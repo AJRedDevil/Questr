@@ -13,8 +13,8 @@ $(document).ready(function(){
 function init_masonry() {
     var $container = $('.content');
 
-    var gutter = 15;
-    var min_width = 200;
+    var gutter = 20;
+    var min_width = 250;
     $container.imagesLoaded( function(){
         $container.masonry({
             itemSelector : '.feature',
