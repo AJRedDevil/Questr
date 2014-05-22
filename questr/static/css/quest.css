@@ -3,20 +3,6 @@
 }
 
 
-
-
-
-
-
-
-input, textarea, button { margin-top:10px }
-
-/* Required field START */
-
-.editDescription {
-    position: relative;   
-}
-
 textarea.description {
 	height: 200px;
 }
@@ -24,19 +10,6 @@ textarea.description {
 textarea.title {
 	font-size: large;
 }
-
-.editDescription .required-icon .text {
-	color: #B80000;
-	font-size: 26px;
-	margin: -3px 0 0 12px;
-}
-
-
-
-
-
-
-
 
 #lightbox .modal-content {
     display: inline-block;
@@ -52,7 +25,16 @@ textarea.title {
     border: 2px solid rgb(255, 255, 255);
     position: absolute;
     top: -15px;
-    right: -55px;
-    
+    right: -55px;  
     z-index:1032;
+}
+
+
+.titleContainer .row .titleColumn .title {
+	margin: 0px;
+}
+
+.titleContainer .row .titleColumn button {
+	float: right;
+	margin: 0px;
 }

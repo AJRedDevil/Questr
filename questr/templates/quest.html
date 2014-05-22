@@ -7,58 +7,60 @@
     
     <!-- Custom Javascript -->
     <script src={% static "js/validator.js" %}></script>    
+    <script src={% static "js/lightbox.js" %}></script>
     
     
 {% endblock localhead %}
 {% block content %}
-    <div class="container">
+  
+  <div class="container titleContainer">
+		<div class="row clearfix">
+			<div class="col-md-10 col-md-offset-1 column well titleColumn">
+				<div class="col-md-10 titleColumn">
+					<h3 class="title">I need this by tomorrow</h3>
+				</div>
+				<div class="col-md-2 titleColumn">
+					<button type="button" class="btn btn-default">Edit Post</button>
+				</div>
+			</div>
+		</div>
+  </div>
+  
+  <div class="container">
+		<div class="row clearfix">
+			<div class="col-md-10 col-md-offset-1 column">
+				<div class="row clearfix">
+					
+					<div class="col-md-4 column well">
+						<a class="thumbnail" data-target="#lightbox" data-toggle="modal" href="#"><img alt="itemImage" class="itemImage" src="http://www.evilmilk.com/pictures/Box_Of_Aids.jpg"></a>
 
-    <div class="row clearfix">      
-        <div class="col-md-10 col-md-offset-1 column well">
-            <h3>I need this by tomorrow</h3>
-        </div>
-    </div>
+						<div class="modal fade" id="lightbox" tabindex="-1">
+							<div class="modal-dialog">
+								<button class="close hidden" data-dismiss="modal" type="button">×</button>
 
-    <div class="row clearfix">      
-        <div class="col-md-10 col-md-offset-1 column">          
-            <div class="row clearfix">
-                <div class="col-md-4 column well">
-                	 <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox">
-	                	 <img class="itemImage" alt="itemImage" src="http://www.evilmilk.com/pictures/Box_Of_Aids.jpg" />
-                	 </a>
-                	 
-                	 <div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-					    <div class="modal-dialog">
-					        <button type="button" class="close hidden" data-dismiss="modal" aria-hidden="true">×</button>
-					        <div class="modal-content">
-					            <div class="modal-body">
-					                <img src="" alt="" />
-					            </div>
-					        </div>
-					    </div>
-					</div>
-                	 
-                    <p> 
-                        <i class="icon-user"></i> <a href="#">donvvo</a><br>
-                         Location: Toronto, Canada<br>
-                         Posted in: <a href="#"><span class="label label-default">Africa</span></a> <a href="#"><span class="label label-default">Liberia</span></a><br>
-                         <i class="icon-calendar"></i>Posted: Sept 16th, 2014 at 4:20 pm
-                    </p>
-                </div>
-                <div class="col-md-6 column col-md-offset-1 well">
-                    <p>
-                        I need this soon--need to get rid of raccoons.                      
-                    </p>
-                    
-                    <p>
-                        <i class=""></i>Offer: $100.00
-                    </p>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+								<div class="modal-content">
+									<div class="modal-body"><img alt="" src=""></div>
+								</div>
+							</div>
+						</div>
+						<p><a href="#">donvvo</a><br>
+						Location: Toronto, Canada<br>
+						Posted in: <a href="#"><span class="label label-default">Africa</span></a> <a href="#"><span class="label label-default">Liberia</span></a><br>
+						Posted: Sept 16th, 2014 at 4:20 pm</p>
+					</div>	<!-- End of column -->
+					
+
+					<div class="col-md-6 column col-md-offset-1 well">
+						<p>This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.</p>
+
+						<p>Offer: $100.00</p>
+					</div>	<!-- End of column -->
+				
+				</div>
+			</div>
+		</div>
+	</div>
+  
 {% endblock content %}
 {% block scripts %}    
 {% endblock scripts %}
