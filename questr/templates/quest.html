@@ -7,6 +7,8 @@
     
     <!-- Custom Javascript -->
     <script src={% static "js/validator.js" %}></script>    
+    
+    
 {% endblock localhead %}
 {% block content %}
     <div class="container">
@@ -21,7 +23,21 @@
         <div class="col-md-10 col-md-offset-1 column">          
             <div class="row clearfix">
                 <div class="col-md-4 column well">
-                    <img class="itemImage" alt="itemImage" src="http://www.evilmilk.com/pictures/Box_Of_Aids.jpg" />
+                	 <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox">
+	                	 <img class="itemImage" alt="itemImage" src="http://www.evilmilk.com/pictures/Box_Of_Aids.jpg" />
+                	 </a>
+                	 
+                	 <div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+					    <div class="modal-dialog">
+					        <button type="button" class="close hidden" data-dismiss="modal" aria-hidden="true">×</button>
+					        <div class="modal-content">
+					            <div class="modal-body">
+					                <img src="" alt="" />
+					            </div>
+					        </div>
+					    </div>
+					</div>
+                	 
                     <p> 
                         <i class="icon-user"></i> <a href="#">donvvo</a><br>
                          Location: Toronto, Canada<br>
