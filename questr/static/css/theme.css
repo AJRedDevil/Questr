@@ -6,7 +6,7 @@ body {
 	font-size: 16px;
 	padding: 0px;
 	margin: 0;
-	background: #c2c2c2;
+	background: #dedede;
  }
  
 footer {
@@ -17,8 +17,6 @@ footer {
 	text-align: center;
 	font-size: 12px;
 	background: white;
-	position: fixed;
-	bottom: 0px;
 }
  
 h1, h2, h3, h4, h5, h6 {
@@ -204,6 +202,16 @@ li a:hover {
 }
 
 
+.iconButton {
+	padding: 0;
+	border-color: rgba(0,255,255,0);
+}
+
+.iconButton:hover {
+	padding: 0;
+	border-color: rgba(0,255,255,0);
+}
+
 /******** Pagination ************/
 .pagination li a {
 	color: #777777;
@@ -235,4 +243,25 @@ li a:hover {
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
   background-color: #5f97d8;
+}
+
+
+
+
+/************* Images *****************/
+.img-responsive {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+.ratio {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+    width: 100%;
 }
