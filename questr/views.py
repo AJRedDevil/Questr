@@ -19,27 +19,4 @@ def index(request):
 def loadPage(request, template):
     return render(request, template, locals())
 
-@login_required
-def quests(request):
-    pagetype="loggedin"
-    secondnav="listquestsecondnav"
-    user = request.user
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
-    return render(request, 'browse.html', locals())
-
-@login_required
-def quest(request):
-    pagetype="loggedin"
-    user = request.user
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
-    return render(request, 'quest.html', locals())    
+  

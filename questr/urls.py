@@ -7,6 +7,5 @@ urlpatterns = patterns('',
     url(r'loadpage/(?P<template>[-_\w/.]+)$', mainview.loadPage, ),    
     url(r'^beta/', include('beta.urls')),
     url(r'^user/', include('users.urls')),
-    url(r'^quests/', mainview.quests ),
-    url(r'^quest/', mainview.quest ),
+    url(r'^quest/', include('quests.urls') ),
 )

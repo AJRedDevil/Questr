@@ -69,6 +69,7 @@ INSTALLED_APPS = (
     'mailchimp',
     'users',
     'djrill',
+    'quests',
 )
 
 MIDDLEWARE_CLASSES = (
