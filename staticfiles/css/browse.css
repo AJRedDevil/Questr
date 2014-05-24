@@ -1,13 +1,11 @@
 .col-md-2 .offer {
-	margin: 0;
 	padding: 0;
 }
 
 .offer {
-	margin: 0;
 	padding: 0;
 }
 
-.offer .textInput {
-	min-width: 54px;
+.offer .col-md-6 {
+	padding: 0;
 }

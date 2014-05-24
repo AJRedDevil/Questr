@@ -6,7 +6,7 @@ body {
 	font-size: 16px;
 	padding: 0px;
 	margin: 0;
-	background: #c2c2c2;
+	background: #dedede;
  }
  
 footer {
@@ -19,13 +19,11 @@ footer {
 	background: white;
 }
  
- 
 h1, h2, h3, h4, h5, h6 {
 	font-weight: normal;
 	font-family: 'TeXGyreCursorRegular', Arial, sans-serif;
 	letter-spacing: 0;
  }
-
 
 /*************** Theme colour & details ********************/
 li a:link {
@@ -70,6 +68,7 @@ li a:hover {
 	padding-bottom: 0;
 }
 
+
 .navbar-default li a.userMenu {
 	padding-top: 11px;
 }
@@ -86,9 +85,8 @@ li a:hover {
 .navbar .profileImg {
 	width: 30px;
 	height: 30px;
-	margin: 0;
-	padding: 0;
 }
+
 
 .navbar span.glyphicon-plus-sign {
 	font-size: 20px;
@@ -185,7 +183,7 @@ li a:hover {
 
 /*************** Well ***************/
 .well {
-	background: #FAFAFA;
+	background: white;
 	border-color: rgba(255,255,255,0); 
 }
 
@@ -202,6 +200,16 @@ li a:hover {
 	background: white;
 }
 
+
+.iconButton {
+	padding: 0;
+	border-color: rgba(0,255,255,0);
+}
+
+.iconButton:hover {
+	padding: 0;
+	border-color: rgba(0,255,255,0);
+}
 
 /******** Pagination ************/
 .pagination li a {
@@ -234,4 +242,25 @@ li a:hover {
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
   background-color: #5f97d8;
+}
+
+
+
+
+/************* Images *****************/
+.img-responsive {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+.ratio {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+    width: 100%;
 }
