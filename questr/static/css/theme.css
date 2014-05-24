@@ -264,3 +264,14 @@ li a:hover {
     position: relative;
     width: 100%;
 }
+
+
+/********** Tabs **************/
+.tabbale ul.nav li {
+	background: aqua;
+}
+
+.tab-pane {
+	min-height: 280px;
+	background: aqua;	
+}
