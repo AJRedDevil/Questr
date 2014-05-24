@@ -19,8 +19,7 @@
          <div class="well profile">
              
               <div  class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
-              
-             
+                    
             <center>
 	            <h3>Don Vo</h3>
 	            
@@ -37,9 +36,10 @@
              <p><strong>Location: </strong> Toronto, Ontario, Canada </p>
                     <p><strong>Quests Completed: </strong> {{quests_complete}} </p>
                     <p><strong>Quests Posted: </strong> {{questes_posted}} </p>  
-                    <p><strong>Trust Rank: </strong> {{ranking}}% </p>                           
-         </div>                 
-        </div>  <!-- End of Profile -->
+                    <p><strong>Trust Rank: </strong> {{ranking}}% 
+             </p>                           
+         </div>	<!-- End of Profile -->                
+        </div>	<!-- End of column -->
     
     
     
@@ -143,11 +143,11 @@
 
 
 <div class="container">
-    <div class="row">
+    <div class="row clearfix">
+        <div class="col-md-12">
         <div class="well">
         <h1 class="text-center">Reviews of Don Vo's Service As a Questr</h1>
-        <div class="list-group">
-           
+        <div class="list-group">   
           <!-- Review Post -->
           <a href="#" class="list-group-item">
                 <div class="media col-md-3">
@@ -192,12 +192,16 @@
                     <p> Average 3.9 <small> / </small> 5 </p>
                     -->
                 </div>
-          </a>  <!-- End of Current Quests -->      
- 
-        </div>
-        </div>
-    </div>
-</div>
+          </a>  <!-- End of Current Quests --> 
+               
+        </div>	<!-- End of list-group -->
+        </div>	<!-- End of well -->
+        </div>	<!-- End of column -->
+    </div>	<!-- End of row -->
+</div>	<!-- End of container -->
+
+
+
 {% endblock content %}
 {% block scripts %}
    <script>
