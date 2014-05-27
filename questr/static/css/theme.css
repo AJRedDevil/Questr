@@ -141,6 +141,87 @@ li a:hover {
     transition: color 0.1s ease-in, background 0.1s ease-in;	
 }
 
+.navbar-default .searchBox {
+
+}
+
+.navbar-default .searchButton {
+	margin: 0;
+	left: 155px;
+	top: 9px;
+	background: transparent;
+	position: absolute;
+	border-color: transparent;
+}
+
+.navbar-default .searchButton:hover {
+	margin: 0;
+	left: 155px;
+	top: 9px;
+	background: transparent;
+	position: absolute;
+	border-color: transparent;
+	color: #5f97d8;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#custom-search-input {
+        margin:0;
+        padding: 0;
+        max-width: 200px;
+    }
+ 
+    #custom-search-input .search-query {
+        padding-right: 3px;
+        padding-right: 4px \9;
+        padding-left: 3px;
+        padding-left: 4px \9;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+ 
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+ 
+    #custom-search-input button {
+        border: 0;
+        background: none;
+        /** belows styles are working good */
+        padding: 2px 5px;
+        margin-top: 2px;
+        position: relative;
+        left: -28px;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        color:#D9230F;
+    }
+ 
+    .search-query:focus + button {
+        z-index: 3;   
+    }
+
 
 
 /*************** Secondary Navbar ***************/
