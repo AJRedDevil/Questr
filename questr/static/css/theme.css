@@ -90,7 +90,7 @@ li a:hover {
 .navbar-default .navbar-nav > .active > a, 
 .navbar-default .navbar-nav > .active > a:hover, 
 .navbar-default .navbar-nav > .active > a:focus {
-    color: white;
+    color: grey;
 }
 
 
@@ -209,26 +209,21 @@ li a:hover {
 .secondary-nav {
 	z-index: 0;
 	text-align: center;
-	border-color: rgba(255,255,255,0);
-	padding: 0;
-	margin: 0;
+	border-color: rgba(255,255,255,0);	
 	display: block;
 	position: relative;
 	background: white;
+	min-height: 35px;
 }
 
 .secondary-nav ul.navbar-nav {
 	list-style: none;
 	display: inline;
     float: none;
-    padding: 0;
-    margin: 0;
     position: absolute;
 }
 
 .secondary-nav li {
-	padding-bottom: 0;
-	margin: 0;
 	display: inline;
 	position: absolute;
 }
@@ -250,29 +245,14 @@ li a:hover {
 }
 
 .secondary-nav li a:hover {
-	background: #5f97d8;
+	background: #6098d9;
 }
 
 .secondary-nav li.quest {
 	left: -90px;
 }
 
-.secondaryNavRow .column {
-	padding: 0;
-	margin: 0;
-}
 
-.secondaryNavRow .column .navbar-default {
-	padding: 0;
-	margin: 0;
-}
-
-.secondaryNavRow .column .navbar-default ul.navbar-nav {
-	padding: 0;
-	margin: 0;
-	background: aqua;
-	color: aqua;
-}
 /*************** Well ***************/
 .well {
 	background: white;
@@ -329,6 +309,7 @@ li a:hover {
 .navbar-default .navbar-toggle {
   border-color: #5f97d8;
   background: white;
+  
 }
 
 .navbar-default .navbar-toggle:hover,
