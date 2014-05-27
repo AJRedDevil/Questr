@@ -1,12 +1,16 @@
-html {overflow-x: hidden;}
+html {
+	overflow-x: hidden;
+	margin: 0;
+	padding: 0;
+	background: aqua;
+}
  
 body {
 	font-family: Arial, sans-serif;
 	color: #393939;
 	font-size: 16px;
-	padding: 0px;
-	margin: 0;
 	background: #bcbcbc;
+	overflow-x: hidden;
  }
  
 footer {
@@ -36,21 +40,23 @@ li a:hover {
 
 .navbar-default .navbar-nav > .active {
     color: #000;
-   background: #5f97d8;
  }
  .navbar-default .navbar-nav > .active > a, 
  .navbar-default .navbar-nav > .active > a:hover, 
+  .navbar-default .navbar-nav > .active > a:active,
  .navbar-default .navbar-nav > .active > a:focus {
       color: #5f97d8;
-      background: white;
+      background: transparent;
  }
+ 
+ 
  
 /*************** Primary Navbar ***************/
 .navbar-container {
 	margin-left: 0;
 	margin-right: 0;
 	margin-top: 0;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	padding: 0;
 	width: 100%;
 }
@@ -60,7 +66,7 @@ li a:hover {
 	margin: 0;
 	padding: 0 15px;
 	z-index: 999;
-	background: #5f97d8;
+	background: white;
 	border: none;
 }
 
@@ -76,7 +82,7 @@ li a:hover {
 
 
 .navbar-default .navbar-nav > li > a {
-	color: #f5f5f5;
+	color: grey;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
@@ -141,48 +147,8 @@ li a:hover {
     transition: color 0.1s ease-in, background 0.1s ease-in;	
 }
 
-.navbar-default .searchBox {
 
-}
-
-.navbar-default .searchButton {
-	margin: 0;
-	left: 155px;
-	top: 9px;
-	background: transparent;
-	position: absolute;
-	border-color: transparent;
-}
-
-.navbar-default .searchButton:hover {
-	margin: 0;
-	left: 155px;
-	top: 9px;
-	background: transparent;
-	position: absolute;
-	border-color: transparent;
-	color: #5f97d8;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/** Search module **/
 #custom-search-input {
         margin:0;
         padding: 0;
@@ -215,7 +181,22 @@ li a:hover {
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
         border-radius: 3px;
-        color:#D9230F;
+        color: gray;
+    }
+    
+    #custom-search-input button:hover {
+        border: 0;
+        /** belows styles are working good */
+        padding: 2px 5px;
+        margin-top: 2px;
+        position: relative;
+        left: -28px;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        color:#5f97d8;
     }
  
     .search-query:focus + button {
@@ -226,14 +207,13 @@ li a:hover {
 
 /*************** Secondary Navbar ***************/
 .secondary-nav {
-	width: 100%;
 	z-index: 0;
 	text-align: center;
 	border-color: rgba(255,255,255,0);
 	padding: 0;
-	margin-bottom: 0;
-	margin-top: 0;
+	margin: 0;
 	display: block;
+	position: relative;
 	background: white;
 }
 
@@ -242,13 +222,15 @@ li a:hover {
 	display: inline;
     float: none;
     padding: 0;
+    margin: 0;
     position: absolute;
 }
 
 .secondary-nav li {
 	padding-bottom: 0;
+	margin: 0;
 	display: inline;
-	background: aqua;
+	position: absolute;
 }
 
 .secondary-nav li a:link {
@@ -264,12 +246,33 @@ li a:hover {
 	border-bottom-style: solid;
 	border-bottom-width: 6px;
 	border-bottom-color: #5f97d8;
+	margin: 0;
 }
 
 .secondary-nav li a:hover {
 	background: #5f97d8;
 }
 
+.secondary-nav li.quest {
+	left: -90px;
+}
+
+.secondaryNavRow .column {
+	padding: 0;
+	margin: 0;
+}
+
+.secondaryNavRow .column .navbar-default {
+	padding: 0;
+	margin: 0;
+}
+
+.secondaryNavRow .column .navbar-default ul.navbar-nav {
+	padding: 0;
+	margin: 0;
+	background: aqua;
+	color: aqua;
+}
 /*************** Well ***************/
 .well {
 	background: white;
