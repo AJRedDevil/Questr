@@ -66,18 +66,19 @@ li a:hover {
 	margin-left: 0;
 	margin-right: 0;
 	margin-top: 0;
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 	padding: 0;
 	width: 100%;
 }
 
 .navbar {
 	width: 100%;
-	margin: 0;
+	margin-bottom: 10px;
 	padding: 0 15px;
 	z-index: 999;
-	background: black;
+	background: white;
 	border: none;
+	
 }
 
 .navbar-default li a, .navbar-default li a .glyphicon {
@@ -126,7 +127,7 @@ li a:hover {
 }
 
 .navbar-default .navbar-brand {
-	color: #f5f5f5;
+	color: #5f97d8;
 	 font-family: 'Lato', sans-serif;
     font-weight: 300;
     font-size: 20px;
