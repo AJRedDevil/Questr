@@ -38,6 +38,7 @@ li a:hover {
 	color: #5f97d8;
 }
 
+
 .navbar-default .navbar-nav > .active {
     color: #000;
  }
@@ -49,7 +50,16 @@ li a:hover {
       background: transparent;
  }
  
- 
+ /******** Navbar toggle **********/
+.navbar-default .navbar-toggle {
+  border-color: #5f97d8;
+  background: white;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #5f97d8;
+}
  
 /*************** Primary Navbar ***************/
 .navbar-container {
@@ -66,7 +76,7 @@ li a:hover {
 	margin: 0;
 	padding: 0 15px;
 	z-index: 999;
-	background: white;
+	background: black;
 	border: none;
 }
 
@@ -212,8 +222,8 @@ li a:hover {
 	border-color: rgba(255,255,255,0);	
 	display: block;
 	position: relative;
-	background: white;
-	min-height: 35px;
+	background: transparent;
+	min-height: 55px;
 }
 
 .secondary-nav ul.navbar-nav {
@@ -226,6 +236,7 @@ li a:hover {
 .secondary-nav li {
 	display: inline;
 	position: absolute;
+	background: transparent;
 }
 
 .secondary-nav li a:link {
@@ -249,9 +260,12 @@ li a:hover {
 }
 
 .secondary-nav li.quest {
-	left: -90px;
+	left: -71px;
 }
 
+.secondary-nav li.questr {
+	left: 20px;
+}
 
 /*************** Well ***************/
 .well {
@@ -303,21 +317,6 @@ li a:hover {
 .dropdown-menu {
 	text-align: center;
 }
-
-
-/******** Navbar toggle **********/
-.navbar-default .navbar-toggle {
-  border-color: #5f97d8;
-  background: white;
-  
-}
-
-.navbar-default .navbar-toggle:hover,
-.navbar-default .navbar-toggle:focus {
-  background-color: #5f97d8;
-}
-
-
 
 
 /************* Images *****************/
