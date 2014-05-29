@@ -338,6 +338,11 @@ li a:hover {
     width: 100%;
 }
 
+imageUploader {
+    height: auto;
+    width: 10px;
+}
+
 
 /********** Tabs **************/
 .tab-pane {
