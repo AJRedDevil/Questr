@@ -119,7 +119,7 @@ AUTH_USER_MODEL = 'users.QuestrUserProfile'
 # User Model
 LOGIN_URL = '/user/login/'
 # LOGIN_ERROR_URL = '/user/login/'
-LOGIN_REDIRECT_URL = '/user/home/'
+LOGIN_REDIRECT_URL = '/home/'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
 SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 SOCIAL_AUTH_USER_MODEL = 'users.QuestrUserProfile'
