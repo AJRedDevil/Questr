@@ -12,16 +12,16 @@
                 <div class="feature">
                     <div class="picture">
                         
-                        <a class="image" href="#" title="Title"><img src={% static 'img/pup.jpg'%}></a>
+                        <a class="image" href="/quest/{{quest.id}}" title="Title"><img src={{quest.item_images}}></a>
 
                         <div class="item-content">
-                            <h4 class="title">Title: {{quest.title | title}}</h4>
+                            <h4 class="title">{{quest.title | title}}</h4>
 
-                            <p class="description">Description: {{quest.description | title}}</p>
+                            <p class="description">{{quest.description | truncatewords:10  }}</p>
 
                             <div class="meta">
                                 <div>
-                                    <a href="#">{{quest.questrs.first_name}} {{quest.questrs.last_name}}</a>
+                                    <a href="/user/{{quest.questrs.displayname}}">{{quest.questrs.first_name}} {{quest.questrs.last_name}}</a>
                                 </div>
 
                                 <div>

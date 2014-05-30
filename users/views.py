@@ -119,7 +119,7 @@ def home(request):
     nav_link_3 = "/user/logout"
     nav_link_3_label ="logout"
     allquests = listallquests()
-    logging.warn(allquests)
+    # logging.warn(allquests)
     return render(request,'homepage.html', locals())
 
 @login_required
@@ -195,8 +195,8 @@ def changePassword(request):
     nav_link_3 = "/user/logout"
     nav_link_3_label ="logout"
     password = passwordExists(user)
-    logging.warn(user)
-    logging.warn(password)
+    # logging.warn(user)
+    # logging.warn(password)
 
 
     try:
