@@ -14,7 +14,7 @@ import logging
 from access.requires import verified, is_alive
 from contrib import mailing
 
-from quests.views import listfeaturedquests
+from quests.views import listfeaturedquests, getQuestsByUser
 
 # Create your views here.
 def logout(request):
@@ -278,6 +278,12 @@ def getUserInfo(request, displayname):
     except QuestrUserProfile.DoesNotExist:
         raise Http404
         return render(request,'404.html')
+
+    try:
+        questsbyuser = getQuestsByUser(publicuser.id)
+    except Exception, e:
+        raise e
+        return render(request,'broke.html')
 
     return render(request,'publicprofile.html', locals())
 
