@@ -30,17 +30,19 @@
 
 
   
-  <div class="container titleContainer">
-		<div class="row clearfix">
-			<div class="col-md-10 col-md-offset-1 column titleColumn">
-				<div class="col-md-2 titleColumn">
-					<a href="edit">					
-						<button type="button" class="btn btn-default">Edit Post</button>
-					</a>
+{% if isOwner %}
+	  <div class="container titleContainer">
+			<div class="row clearfix">
+				<div class="col-md-10 col-md-offset-1 column titleColumn">
+					<div class="col-md-2 titleColumn">
+						<a href="edit">					
+							<button type="button" class="btn btn-default">Edit Post</button>
+						</a>
+					</div>
 				</div>
 			</div>
-		</div>
-  </div>
+	  </div>
+{% endif %}
   
   <div class="container">
 		<div class="row clearfix">
@@ -50,7 +52,7 @@
 					<div class="col-md-3 column">
 						<div class="well">
 							<a class="thumbnail" data-target="#lightbox" data-toggle="modal" href="#">
-								<img alt="itemImage" class="itemImage" src="http://sushinoms.com/wp-content/uploads/2013/10/Pocky-midi-Matcha.jpg">
+								<img alt="itemImage" class="itemImage" src="{{questdetails.item_images}}">
 							</a>
 	
 							<div class="modal fade" id="lightbox" tabindex="-1">
@@ -63,9 +65,9 @@
 								</div>
 							</div>
 							<p>
-								<a href="{{nav_link_1}}">donvvo</a><br>
-								Posted: Sept 16th, 2014 at 4:20 pm<br>
-								Location: Toronto, Canada
+							<a href="/user/{{questdetails.questrs.displayname}}">{{questdetails.questrs.first_name}} {{questdetails.questrs.last_name}}</a><br>
+								Posted: {{questdetails.creation_date}}<br>
+								Location: {{questdetails.location}}, Canada
 							</p>
 						</div>
 					</div>	<!-- End of column -->
@@ -73,12 +75,12 @@
 
 					<div class="col-md-6 column">
 						<div class="well">
-							<h3 class="title">I need this by tomorrow</h3>
-							<p>Offer: $100.00</p>
-							<p>This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.This is a description.</p>
+							<h3 class="title">{{questdetails.title}}</h3>
+							<p>Offer: ${{questdetails.reward}}</p>
+							<p>{{questdetails.description}}</p>
 							
-							<p>Departure Address: </p>
-							<p>Destination Address: </p>
+							<p>Departure Address: {{questdetails.srcaddress}}</p>
+							<p>Destination Address: {{questdetails.dstaddress}}</p>
 						
 						</div>
 					</div>	<!-- End of column -->
@@ -86,6 +88,7 @@
 				
 					<div class="col-md-3 column">
 						<div class="well">
+<<<<<<< HEAD
 							<div class="modal fade" id="lightbox" tabindex="-1">
 								<div class="modal-dialog">
 									<button class="close hidden" data-dismiss="modal" type="button">×</button>
@@ -95,10 +98,12 @@
 									</div>
 								</div>
 							</div>
+=======
+>>>>>>> FETCH_HEAD
 							<p>
-								<a href="{{nav_link_1}}">donvvo</a><br>
-								Posted: Sept 16th, 2014 at 4:20 pm<br>
-								Location: Toronto, Canada
+							<a href="/user/{{questdetails.questrs.displayname}}">{{questdetails.questrs.first_name}} {{questdetails.questrs.last_name}}</a><br>
+								Posted: {{questdetails.creation_date}}<br>
+								Location: {{questdetails.location}}, Canada
 							</p>
 						</div>
 					</div>	<!-- End of column -->

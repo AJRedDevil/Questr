@@ -8,12 +8,13 @@ from django.contrib.auth import authenticate
 from django.http import Http404
 from django.shortcuts import render, redirect
 from .models import QuestrUserProfile, UserTransactional, QuestrToken
-from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, QuestrSocialSignupForm, CreatePasswordForm, ChangePasswordForm
+from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, QuestrSocialSignupForm, SetPasswordForm, PasswordChangeForm
 import logging
 
 from access.requires import verified, is_alive
 from contrib import mailing
 
+from quests.views import listfeaturedquests, getQuestsByUser
 
 # Create your views here.
 def logout(request):
@@ -117,6 +118,8 @@ def home(request):
     nav_link_2_label ="settings"
     nav_link_3 = "/user/logout"
     nav_link_3_label ="logout"
+    allquests = listfeaturedquests()
+    # logging.warn(allquests)
     return render(request,'homepage.html', locals())
 
 @login_required
@@ -163,7 +166,7 @@ def userSettings(request):
 
     elif request.method == "POST" and request.POST['formtype'] == "changepassword":
         try:
-            user_form = ChangePasswordForm(request.POST, instance=request.user)
+            user_form = PasswordChangeForm(request.POST, instance=request.user)
         except QuestrUserProfile.DoesNotExist:
             raise Http404
             return render(request,'404.html', locals())        
@@ -179,49 +182,6 @@ def userSettings(request):
             return render(request,'404.html', locals())
 
     return render(request, "settings.html",locals())
-
-@login_required
-def changePassword(request):
-    """Change's user's personal settings"""
-    pagetype="loggedin"
-    user = request.user
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
-    password = passwordExists(user)
-    logging.warn(user)
-    logging.warn(password)
-
-
-    try:
-        user = QuestrUserProfile.objects.get(email=request.user)
-    except QuestrUserProfile.DoesNotExist:
-        raise Http404
-        return render(request,'404.html', locals())
-
-    if request.method == "POST":
-        try:
-            user_form = ChangePasswordForm(request.POST, instance=request.user)
-        except QuestrUserProfile.DoesNotExist:
-            raise Http404
-            return render(request,'404.html', locals())        
-        if user_form.is_valid():
-            user_form.save()
-            # logging.warn(dir(user_form))
-            return redirect('changepassword')
-    else:
-        try:
-            user_form = QuestrUserChangeForm(instance=request.user)
-            return render(request, "changepassword.html",locals())
-        except QuestrUserProfile.DoesNotExist:
-            raise Http404
-            return render(request,'404.html', locals())
-
-    return render(request, "changepassword.html",locals())
-
 
 def getAccountStatus(status_id):
     '''Get account status of user'''
@@ -276,24 +236,59 @@ def getUserInfo(request, displayname):
         raise Http404
         return render(request,'404.html')
 
+    try:
+        questsbyuser = getQuestsByUser(publicuser.id)
+    except Exception, e:
+        raise e
+        return render(request,'broke.html')
+
     return render(request,'publicprofile.html', locals())
 
 @login_required
 def createPassword(request):
-    """Create the user's password"""
+    """Create a password for socially logged in user"""
+    pagetype="loggedin"
+    user = request.user
+    nav_link_1 = "/user/profile"
+    nav_link_1_label = "my profile"
+    nav_link_2 = "/user/settings"
+    nav_link_2_label ="settings"
+    nav_link_3 = "/user/logout"
+    nav_link_3_label ="logout"
     if passwordExists(request.user):
         return redirect('home')
+    
     if request.method == "POST":
-        try:
-            user_form = CreatePasswordForm(request.POST, instance=request.user)
-        except QuestrUserProfile.DoesNotExist:
-            raise Http404
-            return render(request,'404.html', locals())        
+        user_form = SetPasswordForm(user, request.POST)
         if user_form.is_valid():
             user_form.save()
             return redirect('home')
-
     return render(request, "createpassword.html", locals())
+
+@login_required
+def changePassword(request):
+    """Change's user's personal settings"""
+    pagetype="loggedin"
+    user = request.user
+    nav_link_1 = "/user/profile"
+    nav_link_1_label = "my profile"
+    nav_link_2 = "/user/settings"
+    nav_link_2_label ="settings"
+    nav_link_3 = "/user/logout"
+    nav_link_3_label ="logout"
+    ##check if the user has password, if they don't they'd be provided with a link to create one for them
+    password = passwordExists(user)
+    # logging.warn(user)
+    # logging.warn(password)
+
+    if request.method == "POST":
+        user_form = PasswordChangeForm(user, request.POST)
+        logging.warn(user_form.errors)
+        if user_form.is_valid():
+            user_form.save()
+            return redirect('changepassword')
+    return render(request, "changepassword.html",locals())
+
 
 def saveUserInfo(request):
     """This save's additional user info post the social login is successfull"""

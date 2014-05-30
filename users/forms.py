@@ -1,3 +1,6 @@
+
+from collections import OrderedDict
+
 from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import authenticate, get_user_model
@@ -158,83 +161,66 @@ class QuestrLocalAuthenticationForm(forms.Form):
     def get_user(self):
         return self.user_cache
 
-class CreatePasswordForm(forms.ModelForm):
+class SetPasswordForm(forms.Form):
     """
-    A form that creates a password for socially logged in user so they can login through email 
-    """
-    error_messages = {
-        'password_mismatch': _("The two password fields didn't match."),
-    }
-    password = forms.CharField(label=_("Password"),
-        widget=forms.PasswordInput)
-    password2 = forms.CharField(label=_("Password confirmation"),
-        widget=forms.PasswordInput,
-        help_text=_("Enter the same password as above, for verification."))
-
-    class Meta:
-        model = QuestrUserProfile
-        fields = ['password']
-
-        widget = {
-            'password' : forms.PasswordInput(attrs = { 'placeholder': 'Password'}),
-            'password2' : forms.PasswordInput(attrs = { 'placeholder': 'Confirm Password'}),
-        }
-
-    def clean_password2(self):
-        password = self.cleaned_data.get("password")
-        password2 = self.cleaned_data.get("password2")
-        if password and password2 and password != password2:
-            raise forms.ValidationError(
-                self.error_messages['password_mismatch'],
-                code='password_mismatch',
-            )
-        return password2
-
-    def save(self, commit=True):
-        user = super(CreatePasswordForm, self).save(commit=False)
-        user.set_password(self.cleaned_data["password"])
-        if commit:
-            user.save()
-        return user
-
-class ChangePasswordForm(forms.ModelForm):
-    """
-    A form that creates a password for socially logged in user so they can login through email 
+    A form that lets a user change set his/her password without entering the
+    old password
     """
     error_messages = {
         'password_mismatch': _("The two password fields didn't match."),
     }
-    password = forms.CharField(label=_("Current Password"),
-        widget=forms.PasswordInput)
-    password1 = forms.CharField(label=_("New Password"),
-        widget=forms.PasswordInput)
-    password2 = forms.CharField(label=_("Password confirmation"),
-        widget=forms.PasswordInput,
-        help_text=_("Enter the same password as above, for verification."))
+    new_password1 = forms.CharField(label=_("New password"),
+                                    widget=forms.PasswordInput)
+    new_password2 = forms.CharField(label=_("New password confirmation"),
+                                    widget=forms.PasswordInput)
 
-    class Meta:
-        model = QuestrUserProfile
-        fields = ['password']
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(SetPasswordForm, self).__init__(*args, **kwargs)
 
-        widget = {
-            'password' : forms.PasswordInput(attrs = { 'placeholder': 'Current Password'}),
-            'password1' : forms.PasswordInput(attrs = { 'placeholder': 'New Password'}),
-            'password2' : forms.PasswordInput(attrs = { 'placeholder': 'Confirm Password'}),
-        }
-
-    def clean_password2(self):
-        password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2:
-            raise forms.ValidationError(
-                self.error_messages['password_mismatch'],
-                code='password_mismatch',
-            )
+    def clean_new_password2(self):
+        password1 = self.cleaned_data.get('new_password1')
+        password2 = self.cleaned_data.get('new_password2')
+        if password1 and password2:
+            if password1 != password2:
+                raise forms.ValidationError(
+                    self.error_messages['password_mismatch'],
+                    code='password_mismatch',
+                )
         return password2
 
     def save(self, commit=True):
-        user = super(CreatePasswordForm, self).save(commit=False)
-        user.set_password(self.cleaned_data["password"])
+        self.user.set_password(self.cleaned_data['new_password1'])
         if commit:
-            user.save()
-        return user
+            self.user.save()
+        return self.user
+
+
+class PasswordChangeForm(SetPasswordForm):
+    """
+    A form that lets a user change his/her password by entering
+    their old password.
+    """
+    error_messages = dict(SetPasswordForm.error_messages, **{
+        'password_incorrect': _("Your old password was entered incorrectly. "
+                                "Please enter it again."),
+    })
+    old_password = forms.CharField(label=_("Old password"),
+                                   widget=forms.PasswordInput)
+
+    def clean_old_password(self):
+        """
+        Validates that the old_password field is correct.
+        """
+        old_password = self.cleaned_data["old_password"]
+        if not self.user.check_password(old_password):
+            raise forms.ValidationError(
+                self.error_messages['password_incorrect'],
+                code='password_incorrect',
+            )
+        return old_password
+
+PasswordChangeForm.base_fields = OrderedDict(
+    (k, PasswordChangeForm.base_fields[k])
+    for k in ['old_password', 'new_password1', 'new_password2']
+)
