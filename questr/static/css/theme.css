@@ -217,56 +217,38 @@ li a:hover {
 
 
 /*************** Secondary Navbar ***************/
-.secondary-nav {
-	z-index: 0;
+.secondaryNavRow ul {
+	background: white;
+	list-style-type:none;
+	margin:0;
+	padding:0;
 	text-align: center;
-	border-color: rgba(255,255,255,0);	
-	display: block;
-	position: relative;
-	background: aqua;
-	min-height: 55px;
 }
 
-.secondary-nav ul.navbar-nav {
-	list-style: none;
-	display: inline;
-    float: none;
-    position: absolute;
-}
-
-.secondary-nav li {
-	display: inline;
-	position: absolute;
-	background: transparent;
-}
-
-.secondary-nav li a:link {
-	padding-bottom: 0;
-	padding-left: 0;
-	padding-right: 0;
-	padding-top: 10px;
+.secondaryNavRow ul li {
+	display: inline-block;
+	background: white;
 	margin: 0;
-	text-decoration: none;
+	padding: 0;
+	height: 30px;
 }
 
-.secondary-nav li.active a {
+.secondaryNavRow ul li:hover {
 	border-bottom-style: solid;
 	border-bottom-width: 6px;
 	border-bottom-color: #5f97d8;
-	margin: 0;
 }
 
-.secondary-nav li a:hover {
-	background: #6098d9;
+.secondaryNavRow ul li.active {
+	border-bottom-style: solid;
+	border-bottom-width: 6px;
+	border-bottom-color: #5f97d8;
 }
 
-.secondary-nav li.quest {
-	left: -71px;
+.secondaryNavRow ul li.quest {
+	margin-right: 30px;
 }
 
-.secondary-nav li.questr {
-	left: 20px;
-}
 
 /*************** Well ***************/
 .well {
@@ -361,3 +343,7 @@ imageUploader {
 	border-color: transparent;
 }
           
+          
+          
+          
+ 
