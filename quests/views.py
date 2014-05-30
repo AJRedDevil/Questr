@@ -37,9 +37,22 @@ def createquest(request):
 
     return render(request, 'newquest.html', locals())  
 
-def listallquests():
+def listfeaturedquests():
     allquests = Quests.objects.all()
     return allquests
+
+@login_required
+def listallquests(request):
+    pagetype="loggedin"
+    secondnav="listquestsecondnav"
+    user = request.user
+    nav_link_1 = "/user/profile"
+    nav_link_1_label = "my profile"
+    nav_link_2 = "/user/settings"
+    nav_link_2_label ="settings"
+    nav_link_3 = "/user/logout"
+    nav_link_3_label ="logout"
+    return render(request, 'listallquest.html', locals())
 
 @login_required
 def viewquest(request, questname):

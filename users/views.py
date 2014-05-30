@@ -14,7 +14,7 @@ import logging
 from access.requires import verified, is_alive
 from contrib import mailing
 
-from quests.views import listallquests
+from quests.views import listfeaturedquests
 
 # Create your views here.
 def logout(request):
@@ -118,7 +118,7 @@ def home(request):
     nav_link_2_label ="settings"
     nav_link_3 = "/user/logout"
     nav_link_3_label ="logout"
-    allquests = listallquests()
+    allquests = listfeaturedquests()
     # logging.warn(allquests)
     return render(request,'homepage.html', locals())
 
