@@ -7,9 +7,8 @@ html {
  
 body {
 	font-family: Arial, sans-serif;
-	color: #393939;
 	font-size: 16px;
-	background: #bcbcbc;
+	background: #e8e8e8;
 	overflow-x: hidden;
  }
  
@@ -63,9 +62,6 @@ li a:hover {
  
 /*************** Primary Navbar ***************/
 .navbar-container {
-	margin-left: 0;
-	margin-right: 0;
-	margin-top: 0;
 	margin-bottom: 10px;
 	padding: 0;
 	width: 100%;
@@ -78,19 +74,12 @@ li a:hover {
 	z-index: 999;
 	background: white;
 	border: none;
-	
 }
 
 .navbar-default li a, .navbar-default li a .glyphicon {
 	margin: 0;
 	padding-bottom: 0;
 }
-
-
-.navbar-default li a.userMenu {
-	padding-top: 11px;
-}
-
 
 .navbar-default .navbar-nav > li > a {
 	color: grey;
@@ -107,8 +96,8 @@ li a:hover {
 
 
 .navbar .profileImg {
-	width: 30px;
-	height: 30px;
+	width: 25px;
+	height: 25px;
 }
 
 
@@ -159,61 +148,71 @@ li a:hover {
 }
 
 
-/** Search module **/
-#custom-search-input {
-        margin:0;
-        padding: 0;
-        max-width: 200px;
-    }
- 
-    #custom-search-input .search-query {
-        padding-right: 3px;
-        padding-right: 4px \9;
-        padding-left: 3px;
-        padding-left: 4px \9;
-        /* IE7-8 doesn't have border-radius, so don't indent the padding */
- 
-        margin-bottom: 0;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-    }
- 
-    #custom-search-input button {
-        border: 0;
-        background: none;
-        /** belows styles are working good */
+/*************** Navbar Buttons *******************/
+#navButton {
+    margin:0;
+    padding: 0;
+    max-width: 200px;
+}
+
+#navButton button {
+	height: 34px;
+	position: relative;
+	border-color: #b9b9b9;
+}
+
+#navButton button.normal { 
+	-webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px; 
+}
+
+#navButton button.combo {
+		border-bottom-left-radius: 0px;
+	border-top-left-radius: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+	-webkit-border-top-left-radius: 0px;
+	-moz-border-bottom-left-radius: 0px;
+	-moz-border-top-left-radius: 0px;	
+}
+
+
+.navbar-default li a.userMenu {
         padding: 2px 5px;
-        margin-top: 2px;
         position: relative;
-        left: -28px;
-        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+        left: -15px; 
+}
+
+
+
+
+/** Search module **/
+    #navButton .search-query {
+        padding-right: 3px;
         margin-bottom: 0;
         -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
+        -moz-border-radius: 3px; 
         border-radius: 3px;
-        color: gray;
+    } 
+ 
+    #navButton button.searchButton {
+    	border: 0;
+        /** belows styles are working good */
+        margin-top: -1px;
+        padding: 0px 5px;
+        position: relative;
+        left: -28px; 
+        background: transparent;
     }
     
-    #custom-search-input button:hover {
-        border: 0;
-        /** belows styles are working good */
-        padding: 2px 5px;
-        margin-top: 2px;
-        position: relative;
-        left: -28px;
-        /* IE7-8 doesn't have border-radius, so don't indent the padding */
-        margin-bottom: 0;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
+    #navButton button:hover {
         color:#5f97d8;
     }
  
     .search-query:focus + button {
         z-index: 3;   
     }
-
+/** End of Search module **/
 
 
 /*************** Secondary Navbar ***************/
@@ -253,9 +252,10 @@ li a:hover {
 /*************** Well ***************/
 .well {
 	background: white;
-	border-color: rgba(255,255,255,0); 
+	border: none; 
+	-moz-box-shadow:    0px 1px 0px 0px #b8b8b8;
+	box-shadow:         0px 1px 0px 0px #b8b8b8;
 }
-
 
 /************* Buttons ************/
 .btn, .btn-default, .btn-group .btn-default {

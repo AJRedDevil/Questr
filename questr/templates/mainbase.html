@@ -75,11 +75,11 @@
                         <li>                                         
                             <form class="navbar-form navbar-right" role="search">{% csrf_token %}
                     			<span class="form-group">
-	                            	<div id="custom-search-input">
+	                            	<div id="navButton">
 			                            <div class="input-group">
 			                                <input type="text" class="  search-query form-control" placeholder="Search" />
 			                                <span class="input-group-btn">
-				                                    <button class="btn btn-danger" type="button">
+				                                    <button class="btn btn-danger normal searchButton" type="button">
 			                                        <span class=" glyphicon glyphicon-search"></span>
 			                                    </button>
 			                                </span>
@@ -121,40 +121,53 @@
                                     My Trades
                                 </a>
                             </li>
-                        
-                        
-                       		<li>	<!-- Profile Image -->
-                       			<a href="{{nav_link_1}}">
-		                       		<div class="ratio img-responsive profileImg" style="background-image: url({{user.avatar_file_name}});"></div>           	
-                       			</a>		
-                       		</li>       
+                                 
                                                 
-                            <li class="dropdown">                                                    
-							 <a href="#" class="dropdown-toggle userMenu" data-toggle="dropdown">
-							 	<span>
-							 		
-							 	</span>{{user.first_name}} {{user.last_name}}<strong class="caret"></strong>
-							 </a>
-							<ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{nav_link_1}}">                                                                        
-                                            {{nav_link_1_label|title}}
-                                        </a>
-                                    </li>
-                 
-                                    <li>
-                                        <a href="{{nav_link_2}}">{{nav_link_2_label|title}}</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Help</a>
-                                    </li>
-                                    <li class="divider">
-                                    </li>
-                                    <li>
-                                        <a href="{{nav_link_3}}">{{nav_link_3_label|title}}</a>
-                                    </li>
-                                </ul>
-						</li>
+                            <li class="dropdown">                                                                                
+							 	<form class="navbar-form navbar-right">
+								 	
+		                            	<div id="navButton">
+				                            <div class="input-group">
+				                                
+				                                <span class="input-group-btn">
+				                                
+				                                	<a href="{{nav_link_1}}">	
+				                                	<button class="btn btn-default" type="button">	
+						                       			<div class="ratio img-responsive profileImg" style="background-image: url({{user.avatar_file_name}});"></div> 
+				                                	</button>
+					                       			</a>
+				                                
+				                                 	<a href="#" class="dropdown-toggle userMenu" data-toggle="dropdown">
+						                            	<button class="btn btn-default combo" type="button">
+					                                    	{{user.first_name}}<strong class="caret"></strong>
+					                                    </button>
+				                                 	</a>
+				                                 	
+				                                 	<ul class="dropdown-menu">
+						                                <li>
+						                                    <a href="{{nav_link_1}}">                                                                        
+						                                        {{nav_link_1_label|title}}
+						                                    </a>
+						                                </li>
+						             
+						                                <li>
+						                                    <a href="{{nav_link_2}}">{{nav_link_2_label|title}}</a>
+						                                </li>
+						                                <li>
+						                                    <a href="#">Help</a>
+						                                </li>
+						                                <li class="divider">
+						                                </li>
+						                                <li>
+						                                    <a href="{{nav_link_3}}">{{nav_link_3_label|title}}</a>
+						                                </li>
+						                            </ul>				                                 	
+				                                </span>  
+			                                </div>
+			                            </div>    				 
+			                            </form>			 
+			                            </li>
+                        
     
                             {% endif %}
                             
