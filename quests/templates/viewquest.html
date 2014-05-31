@@ -6,28 +6,13 @@
     <link href={% static "css/quest.css" %} rel="stylesheet">
     
     <!-- Custom Javascript -->
-    <script src={% static "js/validator.js" %}></script>    
+    <script src={% static "js/validator.js" %}></script>  
+    <script src={% static "js/lightbox.js" %}></script> 
     
     
     
 {% endblock localhead %}
 {% block content %}
-
-<div class="navbar navbar-default" id="subnav">
-    <div class="col-md-12">
-    
-        <div class="collapse navbar-collapse" id="navbar-collapse2">
-          <ul class="nav navbar-nav navbar-right">
-             <li class="active"><a href="#">Posts</a></li>
-             <li><a href="#loginModal" role="button" data-toggle="modal">Login</a></li>
-             <li><a href="#aboutModal" role="button" data-toggle="modal">About</a></li>
-           </ul>
-        </div>
-        	
-     </div>	
-</div>
-
-
 
   
 {% if isOwner %}
@@ -88,18 +73,7 @@
 				
 					<div class="col-md-3 column">
 						<div class="well">
-<<<<<<< HEAD
-							<div class="modal fade" id="lightbox" tabindex="-1">
-								<div class="modal-dialog">
-									<button class="close hidden" data-dismiss="modal" type="button">×</button>
-	
-									<div class="modal-content">
-										<div class="modal-body"><img alt="" src=""></div>
-									</div>
-								</div>
-							</div>
-=======
->>>>>>> FETCH_HEAD
+							
 							<p>
 							<a href="/user/{{questdetails.questrs.displayname}}">{{questdetails.questrs.first_name}} {{questdetails.questrs.last_name}}</a><br>
 								Posted: {{questdetails.creation_date}}<br>
