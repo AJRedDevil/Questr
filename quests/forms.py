@@ -13,7 +13,7 @@ class QuestCreationForm(forms.ModelForm):
     """
     class Meta:
         model = Quests
-        exclude = ['questrs','status','creation_date','is_accepted','pretty_url','location',]
+        exclude = ['questrs','status','creation_date','is_accepted','pretty_url','location','depcity','dstcity']
         widget = {
             'title' : forms.TextInput(attrs = { 'placeholder': 'Title'}),
             'reward' : forms.TextInput(attrs = { 'placeholder': "You're offering"}),            

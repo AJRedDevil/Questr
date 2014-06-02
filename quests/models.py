@@ -22,7 +22,6 @@ class Quests(models.Model):
     # offerers = models.TextField(_('questrs')) # if posted under an offer this would be a single digit (pk of questr object of the offerer)
     # qr_code = models.URLField(_('qr_code'), blank=True)
     srcaddress = models.TextField(_('srcaddress')) # this would be a dict of address attributes 
-    location = models.TextField(_('location')) # this would be a city in Toronto
     dstaddress = models.TextField(_('dstaddress')) # this would be a dict of address attributes
     # isprivate = models.BooleanField(_('isprivate'), default=True) # if posted under an offer this would be always set to True, else would be set as False
     isaccepted = models.BooleanField(_('isaccepted'), default=False)

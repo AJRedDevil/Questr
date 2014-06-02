@@ -29,10 +29,10 @@ def createquest(request):
             quest_data = user_form.save(commit=False)
             # logging.warn(dir(user_form))
             quest_data.questrs_id=request.user.id
-            quest_data.location="Toronto"
             quest_data.creation_date=now
             quest_data.pretty_url="jumpingjack"
-            logging.warn(quest_data.reward)
+            quest_data.srcaddress=quest_data.srcaddress+','+request.POST['depcity']
+            quest_data.dstaddress=quest_data.dstaddress+','+request.POST['dstcity']
             quest_data.save()
             return redirect('home')
 
