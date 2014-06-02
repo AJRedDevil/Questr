@@ -93,31 +93,7 @@
                         
                         
                             {% if pagetype == "loggedin" %}
-                            
-                            
-                            
-                            <li class="dropdown">
-                            
-								<div id="navButton">
-								    <div class="input-group"> 
-								        <span class="input-group-btn">
-                            
-							 <a href="#" class="dropdown-toggle post" data-toggle="dropdown">
-								 Post					 
-							 </a>
-							<ul class="dropdown-menu">
-                                    <li>
-                                        <a href="/quest/new">Post a Quest</a>
-                                    </li>           
-                                    <li class="divider"> 
-                                    </li>
-                                    <li>
-                                        <a href="#">Post Availability</a>
-                                    </li>
-                                </ul>
-						</li>
-      						
-      						
+        		
                         
                         	<li class="active"><a class="nonProfile" href="/quest">Browse</a></li>
                         
@@ -127,6 +103,31 @@
                                 </a>
                             </li>
                                  
+                          
+                            <li class="dropdown">
+                            <form class="navbar-form">
+								<div id="navButton">
+								    <div class="input-group"> 
+								        
+                            
+										 <a href="#" class="dropdown-toggle post" data-toggle="dropdown">
+											 <button class="btn btn-default normal" type="button"><span class="glyphicon glyphicon-plus"></span></button>	
+										 </a>
+										<ul class="dropdown-menu">
+		                                    <li>
+		                                        <a href="/quest/new">Post a Quest</a>
+		                                    </li>           
+		                                    <li class="divider"> 
+		                                    </li>
+		                                    <li>
+		                                        <a href="#">Post Availability</a>
+		                                    </li>
+		                                </ul>
+								
+								    </div>
+								</div>  
+                            </form>                       
+							</li>
                                                 
                             <li class="dropdown">                                                                                
 							 	<form class="navbar-form navbar-right">

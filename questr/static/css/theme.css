@@ -76,6 +76,13 @@ li a:hover {
 	border: none;
 }
 
+
+.navbar-form {
+	padding: 0;
+	float: right;
+}
+
+
 .navbar-default li a, .navbar-default li a .glyphicon {
 	margin: 0;
 	padding-bottom: 0;
