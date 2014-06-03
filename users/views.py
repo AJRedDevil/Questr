@@ -146,15 +146,15 @@ def userSettings(request):
     nav_link_2_label ="settings"
     nav_link_3 = "/user/logout"
     nav_link_3_label ="logout"
+    settingstype="general"
     password = passwordExists(user)
-
     try:
         user = QuestrUserProfile.objects.get(email=request.user)
     except QuestrUserProfile.DoesNotExist:
         raise Http404
         return render(request,'404.html', locals())
 
-    if request.method == "POST" and request.POST['formtype'] == "editdetails":
+    if request.method == "POST":
         try:
             user_form = QuestrUserChangeForm(request.POST, instance=request.user)
         except QuestrUserProfile.DoesNotExist:
@@ -164,24 +164,7 @@ def userSettings(request):
             user_form.save()
             return redirect('settings')
 
-    elif request.method == "POST" and request.POST['formtype'] == "changepassword":
-        try:
-            user_form = PasswordChangeForm(request.POST, instance=request.user)
-        except QuestrUserProfile.DoesNotExist:
-            raise Http404
-            return render(request,'404.html', locals())        
-        if user_form.is_valid():
-            user_form.save()
-            return redirect('settings')
-    else:
-        try:
-            user_form = QuestrUserChangeForm(instance=request.user)
-            return render(request, "settings.html",locals())
-        except QuestrUserProfile.DoesNotExist:
-            raise Http404
-            return render(request,'404.html', locals())
-
-    return render(request, "settings.html",locals())
+    return render(request, "generalsettings.html",locals())
 
 def getAccountStatus(status_id):
     '''Get account status of user'''
@@ -255,6 +238,8 @@ def createPassword(request):
     nav_link_2_label ="settings"
     nav_link_3 = "/user/logout"
     nav_link_3_label ="logout"
+    settingstype="password"
+
     if passwordExists(request.user):
         return redirect('home')
     
@@ -263,7 +248,7 @@ def createPassword(request):
         if user_form.is_valid():
             user_form.save()
             return redirect('home')
-    return render(request, "createpassword.html", locals())
+    return render(request, "create_password.html", locals())
 
 @login_required
 def changePassword(request):
@@ -276,6 +261,7 @@ def changePassword(request):
     nav_link_2_label ="settings"
     nav_link_3 = "/user/logout"
     nav_link_3_label ="logout"
+    settingstype="password"
     ##check if the user has password, if they don't they'd be provided with a link to create one for them
     password = passwordExists(user)
     # logging.warn(user)
@@ -287,8 +273,35 @@ def changePassword(request):
         if user_form.is_valid():
             user_form.save()
             return redirect('changepassword')
-    return render(request, "changepassword.html",locals())
+    return render(request, "passwordsettings.html",locals())
 
+@login_required
+def cardSettings(request):
+    """Change's user's personal settings"""
+    pagetype="loggedin"
+    user = request.user
+    nav_link_1 = "/user/profile"
+    nav_link_1_label = "my profile"
+    nav_link_2 = "/user/settings"
+    nav_link_2_label ="settings"
+    nav_link_3 = "/user/logout"
+    nav_link_3_label ="logout"
+    settingstype="card"
+    return render(request, "cardsettings.html",locals())
+
+@login_required
+def emailSettings(request):
+    """Change's user's personal settings"""
+    pagetype="loggedin"
+    user = request.user
+    nav_link_1 = "/user/profile"
+    nav_link_1_label = "my profile"
+    nav_link_2 = "/user/settings"
+    nav_link_2_label ="settings"
+    nav_link_3 = "/user/logout"
+    nav_link_3_label ="logout"
+    settingstype="email"
+    return render(request, "emailsettings.html",locals())
 
 def saveUserInfo(request):
     """This save's additional user info post the social login is successfull"""
