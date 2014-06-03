@@ -1,0 +1,88 @@
+{% extends "settings.html" %}
+{% block tabcontent %}
+<div class="tab-pane active text-style" id="tab1">
+    <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-6">
+        <div class="well well-sm">
+          <form class="form-horizontal" action="" method="post">{% csrf_token %}
+          <fieldset>
+            <legend>Change your general settings here</legend>
+
+            <!-- FirstName -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">First Name</label>
+              <div class="col-md-8">
+                <input id="first_name" name="first_name" type="text" placeholder="" class="form-control" value={{user.first_name}}>
+              </div>
+
+              <label class="col-md-4 control-label" for="name">Last Name</label>
+              <div class="col-md-8">
+                <input id="last_name" name="last_name" type="text" placeholder="" class="form-control" value={{user.last_name}}>
+              </div>
+            </div>
+    
+            <!-- Username -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Username</label>
+              <div class="col-md-8">
+                <input id="displayname" name="displayname" type="text" placeholder="" class="form-control" value={{user.displayname}}>
+              </div>
+            </div>
+            {% if user_form.displayname.errors %}
+                {{ user_form.displayname.errors }}
+            {% endif %}
+            <!-- Email -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Email</label>
+              <div class="col-md-8">
+                <input id="email" name="email" type="text" placeholder="" class="form-control" value={{user.email}}>
+              </div>
+            </div>
+            {% if user_form.email.errors %}
+                {{ user_form.email.errors }}
+            {% endif %}            
+            <!-- Language -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Language</label>
+              <div class="col-md-8">
+                <div class="btn-group">          
+                    <select type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
+                        <option default></option>          
+                        <option value="English">English</option>
+                        <option value="French">French</option>
+                    </select>                  
+                </div> <!-- End of btn-group -->            
+              </div>    
+            </div>  <!-- End of Form group -->
+            
+            
+            <!-- Location -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">City</label>
+              <div class="col-md-8">
+                <div class="btn-group">          
+                  <select type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
+                        <option default value="default"></option>          
+                        <option value="Mississauga">Mississauga</option>
+                        <option value="Toronto">Toronto</option>
+                        <option value="Brampton">Brampton</option>
+                    </select>                
+                    </div> <!-- End of btn-group -->            
+              </div>    
+            </div>  <!-- End of Form group -->
+    
+            <!-- Form actions -->
+            <div class="form-group">
+              <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary btn-md">Save</button>
+              </div>
+            </div>
+          </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+</div>  <!-- End of tab-pane -->    
+{% endblock tabcontent %}

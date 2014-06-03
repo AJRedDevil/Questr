@@ -9,287 +9,44 @@
     <script src={% static "js/validator.js" %}></script>
 {% endblock localhead %}
 {% block content %}
+{% block nav-sidebar %}
     <div class="container">
     <div class="row clearfix">
     
-	<div class="col-md-3 col-lg-3">
-		    <nav class="nav-sidebar">
-		        <ul class="nav tabs well">
-		          <li class="active"><a href="/user/settings">Account</a></li>
-		          <li class=""><a href="/user/settings/password">Password</a></li>
-		          <li class=""><a href="#tab3" data-toggle="tab">Email Notifications</a></li> 
-		          <li class=""><a href="#tab4" data-toggle="tab">Credit Card</a></li>                               
-		        </ul>
-		    </nav>
-	    </div>
-
+  <div class="col-md-3 col-lg-3">
+        <nav class="nav-sidebar">
+            <ul class="nav tabs well">
+            {% if settingstype ==  "general" %}
+              <li class="active"><a href="/user/settings">Account</a></li>
+            {% else %}
+              <li class=""><a href="/user/settings">Account</a></li>
+            {% endif %}
+            
+            {% if settingstype == "password" %}
+              <li class="active"><a href="/user/settings/password">Password</a></li>
+            {% else %}
+              <li class=""><a href="/user/settings/password">Password</a></li>
+            {% endif %}
+            
+            {% if settingstype == "email" %}
+              <li class="active"><a href="/user/settings/email">Email Notifications</a></li>               
+            {% else %}
+              <li class=""><a href="/user/settings/email">Email Notifications</a></li> 
+            {% endif %}
+            
+            {% if settingstype == "card" %}
+              <li class="active"><a href="/user/settings/card">Credit Card</a></li>                               
+            {% else %}
+              <li class=""><a href="/user/settings/card">Credit Card</a></li>                               
+            {% endif %}
+            </ul>
+        </nav>
+      </div>  
+{% endblock nav-sidebar %}
 <!-- tab content -->
 <div class="tab-content">
-<div class="tab-pane active text-style" id="tab1">
-    <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-lg-6">
-        <div class="well well-sm">
-          <form class="form-horizontal" action="" method="post">{% csrf_token %}
-            <input type="hidden" name="formtype" value="editdetails">
-          <fieldset>
-            <legend>Change your general settings here</legend>
-
-            <!-- FirstName -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="name">First Name</label>
-              <div class="col-md-8">
-                <input id="first_name" name="first_name" type="text" placeholder="" class="form-control" value={{user.first_name}}>
-              </div>
-
-              <label class="col-md-4 control-label" for="name">Last Name</label>
-              <div class="col-md-8">
-                <input id="last_name" name="last_name" type="text" placeholder="" class="form-control" value={{user.last_name}}>
-              </div>
-            </div>
-    
-            <!-- Username -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="name">Username</label>
-              <div class="col-md-8">
-                <input id="displayname" name="displayname" type="text" placeholder="" class="form-control" value={{user.displayname}}>
-              </div>
-            </div>
-            {% if user_form.displayname.errors %}
-                {{ user_form.displayname.errors }}
-            {% endif %}
-            <!-- Email -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="name">Email</label>
-              <div class="col-md-8">
-                <input id="email" name="email" type="text" placeholder="" class="form-control" value={{user.email}}>
-              </div>
-            </div>
-            {% if user_form.email.errors %}
-                {{ user_form.email.errors }}
-            {% endif %}            
-            <!-- Language -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="name">Language</label>
-              <div class="col-md-8">
-                <div class="btn-group">          
-                	<select type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
-					  	<option default></option>          
-						<option value="English">English</option>
-						<option value="French">French</option>
-					</select>                  
-                </div> <!-- End of btn-group -->            
-              </div>    
-            </div>  <!-- End of Form group -->
-            
-            
-            <!-- Location -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="name">City</label>
-              <div class="col-md-8">
-                <div class="btn-group">          
-                  <select type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
-					  	<option default value="default"></option>          
-						<option value="Mississauga">Mississauga</option>
-						<option value="Toronto">Toronto</option>
-						<option value="Brampton">Brampton</option>
-					</select>                
-					</div> <!-- End of btn-group -->            
-              </div>    
-            </div>  <!-- End of Form group -->
-    
-            <!-- Form actions -->
-            <div class="form-group">
-              <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-primary btn-md">Save</button>
-              </div>
-            </div>
-          </fieldset>
-          </form>
-        </div>
-      </div>
-    </div>
-</div>
-</div>  <!-- End of tab-pane -->
-
-
-<div class="tab-pane text-style" id="tab2">
-    <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="well well-sm">
-         
-          {% if password %}
-            <form class="form-horizontal" data-toggle="validator" action="" method="post"> {% csrf_token %}
-              <input type="hidden" name="formtype" value="changepassword">
-            <fieldset>
-              <legend class="text-center">Change your password here</legend>
-            
-              <!-- Current Password -->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="name">Current password</label>
-                <div class="col-md-8">
-                  <input id="password" name="password" type="password" placeholder="Enter your current password here" class="form-control">
-                </div>
-              </div>
-             {% if user_form.password.errors %}
-                 {{user_form.password.errors}}
-             {% endif %}
-            
-              <!-- New Password -->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="name">New password</label>
-                <div class="col-md-8">
-                  <input id="inputPassword" name="password1" type="password" data-toggle="validator" data-minlength="6" placeholder="Enter your new password here" class="form-control" required>
-                </div>
-              </div>
-              
-              <!-- Retype New Password -->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="name"></label>
-                <div class="col-md-8">
-                  <input id="inputPasswordConfirm" name="password2" type="password" placeholder="Retype your password here" class="form-control" data-minlength="6" data-match="#inputPassword" data-match-error="Your two passwords don't match" required>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-              {% if user_form.password2.errors %}
-                  {{user_form.password2.errors}}
-              {% endif %}
-              <!-- Form actions -->
-              <div class="form-group">
-                <div class="col-md-12 text-center">
-                  <button type="submit" class="btn btn-primary btn-md">Save</button>
-                </div>
-              </div>
-            </fieldset>
-            </form>
-          {% else %}
-              You do not have a password yet. Please click <a href="/user/createpassword">here</a> to create a password !
-         
-          {% endif %}
-
-        </div>
-      </div>
-    </div>
-</div>               
-</div>  <!-- End of tab-pane -->
-
-
-<div class="tab-pane text-style" id="tab3">
-  <h2></h2>
-  <p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum 
-    iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla 
-    facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit 
-    augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,</p>
-    <hr>  
-</div>	<!-- End of tab-pane -->
-
-
-
-
-<div class="tab-pane text-style" id="tab4">
-    <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="well well-sm">
-        	
-        	<form class="form-horizontal" role="form">
-			    <fieldset>
-			      <legend>Change your credit card information here</legend>
-			      
-			    
-			      	<div class="input-group">
-				      <span class="col-sm-3">
-				      <label class="radio control-label"> <input type="radio"> <img class="visa" src="http://upload.wikimedia.org/wikipedia/en/1/16/Former_Visa_(company)_logo.svg" /></label>
-				      </span>
-				     
-				      <span class="col-sm-3">
-				      	<label class="radio control-label"> <input type="radio"> <img class="mastercard" src="http://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MasterCard_logo.png/800px-MasterCard_logo.png" /></label>
-				      </span>
-				     
-				      <span class="col-sm-3">
-				        <label class="radio control-label"> <input type="radio"> <img class="paypal" src="http://img3.wikia.nocookie.net/__cb20121110085059/logopedia/images/6/61/PayPal_logo_new.png" /></label>
-				      </span>
-				      
-				      <span class="col-sm-3"></span>
-				    </div><!-- /input-group -->
-			   
-			      
-			      <div class="form-group">
-			        <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>
-			        <div class="col-sm-9">
-			          <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name">
-			        </div>
-			      </div>
-			      
-			      <div class="form-group">
-			        <label class="col-sm-3 control-label" for="card-number">Card Number</label>
-			        <div class="col-sm-9">
-			          <input type="text" class="form-control" name="card-number" id="card-number" placeholder="Debit/Credit Card Number">
-			        </div>
-			      </div>
-			      <div class="form-group">
-			        <label class="col-sm-3 control-label" for="expiry-month">Expiration Date</label>
-			        <div class="col-sm-9">
-			          <div class="row">
-			            <div class="col-xs-3">
-			              <select class="form-control col-sm-2" name="expiry-month" id="expiry-month">
-			                <option>Month</option>
-			                <option value="01">Jan (01)</option>
-			                <option value="02">Feb (02)</option>
-			                <option value="03">Mar (03)</option>
-			                <option value="04">Apr (04)</option>
-			                <option value="05">May (05)</option>
-			                <option value="06">June (06)</option>
-			                <option value="07">July (07)</option>
-			                <option value="08">Aug (08)</option>
-			                <option value="09">Sep (09)</option>
-			                <option value="10">Oct (10)</option>
-			                <option value="11">Nov (11)</option>
-			                <option value="12">Dec (12)</option>
-			              </select>
-			            </div>
-			            <div class="col-xs-3">
-			              <select class="form-control" name="expiry-year">
-			                <option value="13">2013</option>
-			                <option value="14">2014</option>
-			                <option value="15">2015</option>
-			                <option value="16">2016</option>
-			                <option value="17">2017</option>
-			                <option value="18">2018</option>
-			                <option value="19">2019</option>
-			                <option value="20">2020</option>
-			                <option value="21">2021</option>
-			                <option value="22">2022</option>
-			                <option value="23">2023</option>
-			              </select>
-			            </div>
-			          </div>
-			        </div>
-			      </div>
-			      <div class="form-group">
-			        <label class="col-sm-3 control-label" for="cvv">Card CVV</label>
-			        <div class="col-sm-3">
-			          <input type="text" class="form-control" name="cvv" id="cvv" placeholder="Security Code">
-			        </div>
-			      </div>
-			      <div class="form-group">
-			        <div class="col-sm-offset-3 col-sm-9">
-			          <button type="button" class="btn btn-success">Pay Now</button>
-			        </div>
-			      </div>
-			    </fieldset>
-		  </form>
-        	  
-          
-        </div>
-      </div>
-    </div>
-</div>               
-</div>  <!-- End of tab-pane -->
-
-
-
+{% block tabcontent %}
+{% endblock tabcontent %}
 </div>
     </div>
     
