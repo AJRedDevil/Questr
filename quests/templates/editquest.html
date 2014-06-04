@@ -27,10 +27,6 @@
 								<img alt="itemImage" class="itemImage" src="{{questdetails.item_images}}">
 							</a>
 							
-							<center>
-								
-								<img src={% static 'img/backpack.png' %} style="width:80px; height:auto;" />
-							</center>
 	
 							<div class="modal fade" id="lightbox" tabindex="-1">
 								<div class="modal-dialog">
@@ -64,15 +60,35 @@
 									<button type="button" class="btn btn-default offerBtn">Offer</button>
 								</div>
 								<div class="col-md-4 column">
-									
+									<center>
+										<h4>Size</h4>
+										<img src={% static 'img/backpack.png' %} style="width:50px; height:auto;" />
+										<p>Backpack</p>
+									</center>
 								</div>
 							</div>
 							<textarea class="form-control" placeholder="Description">{{questdetails.description}}</textarea>
 						
-							<p>Departure Address: </p><textarea class="form-control title" placeholder="">{{questdetails.srcaddress}}</textarea>
+							<p>Departure Address:</p>
+							<div class="btn-group">
+								<select name="depcity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
+									<option value="Mississauga">Mississauga</option>
+									<option default value="Toronto">Toronto</option>
+									<option value="Brampton">Brampton</option>
+								</select>
+							</div>
+							<textarea class="form-control title" placeholder="">{{questdetails.srcaddress}}</textarea>
 						
 						
-							<p>Destination Address: </p><textarea class="form-control title" placeholder="">{{questdetails.dstaddress}}</textarea>
+							<p>Destination Address: </p>
+							<div class="btn-group">
+								<select name="depcity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
+									<option value="Mississauga">Mississauga</option>
+									<option default value="Toronto">Toronto</option>
+									<option value="Brampton">Brampton</option>
+								</select>
+							</div>
+							<textarea class="form-control title" placeholder="">{{questdetails.dstaddress}}</textarea>
 							
 						
 						</div>	<!-- ./well -->
