@@ -18,24 +18,17 @@
 
   
 {% if isOwner %}
-	  <div class="container titleContainer">
-			<div class="row clearfix">
-				<div class="col-md-10 col-md-offset-1 column titleColumn">
-					<div class="col-md-2 titleColumn">
-						<a href="edit">					
-							<button type="button" class="btn btn-default">Edit Post</button>
-						</a>
-					</div>
-				</div>
-			</div>
-	  </div>
+	
+	
 {% endif %}
   
   <div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
-				<div class="row clearfix">
+				<div class="row clearfix">				
 					
+					
+			
 					<div class="col-md-3 column">
 						<div class="well">
 							<a class="thumbnail" data-target="#lightbox" data-toggle="modal" href="#">
@@ -50,19 +43,23 @@
 										<div class="modal-body"><img alt="" src=""></div>
 									</div>
 								</div>
-							</div>
-							<p>
-							<a href="/user/{{questdetails.questrs.displayname}}">{{questdetails.questrs.first_name}} {{questdetails.questrs.last_name}}</a><br>
-								Posted: {{questdetails.creation_date}}<br>
-								Location: {{questdetails.location}}, Canada
-							</p>
+							</div>						
 						</div>
 					</div>	<!-- End of column -->
 					
 
 					<div class="col-md-6 column">
 						<div class="well">
-							<h3 class="title">{{questdetails.title}}</h3>
+							<div class="row clearfix">
+								<div class="col-md-10 column">
+									<h3 class="title">{{questdetails.title}}</h3>
+								</div>
+								<div class="col-md-2 column">								
+									<a href="edit">					
+										<button type="button" class="btn btn-default" style="float:right;">Edit Post</button>
+									</a>									
+								</div>
+							</div>	<!-- ./row -->
 							
 							<div class="row clearfix">
 								<div class="col-md-8 column inBodyWell">
@@ -79,8 +76,9 @@
 							<p>Departure Address: {{questdetails.srcaddress}}</p>
 							<p>Destination Address: {{questdetails.dstaddress}}</p>
 						
-						</div>
+						</div>	<!-- ./well -->
 					</div>	<!-- End of column -->
+				
 				
 				
 					<div class="col-md-3 column">
