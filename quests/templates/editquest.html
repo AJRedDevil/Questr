@@ -15,106 +15,156 @@
 {% block content %}
 
 <div class="container">
-		<div class="row clearfix">
-			<div class="col-md-12 column">
-				<div class="row clearfix">				
-					
-					
-			
-					<div class="col-md-3 column">
-						<div class="well">
-							<a class="thumbnail" data-target="#lightbox" data-toggle="modal" href="#">
-								<img alt="itemImage" class="itemImage" src="{{questdetails.item_images}}">
-							</a>
-							
-	
-							<div class="modal fade" id="lightbox" tabindex="-1">
-								<div class="modal-dialog">
-									<button class="close hidden" data-dismiss="modal" type="button">×</button>
-	
-									<div class="modal-content">
-										<div class="modal-body"><img alt="" src=""></div>
-									</div>
-								</div>
-							</div>	<!-- ./lightbox -->						
-						</div>	<!-- ./well -->
-					</div>	<!-- End of column -->
-					
+  <div class="row">
+      <div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
+        <div class="well well-sm">
+          <form class="form-horizontal" action="" method="post">{% csrf_token %}
+          <fieldset>
+            <legend class="text-center">Edit your quest here</legend>
+    
+            <!-- Name input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Title</label>
+              <div class="col-md-8">
+                <textarea class="form-control" placeholder="Title"> {{questdetails.title}} </textarea>
+              </div>
+            </div>
+            
+          
+    
+    
+            <!-- Offer input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">You're offering</label>
+              <div class="col-md-8">
+                <textarea class="form-control" placeholder="Offer">{{questdetails.reward}}</textarea>
+              </div>
+            </div>
+          
+ 
+            <!-- Location input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label">Departure Location</label>
+              <div class="col-md-8">        
+      
+      
+	              <div class="btn-group">
+					  <select name="depcity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
+						<option value="Mississauga">Mississauga</option>
+						<option default value="Toronto">Toronto</option>
+						<option value="Brampton">Brampton</option>
+					</select>
+				  </div> 
+              </div>  
+            </div>  <!-- End of Form group -->
+                    
+                    
+            <!-- Departure Address input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name"></label>
+              <div class="col-md-8">
+                <textarea class="form-control title" placeholder="">{{questdetails.srcaddress}}</textarea>
+              </div>
+            </div>
+                    
+                    
+            <!-- Location input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label">Destination Location</label>
+              <div class="col-md-8">          
+      
+        <div class="btn-group">      
+        	<select name="dstcity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
+						<option value="Mississauga">Mississauga</option>
+						<option default value="Toronto">Toronto</option>
+						<option value="Brampton">Brampton</option>
+					</select>
+              </div>  
+              </div>
+            </div>  <!-- End of Form group -->                          
+         
+            <!-- Destination Address input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name"></label>
+              <div class="col-md-8">
+                <textarea class="form-control title" placeholder="">{{questdetails.dstaddress}}</textarea>
+              </div>
+            </div>
+                        
+             <!-- Message body -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="message">Package Size</label>
+              <div class="col-md-8">
+              	 <div class="input-group col-md-12">	
+              	 	<div class="col-md-4 column">
+              	 		<center>
+              	 			<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />       	 	
+              	 			<p>Backpack</p>
+              	 			<input type="radio" name="size" value="backpack"> 
+              	 		</center>	
+              	 	</div>   
+              	 	<div class="col-md-4 column">
+	              		<center>
+	              			<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />
+	              			<p>Car</p>
+	              			<input type="radio" name="size" value="car">
+	              		</center>	
+              	 	</div>
+              	 	<div class="col-md-4 column">
+	              		<center>
+	              			<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />
+	              			<p>Van</p>
+	              			<input type="radio" name="size" value="van">
+	              			</center> 	
+              	 	</div>
+			     </div><!-- /input-group -->
+			  </div>
+			 </div>
+            
+            <!-- Message body -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="message">Your message</label>
+              <div class="col-md-8">
+                <textarea class="form-control" placeholder="Description">{{questdetails.description}}</textarea>
+              </div>
+            </div>
+            
+          
+               <!-- Image Uploader -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="message">Your message</label>
+              <div class="col-md-8">
+              	<img style="width:260px; height:auto;" src="http://images.puella-magi.net/thumb/2/27/No_Image_Wide.svg/800px-No_Image_Wide.svg.png?20110202071158">
+              
+                <form class="navbar-form navbar-right">
+					<span class="form-group">			        
+			            <div class="input-group">
+			                <input type="text" class="form-control" name="item_images" placeholder="Image Url" />
+			                <span class="input-group-btn">
+			                	<button class="btn btn-danger" type="button">
+			                    	Upload   
+			                    </button>
+			                </span>
+			            </div>
+					</span>                           
+			    </form>
+		    </div>
+		    </div>
+            
+            <!-- Form actions -->
+            <div class="form-group">
+              <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary btn-md">Save</button>
+              </div>
+            </div>
+          </fieldset>
+          </form>
+        </div>
+      </div>
+  </div>
+</div>
 
-					<div class="col-md-6 column">
-						<div class="well">
-							<div class="row clearfix">
-								<div class="col-md-10 column">
-									<textarea class="form-control" placeholder="Title"> {{questdetails.title}} </textarea>
-								</div>
-								<div class="col-md-2 column">								
-									<a href="edit">					
-										<button type="button" class="btn btn-default" style="float:right;">Save</button>
-									</a>									
-								</div>
-							</div>	<!-- ./row -->
-							
-							<div class="row clearfix">
-								<div class="col-md-8 column inBodyWell">
-									<p>Offer: </p><textarea class="form-control" placeholder="Offer">${{questdetails.reward}}</textarea>
-									<button type="button" class="btn btn-default offerBtn">Offer</button>
-								</div>
-								<div class="col-md-4 column">
-									<center>
-										<h4>Size</h4>
-										<img src={% static 'img/backpack.png' %} style="width:50px; height:auto;" />
-										<p>Backpack</p>
-									</center>
-								</div>
-							</div>
-							<textarea class="form-control" placeholder="Description">{{questdetails.description}}</textarea>
-						
-							<p>Departure Address:</p>
-							<div class="btn-group">
-								<select name="depcity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
-									<option value="Mississauga">Mississauga</option>
-									<option default value="Toronto">Toronto</option>
-									<option value="Brampton">Brampton</option>
-								</select>
-							</div>
-							<textarea class="form-control title" placeholder="">{{questdetails.srcaddress}}</textarea>
-						
-						
-							<p>Destination Address: </p>
-							<div class="btn-group">
-								<select name="depcity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
-									<option value="Mississauga">Mississauga</option>
-									<option default value="Toronto">Toronto</option>
-									<option value="Brampton">Brampton</option>
-								</select>
-							</div>
-							<textarea class="form-control title" placeholder="">{{questdetails.dstaddress}}</textarea>
-							
-						
-						</div>	<!-- ./well -->
-					</div>	<!-- End of column -->
-				
-				
-				
-					<div class="col-md-3 column">
-						<div class="well">
-							
-							<p>
-								<a href="/user/{{questdetails.questrs.displayname}}">{{questdetails.questrs.first_name}} {{questdetails.questrs.last_name}}</a>
-							</p>
-							<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
-							<p>
-								Posted: {{questdetails.creation_date}}<br>
-								Location: {{questdetails.location}}, Canada
-							</p>
-						</div>
-					</div>	<!-- End of column -->
-					
-				</div>
-			</div>
-		</div>
-	</div>
-  
+
 {% endblock content %}
 {% block scripts %}    
 {% endblock scripts %}
