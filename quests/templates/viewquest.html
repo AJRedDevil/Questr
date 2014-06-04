@@ -4,10 +4,12 @@
     <!-- Custom CSS -->
     <link href={% static "css/theme.css" %} rel="stylesheet">
     <link href={% static "css/quest.css" %} rel="stylesheet">
+    <link href={% static "css/star-rating.css" %} media="all" rel="stylesheet" type="text/css"/>
     
     <!-- Custom Javascript -->
     <script src={% static "js/validator.js" %}></script>  
-    <script src={% static "js/lightbox.js" %}></script> 
+    <script src={% static "js/lightbox.js" %}></script>
+    <script src={% static "js/star-rating.js" %} type="text/javascript"></script> 
     
     
     
@@ -62,9 +64,16 @@
 						<div class="well">
 							<h3 class="title">{{questdetails.title}}</h3>
 							
-							<div class="col-md-10 column inBody">
-								<p>Offer: ${{questdetails.reward}}</p>
-							</div>							
+							<div class="row clearfix">
+								<div class="col-md-8 column inBodyWell">
+									<p>Offer: ${{questdetails.reward}}</p>
+									<button type="button" class="btn btn-default offerBtn">Offer</button>
+								</div>
+								<div class="col-md-4 column">
+									
+								</div>
+							</div>
+														
 							<p>{{questdetails.description}}</p>
 							
 							<p>Departure Address: {{questdetails.srcaddress}}</p>
@@ -78,7 +87,10 @@
 						<div class="well">
 							
 							<p>
-							<a href="/user/{{questdetails.questrs.displayname}}">{{questdetails.questrs.first_name}} {{questdetails.questrs.last_name}}</a><br>
+								<a href="/user/{{questdetails.questrs.displayname}}">{{questdetails.questrs.first_name}} {{questdetails.questrs.last_name}}</a>
+							</p>
+							<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
+							<p>
 								Posted: {{questdetails.creation_date}}<br>
 								Location: {{questdetails.location}}, Canada
 							</p>
@@ -91,5 +103,10 @@
 	</div>
   
 {% endblock content %}
-{% block scripts %}    
+{% block scripts %} 
+<script>	  
+	  jQuery(document).ready(function () {
+        $(".rating-kv").rating();
+    });
+</script>   
 {% endblock scripts %}
