@@ -58,7 +58,7 @@ import mailchimp
 
 INSTALLED_APPS = (
     # 'django.contrib.admin',
-    'django.contrib.auth',
+    # 'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
@@ -70,6 +70,7 @@ INSTALLED_APPS = (
     'users',
     'djrill',
     'quests',
+    'south',
 )
 
 MIDDLEWARE_CLASSES = (
