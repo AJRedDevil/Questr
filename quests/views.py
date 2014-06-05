@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 
-from .forms import QuestCreationForm
+from .forms import QuestCreationForm, QuestChangeForm
 from .models import Quests
 
 import logging
@@ -96,6 +96,17 @@ def editquest(request, questname):
     except Quests.DoesNotExist:
         raise Http404
         return render(request,'404.html')
+
+    if request.method=="POST":
+        if questdetails.questrs.id == request.user.id:
+            instance=get_object_or_404(Quests, id=questname)
+            user_form = QuestChangeForm(data=request.POST, instance=instance)
+            # logging.warn(user_form.errors)
+            # logging.warn(user_form.is_valid())
+            if user_form.is_valid():
+                quest_data = user_form.save(commit=False)
+                quest_data.save()
+                return redirect('home')
 
     # Check if the owner and the user are the same
     if questdetails.questrs.id == request.user.id:

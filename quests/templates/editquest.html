@@ -26,7 +26,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="name">Title</label>
               <div class="col-md-8">
-                <textarea class="form-control" placeholder="Title"> {{questdetails.title}} </textarea>
+                <input id="title" name="title" type="text" class="form-control" value="{{questdetails.title}}"></input>
               </div>
             </div>
             
@@ -37,7 +37,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="name">You're offering</label>
               <div class="col-md-8">
-                <textarea class="form-control" placeholder="Offer">{{questdetails.reward}}</textarea>
+                <input id="reward" name="reward" type="text" class="form-control" value="{{questdetails.reward}}">
               </div>
             </div>
           
@@ -49,10 +49,17 @@
       
       
 	              <div class="btn-group">
-					  <select name="depcity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
-						<option value="Mississauga">Mississauga</option>
-						<option default value="Toronto">Toronto</option>
-						<option value="Brampton">Brampton</option>
+					  <select name="srccity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
+            {% if questdetails.srccity %}
+              <option default value="{{questdetails.srccity}}">{{questdetails.srccity}}</option>
+              <option value="Toronto">Toronto</option> 
+              <option value="Mississauga">Mississauga</option>
+              <option value="Brampton">Brampton</option>
+            {% else %}
+              <option default value="Toronto">Toronto</option> 
+              <option value="Mississauga">Mississauga</option>
+              <option value="Brampton">Brampton</option>       
+            {% endif %}
 					</select>
 				  </div> 
               </div>  
@@ -63,7 +70,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="name"></label>
               <div class="col-md-8">
-                <textarea class="form-control title" placeholder="">{{questdetails.srcaddress}}</textarea>
+                <input id="srcaddress" name="srcaddress" type="text" class="form-control" value="{{questdetails.srcaddress}}">
               </div>
             </div>
                     
@@ -75,9 +82,17 @@
       
         <div class="btn-group">      
         	<select name="dstcity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
-						<option value="Mississauga">Mississauga</option>
-						<option default value="Toronto">Toronto</option>
-						<option value="Brampton">Brampton</option>
+            {% if questdetails.dstcity %}
+              <option default value="{{questdetails.dstcity}}">{{questdetails.dstcity}}</option>
+              <option value="Toronto">Toronto</option> 
+              <option value="Mississauga">Mississauga</option>
+              <option value="Brampton">Brampton</option>
+            {% else %}
+              <option default value="Toronto">Toronto</option> 
+              <option value="Mississauga">Mississauga</option>
+              <option value="Brampton">Brampton</option>       
+            {% endif %}
+
 					</select>
               </div>  
               </div>
@@ -87,7 +102,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="name"></label>
               <div class="col-md-8">
-                <textarea class="form-control title" placeholder="">{{questdetails.dstaddress}}</textarea>
+                <input id="dstaddress" name="dstaddress" type="text" class="form-control" value="{{questdetails.dstaddress}}">
               </div>
             </div>
                         
@@ -125,16 +140,16 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="message">Your message</label>
               <div class="col-md-8">
-                <textarea class="form-control" placeholder="Description">{{questdetails.description}}</textarea>
+                <textarea class="form-control" id="description" name="description" rows="5">{{questdetails.description}}</textarea>
               </div>
             </div>
             
           
                <!-- Image Uploader -->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="message">Your message</label>
+              <label class="col-md-4 control-label" for="message">Image of the item</label>
               <div class="col-md-8">
-              	<img style="width:260px; height:auto;" src="http://images.puella-magi.net/thumb/2/27/No_Image_Wide.svg/800px-No_Image_Wide.svg.png?20110202071158">
+              	<img style="width:260px; height:auto;" src="{{questdetails.item_images}}">
               
                 <form class="navbar-form navbar-right">
 					<span class="form-group">			        
