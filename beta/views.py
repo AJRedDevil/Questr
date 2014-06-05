@@ -11,7 +11,7 @@ import logging as log
 from libs import mailchimp_handler, validations
 
 def index(request):
-	messageResponse = "World's first<br>peer-to-peer courier.<br>Coming soon."
+	messageResponse = "Canada's first<br>peer-to-peer courier.<br>Coming soon."
 	return render(request, 'beta/index.html', locals())
 
 # def thankyou(request):
