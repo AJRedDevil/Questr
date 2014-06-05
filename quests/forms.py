@@ -13,13 +13,15 @@ class QuestCreationForm(forms.ModelForm):
     """
     class Meta:
         model = Quests
-        exclude = ['questrs','status','creation_date','is_accepted','pretty_url','location','depcity','dstcity']
+        exclude = ['questrs','status','creation_date','is_accepted','item_images']
         widget = {
             'title' : forms.TextInput(attrs = { 'placeholder': 'Title'}),
             'reward' : forms.TextInput(attrs = { 'placeholder': "You're offering"}),            
             'location' : forms.TextInput(attrs = { 'placeholder': "Location"}),
             'srcaddress' : forms.TextInput(attrs = { 'placeholder': "Departure Address"}),
             'dstaddress' : forms.TextInput(attrs = { 'placeholder': "Destination Address"}),
+            'srccity' : forms.TextInput(attrs = { 'placeholder': "Departure City"}),
+            'dstcity' : forms.TextInput(attrs = { 'placeholder': "Destination City"}),
             'description' : forms.TextInput(attrs = { 'placeholder': "Description"}),
             'item_images' : forms.TextInput(attrs = { 'placeholder': "Image"}),
         }

@@ -23,16 +23,12 @@ def createquest(request):
     if request.method=="POST":
         now = timezone.now()
         user_form = QuestCreationForm(data=request.POST)
-        # logging.warn(user_form.errors)
-        # logging.warn(user_form.is_valid())
+        logging.warn(user_form.errors)
+        logging.warn(user_form.is_valid())
         if user_form.is_valid():
             quest_data = user_form.save(commit=False)
-            # logging.warn(dir(user_form))
             quest_data.questrs_id=request.user.id
             quest_data.creation_date=now
-            quest_data.pretty_url="jumpingjack"
-            quest_data.srcaddress=quest_data.srcaddress+','+request.POST['depcity']
-            quest_data.dstaddress=quest_data.dstaddress+','+request.POST['dstcity']
             quest_data.save()
             return redirect('home')
 

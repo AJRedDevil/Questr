@@ -7,8 +7,8 @@ from users.models import *
 
 class Quests(models.Model):
     questrs = models.ForeignKey(QuestrUserProfile)
-    pretty_url = models.CharField(_('pretty_url'), 
-        max_length=1000)
+    # pretty_url = models.CharField(_('pretty_url'), 
+    #     max_length=1000, blank=True)
     description = models.TextField(_('description'))
     title = models.CharField(_('title'), max_length=100, 
         blank=False)
@@ -21,6 +21,8 @@ class Quests(models.Model):
     # rating = models.IntegerField(_('rating'), default='0')
     # offerers = models.TextField(_('questrs')) # if posted under an offer this would be a single digit (pk of questr object of the offerer)
     # qr_code = models.URLField(_('qr_code'), blank=True)
+    srccity = models.TextField(_('srccity'), default="Toronto") # this is the source city
+    dstcity = models.TextField(_('dstcity'), default="Toronto") # this is the destination city
     srcaddress = models.TextField(_('srcaddress')) # this would be a dict of address attributes     
     srcaddress = models.TextField(_('srcaddress')) # this would be a dict of address attributes 
     dstaddress = models.TextField(_('dstaddress')) # this would be a dict of address attributes
