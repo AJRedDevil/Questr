@@ -229,6 +229,10 @@ li a:hover {
 	margin:0;
 	padding:0;
 	text-align: center;
+	
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-top-color: #f8f8f8;
 }
 
 .secondaryNavRow ul li {
