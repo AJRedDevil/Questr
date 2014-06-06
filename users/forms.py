@@ -2,6 +2,8 @@
 from collections import OrderedDict
 
 from django import forms
+from django.conf import settings
+
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import authenticate, get_user_model
 from django.utils.translation import ugettext_lazy as _
@@ -58,6 +60,7 @@ class QuestrUserCreationForm(forms.ModelForm):
         widget=forms.PasswordInput,
         help_text=_("Enter the same password as above, for verification."))
 
+
     class Meta:
         model = QuestrUserProfile
         fields = ['first_name','last_name','displayname','email',]
@@ -96,6 +99,7 @@ class QuestrUserCreationForm(forms.ModelForm):
     def save(self, commit=True):
         user = super(QuestrUserCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
+        user.avatar_file_name=settings.STATIC_URL+'img/default.png'
         if commit:
             user.save()
         return user

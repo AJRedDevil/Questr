@@ -54,11 +54,13 @@
 								<div class="col-md-10 column">
 									<h3 class="title">{{questdetails.title}}</h3>
 								</div>
-								<div class="col-md-2 column">								
-									<a href="edit">					
-										<button type="button" class="btn btn-default" style="float:right;">Edit Post</button>
-									</a>									
-								</div>
+								{% if isOwner %}
+									<div class="col-md-2 column">								
+										<a href="edit">					
+											<button type="button" class="btn btn-default" style="float:right;">Edit Post</button>
+										</a>									
+									</div>
+								{% endif %}
 							</div>	<!-- ./row -->
 							
 							<div class="row clearfix">
