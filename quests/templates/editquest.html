@@ -52,14 +52,11 @@
 					  <select name="srccity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
             {% if questdetails.srccity %}
               <option default value="{{questdetails.srccity}}">{{questdetails.srccity}}</option>
+              <option value="-----------">-----------</option>
+            {% endif %}
               <option value="Toronto">Toronto</option> 
               <option value="Mississauga">Mississauga</option>
-              <option value="Brampton">Brampton</option>
-            {% else %}
-              <option default value="Toronto">Toronto</option> 
-              <option value="Mississauga">Mississauga</option>
               <option value="Brampton">Brampton</option>       
-            {% endif %}
 					</select>
 				  </div> 
               </div>  
@@ -84,15 +81,11 @@
         	<select name="dstcity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
             {% if questdetails.dstcity %}
               <option default value="{{questdetails.dstcity}}">{{questdetails.dstcity}}</option>
+              <option value="-----------">-----------</option>
+            {% endif %}
               <option value="Toronto">Toronto</option> 
               <option value="Mississauga">Mississauga</option>
-              <option value="Brampton">Brampton</option>
-            {% else %}
-              <option default value="Toronto">Toronto</option> 
-              <option value="Mississauga">Mississauga</option>
               <option value="Brampton">Brampton</option>       
-            {% endif %}
-
 					</select>
               </div>  
               </div>
@@ -111,25 +104,37 @@
               <label class="col-md-4 control-label" for="message">Package Size</label>
               <div class="col-md-8">
               	 <div class="input-group col-md-12">	
-              	 	<div class="col-md-4 column">
-              	 		<center>
-              	 			<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />       	 	
-              	 			<p>Backpack</p>
-              	 			<input type="radio" name="size" value="backpack"> 
-              	 		</center>	
-              	 	</div>   
+                  <div class="col-md-4 column">
+                    <center>
+                      <img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />          
+                      <p>Backpack</p>
+                      {% if questdetails.size == "backpack" %}
+                      <input type="radio" name="size" value="backpack" checked="checked">                         
+                      {% else %}
+                      <input type="radio" name="size" value="backpack"> 
+                      {% endif %}
+                    </center> 
+                  </div>     
               	 	<div class="col-md-4 column">
 	              		<center>
 	              			<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />
 	              			<p>Car</p>
-	              			<input type="radio" name="size" value="car">
+                      {% if questdetails.size == "car" %}
+                      <input type="radio" name="size" value="car" checked="checked">                         
+                      {% else %}
+                      <input type="radio" name="size" value="car">
+                      {% endif %}
 	              		</center>	
               	 	</div>
               	 	<div class="col-md-4 column">
 	              		<center>
 	              			<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />
 	              			<p>Van</p>
-	              			<input type="radio" name="size" value="van">
+                      {% if questdetails.size == "van" %}
+                      <input type="radio" name="size" value="van" checked="checked">                         
+                      {% else %}
+                      <input type="radio" name="size" value="van">
+                      {% endif %}
 	              			</center> 	
               	 	</div>
 			     </div><!-- /input-group -->
@@ -154,7 +159,7 @@
                 <form class="navbar-form navbar-right">
 					<span class="form-group">			        
 			            <div class="input-group">
-			                <input type="text" class="form-control" name="item_images" placeholder="Image Url" />
+			                <input type="text" class="form-control" name="item_images" value="{{questdetails.item_images}}" />
 			                <span class="input-group-btn">
 			                	<button class="btn btn-danger" type="button">
 			                    	Upload   

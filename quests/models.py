@@ -18,6 +18,7 @@ class Quests(models.Model):
     status = models.IntegerField(_('status'), default='0')
     creation_date = models.DateField(_('creation_date'), 
         blank=False)
+    size = models.TextField(_('size'), default="backpack")
     # rating = models.IntegerField(_('rating'), default='0')
     # offerers = models.TextField(_('questrs')) # if posted under an offer this would be a single digit (pk of questr object of the offerer)
     # qr_code = models.URLField(_('qr_code'), blank=True)
