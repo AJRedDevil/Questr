@@ -90,16 +90,43 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6 col-sm-offset-3 text-center">
-        <h1>This user's profile information goes here</h1>
-        <h1>Email and phone number</h1>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="container">
+	<div class="row">
+		<div id="myModal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content col-md-6 col-md-offset-3 column">
+	            <div class="well profile">
+             
+              <div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
+                    
+            <center>
+	            <h3>{{user.first_name}} {{user.last_name}}</h3>  
+	                        
+				
+				 <input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
+				
+			</center>
+            
+            		<p><strong>Location: </strong> Toronto, Ontario, Canada </p>
+             		<p><strong>Telephone #: </strong> Phone number goes here </p>
+                    <p><strong>Quests Completed: </strong> {{quests_complete}} </p>
+                    <p><strong>Quests Posted: </strong> {{questes_posted}} </p>  
+                    <p><strong>Trust Rank: </strong> {{ranking}}%</p>                           
+         </div>	<!-- End of Profile -->
+            	
+                
+                
+                <div class="modal-footer">
+                    <div class="btn-group">
+                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+ 
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dalog -->
+</div><!-- /.modal -->
+	</div>
+</div><!-- ./container -->
 {% endblock content %}    
 {% block scripts %}    
 
