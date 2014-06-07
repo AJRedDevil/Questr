@@ -18,10 +18,10 @@
             <div class="tabbable" id="tabs-84205">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#panel-535112" data-toggle="tab">Offers</a>
+                        <a href="#panel-535112" data-toggle="tab">My Offers</a>
                     </li>
                     <li>
-                        <a href="#panel-670038" data-toggle="tab">Messages</a>
+                        <a href="#panel-670038">My Posts</a>
                     </li>                   
                 </ul>
                 
@@ -40,11 +40,14 @@
                                 </p>
                             </div>
                             <div class="col-md-4">
-                                <p>
+                               
                                     <span class="money">$10</span>
                                     <span class="postDate">
-                                        <button type="button" class="btn btn-default accept">Accept</button>
-                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Contact</button>
+                                    	<button type="button" class="btn btn-default contact" data-toggle="modal" data-target="#myModal">Contact</button>
+                                    	<form action="http://google.com">
+										    <input value="Accept" type="button" class="btn btn-default accept" rel="tooltip" title="We'll notify the user that you're ready to deliver!">
+										</form>                                                                   	
+                                        
                                     </span>
                                 </p>
                             </div>
@@ -98,5 +101,22 @@
   </div>
 </div>
 {% endblock content %}    
-{% block scripts %}     
+{% block scripts %}    
+
+<script>
+	$( document ).ready(function() {
+    $("[rel='tooltip']").tooltip();    
+ 
+    $('.thumbnail').hover(
+        function(){
+            $(this).find('.caption').slideDown(250); //.fadeIn(250)
+        },
+        function(){
+            $(this).find('.caption').slideUp(250); //.fadeOut(205)
+        }
+    ); 
+});
+</script>
+
+ 
 {% endblock scripts %}  

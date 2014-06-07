@@ -7,3 +7,13 @@ body.modal-open #wrap{
 }
   
 .modal-backdrop {background: #f7f7f7;}
+
+form {
+	padding: 0;
+	display: inline;
+	float: right;
+}
+
+.contact {
+	float: right;
+}
