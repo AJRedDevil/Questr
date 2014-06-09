@@ -45,7 +45,7 @@
                                     <span class="postDate">
                                     	<button type="button" class="btn btn-default contact" data-toggle="modal" data-target="#myModal">Contact</button>
                                     	<form action="http://google.com">
-										    <input value="Accept" type="button" class="btn btn-default accept" rel="tooltip" title="We'll notify the user that you're ready to deliver!">
+										    <input onclick="change()" value="Accept" type="button" class="btn btn-default" id="acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!"></input>
 										</form>                                                                   	
                                         
                                     </span>
@@ -143,6 +143,17 @@
         }
     ); 
 });
+</script>
+
+<script>
+	function change()
+	{
+		var elem = document.getElementById("acceptBtn");
+		
+		elem.value = "Review";
+		elem.title = "Leave a review to tell others how it went!";
+		elem.src = "#";
+	}	
 </script>
 
  
