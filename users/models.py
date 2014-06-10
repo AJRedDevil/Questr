@@ -44,8 +44,9 @@ class QuestrUserProfile(AbstractBaseUser):
     avatar_file_name = models.ImageField(max_length=9999, upload_to='ppsize')
     biography = models.TextField(_('biography'),max_length=9999, blank=True)
     account_status = models.IntegerField(_('account_status'), max_length=1, blank=True, default=1)
-    privacy = models.BooleanField(default=False)
-    gender = models.CharField(max_length=1)
+    privacy = models.BooleanField(_('privacy'), default=False)
+    gender = models.CharField(_('gender'), max_length=1)
+    notifications = models.BooleanField(_('notifications'), default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name','displayname']

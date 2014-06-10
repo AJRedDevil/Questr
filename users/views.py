@@ -174,6 +174,11 @@ def userSettings(request):
 
     return render(request, "generalsettings.html",locals())
 
+def getUsersWitNotificationEnabled():
+    """List all the quests by a particular user"""
+    usersWitNotificationEnabled = QuestrUserProfile.objects.filter(notifications='t')
+    return usersWitNotificationEnabled
+
 def getAccountStatus(status_id):
     '''Get account status of user'''
     status_list = ["Normal","Starred","Warned","Suspended","Closed"]

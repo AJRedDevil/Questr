@@ -29,9 +29,10 @@ class Quests(models.Model):
     dstaddress = models.TextField(_('dstaddress')) # this would be a dict of address attributes
     # isprivate = models.BooleanField(_('isprivate'), default=True) # if posted under an offer this would be always set to True, else would be set as False
     isaccepted = models.BooleanField(_('isaccepted'), default=False)
+    isnotified = models.BooleanField(_('notified'), default=False)
 
     def __unicode__(self):
-        return self.pretty_url 
+        return str(self.id )
 
 
 class QuestComments(models.Model):
