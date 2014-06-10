@@ -200,6 +200,15 @@
         </div><!-- End of main navbar -->
         <!-- Secondary navbar:  holds search, Quests, and Questrs -->
 
+{% if message %}
+    <!-- Secondary navbar:  to display message notifications -->
+    <div class="row clearfix secondaryNavRow">
+        <div class="col-md-12 column">
+            {{message}}
+        </div>
+    </div><!-- End of Secondary navbar -->
+{% endif %}
+
 {% if secondnav == "listquestsecondnav" %}
         <!-- Secondary navbar:  holds search, Quests, and Questrs -->
         <div class="row clearfix secondaryNavRow">

@@ -76,7 +76,7 @@
                               </div>
                            
                           <div class="form-group">
-                            <label for="exampleInputPassword1">Password <a href="/sessions/forgot_password">(forgot password)</a></label>
+                            <label for="exampleInputPassword1">Password <a href="{% url 'reset_password' %}">(forgot password)</a></label>
                             <input type="password" class="form-control" name="password" style="border-radius:0px" id="exampleInputPassword1" placeholder="Password">
                             {% if auth_form.password.errors %}
                                 {{ auth_form.password.errors }}
