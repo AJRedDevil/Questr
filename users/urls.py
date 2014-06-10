@@ -3,8 +3,8 @@ from django.conf.urls import patterns, include, url
 import views as userviews
 
 urlpatterns = patterns('',
+    url(r'^forgotpassword/$', userviews.resetpassword, name='reset_password'),
     url(r'', include('social.apps.django_app.urls', namespace='social')),
-    url(r'^$', userviews.login, name='user'),
     url(r'^signup/$', userviews.signup, name='signup'),
     url(r'^login/$', userviews.login, name='login'),
     url(r'^home/$', userviews.home, name='home'),
@@ -19,4 +19,6 @@ urlpatterns = patterns('',
     url(r'^(?P<displayname>[-_\w/.]+)/$', userviews.getUserInfo, name='getUserInfo'),
     url(r'^verifymail$', userviews.resend_verification_email, name='verify_Email'),
     url(r'^email/confirm/(?P<user_code>[\w\d]+)', userviews.verify_email),
+    url(r'^$', userviews.login, name='user'),
+
 )

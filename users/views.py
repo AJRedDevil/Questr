@@ -12,7 +12,7 @@ from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuth
 import logging
 
 from access.requires import verified, is_alive
-from contrib import mailing
+from contrib import mailing, user_handler
 
 from quests.views import listfeaturedquests, getQuestsByUser
 
@@ -75,7 +75,15 @@ def __get_verification_url(user=None):
     """
     verf_link = ""
     if user:
-        transcational = UserTransactional(id=user.id, email=user.email)
+        try:
+            prev_transactional = UserTransactional.objects.get(email = user.email, status = False)
+            if prev_transactional:
+                prev_transactional.status = True
+                prev_transactional.save()
+        except UserTransactional.DoesNotExist:
+            pass
+        count = UserTransactional.objects.count()
+        transcational = UserTransactional(id=count+1,email=user.email)
         transcational.save()
         token_id = transcational.get_token_id()
         questr_token = QuestrToken(token_id=token_id)
@@ -327,17 +335,42 @@ def verify_email(request, user_code):
     if user_code:
         try:
             transcational = UserTransactional.objects.get(user_code__regex=r'^%s' % user_code)
-            if transcational and not transcational.status:
-                try:
-                    user = QuestrUserProfile.objects.get(id=transcational.id)
-                    if user:
-                        user.email_status = True
-                        user.save()
-                        transcational.status = True
-                        transcational.save()
-                except User.DoesNotExist:
-                    return redirect('home')
+            if transcational:
+                if transcational.status:
+                    try:
+                        user = QuestrUserProfile.objects.get(id=transcational.id)
+                        if user:
+                            user.email_status = True
+                            user.save()
+                            transcational.status = True
+                            transcational.save()
+                    except QuestrUserProfile.DoesNotExist:
+                        logging.debug('User does not exist')
+                        return redirect('home')
+                else:
+                    message = "Please use the latest verification email sent."
+                    return redirect('home', locals())
         except UserTransactional.DoesNotExist:
             return redirect('home')
     return redirect('home')
 
+def resetpassword(request):
+    """
+    Mail new random password to the user.
+    """
+    if request.method=="POST":
+        user_email = request.POST['email']
+        try:
+            user = QuestrUserProfile.objects.get(email = user_email)
+        except Exception, e:
+            message ="Bruh, a user with that email doesnt exist!"
+            return render(request, "resetpassword.html", locals())
+        if user:
+            new_random_password = user_handler.get_random_password()
+            user.set_password(new_random_password)
+            user.save()
+            mailing.send_reset_password_email(user, new_random_password)
+            message = "Please check your inbox for your new password"
+            return render(request, "homepage.html", locals())
+
+    return render(request,"resetpassword.html", locals())
