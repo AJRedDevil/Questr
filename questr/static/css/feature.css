@@ -1,7 +1,6 @@
 
  a {white-space: nowrap;}
  
- 
 img {
 	max-width: 100%;
 	border-top-left-radius: 2px; 
@@ -28,7 +27,6 @@ img {
 	/* code for ellipsis */
 	 overflow: hidden;
 	height: 80px;
-	line-height: 25px;
 	text-overflow: ellipsis;
 	width: auto;
 	/* end */ 	
@@ -51,7 +49,6 @@ img {
 	margin-left: 65px;
 	margin-right: 65px;
 }
-
 
 #pages {
     display: none;

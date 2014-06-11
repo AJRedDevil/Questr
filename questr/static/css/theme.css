@@ -6,8 +6,9 @@ html {
 }
  
 body {
-	font-family: Arial, sans-serif;
-	font-size: 16px;
+	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: 70;
+
 	background: #fafafa;
 	overflow-x: hidden;
  }
@@ -26,9 +27,9 @@ footer {
 	 list-style-type: none;
  }
  
-h1, h2, h3, h4, h5, h6 {
-	font-weight: normal;
-	font-family: 'TeXGyreCursorRegular', Arial, sans-serif;
+h1, h2, h3, h4, h5, h6, p {
+	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: 70;
 	letter-spacing: 0;
  }
 
@@ -354,6 +355,17 @@ imageUploader {
     width: 10px;
 }
 
+/************* Input Boxes *****************/
+input.form-control {
+	border-radius: 1px; /* CSS3 */
+	-moz-border-radius: 1px; /* Firefox */
+	-webkit-border-radius: 1px; /* Safari, Chrome */
+	-khtml-border-radius: 1px; /* KHTML */
+	
+	background: white;
+	border-color: #e7e7e7;
+	
+}
 
 /********** Tabs **************/
 .tab-pane {
