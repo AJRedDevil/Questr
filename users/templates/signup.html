@@ -13,7 +13,7 @@
     <div class="row clearfix">
     {% csrf_token %}
         <div class="col-md-10 col-md-offset-1 column">
-	    	<h1>Create your Questr account</h1>
+	    	<h1><span class="glyphicon glyphicon-user"></span> Create your Questr account</h1>
 	         
         	<center>
         		<br>
@@ -51,6 +51,7 @@
 				<div class="col-md-8 column">
 					<div class="row clearfix">
 						<div class="col-md-6 column">
+							
 							<label for="inputEmail" class="control-label">Email</label>
 			                <input type="email" class="form-control" name="email" id="inputEmail" placeholder="" data-error="Bruh, that email address is invalid" required>
 			                <div class="help-block with-errors"></div>

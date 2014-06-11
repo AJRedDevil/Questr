@@ -3,13 +3,18 @@ html {
 	margin: 0;
 	padding: 0;
 	background: aqua;
+	
+	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: 50;
 }
  
 body {
 	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-weight: 70;
+	font-weight: 50;
 
-	background: #fafafa;
+	background: #e9eaed;
+	/** background: #fafafa; **/
+	
 	overflow-x: hidden;
  }
  
@@ -29,7 +34,7 @@ footer {
  
 h1, h2, h3, h4, h5, h6, p {
 	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-weight: 70;
+	font-weight: 50;
 	letter-spacing: 0;
  }
 
