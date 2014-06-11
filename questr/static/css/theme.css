@@ -3,15 +3,9 @@ html {
 	margin: 0;
 	padding: 0;
 	background: aqua;
-	
-	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-weight: 50;
 }
  
 body {
-	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-weight: 50;
-
 	background: #e9eaed;
 	/** background: #fafafa; **/
 	
@@ -19,7 +13,6 @@ body {
  }
  
 footer {
-	font-family: 'TeXGyreCursorRegular', Arial, sans-serif;
 	border-top: 1px solid #ddd;
 	margin-top: 35px;
 	padding-top: 6px;
@@ -32,11 +25,25 @@ footer {
 	 list-style-type: none;
  }
  
-h1, h2, h3, h4, h5, h6, p {
-	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-weight: 50;
-	letter-spacing: 0;
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 1em 0;
+	padding: 0;
+}
+ 
+html, body, footer, h1, h2, h3, h4, h5, h6, p {
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif; 
+    font-weight: normal;
+    font-style: normal;
  }
+ 
+h1 {font-size:250%}
+h2 {font-size:200%}
+p, body {font-size:110%}
+
 
 /*************** Theme colour & details ********************/
 li a:link {
@@ -305,15 +312,7 @@ li a:hover {
 }
 
 
-.iconButton {
-	padding: 0;
-	border-color: rgba(0,255,255,0);
-}
 
-.iconButton:hover {
-	padding: 0;
-	border-color: rgba(0,255,255,0);
-}
 
 /******** Pagination ************/
 .pagination li a {
