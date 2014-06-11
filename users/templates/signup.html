@@ -1,114 +1,155 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
-  <!-- Custom CSS -->
+  <!-- CSS -->
   <link href={% static "css/sign.css" %} rel="stylesheet">
+  <link href={% static "css/social-buttons.css" %} rel="stylesheet">
   <!-- Custom Javascript -->
   <script src={% static "js/validator.js" %}></script>
 {% endblock localhead %}
 {% block content%}
+
 <div class="container">
     <div class="row clearfix">
-        <div class="col-md-8 col-md-offset-2 colum">
-            <div class="omb_login">
-                        <h3 class="omb_authTitle">Signing up is so easy!</h3>
-                        <div class="row omb_row-sm-offset-3 omb_socialButtons">
-                            <div class="row omb_row-sm-offset-3 omb_socialButtons">
-                                <div class="col-xs-4 col-sm-2">
-                                    <a class="btn btn-lg btn-block omb_btn-facebook" href="{% url 'social:begin' 'facebook' %}"><span class="hidden-xs">Facebook</span></a>
-                                </div>
+    {% csrf_token %}
+        <div class="col-md-10 col-md-offset-1 column">
+	    	<h1>Create your Questr account</h1>
+	         
+        	<center>
+        		<br>
+	    		<a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i> | Sign up with Facebook</button></a>
+	    		<a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i> | Sign up with Twitter</button></a>
+	    		{% comment %}
+                ## This is for google plus based authentication ##
+                    {% if plus_id %}
+                    <form id="google-plus" method="post" action="{% url 'social:complete' 'google-plus' %}">{% csrf_token %}
+                      <input id="at" type="hidden" name="access_token" value="" />
+                      <input id="code" type="hidden" name="code" value="" />
 
-                                <div class="col-xs-4 col-sm-2">
-                                    <a class="btn btn-lg btn-block omb_btn-twitter"
-                                    href="{% url 'social:begin' 'twitter' %}"><span class=
-                                    "hidden-xs">Twitter</span></a>
-                                </div>
-                                {% comment %}
-                                ## This is for google plus based authentication ##
-                                    {% if plus_id %}
-                                    <form id="google-plus" method="post" action="{% url 'social:complete' 'google-plus' %}">{% csrf_token %}
-                                      <input id="at" type="hidden" name="access_token" value="" />
-                                      <input id="code" type="hidden" name="code" value="" />
-
-                                      <div id="signinButton">
-                                        <span class="g-signin" data-scope="{{ plus_scope }}"
-                                                               data-clientid="{{ plus_id }}"
-                                                               data-redirecturi="postmessage"
-                                                               data-accesstype="offline"
-                                                               data-cookiepolicy="single_host_origin"
-                                                               data-callback="signInCallback">
-                                        </span>
-                                      </div>
-                                    </form>
-                                    {% endif %}
-                                {% endcomment %}
-                                <div class="col-xs-4 col-sm-2">
-                                    <a class="btn btn-lg btn-block omb_btn-google"
-                                    href="{% url 'social:begin' 'google-oauth2' %}"><span class=
-                                    "hidden-xs">Google+</span></a>
-                                </div>
-                            </div>
-
-                        <div class="row omb_row-sm-offset-3 omb_loginOr">
-                            <div class="col-xs-12 col-sm-6">
-                                <hr class="omb_hrOr">
-                                <span class="omb_spanOr">or</span>
-                            </div>
-                        </div>
-            </div>
-        </div>
-    </div>
+                      <div id="signinButton">
+                        <span class="g-signin" data-scope="{{ plus_scope }}"
+                                               data-clientid="{{ plus_id }}"
+                                               data-redirecturi="postmessage"
+                                               data-accesstype="offline"
+                                               data-cookiepolicy="single_host_origin"
+                                               data-callback="signInCallback">
+                        </span>
+                      </div>
+                    </form>
+                    {% endif %}
+                {% endcomment %}
+	    		<a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i> | Sign up with Google Plus</button></a>		
+        	</center>
+	        </div><!-- ./col-md-10 -->
+	    </div><!-- ./row -->
+	    
+	    
+	    <div class="container">
+	<div class="row clearfix">
+		<div class="col-md-10 col-md-offset-1 column">
+			<div class="row clearfix">
+				<div class="col-md-8 column">
+					<div class="row clearfix">
+						<div class="col-md-6 column">
+							<label for="inputEmail" class="control-label">Email</label>
+			                <input type="email" class="form-control" name="email" id="inputEmail" placeholder="" data-error="Bruh, that email address is invalid" required>
+			                <div class="help-block with-errors"></div>
+			                {% if user_form.email.errors %}
+			                    {{user_form.email.errors}}
+			                {% endif %}
+						</div>
+						<div class="col-md-6 column">
+							<label for="inputEmail" class="control-label">Email</label>
+			                <input type="email" class="form-control" name="email" id="inputEmail" placeholder="" data-error="Bruh, that email address is invalid" required>
+			                <div class="help-block with-errors"></div>
+			                {% if user_form.email.errors %}
+			                    {{user_form.email.errors}}
+			                {% endif %}
+						</div><!-- ./col-md-6 -->						
+					</div><!-- ./row -->
+					
+					
+					
+					<label for="inputPassword" class="control-label">Password</label>
+					<div class="row clearfix">
+						<div class="col-md-6 column">
+						           
+							<input type="password" data-toggle="validator" data-minlength="6" class="form-control" name="password1" id="inputPassword" placeholder="" required>
+							<span class="help-block">Minimum of 6 characters</span>
+						</div>
+						<div class="col-md-6 column">
+							
+							<input type="password" class="form-control" name="password2" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Type it again" required>
+							<div class="help-block with-errors"></div>
+							{% if user_form.password2.errors %}
+							{{user_form.password2.errors}}
+							{% endif %}
+						</div><!-- ./col-md-6 -->						
+					</div><!-- ./row -->
+					
+					
+					
+				</div><!-- ./col-md-8 -->
+				<div class="col-md-4 column">
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
-
-<div class="container">
-    <div class="row clearfix">
-        <div class="col-md-8 col-md-offset-2 column">
-            <form data-toggle="validator" role="form" class="signup" action="" method="post">{% csrf_token %}
-              <div class="form-group">
-                <label for="firstName" class="control-label">First Name</label>
-                <input type="text" class="form-control" name="first_name" id="inputFirst" placeholder="" required>
-                <label for="lastName" class="control-label">Last Name</label>
-                <input type="text" class="form-control" name="last_name" id="inputLast" placeholder="" required>
-              </div>
-              <div class="form-group">
+	    
+	    
+	    
+	    
+	    <div class="row clearfix">
+    		<div class="col-md-10 col-md-offset-1 column">
+    		<div class="col-md-4 column">
+ 
                 <label for="username" class="control-label">Username</label>
                 <input type="text" class="form-control" name="displayname" id="username" placeholder="" required>
                 {% if user_form.displayname.errors %}
                     {{user_form.displayname.errors}}
                 {% endif %}
-              </div>
-              <div class="form-group">
-                <label for="inputEmail" class="control-label">Email</label>
-                <input type="email" class="form-control" name="email" id="inputEmail" placeholder="" data-error="Bruh, that email address is invalid" required>
-                <div class="help-block with-errors"></div>
-                {% if user_form.email.errors %}
-                    {{user_form.email.errors}}
+                
+                
+                
+                
+                <label for="firstName" class="control-label">First Name</label>
+                <input type="text" class="form-control" name="first_name" id="inputFirst" placeholder="" required>   
+                 
+              
+                <label for="username" class="control-label">Username</label>
+                <input type="text" class="form-control" name="displayname" id="username" placeholder="" required>
+                {% if user_form.displayname.errors %}
+                    {{user_form.displayname.errors}}
                 {% endif %}
-              </div>
-              <div class="form-group">
-                <label for="inputPassword" class="control-label">Password</label>
-                <br>
-                <div class="form-group col-sm-6">
-                  <input type="password" data-toggle="validator" data-minlength="6" class="form-control" name="password1" id="inputPassword" placeholder="" required>
-                  <span class="help-block">Minimum of 6 characters</span>
-                </div>
-                <div class="form-group col-sm-6">
-                  <input type="password" class="form-control" name="password2" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Type it again" required>
-                  <div class="help-block with-errors"></div>
-                  {% if user_form.password2.errors %}
-                      {{user_form.password2.errors}}
-                  {% endif %}
-                </div>
-                </div>
-              </div>
-              <div class="form-group col-sm-12">
-                <center><button type="submit" class="btn btn-primary">Submit</button></center>
-              </div>
-            </form>
-        </div>
-    </div>
-</div>
+
+        	</div><!-- ./col-md-4 -->
+    		<div class="col-md-4 column">
+        		        	
+    		</div>
+    		<div class="col-md-4 column">
+        		        	
+    		</div>
+        	
+        	</div><!-- ./col-md-10 -->
+    </div><!-- ./row -->
+    
+    
+    <div class="row clearfix">
+    		<div class="col-md-10 col-md-offset-1 column">
+	    		<div class="col-md-8 column">	
+	              <hr>
+	              <p id="disclaimer">By continuing, I agree to Questr's <a href="#">Seller Agreement</a> and <a href="#">E-Sign Consent</a>.</p>
+	              <button type="button" class="btn btn-default" id="createAccBtn">Create Account</button>
+	    		</div>
+	    		<div class="col-md-4 column">
+	    		
+	    		</div>
+    		</div><!-- ./col-md-10 -->
+    </div><!-- ./row -->                  
+
+</div><!-- ./container -->
+
 {% endblock %}    
 {% block scripts %}
 {% endblock scripts %}

@@ -1,95 +1,82 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
-    <!-- Custom CSS -->
+    <!-- CSS -->
     <link href={% static "css/sign.css" %} rel="stylesheet">
+    <link href={% static "css/social-buttons.css" %} rel="stylesheet">
+    
     <!-- Custom Javascript -->
     <script src={% static "js/validator.js" %}></script>
 
 {% endblock localhead %}
-{% block content %}    
+{% block content %} 
+   
 <div class="container">
     <div class="row clearfix">
-        <div class="col-md-8 col-md-offset-2 colum">
-            <div class="omb_login">
-                        <h3 class="omb_authTitle">Signing up is so easy!</h3>
-                        <div class="row omb_row-sm-offset-3 omb_socialButtons">
-                            <div class="row omb_row-sm-offset-3 omb_socialButtons">
-                                <div class="col-xs-4 col-sm-2">
-                                    <a class="btn btn-lg btn-block omb_btn-facebook" href="{% url 'social:begin' 'facebook' %}"><span class="hidden-xs">Facebook</span></a>
-                                </div>
-
-                                <div class="col-xs-4 col-sm-2">
-                                    <a class="btn btn-lg btn-block omb_btn-twitter"
-                                    href="{% url 'social:begin' 'twitter' %}"><span class=
-                                    "hidden-xs">Twitter</span></a>
-                                </div>
-                                {% comment %}
-                                ## This is for google plus based authentication ##
-                                    {% if plus_id %}
-                                    <form id="google-plus" method="post" action="{% url 'social:complete' 'google-plus' %}">{% csrf_token %}
-                                      <input id="at" type="hidden" name="access_token" value="" />
-                                      <input id="code" type="hidden" name="code" value="" />
-
-                                      <div id="signinButton">
-                                        <span class="g-signin" data-scope="{{ plus_scope }}"
-                                                               data-clientid="{{ plus_id }}"
-                                                               data-redirecturi="postmessage"
-                                                               data-accesstype="offline"
-                                                               data-cookiepolicy="single_host_origin"
-                                                               data-callback="signInCallback">
-                                        </span>
-                                      </div>
-                                    </form>
-                                    {% endif %}
-                                {% endcomment %}
-                                <div class="col-xs-4 col-sm-2">
-                                    <a class="btn btn-lg btn-block omb_btn-google"
-                                    href="{% url 'social:begin' 'google-oauth2' %}"><span class=
-                                    "hidden-xs">Google+</span></a>
-                                </div>
-                            </div>
-
-                        <div class="row omb_row-sm-offset-3 omb_loginOr">
-                            <div class="col-xs-12 col-sm-6">
-                                <hr class="omb_hrOr">
-                                <span class="omb_spanOr">or</span>
-                            </div>
-                        </div>
-            </div>
+        <div class="col-md-4 col-md-offset-4 column">
+	         <div class="panel panel-default">
+		         <div class="panel-heading text-center">Sign in</div>
+		         <div class="col-md-12 column panel-content">
+        	<center>
+        		<br>
+	    		<a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i> | Connect with Facebook</button></a>
+	    		<a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i> | Connect with Twitter</button></a>
+	    		{% comment %}
+		        ## This is for google plus based authentication ##
+		            {% if plus_id %}
+		            <form id="google-plus" method="post" action="{% url 'social:complete' 'google-plus' %}">{% csrf_token %}
+		              <input id="at" type="hidden" name="access_token" value="" />
+		              <input id="code" type="hidden" name="code" value="" />
+		
+		              <div id="signinButton">
+		                <span class="g-signin" data-scope="{{ plus_scope }}"
+		                                       data-clientid="{{ plus_id }}"
+		                                       data-redirecturi="postmessage"
+		                                       data-accesstype="offline"
+		                                       data-cookiepolicy="single_host_origin"
+		                                       data-callback="signInCallback">
+		                </span>
+		              </div>
+		            </form>
+		            {% endif %}
+		        {% endcomment %}
+	    		<a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i> | Connect with Google Plus</button></a>		
+        	</center>
+    		
+    		<hr>
+    		    		
+    		<!-- Login with Username and Password --> 
+           <form role="form" data-toggle="validator" class="signin" action="" method="post">{% csrf_token %}
+               <div class="form-group">        
+                    <input type="email" class="form-control" name="username" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
+                    {% if auth_form.username.errors %}
+                        {{ auth_form.username.errors }}
+                    {% endif %}
+                <div class="help-block with-errors"></div>
+              </div>
+           
+	          <div class="form-group">                
+	            <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+	            {% if auth_form.password.errors %}
+	                {{ auth_form.password.errors }}
+	            {% endif %}
+	            {% if auth_form.errors %}
+	                {{ auth_form.non_field_errors }}
+	            {% endif %}
+	          </div>
+	          <a href="{% url 'reset_password' %}" id="forgot-password">Forgot password?</a>
+	          <button type="submit" class="btn btn-sm btn-default">Sign in</button>                        
+	        </form> <!-- End of Login with Username and Password -->
+			   
+			   
+			
+        	</div>
+        </div>       
+        	<p class="text-center">Don't have a Questr account?  <a href="#">Sign up</a> today.</p>
         </div>
     </div>
 </div>
-    
-<div class="container">
-    <div class="row clearfix">
-        <div class="col-md-8 col-md-offset-2 colum">
-            <!-- Login with Username and Password --> 
-                           <form role="form" data-toggle="validator" class="signin" action="" method="post">{% csrf_token %}
-                               <div class="form-group">
-                                <label for="inputEmail" class="control-label">Email</label>
-                                    <input type="email" class="form-control" name="username" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
-                                    {% if auth_form.username.errors %}
-                                        {{ auth_form.username.errors }}
-                                    {% endif %}
-                                <div class="help-block with-errors"></div>
-                              </div>
-                           
-                          <div class="form-group">
-                            <label for="exampleInputPassword1">Password <a href="{% url 'reset_password' %}">(forgot password)</a></label>
-                            <input type="password" class="form-control" name="password" style="border-radius:0px" id="exampleInputPassword1" placeholder="Password">
-                            {% if auth_form.password.errors %}
-                                {{ auth_form.password.errors }}
-                            {% endif %}
-                            {% if auth_form.errors %}
-                                {{ auth_form.non_field_errors }}
-                            {% endif %}
-                          </div>
-                          <button type="submit" class="btn btn-sm btn-default">Sign in</button>
-                        </form> <!-- End of Login with Username and Password -->
-        </div>
-    </div>
-</div>
+
 {% endblock %}
 {% block scripts %}
 {% endblock scripts %}
