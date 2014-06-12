@@ -1,0 +1,35 @@
+{% extends "mainbase.html" %}
+{% load staticfiles %}
+{% block localhead %}
+	<!-- Custom CSS -->
+	<link href={% static "css/star-rating.css" %} media="all" rel="stylesheet" type="text/css"/>
+    <script src={% static "js/star-rating.js" %} type="text/javascript"></script>
+	
+	<!-- Custom Javascript -->
+	<script src={% static "js/validator.js" %}></script>	
+{% endblock localhead %}
+{% block content %}
+<div class="container">
+	<div class="row">
+	<div class="col-md-8 col-md-offset-2 column">
+	<div class="well">
+		<p>Was this Questr prompted and on time?</p>
+		<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
+		<p>How was the condition of your package when it arrived?</p>
+		<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
+		<p>Was the package what you expected to receive?</p>
+		<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >		
+		<p>Overall, how would you rate the service you recieved from this Questr?</p>
+		<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
+	</div>
+	</div>
+	</div>
+</div>	
+{% endblock content %}
+{% block scripts %}
+<script>
+    jQuery(document).ready(function () {
+        $(".rating-kv").rating();
+    });
+</script>	
+{% endblock scripts %}

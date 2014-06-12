@@ -1,0 +1,104 @@
+{% extends "mainbase.html" %}
+{% load staticfiles %}
+{% block localhead %}
+    <!-- Custom CSS -->
+    <link href={% static "css/smallpost.css" %} rel="stylesheet">
+    <link href={% static "css/profile.css" %} rel="stylesheet">
+    <link href={% static "css/trades.css" %} rel="stylesheet">
+    
+    <!-- Custom Javascript -->
+    <script src={% static "js/validator.js" %}></script>
+{% endblock localhead %}
+{% block content %}
+<div class="container">
+    <div class="row">
+       <div class="col-md-8 col-md-offset-2 column">    
+   
+            <div class="tabbable" id="tabs-84205">
+                <ul class="nav nav-tabs">
+                    <li>
+                        <a href="#panel-535112">My Offers</a>
+                    </li>
+                    <li class="active">
+                        <a href="#panel-670038" data-toggle="tab">My Posts</a>
+                    </li>                   
+                </ul>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="panel-535112">
+    
+                        <!-- Quest Post -->
+                        <a href="#" class="list-group-item">
+                            <div class="media col-md-2">
+                                <div class="ratio img-responsive" style="background-image: url(http://upload.wikimedia.org/wikipedia/commons/2/22/Turkish_Van_Cat.jpg);"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="list-group-item-heading postTitle"> This is the quest another user has posted </h4>
+                                <p class="list-group-item-text postDesc"> 
+                                    Clicking this post should direct the user to this specific questView.html                          
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                               
+                                    <span class="money">$10</span>
+                                    <span class="postDate">
+                                    	<button type="button" class="btn btn-default contact" data-toggle="modal" data-target="#myModal">Contact</button>
+                                    	<form action="http://google.com">
+										    <input value="Accept" type="button" class="btn btn-default accept" rel="tooltip" title="We'll notify the user that you're ready to deliver!">
+										</form>                                                                   	
+                                        
+                                    </span>
+                                </p>
+                            </div>
+                           
+                            </a>  <!-- End of Quest Post -->
+                           
+                    </div> <!-- End of tab-pane -->
+                        
+                    
+                        
+                    <div class="tab-pane" id="panel-670038">
+                        
+                        <!-- Quest Post -->
+                        <a href="#" class="list-group-item">
+                            <div class="media col-md-2">
+                                <div  class="ratio img-responsive" style="background-image: url(http://sushinoms.com/wp-content/uploads/2013/10/Pocky-midi-Matcha.jpg);"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="list-group-item-heading postTitle"> Green Tea Pocky </h4>
+                                <p class="list-group-item-text postDesc"> Im looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thing                         
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><span class="money">$10</span><span class="postDate">June 20, 2014</span></p>
+                            </div>
+                           
+                        </a>  <!-- End of Quest Post -->
+                        
+                    </div>  <!-- End of tab-pane -->
+                                    
+                    
+                    
+                </div>  <!-- End of tab-content -->
+            </div>  <!-- End of tabbable -->    
+        </div>
+    </div>  <!-- End of column -->          
+    </div>  <!-- End of row -->
+</div>  <!-- End of container -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3 text-center">
+        <h1>This user's profile information goes here</h1>
+        <h1>Email and phone number</h1>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}    
+{% block scripts %}     
+{% endblock scripts %}  
