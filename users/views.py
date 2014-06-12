@@ -261,7 +261,7 @@ def createPassword(request):
         if user_form.is_valid():
             user_form.save()
             return redirect('home')
-    return render(request, "create_password.html", locals())
+    return render(request, "createpassword.html", locals())
 
 @login_required
 def changePassword(request):
