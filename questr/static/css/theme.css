@@ -35,14 +35,14 @@ hr {
 }
  
 html, body, footer, h1, h2, h3, h4, h5, h6, p {
-	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif; 
     font-weight: normal;
     font-style: normal;
+    color: #5a5a5a;
  }
  
 h1 {font-size:250%}
 h2 {font-size:200%}
-p, body {font-size:110%}
+p, body, html {font-size:90%}
 
 
 /*************** Theme colour & details ********************/
@@ -300,13 +300,13 @@ li a:hover {
 }
 
 /************* Buttons ************/
-.btn, .btn-default, .btn-group .btn-default {
+.btn {
 	color: #777777;
 	background: white;
-	border-color: grey;
+	border-color: transparent;
 }
 
-.btn:hover, .btn-default:hover, .btn-group .btn-default:hover {
+.btn:hover {
 	color: #333333;
 	background: white;
 }
@@ -361,15 +361,19 @@ imageUploader {
 
 /************* Input Boxes *****************/
 input.form-control {
-	border-radius: 1px; /* CSS3 */
-	-moz-border-radius: 1px; /* Firefox */
-	-webkit-border-radius: 1px; /* Safari, Chrome */
-	-khtml-border-radius: 1px; /* KHTML */
-	
-	background: white;
-	border-color: #e7e7e7;
-	
+	border-color: white;
+	-webkit-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 }
+
+input.form-control:focus {
+	border-color: blue;
+	-webkit-box-shadow: 0px 2px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0px 2px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 0px 2px 0 rgba(0, 0, 0, 0.15);
+}
+
 
 /********** Tabs **************/
 .tab-pane {

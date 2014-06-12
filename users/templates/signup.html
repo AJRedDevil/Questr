@@ -13,12 +13,12 @@
     <div class="row clearfix">
     {% csrf_token %}
         <div class="col-md-10 col-md-offset-1 column">
-	    	<h1 class="grey"><span class="glyphicon glyphicon-user blue"></span> Create your Questr account</h1>
+	    	<h3 class="lead grey"><span class="glyphicon glyphicon-user blue"></span> Create your Questr account with</h3>
 	         
         	<center>
         		<br>
-	    		<a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i> | Sign up with Facebook</button></a>
-	    		<a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i> | Sign up with Twitter</button></a>
+	    		<a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i> | Facebook</button></a>
+	    		<a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i> | Twitter</button></a>
 	    		{% comment %}
                 ## This is for google plus based authentication ##
                     {% if plus_id %}
@@ -38,7 +38,7 @@
                     </form>
                     {% endif %}
                 {% endcomment %}
-	    		<a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i> | Sign up with Google Plus</button></a>		
+	    		<a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i> | Google Plus</button></a>		
         	</center>
 	        </div><!-- ./col-md-10 -->
 	    </div><!-- ./row -->
@@ -50,7 +50,7 @@
 				<div class="col-md-10 col-md-offset-1 column">
 					<div class="row clearfix">
 						<div class="col-md-12 column">
-							<h4>Lets get some things straight</h4>
+							<h6 class="lead grey">Or the old fashion way</h6>
 						</div>
 					</div>
 				</div>
@@ -68,19 +68,14 @@
 						<div class="col-md-6 column">			
 							
 							<label for="inputEmail" class="control-label grey">Email</label>
-			                <input type="email" class="form-control" name="email" id="inputEmail" placeholder="" data-error="Bruh, that email address is invalid" required>
+			                <input type="email" class="form-control input-sm" name="email" id="inputEmail" placeholder="youremail@example.com" data-error="Bruh, that email address is invalid" required>
 			                <div class="help-block with-errors"></div>
 			                {% if user_form.email.errors %}
 			                    {{user_form.email.errors}}
 			                {% endif %}
 						</div>
 						<div class="col-md-6 column">
-							<label for="inputEmail" class="control-label">Email</label>
-			                <input type="email" class="form-control" name="email" id="inputEmail" placeholder="" data-error="Bruh, that email address is invalid" required>
-			                <div class="help-block with-errors"></div>
-			                {% if user_form.email.errors %}
-			                    {{user_form.email.errors}}
-			                {% endif %}
+							
 						</div><!-- ./col-md-6 -->						
 					</div><!-- ./row -->
 					
@@ -90,12 +85,12 @@
 					<div class="row clearfix">
 						<div class="col-md-6 column">
 						           
-							<input type="password" data-toggle="validator" data-minlength="6" class="form-control" name="password1" id="inputPassword" placeholder="" required>
+							<input type="password" data-toggle="validator" data-minlength="6" class="form-control input-sm" name="password1" id="inputPassword" placeholder="" required>
 							<span class="help-block">Minimum of 6 characters</span>
 						</div>
 						<div class="col-md-6 column">
 							
-							<input type="password" class="form-control" name="password2" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Type it again" required>
+							<input type="password" class="form-control input-sm" name="password2" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Type it again" required>
 							<div class="help-block with-errors"></div>
 							{% if user_form.password2.errors %}
 							{{user_form.password2.errors}}
@@ -123,7 +118,7 @@
     		<div class="col-md-4 column">
  
                 <label for="username" class="control-label">Username</label>
-                <input type="text" class="form-control" name="displayname" id="username" placeholder="" required>
+                <input type="text" class="form-control input-sm" name="displayname" id="username" placeholder="" required>
                 {% if user_form.displayname.errors %}
                     {{user_form.displayname.errors}}
                 {% endif %}
@@ -132,11 +127,11 @@
                 
                 
                 <label for="firstName" class="control-label">First Name</label>
-                <input type="text" class="form-control" name="first_name" id="inputFirst" placeholder="" required>   
+                <input type="text" class="form-control input-sm" name="first_name" id="inputFirst" placeholder="" required>   
                  
               
                 <label for="username" class="control-label">Username</label>
-                <input type="text" class="form-control" name="displayname" id="username" placeholder="" required>
+                <input type="text" class="form-control input-sm" name="displayname" id="username" placeholder="" required>
                 {% if user_form.displayname.errors %}
                     {{user_form.displayname.errors}}
                 {% endif %}
@@ -157,8 +152,8 @@
     		<div class="col-md-10 col-md-offset-1 column">
 	    		<div class="col-md-8 column">	
 	              <hr>
-	              <p id="disclaimer">By continuing, I agree to Questr's <a href="#">Seller Agreement</a> and <a href="#">E-Sign Consent</a>.</p>
-	              <button type="button" class="btn btn-default" id="createAccBtn">Create Account</button>
+	              <small class="small" id="disclaimer">By continuing, I agree to Questr's <a href="#">Seller Agreement</a> and <a href="#">E-Sign Consent</a>.</small>
+	              <button type="button" class="btn btn-embossed btn-primary" id="createAccBtn">Create Account</button>
 	    		</div>
 	    		<div class="col-md-4 column">
 	    		
