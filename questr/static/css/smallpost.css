@@ -28,12 +28,9 @@ a.list-group-item:hover {
 	height: 90px;
 }
 
-.postTitle {
-	
-}
-
-.postDesc {
-	
+.smallInfo small {
+	margin: 0;
+	padding: 0;
 }
 
 

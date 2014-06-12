@@ -34,16 +34,6 @@ hr {
 	padding: 0;
 }
  
-html, body, footer, h1, h2, h3, h4, h5, h6, p {
-    font-weight: normal;
-    font-style: normal;
-    color: #5a5a5a;
- }
- 
-h1 {font-size:250%}
-h2 {font-size:200%}
-p, body, html {font-size:90%}
-
 
 /*************** Theme colour & details ********************/
 li a:link {
@@ -79,9 +69,13 @@ li a:hover {
 	border-color: transparent;
 	background: aqua;
 	color: aqua;
-	
-	
 }
+
+.profileImg {
+	width: 40px;
+	height: auto;
+}
+
 /*************** Secondary Navbar ***************/
 .secondaryNavRow ul {
 	background: white;
@@ -238,4 +232,34 @@ input.form-control:focus {
           
           
           
+          
+          
+          
+.inputBackground {
+	background: #f2f2f2;
+	padding: 10px;
+}
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ .white {
+	color: white;
+}
+
+.blue {
+	color: #507ecd;
+}
+
+.grey {
+	color: #5a5a5a;
+}
+
+.light-grey {
+	color: #979797;
+}
