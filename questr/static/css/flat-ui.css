@@ -1964,7 +1964,7 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   line-height: 53px;
 }
 .navbar-toggle:before {
-  color: #16a085;
+  color: #17a186;
   content: "\e00c";
   font-family: "Flat-UI-Icons";
   font-size: 22px;
@@ -2241,7 +2241,24 @@ select[multiple].navbar-form .btn {
   -webkit-font-smoothing: subpixel-antialiased;
 }
 .navbar-default {
-  background-color: #ecf0f1;
+	color: #f8f8f8;
+  text-shadow: 0 0.7px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  *background-color: white;
+  background-image: -moz-linear-gradient(top, #f8f8f8 0%, #ffffff 100%);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f8f8f8), to(#ffffff));
+  background-image: -webkit-linear-gradient(top, #f8f8f8, #ffffff);
+  background-image: -o-linear-gradient(top, #f8f8f8, #ffffff);
+  background-image: linear-gradient(to bottom, #f8f8f8 0%, #ffffff 100%);
+  background-repeat: repeat-x;
+  border-color: #e6e6e6 #e6e6e6 #c0c0c0;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffafafa', endColorstr='#ffe6e6e6', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  
+  -webkit-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 }
 .navbar-default .navbar-brand {
   color: #34495e;
