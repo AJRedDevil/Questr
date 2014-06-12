@@ -130,27 +130,27 @@ nav.navbar {
 }
 
 
-/*************** Well ***************/
-.well {
+
+
+
+/*************** Well, Panels ***************/
+.well, .panel-default {
 	background: white;
 	border: none; 
-	-moz-box-shadow:    0px 1px 0px 0px #b8b8b8;
-	box-shadow:         0px 1px 0px 0px #b8b8b8;
+	-webkit-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 }
 
-.well .well-title {
-	width: 100%;
-	background: aqua;
-	border-bottom: #c3c2c2;
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
-	margin: 0;
+.panel-default .panel-heading {
+	border: none;
 }
 
-/*************** Panels ***************/
 .panel-default .panel-content {
 	background: white;
 }
+
+
 
 /************* Buttons ************/
 .btn {
