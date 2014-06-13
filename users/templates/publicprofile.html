@@ -1,46 +1,41 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
+{% load endless %}
 {% block localhead %}
     <link href={% static "css/profile.css" %} rel="stylesheet">
     <link href={% static "css/smallpost.css" %} rel="stylesheet">
-    <!-- Custom Javascript -->
-    <script src={% static "js/validator.js" %}></script>  
     <link href={% static "css/bootstrap-ellipsis.css" %} rel="stylesheet">
-    <script src={% static "js/bootstrap-ellipsis.js" %}></script>   
+   <link href={% static "css/star-rating.css" %} media="all" rel="stylesheet" type="text/css"/>
+    
+    <!-- Custom Javascript -->
+    <script src={% static "js/bootstrap-ellipsis.js" %}></script>
+    <script src={% static "js/validator.js" %}></script>    
+    <script src={% static "js/star-rating.js" %} type="text/javascript"></script>
 
 {% endblock localhead %}
 {% block content %}
 <div class="container">
     <div class="row">
-        
+      
         <!-- Profile -->
         <div class="col-md-2">  
-         <div class="well profile">
+         <div class="well">
              
-              <div  class="ratio img-responsive img-circle" style="background-image: url({{publicuser.avatar_file_name}});"></div>
+              <div class="ratio img-responsive img-circle profileImg" style="background-image: url({{publicuser.avatar_file_name}});"></div>
                     
             <center>
-                <h3>{{publicuser.first_name}} {{publicuser.last_name}}</h3>
-                
-                <button type="button" class="btn btn-default btn-lg iconButton">
-                  <span class="glyphicon glyphicon-comment"></span>
-                </button>            
-                
-                <button type="button" class="btn btn-default btn-lg iconButton">
-                  <span class="glyphicon glyphicon-flag"></span>
-                </button>
-                
-            </center>
+              <h5 class="userName">{{publicuser.first_name}} {{publicuser.last_name}}</h5>  
+              
+              <input id="input-21e" value="0" type="number" class="rating" min=0 max=100 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" >
+                              
+      </center>
             
-             <p><strong>Location: </strong> Toronto, Ontario, Canada </p>
-                    <p><strong>Quests Completed: </strong> {{quests_complete}} </p>
-                    <p><strong>Quests Posted: </strong> {{questes_posted}} </p>  
-                    <p><strong>Trust Rank: </strong> {{ranking}}% 
-             </p>                           
-         </div> <!-- End of Profile -->                
+              <p><span class="glyphicon glyphicon-map-marker"></span> Toronto, Ontario, Canada </p>
+                <p><strong>Quests Completed: </strong> {{quests_complete}} </p>
+                <p><strong>Quests Posted: </strong> {{quests_posted}} </p>                            
+            
+         </div> <!-- End of Well -->                
         </div>  <!-- End of column -->
-    
-    
     
     
     
@@ -51,123 +46,50 @@
             <div class="tabbable" id="tabs-84205">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#panel-535112" data-toggle="tab">Posts</a>
-                    </li>
-                    <li>
-                        <a href="#panel-670038" data-toggle="tab">History</a>
+                        <a href="#panel-535112" data-toggle="tab">My Quests</a>
                     </li>
                 </ul>
               
                 <div class="tab-content">
                     <div class="tab-pane active" id="panel-535112"> 
-                                
-                      
-                                     
-                       <!-- Quest Post -->
-                       {% for quest in questsbyuser  %}
                         <!-- Quest Post -->
-                       <a href="#" class="list-group-item">
-                             <div class="media col-md-2">
-                                 <div  class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
-                             </div>
-                             <div class="col-md-6">
-                                 <h4 class="list-group-item-heading postTitle">{{quest.title}}</h4>
-                                 <p class="list-group-item-text postDesc">{{quest.description}}
-                                 </p>
-                             </div>
-                             <div class="col-md-4">
-                                 <p><span class="money">${{quest.reward}}</span><span class="postDate">{{quest.creation_date}}</span></p>
-                       </div>
-                            
-                       </a> 
-                        <!-- End of Quest Post -->
-                       {% endfor %}
+                        {% paginate 5,5 questsbyuser %}
+                        {% for quest in questsbyuser  %}
+                         <!-- Quest Post -->
+                        <a href="#" class="list-group-item">
+                              <div class="media col-md-2">
+                                  <div  class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
+                              </div>
+                              <div class="col-md-6">
+                                <h4 class="list-group-item-heading postTitle">{{quest.title}}</h4>
+                                <p class="list-group-item-text postDesc">{{quest.description}}
+                                </p>
 
-                    </div>
-                   
-                   
-                    <div class="tab-pane" id="panel-670038">
-                                             
-                        <!-- Quest Post -->
-                        <a href="#" class="list-group-item">
-                            <div class="media col-md-2">
-                                <div  class="ratio img-responsive img-circle" style="background-image: url(http://www.stars-arena.com/wp-content/uploads/2013/08/emma-watson-3.jpg);"></div>
-                            </div>
-                            <div class="col-md-6">
-                                <h4 class="list-group-item-heading postTitle"> Thanks a ton! </h4>
-                                <p class="list-group-item-text postDesc">
-                                    Don Vo is amazing, he gave it to me quick and fast ;).  Definitely trustworthy!  A+++                         
-                                </p>
-                            </div>
-                            <div class="col-md-4">
-                                <p><span class="money">$10</span><span class="postDate">100%</span></p>
-                            </div>         
-                        </a>  <!-- End of Quest Post -->
-                        
-                        <!-- Quest Post -->
-                        <a href="#" class="list-group-item">
-                            <div class="media col-md-2">
-                                <div  class="ratio img-responsive img-circle" style="background-image: url(http://www.stars-arena.com/wp-content/uploads/2013/08/emma-watson-3.jpg);"></div>
-                            </div>
-                            <div class="col-md-6">
-                                <h4 class="list-group-item-heading postTitle"> Thanks a ton! </h4>
-                                <p class="list-group-item-text postDesc">
-                                    Don Vo is amazing, he gave it to me quick and fast ;).  Definitely trustworthy!  A+++                         
-                                </p>
-                            </div>
-                            <div class="col-md-4">
-                                <p><span class="money">$10</span><span class="postDate">100%</span></p>
-                            </div>         
-                        </a>  <!-- End of Quest Post -->
-                        
-                        
-                        <!-- Quest Post -->
-                        <a href="#" class="list-group-item">
-                            <div class="media col-md-2">
-                                <div  class="ratio img-responsive img-circle" style="background-image: url(http://www.stars-arena.com/wp-content/uploads/2013/08/emma-watson-3.jpg);"></div>
-                            </div>
-                            <div class="col-md-6">
-                                <h4 class="list-group-item-heading postTitle"> Thanks a ton! </h4>
-                                <p class="list-group-item-text postDesc">
-                                    Don Vo is amazing, he gave it to me quick and fast ;).  Definitely trustworthy!  A+++                         
-                                </p>
-                            </div>
-                            <div class="col-md-4">
-                                <p><span class="money">$10</span><span class="postDate">100%</span></p>
-                            </div>         
-                        </a>  <!-- End of Quest Post -->
-                        
-                        
-                        <!-- Quest Post -->
-                        <a href="#" class="list-group-item">
-                            <div class="media col-md-2">
-                                <div  class="ratio img-responsive img-circle" style="background-image: url(http://www.stars-arena.com/wp-content/uploads/2013/08/emma-watson-3.jpg);"></div>
-                            </div>
-                            <div class="col-md-6">
-                                <h4 class="list-group-item-heading postTitle"> Thanks a ton! </h4>
-                                <p class="list-group-item-text postDesc">
-                                    Don Vo is amazing, he gave it to me quick and fast ;).  Definitely trustworthy!  A+++                         
-                                </p>
-                            </div>
-                            <div class="col-md-4">
-                                <p><span class="money">$10</span><span class="postDate">100%</span></p>
-                            </div>         
-                        </a>  <!-- End of Quest Post -->
-                        
-                    </div>
+                                <div class="smallInfo">
+                                    <small class="light-grey"><span class="glyphicon glyphicon-user"></span>{{quest.questr_id.displayname}} &nbsp;&nbsp;
+                                    <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
+                                </div><!-- ./smallInfo -->
+                              </div>
+                              <div class="col-md-4">
+                                  <p><span class="money">${{quest.reward}}</span><span class="postDate">{{quest.creation_date}}</span></p>
+                        </div>
+                             
+                        </a> 
+                         <!-- End of Quest Post -->
+                        {% endfor %}                                
+                    </div><!-- ./tab-pane -->
+                    {% show_pages %}
                 </div>
-            </div>    
-       </div>   <!-- End of column/well -->
-       
-      
-      
-      
-      
+            </div>     
+       </div> <!-- End of column/well -->
+        
+
+  
       
        <div class="col-md-12 reviews">
-        <div class="panel panel-default">
-          <!-- Default panel contents -->
-          <div class="panel-heading">Reviews</div>
+      <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Reviews</div>
         
         
         <div class="list-group">   
@@ -176,21 +98,26 @@
         <!-- Quest Post -->
           <a href="#" class="list-group-item">
                 <div class="media col-md-2">
-                    <div  class="ratio img-responsive img-circle" style="background-image: url(http://www.stars-arena.com/wp-content/uploads/2013/08/emma-watson-3.jpg);"></div>
+                  <div  class="ratio img-responsive img-circle" style="background-image: url(http://www.stars-arena.com/wp-content/uploads/2013/08/emma-watson-3.jpg);"></div>
                 </div>
                 <div class="col-md-6">
-                    <h4 class="list-group-item-heading postTitle"> Thanks a ton! </h4>
+                    <h6 class="list-group-item-heading postTitle"> Thanks a ton! </h6>
                     <p class="list-group-item-text postDesc">
-                        Don Vo is amazing, he gave it to me quick and fast ;).  Definitely trustworthy!  A+++                         
+                      wordswrodswrodsworwldowrowrew                      
                     </p>
+                    <div class="smallInfo">
+                      <small class="light-grey"><span class="glyphicon glyphicon-user"></span>usrname goes hre &nbsp;&nbsp;
+                      <span class="glyphicon glyphicon-map-marker"></span>Only city+cuntry here</small>
+                      </div><!-- ./smallInfo -->
                 </div>
                 <div class="col-md-4">
-                    <p><span class="money">$10</span><span class="postDate">100%</span></p>
+                    <p><span class="money">$10</span><span class="postDate"><input id="input-21e" value="0" type="number" class="rating" min=0 max=100 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" ></span></p>
+                    
                 </div>
                
           </a>  <!-- End of Quest Post -->    
         </div>  <!-- End of list-group -->
-        </div>
+      </div>
         </div>  <!-- End of column -->
     </div>  <!-- End of reviews -->     
              
@@ -200,9 +127,17 @@
 
 
 
+
+
 {% endblock content %}
 {% block scripts %}
-   <script>
-        $('.postDesc').ellipsis({maxLine: 3, fixedWidth: 200})   
-    </script>
+<script>
+   $('.postDesc').ellipsis({maxLine: 3, fixedWidth: 150})   
+    
+    jQuery(document).ready(function () {
+        $(".rating-kv").rating();
+    });
+</script>
+
+
 {% endblock scripts %}

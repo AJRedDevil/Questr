@@ -10,5 +10,4 @@ urlpatterns = patterns('',
     url(r'^quest/', include('quests.urls') ),
     url(r'^questrreview/', mainview.questrReview ),
     url(r'^questreview/', mainview.questReview ),
-    url(r'^trades/', mainview.myTrades ),
 )
