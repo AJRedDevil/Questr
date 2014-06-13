@@ -8,5 +8,7 @@ urlpatterns = patterns('',
     url(r'^beta/', include('beta.urls')),
     url(r'^user/', include('users.urls')),
     url(r'^quest/', include('quests.urls') ),
+    url(r'^questrreview/', mainview.questrReview ),
+    url(r'^questreview/', mainview.questReview ),
     url(r'^trades/', mainview.myTrades ),
 )

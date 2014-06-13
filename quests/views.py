@@ -24,7 +24,6 @@ def getQuestsByUser(questrs_id):
 @login_required
 def listallquests(request):
     pagetype="loggedin"
-    secondnav="listquestsecondnav"
     user = request.user
     nav_link_1 = "/user/profile"
     nav_link_1_label = "my profile"

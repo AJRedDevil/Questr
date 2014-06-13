@@ -1,5 +1,6 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
+{% load endless %}
 {% block localhead %}
     <link href={% static "css/profile.css" %} rel="stylesheet">
     <link href={% static "css/smallpost.css" %} rel="stylesheet">
@@ -31,7 +32,7 @@
             
             	<p><span class="glyphicon glyphicon-map-marker"></span> Toronto, Ontario, Canada </p>
                 <p><strong>Quests Completed: </strong> {{quests_complete}} </p>
-                <p><strong>Quests Posted: </strong> {{questes_posted}} </p>                            
+                <p><strong>Quests Posted: </strong> {{quests_posted}} </p>                            
             
          </div>	<!-- End of Well -->                
         </div>	<!-- End of column -->
@@ -45,52 +46,39 @@
             <div class="tabbable" id="tabs-84205">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#panel-535112" data-toggle="tab">Posts</a>
+                        <a href="#panel-535112" data-toggle="tab">My Quests</a>
                     </li>
                 </ul>
               
                 <div class="tab-content">
                     <div class="tab-pane active" id="panel-535112"> 
-                                
-            
-			                         
-			           <!-- Quest Post -->
-			          <a href="#" class="list-group-item">
-			                <div class="media col-md-2">
-			                	<div  class="ratio img-responsive" style="background-image: url(http://sushinoms.com/wp-content/uploads/2013/10/Pocky-midi-Matcha.jpg);"></div>
-			                </div>
-			                <div class="col-md-6">
-			                    <h6 class="list-group-item-heading postTitle"> Green Tea Pocky </h6>
-			                    <p class="list-group-item-text postDesc"> Im looking for this thing                    
-			                    </p>
-			                    
-			                    <div class="smallInfo">
-			                    	<small class="light-grey"><span class="glyphicon glyphicon-user"></span>usrname goes hre &nbsp;&nbsp;
-			                    	<span class="glyphicon glyphicon-map-marker"></span>Only city+cuntry here</small>
-			                    	</div><!-- ./smallInfo -->
-			                </div><!-- ./col-md-6 -->
-			                <div class="col-md-4">
-			                    <p><span class="money">$10</span><span class="postDate">June 20, 2014</span></p>
-			                </div>
-			               
-			          </a>  <!-- End of Quest Post -->
-	    
-			          
-			          <!-- Quest Post -->
-			          <a href="#" class="list-group-item" style="min-height: 45px;">
-			                <div class="media col-md-3">
-			                    <figure class="pull-left">
-			                        
-			                    </figure>
-			                </div>
-			                <div class="col-md-6">
-			                    <center><h6 class="list-group-item-heading postTitle"> More... </h6></center>
-			                </div>
-			                <div class="col-md-3 text-center">
-			                   
-			                </div>
-			          </a>  <!-- End of quest post -->
+                        <!-- Quest Post -->
+                        {% paginate 5,5 questsbyuser %}
+                        {% for quest in questsbyuser  %}
+                         <!-- Quest Post -->
+                        <a href="#" class="list-group-item">
+                              <div class="media col-md-2">
+                                  <div  class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
+                              </div>
+                              <div class="col-md-6">
+                                <h4 class="list-group-item-heading postTitle">{{quest.title}}</h4>
+                                <p class="list-group-item-text postDesc">{{quest.description}}
+                                </p>
+
+                                <div class="smallInfo">
+                                    <small class="light-grey"><span class="glyphicon glyphicon-user"></span>{{quest.questr_id.displayname}} &nbsp;&nbsp;
+                                    <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
+                                </div><!-- ./smallInfo -->
+                              </div>
+                              <div class="col-md-4">
+                                  <p><span class="money">${{quest.reward}}</span><span class="postDate">{{quest.creation_date}}</span></p>
+                        </div>
+                             
+                        </a> 
+                         <!-- End of Quest Post -->
+                        {% endfor %}                                
                     </div><!-- ./tab-pane -->
+                    {% show_pages %}
                 </div>
             </div>     
        </div>	<!-- End of column/well -->

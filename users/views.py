@@ -141,6 +141,17 @@ def profile(request):
     nav_link_2_label ="settings"
     nav_link_3 = "/user/logout"
     nav_link_3_label ="logout"
+    try:
+        user = QuestrUserProfile.objects.get(email=request.user)
+    except QuestrUserProfile.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
+
+    try:
+        questsbyuser = getQuestsByUser(user.id)
+    except Exception, e:
+        raise e
+        return render(request,'broke.html')
     return render(request,'profile.html', locals())
 
 @login_required

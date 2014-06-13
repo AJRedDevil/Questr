@@ -1,5 +1,6 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
+{% load endless %}
 {% block localhead %}
      <link href={% static "css/browse.css" %} rel="stylesheet">
      <link href={% static "css/smallpost.css" %} rel="stylesheet">
@@ -106,11 +107,10 @@
          
          <div class="col-md-8">
 	    <div class="panel panel-default">
-		  <!-- Default panel contents -->
-		  <div class="panel-heading">Reviews</div>
+		  <!-- Default panel contents -->        
         
-        
-        <div class="list-group">    
+        <div class="list-group">
+        {% paginate 5,5 allquests %}    
         {% for quest in allquests  %}
                     <!-- Quest Post -->
                     <a href="/quest/{{quest.id}}" class="list-group-item">
@@ -128,7 +128,7 @@
                          
                     </a>  <!-- End of Quest Post --> 
         {% endfor %}          
-      
+      {% show_pages %}
         </div>	<!-- End of list-group -->
 	    </div>
         </div>	<!-- End of column -->

@@ -29,3 +29,25 @@ def myTrades(request):
     nav_link_3 = "/user/logout"
     nav_link_3_label ="logout"
     return render(request, 'trades.html', locals())
+
+def questReview(request):
+    pagetype="loggedin"
+    user = request.user
+    nav_link_1 = "/user/profile"
+    nav_link_1_label = "my profile"
+    nav_link_2 = "/user/settings"
+    nav_link_2_label ="settings"
+    nav_link_3 = "/user/logout"
+    nav_link_3_label ="logout"
+    return render(request, 'questReview.html', locals())
+
+def questrReview(request):
+    pagetype="loggedin"
+    user = request.user
+    nav_link_1 = "/user/profile"
+    nav_link_1_label = "my profile"
+    nav_link_2 = "/user/settings"
+    nav_link_2_label ="settings"
+    nav_link_3 = "/user/logout"
+    nav_link_3_label ="logout"
+    return render(request, 'questrReview.html', locals())
