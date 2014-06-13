@@ -279,3 +279,7 @@ input.form-control:focus {
 .light-grey {
 	color: #979797;
 }
+
+.otherWell {
+	background: #f7f7f7;	
+}
