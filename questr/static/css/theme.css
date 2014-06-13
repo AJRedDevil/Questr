@@ -90,6 +90,24 @@ nav.navbar {
 .profileImg {
 	width: 40px;
 	height: auto;
+	float: left;
+}
+
+
+#notifications .dropdown-menu li, #notifications .dropdown-menu li {
+	background: aqua;
+	min-width: 300px;
+	max-height: 40px;
+}
+
+#notifications .dropdown-menu li .lol {
+	width: 40px;
+	height: 40px;
+	background: black;
+}
+
+#notifications .dropdown-menu li p {
+	text-overflow: ellipsis;
 }
 
 /*************** Secondary Navbar ***************/
@@ -207,7 +225,7 @@ nav.navbar {
     width: 100%;
 }
 
-imageUploader {
+.imageUploader {
     height: auto;
     width: 10px;
 }
