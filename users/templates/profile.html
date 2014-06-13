@@ -39,20 +39,15 @@
     
     
     
-    <!-- Current Quests -->
-    <div class="col-md-8">
-        <!-- Tab menu -->
-       <div class="col-md-12">  
-            <div class="tabbable" id="tabs-84205">
-                <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a href="#panel-535112" data-toggle="tab">My Quests</a>
-                    </li>
-                </ul>
-              
-                <div class="tab-content">
-                    <div class="tab-pane active" id="panel-535112"> 
-                        <!-- Quest Post -->
+        <div class="col-md-8 column">
+        <div class="col-md-12 column">
+	    <div class="panel panel-default">
+		  <!-- Default panel contents -->
+		  <div class="panel-heading">Posts</div>
+		  <div class="list-group">   
+          
+        
+        <!-- Quest Post -->
                         {% paginate 5,5 questsbyuser %}
                         {% for quest in questsbyuser  %}
                          <!-- Quest Post -->
@@ -74,19 +69,16 @@
                                   <p><span class="money">${{quest.reward}}</span><span class="postDate">{{quest.creation_date}}</span></p>
                         </div>
                              
-                        </a> 
-                         <!-- End of Quest Post -->
-                        {% endfor %}                                
-                    </div><!-- ./tab-pane -->
-                    {% show_pages %}
-                </div>
-            </div>     
-       </div>	<!-- End of column/well -->
+                        </a>
+                        {% endfor %}
+                        
+        </div>	<!-- End of list-group -->
+        {% show_pages %}
+	    </div>
+        </div><!-- ./col-md-12 -->
         
-
-  
-      
-       <div class="col-md-12 reviews">
+        
+        <div class="col-md-12 column">
 	    <div class="panel panel-default">
 		  <!-- Default panel contents -->
 		  <div class="panel-heading">Reviews</div>
@@ -138,11 +130,15 @@
                 </div>
                
           </a>  <!-- End of Quest Post -->
-              
         </div>	<!-- End of list-group -->
 	    </div>
-        </div>	<!-- End of column -->
-    </div>  <!-- End of reviews -->     
+        </div>
+    </div>  <!-- ./col-md-12 -->
+        
+        
+        </div>  <!-- ./col-md-8 -->
+   
+       
              
                    
     </div>  <!-- End of row -->
