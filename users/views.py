@@ -73,7 +73,8 @@ def resend_verification_email(request):
             if user and not user.email_status:
                 user_handler.send_verfication_mail(user)
         except QuestrUserProfile.DoesNotExist:
-            return redirect('home')
+            raise Http404
+            return render(request,'404.html')
     return redirect('home')
 
 @login_required
@@ -128,6 +129,7 @@ def userSettings(request):
             return render(request,'404.html', locals())        
         if user_form.is_valid():
             user_form.save()
+            message="Your profile has been updated!"
             return redirect('settings')
     pagetitle = "My Settings"
     return render(request, "generalsettings.html",locals())
@@ -179,6 +181,7 @@ def createPassword(request):
         user_form = SetPasswordForm(user, request.POST)
         if user_form.is_valid():
             user_form.save()
+            message="Your password has been created!"
             return redirect('home')
     pagetitle = "Create Your Password"
     return render(request, "createpassword.html", locals())
@@ -199,6 +202,7 @@ def changePassword(request):
         logging.warn(user_form.errors)
         if user_form.is_valid():
             user_form.save()
+            message="Your password has been changed!"
             return redirect('changepassword')
     pagetitle = "Change Your Password"
     return render(request, "passwordsettings.html",locals())

@@ -59,14 +59,15 @@ def editquest(request, questname):
             if user_form.is_valid():
                 quest_data = user_form.save(commit=False)
                 quest_data.save()
-                return redirect('home')
+                message = "Your quest has been updated!"
+                return redirect('viewquest', questname=questname)
 
     # Check if the owner and the user are the same
     if questdetails.questrs.id == request.user.id:
+        pagetitle="Edit - " + questdetails.title
         return render(request, 'editquest.html', locals())
 
     raise Http404
-    pagetitle="Edit - " + questdetails.title
     return render(request,'404.html')
 
 @login_required
@@ -94,6 +95,7 @@ def createquest(request):
             except Exception, e:
                 logging.warn(e)
                 pass
+            message="Your quest has been created!"
             return redirect('home')
     pagetitle = "Create a Quest"
     return render(request, 'newquest.html', locals())  

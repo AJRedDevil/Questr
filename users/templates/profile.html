@@ -51,7 +51,7 @@
                         {% paginate 5,5 questsbyuser %}
                         {% for quest in questsbyuser  %}
                          <!-- Quest Post -->
-                        <a href="#" class="list-group-item">
+                        <a href="/quest/{{quest.id}}" class="list-group-item">
                               <div class="media col-md-2">
                                   <div  class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
                               </div>
