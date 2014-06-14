@@ -48,6 +48,8 @@ class QuestrUserProfile(AbstractBaseUser):
     gender = models.CharField(_('gender'), max_length=1)
     notifications = models.BooleanField(_('notifications'), default=False)
     is_shipper = models.BooleanField(_('is_shipper'), default=False)
+    rating = models.DecimalField(_('rating'), default='0', max_digits=5, decimal_places=2)
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name','displayname']
