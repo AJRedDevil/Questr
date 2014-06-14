@@ -1,9 +1,13 @@
+
+
+from django.shortcuts import render, redirect
+
 from quests.models import Quests
 
 # Create your views here.
-def listfeaturedquests():
+def listfeaturedquests(questrs_id):
     """List all the featured quests"""
-    allquests = Quests.objects.all()
+    allquests = Quests.objects.exclude(questrs_id=questrs_id)
     return allquests
 
 def getQuestsByUser(questrs_id):
