@@ -18,6 +18,7 @@ def listallquests(request):
     # user = request.user
     # allquests = Quests.objects.all()
     # return render(request, 'listallquest.html', locals())
+    pagetitle="home"
     return redirect("home")
 
 @login_required
@@ -27,6 +28,7 @@ def viewquest(request, questname):
     questname=questname
     try:
         questdetails = Quests.objects.get(id=questname)
+        pagetitle = questdetails.title
     except Quests.DoesNotExist:
         raise Http404
         return render(request,'404.html')
@@ -34,6 +36,7 @@ def viewquest(request, questname):
     # Check if the owner and the user are the same
     if questdetails.questrs.id == request.user.id:
         isOwner = True
+
     return render(request, 'viewquest.html', locals())
 
 @login_required
@@ -63,6 +66,7 @@ def editquest(request, questname):
         return render(request, 'editquest.html', locals())
 
     raise Http404
+    pagetitle="Edit - " + questdetails.title
     return render(request,'404.html')
 
 @login_required
@@ -91,7 +95,7 @@ def createquest(request):
                 logging.warn(e)
                 pass
             return redirect('home')
-
+    pagetitle = "Create a Quest"
     return render(request, 'newquest.html', locals())  
 
 @login_required

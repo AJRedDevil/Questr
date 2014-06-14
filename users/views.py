@@ -33,6 +33,7 @@ def login(request):
         if auth_form.is_valid():
             auth_login(request, auth_form.get_user())
             return redirect('home')
+    pagetitle = "Login"
     return render(request, 'signin.html', locals())
 
 def signup(request):
@@ -51,10 +52,13 @@ def signup(request):
             userdata.backend='django.contrib.auth.backends.ModelBackend'
             auth_login(request, userdata)
             user_handler.send_verfication_mail(userdata)
+            pagetitle = "Please verify your email !"
             return render(request, 'thankyou.html', locals())
+        pagetitle = "Signup"
         return render(request, 'signup.html', locals())
     else:
         user_form = QuestrUserCreationForm()
+        pagetitle = "Signup"
         return render(request, 'signup.html', locals())
 
 @login_required
@@ -81,6 +85,7 @@ def home(request):
     user = request.user
     allquests = quest_handler.listfeaturedquests()
     # logging.warn(allquests)
+    pagetitle = "Home"
     return render(request,'homepage.html', locals())
 
 @login_required
@@ -99,6 +104,7 @@ def profile(request):
     except Exception, e:
         raise e
         return render(request,'broke.html')
+    pagetitle = user.first_name+' '+user.last_name
     return render(request,'profile.html', locals())
 
 @login_required
@@ -123,19 +129,21 @@ def userSettings(request):
         if user_form.is_valid():
             user_form.save()
             return redirect('settings')
-
+    pagetitle = "My Settings"
     return render(request, "generalsettings.html",locals())
 
 @login_required
 def myTrades(request):
     pagetype="loggedin"
     user = request.user
+    pagetitle = "My Trades"
     return render(request, 'trades.html', locals())
 
 @login_required
 def myPosts(request):
     pagetype="loggedin"
     user = request.user
+    pagetitle = "My Posts"
     return render(request, 'trades2.html', locals())
 
 @login_required
@@ -150,11 +158,11 @@ def getUserInfo(request, displayname):
         return render(request,'404.html')
 
     try:
-        questsbyuser = getQuestsByUser(publicuser.id)
+        questsbyuser = quest_handler.getQuestsByUser(publicuser.id)
     except Exception, e:
         raise e
         return render(request,'broke.html')
-
+    pagetitle = publicuser.first_name+' '+publicuser.last_name
     return render(request,'publicprofile.html', locals())
 
 @login_required
@@ -172,6 +180,7 @@ def createPassword(request):
         if user_form.is_valid():
             user_form.save()
             return redirect('home')
+    pagetitle = "Create Your Password"
     return render(request, "createpassword.html", locals())
 
 @login_required
@@ -191,6 +200,7 @@ def changePassword(request):
         if user_form.is_valid():
             user_form.save()
             return redirect('changepassword')
+    pagetitle = "Change Your Password"
     return render(request, "passwordsettings.html",locals())
 
 @login_required
@@ -271,5 +281,5 @@ def resetpassword(request):
             mailing.send_reset_password_email(user, new_random_password)
             message = "Please check your inbox for your new password"
             return render(request, "homepage.html", locals())
-
+    pagetitle = "Reset Your Password"
     return render(request,"resetpassword.html", locals())
