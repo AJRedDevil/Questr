@@ -14,7 +14,7 @@ import logging
 from access.requires import verified, is_alive
 from contrib import mailing, user_handler
 
-from quests.views import listfeaturedquests, getQuestsByUser
+from quests.contrib import quest_handler
 
 # Create your views here.
 def logout(request):
@@ -61,42 +61,12 @@ def signup(request):
             authenticate(username=userdata.email, password=userdata.password)
             userdata.backend='django.contrib.auth.backends.ModelBackend'
             auth_login(request, userdata)
-            send_verfication_mail(userdata)
+            user_handler.send_verfication_mail(userdata)
             return render(request, 'thankyou.html', locals())
         return render(request, 'signup.html', locals())
     else:
         user_form = QuestrUserCreationForm()
         return render(request, 'signup.html', locals())
-
-
-def __get_verification_url(user=None): 
-    """
-        Returns the verification url.
-    """
-    verf_link = ""
-    if user:
-        try:
-            prev_transactional = UserTransactional.objects.get(email = user.email, status = False)
-            if prev_transactional:
-                prev_transactional.status = True
-                prev_transactional.save()
-        except UserTransactional.DoesNotExist:
-            pass
-        count = UserTransactional.objects.count()
-        transcational = UserTransactional(id=count+1,email=user.email)
-        transcational.save()
-        token_id = transcational.get_token_id()
-        questr_token = QuestrToken(token_id=token_id)
-        questr_token.save()
-        verf_link = "{0}/user/email/confirm/{1}?questr_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_user_code(), token_id)
-    return verf_link
-
-def send_verfication_mail(user):
-    """
-        Sends the verification email to the user
-    """
-    verf_link = __get_verification_url(user)
-    mailing.send_verification_email(user, verf_link)
 
 @login_required
 def resend_verification_email(request):
@@ -108,7 +78,7 @@ def resend_verification_email(request):
         try:
             user = QuestrUserProfile.objects.get(email=user_email)
             if user and not user.email_status:
-                send_verfication_mail(user)
+                user_handler.send_verfication_mail(user)
         except QuestrUserProfile.DoesNotExist:
             return redirect('home')
     return redirect('home')
@@ -126,7 +96,7 @@ def home(request):
     nav_link_2_label ="settings"
     nav_link_3 = "/user/logout"
     nav_link_3_label ="logout"
-    allquests = listfeaturedquests()
+    allquests = quest_handler.listfeaturedquests()
     # logging.warn(allquests)
     return render(request,'homepage.html', locals())
 
@@ -166,7 +136,7 @@ def userSettings(request):
     nav_link_3 = "/user/logout"
     nav_link_3_label ="logout"
     settingstype="general"
-    password = passwordExists(user)
+    password = user_handler.passwordExists(user)
     try:
         user = QuestrUserProfile.objects.get(email=request.user)
     except QuestrUserProfile.DoesNotExist:
@@ -208,47 +178,6 @@ def myPosts(request):
     nav_link_3 = "/user/logout"
     nav_link_3_label ="logout"
     return render(request, 'trades2.html', locals())
-
-def getUsersWitNotificationEnabled():
-    """List all the quests by a particular user"""
-    usersWitNotificationEnabled = QuestrUserProfile.objects.filter(notifications='t')
-    return usersWitNotificationEnabled
-
-def getAccountStatus(status_id):
-    '''Get account status of user'''
-    status_list = ["Normal","Starred","Warned","Suspended","Closed"]
-    if status_id < len(status_list):
-        return status_list[status_id]
-
-def isActive(status):
-    """Returns if the account is active for the user"""
-    return "Yes" if status else "No"
-
-def isEmailVerified(status):
-    """Returns if the email of the user has been verified"""
-    return "Yes" if status else "No"
-
-def userExists(user):
-    """Checks if the user by the provided displayname exists already"""
-    try:
-        user = QuestrUserProfile.objects.get(displayname=user)
-    except QuestrUserProfile.DoesNotExist:
-        return False
-    if user:
-        return True
-
-def passwordExists(user):
-    """Checks if the user has created a password for himself, passwords created by PSA are unusable"""
-    return user.has_usable_password()
-        
-def emailExists(email):
-    """Checks if the user with the provided email exists already"""
-    try:
-        user = QuestrUserProfile.objects.get(email=email)
-    except QuestrUserProfile.DoesNotExist:
-        return False
-    if user:
-        return True
 
 @login_required
 def getUserInfo(request, displayname):
