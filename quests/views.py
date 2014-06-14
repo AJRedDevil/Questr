@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from libs import email_notifier
 
 from contrib import quest_handler
+from users.contrib.user_handler import isShipper
 from .forms import QuestCreationForm, QuestChangeForm
 from .models import Quests
 
@@ -13,28 +14,17 @@ import logging
 
 @login_required
 def listallquests(request):
-    pagetype="loggedin"
-    user = request.user
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
-    allquests = Quests.objects.all()
-    return render(request, 'listallquest.html', locals())
+    # pagetype="loggedin"
+    # user = request.user
+    # allquests = Quests.objects.all()
+    # return render(request, 'listallquest.html', locals())
+    return redirect("home")
 
 @login_required
 def viewquest(request, questname):
     pagetype="loggedin"
     user = request.user
     questname=questname
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
     try:
         questdetails = Quests.objects.get(id=questname)
     except Quests.DoesNotExist:
@@ -51,12 +41,6 @@ def editquest(request, questname):
     pagetype="loggedin"
     user = request.user
     questname=questname
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
     try:
         questdetails = Quests.objects.get(id=questname)
     except Quests.DoesNotExist:
@@ -87,12 +71,6 @@ def createquest(request):
     from users.contrib.user_handler import getShippers
     pagetype="loggedin"
     user = request.user
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
 
     if request.method=="POST":
         now = timezone.now()

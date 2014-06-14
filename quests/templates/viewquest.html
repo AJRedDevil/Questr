@@ -14,13 +14,6 @@
     
 {% endblock localhead %}
 {% block content %}
-
-  
-{% if isOwner %}
-	
-	
-{% endif %}
-  
   <div class="container">
 		<div class="row clearfix">
 			<div class="col-md-12 column">
@@ -65,7 +58,10 @@
 							<div class="row clearfix">
 								<div class="col-md-8 column inBodyWell">
 									<p>Offer: ${{questdetails.reward}}</p>
+								{# Only allowing shippers to apply for quests #}
+								{% if user.is_shipper == True %}
 									<button type="button" class="btn btn-default offerBtn">Offer</button>
+								{% endif %}
 								</div>
 								<div class="col-md-4 column">
 									<center>
@@ -78,8 +74,11 @@
 														
 							<p>{{questdetails.description}}</p>
 							
+							{# Only allowing shippers to view addresses #}
+							{% if user.is_shipper or isOwner %}
 							<p>Departure Address: {{questdetails.srcaddress}},{{questdetails.srccity}}</p>
 							<p>Destination Address: {{questdetails.dstaddress}},{{questdetails.dstcity}}</p>
+							{% endif %}
 						
 						</div>	<!-- ./well -->
 					</div>	<!-- End of column -->

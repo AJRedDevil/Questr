@@ -1,7 +1,9 @@
 
 
 from random import choice
+from django.conf import settings
 
+import mailing
 from users.models import QuestrUserProfile, UserTransactional, QuestrToken
 
 def get_random_password():

@@ -10,8 +10,8 @@
 {% block content%}
 
 <div class="container">
+    <form action="" method="post">{% csrf_token %}
     <div class="row clearfix">
-    {% csrf_token %}
         <div class="col-md-10 col-md-offset-1 column">
 	    	<h3 class="lead grey"><span class="glyphicon glyphicon-user blue"></span> Create your Questr account with</h3>
 	         
@@ -123,24 +123,24 @@
                     {{user_form.displayname.errors}}
                 {% endif %}
                 
-                
-                
-                
                 <label for="firstName" class="control-label">First Name</label>
-                <input type="text" class="form-control input-sm" name="first_name" id="inputFirst" placeholder="" required>   
-                 
+                <input type="text" class="form-control input-sm" name="first_name" id="first_name" placeholder="" required>   
+                {% if user_form.first_name.errors %}
+                    {{user_form.first_name.errors}}
+                {% endif %}   
               
-                <label for="username" class="control-label">Username</label>
-                <input type="text" class="form-control input-sm" name="displayname" id="username" placeholder="" required>
-                {% if user_form.displayname.errors %}
-                    {{user_form.displayname.errors}}
+                <label for="username" class="control-label">Last Name</label>
+                <input type="text" class="form-control input-sm" name="last_name" id="last_name" placeholder="" required>
+                {% if user_form.last_name.errors %}
+                    {{user_form.last_name.errors}}
                 {% endif %}
 
         	</div><!-- ./col-md-4 -->
     		<div class="col-md-4 column">
         		        	
     		</div>
-    		<div class="col-md-4 column">
+    		
+            <div class="col-md-4 column">
         		        	
     		</div>
         	
@@ -153,14 +153,14 @@
 	    		<div class="col-md-8 column">	
 	              <hr>
 	              <small class="small" id="disclaimer">By continuing, I agree to Questr's <a href="#">Seller Agreement</a> and <a href="#">E-Sign Consent</a>.</small>
-	              <button type="button" class="btn btn-embossed btn-primary" id="createAccBtn">Create Account</button>
+	              <button type="submit" class="btn btn-embossed btn-primary" id="createAccBtn">Create Account</button>
 	    		</div>
 	    		<div class="col-md-4 column">
 	    		
 	    		</div>
     		</div><!-- ./col-md-10 -->
     </div><!-- ./row -->                  
-
+</form>
 </div><!-- ./container -->
 
 {% endblock %}    

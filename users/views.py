@@ -43,6 +43,8 @@ def signup(request):
         return redirect('home')
     if request.method == "POST":
         user_form = QuestrUserCreationForm(request.POST)
+        logging.warn(user_form.is_valid())
+        logging.warn(user_form.errors)
         if user_form.is_valid():
             userdata = user_form.save()
             authenticate(username=userdata.email, password=userdata.password)
@@ -228,13 +230,14 @@ def verify_email(request, user_code):
     """
         Verifies email of the user and redirect to the home page
     """
+    logging.warn(user_code)
     if user_code:
         try:
             transcational = UserTransactional.objects.get(user_code__regex=r'^%s' % user_code)
             if transcational:
                 if transcational.status:
                     try:
-                        user = QuestrUserProfile.objects.get(id=transcational.id)
+                        user = QuestrUserProfile.objects.get(email=transcational.email)
                         if user:
                             user.email_status = True
                             user.save()

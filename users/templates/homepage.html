@@ -23,11 +23,13 @@
                                 <div>
                                     <a href="/user/{{quest.questrs.displayname}}">{{quest.questrs.first_name}} {{quest.questrs.last_name}}</a>
                                 </div>
-
+                                {# only allow shippers to see addresses #}
+                                {% if user.is_shipper == True %}
                                 <div>
                                     From: {{quest.srcaddress}}
                                     To: {{quest.dstaddress}}
-                                </div>
+                                </div>                                    
+                                {% endif %}
 
                                 <div>
                                     Posted: <i class="posted">{{quest.creation_date}}</i>

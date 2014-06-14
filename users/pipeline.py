@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.conf import settings
 from requests import request, HTTPError
 from social.pipeline.partial import partial
-from .views import userExists, emailExists
+from users.contrib.user_handler import userExists, emailExists
 from .models import QuestrUserProfile as User
 
 

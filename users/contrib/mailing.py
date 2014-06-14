@@ -32,7 +32,7 @@ def send_verification_email(user, verf_link):
     template_name = "Welcome_Email"
     try:
         msg = __get_verification_template(template_name, user.first_name, user.email, verf_link)
-        logging.debug("Verification email Sent")
+        logging.warn("Verification email Sent")
         msg.send()
     except Exception, e:
         logging.exception(str(e))

@@ -63,11 +63,11 @@ class QuestrUserProfile(AbstractBaseUser):
 class UserTransactional(models.Model):
     id = models.IntegerField(_('id'), primary_key=True)
     user_code = models.CharField(_('user_code'), max_length=64, unique=True)
-    email = models.EmailField(_('email'), max_length=100, unique=True)
+    email = models.EmailField(_('email'), max_length=100)
     status = models.BooleanField(_('status'), default=False)
 
     def generate_hash(self):
-        return hashlib.sha256(str(self.email)).hexdigest()
+        return hashlib.sha256(str(timezone.now()) + str(self.email)).hexdigest()
 
     def get_truncated_user_code(self):
         return self.user_code[:7]
