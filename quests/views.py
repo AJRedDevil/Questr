@@ -93,3 +93,22 @@ def createquest(request):
             return redirect('home')
 
     return render(request, 'newquest.html', locals())  
+
+@login_required
+def applyForQuest(request, questname):
+    """Takes in applications for a quest"""
+    pagetype="loggedin"
+    shipper = request.user # the guy logged in is the shipper
+    questname = questname
+    try:
+        questdetails = Quests.objects.get(id=questname, isaccepted=False)
+    except Quests.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
+    # add a shipper to the quest
+    quest_handler.addShipper(str(shipper.id), questname)
+    message="Your application has been sent to the quest owner"
+    logging.warn(message)
+    return redirect('viewquest', questname=questname)
+
+

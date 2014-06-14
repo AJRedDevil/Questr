@@ -59,8 +59,8 @@
 								<div class="col-md-8 column inBodyWell">
 									<p>Offer: ${{questdetails.reward}}</p>
 								{# Only allowing shippers to apply for quests #}
-								{% if user.is_shipper == True %}
-									<button type="button" class="btn btn-default offerBtn">Offer</button>
+								{% if user.is_shipper and not questdetails.isaccepted %}
+									<a href="apply"><button type="button" class="btn btn-default offerBtn">Apply</button></a>
 								{% endif %}
 								</div>
 								<div class="col-md-4 column">

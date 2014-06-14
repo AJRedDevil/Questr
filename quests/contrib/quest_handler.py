@@ -11,6 +11,33 @@ def getQuestsByUser(questrs_id):
     questsbysuer = Quests.objects.filter(questrs_id=questrs_id)
     return questsbysuer
 
+def addShipper(shipper_id, questname):
+    """adds a shipper to a posted quest"""
+    try:
+        questdetails = Quests.objects.get(id=questname)
+    except Quests.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
+
+    current_shipper = questdetails.shipper
+    # for first application
+    if current_shipper==None:
+        current_shipper = []
+    else:
+        current_shipper = current_shipper.split(',')
+    # check if shipper has already applied
+    if not shipper_id in current_shipper:
+        current_shipper.append(shipper_id)
+        current_shipper = ','.join(current_shipper)
+    else:
+        return redirect('home')
+
+    try:
+        Quests.objects.filter(id=questname).update(shipper=current_shipper)
+    except Quests.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
+
 def prepNewQuestNotification(user, questdetails):
     """Prepare the details for notification emails for new quests"""
     template_name="New_Quest_Notification"

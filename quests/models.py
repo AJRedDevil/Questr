@@ -20,7 +20,7 @@ class Quests(models.Model):
         blank=False)
     size = models.TextField(_('size'), default="backpack")
     # rating = models.IntegerField(_('rating'), default='0')
-    # offerers = models.TextField(_('questrs')) # if posted under an offer this would be a single digit (pk of questr object of the offerer)
+    shipper = models.TextField(_('shipper'), blank=True, null=True) # if posted under an offer this would be a single digit (pk of questr object of the offerer)
     # qr_code = models.URLField(_('qr_code'), blank=True)
     srccity = models.TextField(_('srccity'), default="Toronto") # this is the source city
     dstcity = models.TextField(_('dstcity'), default="Toronto") # this is the destination city

@@ -13,7 +13,7 @@ class QuestCreationForm(forms.ModelForm):
     """
     class Meta:
         model = Quests
-        exclude = ['questrs','status','creation_date','is_accepted']
+        exclude = ['questrs','status','creation_date','is_accepted', 'shipper']
         # widget = {
         #     'title' : forms.TextInput(attrs = { 'placeholder': 'Title'}),
         #     'reward' : forms.TextInput(attrs = { 'placeholder': "You're offering"}),            
@@ -32,7 +32,7 @@ class QuestChangeForm(forms.ModelForm):
     """
     class Meta:
         model = Quests
-        exclude = ['questrs','status','creation_date','is_accepted']
+        exclude = ['questrs','status','creation_date','is_accepted', 'shipper']
         # widget = {
         #     'title' : forms.TextInput(attrs = { 'placeholder': 'Title'}),
         #     'reward' : forms.TextInput(attrs = { 'placeholder': "You're offering"}),            
