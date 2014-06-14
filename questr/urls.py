@@ -3,7 +3,7 @@ import views as mainview
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', mainview.index, name="index"),
+    url(r'^$', mainview.index, name="mainindex"),
     url(r'loadpage/(?P<template>[-_\w/.]+)$', mainview.loadPage, ),    
     url(r'^beta/', include('beta.urls')),
     url(r'^user/', include('users.urls')),

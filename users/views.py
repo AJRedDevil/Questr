@@ -20,18 +20,11 @@ from quests.contrib import quest_handler
 def logout(request):
     """Logs out user"""
     auth_logout(request)
-    # nextlink="signup"
     return redirect('index')
     
 def login(request):
     """Home view, displays login mechanism"""
     pagetype="public"
-    nav_link_1 = "/user/login"
-    nav_link_1_label = "login"
-    nav_link_2 = "/user/signup"
-    nav_link_2_label ="signup"
-    nav_link_3 = "#"
-    nav_link_3_label ="about us"
     ## if authenticated redirect to user's homepage directly ##
     if request.user.is_authenticated():
         return redirect('home')
@@ -45,12 +38,6 @@ def login(request):
 def signup(request):
     """Signup, if request == POST, creates the user"""
     pagetype="public"
-    nav_link_1 = "/user/login"
-    nav_link_1_label = "login"
-    nav_link_2 = "/user/signup"
-    nav_link_2_label ="signup"
-    nav_link_3 = "#"
-    nav_link_3_label ="about us"
     ## if authenticated redirect to user's homepage directly ##
     if request.user.is_authenticated():
         return redirect('home')
@@ -90,12 +77,6 @@ def home(request):
     pagetype="loggedin"
     secondnav="listquestsecondnav"
     user = request.user
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
     allquests = quest_handler.listfeaturedquests()
     # logging.warn(allquests)
     return render(request,'homepage.html', locals())
@@ -105,12 +86,6 @@ def profile(request):
     """This displays user's profile page"""
     pagetype="loggedin"
     user = request.user
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
     try:
         user = QuestrUserProfile.objects.get(email=request.user)
     except QuestrUserProfile.DoesNotExist:
@@ -129,12 +104,6 @@ def userSettings(request):
     """Change's user's personal settings"""
     pagetype="loggedin"
     user = request.user
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
     settingstype="general"
     password = user_handler.passwordExists(user)
     try:
@@ -159,24 +128,12 @@ def userSettings(request):
 def myTrades(request):
     pagetype="loggedin"
     user = request.user
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
     return render(request, 'trades.html', locals())
 
 @login_required
 def myPosts(request):
     pagetype="loggedin"
     user = request.user
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
     return render(request, 'trades2.html', locals())
 
 @login_required
@@ -184,12 +141,6 @@ def getUserInfo(request, displayname):
     '''This is used to display user's public profile'''
     pagetype="loggedin"
     user = request.user
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
     try:
         publicuser = QuestrUserProfile.objects.get(displayname=displayname)
     except QuestrUserProfile.DoesNotExist:
@@ -209,12 +160,6 @@ def createPassword(request):
     """Create a password for socially logged in user"""
     pagetype="loggedin"
     user = request.user
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
     settingstype="password"
 
     if passwordExists(request.user):
@@ -232,12 +177,6 @@ def changePassword(request):
     """Change's user's personal settings"""
     pagetype="loggedin"
     user = request.user
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
     settingstype="password"
     ##check if the user has password, if they don't they'd be provided with a link to create one for them
     password = passwordExists(user)
@@ -257,12 +196,6 @@ def cardSettings(request):
     """Change's user's personal settings"""
     pagetype="loggedin"
     user = request.user
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
     settingstype="card"
     return render(request, "cardsettings.html",locals())
 
@@ -271,12 +204,6 @@ def emailSettings(request):
     """Change's user's personal settings"""
     pagetype="loggedin"
     user = request.user
-    nav_link_1 = "/user/profile"
-    nav_link_1_label = "my profile"
-    nav_link_2 = "/user/settings"
-    nav_link_2_label ="settings"
-    nav_link_3 = "/user/logout"
-    nav_link_3_label ="logout"
     settingstype="email"
     return render(request, "emailsettings.html",locals())
 
