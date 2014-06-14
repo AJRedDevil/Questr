@@ -47,6 +47,7 @@ class QuestrUserProfile(AbstractBaseUser):
     privacy = models.BooleanField(_('privacy'), default=False)
     gender = models.CharField(_('gender'), max_length=1)
     notifications = models.BooleanField(_('notifications'), default=False)
+    is_shipper = models.BooleanField(_('is_shipper'), default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name','displayname']
