@@ -95,7 +95,7 @@ def profile(request):
         return render(request,'404.html')
 
     try:
-        questsbyuser = getQuestsByUser(user.id)
+        questsbyuser = quest_handler.getQuestsByUser(user.id)
     except Exception, e:
         raise e
         return render(request,'broke.html')
@@ -164,7 +164,7 @@ def createPassword(request):
     user = request.user
     settingstype="password"
 
-    if passwordExists(request.user):
+    if user_handler.passwordExists(request.user):
         return redirect('home')
     
     if request.method == "POST":
@@ -181,7 +181,7 @@ def changePassword(request):
     user = request.user
     settingstype="password"
     ##check if the user has password, if they don't they'd be provided with a link to create one for them
-    password = passwordExists(user)
+    password = user_handler.passwordExists(user)
     # logging.warn(user)
     # logging.warn(password)
 

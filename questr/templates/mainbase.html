@@ -66,32 +66,33 @@
 	                        <li><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                         	{% comment %}
                             <li><a href="/quest">Browse</a></li>                  
-                            {% endcomment %}             
                             
                             <li class="dropdown" id="notifications">
-                            	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="navbar-new">2</span></a>
-                            	<ul class="dropdown-menu">
-	
-	                                <li>
-		                                <!-- Notification -->
-										<a href="#" class="list-group-item">
-									
-										    <div class="media col-md-3 imgBox">
-										    	<div class="ratio img-responsive" style="background-image: url(http://www.stars-arena.com/wp-content/uploads/2013/08/emma-watson-3.jpg);"></div>
-										    </div>
-										    <div class="col-md-9">
-										        <div class="smallInfo">
-										        	<small class="light-grey">Emma Watson left you a comment: Hello World ;)</small>
-										        </div><!-- ./smallInfo -->
-										
-										    
-										    </div> 
-										</a>  <!-- End of notification -->
-	                                </li>
-	                                
-	                            </ul>
-                            </li>
-                                                                                        
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="navbar-new">2</span></a>
+                                <ul class="dropdown-menu">
+
+                                    <li>
+                                        <!-- Notification -->
+                                        <a href="#" class="list-group-item">
+                                    
+                                            <div class="media col-md-3 imgBox">
+                                                <div class="ratio img-responsive" style="background-image: url(http://www.stars-arena.com/wp-content/uploads/2013/08/emma-watson-3.jpg);"></div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="smallInfo">
+                                                    <small class="light-grey">Emma Watson left you a comment: Hello World ;)</small>
+                                                </div><!-- ./smallInfo -->
+                                        
+                                            
+                                            </div> 
+                                        </a>  <!-- End of notification -->
+                                    </li>
+                                    
+                                </ul>
+                            </li>                            
+
+                            {% endcomment %}             
+                            
                             <li class="dropdown">
 								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.first_name}}<span class="caret"></span></a>
 								<ul class="dropdown-menu">
