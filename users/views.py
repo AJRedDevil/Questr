@@ -160,6 +160,7 @@ def myPosts(request):
     pagetype="loggedin"
     user = request.user
     pagetitle = "My Posts"
+    myquests = quest_handler.getQuestsByUser(user)
     return render(request, 'myquests.html', locals())
 
 @login_required

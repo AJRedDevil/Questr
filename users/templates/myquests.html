@@ -26,59 +26,55 @@
                 
                 <div class="tab-content">
                     <div class="tab-pane active" id="panel-535112">
-    
+                    {% for quest in  myquests %}
                         <!-- Quest Post -->
-                        <a href="#" class="list-group-item">
+                        <a href="/quest/{{quest.id}}" class="list-group-item">
                             <div class="media col-md-2">
-                                <div class="ratio img-responsive" style="background-image: url(http://upload.wikimedia.org/wikipedia/commons/2/22/Turkish_Van_Cat.jpg);"></div>
+                                <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
                             </div>
                             <div class="col-md-6">
-                                <h4 class="list-group-item-heading postTitle"> This is the Posts </h4>
+                                <h4 class="list-group-item-heading postTitle"> {{quest.title}} </h4>
                                 <p class="list-group-item-text postDesc"> 
                                     Clicking this post should direct the user to this specific questView.html                          
                                 </p>
                             </div>
                             <div class="col-md-4">
-                               
-                                    <span class="money">$10</span>
+                                    <span class="money">${{quest.reward}}</span>
                                     <span class="postDate">
-                                    	<button type="button" class="btn btn-default contact" data-toggle="modal" data-target="#myModal">Contact</button>
-                                    	<form action="http://google.com">
-										    <input value="Accept" type="button" class="btn btn-default accept" rel="tooltip" title="We'll notify the user that you're ready to deliver!">
-										</form>                                                                   	
+                                        <button type="button" class="btn btn-default contact" data-toggle="modal" data-target="#myModal">Contact</button>
+                                        <form action="http://google.com">
+                                            <input value="Accept" type="button" class="btn btn-default accept" rel="tooltip" title="We'll notify the user that you're ready to deliver!">
+                                        </form>                                                                     
                                         
                                     </span>
-                                </p>
                             </div>
                            
                             </a>  <!-- End of Quest Post -->
                            
                     </div> <!-- End of tab-pane -->
-                        
+                    {% endfor %}    
+                {% comment %}
+                
+                <div class="tab-pane" id="panel-670038">
                     
-                        
-                    <div class="tab-pane" id="panel-670038">
-                        
-                        <!-- Quest Post -->
-                        <a href="#" class="list-group-item">
-                            <div class="media col-md-2">
-                                <div  class="ratio img-responsive" style="background-image: url(http://sushinoms.com/wp-content/uploads/2013/10/Pocky-midi-Matcha.jpg);"></div>
-                            </div>
-                            <div class="col-md-6">
-                                <h4 class="list-group-item-heading postTitle"> Green Tea Pocky </h4>
-                                <p class="list-group-item-text postDesc"> Im looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thing                         
-                                </p>
-                            </div>
-                            <div class="col-md-4">
-                                <p><span class="money">$10</span><span class="postDate">June 20, 2014</span></p>
-                            </div>
-                           
-                        </a>  <!-- End of Quest Post -->
-                        
-                    </div>  <!-- End of tab-pane -->
-                                    
+                    <!-- Quest Post -->
+                    <a href="#" class="list-group-item">
+                        <div class="media col-md-2">
+                            <div  class="ratio img-responsive" style="background-image: url(http://sushinoms.com/wp-content/uploads/2013/10/Pocky-midi-Matcha.jpg);"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="list-group-item-heading postTitle"> Green Tea Pocky </h4>
+                            <p class="list-group-item-text postDesc"> Im looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thing                         
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <p><span class="money">$10</span><span class="postDate">June 20, 2014</span></p>
+                        </div>
+                       
+                    </a>  <!-- End of Quest Post -->
                     
-                    
+                </div>  <!-- End of tab-pane -->                    
+                {% endcomment %}                    
                 </div>  <!-- End of tab-content -->
             </div>  <!-- End of tabbable -->    
         </div>

@@ -74,7 +74,7 @@ def editquest(request, questname):
 @login_required
 def createquest(request):
     """creates new quest and sends notification to shippers"""
-    from users.contrib.user_handler import getShippers
+    from users.contrib.user_handler import getShipper
     pagetype="loggedin"
     user = request.user
 
