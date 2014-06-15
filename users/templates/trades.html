@@ -14,26 +14,56 @@
     <div class="row">
        <div class="col-md-8 col-md-offset-2 column"> 
           
-          
-   
-            <div class="tabbable" id="tabs-84205">
-                <ul class="nav nav-tabs">
+          <div class="panel panel-default">
+		  <!-- Default panel contents -->
+		  <div class="panel-heading">
+			  <ul class="nav nav-tabs">
                     <li class="active">
                         <a href="{% url 'mytrades' %}">My Offers</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="{% url 'myposts' %}">My Posts</a>
                     </li>                   
                 </ul>
-                
-                <div class="tab-content">
+		  </div>
+		
+		  <div class="list-group">   
                     {% for quest,shippers in shipperlist.items %}
-                        <div class="tab-pane active" id="panel-535112">
-        
-                            <!-- Quest Post -->
+                    
+                    <!-- Quest Post -->
                             <a href="/quest/{{quest.id}}" class="list-group-item">
                                 <div class="media col-md-2">
-                                    <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
+                                    <div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="list-group-item-heading"> {{quest.title| title}} </h6>
+                                    
+                                    <p class="list-group-item-text"> 
+                                    	{% for shipper in shippers %}
+                                                    {{shipper.0.displayname}}, 
+                                                {% endfor %} has shown interest!
+                                    </p>
+                                    <small><span class="glyphicon glyphicon-time"></span> time and date</small>
+                                </div>
+                                <div class="col-md-4">         
+                                	<div class="col-md-6">
+                                		<button onclick="change()" value="Accept" class="btn btn-embossed btn-primary" id="acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button>
+                                	</div>
+                                	<div class="col-md-6">
+                                		<button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
+                                	</div>
+                                </div>
+                               
+                            </a>  <!-- End of Quest Post -->
+                    
+                    
+                    
+                 
+                    {% comment %}
+         
+                            <a href="/quest/{{quest.id}}" class="list-group-item">
+                                <div class="media col-md-2">
+                                    <div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
                                 </div>
                                 <div class="col-md-6">
                                     <h6 class="list-group-item-heading postTitle"> {{quest.title| title}} </h6>
@@ -44,52 +74,25 @@
                                                 {% endfor %}
                                     </p>
                                 </div>
-                                <div class="col-md-4">
-                                        <span class="money">${{quest.reward}}</span>
-                                        <span class="postDate">
-                                            <button type="button" class="btn btn-default contact" data-toggle="modal" data-target="#myModal">Contact</button>
-                                            <form action="">
-                                                <input onclick="change()" value="Accept" type="button" class="btn btn-default" id="acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!"></input>
-                                            </form>                                                                     
-                                            
-                                        </span>
+                                <div class="col-md-4">         
+                                	<div class="col-md-6">
+                                		<button onclick="change()" value="Accept" class="btn btn-embossed btn-primary" id="acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button>
+                                	</div>
+                                	<div class="col-md-6">
+                                		<button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
+                                	</div>
                                 </div>
                                
                             </a>  <!-- End of Quest Post -->
-                               
-                        </div> <!-- End of tab-pane -->
-                    {% endfor %}
-
-                {% comment %}
-                    <div class="tab-pane" id="panel-670038">
+                               {% endcomment %}
+                            
+                   
+             {% endfor %}
                         
-                        <!-- Quest Post -->
-                        <a href="#" class="list-group-item">
-                            <div class="media col-md-2">
-                                <div  class="ratio img-responsive" style="background-image: url(http://sushinoms.com/wp-content/uploads/2013/10/Pocky-midi-Matcha.jpg);"></div>
-                            </div>
-                            <div class="col-md-6">
-                                <h4 class="list-group-item-heading postTitle"> Green Tea Pocky </h4>
-                                <p class="list-group-item-text postDesc"> Im looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thingIm looking for this thing                         
-                                </p>
-                            </div>
-                            <div class="col-md-4">
-                                <p><span class="money">$10</span><span class="postDate">June 20, 2014</span></p>
-                            </div>
-                           
-                        </a>  <!-- End of Quest Post -->
-                        
-                    </div>  <!-- End of tab-pane -->
-                                    
-                {% endcomment %}
-
-                </div>  <!-- End of tab-content -->
-            </div>  <!-- End of tabbable -->    
+        </div>	<!-- End of list-group -->
+       
+	    </div>    
         </div>
-    </div>  <!-- End of column -->          
-    </div>  <!-- End of row -->
-</div>  <!-- End of container -->
-
 
 
 <!-- Modal -->
