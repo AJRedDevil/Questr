@@ -9,39 +9,38 @@
             <div class="content">
                 {% for quest in  allquests %}
                 <!-- Single post -->
+                
                 <div class="feature shadows body-borders">
                     <div class="picture">
                         
-                        <a class="image" href="/quest/{{quest.id}}" title="Title"><img src={{quest.item_images}}></a>
+                        <a  href="/quest/{{quest.id}}" class="image" title="Title"><img src={{quest.item_images}}></a>
 
                         <div class="item-content">
                             <h4 class="title">{{quest.title | title}}</h4>
 
                             <p class="description">{{quest.description | truncatewords:10  }}</p>
 
-                            <div class="meta">
-                                <div>
-                                    <a href="/user/{{quest.questrs.displayname}}">{{quest.questrs.first_name}} {{quest.questrs.last_name}}</a>
-                                </div>
-                                {# only allow shippers to see addresses #}
-                                {% if user.is_shipper == True %}
-                                <div>
-                                    From: {{quest.srcaddress}}
-                                    To: {{quest.dstaddress}}
-                                </div>                                    
-                                {% endif %}
-
-                                <div>
-                                    <p><div class="glyphicon glyphicon-time"></div> {{quest.creation_date}}</p>
-                                </div>
-                            </div><!-- End of meta -->
+                                <div class="post-info">
+	                                <a href="/user/{{quest.questrs.displayname}}"> <p>{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p></a>
+	                              
+	                                {# only allow shippers to see addresses #}
+	                                {% if user.is_shipper == True %}
+	                              
+	                                    <p>From: {{quest.srcaddress}}</p>
+	                                    <p>To: {{quest.dstaddress}}</p>
+	                                    <p><span class="glyphicon glyphicon-time"></span> {{quest.creation_date}}</p>
+	                                                         
+	                                {% endif %}         
+                                </div><!-- ./post-info -->
                         </div><!-- End of item-content -->
                     </div><!-- End of picture -->
-                </div><!-- End of feature -->
-                <!-- Single post -->   
+                    
+                </div><!-- ./feature -->
+                <!-- Single post --> 
+            
                {% endfor %}           
-            </div>  <!-- End of content -->         
-         </div> <!-- End of scroll-container -->
+            </div>  <!-- ./content -->         
+         </div><!-- ./row -->
 {% comment %}
 <div id="pages">
     <a href="index.html"></a>
