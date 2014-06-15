@@ -13,11 +13,8 @@ img {
 	display: inline-block;
 	vertical-align: top;
 	margin-bottom: 12px;
-	-moz-border-bottom-colors: none;
-	-moz-border-left-colors: none;
-	-moz-border-right-colors: none;
-	-moz-border-top-colors: none;
 	background: white;
+	
  }
  
  .feature .description {

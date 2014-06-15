@@ -40,11 +40,12 @@ hr {
 	box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 }
 
-.border-radius {
+.body-borders {
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
+	border: none;
 }
  
 

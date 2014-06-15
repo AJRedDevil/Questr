@@ -9,7 +9,7 @@
             <div class="content">
                 {% for quest in  allquests %}
                 <!-- Single post -->
-                <div class="feature shadows border-radius">
+                <div class="feature shadows body-borders">
                     <div class="picture">
                         
                         <a class="image" href="/quest/{{quest.id}}" title="Title"><img src={{quest.item_images}}></a>
@@ -32,7 +32,7 @@
                                 {% endif %}
 
                                 <div>
-                                    Posted: <i class="posted">{{quest.creation_date}}</i>
+                                    <p><div class="glyphicon glyphicon-time"></div> {{quest.creation_date}}</p>
                                 </div>
                             </div><!-- End of meta -->
                         </div><!-- End of item-content -->
