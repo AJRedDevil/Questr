@@ -44,12 +44,12 @@
 						<div class="well">
 							<div class="row clearfix">
 								<div class="col-md-10 column">
-									<h3 class="title">{{questdetails.title}}</h3>
+									<h5 class="title">{{questdetails.title}}</h5>
 								</div>
 								{% if isOwner %}
 									<div class="col-md-2 column">								
 										<a href="edit">					
-											<button type="button" class="btn btn-default" style="float:right;">Edit Post</button>
+											<button type="button" class="btn btn-embossed btn-default" style="float:right;">Edit Post</button>
 										</a>									
 									</div>
 								{% endif %}
@@ -68,7 +68,7 @@
 								</div>
 								<div class="col-md-4 column">
 									<center>
-										<h4>Size</h4>
+										<h6>Size</h6>
 										<img src={% static 'img/backpack.png' %} style="width:50px; height:auto;" />
 										<p>{{questdetails.size}}</p>
 									</center>
@@ -94,7 +94,7 @@
 							<p>
 								<a href="/user/{{questdetails.questrs.displayname}}">{{questdetails.questrs.first_name}} {{questdetails.questrs.last_name}}</a>
 							</p>
-							<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
+							 <input id="input-21e" value="0" type="number" class="rating" min=0 max=100 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" >
 							<p>
 								Posted: {{questdetails.creation_date}}<br>
 								Location: {{questdetails.location}}, Canada
