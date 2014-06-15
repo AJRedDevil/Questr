@@ -1,18 +1,25 @@
     
-a.list-group-item {
+.list-group-item {
 	height:auto;
 	min-height: 100px;
 	background: white;
 }
 
-a.list-group-item:hover {
+.list-group-item:hover {
 	background: rgba(250,250,250,1);
 }
 
-.list-group-item img {
-	
+.list-group-item .post-image {
+	margin: 0;
 }
-	
+
+.list-group-item .media {
+	margin: 0;
+}
+
+.list-group-item button {
+	float: right;
+}
 
 .list-group-item .col-md-4 p span.money {
 	text-align: center;

@@ -11,7 +11,8 @@
 {% endblock localhead %}
 {% block content %}
 <div class="container">
-    <div class="row">
+    <div class="row">	
+    <div class="col-md-12 column"> 
        <div class="col-md-8 col-md-offset-2 column"> 
           
           <div class="panel panel-default">
@@ -26,35 +27,33 @@
                     </li>                   
                 </ul>
 		  </div>
-		
-		  <div class="list-group">   
-                    {% for quest,shippers in shipperlist.items %}
-                    
-                    <!-- Quest Post -->
-                            <a href="/quest/{{quest.id}}" class="list-group-item">
-                                <div class="media col-md-2">
-                                    <div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
-                                </div>
-                                <div class="col-md-6">
-                                    <h6 class="list-group-item-heading"> {{quest.title| title}} </h6>
-                                    
-                                    <p class="list-group-item-text"> 
-                                    	{% for shipper in shippers %}
-                                                    {{shipper.0.displayname}}, 
-                                                {% endfor %} has shown interest!
-                                    </p>
-                                    <small><span class="glyphicon glyphicon-time"></span> time and date</small>
-                                </div>
-                                <div class="col-md-4">         
-                                	<div class="col-md-6">
-                                		<button onclick="change()" value="Accept" class="btn btn-embossed btn-primary" id="acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button>
-                                	</div>
-                                	<div class="col-md-6">
-                                		<button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
-                                	</div>
-                                </div>
-                               
-                            </a>  <!-- End of Quest Post -->
+		  
+		  
+	
+		  <ul class="list-group">   
+			  {% for quest,shippers in shipperlist.items %}             
+			  <a href="/quest/{{quest.id}}">
+				<li class="list-group-item">
+				<div class="row clearfix">
+				    <div class="col-sm-2">
+					    <div class="ratio img-responsive img-circle post-image" style="background-image: url({{user.avatar_file_name}});"></div>
+				    </div>
+				    <div class="col-sm-6">
+				        <h6 class="list-group-item-heading"> {{quest.title| title}} </h6>
+	                    <p class="list-group-item-text"> 
+	                    	{% for shipper in shippers %}
+	                                    {{shipper.0.displayname}}, 
+	                                {% endfor %} has shown interest!
+	                    </p>
+	                    <small><span class="glyphicon glyphicon-time"></span> time and date</small>
+				    </div>
+				    <div class="col-sm-4">
+				    	<button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
+	            		<button onclick="change()" value="Accept" class="btn btn-embossed btn-primary" id="acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button>     
+				    </div>
+				</div>
+				</li>
+			</a> 
                     
                     
                     
@@ -89,10 +88,11 @@
                    
              {% endfor %}
                         
-        </div>	<!-- End of list-group -->
-       
+        </ul>	<!-- End of list-group -->
+		 </div>
 	    </div>    
-        </div>
+    </div>
+
 
 
 <!-- Modal -->
