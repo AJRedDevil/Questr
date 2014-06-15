@@ -3,6 +3,7 @@
 	height:auto;
 	min-height: 100px;
 	background: white;
+	margin-top: 1px;
 }
 
 .list-group-item:hover {

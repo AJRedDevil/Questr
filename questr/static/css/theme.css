@@ -161,11 +161,8 @@ nav.navbar {
 
 /*************** Well, Panels ***************/
 .well, .panel-default {
-	background: white;
+	background: transparent;
 	border: none; 
-	-webkit-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
-	-moz-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
-	box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 }
 
 .panel-default .panel-heading {
@@ -173,7 +170,7 @@ nav.navbar {
 }
 
 .panel-default .panel-content {
-	background: white;
+	background: black;
 }
 
 
