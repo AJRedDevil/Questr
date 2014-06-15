@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 
 from quests.models import Quests
 
+import logging
 # Create your views here.
 def listfeaturedquests(questrs_id):
     """List all the featured quests"""
@@ -12,8 +13,36 @@ def listfeaturedquests(questrs_id):
 
 def getQuestsByUser(questrs_id):
     """List all the quests by a particular user"""
-    questsbysuer = Quests.objects.filter(questrs_id=questrs_id)
+    try:
+        questsbysuer = Quests.objects.filter(questrs_id=questrs_id)
+    except Quests.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
     return questsbysuer
+
+def getQuestsWithOffer(questrs_id):
+    """Lists a user's quest where offers are put"""
+    try:
+        questsWithOffer = Quests.objects.filter(questrs_id=questrs_id).exclude(shipper=None)
+    except Quests.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
+    return questsWithOffer
+
+def isShipperForQuest(shipper_id, questname):
+    """Returns if the current shipper is listed in for the quest"""
+    try:
+        questdetails = Quests.objects.get(id=questname)
+    except Quests.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
+
+    current_shipper = questdetails.shipper
+    if current_shipper != None:
+        if shipper_id in current_shipper:
+            return True
+        return False
+    return False
 
 def addShipper(shipper_id, questname):
     """adds a shipper to a posted quest"""
@@ -25,6 +54,7 @@ def addShipper(shipper_id, questname):
 
     current_shipper = questdetails.shipper
     # for first application
+    logging.warn(current_shipper)
     if current_shipper==None:
         current_shipper = []
     else:
@@ -33,6 +63,36 @@ def addShipper(shipper_id, questname):
     if not shipper_id in current_shipper:
         current_shipper.append(shipper_id)
         current_shipper = ','.join(current_shipper)
+    else:
+        return redirect('home')
+
+    try:
+        Quests.objects.filter(id=questname).update(shipper=current_shipper)
+    except Quests.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
+
+def delShipper(shipper_id, questname):
+    """adds a shipper to a posted quest"""
+    try:
+        questdetails = Quests.objects.get(id=questname)
+    except Quests.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
+
+    current_shipper = questdetails.shipper
+    if current_shipper==None:
+        #If no user has bid so far , redirect to home
+        return redirect('home')
+    else:
+        current_shipper = current_shipper.split(',')
+    # check if shipper has already applied
+    if shipper_id in current_shipper:
+        current_shipper.remove(shipper_id)
+        if current_shipper:
+            current_shipper = ','.join(current_shipper)
+        else:
+            current_shipper=None
     else:
         return redirect('home')
 

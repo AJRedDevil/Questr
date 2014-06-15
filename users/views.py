@@ -139,6 +139,20 @@ def myTrades(request):
     pagetype="loggedin"
     user = request.user
     pagetitle = "My Trades"
+    shipperlist = {} #init blank dict
+    
+    questswithoffers = quest_handler.getQuestsWithOffer(user.id) # list of the logged in user's quest where offers are put
+
+    for quest in questswithoffers:
+        shippers = user_handler.getShippersOfQuest(quest.id) # for each quest get the individual shippers
+        shipper_object_list = []
+        for shipper in shippers:
+            # build a dict of quest and shipper objects
+            shipper_object_list.append(user_handler.getShipper(shipper) )
+        
+        shipperlist[quest]=shipper_object_list
+    
+    # logging.warn(shipperlist)
     return render(request, 'trades.html', locals())
 
 @login_required
@@ -146,7 +160,7 @@ def myPosts(request):
     pagetype="loggedin"
     user = request.user
     pagetitle = "My Posts"
-    return render(request, 'trades2.html', locals())
+    return render(request, 'myquests.html', locals())
 
 @login_required
 def getUserInfo(request, displayname):

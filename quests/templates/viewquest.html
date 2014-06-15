@@ -59,8 +59,11 @@
 								<div class="col-md-8 column inBodyWell">
 									<p>Offer: ${{questdetails.reward}}</p>
 								{# Only allowing shippers to apply for quests #}
-								{% if user.is_shipper and not questdetails.isaccepted %}
+								{% if user.is_shipper and not isShipperForQuest and not questdetails.isaccepted and not isOwner %}
 									<a href="apply"><button type="button" class="btn btn-default offerBtn">Apply</button></a>
+								{% endif %}
+								{% if user.is_shipper and isShipperForQuest and not questdetails.isaccepted and not isOwner %}
+									<a href="withdraw"><button type="button" class="btn btn-default offerBtn">Withdraw</button></a>
 								{% endif %}
 								</div>
 								<div class="col-md-4 column">

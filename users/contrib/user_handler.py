@@ -5,6 +5,7 @@ from django.conf import settings
 
 import mailing
 from users.models import QuestrUserProfile, UserTransactional, QuestrToken
+from quests.models import Quests
 
 def get_random_password():
 	"""
@@ -42,9 +43,14 @@ def send_verfication_mail(user):
     verf_link = __get_verification_url(user)
     mailing.send_verification_email(user, verf_link)
 
-def getShippers():
+def getShipper(shipper_id):
     """List all the quests by a particular user"""
-    shippers = QuestrUserProfile.objects.filter(is_shipper='t')
+    shipper = QuestrUserProfile.objects.filter(id=shipper_id)
+    return shipper
+
+def getShippersOfQuest(questname):
+    """List of on shippers for a given quest"""
+    shippers = str(Quests.objects.get(id=questname).shipper).split(',')
     return shippers
 
 def isShipper(user):

@@ -37,6 +37,7 @@ def viewquest(request, questname):
     if questdetails.questrs.id == request.user.id:
         isOwner = True
 
+    isShipperForQuest=quest_handler.isShipperForQuest(str(user.id), questname)
     return render(request, 'viewquest.html', locals())
 
 @login_required
@@ -111,10 +112,31 @@ def applyForQuest(request, questname):
     except Quests.DoesNotExist:
         raise Http404
         return render(request,'404.html')
+    # Check if the owner and the user are the same
+    if questdetails.questrs.id == request.user.id:
+        return redirect('home')
     # add a shipper to the quest
     quest_handler.addShipper(str(shipper.id), questname)
     message="Your application has been sent to the quest owner"
     logging.warn(message)
     return redirect('viewquest', questname=questname)
 
-
+@login_required
+def withdrawFromQuest(request, questname):
+    """Takes in applications for a quest"""
+    pagetype="loggedin"
+    shipper = request.user # the guy logged in is the shipper
+    questname = questname
+    try:
+        questdetails = Quests.objects.get(id=questname, isaccepted=False)
+    except Quests.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
+    # Check if the owner and the user are the same
+    if questdetails.questrs.id == request.user.id:
+        return redirect('home')
+    # remove the shipper from the quest
+    quest_handler.delShipper(str(shipper.id), questname)
+    message="You have retracted yourself from the quest"
+    logging.warn(message)
+    return redirect('viewquest', questname=questname)
