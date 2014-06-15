@@ -13,9 +13,12 @@
 <div class="container">
     <div class="row">
        <div class="col-md-8 col-md-offset-2 column">    
-   
-            <div class="tabbable" id="tabs-84205">
-                <ul class="nav nav-tabs">
+       
+       
+	       <div class="panel panel-default">
+		  <!-- Default panel contents -->
+		  <div class="panel-heading">
+			  <ul class="nav nav-tabs">
                     <li>
                         <a href="{% url 'mytrades' %}">My Offers</a>
                     </li>
@@ -23,10 +26,9 @@
                         <a href="{% url 'myposts' %}">My Posts</a>
                     </li>                   
                 </ul>
-                
-                <div class="tab-content">
-                    <div class="tab-pane active" id="panel-535112">
-                    {% for quest in  myquests %}
+		  </div>
+		  <div class="list-group">   
+			  {% for quest in  myquests %}
                     
                     	<a href="/quest/{{quest.id}}" class="list-group-item">
                               <div class="media col-md-2">
@@ -47,12 +49,11 @@
                         </div>
                              
                         </a>
-             {% endfor %} 
-                    </div> <!-- End of tab-pane -->
-                     
-                               
-                </div>  <!-- End of tab-content -->
-            </div>  <!-- End of tabbable -->    
+             {% endfor %}
+                        
+        </div>	<!-- End of list-group -->
+       
+	    </div>    
         </div>
     </div>  <!-- End of column -->          
     </div>  <!-- End of row -->
