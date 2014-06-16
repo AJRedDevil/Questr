@@ -58,35 +58,7 @@
 				
 			</a> 
 			
-                   
-              <a href="/quest/{{quest.id}}">
-				<li class="list-group-item">
-				<div class="row clearfix">
-				    <div class="col-sm-2">
-					    <div class="ratio img-responsive img-circle post-image" style="background-image: url({{user.avatar_file_name}});"></div>
-				    </div>
-				    <div class="col-sm-6">
-				        <h6> {{quest.title| title}} </h6>
-	                    <p> 
-	                    	{% for shipper in shippers %}
-	                                    {{shipper.0.displayname}}, 
-	                                {% endfor %} has shown interest!
-	                    </p>
-	                    <small><span class="glyphicon glyphicon-time"></span> time and date</small>
-				    </div>
-				    <div class="col-sm-4">
-				    	<button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
-	            		<button onclick="change()" value="Accept" class="btn btn-embossed btn-primary" id="acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button>     
-				    </div>
-				</div>
-				</li>
-				
-			</a>       
-			
-		
-                    
-                    
-                    
+        
                  
                     {% comment %}
          
