@@ -12,8 +12,12 @@
 {% block content %}
 
 
-<div class="alert alert-success">...<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>
-
+<div class="alert alert-success-alt alert-dismissable" style="display: none">
+                <span class="glyphicon glyphicon-certificate"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                    ×</button><strong>Well done!</strong> sdad <a href="http://www.jquery2dotnet.com"
+                        target="_blank">alert</a>sadadasdasd</div>
+</div>
 
 
 
@@ -82,7 +86,9 @@
                                 </div>
                                 <div class="col-md-4">         
                                 	<div class="col-md-6">
-                                		<button onclick="change()" value="Accept" type="button" class="btn btn-embossed btn-primary" id="acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button>
+                                		
+                                		
+                                		
                                 	</div>
                                 	<div class="col-md-6">
                                 		<button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
@@ -144,7 +150,7 @@
 
 
 
-<button onclick="change()" value="Accept" class="btn btn-embossed btn-primary" id="acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button>
+<button value="Accept" class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button>
 
 
 
@@ -153,23 +159,9 @@
 
 <script>
 $(function() {
-	$(".alert").hide();
-	$("[rel='tooltip']").tooltip();    
-	
-	
-	
-	$('.thumbnail').hover(function(){
-	    $(this).find('.caption').slideDown(250); //.fadeIn(250)
-	},
-	function(){
-	    $(this).find('.caption').slideUp(250); //.fadeOut(205)
-	}); 
        
-       
-       
-       
-	$('#acceptBtn').onclick(function(){
-		$(".alert").show();
+	$(".acceptBtn").click(function(){
+		$( ".alert" ).show( "slow" );
     });
 
 });
