@@ -15,7 +15,7 @@
        <div class="col-md-8 col-md-offset-2 column">    
        
        
-	       <div class="panel panel-default">
+	       <div class="panel panel-default shadows">
 		  <!-- Default panel contents -->
 		  <div class="panel-heading">
 			  <ul class="nav nav-tabs">
@@ -27,15 +27,21 @@
                     </li>                   
                 </ul>
 		  </div>
-		  <div class="list-group">   
-			  {% for quest in  myquests %}
-                    
-                    	<a href="/quest/{{quest.id}}" class="list-group-item">
-                              <div class="media col-md-2">
-                                  <div  class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
-                              </div>
-                              <div class="col-md-6">
-                                <h6 class="list-group-item-heading postTitle">{{quest.title}}</h6>
+		  
+		  
+	
+		  <ul class="list-group">   
+			  {% for quest,shippers in shipperlist.items %} 
+		
+			              
+			  <a href="/quest/{{quest.id}}">
+				<li class="list-group-item">
+				<div class="row clearfix">
+				    <div class="col-sm-2">
+					    <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
+				    </div><!-- ./column -->
+				    <div class="col-sm-6">
+				        <h6 class="list-group-item-heading postTitle">{{quest.title}}</h6>
                                 <p class="list-group-item-text postDesc">{{quest.description}}
                                 </p>
 
@@ -43,21 +49,21 @@
                                     <small class="light-grey"><span class="glyphicon glyphicon-user"></span>{{quest.questr_id.displayname}} &nbsp;&nbsp;
                                     <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
                                 </div><!-- ./smallInfo -->
-                              </div>
-                              <div class="col-md-4">
-                                  <p><span class="money">${{quest.reward}}</span><span class="postDate">{{quest.creation_date}}</span></p>
-                        </div>
-                             
-                        </a>
-             {% endfor %}
-                        
-        </div>	<!-- End of list-group -->
-       
-	    </div>    
-        </div>
-    </div>  <!-- End of column -->          
-    </div>  <!-- End of row -->
-</div>  <!-- End of container -->
+				    </div><!-- ./column -->
+				    <div class="col-sm-4 column">
+				    	<p><span class="money">${{quest.reward}}</span><span class="postDate">{{quest.creation_date}}</span></p>    
+				    </div><!-- ./column -->
+				</div><!-- ./row -->
+				</li><!-- list-group-item -->	
+			</a> 
+              
+                   
+             {% endfor %}               
+        </ul>	<!-- End of list-group -->
+		 </div><!-- ./panel -->
+    </div>  <!-- ./column -->          
+    </div>  <!-- ./row -->
+</div>  <!-- ./container -->
 
 
 {% endblock content %}    
