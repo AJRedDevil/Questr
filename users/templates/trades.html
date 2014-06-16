@@ -59,11 +59,15 @@
 	                    </p>
 	                    <small><span class="glyphicon glyphicon-time"></span> time and date</small>
 				    </div>
-				    <div class="col-sm-4">
-				    	<button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
-	            		<button onclick="change()" value="Accept" class="btn btn-embossed btn-primary" id="acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button>     
-				    </div>
-				</div>
+				    <div class="col-sm-4 column">
+				    	<div class="col-md-6">
+                        	<a href="#" class="acceptUrl"><button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button></a>
+                    	</div>
+                    	<div class="col-md-6">
+                    		<button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
+                    	</div>
+                    </div><!-- ./column -->
+				</div><!-- ./row -->
 				</li>
 				</a> 
 			
@@ -86,9 +90,7 @@
                                 </div>
                                 <div class="col-md-4">         
                                 	<div class="col-md-6">
-                                		
-                                		
-                                		
+	                                	<a href="#"><button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button></a>
                                 	</div>
                                 	<div class="col-md-6">
                                 		<button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
@@ -148,12 +150,6 @@
 </div><!-- ./container -->
 
 
-
-
-<button value="Accept" class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button>
-
-
-
 {% endblock content %}    
 {% block scripts %}    
 
@@ -162,6 +158,7 @@ $(function() {
        
 	$(".acceptBtn").click(function(){
 		$( ".alert" ).show( "slow" );
+		$(".acceptBtn").html("Leave a review");
     });
 
 });
