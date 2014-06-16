@@ -10,6 +10,13 @@
     <script src={% static "js/validator.js" %}></script>
 {% endblock localhead %}
 {% block content %}
+
+
+<div class="alert alert-success">...<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button></div>
+
+
+
+
 <div class="container">
     <div class="row">	
     <div class="col-md-12 column"> 
@@ -27,8 +34,7 @@
                     </li>                   
                 </ul>
 		  </div>
-		  
-		  
+	
 	
 		  <ul class="list-group">   
 			  {% for quest,shippers in shipperlist.items %} 
@@ -77,7 +83,7 @@
                                 </div>
                                 <div class="col-md-4">         
                                 	<div class="col-md-6">
-                                		<button onclick="change()" value="Accept" class="btn btn-embossed btn-primary" id="acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button>
+                                		<button onclick="change()" value="Accept" type="button" class="btn btn-embossed btn-primary" id="acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button>
                                 	</div>
                                 	<div class="col-md-6">
                                 		<button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
@@ -135,34 +141,39 @@
 </div><!-- /.modal -->
 	</div>
 </div><!-- ./container -->
+
+
+
+
+<button onclick="change()" value="Accept" class="btn btn-embossed btn-primary" id="acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button>
+
+
+
 {% endblock content %}    
 {% block scripts %}    
 
 <script>
-	$( document ).ready(function() {
-    $("[rel='tooltip']").tooltip();    
- 
-    $('.thumbnail').hover(
-        function(){
-            $(this).find('.caption').slideDown(250); //.fadeIn(250)
-        },
-        function(){
-            $(this).find('.caption').slideUp(250); //.fadeOut(205)
-        }
-    ); 
+$(function() {
+	$(".alert").hide();
+	$("[rel='tooltip']").tooltip();    
+	
+	
+	
+	$('.thumbnail').hover(function(){
+	    $(this).find('.caption').slideDown(250); //.fadeIn(250)
+	},
+	function(){
+	    $(this).find('.caption').slideUp(250); //.fadeOut(205)
+	}); 
+       
+       
+       
+       
+	$('#acceptBtn').onclick(function(){
+		$(".alert").show();
+    });
+
 });
 </script>
 
-<script>
-	function change()
-	{
-		var elem = document.getElementById("acceptBtn");
-		
-		elem.value = "Review";
-		elem.title = "Leave a review to tell others how it went!";
-		elem.src = "#";
-	}	
-</script>
-
- 
 {% endblock scripts %}  

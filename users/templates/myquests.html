@@ -27,9 +27,7 @@
                     </li>                   
                 </ul>
 		  </div>
-		  
-		  
-	
+
 		  <ul class="list-group">   
 			  {% for quest in myquests %} 
 		
@@ -42,8 +40,7 @@
 				    </div><!-- ./column -->
 				    <div class="col-sm-6">
 				        <h6 class="list-group-item-heading postTitle">{{quest.title}}</h6>
-                                <p class="list-group-item-text postDesc">{{quest.description}}
-                                </p>
+				        <p class="list-group-item-text postDesc">{{quest.description}}</p>
 
                                 <div class="smallInfo">
                                     <small class="light-grey"><span class="glyphicon glyphicon-user"></span>{{quest.questr_id.displayname}} &nbsp;&nbsp;
