@@ -17,10 +17,36 @@
 	         <div class="panel panel-default">
 		         <div class="panel-heading text-center">Sign in</div>
 		         <div class="col-md-12 column panel-content">
-        	<center>
-        		<br>
-	    		<a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i> | Connect with Facebook</button></a>
-	    		<a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i> | Connect with Twitter</button></a>
+    		    		
+    		<!-- Login with Username and Password --> 
+           <form role="form" data-toggle="validator" class="signin" action="" method="post">{% csrf_token %}
+           
+                     
+                    <input type="email" class="form-control" name="username" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
+                    {% if auth_form.username.errors %}
+                        {{ auth_form.username.errors }}
+                    {% endif %}
+                <div class="help-block with-errors"></div>
+            
+                           
+	            <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+	            {% if auth_form.password.errors %}
+	                {{ auth_form.password.errors }}
+	            {% endif %}
+	            {% if auth_form.errors %}
+	                {{ auth_form.non_field_errors }}
+	            {% endif %}
+                        
+	            <a href="{% url 'reset_password' %}" id="forgot-password">Forgot password?</a>
+	        </form> <!-- End of Login with Username and Password -->
+			 
+			 
+			 
+			 
+			 <center>
+        		<h6>Sign in with</h6>
+	    		<a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i></button></a>
+	    		<a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i></button></a>
 	    		{% comment %}
 		        ## This is for google plus based authentication ##
 		            {% if plus_id %}
@@ -40,37 +66,13 @@
 		            </form>
 		            {% endif %}
 		        {% endcomment %}
-	    		<a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i> | Connect with Google Plus</button></a>		
+	    		<a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i></button></a>		
         	</center>
-    		
-    		<hr>
-    		    		
-    		<!-- Login with Username and Password --> 
-           <form role="form" data-toggle="validator" class="signin" action="" method="post">{% csrf_token %}
-           	<div class="inputBackground">
-                     
-                    <input type="email" class="form-control" name="username" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
-                    {% if auth_form.username.errors %}
-                        {{ auth_form.username.errors }}
-                    {% endif %}
-                <div class="help-block with-errors"></div>
-            
-                           
-	            <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
-	            {% if auth_form.password.errors %}
-	                {{ auth_form.password.errors }}
-	            {% endif %}
-	            {% if auth_form.errors %}
-	                {{ auth_form.non_field_errors }}
-	            {% endif %}
-	     
-           	</div>
-           	
-	          <a href="{% url 'reset_password' %}" id="forgot-password">Forgot password?</a>
-	          <button type="submit" class="btn btn-sm btn-default">Sign in</button>                        
-	        </form> <!-- End of Login with Username and Password -->
 			   
-			   
+			   <br>
+			  
+	          <center><button type="submit" class="btn btn-sm btn-default">Sign in</button></center>
+	          <br>
 			
         	</div>
         </div>       

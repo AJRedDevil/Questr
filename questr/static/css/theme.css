@@ -160,9 +160,14 @@ nav.navbar {
 
 
 /*************** Well, Panels ***************/
-.well, .panel-default {
+.well {
 	background: white;
 	border: none; 
+}
+
+.panel-default {
+	background: transparent;
+	border: none;
 }
 
 .panel-default .panel-heading {
