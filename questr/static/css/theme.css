@@ -193,8 +193,6 @@ nav.navbar {
 }
 
 
-
-
 /******** Pagination ************/
 .pagination li a {
 	color: #777777;
@@ -253,6 +251,10 @@ nav.navbar {
 }
 
 /************* Input Boxes *****************/
+
+
+
+/**
 input.form-control {
 	border-color: white;
 	-webkit-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
@@ -266,6 +268,7 @@ input.form-control:focus {
 	-moz-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 	box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 }
+**/
 
 
 /********** Tabs **************/
@@ -284,25 +287,12 @@ input.form-control:focus {
 	background-color: rgba(204,170,170,0);
 	border-color: transparent;
 }
-          
-          
-          
-          
-          
-          
+               
           
 .inputBackground {
 	background: #f2f2f2;
 	padding: 10px;
 }
- 
- 
- 
- 
- 
- 
- 
- 
  
  .white {
 	color: white;
@@ -320,6 +310,3 @@ input.form-control:focus {
 	color: #979797;
 }
 
-.otherWell {
-	background: #f7f7f7;	
-}
