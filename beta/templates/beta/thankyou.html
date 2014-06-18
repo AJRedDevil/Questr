@@ -204,13 +204,13 @@
                     <h4>Say hi to us</h4>
                     <div class="hline-w"></div>
                         
-                    <form role="form">
-                      <div class="form-group">
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Your name">
+                    <form action="/beta/contactus" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
+                        <div class="form-group">
+                        <input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Your name">
                         <br>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Your email address">
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Your email address">
                         <br>
-                        <textarea class="form-control" rows="3" placeholder="Your message"></textarea>
+                        <textarea name="message" class="form-control" rows="3" placeholder="Your message"></textarea>
                       </div>
                       <button type="submit" class="btn btn-embossed btn-default">Send</button>
                     </form>

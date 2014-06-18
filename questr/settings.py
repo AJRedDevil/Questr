@@ -18,6 +18,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['LOCAL_SECRET_KEY']
+# Mandrill API Key
+MANDRILL_API_KEY = os.environ['MANDRILL_API_KEY']
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 
 #Append Slash to all cals
 APPEND_SLASH = True
@@ -54,6 +57,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'beta',
     'mailchimp',
+    'djrill',
 )
 
 MIDDLEWARE_CLASSES = (
