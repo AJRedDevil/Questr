@@ -18,9 +18,9 @@ def about(request):
 	messageResponse = "Canada's first<br>peer-to-peer courier.<br>Coming soon."
 	return render(request, 'beta/about.html', locals())
 
-# def thankyou(request):
-# 	messageResponse = "Thanks for joining us.<br>Please check your mailbox.</b>"
-# 	return render(request, 'beta/thankyou.html', locals())
+def thankyou(request):
+	messageResponse = "Thanks for joining us.<br>Please check your mailbox.</b>"
+	return render(request, 'beta/thankyou.html', locals())
 
 # function to join the invitee's subscription list
 
