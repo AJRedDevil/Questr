@@ -14,6 +14,10 @@ def index(request):
 	messageResponse = "Canada's first<br>peer-to-peer courier.<br>Coming soon."
 	return render(request, 'beta/index.html', locals())
 
+def about(request):
+	messageResponse = "Canada's first<br>peer-to-peer courier.<br>Coming soon."
+	return render(request, 'beta/about.html', locals())
+
 # def thankyou(request):
 # 	messageResponse = "Thanks for joining us.<br>Please check your mailbox.</b>"
 # 	return render(request, 'beta/thankyou.html', locals())
@@ -45,3 +49,29 @@ def join(request):
 		messageResponse = "Please enter an email address!"
 		return render(request, 'beta/index.html', locals())
 
+def sendmessage(request):
+	email = request.POST['EMAIL']
+	name = request.POST['name']
+	message = request.POST['message']
+	if email:
+		if validations.is_valid_email(email):
+			try:
+				mailchimp_handler.ping()										
+				response = mailchimp_handler.subscribe(email)
+				if not response:
+					messageResponse = "You have already been subscribed!"
+					return render(request, 'beta/index.html', locals())
+
+				messageResponse = "Thanks for joining us.<br>Please check your mailbox.</b>"
+				return render(request, 'beta/thankyou.html', locals())
+			except mailchimp.Error, e:
+				# Error for 
+				log.debug(str(e))
+				messageResponse = "Something went wrong! We're looking onto it!"
+				return render(request, 'beta/index.html', locals())
+		else:
+			messageResponse="Please provide us with a valid email address!"
+			return render(request, 'beta/index.html', locals())
+	else:
+		messageResponse = "Please enter an email address!"
+		return render(request, 'beta/index.html', locals())
