@@ -68,28 +68,30 @@ def prepContactUsNotification(name, user_email, message):
                     }
     return email_details
 
+
+
 def contactus(request):
-	user_email = request.POST['email']
-	name = request.POST['name']
-	message = request.POST['message']
-	if request.method=="POST":
-		if user_email:
+    user_email = request.POST['email']
+    name = request.POST['name']
+    message = request.POST['message']
+    if request.method=="POST":
+        if user_email:
             # to cope with the load template function in emai_notifier
             user = {'email':user_email}
-			if validations.is_valid_email(user_email):
-				try:
-					email_details = prepContactUsNotification(name, user_email, message)
-					log.warn(email_details)
-					email_notifier.send_email_notification(user, email_details)				
-					return redirect('index')
-				except mailchimp.Error, e:
-					# Error for 
-					log.debug(str(e))
-					messageResponse = "Something went wrong! We're looking onto it!"
-					return render(request, 'beta/index.html', locals())
-			else:
-				messageResponse="Please provide us with a valid email address!"
-				return render(request, 'beta/index.html', locals())
-	else:
-		messageResponse = "Please enter an email address!"
-		return redirect('index')
+            if validations.is_valid_email(user_email):
+                try:
+                    email_details = prepContactUsNotification(name, user_email, message)
+                    log.warn(email_details)
+                    email_notifier.send_email_notification(user, email_details)             
+                    return redirect('index')
+                except mailchimp.Error, e:
+                    # Error for 
+                    log.debug(str(e))
+                    messageResponse = "Something went wrong! We're looking onto it!"
+                    return render(request, 'beta/index.html', locals())
+            else:
+                messageResponse="Please provide us with a valid email address!"
+                return render(request, 'beta/index.html', locals())
+    else:
+        messageResponse = "Please enter an email address!"
+        return redirect('index')
