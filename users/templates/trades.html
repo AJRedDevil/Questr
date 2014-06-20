@@ -42,113 +42,94 @@
 	
 		  <ul class="list-group">   
 			  {% for quest,shippers in shipperlist.items %} 
-		
-			              
-			  <a href="/quest/{{quest.id}}">
-				<li class="list-group-item">
-				<div class="row clearfix">
-				    <div class="col-sm-2">
-					    <div class="ratio img-responsive img-circle post-image" style="background-image: url({{user.avatar_file_name}});"></div>
-				    </div>
-				    <div class="col-sm-6">
-				        <h6> {{quest.title| title}} </h6>
-	                    <p> 
-	                    	{% for shipper in shippers %}
-	                                    {{shipper.0.displayname}}, 
-	                                {% endfor %} has shown interest!
-	                    </p>
-	                    <small><span class="glyphicon glyphicon-time"></span> time and date</small>
-				    </div>
-				    <div class="col-sm-4 column">
-				    	<div class="col-md-6">
-                        	<a href="#" class="acceptUrl"><button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button></a>
-                    	</div>
-                    	<div class="col-md-6">
-                    		<button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
-                    	</div>
-                    </div><!-- ./column -->
-				</div><!-- ./row -->
-				</li>
-				</a> 
-			
-        
-                 
-                    {% comment %}
-         
-                            <a href="/quest/{{quest.id}}" class="list-group-item">
-                                <div class="media col-md-2">
-                                    <div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
+                  {% if not quest.isaccepted %}
+                      <a href="/quest/{{quest.id}}">
+                        <li class="list-group-item">
+                        <div class="row clearfix">
+                            <div class="col-sm-2">
+                                  <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
+                              </a>
+                            </div>
+                            <div class="col-sm-6">
+                                <h6> {{quest.title| title}} </h6>
+                                    {% for shipper in shippers %}
+                                        <div class="col-sm-4">
+                                            <center>{{shipper.0.first_name | title}}</center>
+                                                <a href="/user/{{shipper.0.displayname}}"><div class="ratio img-responsive img-circle post-image" style="background-image: url({{shipper.0.avatar_file_name}});"></div></a>
+                                                <a href="{{quest.id}}/accept/{{shipper.0.id}}" class="acceptUrl"><button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you've accepted his bid!">Accept</button></a>
+                                        </div>
+                                      {% endfor %}
+                            </div>
+                        </div><!-- ./row -->
+                          <small><span class="glyphicon glyphicon-time"></span> time and date</small>
+                        </li>
+                {% endif %}
+                {% if quest.isaccepted %}
+                    {% for shipper in shippers %}
+                          <a href="/quest/{{quest.id}}">
+                            <li class="list-group-item">
+                            <div class="row clearfix">
+                                <div class="col-sm-2">
+                                      <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
+                                  </a>
                                 </div>
-                                <div class="col-md-6">
-                                    <h6 class="list-group-item-heading postTitle"> {{quest.title| title}} </h6>
-                                    Following shippers have shown interest:
-                                    <p class="list-group-item-text postDesc"> 
-                                                {% for shipper in shippers %}
-                                                    {{shipper.0.displayname}}, 
-                                                {% endfor %}
-                                    </p>
+                                <div class="col-sm-6">
+                                    <h6> {{quest.title| title}} </h6>
+                                            <div class="col-md-4">
+                                            <center>{{shipper.0.first_name | title}}</center>
+                                            <a href="/user/{{shipper.0.displayname}}"><div class="ratio img-responsive img-circle post-image" style="background-image: url({{shipper.0.avatar_file_name}});"></div></a>
+                                            <button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal{{shipper.0.id}}">Contact</button>
+                                            </div>
                                 </div>
-                                <div class="col-md-4">         
-                                	<div class="col-md-6">
-	                                	<a href="#"><button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button></a>
-                                	</div>
-                                	<div class="col-md-6">
-                                		<button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
-                                	</div>
+                            </div><!-- ./row -->
+                              <small><span class="glyphicon glyphicon-time"></span>time and date</small>
+                            </li>
+                            <!-- Modal -->
+                            <div class="container">
+                                <div class="row">
+                                    <div id="myModal{{shipper.0.id}}" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content col-md-6 col-md-offset-3 column">
+                                            <div class="well profile">
+                                         
+                                          <div class="ratio img-responsive img-circle" style="background-image: url({{shipper.0.avatar_file_name}});"></div>
+                                                
+                                        <center>
+                                            <h3>{{shipper.0.first_name}} {{shipper.0.last_name}}</h3>  
+                                                        
+                                            
+                                             <input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
+                                            
+                                        </center>
+                                        
+                                                <p><strong>Location: </strong> Toronto, Ontario, Canada </p>
+                                                <p><strong><span class="glyphicon glyphicon-earphone"></span></strong> Phone number goes here </p>
+                                                <p><strong>Quests Completed: </strong> {{quests_complete}} </p>
+                                                <p><strong>Quests Posted: </strong> {{questes_posted}} </p>  
+                                                <p><strong>Trust Rank: </strong> {{ranking}}%</p>                           
+                                     </div> <!-- End of Profile -->
+                                            
+                                            
+                                            
+                                            <div class="modal-footer">
+                                                <div class="btn-group">
+                                                <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                                            </div>
+                                            </div>
+                             
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dalog -->
+                            </div><!-- /.modal -->
                                 </div>
-                               
-                            </a>  <!-- End of Quest Post -->
-                               {% endcomment %}
-                            
-                   
-             {% endfor %}
+                            </div><!-- ./container -->
+                        {% endfor %}
+                {% endif %}
+            {% endfor %}
                         
         </ul>	<!-- End of list-group -->
 		 </div>
 	    </div>    
     </div>
-
-
-
-<!-- Modal -->
-<div class="container">
-	<div class="row">
-		<div id="myModal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content col-md-6 col-md-offset-3 column">
-	            <div class="well profile">
-             
-              <div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
-                    
-            <center>
-	            <h3>{{user.first_name}} {{user.last_name}}</h3>  
-	                        
-				
-				 <input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
-				
-			</center>
-            
-            		<p><strong>Location: </strong> Toronto, Ontario, Canada </p>
-             		<p><strong><span class="glyphicon glyphicon-earphone"></span></strong> Phone number goes here </p>
-                    <p><strong>Quests Completed: </strong> {{quests_complete}} </p>
-                    <p><strong>Quests Posted: </strong> {{questes_posted}} </p>  
-                    <p><strong>Trust Rank: </strong> {{ranking}}%</p>                           
-         </div>	<!-- End of Profile -->
-            	
-                
-                
-                <div class="modal-footer">
-                    <div class="btn-group">
-                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-                </div>
- 
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dalog -->
-</div><!-- /.modal -->
-	</div>
-</div><!-- ./container -->
-
 
 {% endblock content %}    
 {% block scripts %}    

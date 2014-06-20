@@ -2,6 +2,7 @@
 
 from random import choice
 from django.conf import settings
+from django.http import Http404
 
 import mailing
 from users.models import QuestrUserProfile, UserTransactional, QuestrToken
@@ -45,7 +46,11 @@ def send_verfication_mail(user):
 
 def getShipper(shipper_id):
     """List all the quests by a particular user"""
-    shipper = QuestrUserProfile.objects.filter(id=shipper_id)
+    try:
+        shipper = QuestrUserProfile.objects.filter(id=shipper_id)
+    except QuestrUserProfile.DoesNotExist:
+        raise Http404
+        return render('404.html', locals())
     return shipper
 
 def getShippersOfQuest(questname):
@@ -73,10 +78,19 @@ def isEmailVerified(status):
     """Returns if the email of the user has been verified"""
     return "Yes" if status else "No"
 
-def userExists(user):
+def usernameExists(user):
     """Checks if the user by the provided displayname exists already"""
     try:
         user = QuestrUserProfile.objects.get(displayname=user)
+    except QuestrUserProfile.DoesNotExist:
+        return False
+    if user:
+        return True
+
+def userExists(user_id):
+    """Checks if the user by the provided displayname exists already"""
+    try:
+        user = QuestrUserProfile.objects.get(id=user_id)
     except QuestrUserProfile.DoesNotExist:
         return False
     if user:

@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.conf import settings
 from requests import request, HTTPError
 from social.pipeline.partial import partial
-from users.contrib.user_handler import userExists, emailExists
+from users.contrib.user_handler import usernameExists, emailExists
 from .models import QuestrUserProfile as User
 
 
@@ -24,8 +24,8 @@ def required_fields(strategy, details, user=None, is_new=False, *args, **kwargs)
             for field in required_fields:
                 details[field] = strategy.session_pop(field)
             # redirect if user exists
-            if userExists(details['displayname']):
-                logging.warn("userExists")
+            if usernameExists(details['displayname']):
+                logging.warn("usernameExists")
                 return redirect('saveprofile')
             # redirect if email exists
             if emailExists(details['email']):

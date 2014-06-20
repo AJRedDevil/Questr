@@ -15,6 +15,7 @@ from access.requires import verified, is_alive
 from contrib import mailing, user_handler
 
 from quests.contrib import quest_handler
+from quests.models import Quests
 
 # Create your views here.
 def logout(request):
@@ -146,14 +147,35 @@ def myTrades(request):
     for quest in questswithoffers:
         shippers = user_handler.getShippersOfQuest(quest.id) # for each quest get the individual shippers
         shipper_object_list = []
-        for shipper in shippers:
+        for shipper_id in shippers:
             # build a dict of quest and shipper objects
-            shipper_object_list.append(user_handler.getShipper(shipper) )
+            shipper_object_list.append(user_handler.getShipper(shipper_id) )
         
         shipperlist[quest]=shipper_object_list
     
     # logging.warn(shipperlist)
     return render(request, 'trades.html', locals())
+
+@login_required
+def acceptOffer(request, quest_id, shipper_id):
+    pagetype="loggedin"
+    user = request.user
+    if not user_handler.userExists(shipper_id):
+        return redirect('mytrades')
+    
+    try:
+        Quests.objects.filter(id=quest_id).update(shipper=shipper_id, isaccepted='t')
+    except Quests.DoesNotExist:
+        raise Http404
+        return render('404.html', locals())
+
+    try:
+        shipper = user_handler.getShipper(shipper_id)
+    except Exception, e:
+        raise Http404
+        return render('404.html', locals())
+    
+    return redirect('mytrades')
 
 @login_required
 def myPosts(request):

@@ -28,7 +28,7 @@
 	                              
 	                                    <p>From: {{quest.srcaddress}}</p>
 	                                    <p>To: {{quest.dstaddress}}</p>
-	                                    <p><span class="glyphicon glyphicon-time"></span> {{quest.creation_date}}</p>
+	                                    <p><span class="glyphicon glyphicon-time"></span>{{quest.creation_date | timesince}} ago</p>
 	                                                         
 	                                {% endif %}         
                                 </div><!-- ./post-info -->
