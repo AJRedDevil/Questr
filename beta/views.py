@@ -50,7 +50,7 @@ def join(request):
 		messageResponse = "Please enter an email address!"
 		return render(request, 'beta/index.html', locals())
 
-def prepNewQuestNotification(name, user_email, message):
+def prepContactUsNotification(name, user_email, message):
     """Prepare the details for notification emails for new quests"""
     template_name="Contact_Us_Notification"
     subject="Hi from a to be Questr!"
@@ -74,11 +74,13 @@ def contactus(request):
 	message = request.POST['message']
 	if request.method=="POST":
 		if user_email:
+            # to cope with the load template function in emai_notifier
+            user = {'email':user_email}
 			if validations.is_valid_email(user_email):
 				try:
-					email_details = prepNewQuestNotification(name, user_email, message)
+					email_details = prepContactUsNotification(name, user_email, message)
 					log.warn(email_details)
-					email_notifier.send_contactus_message(email_details)				
+					email_notifier.send_email_notification(user, email_details)				
 					return redirect('index')
 				except mailchimp.Error, e:
 					# Error for 

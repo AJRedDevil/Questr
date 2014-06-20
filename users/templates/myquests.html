@@ -1,0 +1,71 @@
+{% extends "mainbase.html" %}
+{% load staticfiles %}
+{% block localhead %}
+    <!-- Custom CSS -->
+    <link href={% static "css/smallpost.css" %} rel="stylesheet">
+    <link href={% static "css/profile.css" %} rel="stylesheet">
+    <link href={% static "css/trades.css" %} rel="stylesheet">
+    
+    <!-- Custom Javascript -->
+    <script src={% static "js/validator.js" %}></script>
+{% endblock localhead %}
+{% block content %}
+<div class="container">
+    <div class="row">
+       <div class="col-md-8 col-md-offset-2 column">    
+       
+       
+	       <div class="panel panel-default shadows">
+		  <!-- Default panel contents -->
+		  <div class="panel-heading">
+			  <ul class="nav nav-tabs">
+                    <li>
+                        <a href="{% url 'mytrades' %}">My Offers</a>
+                    </li>
+                    <li class="active">
+                        <a href="{% url 'myposts' %}">My Posts</a>
+                    </li>                   
+                </ul>
+		  </div>
+
+		  <ul class="list-group">   
+			  {% for quest in myquests %} 
+		
+			              
+			  <a href="/quest/{{quest.id}}">
+				<li class="list-group-item">
+				<div class="row clearfix">
+				    <div class="col-sm-2">
+					    <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
+				    </div><!-- ./column -->
+				    <div class="col-sm-6">
+				        <h6 class="list-group-item-heading postTitle">{{quest.title}}</h6>
+				        <p class="list-group-item-text postDesc">{{quest.description}}</p>
+
+                                <div class="smallInfo">
+                                    <small class="light-grey"><span class="glyphicon glyphicon-user"></span>{{quest.questr_id.displayname}} &nbsp;&nbsp;
+                                    <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
+                                </div><!-- ./smallInfo -->
+				    </div><!-- ./column -->
+				    <div class="col-md-2 column">
+                    	<p>${{quest.reward}}</p>
+				    </div><!-- ./column -->
+				    <div class="col-md-2 column">
+	                    <p><span class="glyphicon glyphicon-time"></span>{{quest.creation_date}}</p>
+				    </div><!-- ./column -->
+				</div><!-- ./row -->
+				</li><!-- list-group-item -->	
+			</a> 
+              
+                   
+             {% endfor %}               
+        </ul>	<!-- End of list-group -->
+		 </div><!-- ./panel -->
+    </div>  <!-- ./column -->          
+    </div>  <!-- ./row -->
+</div>  <!-- ./container -->
+
+
+{% endblock content %}    
+{% block scripts %}     
+{% endblock scripts %}  

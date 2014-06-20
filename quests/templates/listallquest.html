@@ -1,0 +1,184 @@
+{% extends "mainbase.html" %}
+{% load staticfiles %}
+{% load endless %}
+{% block localhead %}
+     <link href={% static "css/browse.css" %} rel="stylesheet">
+     <link href={% static "css/smallpost.css" %} rel="stylesheet">
+     <link href={% static "css/bootstrap-ellipsis.css" %} rel="stylesheet">
+     
+    <link href={% static "css/bootstrap-ellipsis.css" %} rel="stylesheet">
+    <script src={% static "js/bootstrap-ellipsis.js" %}></script>
+     
+{% endblock localhead %}
+{% block content %}
+    
+    <div class="container">
+        <div class="row">
+        
+            <div class="col-md-2">
+            <nav class="nav-sidebar well">
+                
+                <div class="btn-group">
+                    <h5>Search In</h5>
+                             
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        City
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Dropdown link</a></li>
+                      <li><a href="#">Dropdown link</a></li>
+                    </ul>           
+                 </div>
+                             
+                
+                 <div class="btn-group">
+                    <h5>Need Item By</h5>
+                             
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Day
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Dropdown link</a></li>
+                      <li><a href="#">Dropdown link</a></li>
+                    </ul>
+                 </div>
+                 
+                 <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Month
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Dropdown link</a></li>
+                      <li><a href="#">Dropdown link</a></li>
+                    </ul>               
+                 </div>
+                    
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Year
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Dropdown link</a></li>
+                      <li><a href="#">Dropdown link</a></li>
+                    </ul>
+                    
+                 </div>
+                 
+                 
+                 <div class="btn-group">
+                    <h5>Fits in</h5>
+                             
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        Backpack
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Backpack</a></li>
+                      <li><a href="#">Car</a></li>
+                      <li><a href="#">Minivan</a></li>                 
+                    </ul>           
+                 </div>
+                 
+                                
+                <div class="input-group input-group-sm offer">
+                    <h5>Offer</h5>                
+                    <div class="col-md-6">
+                        <input type="text" class="form-control textInput" placeholder="min">
+                    </div>                  
+                    <div class="col-md-6">
+                        <input type="text" class="form-control textInput" placeholder="max">
+                    </div>
+                </div>
+                 
+                 <div class="btn-group">
+                     <button type="button" class="btn btn-default">Search</button>
+                 </div>
+                                
+            </nav>
+                            
+        </div>  <!-- End of col -->
+      
+         
+         
+         
+         <div class="col-md-8">
+	    <div class="panel panel-default">
+		  <!-- Default panel contents -->        
+        
+        <div class="list-group">
+        {% paginate 5,5 allquests %}    
+        {% for quest in allquests  %}
+                    <!-- Quest Post -->
+                    <a href="/quest/{{quest.id}}" class="list-group-item">
+                          <div class="media col-md-2">
+                            <div  class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
+                          </div>
+                          <div class="col-md-6">
+                              <h4 class="list-group-item-heading postTitle">{{quest.title}}</h4>
+                              <p class="list-group-item-text postDesc"> {{quest.description}}                         
+                              </p>
+                          </div>
+                          <div class="col-md-4">
+                              <p><span class="money">${{quest.reward}}</span><span class="postDate">{{quest.creation_date}}</span></p>
+                          </div>
+                         
+                    </a>  <!-- End of Quest Post --> 
+        {% endfor %}          
+      {% show_pages %}
+        </div>	<!-- End of list-group -->
+	    </div>
+        </div>	<!-- End of column -->
+    </div>  <!-- End of reviews -->  
+   
+</div>                        
+</div>  <!-- End of container --> 
+         
+    
+    
+    
+    
+{% comment %}
+  <div class="container">
+  <div class="row clearfix">
+      <div class="col-md-12 column">
+        <center>
+            <ul class="pagination">
+                <li class="disabled">
+                    <a href="#">&laquo;</a>
+                </li>
+                <li class="active">
+                    <a href="#">1</a>
+                </li>
+                <li>
+                    <a href="./browsePages/2.html">2</a>
+                </li>
+                <li>
+                    <a href="#">3</a>
+                </li>
+                <li>
+                    <a href="#">4</a>
+                </li>
+                <li>
+                    <a href="#">5</a>
+                </li>
+                <li>
+                    <a href="#">&raquo;</a>
+                </li>
+            </ul>
+          </center>
+        </div>
+    </div>
+</div>
+{% endcomment %}
+    
+{% endblock content %}
+{% block scripts %}
+
+      <script>
+            $('.postDesc').ellipsis({maxLine: 3, fixedWidth: 150})   
+        </script>
+{% endblock scripts %}

@@ -1,0 +1,29 @@
+.itemImage {
+	width: 100%;
+}
+
+
+
+
+input, textarea, button { margin-top:10px }
+
+/* Required field START */
+
+.editDescription {
+    position: relative;   
+}
+
+textarea.description {
+	height: 200px;
+}
+
+textarea.title {
+	font-size: large;
+}
+
+.editDescription .required-icon .text {
+	color: #B80000;
+	font-size: 26px;
+	margin: -3px 0 0 12px;
+}
+/* Required field END 

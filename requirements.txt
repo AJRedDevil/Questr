@@ -9,6 +9,9 @@ djrill==1.0.0
 docopt==0.4.0
 gunicorn==18.0
 mailchimp==2.0.7
+oauthlib==0.6.1
+psycopg2==2.5.2
+pystache==0.5.3
 python-openid==2.2.5
 python-social-auth==0.1.23
 requests==2.2.1

@@ -1,0 +1,219 @@
+html {overflow-x: hidden;}
+ 
+body {
+	font-family: Arial, sans-serif;
+	color: #393939;
+	font-size: 16px;
+	padding: 0px;
+	margin: 0;
+	background: #c2c2c2;
+ }
+ 
+footer {
+	font-family: 'TeXGyreCursorRegular', Arial, sans-serif;
+	border-top: 1px solid #ddd;
+	margin-top: 35px;
+	padding-top: 6px;
+	text-align: center;
+	font-size: 12px;
+	background: white;
+}
+ 
+ 
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	font-family: 'TeXGyreCursorRegular', Arial, sans-serif;
+	letter-spacing: 0;
+ }
+
+
+/*************** Theme colour & details ********************/
+li a:link {
+	color: #777777;
+}
+
+li a:hover {
+	color: #5f97d8;
+}
+
+.navbar-default .navbar-nav > .active {
+    color: #000;
+   background: #5f97d8;
+ }
+ .navbar-default .navbar-nav > .active > a, 
+ .navbar-default .navbar-nav > .active > a:hover, 
+ .navbar-default .navbar-nav > .active > a:focus {
+      color: #5f97d8;
+      background: white;
+ }
+
+ 
+/*************** Primary Navbar ***************/
+.navbar-container {
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 0;
+	margin-bottom: 20px;
+	padding: 0;
+	width: 100%;
+}
+
+.navbar {
+	width: 100%;
+	margin: 0;
+	padding: 0 15px;
+	z-index: 999;
+	background: white;
+}
+
+
+.navbar-default a:link {
+	color: #777777;
+}
+
+.navbar-default a:hover {
+	color: #5f97d8;	
+}
+
+.navbar .profileImg {
+	width: 30px;
+	height: 30px;
+	margin: 0;
+	padding: 0;
+}
+
+.navbar span.glyphicon-plus-sign {
+	font-size: 30px;
+	color: rgba(96,152,217,0.82);	
+}
+
+.navbar span.glyphicon-plus-sign:hover {
+	font-size: 30px;
+	color: #5f97d8;
+}
+
+.navbar .nonProfile {
+	line-height: 30px;
+}
+
+.navbar .form-control {
+	height: 45px;
+}
+
+.navbar-default .navbar-brand:link {
+	color: #5f97d8;
+	 font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+    
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+.navbar-default .navbar-brand:hover {
+	color: #54a3fd;
+	font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+    
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;	
+}
+
+
+
+/*************** Secondary Navbar ***************/
+.secondary-nav {
+	z-index: 0;
+	text-align: center;
+	display: block;
+	float: none;
+	border-color: rgba(255,255,255,0);
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+.secondary-nav ul {
+	display: inline-block;
+    float: none;
+}
+
+.secondary-nav li {
+	margin-left: 17px;
+	margin-right: 17px;
+	padding-bottom: 0;
+}
+
+.secondary-nav li a {
+	padding-bottom: 0;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.secondary-nav li.active a {
+	border-bottom-style: solid;
+	border-bottom-width: 6px;
+	border-bottom-color: #5f97d8;
+}
+
+.secondary-nav li.active {
+}
+
+.secondary-nav li a:hover {
+	background: #5f97d8;
+}
+
+/*************** Well ***************/
+.well {
+	background: #FAFAFA;
+	border-color: rgba(255,255,255,0); 
+}
+
+
+/************* Buttons ************/
+.btn, .btn-default, .btn-group .btn-default {
+	color: #777777;
+	background: white;
+	border-color: grey;
+}
+
+.btn:hover, .btn-default:hover, .btn-group .btn-default:hover {
+	color: #333333;
+	background: white;
+}
+
+
+/******** Pagination ************/
+.pagination li a {
+	color: #777777;
+}
+
+.pagination li a:hover {
+	color: #333333;
+	background: white;
+}
+
+.pagination li.active a, .pagination li.active a:hover {
+	background: grey;
+	border-color: grey;
+}
+
+
+/********* Dropdown *********/
+.dropdown-menu {
+	text-align: center;
+}
+
+

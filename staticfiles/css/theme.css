@@ -1,0 +1,266 @@
+html {overflow-x: hidden;}
+ 
+body {
+	font-family: Arial, sans-serif;
+	color: #393939;
+	font-size: 16px;
+	padding: 0px;
+	margin: 0;
+	background: #dedede;
+ }
+ 
+footer {
+	font-family: 'TeXGyreCursorRegular', Arial, sans-serif;
+	border-top: 1px solid #ddd;
+	margin-top: 35px;
+	padding-top: 6px;
+	text-align: center;
+	font-size: 12px;
+	background: white;
+}
+ 
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	font-family: 'TeXGyreCursorRegular', Arial, sans-serif;
+	letter-spacing: 0;
+ }
+
+/*************** Theme colour & details ********************/
+li a:link {
+	color: #777777;
+}
+
+li a:hover {
+	color: #5f97d8;
+}
+
+.navbar-default .navbar-nav > .active {
+    color: #000;
+   background: #5f97d8;
+ }
+ .navbar-default .navbar-nav > .active > a, 
+ .navbar-default .navbar-nav > .active > a:hover, 
+ .navbar-default .navbar-nav > .active > a:focus {
+      color: #5f97d8;
+      background: white;
+ }
+ 
+/*************** Primary Navbar ***************/
+.navbar-container {
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 0;
+	margin-bottom: 20px;
+	padding: 0;
+	width: 100%;
+}
+
+.navbar {
+	width: 100%;
+	margin: 0;
+	padding: 0 15px;
+	z-index: 999;
+	background: white;
+}
+
+.navbar-default li a, .navbar-default li a .glyphicon {
+	margin: 0;
+	padding-bottom: 0;
+}
+
+
+.navbar-default li a.userMenu {
+	padding-top: 11px;
+}
+
+
+.navbar-default a:link {
+	color: #777777;
+}
+
+.navbar-default a:hover {
+	color: #5f97d8;	
+}
+
+.navbar .profileImg {
+	width: 30px;
+	height: 30px;
+}
+
+
+.navbar span.glyphicon-plus-sign {
+	font-size: 20px;
+	color: rgba(96,152,217,0.82);	
+}
+
+.navbar span.glyphicon-plus-sign:hover {
+	font-size: 20px;
+	color: #5f97d8;
+}
+
+.navbar .nonProfile {
+
+}
+
+.navbar-default .navbar-brand {
+	color: #5f97d8;
+	 font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+    
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+}
+
+.navbar-default .navbar-brand:hover {
+	color: #54a3fd;
+	font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+    
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;	
+}
+
+
+
+/*************** Secondary Navbar ***************/
+.secondary-nav {
+	width: 100%;
+	z-index: 0;
+	text-align: center;
+	border-color: rgba(255,255,255,0);
+	padding: 0;
+	margin-bottom: 0;
+	margin-top: 0;
+	display: block;
+}
+
+.secondary-nav ul.navbar-nav {
+	list-style: none;
+	display: inline;
+    float: none;
+    padding: 0;
+    position: absolute;
+}
+
+.secondary-nav li {
+	padding-bottom: 0;
+	display: inline;
+	background: aqua;
+}
+
+.secondary-nav li a:link {
+	padding-bottom: 0;
+	padding-left: 0;
+	padding-right: 0;
+	padding-top: 10px;
+	margin: 0;
+	text-decoration: none;
+}
+
+.secondary-nav li.active a {
+	border-bottom-style: solid;
+	border-bottom-width: 6px;
+	border-bottom-color: #5f97d8;
+}
+
+.secondary-nav li a:hover {
+	background: #5f97d8;
+}
+
+/*************** Well ***************/
+.well {
+	background: white;
+	border-color: rgba(255,255,255,0); 
+}
+
+
+/************* Buttons ************/
+.btn, .btn-default, .btn-group .btn-default {
+	color: #777777;
+	background: white;
+	border-color: grey;
+}
+
+.btn:hover, .btn-default:hover, .btn-group .btn-default:hover {
+	color: #333333;
+	background: white;
+}
+
+
+.iconButton {
+	padding: 0;
+	border-color: rgba(0,255,255,0);
+}
+
+.iconButton:hover {
+	padding: 0;
+	border-color: rgba(0,255,255,0);
+}
+
+/******** Pagination ************/
+.pagination li a {
+	color: #777777;
+}
+
+.pagination li a:hover {
+	color: #333333;
+	background: white;
+}
+
+.pagination li.active a, .pagination li.active a:hover {
+	background: grey;
+	border-color: grey;
+}
+
+
+/********* Dropdown *********/
+.dropdown-menu {
+	text-align: center;
+}
+
+
+/******** Navbar toggle **********/
+.navbar-default .navbar-toggle {
+  border-color: #5f97d8;
+  background: white;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #5f97d8;
+}
+
+
+
+
+/************* Images *****************/
+.img-responsive {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+.ratio {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+    width: 100%;
+}

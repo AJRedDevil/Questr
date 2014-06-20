@@ -1,0 +1,172 @@
+{% extends "mainbase.html" %}
+{% load staticfiles %}
+{% block localhead %}
+  
+{% endblock localhead %}
+{% block content %}
+<div class="container">
+  <div class="row">
+      <div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
+        <div class="well">
+          <form class="form-horizontal" action="" method="post">{% csrf_token %}
+          <fieldset>
+            <legend class="text-center">You're steps away from posting a quest!</legend>
+    
+            <!-- Name input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">Title</label>
+              <div class="col-md-8">
+                <input id="title" name="title" type="text" placeholder="Your title" class="form-control input-sm">
+              </div>
+            </div>
+            
+          
+    
+    
+            <!-- Offer input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name">You're offering</label>
+              <div class="col-md-8">
+                <input id="reward" name="reward" type="text" placeholder="$$$$" class="form-control input-sm">
+              </div>
+            </div>
+          
+ 
+            <!-- Location input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label">Pickup from</label>
+              <div class="col-md-8">        
+      
+      
+      
+	              <div class="btn-group">
+					  <select name="srccity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
+						<option value="Mississauga">Mississauga</option>
+						<option value="Toronto">Toronto</option>
+						<option value="Brampton">Brampton</option>
+					</select>
+				  </div> 
+              </div>  
+            </div>  <!-- End of Form group -->
+                    
+                    
+                    
+                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+            <!-- Departure Address input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name"></label>
+              <div class="col-md-8">
+                <input id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" class="form-control input-sm">
+              </div>
+            </div>
+                    
+                    
+            <!-- Location input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label">Deliver to</label>
+              <div class="col-md-8">          
+      
+        <div class="btn-group">      
+        	<select name="dstcity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
+						<option value="Mississauga">Mississauga</option>
+						<option value="Toronto">Toronto</option>
+						<option value="Brampton">Brampton</option>
+					</select>
+              </div>  
+              </div>
+            </div>  <!-- End of Form group -->                          
+         
+            <!-- Departure Address input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name"></label>
+              <div class="col-md-8">
+                <input id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" class="form-control input-sm">
+              </div>
+            </div>
+                        
+             <!-- Message body -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="message">Package Size</label>
+              <div class="col-md-8">
+              	 <div class="input-group col-md-12">	
+              	 	<div class="col-md-4 column">
+              	 		<center>
+              	 			<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />       	 	
+              	 			<p>Backpack</p>
+              	 			<input type="radio" name="size" value="backpack"> 
+              	 		</center>	
+              	 	</div>   
+              	 	<div class="col-md-4 column">
+	              		<center>
+	              			<img src={% static 'img/car.png' %} style="width:100%; height:auto;" />
+	              			<p>Car</p>
+	              			<input type="radio" name="size" value="car">
+	              		</center>	
+              	 	</div>
+              	 	<div class="col-md-4 column">
+	              		<center>
+	              			<img src={% static 'img/minivan.png' %} style="width:100%; height:auto;" />
+	              			<p>Van</p>
+	              			<input type="radio" name="size" value="van">
+	              			</center> 	
+              	 	</div>
+			     </div><!-- /input-group -->
+			  </div>
+			 </div>
+            
+            <!-- Message body -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="message">Your Message</label>
+              <div class="col-md-8">
+                <textarea class="form-control" id="description" name="description" placeholder="Please enter your message here..." rows="5"></textarea>
+              </div>
+            </div>
+            
+          
+               <!-- Image Uploader -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="message">Image of the item</label>
+              <div class="col-md-8">
+              	<img style="width:260px; height:auto;" src="http://images.puella-magi.net/thumb/2/27/No_Image_Wide.svg/800px-No_Image_Wide.svg.png?20110202071158">
+              
+                <form class="navbar-form navbar-right">
+					<span class="form-group">			        
+			            <div class="input-group">
+			                <input type="text" class="form-control" name="item_images" placeholder="Image Url" />
+			                <span class="input-group-btn">
+			                	<button class="btn btn-danger" type="button">
+			                    	Upload   
+			                    </button>
+			                </span>
+			            </div>
+					</span>                           
+			    </form>
+		    </div>
+		    </div>
+            
+            <!-- Form actions -->
+            <div class="form-group">
+              <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-embossed btn-primary">Submit</button>
+              </div>
+            </div>
+          </fieldset>
+          </form>
+        </div>
+      </div>
+  </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+  
+{% endblock scripts %}

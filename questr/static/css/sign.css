@@ -1,0 +1,21 @@
+
+#forgot-password {
+	font-size: small;	
+}
+
+#createAccBtn {
+	float: right;
+	display: inline;
+
+}
+
+#disclaimer {
+	display: inline;
+	float: left;
+}
+
+
+
+.panel-content {
+	background: aqua;	
+}

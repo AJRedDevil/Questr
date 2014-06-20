@@ -1,0 +1,38 @@
+.nav-sidebar a {
+    color: #333;
+    -webkit-transition: all 0.08s linear;
+    -moz-transition: all 0.08s linear;
+    -o-transition: all 0.08s linear;
+    transition: all 0.08s linear;
+    text-align: center;
+}
+.nav-sidebar .active a { 
+    cursor: default;
+    background-color: #5f97d8; 
+    color: #fff; 
+}
+.nav-sidebar .active a:hover {
+    background-color: #5f97d8;   
+}
+.nav-sidebar .text-overflow a,
+.nav-sidebar .text-overflow .media-body {
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis; 
+}
+
+img.visa {
+	width: auto;
+	height: 25px;
+}
+
+img.mastercard {
+	width: auto;
+	height: 35px;
+}
+
+img.paypal {
+	width: auto;
+	height: 20px;
+}

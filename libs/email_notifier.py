@@ -3,8 +3,7 @@
 import logging
 from django.core.mail import EmailMessage
 
-
-def _load_template(email_details):
+def _load_template(user, email_details):
     """
     Returns the template for email verification.
     """
@@ -12,7 +11,7 @@ def _load_template(email_details):
     email_template = EmailMessage(
         subject=email_details['subject'],
         from_email="Questr <hello@questr.co>",
-        to=['Questr <hello@questr.co>'],
+        to=[user.email],
         headers={'Reply-To': "Questr <hello@questr.co>"}
         )
 
@@ -24,7 +23,7 @@ def _load_template(email_details):
 
     return email_template
 
-def send_contactus_message(email_details):
+def send_email_notification(user, email_details):
     """
     Send a verification email to the user.
     """
@@ -47,9 +46,8 @@ def send_contactus_message(email_details):
     #                                             },
     #                 }
     try:
-        msg = _load_template(email_details)
-        msg.send()
+        msg = _load_template(user, email_details)
         logging.warn("Assumption email Sent")
+        msg.send()
     except Exception, e:
-        logging.warn(e)
         logging.exception(str(e))

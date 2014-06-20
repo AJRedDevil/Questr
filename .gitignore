@@ -26,7 +26,7 @@ __pycache__/
 # Local Settings
 local_setting.py
 Procfile.dev
-# staticfiles
+#staticfiles
 
 
 # C extensions
@@ -75,3 +75,7 @@ coverage.xml
 docs/_build/
 
 ##### Python/Django end #####
+
+##### Questr ####
+localtemplates/
+media/

@@ -1,0 +1,168 @@
+{% extends "mainbase.html" %}
+{% load staticfiles %}
+{% block localhead %}
+  <!-- CSS -->
+  <link href={% static "css/sign.css" %} rel="stylesheet">
+  <link href={% static "css/social-buttons.css" %} rel="stylesheet">
+  <!-- Custom Javascript -->
+  <script src={% static "js/validator.js" %}></script>
+{% endblock localhead %}
+{% block content%}
+
+<div class="container">
+    <form action="" method="post">{% csrf_token %}
+    <div class="row clearfix">
+        <div class="col-md-10 col-md-offset-1 column">
+	    	<h3 class="lead grey"><span class="glyphicon glyphicon-user blue"></span> Create your Questr account with</h3>
+	         
+        	<center>
+        		<br>
+	    		<a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i> | Facebook</button></a>
+	    		<a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i> | Twitter</button></a>
+	    		{% comment %}
+                ## This is for google plus based authentication ##
+                    {% if plus_id %}
+                    <form id="google-plus" method="post" action="{% url 'social:complete' 'google-plus' %}">{% csrf_token %}
+                      <input id="at" type="hidden" name="access_token" value="" />
+                      <input id="code" type="hidden" name="code" value="" />
+
+                      <div id="signinButton">
+                        <span class="g-signin" data-scope="{{ plus_scope }}"
+                                               data-clientid="{{ plus_id }}"
+                                               data-redirecturi="postmessage"
+                                               data-accesstype="offline"
+                                               data-cookiepolicy="single_host_origin"
+                                               data-callback="signInCallback">
+                        </span>
+                      </div>
+                    </form>
+                    {% endif %}
+                {% endcomment %}
+	    		<a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i> | Google Plus</button></a>		
+        	</center>
+	        </div><!-- ./col-md-10 -->
+	    </div><!-- ./row -->
+	    
+	    
+	    <div class="container">	
+	    	<br>
+	    	<div class="row clearfix">
+				<div class="col-md-10 col-md-offset-1 column">
+					<div class="row clearfix">
+						<div class="col-md-12 column">
+							<h6 class="lead grey">Or the old fashion way</h6>
+						</div>
+					</div>
+				</div>
+	    	</div>
+	    
+	        
+	<div class="row clearfix">
+		<div class="col-md-10 col-md-offset-1 column">
+			<div class="row clearfix">
+
+				<div class="col-md-8 column">		
+					<hr>
+					
+					<div class="row clearfix">
+						<div class="col-md-6 column">			
+							
+							<label for="inputEmail" class="control-label grey">Email</label>
+			                <input type="email" class="form-control input-sm" name="email" id="inputEmail" placeholder="youremail@example.com" data-error="Bruh, that email address is invalid" required>
+			                <div class="help-block with-errors"></div>
+			                {% if user_form.email.errors %}
+			                    {{user_form.email.errors}}
+			                {% endif %}
+						</div>
+						<div class="col-md-6 column">
+							
+						</div><!-- ./col-md-6 -->						
+					</div><!-- ./row -->
+					
+					
+					
+					<label for="inputPassword" class="control-label">Password</label>
+					<div class="row clearfix">
+						<div class="col-md-6 column">
+						           
+							<input type="password" data-toggle="validator" data-minlength="6" class="form-control input-sm" name="password1" id="inputPassword" placeholder="" required>
+							<span class="help-block">Minimum of 6 characters</span>
+						</div>
+						<div class="col-md-6 column">
+							
+							<input type="password" class="form-control input-sm" name="password2" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Type it again" required>
+							<div class="help-block with-errors"></div>
+							{% if user_form.password2.errors %}
+							{{user_form.password2.errors}}
+							{% endif %}
+						</div><!-- ./col-md-6 -->						
+					</div><!-- ./row -->
+					
+					
+					
+				</div><!-- ./col-md-8 -->
+				<div class="col-md-4 column">
+					<hr>
+					<p>Already a member?  Sign in <a href="{% url 'login' %}">here.</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	    
+	    
+	    
+	    
+	    <div class="row clearfix">
+    		<div class="col-md-10 col-md-offset-1 column">
+    		<div class="col-md-4 column">
+ 
+                <label for="username" class="control-label">Username</label>
+                <input type="text" class="form-control input-sm" name="displayname" id="username" placeholder="" required>
+                {% if user_form.displayname.errors %}
+                    {{user_form.displayname.errors}}
+                {% endif %}
+                
+                <label for="firstName" class="control-label">First Name</label>
+                <input type="text" class="form-control input-sm" name="first_name" id="first_name" placeholder="" required>   
+                {% if user_form.first_name.errors %}
+                    {{user_form.first_name.errors}}
+                {% endif %}   
+              
+                <label for="username" class="control-label">Last Name</label>
+                <input type="text" class="form-control input-sm" name="last_name" id="last_name" placeholder="" required>
+                {% if user_form.last_name.errors %}
+                    {{user_form.last_name.errors}}
+                {% endif %}
+
+        	</div><!-- ./col-md-4 -->
+    		<div class="col-md-4 column">
+        		        	
+    		</div>
+    		
+            <div class="col-md-4 column">
+        		        	
+    		</div>
+        	
+        	</div><!-- ./col-md-10 -->
+    </div><!-- ./row -->
+    
+    
+    <div class="row clearfix">
+    		<div class="col-md-10 col-md-offset-1 column">
+	    		<div class="col-md-8 column">	
+	              <hr>
+	              <small class="small" id="disclaimer">By continuing, I agree to Questr's <a href="#">Seller Agreement</a> and <a href="#">E-Sign Consent</a>.</small>
+	              <button type="submit" class="btn btn-embossed btn-primary" id="createAccBtn">Create Account</button>
+	    		</div>
+	    		<div class="col-md-4 column">
+	    		
+	    		</div>
+    		</div><!-- ./col-md-10 -->
+    </div><!-- ./row -->                  
+</form>
+</div><!-- ./container -->
+
+{% endblock %}    
+{% block scripts %}
+{% endblock scripts %}

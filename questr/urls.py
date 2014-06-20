@@ -1,12 +1,13 @@
 from django.conf.urls import patterns, include, url
-
-from django.contrib import admin
-admin.autodiscover()
+import views as mainview
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'questr.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-    url(r'^$', include('beta.urls')),
+    url(r'^$', mainview.index, name="mainindex"),
+    url(r'loadpage/(?P<template>[-_\w/.]+)$', mainview.loadPage, ),    
     url(r'^beta/', include('beta.urls')),
+    url(r'^user/', include('users.urls')),
+    url(r'^quest/', include('quests.urls') ),
+    url(r'^questrreview/', mainview.questrReview ),
+    url(r'^questreview/', mainview.questReview ),
 )

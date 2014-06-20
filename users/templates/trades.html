@@ -1,0 +1,167 @@
+{% extends "mainbase.html" %}
+{% load staticfiles %}
+{% block localhead %}
+    <!-- Custom CSS -->
+    <link href={% static "css/smallpost.css" %} rel="stylesheet">
+    <link href={% static "css/profile.css" %} rel="stylesheet">
+    <link href={% static "css/trades.css" %} rel="stylesheet">
+    
+    <!-- Custom Javascript -->
+    <script src={% static "js/validator.js" %}></script>
+{% endblock localhead %}
+{% block content %}
+
+
+<div class="alert alert-success-alt alert-dismissable" style="display: none">
+                <span class="glyphicon glyphicon-certificate"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                    ×</button><strong>Well done!</strong> sdad <a href="http://www.jquery2dotnet.com"
+                        target="_blank">alert</a>sadadasdasd</div>
+</div>
+
+
+
+<div class="container">
+    <div class="row">	
+    <div class="col-md-12 column"> 
+       <div class="col-md-8 col-md-offset-2 column"> 
+          
+          <div class="panel panel-default shadows">
+		  <!-- Default panel contents -->
+		  <div class="panel-heading">
+			  <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="{% url 'mytrades' %}">My Offers</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'myposts' %}">My Posts</a>
+                    </li>                   
+                </ul>
+		  </div>
+	
+	
+		  <ul class="list-group">   
+			  {% for quest,shippers in shipperlist.items %} 
+		
+			              
+			  <a href="/quest/{{quest.id}}">
+				<li class="list-group-item">
+				<div class="row clearfix">
+				    <div class="col-sm-2">
+					    <div class="ratio img-responsive img-circle post-image" style="background-image: url({{user.avatar_file_name}});"></div>
+				    </div>
+				    <div class="col-sm-6">
+				        <h6> {{quest.title| title}} </h6>
+	                    <p> 
+	                    	{% for shipper in shippers %}
+	                                    {{shipper.0.displayname}}, 
+	                                {% endfor %} has shown interest!
+	                    </p>
+	                    <small><span class="glyphicon glyphicon-time"></span> time and date</small>
+				    </div>
+				    <div class="col-sm-4 column">
+				    	<div class="col-md-6">
+                        	<a href="#" class="acceptUrl"><button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button></a>
+                    	</div>
+                    	<div class="col-md-6">
+                    		<button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
+                    	</div>
+                    </div><!-- ./column -->
+				</div><!-- ./row -->
+				</li>
+				</a> 
+			
+        
+                 
+                    {% comment %}
+         
+                            <a href="/quest/{{quest.id}}" class="list-group-item">
+                                <div class="media col-md-2">
+                                    <div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="list-group-item-heading postTitle"> {{quest.title| title}} </h6>
+                                    Following shippers have shown interest:
+                                    <p class="list-group-item-text postDesc"> 
+                                                {% for shipper in shippers %}
+                                                    {{shipper.0.displayname}}, 
+                                                {% endfor %}
+                                    </p>
+                                </div>
+                                <div class="col-md-4">         
+                                	<div class="col-md-6">
+	                                	<a href="#"><button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you're ready to deliver!">Accept</button></a>
+                                	</div>
+                                	<div class="col-md-6">
+                                		<button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
+                                	</div>
+                                </div>
+                               
+                            </a>  <!-- End of Quest Post -->
+                               {% endcomment %}
+                            
+                   
+             {% endfor %}
+                        
+        </ul>	<!-- End of list-group -->
+		 </div>
+	    </div>    
+    </div>
+
+
+
+<!-- Modal -->
+<div class="container">
+	<div class="row">
+		<div id="myModal" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content col-md-6 col-md-offset-3 column">
+	            <div class="well profile">
+             
+              <div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
+                    
+            <center>
+	            <h3>{{user.first_name}} {{user.last_name}}</h3>  
+	                        
+				
+				 <input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
+				
+			</center>
+            
+            		<p><strong>Location: </strong> Toronto, Ontario, Canada </p>
+             		<p><strong><span class="glyphicon glyphicon-earphone"></span></strong> Phone number goes here </p>
+                    <p><strong>Quests Completed: </strong> {{quests_complete}} </p>
+                    <p><strong>Quests Posted: </strong> {{questes_posted}} </p>  
+                    <p><strong>Trust Rank: </strong> {{ranking}}%</p>                           
+         </div>	<!-- End of Profile -->
+            	
+                
+                
+                <div class="modal-footer">
+                    <div class="btn-group">
+                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+ 
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dalog -->
+</div><!-- /.modal -->
+	</div>
+</div><!-- ./container -->
+
+
+{% endblock content %}    
+{% block scripts %}    
+
+<script>
+$(function() {
+       
+	$(".acceptBtn").click(function(){
+		$( ".alert" ).show( "slow" );
+		$(".acceptBtn").html("Leave a review");
+    });
+
+});
+</script>
+
+{% endblock scripts %}  

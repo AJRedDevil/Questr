@@ -1,0 +1,55 @@
+{% extends "mainbase.html" %}
+{% load staticfiles %}
+{% block localhead %}
+    <!-- Custom CSS -->
+    <link href={% static "css/settings.css" %} rel="stylesheet">
+
+    <!-- Custom Javascript -->
+    <script src={% static "js/validator.js" %}></script>
+{% endblock localhead %}
+{% block content %}
+{% block nav-sidebar %}
+    <div class="container">
+    <div class="row clearfix">
+    
+  <div class="col-md-3 col-lg-3">
+        <nav class="nav-sidebar">
+            <ul class="nav tabs well">
+            {% if settingstype ==  "general" %}
+              <li class="active"><a href="/user/settings">Account</a></li>
+            {% else %}
+              <li class=""><a href="/user/settings">Account</a></li>
+            {% endif %}
+            
+            {% if settingstype == "password" %}
+              <li class="active"><a href="/user/settings/password">Password</a></li>
+            {% else %}
+              <li class=""><a href="/user/settings/password">Password</a></li>
+            {% endif %}
+            
+            {% if settingstype == "email" %}
+              <li class="active"><a href="/user/settings/email">Email Notifications</a></li>               
+            {% else %}
+              <li class=""><a href="/user/settings/email">Email Notifications</a></li> 
+            {% endif %}
+            
+            {% if settingstype == "card" %}
+              <li class="active"><a href="/user/settings/card">Credit Card</a></li>                               
+            {% else %}
+              <li class=""><a href="/user/settings/card">Credit Card</a></li>                               
+            {% endif %}
+            </ul>
+        </nav>
+      </div>  
+{% endblock nav-sidebar %}
+<!-- tab content -->
+<div class="tab-content">
+{% block tabcontent %}
+{% endblock tabcontent %}
+</div>
+    </div>
+    
+</div>
+{% endblock content %}
+{% block scripts %}
+{% endblock scripts %}
