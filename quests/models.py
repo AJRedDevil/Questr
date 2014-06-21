@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from users.models import *
 
+import logging
 
 class Quests(models.Model):
     questrs = models.ForeignKey(QuestrUserProfile)
@@ -15,7 +16,7 @@ class Quests(models.Model):
     reward = models.DecimalField(_('reward'), decimal_places=2, 
         max_digits=1000)
     item_images = models.URLField(_('item_images'), blank=True)
-    status = models.IntegerField(_('status'), default='0')
+    status = models.TextField(_('status'), default='new')
     creation_date = models.DateField(_('creation_date'), 
         blank=False)
     size = models.TextField(_('size'), default="backpack")
@@ -29,10 +30,20 @@ class Quests(models.Model):
     dstaddress = models.TextField(_('dstaddress')) # this would be a dict of address attributes
     # isprivate = models.BooleanField(_('isprivate'), default=True) # if posted under an offer this would be always set to True, else would be set as False
     isaccepted = models.BooleanField(_('isaccepted'), default=False)
-    isnotified = models.BooleanField(_('notified'), default=False)
+    isnotified = models.BooleanField(_('isnotified'), default=False)
+    delivery_code = models.TextField(_('delivery_code'), default='121212')
+
+    def get_delivery_code(self):
+        return hashlib.sha256(str(timezone.now()) + str(self.creation_date)).hexdigest()
 
     def __unicode__(self):
         return str(self.id )
+
+        #Overriding
+    def save(self, *args, **kwargs):
+        # get a delivery code with 3 letters from the first and 2 from the last
+        self.delivery_code = self.get_delivery_code()[:3]+self.get_delivery_code()[-2:]
+        super(Quests, self).save(*args, **kwargs)
 
 
 class QuestComments(models.Model):

@@ -19,9 +19,8 @@ urlpatterns = patterns('',
     url(r'^verifymail$', userviews.resend_verification_email, name='verify_Email'),
     url(r'^email/confirm/(?P<user_code>[\w\d]+)', userviews.verify_email),
     url(r'^trades/$', userviews.myTrades, name='mytrades' ),
-    url(r'^trades/(?P<quest_id>[\d+])/accept/(?P<shipper_id>[\d+])$', userviews.acceptOffer, name='acceptOffer' ),
+    url(r'^trades/(?P<quest_id>[\d+])/accept/(?P<shipper_id>[\d+])/$', userviews.acceptOffer, name='acceptOffer' ),
     url(r'^posts/$', userviews.myPosts, name='myposts' ),
     url(r'^forgotpassword/$', userviews.resetpassword, name='reset_password'),
     url(r'^(?P<displayname>[-_\w/.]+)/$', userviews.getUserInfo, name='getUserInfo'),
-
 )

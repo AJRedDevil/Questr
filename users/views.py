@@ -158,22 +158,19 @@ def myTrades(request):
 
 @login_required
 def acceptOffer(request, quest_id, shipper_id):
+    """Accepts a bid on a quest from a user"""
     pagetype="loggedin"
     user = request.user
     if not user_handler.userExists(shipper_id):
-        return redirect('mytrades')
+        return redirect('mytrades')    
     
     try:
         Quests.objects.filter(id=quest_id).update(shipper=shipper_id, isaccepted='t')
     except Quests.DoesNotExist:
         raise Http404
         return render('404.html', locals())
-
-    try:
-        shipper = user_handler.getShipper(shipper_id)
-    except Exception, e:
-        raise Http404
-        return render('404.html', locals())
+    #To display the information of shipper on the trades page
+    shipper = user_handler.getShipper(shipper_id)    
     
     return redirect('mytrades')
 

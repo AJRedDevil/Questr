@@ -50,7 +50,13 @@
 									<div class="col-md-2 column">								
 										<a href="edit">					
 											<button type="button" class="btn btn-embossed btn-default" style="float:right;">Edit Post</button>
-										</a>									
+										</a>																			
+									</div>
+									<div class="col-md-2 column">
+										<button type="button" class="btn btn-embossed btn-default" style="float:right;">{{questdetails.status}}</button>
+									</div>
+									<div class="col-md-8 column inBodyWell">
+										<p>Delivery Code [this should be click to show/JS]: {{questdetails.delivery_code}}</p>
 									</div>
 								{% endif %}
 							</div>	<!-- ./row -->
