@@ -351,7 +351,7 @@
         size: 'md',
         showClear: true,
         showCaption: true,
-        defaultCaption: '{rating} Stars',
+        defaultCaption: '{rating} %',
         starCaptions: {
             0.5: 'Half Star',
             1: 'One Star',

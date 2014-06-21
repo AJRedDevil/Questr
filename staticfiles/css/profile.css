@@ -1,24 +1,6 @@
-.profile .displayName {
-	font-size: large;
-	display: inline-block;
-	width: 100%;
+.userName {
+	margin: 0;
 }
-
-    
-figcaption.ratings
-{
-    margin-top:20px;
-    }
-figcaption.ratings a
-{
-    color:#f1c40f;
-    font-size:11px;
-    }
-figcaption.ratings a:hover
-{
-    color:#f39c12;
-    text-decoration:none;
-    }
 
 span.tags 
 {
@@ -29,6 +11,11 @@ span.tags
     padding: 2px 4px;
 }
 
+
+input.rating {
+	margin: 0;
+	background: aqua;
+}
  
  
 /*********** Tab Menu ************/

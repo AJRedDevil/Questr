@@ -1,3 +1,64 @@
 .itemImage {
 	width: 100%;
 }
+
+
+textarea.description {
+	height: 200px;
+}
+
+textarea.title {
+	font-size: large;
+}
+
+#lightbox .modal-content {
+    display: inline-block;
+    text-align: center;   
+}
+
+#lightbox .close {
+    opacity: 1;
+    color: rgb(255, 255, 255);
+    background-color: rgb(25, 25, 25);
+    padding: 5px 8px;
+    border-radius: 30px;
+    border: 2px solid rgb(255, 255, 255);
+    position: absolute;
+    top: -15px;
+    right: -55px;  
+    z-index:1032;
+}
+
+
+.titleContainer .row .titleColumn .title {
+	margin: 0px;
+}
+
+.titleContainer .row .titleColumn button {
+	float: right;
+	margin: 0px;
+}
+
+.inBodyWell {
+	background: #f8f8f8;
+}
+
+
+.offerBtn {
+	width: 100px;
+	height: 50px;
+
+	border: rgba(255,255,255,0);
+	background: #FFA107;
+	-moz-box-shadow:    inset 0px -4px 0px 0px #FA8C24;
+	-webkit-box-shadow: inset 0px -4px 0px 0px #FA8C24;
+	box-shadow:         inset 0px -4px 0px 0px #FA8C24;
+}
+
+.offerBtn:hover {
+	border: rgba(255,255,255,0);
+	background: #FA8C24;
+	-moz-box-shadow:    inset 0px 0px 0px 0px rgba(255,255,255,0);
+	-webkit-box-shadow: inset 0px 0px 0px 0px rgba(255,255,255,0);
+	box-shadow:         0px 0px 0px rgba(255,255,255,0);	
+}

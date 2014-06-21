@@ -36,6 +36,11 @@
                     <li>
                         <a href="{% url 'myposts' %}">My Posts</a>
                     </li>                   
+                    {% if user.is_shipper %}
+                    <li>
+                        <a href="{% url 'myposts' %}">My Shipments</a>
+                    </li>                                       
+                    {% endif %}
                 </ul>
 		  </div>
 	

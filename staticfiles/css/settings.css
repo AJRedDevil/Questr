@@ -1,19 +1,18 @@
-
-
 .nav-sidebar a {
     color: #333;
     -webkit-transition: all 0.08s linear;
     -moz-transition: all 0.08s linear;
     -o-transition: all 0.08s linear;
     transition: all 0.08s linear;
+    text-align: center;
 }
 .nav-sidebar .active a { 
     cursor: default;
-    background-color: #0b56a8; 
+    background-color: #5f97d8; 
     color: #fff; 
 }
 .nav-sidebar .active a:hover {
-    background-color: #E50000;   
+    background-color: #5f97d8;   
 }
 .nav-sidebar .text-overflow a,
 .nav-sidebar .text-overflow .media-body {
@@ -23,10 +22,17 @@
     text-overflow: ellipsis; 
 }
 
-.btn-blog {
-    color: #ffffff;
-    background-color: #E50000;
-    border-color: #E50000;
-    border-radius:0;
-    margin-bottom:10px
+img.visa {
+	width: auto;
+	height: 25px;
+}
+
+img.mastercard {
+	width: auto;
+	height: 35px;
+}
+
+img.paypal {
+	width: auto;
+	height: 20px;
 }

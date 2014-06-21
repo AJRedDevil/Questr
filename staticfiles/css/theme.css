@@ -1,16 +1,18 @@
-html {overflow-x: hidden;}
+html {
+	overflow-x: hidden;
+	margin: 0;
+	padding: 0;
+	background: aqua;
+}
  
 body {
-	font-family: Arial, sans-serif;
-	color: #393939;
-	font-size: 16px;
-	padding: 0px;
-	margin: 0;
-	background: #dedede;
+	background: #e9eaed;
+	/** background: #fafafa; **/
+	
+	overflow-x: hidden;
  }
  
 footer {
-	font-family: 'TeXGyreCursorRegular', Arial, sans-serif;
 	border-top: 1px solid #ddd;
 	margin-top: 35px;
 	padding-top: 6px;
@@ -19,11 +21,33 @@ footer {
 	background: white;
 }
  
-h1, h2, h3, h4, h5, h6 {
-	font-weight: normal;
-	font-family: 'TeXGyreCursorRegular', Arial, sans-serif;
-	letter-spacing: 0;
+ footer ul {
+	 list-style-type: none;
  }
+ 
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 1em 0;
+	padding: 0;
+}
+
+.shadows {
+	-webkit-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
+}
+
+.body-borders {
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border: none;
+}
+ 
 
 /*************** Theme colour & details ********************/
 li a:link {
@@ -34,182 +58,140 @@ li a:hover {
 	color: #5f97d8;
 }
 
+
 .navbar-default .navbar-nav > .active {
     color: #000;
-   background: #5f97d8;
  }
  .navbar-default .navbar-nav > .active > a, 
  .navbar-default .navbar-nav > .active > a:hover, 
+  .navbar-default .navbar-nav > .active > a:active,
  .navbar-default .navbar-nav > .active > a:focus {
       color: #5f97d8;
-      background: white;
+      background: transparent;
  }
+  d
  
 /*************** Primary Navbar ***************/
-.navbar-container {
-	margin-left: 0;
-	margin-right: 0;
-	margin-top: 0;
-	margin-bottom: 20px;
+nav.navbar {
+	color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #2b4b90;
+  background-color: #133783;
+  background-image: -moz-linear-gradient(top, #3b5998, #133783);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3b5998), to(#133783));
+  background-image: -webkit-linear-gradient(top, #3b5998, #133783);
+  background-image: -o-linear-gradient(top, #3b5998, #133783);
+  background-image: linear-gradient(to bottom, #3b5998, #133783);
+  background-repeat: repeat-x;
+  border-color: transparent;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3b5998', endColorstr='#ff133783', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.nav .form-control .search {
+	border-color: white;
+	-webkit-box-shadow: 1px 1.5px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 1px 1.5px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 1px 1.5px 0 rgba(0, 0, 0, 0.15);
+}
+
+.nav button.btn span {
+	border-color: transparent;
+	background: aqua;
+	color: aqua;
+}
+
+.profileImg {
+	width: 40px;
+	height: auto;
+	float: left;
+}
+
+
+#notifications .dropdown-menu li a {
+	min-width: 350px;
+	max-height: 20px;
+}
+#notifications .dropdown-menu li .imgBox {
+	margin: 0;
 	padding: 0;
-	width: 100%;
 }
-
-.navbar {
-	width: 100%;
-	margin: 0;
-	padding: 0 15px;
-	z-index: 999;
-	background: white;
-}
-
-.navbar-default li a, .navbar-default li a .glyphicon {
-	margin: 0;
-	padding-bottom: 0;
-}
-
-
-.navbar-default li a.userMenu {
-	padding-top: 11px;
-}
-
-
-.navbar-default a:link {
-	color: #777777;
-}
-
-.navbar-default a:hover {
-	color: #5f97d8;	
-}
-
-.navbar .profileImg {
-	width: 30px;
-	height: 30px;
-}
-
-
-.navbar span.glyphicon-plus-sign {
-	font-size: 20px;
-	color: rgba(96,152,217,0.82);	
-}
-
-.navbar span.glyphicon-plus-sign:hover {
-	font-size: 20px;
-	color: #5f97d8;
-}
-
-.navbar .nonProfile {
-
-}
-
-.navbar-default .navbar-brand {
-	color: #5f97d8;
-	 font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    font-size: 20px;
-    
-    -webkit-font-smoothing: antialiased;
-    -webkit-overflow-scrolling: touch;
-    
-    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
-    transition: color 0.1s ease-in, background 0.1s ease-in;
-}
-
-.navbar-default .navbar-brand:hover {
-	color: #54a3fd;
-	font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    font-size: 20px;
-    
-    -webkit-font-smoothing: antialiased;
-    -webkit-overflow-scrolling: touch;
-    
-    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
-    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
-    transition: color 0.1s ease-in, background 0.1s ease-in;	
-}
-
 
 
 /*************** Secondary Navbar ***************/
-.secondary-nav {
-	width: 100%;
-	z-index: 0;
+.secondaryNavRow ul {
+	background: white;
+	list-style-type:none;
+	margin:0;
+	padding:0;
 	text-align: center;
-	border-color: rgba(255,255,255,0);
-	padding: 0;
-	margin-bottom: 0;
-	margin-top: 0;
-	display: block;
+	
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-top-color: #f8f8f8;
 }
 
-.secondary-nav ul.navbar-nav {
-	list-style: none;
-	display: inline;
-    float: none;
-    padding: 0;
-    position: absolute;
-}
-
-.secondary-nav li {
-	padding-bottom: 0;
-	display: inline;
-	background: aqua;
-}
-
-.secondary-nav li a:link {
-	padding-bottom: 0;
-	padding-left: 0;
-	padding-right: 0;
-	padding-top: 10px;
+.secondaryNavRow ul li {
+	display: inline-block;
+	background: white;
 	margin: 0;
-	text-decoration: none;
+	padding: 0;
+	height: 30px;
 }
 
-.secondary-nav li.active a {
+.secondaryNavRow ul li:hover {
 	border-bottom-style: solid;
 	border-bottom-width: 6px;
 	border-bottom-color: #5f97d8;
 }
 
-.secondary-nav li a:hover {
-	background: #5f97d8;
+.secondaryNavRow ul li.active {
+	border-bottom-style: solid;
+	border-bottom-width: 6px;
+	border-bottom-color: #5f97d8;
 }
 
-/*************** Well ***************/
+.secondaryNavRow ul li.quest {
+	margin-right: 30px;
+}
+
+
+
+
+
+/*************** Well, Panels ***************/
 .well {
 	background: white;
-	border-color: rgba(255,255,255,0); 
+	border: none; 
 }
+
+.panel-default {
+	background: transparent;
+	border: none;
+}
+
+.panel-default .panel-heading {
+	border: none;
+}
+
+.panel-default .panel-content {
+	background: white;
+}
+
 
 
 /************* Buttons ************/
-.btn, .btn-default, .btn-group .btn-default {
+.btn {
 	color: #777777;
 	background: white;
-	border-color: grey;
+	border-color: transparent;
 }
 
-.btn:hover, .btn-default:hover, .btn-group .btn-default:hover {
+.btn:hover {
 	color: #333333;
 	background: white;
 }
 
-
-.iconButton {
-	padding: 0;
-	border-color: rgba(0,255,255,0);
-}
-
-.iconButton:hover {
-	padding: 0;
-	border-color: rgba(0,255,255,0);
-}
 
 /******** Pagination ************/
 .pagination li a {
@@ -233,17 +215,14 @@ li a:hover {
 }
 
 
-/******** Navbar toggle **********/
-.navbar-default .navbar-toggle {
-  border-color: #5f97d8;
-  background: white;
-}
-
-.navbar-default .navbar-toggle:hover,
-.navbar-default .navbar-toggle:focus {
-  background-color: #5f97d8;
-}
-
+/************* Alert *****************/
+.alert-purple { border-color: #694D9F;background: #694D9F;color: #fff; }
+.alert-info-alt { border-color: #B4E1E4;background: #81c7e1;color: #fff; }
+.alert-danger-alt { border-color: #B63E5A;background: #E26868;color: #fff; }
+.alert-warning-alt { border-color: #F3F3EB;background: #E9CEAC;color: #fff; }
+.alert-success-alt { border-color: #19B99A;background: #20A286;color: #fff; }
+.glyphicon { margin-right:10px; }
+.alert a {color: gold;}
 
 
 
@@ -252,15 +231,82 @@ li a:hover {
     display: block;
     height: auto;
     max-width: 100%;
+    margin: 0;
 }
 
 .ratio {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-
     height: 0;
     padding-bottom: 100%;
     position: relative;
     width: 100%;
+    margin: 0;
 }
+
+.imageUploader {
+    height: auto;
+    width: 10px;
+}
+
+/************* Input Boxes *****************/
+
+
+
+/**
+input.form-control {
+	border-color: white;
+	-webkit-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
+}
+
+input.form-control:focus {
+	border-color: blue;
+	-webkit-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
+}
+**/
+
+
+/********** Tabs **************/
+.tab-pane {
+	min-height: 280px;	
+}
+
+
+.nav-tabs > li > a, 
+	.nav-tabs > li > a:hover,
+    .nav-tabs > li > a:focus,
+    .nav-tabs > li.active > a, 
+	.nav-tabs > li.active > a:hover,
+    .nav-tabs > li.active > a:focus {
+	cursor: default;
+	background-color: rgba(204,170,170,0);
+	border-color: transparent;
+}
+               
+          
+.inputBackground {
+	background: #f2f2f2;
+	padding: 10px;
+}
+ 
+ .white {
+	color: white;
+}
+
+.blue {
+	color: #507ecd;
+}
+
+.grey {
+	color: #5a5a5a;
+}
+
+.light-grey {
+	color: #979797;
+}
+
