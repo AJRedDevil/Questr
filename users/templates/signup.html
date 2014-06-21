@@ -10,7 +10,6 @@
 {% block content%}
 
 <div class="container">
-    <form action="" method="post">{% csrf_token %}
     <div class="row clearfix">
         <div class="col-md-10 col-md-offset-1 column">
 	    	<h3 class="lead grey"><span class="glyphicon glyphicon-user blue"></span> Create your Questr account with</h3>
@@ -43,7 +42,7 @@
 	        </div><!-- ./col-md-10 -->
 	    </div><!-- ./row -->
 	    
-	    
+	    <form action="" method="post">{% csrf_token %}
 	    <div class="container">	
 	    	<br>
 	    	<div class="row clearfix">

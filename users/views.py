@@ -285,10 +285,15 @@ def verify_email(request, user_code):
     if user_code:
         try:
             transcational = UserTransactional.objects.get(user_code__regex=r'^%s' % user_code)
+            logging.debug("transactional")
+            logging.debug(transcational)
             if transcational:
-                if transcational.status:
+                logging.debug("transctional status")
+                logging.debug(transcational.status)
+                if not transcational.status:
                     try:
                         user = QuestrUserProfile.objects.get(email=transcational.email)
+                        logging.debug(user)
                         if user:
                             user.email_status = True
                             user.save()
