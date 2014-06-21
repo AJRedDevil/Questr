@@ -211,7 +211,7 @@ a {
 }
 a:hover,
 a:focus {
-  color: #1abc9c;
+  color: #5f97d8;
   text-decoration: none;
 }
 a:focus {
@@ -367,7 +367,7 @@ a.text-info:hover {
 }
 .bg-primary {
   color: #ffffff;
-  background-color: #34495e;
+  background-color: #34495f;
 }
 a.bg-primary:hover {
   background-color: #222f3d;
@@ -2371,7 +2371,7 @@ select[multiple].navbar-form .btn {
   color: #aeb6bf;
 }
 .navbar-default .navbar-form .form-control:focus {
-  border-color: #1abc9c;
+  border-color: #5f97d8;
   color: #1abc9c;
 }
 .navbar-default .navbar-form .input-group-btn .btn {
