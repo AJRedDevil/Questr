@@ -4,6 +4,6 @@ import views as mainview
 
 
 urlpatterns = patterns('',
-    url(r'^(?P<quest_id>[\d+])/review/(?P<reviewed_id>[\d+])$', mainview.render_review, name='render_review' ),
-    url(r'^(?P<quest_id>[\d+])/(?P<reviewed_id>[\d+])$', mainview.review, name='review')
+    url(r'^(?P<quest_id>\d+)/(?P<reviewed_id>\d+)$', mainview.review, name='render_review' ),
+    # url(r'^(?P<quest_id>\d+)/(?P<reviewed_id>\d+)$', mainview.review, name='review')
 )

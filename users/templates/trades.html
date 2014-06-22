@@ -74,9 +74,6 @@
                                             <button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
                                         </div>
                                     {% endcomment %}
-                                    <div class="col-md-6">
-                                        <a href="/review/{{quest.id}}/review/{{shipper.0.id}}" class="acceptUrl"><button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you've reviewed his effort!">Review</button></a>
-                                    </div>
                                 </div><!-- ./column -->
                             </div><!-- ./row -->
                           {% comment %}
@@ -108,6 +105,9 @@
                                         <div class="col-md-6">
                                             <button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal{{shipper.0.id}}">Contact</button>
                                             </div>
+                                            {% if not quest.status == "Reviewed" %}
+                                                <a href="/review/{{quest.id}}/{{shipper.0.id}}" class="reviewUrl"><button class="btn btn-embossed btn-primary reviewBtn" rel="tooltip" title="We'll notify the user that you've reviewed his effort!">Review</button></a>
+                                            {% endif %}
                                         </div>
                                         {% comment %}
                                             <div class="col-md-6">
@@ -171,15 +171,17 @@
 {% endblock content %}    
 {% block scripts %}    
 
-<script>
+{% comment %}
+    <script>
 $(function() {
        
-	$(".acceptBtn").click(function(){
-		$( ".alert" ).show( "slow" );
-		$(".acceptBtn").html("Leave a review");
+    $(".acceptBtn").click(function(){
+        $( ".alert" ).show( "slow" );
+        $(".acceptBtn").html("Leave a review");
     });
 
 });
 </script>
+{% endcomment %}
 
 {% endblock scripts %}  
