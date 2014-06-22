@@ -286,11 +286,11 @@ def verify_email(request, user_code):
             logging.debug(transcational)
             if transcational:
                 logging.debug("transctional status")
-                logging.debug(transcational.status)
+                logging.warn(transcational.status)
                 if not transcational.status:
                     try:
                         user = QuestrUserProfile.objects.get(email=transcational.email)
-                        logging.debug(user)
+                        logging.warn(user)
                         if user:
                             user.email_status = True
                             user.save()
