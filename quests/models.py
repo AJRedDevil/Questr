@@ -17,7 +17,7 @@ class Quests(models.Model):
         max_digits=1000)
     item_images = models.URLField(_('item_images'), blank=True)
     status = models.TextField(_('status'), default='new')
-    creation_date = models.DateField(_('creation_date'), 
+    creation_date = models.DateTimeField(_('creation_date'), 
         blank=False)
     size = models.TextField(_('size'), default="backpack")
     # rating = models.IntegerField(_('rating'), default='0')

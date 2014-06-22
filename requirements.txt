@@ -1,5 +1,6 @@
 Django==1.6.2
 Pillow==2.4.0
+South==0.8.4
 autoenv==1.0.0
 dj-database-url==0.3.0
 dj-static==0.0.5
@@ -14,6 +15,7 @@ psycopg2==2.5.2
 pystache==0.5.3
 python-openid==2.2.5
 python-social-auth==0.1.23
+pytz==2014.4
 requests==2.2.1
 requests-oauthlib==0.4.0
 six==1.6.1

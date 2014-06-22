@@ -1,5 +1,6 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
+{% load tz %}
 {% block localhead %}
 <link href={% static "css/feature.css" %} rel="stylesheet">
 {% endblock localhead %}
@@ -29,7 +30,7 @@
 	                                    <p>From: {{quest.srcaddress}}</p>
 	                                    <p>To: {{quest.dstaddress}}</p>
 	                                {% endif %}         
-                                  <p><span class="glyphicon glyphicon-time"></span>{{quest.creation_date | timesince}} ago</p>
+                                  <p><span class="glyphicon glyphicon-time"></span>{% localtime on%} {{quest.creation_date | timesince }} {% endlocaltime %} ago</p>
                                 </div><!-- ./post-info -->
                         </div><!-- End of item-content -->
                     </div><!-- End of picture -->
