@@ -39,18 +39,23 @@
     <!-- This is the overlay DIV that is displayed while loading a new page -->
 
 <!-- Main Navbar -->
-  
-            	
+  <div class="container brand">
+  <div class="row clearfix">
+  <div class="col-md-2 col-md-offset-5 column">
+  				<center><a href="{% url 'mainindex' %}">QUESTR</a></center>
+  </div>
+  </div>
+  </div>
             	<nav class="navbar navbar-default" role="navigation">
+            		
 				  <div class="navbar-header">
 				    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
 				      <span class="sr-only">Toggle navigation</span>
 				    </button>
-				    <a class="navbar-brand" href="{% url 'mainindex' %}">QUESTR</a>
 				  </div>
+				  
+				  
 				  <div class="collapse navbar-collapse" id="navbar-collapse-01">
-				    
-					
 					  <ul class="nav navbar-nav navbar-right"> 
 				      
 				      		{% if pagetype == "public" %}
@@ -59,11 +64,12 @@
 	                        <li><a href="{% url 'signup' %}">Signup</a></li>
 	
 	                        <li><a href="#">About Us</a></li>
+	        
 	                        {% endif %}
         		
 	                        {% if pagetype == "loggedin" %}
 	                        <li><a href="{% url 'createquest' %}"><span class="glyphicon glyphicon-plus"></span> Post</a></li>
-	                        <li><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+	                        <li><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li> 
                         	{% comment %}
                             <li><a href="/quest">Browse</a></li>                  
                             
