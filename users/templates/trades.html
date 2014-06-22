@@ -23,7 +23,6 @@
 
 <div class="container">
     <div class="row">	
-    <div class="col-md-12 column"> 
        <div class="col-md-8 col-md-offset-2 column"> 
           
           <div class="panel panel-default shadows">
@@ -42,7 +41,7 @@
                     </li>                                       
                     {% endif %}
                 </ul>
-		  </div>
+		  </div><!-- ./panel-heading -->
 	
 	
 		  <ul class="list-group">   
@@ -51,44 +50,67 @@
                       <a href="/quest/{{quest.id}}">
                         <li class="list-group-item">
                         <div class="row clearfix">
-                            <div class="col-sm-2">
-                                  <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
-                              </a>
-                            </div>
-                            <div class="col-sm-6">
-                                <h6> {{quest.title| title}} </h6>
+                            <div class="col-md-2 column">
+                                  <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>    
+                            </div><!-- ./column -->
+                            <div class="col-md-6 column">
+                                <h6> {{quest.title| title}}</h6>
                                     {% for shipper in shippers %}
-                                        <div class="col-sm-4">
-                                            <center>{{shipper.0.first_name | title}}</center>
-                                                <a href="/user/{{shipper.0.displayname}}"><div class="ratio img-responsive img-circle post-image" style="background-image: url({{shipper.0.avatar_file_name}});"></div></a>
-                                                <a href="{{quest.id}}/accept/{{shipper.0.id}}" class="acceptUrl"><button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you've accepted his bid!">Accept</button></a>
-                                        </div>
+                                        
+                                    <center>{{shipper.0.first_name | title}}</center>
+                                    <a href="/user/{{shipper.0.displayname}}"></a>          
+                                    <div class="ratio img-responsive img-circle post-image" style="background-image: url({{shipper.0.avatar_file_name}});"></div>
+                                    <a href="{{quest.id}}/accept/{{shipper.0.id}}" class="acceptUrl">
+                                    	<button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you've accepted his bid!">Accept</button>
+                                    	</a>
+                                     
                                       {% endfor %}
-                            </div>
+                            </div><!-- ./column -->
+                            <div class="col-md-4 column">
+                            	<small><span class="glyphicon glyphicon-time"></span> time and date</small>
+                            </div><!-- ./column -->
+                            
+                            
                         </div><!-- ./row -->
-                          <small><span class="glyphicon glyphicon-time"></span> time and date</small>
-                        </li>
+                          
+                        </li>  
+                        </a>    
                 {% endif %}
+                
+                
+                
+                
+                
+                
+                
                 {% if quest.isaccepted %}
                     {% for shipper in shippers %}
                           <a href="/quest/{{quest.id}}">
                             <li class="list-group-item">
                             <div class="row clearfix">
-                                <div class="col-sm-2">
+                                <div class="col-md-2 column">
                                       <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
-                                  </a>
-                                </div>
-                                <div class="col-sm-6">
+                                </div><!-- ./column -->
+                                <div class="col-md-6 column">
                                     <h6> {{quest.title| title}} </h6>
-                                            <div class="col-md-4">
+                                    
                                             <center>{{shipper.0.first_name | title}}</center>
                                             <a href="/user/{{shipper.0.displayname}}"><div class="ratio img-responsive img-circle post-image" style="background-image: url({{shipper.0.avatar_file_name}});"></div></a>
                                             <button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal{{shipper.0.id}}">Contact</button>
-                                            </div>
-                                </div>
+                                      <small><span class="glyphicon glyphicon-time"></span>time and date</small>
+                                </div><!-- ./column -->
                             </div><!-- ./row -->
-                              <small><span class="glyphicon glyphicon-time"></span>time and date</small>
+                             
                             </li>
+                            </a>
+                          
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             <!-- Modal -->
                             <div class="container">
                                 <div class="row">
@@ -135,7 +157,6 @@
 		 </div>
 	    </div>    
     </div>
-</div>
 </div>
 </div>
 </div>
