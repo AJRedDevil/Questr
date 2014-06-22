@@ -47,7 +47,7 @@ def send_email_notification(user, email_details):
     #                 }
     try:
         msg = _load_template(user, email_details)
-        logging.warn("Assumption email Sent")
+        logging.warn("Notification sent to - %s for %s", user.email, email_details['template_name'])
         msg.send()
     except Exception, e:
         logging.exception(str(e))
@@ -96,7 +96,7 @@ def send_contactus_notification(user_email, email_details):
     #                 }
     try:
         msg = _load_contact_template(user_email, email_details)
-        logging.warn("Assumption email Sent")
+        logging.warn("Notification sent to - %s for %s", user_email, email_details['template_name'])
         msg.send()
     except Exception, e:
         logging.exception(str(e))

@@ -1,6 +1,7 @@
 
 
 from django.shortcuts import render, redirect
+from django.conf import settings
 
 from quests.models import Quests
 
@@ -114,7 +115,7 @@ def prepNewQuestNotification(user, questdetails):
                         'subject' : subject,
                         'template_name' : template_name,
                         'global_merge_vars': {
-                                                'quest_public_link' : "http://questr.co/quest/"+str(questdetails.id),
+                                                'quest_public_link' : settings.QUESTR_URL+'/quest/'+str(questdetails.id),
                                                 'quest_description' : questdetails.description,
                                                 'user_first_name'   : user.first_name,
                                                 'email_unsub_link'  : questr_unsubscription_link,

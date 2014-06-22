@@ -53,6 +53,11 @@ def getShipper(shipper_id):
         return render('404.html', locals())
     return shipper
 
+def getShippers():
+    """List all the quests by a particular user"""
+    shippers = QuestrUserProfile.objects.filter(is_shipper='t')
+    return shippers
+
 def getShippersOfQuest(questname):
     """List of on shippers for a given quest"""
     shippers = str(Quests.objects.get(id=questname).shipper).split(',')

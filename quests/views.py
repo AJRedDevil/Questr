@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from libs import email_notifier
 
 from contrib import quest_handler
-from users.contrib.user_handler import isShipper
+from users.contrib.user_handler import isShipper, getShippers
 from .forms import QuestCreationForm, QuestChangeForm
 from .models import Quests
 
@@ -91,8 +91,8 @@ def createquest(request):
             try:
                 shippers = getShippers()
                 for shipper in shippers: # send notifcations to all the shippers
-                    email_details = quest_handler.prepNewQuestNotification(users, quest_data)
-                    email_notifier.send_newquest_notification(users, email_details)
+                    email_details = quest_handler.prepNewQuestNotification(shipper, quest_data)
+                    email_notifier.send_email_notification(shipper, email_details)
             except Exception, e:
                 logging.warn(e)
                 pass
