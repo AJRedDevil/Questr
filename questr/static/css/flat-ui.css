@@ -204,14 +204,12 @@ body {
   line-height: 1.72222;
 }
 a {
-  color: #16a085;
-  text-decoration: none;
   -webkit-transition: 0.25s;
   transition: 0.25s;
 }
 a:hover,
 a:focus {
-  color: #5f97d8;
+  color: #6098d9;
   text-decoration: none;
 }
 a:focus {
@@ -267,7 +265,7 @@ h6 small,
 .h4 small,
 .h5 small,
 .h6 small {
-  color: #e7e9ec;
+  color: #e9ebee;
 }
 h1,
 h2,
@@ -1864,7 +1862,6 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   min-height: 53px;
   margin-bottom: 30px;
   border: none;
-  border-radius: 6px;
 }
 @media (min-width: 768px) {
   .navbar-header {
@@ -1960,7 +1957,7 @@ fieldset[disabled] .input-group-btn .btn-default.active {
 }
 .navbar-toggle {
   border: none;
-  color: #34495e;
+  color: #34485f;
   margin: 0 0 0 21px;
   padding: 0 21px;
   height: 53px;
@@ -1997,8 +1994,8 @@ fieldset[disabled] .input-group-btn .btn-default.active {
 .navbar-nav {
   margin: 0;
 }
+
 .navbar-nav > li > a {
-  font-size: 11px;
   padding: 15px 19px;
   line-height: 23px;
   font-weight: 700;
@@ -2253,14 +2250,7 @@ select[multiple].navbar-form .btn {
 	-moz-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 	box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 }
-.navbar-default .navbar-brand {
-  color: #34495e;
-}
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
-  color: #5f97d8;
-  background-color: transparent;
-}
+
 .navbar-default .navbar-toggle:before {
   color: #34495e;
 }
@@ -2277,12 +2267,14 @@ select[multiple].navbar-form .btn {
   border-color: #e5e9ea;
   border-width: 2px;
 }
+
+/***************** navbar font color *********************/
 .navbar-default .navbar-nav > li > a {
-  color: #34495e;
+  color: #83848f;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #1abc9c;
+  color: #5f97d8;
   background-color: transparent;
 }
 .navbar-default .navbar-nav > .active > a,
@@ -4065,7 +4057,7 @@ body.vjs-full-window {
 .vjs-play-control div:after {
   position: absolute;
   font-family: "Flat-UI-Icons";
-  color: #1abc9c;
+  color: #1bbd9d;
   font-size: 16px;
   top: 50%;
   left: 50%;
