@@ -61,6 +61,9 @@ class QuestrUserProfile(AbstractBaseUser):
     def __unicode__(self):
         return self.email 
 
+    def get_full_name(self):
+        return self.first_name + " " + self.last_name
+
 # User transactionl model
 class UserTransactional(models.Model):
     id = models.IntegerField(_('id'), primary_key=True)

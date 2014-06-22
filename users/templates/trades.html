@@ -74,8 +74,11 @@
                                             <button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
                                         </div>
                                     {% endcomment %}
+                                    <div class="col-md-6">
+                                        <a href="/review/{{quest.id}}/review/{{shipper.0.id}}" class="acceptUrl"><button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you've reviewed his effort!">Review</button></a>
+                                    </div>
                                 </div><!-- ./column -->
-                        </div><!-- ./row -->
+                            </div><!-- ./row -->
                           {% comment %}
                               <small><span class="glyphicon glyphicon-time"></span> time and date</small>
                           {% endcomment %}
