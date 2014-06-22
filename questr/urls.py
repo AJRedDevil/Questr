@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     url(r'^beta/', include('beta.urls')),
     url(r'^user/', include('users.urls')),
     url(r'^quest/', include('quests.urls') ),
-    url(r'^questrreview/', mainview.questrReview ),
+    url(r'^questrreview/', mainview.questrReview, name='questReview' ),
     url(r'^questreview/', mainview.questReview ),
+    url(r'^review/', include('reviews.urls')),
 )

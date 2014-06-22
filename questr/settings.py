@@ -70,6 +70,7 @@ INSTALLED_APPS = (
     'djrill',
     'quests',
     'south',
+    'reviews',
 )
 
 MIDDLEWARE_CLASSES = (

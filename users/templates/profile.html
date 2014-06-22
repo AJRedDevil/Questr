@@ -28,7 +28,7 @@
             <center>
 	            <h5 class="userName">{{user.first_name}} {{user.last_name}}</h5>  
 	            
-	            <input id="input-21e" value="0" type="number" class="rating" min=0 max=100 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" >
+	            <input id="input-21e" value="{{final_rating}}" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" >
 	                       			
 			</center>
             
@@ -100,26 +100,25 @@
 		  <div class="panel-heading">
 			  Reviews
 		  </div>
-
 		  <ul class="list-group">  
 		  	<!-- Quest Post -->
-
-		  	
-		  	
-		  	<a href="/quest/{{quest.id}}">
+            {% if allreviews %}
+            {% for review in  allreviews %}
 				<li class="list-group-item">
 				<div class="row clearfix">
 				    <div class="col-sm-2">
-					    <div  class="ratio img-responsive img-circle post-image" style="background-image: url(http://www.stars-arena.com/wp-content/uploads/2013/08/emma-watson-3.jpg);"></div>
+                    <a href="/quest/{{review.quest_id}}">
+					    <div  class="ratio img-responsive img-circle post-image" style="background-image: url({{review.quest_id.item_images}});"></div>
+                    </a>
 				    </div><!-- ./column -->
 				    <div class="col-sm-6">
-				        <h6 class="list-group-item-heading postTitle"> Thanks a ton! </h6>
+				        <h6 class="list-group-item-heading postTitle"> {{review.title}} </h6>
                     <p class="list-group-item-text postDesc">
-                    	wordswrodswrodsworwldowrowrew                      
+                    	{{review.description}}
                     </p>
 
                                 <div class="smallInfo">
-                                    <small class="light-grey"><span class="glyphicon glyphicon-user"></span>usrname goes hre &nbsp;&nbsp;
+                                    <a href={% url 'getUserInfo' displayname=review.quest.questrs.displayname %}><small class="light-grey"><span class="glyphicon glyphicon-user"></span>{{review.quest.questrs.displayname}} &nbsp;&nbsp;</a>
                     	<span class="glyphicon glyphicon-map-marker"></span>Only city+cuntry here</small>
                                 </div><!-- ./smallInfo -->
 				    </div><!-- ./column -->
@@ -127,12 +126,39 @@
                     	<p><span class="money">$10</span><span class="postDate">
 				    </div><!-- ./column -->
 				    <div class="col-md-2 column">
-					    <input id="input-21e" value="0" type="number" class="rating" min=0 max=100 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" ></span>
+					    <input id="input-21e" value="{{review.final_rating}}" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" ></span>
 				    </div><!-- ./column -->
 				</div><!-- ./row -->
-				</li><!-- list-group-item -->	
-			</a>
-			</ul>
+				</li><!-- list-group-item -->
+            {% endfor %}
+            {% endif %}
+                <li class="list-group-item">
+                <div class="row clearfix">
+                    <div class="col-sm-2">
+                    <a href="/quest/{{review.quest_id}}">
+                        <div  class="ratio img-responsive img-circle post-image" style="background-image: url({{review.quest_id.item_images}});"></div>
+                    </a>
+                    </div><!-- ./column -->
+                    <div class="col-sm-6">
+                        <h6 class="list-group-item-heading postTitle"> {{review.title}} </h6>
+                    <p class="list-group-item-text postDesc">
+                        {{review.description}}
+                    </p>
+
+                                <div class="smallInfo">
+                                    <a href="#"><small class="light-grey"><span class="glyphicon glyphicon-user"></span>{{review.quest.questrs.displayname}} &nbsp;&nbsp;</a>
+                        <span class="glyphicon glyphicon-map-marker"></span>Only city+cuntry here</small>
+                                </div><!-- ./smallInfo -->
+                    </div><!-- ./column -->
+                    <div class="col-md-2 column">
+                        <p><span class="money">$10</span><span class="postDate">
+                    </div><!-- ./column -->
+                    <div class="col-md-2 column">
+                        <input id="input-21e" value="{{review.final_rating}}" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" ></span>
+                    </div><!-- ./column -->
+                </div><!-- ./row -->
+                </li><!-- list-group-item -->
+                </ul>
 			</div>
 			</div>
 		  	           

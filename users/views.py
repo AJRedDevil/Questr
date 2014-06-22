@@ -1,21 +1,24 @@
 
 
+import logging
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
+from django.db.models import Avg
 from django.http import Http404
 from django.shortcuts import render, redirect
 from .models import QuestrUserProfile, UserTransactional, QuestrToken
 from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, QuestrSocialSignupForm, SetPasswordForm, PasswordChangeForm
-import logging
 
 from access.requires import verified, is_alive
 from contrib import mailing, user_handler
 
 from quests.contrib import quest_handler
 from quests.models import Quests
+from reviews.models import Review
+from reviews.contrib import review_handler
 
 # Create your views here.
 def logout(request):
@@ -103,6 +106,22 @@ def profile(request):
 
     try:
         questsbyuser = quest_handler.getQuestsByUser(user.id)
+    except Exception, e:
+        raise e
+        return render(request,'broke.html')
+
+    try:
+        final_rating = Review.objects.filter(reviewed=user).aggregate(Avg('final_rating'))
+    except Review.DoesNotExist:
+        final_rating['final_rating__avg'] = 0.0
+    # for users without rating
+    if not final_rating['final_rating__avg']:
+            final_rating['final_rating__avg'] = 0.0
+
+    final_rating = round(final_rating['final_rating__avg'], 1)
+
+    try:
+        allreviews = review_handler.get_review(user.id)
     except Exception, e:
         raise e
         return render(request,'broke.html')
@@ -198,6 +217,17 @@ def getUserInfo(request, displayname):
     except Exception, e:
         raise e
         return render(request,'broke.html')
+
+    try:
+        final_rating = Review.objects.filter(reviewed=publicuser).aggregate(Avg('final_rating'))
+    except Review.DoesNotExist:
+        final_rating['final_rating__avg'] = 0.0
+    # for users without rating
+    if not final_rating['final_rating__avg']:
+            final_rating['final_rating__avg'] = 0.0
+
+    final_rating = round(final_rating['final_rating__avg'], 1)
+
     pagetitle = publicuser.first_name+' '+publicuser.last_name
     return render(request,'publicprofile.html', locals())
 
