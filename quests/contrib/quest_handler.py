@@ -107,7 +107,7 @@ def prepNewQuestNotification(user, questdetails):
     """Prepare the details for notification emails for new quests"""
     template_name="New_Quest_Notification"
     subject="New Quest Notification"
-    quest_browse_link="http://questr.co/quest"
+    # quest_browse_link=settings.QUESTR_URL+"/quest"
     quest_support_email="support@questr.co"
     questr_unsubscription_link="http://questr.co/unsub"
 
@@ -121,7 +121,6 @@ def prepNewQuestNotification(user, questdetails):
                                                 'email_unsub_link'  : questr_unsubscription_link,
                                                 'quest_title'       : questdetails.title,
                                                 'quest_reward'      : str(questdetails.reward),
-                                                'quest_browse_link' : quest_browse_link,
                                                 'quest_support_mail': quest_support_email,
                                                 'recipient_id'      : user.id,
                                                 'questr_unsubscription_link' : questr_unsubscription_link,
