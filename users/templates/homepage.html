@@ -15,13 +15,17 @@
    
 	    <div class="feature shadows body-borders">    
             <a  href="/quest/{{quest.id}}" class="image" title="Title"><img src={{quest.item_images}}></a>
-
+            
+            <!--
+            <div class="no-image">
+	            <h1><span class="glyphicon glyphicon-picture"></span></h1>
+            </div>
+            -->
+            
             <div class="item-content">
-            
-            
                 <h6 class="title">{{quest.title | title}}</h6>
 
-                <p class="description">{{quest.description | truncatewords:10  }}</p>
+                <p>{{quest.description | truncatewords:10  }}</p>
 
            
                 <div class="info">

@@ -27,6 +27,8 @@ img {
 	opacity: .8;
 	background-color: #FFFFFF;
 }
+
+
  
 
  
@@ -64,7 +66,18 @@ img {
 	font-size: x-small;
 	margin: 0;
 	padding: 0;
-	line-height: 9px;	 
+	line-height: 9px;
+		 
  }
  
  
+ /********* no image post **********/
+ .feature .no-image {
+ 	background: #fdfdfd;
+	 max-width: 100%;
+	 padding: 10px;
+ }
+ 
+.feature .no-image h1 {
+	text-align: center;
+}
