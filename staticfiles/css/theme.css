@@ -54,8 +54,10 @@ hr {
 	z-index: 00099999;
 	position: absolute;
 	width: 100%;
-	margin-top: 12px;
+	margin-top: 8px;
 	background: none;
+	font-size: larger;
+	font-weight: bolder;
 }
 
 
@@ -86,6 +88,11 @@ hr {
 #notifications .dropdown-menu li .imgBox {
 	margin: 0;
 	padding: 0;
+}
+
+nav .glyphicon {
+	font-size: large;
+	margin-right: 6px;
 }
 
 
@@ -192,7 +199,6 @@ hr {
 .alert-danger-alt { border-color: #B63E5A;background: #E26868;color: #fff; }
 .alert-warning-alt { border-color: #F3F3EB;background: #E9CEAC;color: #fff; }
 .alert-success-alt { border-color: #19B99A;background: #20A286;color: #fff; }
-.glyphicon { margin-right:10px; }
 .alert a {color: gold;}
 
 

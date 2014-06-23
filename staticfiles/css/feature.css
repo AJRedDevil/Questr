@@ -1,47 +1,15 @@
-
- a {white-space: nowrap;}
+a {white-space: nowrap;}
  
 img {
 	max-width: 100%;
-	border-top-left-radius: 2px; 
-	border-top-right-radius: 2px; 
+	border-top-left-radius: 5px; 
+	border-top-right-radius: 5px; 
  }
  
- /* Feature posts */
-.feature {
-	width: 200px;
-	display: inline-block;
-	vertical-align: top;
-	margin-bottom: 12px;
-	background: white;
-	
- }
  
- .feature .description {
-	/* code for ellipsis */
-	 overflow: hidden;
-
-	text-overflow: ellipsis;
-	width: auto;
-	/* end */ 	
-	 margin: 0 5px;
- }
- 
- .feature .title {
-	 overflow: hidden;
-	 text-overflow: ellipsis;
-	 white-space: nowrap;
-	 margin: 0 5px;
- }
- 
-/* End of feature posts */
- 
- 
-.content {
+ .content {
 	margin-top: 0;
 	margin-bottom: 0;
-	margin-left: 65px;
-	margin-right: 65px;
 }
 
 #pages {
@@ -61,9 +29,55 @@ img {
 }
 
 
+ 
 
-
-
-.post-info p {
+ 
+/************ Feature posts ***************/
+.feature {
+	width: 200px;
+	display: inline-block;
+	vertical-align: top;
+	margin: 7px;
+	
+	background: white;
+	padding: 0;
+ }
+ 
+ .feature .item-content {
+	  overflow: hidden;
+	 text-overflow: ellipsis;
+	 white-space: nowrap;
+	 margin: 0 5px;
+ }
+ 
+.feature .item-content .title {
+	margin: 5px 0px;
+}
+ 
+.feature .info {
+	padding: 0;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 0;
+	margin-bottom: 10px;
+} 
+ 
+ .feature .info p {
+	font-size: x-small;
 	margin: 0;
+	padding: 0;
+	line-height: 9px;
+		 
+ }
+ 
+ 
+ /********* no image post **********/
+ .feature .no-image {
+ 	background: #fdfdfd;
+	 max-width: 100%;
+	 padding: 10px;
+ }
+ 
+.feature .no-image h1 {
+	text-align: center;
 }
