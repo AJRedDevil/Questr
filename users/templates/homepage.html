@@ -6,41 +6,47 @@
 {% endblock localhead %}
 {% block content %}
 <!-- This is the main container (#scroll-container) -->
-    <div class="row" id="scroll-container">
-            <div class="content">
-                {% for quest in  allquests %}
-                <!-- Single post -->
-                
-                <div class="feature shadows body-borders">
-                    <div class="picture">
-                        
-                        <a  href="/quest/{{quest.id}}" class="image" title="Title"><img src={{quest.item_images}}></a>
+<div class="container">
+<div class="row">
+<div class="col-md-10 col-md-offset-1 column">
+    <div class="content" id="scroll-container">
+        {% for quest in  allquests %}
+        
+   
+	    <div class="feature shadows body-borders">    
+            <a  href="/quest/{{quest.id}}" class="image" title="Title"><img src={{quest.item_images}}></a>
 
-                        <div class="item-content">
-                            <h4 class="title">{{quest.title | title}}</h4>
-
-                            <p class="description">{{quest.description | truncatewords:10  }}</p>
-
-                                <div class="post-info">
-	                                <a href="/user/{{quest.questrs.displayname}}"> <p>{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p></a>
-	                              
-	                                {# only allow shippers to see addresses #}
-	                                {% if user.is_shipper == True %}
-	                              
-	                                    <p>From: {{quest.srcaddress}}</p>
-	                                    <p>To: {{quest.dstaddress}}</p>
-	                                {% endif %}         
-                                  <p><span class="glyphicon glyphicon-time"></span>{% localtime on%} {{quest.creation_date | timesince }} {% endlocaltime %} ago</p>
-                                </div><!-- ./post-info -->
-                        </div><!-- End of item-content -->
-                    </div><!-- End of picture -->
-                    
-                </div><!-- ./feature -->
-                <!-- Single post --> 
+            <div class="item-content">
             
-               {% endfor %}           
-            </div>  <!-- ./content -->         
-         </div><!-- ./row -->
+            
+                <h6 class="title">{{quest.title | title}}</h6>
+
+                <p class="description">{{quest.description | truncatewords:10  }}</p>
+
+           
+                <div class="info">
+                
+         
+                <a href="/user/{{quest.questrs.displayname}}"><p>{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p></a>
+                      
+                        {# only allow shippers to see addresses #}
+                        {% if user.is_shipper == True %}
+                      
+                            <p class="grey">From: {{quest.srcaddress}}</p>
+                            <p class="grey">To: {{quest.dstaddress}}</p>
+                        {% endif %}         
+                      <p class="grey"><span class="glyphicon glyphicon-time"></span>{% localtime on%} {{quest.creation_date | timesince }} {% endlocaltime %} ago</p>
+                </div>      
+            </div><!-- End of item-content -->   
+	    </div><!-- ./feature -->
+     
+        
+        
+       {% endfor %}           
+            </div>  <!-- ./content --> 
+</div>       
+</div><!-- ./row -->
+</div><!-- ./container -->
 {% comment %}
 <div id="pages">
     <a href="index.html"></a>
