@@ -13,15 +13,16 @@
         {% for quest in  allquests %}
         
    
-	    <div class="feature shadows body-borders">    
-            <a  href="/quest/{{quest.id}}" class="image" title="Title"><img src={{quest.item_images}}></a>
-            
-            <!--
+	    <div class="feature shadows body-borders">
+            {% if quest.item_images %}
+            <a  href="/quest/{{quest.id}}" class="image" title="Title"><img src={{quest.item_images}}></a>                  
+            {% else %}    
+            <a  href="/quest/{{quest.id}}" class="image" title="Title">
             <div class="no-image">
 	            <h1><span class="glyphicon glyphicon-picture"></span></h1>
             </div>
-            -->
-            
+            </a>
+            {% endif %}            
             <div class="item-content">
                 <h6 class="title">{{quest.title | title}}</h6>
 
