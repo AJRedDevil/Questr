@@ -87,10 +87,17 @@
 									<h5>{{questdetails.title}}</h5>
 								</div>
 								{% if isOwner %}
-									<div class="col-md-2 column">								
-										<a href="edit">					
-											<button type="button" class="btn btn-embossed btn-default" style="float:right;">Edit Post</button>
-										</a>																			
+									<div class="col-md-2 column">	
+									
+											 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><button class="btn btn-default dropdown">...</button></a>
+											<ul class="dropdown-menu">
+												<li><a href="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
+												<li class="divider"></li>
+				                                <li>
+				                                    <a href="#"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+				                                </li>
+				                            </ul>
+																												
 									</div>
 									<div class="col-md-2 column">
 										<button type="button" class="btn btn-embossed btn-default" style="float:right;">{{questdetails.status}}</button>
