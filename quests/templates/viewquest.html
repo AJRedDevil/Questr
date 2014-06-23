@@ -20,9 +20,50 @@
 								
 					<div class="col-md-3 column">
 						<div class="well shadows">
-							<a class="thumbnail" data-target="#lightbox" data-toggle="modal" href="#">
-								<img alt="itemImage" class="itemImage" src="{{questdetails.item_images}}">
-							</a>
+					
+							<div class="carousel slide article-slide" id="article-photo-carousel">
+
+							  <!-- Wrapper for slides -->
+							  <div class="carousel-inner cont-slider">
+							
+							    <div class="item active">
+								    <a data-target="#lightbox" data-toggle="modal" href="#">
+										<img alt="itemImage" class="itemImage" src="{{questdetails.item_images}}">
+									</a>
+							    </div>
+							    <div class="item">
+							      <img alt="" title="" src="http://placehold.it/600x400">
+							    </div>
+							    <div class="item">
+							      <img alt="" title="" src="http://placehold.it/600x400">
+							    </div>
+							    <div class="item">
+							      <img alt="" title="" src="http://placehold.it/600x400">
+							    </div>
+							  </div>
+							  
+							  <br><br><br><br><br>
+							  
+							  <!-- Indicators -->
+							  <ol class="carousel-indicators">
+							    <li class="active" data-slide-to="0" data-target="#article-photo-carousel">
+							      <img class="itemImage" src="{{questdetails.item_images}}">
+							    </li>
+							    <li class="" data-slide-to="1" data-target="#article-photo-carousel">
+							      <img alt="" src="http://placehold.it/250x180">
+							    </li>
+							    <li class="" data-slide-to="2" data-target="#article-photo-carousel">
+							      <img alt="" src="http://placehold.it/250x180">
+							    </li>
+							    <li class="" data-slide-to="3" data-target="#article-photo-carousel">
+							      <img alt="" src="http://placehold.it/250x180">
+							    </li>
+							  </ol>
+							</div>
+								
+	
+	
+	
 	
 							<div class="modal fade" id="lightbox" tabindex="-1">
 								<div class="modal-dialog">
@@ -123,5 +164,10 @@
 	  jQuery(document).ready(function () {
         $(".rating-kv").rating();
     });
+    
+    // Stop carousel
+		$('.carousel').carousel({
+		  interval: false
+		});
 </script>   
 {% endblock scripts %}

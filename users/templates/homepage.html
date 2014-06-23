@@ -36,10 +36,10 @@
                       
                         {# only allow shippers to see addresses #}
                         {% if user.is_shipper == True %}
-                      
                             <p class="grey">From: {{quest.srcaddress}}</p>
                             <p class="grey">To: {{quest.dstaddress}}</p>
-                        {% endif %}         
+                        {% endif %}   
+                              
                       <p class="grey"><span class="glyphicon glyphicon-time"></span>{% localtime on%} {{quest.creation_date | timesince }} {% endlocaltime %} ago</p>
                 </div>      
             </div><!-- End of item-content -->   
