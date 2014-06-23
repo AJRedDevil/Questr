@@ -27,6 +27,15 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ['SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET'
 # Mandrill API Key
 MANDRILL_API_KEY = os.environ['MANDRILL_API_KEY']
 EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+# Amazon S3 Access Keys
+AWS_S3_SECURE_URLS = False
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_ACCESS_KEY_ID = os.environ['AMAZON_ACCESS_KEY_ID']
+AWS_S3_SECRET_ACCESS_KEY = os.environ['AMAZON_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
+##Use Amazon S3 as default storage
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 #Append Slash to all cals
 APPEND_SLASH = True
@@ -71,6 +80,7 @@ INSTALLED_APPS = (
     'quests',
     'south',
     'reviews',
+    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
