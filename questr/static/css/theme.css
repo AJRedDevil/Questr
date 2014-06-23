@@ -227,15 +227,19 @@ nav .glyphicon {
 }
 
 /************* Input Boxes *****************/
+
 input.form-control {
-	border-color: white;
+	border: none;
+	background: rgba(96,152,217,0.11);
 	-webkit-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 	-moz-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 	box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 }
 
 input.form-control:focus {
-	border-color: blue;
+	border: 1px;
+	border-style: solid;
+	border-color: #5f97d8;
 	-webkit-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 	-moz-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 	box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
