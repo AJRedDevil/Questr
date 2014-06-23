@@ -27,19 +27,20 @@
                 <h6 class="title">{{quest.title | title}}</h6>
 
                 <p>{{quest.description | truncatewords:10  }}</p>
-
            
                 <div class="info">
                 
          
                 <a href="/user/{{quest.questrs.displayname}}"><p>{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p></a>
-                      
+                
+                <p class="grey">pay:</p>
+                
                         {# only allow shippers to see addresses #}
                         {% if user.is_shipper == True %}
                             <p class="grey">From: {{quest.srcaddress}}</p>
                             <p class="grey">To: {{quest.dstaddress}}</p>
                         {% endif %}   
-                              
+                	              
                       <p class="grey"><span class="glyphicon glyphicon-time"></span>{% localtime on%} {{quest.creation_date | timesince }} {% endlocaltime %} ago</p>
                 </div>      
             </div><!-- End of item-content -->   
