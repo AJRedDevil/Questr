@@ -21,6 +21,71 @@
 
 
 
+
+
+<div class="container">
+    <div class="row">
+       <div class="col-md-8 col-md-offset-2 column">    
+       
+       
+	       <div class="panel panel-default shadows">
+		  <!-- Default panel contents -->
+		  <div class="panel-heading">
+			  <ul class= "nav nav-tabs">
+                    <li class="active">
+                        <a href="{% url 'mytrades' %}">My Offers</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'myposts' %}">My Posts</a>
+                    </li>       
+                    {% if user.is_shipper %}
+                    <li>
+                        <a href="{% url 'myposts' %}">My Shipments</a>
+                    </li>                                       
+                    {% endif %}
+                </ul>
+		  </div>
+
+		  <ul class="list-group">  
+				              
+			  <a href="/quest/{{quest.id}}">
+				<li class="list-group-item">
+				<div class="row clearfix">
+				    <div class="col-sm-2">
+					    <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
+				    </div><!-- ./column -->
+				    <div class="col-sm-6">
+				        <h6> {{quest.title| title}} </h6>
+                                            <div class="col-sm-4">
+                                                <a href="/user/{{shipper.0.displayname}}">{{shipper.0.first_name | title}}</a> is interested!
+                                                {% comment %}
+                                                    <a href="/user/{{shipper.0.displayname}}"><div class="ratio img-responsive img-circle post-image" style="background-image: url({{shipper.0.avatar_file_name}});"></div></a>
+                                                {% endcomment %}
+                                            </div>
+				    </div><!-- ./column -->
+				    <div class="col-md-2 column">
+					    <a href="{{quest.id}}/accept/{{shipper.0.id}}" class="acceptUrl"><button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you've accepted his bid!">Accept</button></a>
+				    </div><!-- ./column -->
+				    <div class="col-md-2 column">
+	                    <button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
+				    </div><!-- ./column -->
+				</div><!-- ./row -->
+				</li><!-- list-group-item -->	
+			</a> 
+             
+        </ul>	<!-- End of list-group -->
+		 </div><!-- ./panel -->
+    </div>  <!-- ./column -->          
+    </div>  <!-- ./row -->
+</div>  <!-- ./container -->
+
+
+
+
+
+
+
+
 <div class="container">
     <div class="row">	
     <div class="col-md-12 column"> 
@@ -47,6 +112,8 @@
 	
 		  <ul class="list-group">   
     			{% for quest,shippers in shipperlist.items %} 
+                   
+                   
                     {% if not quest.isaccepted %}
                         {% for shipper in shippers %}
                             <li class="list-group-item">
@@ -82,6 +149,10 @@
                         </li></a>
                         {% endfor %}
                     {% endif %}
+                    
+                    
+                    
+                    
                     {% if quest.isaccepted %}
                         {% for shipper in shippers %}
                               <a href="/quest/{{quest.id}}">
