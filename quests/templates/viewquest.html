@@ -73,9 +73,7 @@
 									</div><!-- ./modal-content -->
 								</div><!-- ./modal-dialog -->
 							</div><!-- ./modal -->						
-					
-					
-					
+		
 						</div><!-- ./well -->
 					</div>	<!-- End of column -->
 					
@@ -88,33 +86,36 @@
 									<h5>{{questdetails.title}}</h5>
 								</div>
 							
-									<div class="col-md-2 column">	
-										{% if isOwner %}
-											 <center><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a></center>
-											<ul class="dropdown-menu">
-												<li><a href="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
-												<li class="divider"></li>
-				                                <li>
-				                                    <a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-trash"></span> Delete</a>
-				                                </li>
-				                            </ul>
-										<button type="button" class="btn btn-embossed btn-default" style="float:right;">{{questdetails.status}}</button>
-										<p>Delivery Code [this should be click to show/JS]: {{questdetails.delivery_code}}</p>
-										{% endif %}						
-									</div>
-								
+								<div class="col-md-2 column">	
+									{% if isOwner %}
+										 <center><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a></center>
+										<ul class="dropdown-menu">
+											<li><a href="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
+											<li class="divider"></li>
+			                                <li>
+			                                    <a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+			                                </li>
+			                            </ul>
+									<button type="button" class="btn btn-embossed btn-default" style="float:right;">{{questdetails.status}}</button>
+									{% endif %}						
+								</div><!-- ./column -->	
 							</div>	<!-- ./row -->
 							
 							<div class="row clearfix">
 								<div class="col-md-12 column inBodyWell">
 									<p>Offer: ${{questdetails.reward}}</p>
-								{# Only allowing shippers to apply for quests #}
-								{% if user.is_shipper and not isShipperForQuest and not questdetails.isaccepted and not isOwner %}
+									{# Only allowing shippers to apply for quests #}
+									{% if user.is_shipper and not isShipperForQuest and not questdetails.isaccepted and not isOwner %}
 									<a href="apply"><button type="button" class="btn btn-default offerBtn">Apply</button></a>
-								{% endif %}
-								{% if user.is_shipper and isShipperForQuest and not questdetails.isaccepted and not isOwner %}
+									{% endif %}
+									{% if user.is_shipper and isShipperForQuest and not questdetails.isaccepted and not isOwner %}
 									<a href="withdraw"><button type="button" class="btn btn-default offerBtn">Withdraw</button></a>
-								{% endif %}
+									{% endif %}
+									
+									{% if isOwner %}
+									<button type="button" id="codeBtn" class="btn btn-embossed btn-default">Show Delivery Code</button>
+									<p id="code">Delivery Code [this should be click to show/JS]: {{questdetails.delivery_code}}</p>
+									{% endif %}
 								</div>		
 							</div>	<!-- ./row -->
 								
@@ -193,13 +194,24 @@
 {% endblock content %}
 {% block scripts %} 
 <script>	  
-	  jQuery(document).ready(function () {
-        $(".rating-kv").rating();
-    });
-    
-    // Stop carousel
-		$('.carousel').carousel({
-		  interval: false
+jQuery(document).ready(function () {
+	$(".rating-kv").rating();
+
+	$("#code").hide();
+	$("#codeBtn").mousedown(function(){
+		$("#code").show();
 		});
+  
+  $("#codeBtn").mouseup(function(){
+  	$("#code").hide(); 
+  	});
+  	
+  	// Stop carousel
+	$('.carousel').carousel({
+		interval: false
+		});  	
+});
+	
+		
 </script>   
 {% endblock scripts %}
