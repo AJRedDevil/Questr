@@ -17,7 +17,6 @@ footer {
 	margin-top: 35px;
 	padding-top: 6px;
 	text-align: center;
-	font-size: 12px;
 	background: white;
 }
  
@@ -49,95 +48,8 @@ hr {
 }
  
  
-/*************** Primary Navbar ***************/
-.brand {
-	z-index: 00099999;
-	position: absolute;
-	width: 100%;
-	margin-top: 8px;
-	background: none;
-	font-size: larger;
-	font-weight: bolder;
-}
-
-
-.nav .form-control .search {
-	border-color: white;
-	-webkit-box-shadow: 1px 1.5px 0 rgba(0, 0, 0, 0.15);
-	-moz-box-shadow: 1px 1.5px 0 rgba(0, 0, 0, 0.15);
-	box-shadow: 1px 1.5px 0 rgba(0, 0, 0, 0.15);
-}
-
-.nav button.btn span {
-	border-color: transparent;
-	background: aqua;
-	color: aqua;
-}
-
-.profileImg {
-	width: 40px;
-	height: auto;
-	float: left;
-}
-
-
-#notifications .dropdown-menu li a {
-	min-width: 350px;
-	max-height: 20px;
-}
-#notifications .dropdown-menu li .imgBox {
-	margin: 0;
-	padding: 0;
-}
-
-nav .glyphicon {
-	font-size: large;
-	margin-right: 6px;
-}
-
-
-/*************** Secondary Navbar ***************/
-.secondaryNavRow ul {
-	background: white;
-	list-style-type:none;
-	margin:0;
-	padding:0;
-	text-align: center;
-	
-	border-top-style: solid;
-	border-top-width: 1px;
-	border-top-color: #f8f8f8;
-}
-
-.secondaryNavRow ul li {
-	display: inline-block;
-	background: white;
-	margin: 0;
-	padding: 0;
-	height: 30px;
-}
-
-.secondaryNavRow ul li:hover {
-	border-bottom-style: solid;
-	border-bottom-width: 6px;
-	border-bottom-color: #5f97d8;
-}
-
-.secondaryNavRow ul li.active {
-	border-bottom-style: solid;
-	border-bottom-width: 6px;
-	border-bottom-color: #5f97d8;
-}
-
-.secondaryNavRow ul li.quest {
-	margin-right: 30px;
-}
-
-
-
-
-
-/*************** Well, Panels ***************/
+ 
+ /*************** Well, Panels ***************/
 .well {
 	background: white;
 	border: none; 
@@ -228,19 +140,114 @@ nav .glyphicon {
 }
 
 /************* Input Boxes *****************/
+
 input.form-control {
-	border-color: white;
+	border: none;
+	background: rgba(96,152,217,0.11);
 	-webkit-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 	-moz-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 	box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 }
 
 input.form-control:focus {
-	border-color: blue;
+	border: 1px;
+	border-style: solid;
+	border-color: #5f97d8;
+
 	-webkit-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 	-moz-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 	box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.15);
 }
+
+ 
+ 
+ 
+ 
+/*************** Primary Navbar ***************/
+.brand {
+	z-index: 00099999;
+	position: absolute;
+	width: 100%;
+	margin-top: 8px;
+	background: none;
+	font-size: larger;
+	font-weight: bolder;
+}
+
+
+.navbar-left input.search {
+	border: none;
+	background: #92a8b5;
+	-webkit-box-shadow: 1px 1.5px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 1px 1.5px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 1px 1.5px 0 rgba(0, 0, 0, 0.15);
+}
+
+.nav button.btn span {
+	border-color: transparent;
+	background: aqua;
+	color: aqua;
+}
+
+.profileImg {
+	width: 40px;
+	height: auto;
+	float: left;
+}
+
+
+#notifications .dropdown-menu li a {
+	min-width: 350px;
+	max-height: 20px;
+}
+#notifications .dropdown-menu li .imgBox {
+	margin: 0;
+	padding: 0;
+}
+
+nav .glyphicon {
+	font-size: large;
+	margin-right: 6px;
+}
+
+
+/*************** Secondary Navbar ***************/
+.secondaryNavRow ul {
+	background: white;
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	text-align: center;
+	
+	border-top-style: solid;
+	border-top-width: 1px;
+	border-top-color: #f8f8f8;
+}
+
+.secondaryNavRow ul li {
+	display: inline-block;
+	background: white;
+	margin: 0;
+	padding: 0;
+	height: 30px;
+}
+
+.secondaryNavRow ul li:hover {
+	border-bottom-style: solid;
+	border-bottom-width: 6px;
+	border-bottom-color: #5f97d8;
+}
+
+.secondaryNavRow ul li.active {
+	border-bottom-style: solid;
+	border-bottom-width: 6px;
+	border-bottom-color: #5f97d8;
+}
+
+.secondaryNavRow ul li.quest {
+	margin-right: 30px;
+}
+
 
 
 /********** Tabs **************/

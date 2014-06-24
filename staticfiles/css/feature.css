@@ -73,11 +73,20 @@ img {
  
  /********* no image post **********/
  .feature .no-image {
- 	background: #fdfdfd;
+ 	background: #5f97d8;
 	 max-width: 100%;
-	 padding: 10px;
+	 padding: 0;
+	 border-top-left-radius: 5px; 
+	border-top-right-radius: 5px;
  }
  
 .feature .no-image h1 {
 	text-align: center;
+	margin: 0;
+	padding-top: 12px;
+	padding-bottom: 18px;
 }
+
+.feature .no-image .glyphicon {
+	color: white;
+} 
