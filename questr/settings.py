@@ -33,9 +33,6 @@ AWS_QUERYSTRING_AUTH = False
 AWS_S3_ACCESS_KEY_ID = os.environ['AMAZON_ACCESS_KEY_ID']
 AWS_S3_SECRET_ACCESS_KEY = os.environ['AMAZON_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
-##Use Amazon S3 as default storage
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 #Append Slash to all cals
 APPEND_SLASH = True
@@ -173,4 +170,10 @@ TEMPLATE_DIRS = (TEMPLATE_PATH)
 try:
     from local_setting import *
 except ImportError:
-    pass   
+    pass
+
+# Use amazon S3 storage only on production
+if not DEBUG:
+    ##Use Amazon S3 as default storage
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
