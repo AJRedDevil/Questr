@@ -265,8 +265,11 @@ nav .glyphicon {
 	cursor: default;
 	background-color: rgba(204,170,170,0);
 	border-color: transparent;
+	border-bottom: #5f97d8;
+	border-bottom-style: solid;
+	border-bottom-width: 4px;
 }
-               
+/********** ./Tabs **************/           
           
 .inputBackground {
 	background: #f2f2f2;

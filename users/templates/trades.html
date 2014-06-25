@@ -5,9 +5,11 @@
     <link href={% static "css/smallpost.css" %} rel="stylesheet">
     <link href={% static "css/profile.css" %} rel="stylesheet">
     <link href={% static "css/trades.css" %} rel="stylesheet">
+    <link href={% static "css/star-rating.css" %} media="all" rel="stylesheet" type="text/css"/>
     
     <!-- Custom Javascript -->
     <script src={% static "js/validator.js" %}></script>
+    <script src={% static "js/star-rating.js" %} type="text/javascript"></script>
 {% endblock localhead %}
 {% block content %}
 
@@ -125,28 +127,35 @@
                             	<!-- Modal -->
                                 <div id="myModal-{{shipper.0.id}}" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
-                                            <div class="modal-content col-md-6 col-md-offset-3 column">
-                                                <div class="well profile">
-                                             
-                                                  <div class="ratio img-responsive img-circle" style="background-image: url({{shipper.0.avatar_file_name}});">
-                                                  </div>
-                                                    
-                                                    <center>
-                                                        <h3>{{shipper.0.first_name}} {{shipper.0.last_name}}</h3>  
-                                                         <input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
-                                                    </center>
-                                            
-                                                    <p><strong>Location: </strong> Toronto, Ontario, Canada </p>
-                                                    <p><strong><span class="glyphicon glyphicon-earphone"></span></strong> Phone number goes here </p>
-                                                    <p><strong>Quests Completed: </strong> {{quests_complete}} </p>
-                                                    <p><strong>Quests Posted: </strong> {{questes_posted}} </p>  
-                                                    <p><strong>Trust Rank: </strong> {{ranking}}%</p>                           
-                                                </div> <!-- End of Profile -->
+                                            <div class="modal-content col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 column">
+                                                  
+	                                            <div class="row clearfix">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 column">
+                                                    	<div class="ratio img-responsive img-circle" style="background-image: url({{shipper.0.avatar_file_name}});"></div>
+                                                    	<center><h5 id="shipperName">{{shipper.0.first_name}} {{shipper.0.last_name}}</h5></center>
+                                                 		<div class="col-xs-3 col-sm-3 col-md-3 column"></div>
+                                                 		<div class="col-xs-9 col-sm-9 col-md-9 column">
+	                                                 		<input id="input-21e" value="{{final_rating}}" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" >
+                                                 		</div> 
+                                                 		     
+                                                    </div>
+	                                            </div><!-- ./row -->
+	                                            
+	                                            <div class="row clearfix">
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 column">
+                                                    	<p><strong>Location: </strong> Toronto, Ontario, Canada </p>
+                                                    	<p><strong><span class="glyphicon glyphicon-earphone"></span></strong> Phone number goes here </p>
+                                                    	<p><strong>Quests Completed: </strong> {{quests_complete}} </p>
+                                                    	<p><strong>Quests Posted: </strong> {{questes_posted}} </p>
+                                                    </div>
+	                                            </div>
+ 
                                                 <div class="modal-footer">
                                                     <div class="btn-group">
                                                         <button class="btn btn-danger" data-dismiss="modal">Close</button>
                                                     </div>
                                                 </div>
+                                      
                                             </div><!-- /.modal-content -->
                                         </div><!-- /.modal-dalog -->
                                 </div><!-- /.modal -->
