@@ -22,7 +22,7 @@
 
 <div class="container">
     <div class="row">	
-       <div class="col-md-8 col-md-offset-2 column"> 
+       <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 column"> 
           
           <div class="panel panel-default shadows">
 		  <!-- Default panel contents -->
@@ -47,72 +47,80 @@
     			{% for quest,shippers in shipperlist.items %} 
                     {% if not quest.isaccepted %}
                         {% for shipper in shippers %}
+                        
+                         <a href="/quest/{{quest.id}}">
                         <li class="list-group-item">
                             <div class="row clearfix">
-                                <div class="col-sm-2">
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 column">
                                     <a href="/quest/{{quest.id}}">
                                         <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
                                     </a>
-                                </div>
-                                <div class="col-sm-6">
-                                    <a href="/quest/{{quest.id}}">
-                                    <h6> {{quest.title| title}} </h6>
-                                    </a>
-                                        <div class="col-sm-4">
-                                            <a href="/user/{{shipper.0.displayname}}">{{shipper.0.first_name | title}}</a> is interested!
-                                            {% comment %}
-                                                <a href="/user/{{shipper.0.displayname}}"><div class="ratio img-responsive img-circle post-image" style="background-image: url({{shipper.0.avatar_file_name}});"></div></a>
-                                            {% endcomment %}
-                                        </div>
-                                </div>
-                                <div class="col-sm-4 column">
-                                    <div class="col-md-6">
-                                        <a href="{{quest.id}}/accept/{{shipper.0.id}}" class="acceptUrl"><button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you've accepted his bid!">Accept</button></a>
-                                    </div>
-                                    {% comment %}
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
-                                        </div>
-                                    {% endcomment %}
                                 </div><!-- ./column -->
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
+                                    <a href="/quest/{{quest.id}}"><h6> {{quest.title| title}}</h6></a>
+                                      
+                                    <p><a href="/user/{{shipper.0.displayname}}">{{shipper.0.first_name | title}}</a> is interested!</p>
+                                    {% comment %}
+                                    <a href="/user/{{shipper.0.displayname}}"><div class="ratio img-responsive img-circle post-image" style="background-image: url({{shipper.0.avatar_file_name}});"></div></a>
+                                    {% endcomment %}
+                                     
+                                </div><!-- ./column -->
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 column">
+	                                <a href="{{quest.id}}/accept/{{shipper.0.id}}" class="acceptUrl"><button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you've accepted his bid!">Accept</button></a>
+	                             </div><!-- ./column -->
+                                    {% comment %}
+                                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 column">
+                                  	<button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal">Contact</button>
+                                 </div><!-- ./column -->
+                                 {% endcomment %}
+                              
+                                
                             </div><!-- ./row -->
                           {% comment %}
                               <small><span class="glyphicon glyphicon-time"></span> time and date</small>
                           {% endcomment %}
-                        </li></a>
+                        </li>
+                        </a>
                         {% endfor %}
                     {% endif %}
+                   
+                   
+                   
+          
+                   
+                   
                     {% if quest.isaccepted %}
                         {% for shipper in shippers %}
                         <li class="list-group-item">
                             <div class="row clearfix">
-                                <div class="col-sm-2">
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 column">
                                     <a href="/quest/{{quest.id}}">
                                         <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
                                     </a>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
                                     <a href="/quest/{{quest.id}}">
                                         <h6> {{quest.title| title}} </h6>
                                     </a>
-                                        <div class="col-md-4">
-                                            You've chosen<a href="/user/{{shipper.0.displayname}}">{{shipper.0.first_name | title}}</a>
-!                                            {% comment %}
+                                       
+                                           <p> You've chosen <a href="/user/{{shipper.0.displayname}}">{{shipper.0.first_name | title}}</a></p>
+                                            {% comment %}
                                             <a href="/user/{{shipper.0.displayname}}"><div class="ratio img-responsive img-circle post-image" style="background-image: url({{shipper.0.avatar_file_name}});"></div></a>
                                             <button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal{{shipper.0.id}}">Contact</button>
                                             {% endcomment %}                                            
-                                        </div>
-                                </div>
-                                <div class="col-sm-4 column">
+                                    
+                                </div><!-- column -->
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
                                   
-                                        <button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal-{{shipper.0.id}}">Contact</button>
+                                        <button type="button" class="btn btn-embossed btn-info contact" data-toggle="modal" data-target="#myModal-{{shipper.0.id}}">Contact</button>
                                
                                         {% if not quest.status == "Reviewed" %}
-                                            <a href="/review/{{quest.id}}/{{shipper.0.id}}" class="reviewUrl"><button class="btn btn-embossed btn-primary reviewBtn" rel="tooltip" title="We'll notify the user that you've reviewed his effort!">Review</button></a>
+                                            <a href="/review/{{quest.id}}/{{shipper.0.id}}" class="reviewUrl"><button class="btn btn-embossed btn-inverse reviewBtn" rel="tooltip" title="We'll notify the user that you've reviewed his effort!">Review</button></a>
                                         {% endif %}
-                                </div>
+                                </div><!-- column -->
+                            </div><!-- ./row -->
                             </li>
-                            
+                           
                             
                             	<!-- Modal -->
                                 <div id="myModal-{{shipper.0.id}}" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -145,6 +153,7 @@
                         {% endfor %}
                     {% endif %}
                 {% endfor %}
+		  
                 </ul>   <!-- End of list-group -->
             </div><!-- ./panel -->
         </div><!-- ./column -->
