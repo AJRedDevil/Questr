@@ -11,7 +11,7 @@
 
 <div class="container">
     <div class="row clearfix">
-        <div class="col-md-10 col-md-offset-1 column">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 column">
 	    	<h3 class="lead grey"><span class="glyphicon glyphicon-user blue"></span> Create your Questr account with</h3>
 	         
         	<center>
@@ -80,12 +80,12 @@
 					
 					
 					
-					<label for="inputPassword" class="control-label">Password</label>
+					<label for="inputPassword" class="control-label grey">Password</label>
 					<div class="row clearfix">
 						<div class="col-md-6 column">
 						           
 							<input type="password" data-toggle="validator" data-minlength="6" class="form-control input-sm" name="password1" id="inputPassword" placeholder="" required>
-							<span class="help-block">Minimum of 6 characters</span>
+							<span class="help-block"><p class="grey">Minimum of 6 characters</p></span>
 						</div>
 						<div class="col-md-6 column">
 							
@@ -102,7 +102,7 @@
 				</div><!-- ./col-md-8 -->
 				<div class="col-md-4 column">
 					<hr>
-					<p>Already a member?  Sign in <a href="{% url 'login' %}">here.</a></p>
+					<p class="grey">Already a member?  Sign in <a href="{% url 'login' %}">here.</a></p>
 				</div>
 			</div>
 		</div>
@@ -116,19 +116,19 @@
     		<div class="col-md-10 col-md-offset-1 column">
     		<div class="col-md-4 column">
  
-                <label for="username" class="control-label">Username</label>
+                <label for="username" class="control-label grey">Username</label>
                 <input type="text" class="form-control input-sm" name="displayname" id="username" placeholder="" required>
                 {% if user_form.displayname.errors %}
                     {{user_form.displayname.errors}}
                 {% endif %}
                 
-                <label for="firstName" class="control-label">First Name</label>
+                <label for="firstName" class="control-label grey">First Name</label>
                 <input type="text" class="form-control input-sm" name="first_name" id="first_name" placeholder="" required>   
                 {% if user_form.first_name.errors %}
                     {{user_form.first_name.errors}}
                 {% endif %}   
               
-                <label for="username" class="control-label">Last Name</label>
+                <label for="username" class="control-label grey">Last Name</label>
                 <input type="text" class="form-control input-sm" name="last_name" id="last_name" placeholder="" required>
                 {% if user_form.last_name.errors %}
                     {{user_form.last_name.errors}}
@@ -151,8 +151,8 @@
     		<div class="col-md-10 col-md-offset-1 column">
 	    		<div class="col-md-8 column">	
 	              <hr>
-	              <small class="small" id="disclaimer">By continuing, I agree to Questr's <a href="#">Seller Agreement</a> and <a href="#">E-Sign Consent</a>.</small>
-	              <button type="submit" class="btn btn-embossed btn-primary" id="createAccBtn">Create Account</button>
+	              <small class="small lead grey" id="disclaimer">By continuing, I agree to Questr's <a href="#">Seller Agreement</a> and <a href="#">E-Sign Consent</a>.</small>
+	              <button type="submit" class="btn btn-embossed btn-info" id="createAccBtn">Create Account</button>
 	    		</div>
 	    		<div class="col-md-4 column">
 	    		
