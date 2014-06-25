@@ -1,12 +1,13 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
-  
+  <!-- Custom CSS -->
+    <link href={% static "css/quest.css" %} rel="stylesheet">
 {% endblock localhead %}
 {% block content %}
 <div class="container">
   <div class="row">
-      <div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
+      <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column">
         <div class="well">
           <form class="form-horizontal" action="" method="post">{% csrf_token %}
           <fieldset>
@@ -85,26 +86,26 @@
               </div>
             </div>
                         
-             <!-- Message body -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="message"><p class="grey">Package Size</p></label>
-              <div class="col-md-8">
-              	 <div class="input-group col-md-12">	
-              	 	<div class="col-md-4 column">
+    
+            <div class="form-group" id="size">
+              <label class="col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Package Size</p></label>
+              <div class="col-sm-8 col-md-8 col-lg-8 column">
+              	 <div class="input-group col-sm-12 col-md-12 col-lg-12 column">	
+              	 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
               	 		<center>
               	 			<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />       	 	
               	 			<p>Backpack</p>
               	 			<input type="radio" name="size" value="backpack"> 
               	 		</center>	
               	 	</div>   
-              	 	<div class="col-md-4 column">
+              	 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
 	              		<center>
 	              			<img src={% static 'img/car.png' %} style="width:100%; height:auto;" />
 	              			<p>Car</p>
 	              			<input type="radio" name="size" value="car">
 	              		</center>	
               	 	</div>
-              	 	<div class="col-md-4 column">
+              	 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
 	              		<center>
 	              			<img src={% static 'img/minivan.png' %} style="width:100%; height:auto;" />
 	              			<p>Van</p>
