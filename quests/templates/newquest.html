@@ -41,13 +41,13 @@
       
       
       
-	             
-					  <select name="srccity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
+	              <div class="btn-group">
+					  <select name="srccity" class="form-control multiselect multiselect-icon">   
 						<option value="Mississauga">Mississauga</option>
 						<option value="Toronto">Toronto</option>
 						<option value="Brampton">Brampton</option>
 					</select>
- 
+				  </div> 
               </div>  
             </div>  <!-- End of Form group -->
                     
@@ -66,14 +66,15 @@
             <!-- Location input-->
             <div class="form-group">
               <label class="col-md-4 control-label"><p class="grey">Deliver to</p></label>
-              <div class="col-md-8">   
-                  
-	        	<select name="dstcity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
+              <div class="col-md-8">      
+      
+        <div class="btn-group">      
+        	<select name="dstcity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
 						<option value="Mississauga">Mississauga</option>
 						<option value="Toronto">Toronto</option>
 						<option value="Brampton">Brampton</option>
 					</select>
-             
+              </div>  
               </div>
             </div>  <!-- End of Form group -->                          
          
@@ -157,7 +158,6 @@
       </div>
   </div>
 </div>
-
 {% endblock content %}
 {% block scripts %}
 <script>
