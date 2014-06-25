@@ -9,7 +9,7 @@ import logging
 # Create your views here.
 def listfeaturedquests(questrs_id):
     """List all the featured quests"""
-    allquests = Quests.objects.exclude(questrs_id=questrs_id)
+    allquests = Quests.objects.all()
     return allquests
 
 def getQuestsByUser(questrs_id):
