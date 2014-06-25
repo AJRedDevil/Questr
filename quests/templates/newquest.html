@@ -38,16 +38,13 @@
             <div class="form-group">
               <label class="col-md-4 control-label"><p class="grey">Pickup from</p></label>
               <div class="col-md-8">        
-      
-      
-      
-	              <div class="btn-group">
-					  <select name="srccity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
-						<option value="Mississauga">Mississauga</option>
-						<option value="Toronto">Toronto</option>
-						<option value="Brampton">Brampton</option>
-					</select>
-				  </div> 
+     
+	              <select>
+				  	<option value="Mississauga">Mississauga</option>
+					<option value="Toronto">Toronto</option>
+					<option value="Brampton">Brampton</option>
+				</select>
+				 
               </div>  
             </div>  <!-- End of Form group -->
                     
@@ -66,15 +63,14 @@
             <!-- Location input-->
             <div class="form-group">
               <label class="col-md-4 control-label"><p class="grey">Deliver to</p></label>
-              <div class="col-md-8">          
-      
-        <div class="btn-group">      
-        	<select name="dstcity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
-						<option value="Mississauga">Mississauga</option>
+              <div class="col-md-8">   
+              
+              	<select>
+				  <option value="Mississauga">Mississauga</option>
 						<option value="Toronto">Toronto</option>
 						<option value="Brampton">Brampton</option>
-					</select>
-              </div>  
+				</select>       
+      
               </div>
             </div>  <!-- End of Form group -->                          
          
@@ -160,5 +156,17 @@
 </div>
 {% endblock content %}
 {% block scripts %}
+<script>
+jQuery(document).ready(function () {
+	$("select").selectpicker({style: 'btn-hg btn-primary', menuStyle: 'dropdown-inverse'});
+
+// style: select toggle class name (which is .btn)
+// menuStyle: dropdown class name
+
+// You can always select by any other attribute, not just tag name.
+// Also you can leave selectpicker arguments blank to apply defaults.
+
+});
+</script>
   
 {% endblock scripts %}
