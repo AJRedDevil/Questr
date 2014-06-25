@@ -156,22 +156,23 @@
 									<div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
 								</div>
 								<div class="col-md-9 column">
-									<p>{{questdetails.questrs.first_name}} {{questdetails.questrs.last_name}}</p>
+									<p id="username">{{questdetails.questrs.first_name}} {{questdetails.questrs.last_name}}</p>
+									
+									<input id="input-21e" value="0" type="number" class="rating" min=0 max=100 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" >
+							
 								</div>
 							</a>
-							<hr>
 							</div><!-- ./row -->
 		
-							
-								
-								
-					
-						
-							 <input id="input-21e" value="0" type="number" class="rating" min=0 max=100 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" >
-							<p>
-								<span class="glyphicon glyphicon-time"></span>{{questdetails.creation_date}}<br>
-								<span class="glyphicon glyphicon-map-marker"></span>{{questdetails.location}}, Canada
-							</p>
+							<div class="row clearfix">
+								<div class="col-md-12 column">
+									<hr>
+									<p class="grey">
+										<span class="glyphicon glyphicon-time"></span>{{questdetails.creation_date}}<br>
+										<span class="glyphicon glyphicon-map-marker"></span>{{questdetails.location}}, Canada
+									</p>
+								</div>
+							</div>
 						</div><!-- ./well -->
 					</div>	<!-- ./column -->
 					

@@ -112,3 +112,16 @@ textarea.description {
     opacity: 0.7;
 }
 
+
+.rating {
+	margin: 0;
+}
+
+#username {
+	margin: 0;
+}
+
+hr {
+	margin-top: 8px;
+	margin-bottom: 0;
+}
