@@ -12,7 +12,7 @@
 {% block content %}
 <div class="container">
     <div class="row">
-       <div class="col-md-8 col-md-offset-2 column">    
+       <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 column">    
        
        
 	       <div class="panel panel-default shadows">
@@ -40,22 +40,22 @@
 			  <a href="/quest/{{quest.id}}">
 				<li class="list-group-item">
 				<div class="row clearfix">
-				    <div class="col-sm-2">
+				    <div class="col-xs-2 col-sm-2 col-md-2 column">
 					    <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
 				    </div><!-- ./column -->
-				    <div class="col-sm-6">
+				    <div class="col-xs-6 col-sm-6 col-md-6 column">
 				        <h6 class="list-group-item-heading postTitle">{{quest.title}}</h6>
 				        <p class="list-group-item-text postDesc">{{quest.description}}</p>
 
                                 <div class="smallInfo">
-                                    <small class="light-grey"><span class="glyphicon glyphicon-user"></span>{{quest.questr_id.displayname}} &nbsp;&nbsp;
+                                    <small class="light-grey">
                                     <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
                                 </div><!-- ./smallInfo -->
 				    </div><!-- ./column -->
-				    <div class="col-md-2 column">
+				    <div class="col-xs-1 col-sm-1 col-md-1 column">
                     	<p>${{quest.reward}}</p>
 				    </div><!-- ./column -->
-				    <div class="col-md-2 column">
+				    <div class="col-xs-3 col-sm-3 col-md-3 column">
 	                    <p><span class="glyphicon glyphicon-time"></span>{{quest.creation_date}}</p>
 				    </div><!-- ./column -->
 				</div><!-- ./row -->
