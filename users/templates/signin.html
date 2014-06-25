@@ -13,14 +13,14 @@
    
 <div class="container">
     <div class="row clearfix">
-        <div class="col-md-4 col-md-offset-4 column">
+        <div class="col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 column">
 	         <div class="panel panel-default">
 		         <div class="panel-heading text-center">Sign in</div>
-		         <div class="col-md-12 column panel-content">
+		         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column panel-content">
     		    		
     		<!-- Login with Username and Password --> 
            <form action="" role="form" data-toggle="validator" class="signin" action="" method="post">{% csrf_token %}
-           
+           		<br>
                      
                     <input type="email" class="form-control" name="username" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
                     {% if auth_form.username.errors %}
@@ -37,12 +37,13 @@
 	                {{ auth_form.non_field_errors }}
 	            {% endif %}
                         
-	            <a href="{% url 'reset_password' %}" id="forgot-password">Forgot password?</a>
-	          <center><button type="submit" class="btn btn-sm btn-default">Sign in</button></center>
+	            <a href="{% url 'reset_password' %}"><small>Forgot password?</small></a>
+	          <center><button type="submit" class="btn btn-sm btn-embossed btn-info">Sign in</button></center>
 			</form> <!-- End of Login with Username and Password -->
-            <center><h6>OR</h6></center>
+           
+           <hr>
             <center>
-                <h6>Sign in with</h6>
+                <h6 class="grey">Sign in with</h6>
                 <a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i></button></a>
                 <a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i></button></a>
                 {% comment %}
@@ -69,7 +70,7 @@
             <br>
         	</div>
         </div>       
-        	<p class="text-center">Don't have a Questr account?  <a href="{% url 'signup' %}">Sign up</a> today.</p>
+        	<p class="text-center grey">Don't have a Questr account?  <a href="{% url 'signup' %}">Sign up</a> today.</p>
         </div>
     </div>
 </div>
