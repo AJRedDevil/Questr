@@ -35,16 +35,14 @@
 
 		  <ul class="list-group">   
 			  {% for quest in myquests %} 
-		
-			              
-			  <a href="/quest/{{quest.id}}">
+	
 				<li class="list-group-item">
 				<div class="row clearfix">
 				    <div class="col-xs-2 col-sm-2 col-md-2 column">
-					    <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
+					    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div></a>
 				    </div><!-- ./column -->
 				    <div class="col-xs-6 col-sm-6 col-md-6 column">
-				        <h6 class="list-group-item-heading postTitle">{{quest.title}}</h6>
+				        <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
 				        <p class="list-group-item-text postDesc">{{quest.description}}</p>
 
                                 <div class="smallInfo">
@@ -60,7 +58,7 @@
 				    </div><!-- ./column -->
 				</div><!-- ./row -->
 				</li><!-- list-group-item -->	
-			</a> 
+			
               
                    
              {% endfor %}               
