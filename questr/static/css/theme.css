@@ -292,3 +292,21 @@ nav .glyphicon {
 	color: #979797;
 }
 
+
+ /********* no image post **********/
+.no-image {
+ 	background: #5f97d8;
+	 max-width: 100%;
+	 padding: 0;
+ }
+ 
+.no-image h1 {
+	text-align: center;
+	margin: 0;
+	padding-top: 18px;
+	padding-bottom: 24px;
+}
+
+.no-image .glyphicon {
+	color: white;
+} 

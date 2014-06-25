@@ -21,7 +21,7 @@
 	    
         <!-- Profile -->
         <div class="col-md-2 column">  
-         <div class="well">
+         <div class="well body-borders shadows">
              
               <div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
                     
@@ -43,7 +43,7 @@
  
  
         <div class="col-md-8 column">    
-	       <div class="panel panel-default shadows">
+	       <div class="panel panel-default shadows body-borders">
 		  <!-- Default panel contents -->
 		  <div class="panel-heading">
 			  Posts
@@ -56,15 +56,15 @@
                         {% for quest in questsbyuser  %}
                          <!-- Quest Post -->
                          
-                         <a href="/quest/{{quest.id}}">
+                         
 				<li class="list-group-item">
 				<div class="row clearfix">
 				    <div class="col-sm-2">
-					    <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
+					    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div></a>
 				    </div><!-- ./column -->
 				    <div class="col-sm-6">
-				        <h6 class="list-group-item-heading postTitle">{{quest.title}}</h6>
-				        <p class="list-group-item-text postDesc">{{quest.description}}</p>
+				        <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
+				        <p class="list-group-item-text postDesc grey">{{quest.description}}</p>
 
                                 <div class="smallInfo">
                                     <small class="light-grey"><span class="glyphicon glyphicon-user"></span>{{quest.questr_id.displayname}} &nbsp;&nbsp;
@@ -72,10 +72,10 @@
                                 </div><!-- ./smallInfo -->
 				    </div><!-- ./column -->
 				    <div class="col-md-2 column">
-                    	<p>${{quest.reward}}</p>
+                    	<p class="grey">${{quest.reward}}</p>
 				    </div><!-- ./column -->
 				    <div class="col-md-2 column">
-	                    <p><span class="glyphicon glyphicon-time"></span>{{quest.creation_date}}</p>
+	                    <p class="grey"><span class="glyphicon glyphicon-time"></span>{{quest.creation_date}}</p>
 				    </div><!-- ./column -->
 				</div><!-- ./row -->
 				</li><!-- list-group-item -->	
@@ -95,7 +95,7 @@
         
         
         <div class="col-md-8 column">    
-	       <div class="panel panel-default shadows">
+	       <div class="panel panel-default shadows body-borders">
 		  <!-- Default panel contents -->
 		  <div class="panel-heading">
 			  Reviews
