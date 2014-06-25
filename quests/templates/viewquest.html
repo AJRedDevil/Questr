@@ -18,49 +18,32 @@
   <div class="container">
 		<div class="row clearfix">
 	
-					<div class="col-md-3 column">
+					<div class="col-sm-3 col-md-3 column">
 						<div class="well shadows">
-					
-							<div class="carousel slide article-slide" id="article-photo-carousel">
-
-							  <!-- Wrapper for slides -->
-							  <div class="carousel-inner cont-slider">
+		
+							<div class="row clearfix">
+								<div class="col-sm-12 col-md-12 column">
 							
-							    <div class="item active">
-								    <a data-target="#lightbox" data-toggle="modal" href="#">
-										<img alt="itemImage" class="itemImage" src="{{questdetails.item_images}}">
-									</a>
-							    </div>
-							    <div class="item">
-							      <img alt="" title="" src="http://placehold.it/600x400">
-							    </div>
-							    <div class="item">
-							      <img alt="" title="" src="http://placehold.it/600x400">
-							    </div>
-							    <div class="item">
-							      <img alt="" title="" src="http://placehold.it/600x400">
-							    </div>
-							  </div>
+										<a data-target="#lightbox" data-toggle="modal" href="#">
+											<img alt="itemImage" class="itemImage" src="{{questdetails.item_images}}">
+											</a>
+							
+								</div><!-- ./column -->
+							</div><!-- ./row -->
 							  
-							  <br><br><br><br><br>
-							  
-							  <!-- Indicators -->
-							  <ol class="carousel-indicators">
-							    <li class="active" data-slide-to="0" data-target="#article-photo-carousel">
-							      <img class="itemImage" src="{{questdetails.item_images}}">
-							    </li>
-							    <li class="" data-slide-to="1" data-target="#article-photo-carousel">
-							      <img alt="" src="http://placehold.it/250x180">
-							    </li>
-							    <li class="" data-slide-to="2" data-target="#article-photo-carousel">
-							      <img alt="" src="http://placehold.it/250x180">
-							    </li>
-							    <li class="" data-slide-to="3" data-target="#article-photo-carousel">
-							      <img alt="" src="http://placehold.it/250x180">
-							    </li>
-							  </ol>
-							</div><!--carousel-->
-								
+							 
+							 <div class="row clearfix"  id="imageSelector">
+								<div class="col-xs-4 col-sm-4 col-md-4 column"> 
+							    	<img class="itemImage" src="{{questdetails.item_images}}">
+							    </div><!-- ./column -->
+							    <div class="col-xs-4 col-sm-4 col-md-4 column"> 
+							    	<img class="itemImage" src="{{questdetails.item_images}}">
+							    </div><!-- ./column -->
+							    <div class="col-xs-4 col-sm-4 col-md-4 column"> 
+							    	<img class="itemImage" src="{{questdetails.item_images}}">
+							    </div><!-- ./column -->
+							    
+								</div><!-- ./row -->
 	
 	
 	
@@ -74,20 +57,24 @@
 									</div><!-- ./modal-content -->
 								</div><!-- ./modal-dialog -->
 							</div><!-- ./modal -->						
-		
+							
+			
 						</div><!-- ./well -->
 					</div>	<!-- End of column -->
 					
 
-					<div class="col-md-6 column">
+					<div class="col-sm-6 col-md-6 column">
 						<div class="well shadows">
 							
 							<div class="row clearfix">
-								<div class="col-md-12 column">
+								<div class="col-xs-10 col-sm-10 col-md-10 column">
 									<h5 id="title">{{questdetails.title}}</h5>
 									{% if isOwner %}
-										<span class="label label-info">{{questdetails.status}}</span>
-										
+									<span class="label label-info">{{questdetails.status}}</span>
+									{% endif %}
+								</div>
+								<div class="col-xs-2 col-sm-2 col-md-2 column">
+									{% if isOwner %}								
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="float:right;"><i class="fa fa-ellipsis-v"></i></a>
 										<ul class="dropdown-menu">
 											<li><a href="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
@@ -96,7 +83,7 @@
 			                                    <a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-trash"></span> Delete</a>
 			                                </li>
 			                            </ul>
-									{% endif %}		
+									{% endif %}
 								</div>	
 							</div>	<!-- ./row -->
 							
@@ -148,7 +135,7 @@
 				
 				
 				
-					<div class="col-md-3 column">
+					<div class="col-sm-3 col-md-3 column">
 						<div class="well shadows">
 							<div class="row clearfix">
 							<a href="/user/{{questdetails.questrs.displayname}}">
