@@ -1868,9 +1868,10 @@ fieldset[disabled] .input-group-btn .btn-default.active {
 .navbar {
 	background: white;
   font-size: 12px;
-  min-height: 53px;
-  margin-bottom: 30px;
+  min-height: 23px;
+  margin-bottom: 10px;
   border: none;
+  padding: 0;
 }
 @media (min-width: 768px) {
   .navbar-header {
@@ -2000,16 +2001,18 @@ fieldset[disabled] .input-group-btn .btn-default.active {
     display: none;
   }
 }
+
 .navbar-nav {
   margin: 0;
 }
 
 .navbar-nav > li > a {
-  padding: 15px 19px;
-  line-height: 23px;
+  padding: 10px 19px;
+  line-height: 13px;
   font-weight: 700;
   z-index: 99999999999999;
   text-align: center;
+  height: auto;
 }
 .navbar-nav .dropdown-toggle .caret {
   border-top-color: #16a085;
@@ -2077,8 +2080,8 @@ select[multiple].navbar-input {
   margin-bottom: 0;
   padding-right: 19px;
   padding-left: 19px;
-  padding-top: 9px;
-  padding-bottom: 9px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 @media (max-width: 767px) {
   .navbar-form .form-group {
