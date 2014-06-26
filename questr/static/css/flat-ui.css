@@ -1188,6 +1188,15 @@ fieldset[disabled] .form-control {
 .form-control.flat:focus {
   border-color: #1abc9c;
 }
+
+.input-xs {
+  height: 30px;
+  padding: 6px 10px;
+  font-size: 12px;
+  line-height: 1.462;
+  border-radius: 6px;
+}
+
 .input-sm {
   height: 35px;
   padding: 6px 10px;
