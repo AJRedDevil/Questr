@@ -254,26 +254,11 @@ nav .glyphicon {
 
 
 
-/********** Tabs **************/
-.tab-pane {
-	min-height: 280px;	
-}
 
 
-.nav-tabs > li > a, 
-	.nav-tabs > li > a:hover,
-    .nav-tabs > li > a:focus,
-    .nav-tabs > li.active > a, 
-	.nav-tabs > li.active > a:hover,
-    .nav-tabs > li.active > a:focus {
-	cursor: default;
-	background-color: rgba(204,170,170,0);
-	border-color: transparent;
-	border-bottom: #5f97d8;
-	border-bottom-style: solid;
-	border-bottom-width: 4px;
-}
-/********** ./Tabs **************/           
+
+
+           
           
 .inputBackground {
 	background: #f2f2f2;
