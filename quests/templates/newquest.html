@@ -3,7 +3,6 @@
 {% block localhead %}
   <!-- Custom CSS -->
     <link href={% static "css/quest.css" %} rel="stylesheet">
-    <link href={% static "css/social-buttons.css" %} rel="stylesheet">
 {% endblock localhead %}
 {% block content %}
 <div class="container">
@@ -13,7 +12,7 @@
       	
       	<div class="panel panel-default shadows body-borders">
          <div class="panel-heading">
-	         <h5 class="panel-title lead">Lets post a quest</h5>
+	         <div class="panel-title lead">Lets post a quest</div>
          </div>
           <div class="panel-body">
             
@@ -42,16 +41,19 @@
             <div class="form-group">
               <label class="col-md-4 control-label"><p class="grey">Pickup from</p></label>
               <div class="col-md-8">        
-      
-      
-      
-	              <div class="btn-group">
-					  <select name="srccity" class="form-control multiselect multiselect-icon">   
-						<option value="Mississauga">Mississauga</option>
-						<option value="Toronto">Toronto</option>
-						<option value="Brampton">Brampton</option>
-					</select>
-				  </div> 
+	              <!-- Location input-->
+	            <div class="dropdown">
+				  
+				  <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+				    <span class="glyphicon glyphicon-map-marker theme-colour"></span> City
+				    <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" name="srccity">
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mississauga</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Toronto</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Brampton</a></li>
+				  </ul>
+				</div>
               </div>  
             </div>  <!-- End of Form group -->
                     
@@ -66,21 +68,28 @@
               </div>
             </div>
                     
-                    
-            <!-- Location input-->
+                   
+            
             <div class="form-group">
               <label class="col-md-4 control-label"><p class="grey">Deliver to</p></label>
               <div class="col-md-8">      
-      
-        <div class="btn-group">      
-        	<select name="dstcity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
-						<option value="Mississauga">Mississauga</option>
-						<option value="Toronto">Toronto</option>
-						<option value="Brampton">Brampton</option>
-					</select>
-              </div>  
+	              <!-- Location input-->
+	            <div class="dropdown">
+				  
+				  <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+				    <span class="glyphicon glyphicon-map-marker theme-colour"></span> City
+				    <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" name="dstcity">
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mississauga</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Toronto</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Brampton</a></li>
+				  </ul>
+				</div>
               </div>
             </div>  <!-- End of Form group -->                          
+         
+         
          
             <!-- Departure Address input-->
             <div class="form-group">

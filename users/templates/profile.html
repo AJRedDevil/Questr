@@ -45,7 +45,10 @@
         <div class="col-md-8 column">    
 	       <div class="panel panel-default shadows body-borders">
 		  <!-- Default panel contents -->
-		  <div class="panel-heading">Posts<a href="#" class="pull-right">View all</a></div>
+		  <div class="panel-heading">
+			  <div class="panel-title lead">Posts</div>
+			  <a href="#" class="pull-right">View all</a>
+		  </div>
 
 		  <ul class="list-group">  
 
@@ -62,7 +65,7 @@
 				    </div><!-- ./column -->
 				    <div class="col-sm-6">
 				        <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
-				        <p class="list-group-item-text postDesc grey">{{quest.description}}</p>
+				        <p class="list-group-item-text postDesc">{{quest.description}}</p>
 
                                 <div class="smallInfo">
                                     <small class="light-grey"><span class="glyphicon glyphicon-user"></span>{{quest.questr_id.displayname}} &nbsp;&nbsp;
@@ -95,7 +98,10 @@
         <div class="col-md-8 column">    
 	       <div class="panel panel-default shadows body-borders">
 		  <!-- Default panel contents -->
-		  <div class="panel-heading">Reviews<a href="#" class="pull-right">View all</a></div>
+		  <div class="panel-heading">
+		  	<div class="panel-title lead">Reviews</div>
+		  	<a href="#" class="pull-right">View all</a>
+		  </div>
 		  <ul class="list-group">  
 		  	<!-- Quest Post -->
             {% if allreviews %}

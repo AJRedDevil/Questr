@@ -50,7 +50,7 @@ hr {
  
  /*************** Well, Panels ***************/
 .well {
-	background: #FAFAFA;
+	background:rgba(255,255,255,0.94);
 	border: none; 
 }
 
@@ -60,34 +60,70 @@ hr {
 
 .panel-default {
 	border-color: #dde0e3;
+	background: rgba(255,255,255,0.94);
 }
 
 .panel-default .panel-heading {
-	background: white;
-	color: #bcbcbc;
+	background: rgba(255,255,255,0.94);
+	color: #a5a5a5;
 }
 .panel-default .panel-heading .panel-title {
-	margin-bottom: 0;
+	font-size: larger;
+	display: inline;
+}
+
+.panel-default .panel-heading a.pull-right {
+	font-size: small;
+	margin-top: 5px;
 }
 
 
 .panel-default .panel-content {
-	background: #FAFAFA;
+	background: rgba(255,255,255,0.94);
 }
 
 
 
 /************* Buttons ************/
-.btn {
-	color: #777777;
-	background: white;
-	border-color: transparent;
+button.btn {
+	
 }
 
-.btn:hover {
-	color: #333333;
-	background: white;
+.dropdown button.btn {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #dedede;
+	color: black;
+	
+  text-shadow: 0 0.7px 0 rgba(0, 0, 0, 0.1);
+  background-color: #f2f2f2;
+  *background-color: #e6e6e6;
+  background-image: -moz-linear-gradient(top, #fafafa, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #fafafa, #e6e6e6);
+  background-image: -o-linear-gradient(top, #fafafa, #e6e6e6);
+  background-image: linear-gradient(to bottom, #fafafa, #e6e6e6);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffafafa', endColorstr='#ffe6e6e6', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
+
+.dropdown button.btn:hover,
+.dropdown button.btn:focus,
+.dropdown button.btn:active,
+.dropdown button.btn.active,
+.dropdown button.btn.disabled,
+.dropdown button.btn[disabled] {
+  color: #000000;
+  background-color: #e6e6e6;
+  *background-color: #d9d9d9;
+}
+
+.dropdown button.btn:active,
+.dropdown button.btn.active {
+  background-color: #cdcdcd \9;
+}
+
 
 
 /******** Pagination ************/
@@ -148,14 +184,14 @@ hr {
 
 /************* Input Boxes *****************/
 
-input.form-control {
+input.form-control, input.form-control, textarea.form-control {
 	border: 1px;
 	border-style: solid;
 	border-color: #e2e2e2;
 	background: white;
 }
 
-input.form-control:focus {
+input.form-control:focus, textarea.form-control:focus {
 	border: 1px;
 	border-style: solid;
 	border-color: #5f97d8;
@@ -271,6 +307,10 @@ nav .glyphicon {
 
 .light-grey {
 	color: #979797;
+}
+
+.theme-colour {
+	color: #5f97d8;
 }
 
 
