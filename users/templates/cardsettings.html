@@ -7,14 +7,12 @@
        	<div class="panel panel-default shadows body-borders">
 		  <!-- Default panel contents -->
 		  <div class="panel-heading">
-			  <div class="panel-title lead">Posts</div>  
+			  <div class="panel-title lead">Change your credit card information here</div>  
 		  </div>
 		  <div class="panel-body">
 			  <form class="form-horizontal" role="form">
           <fieldset>
-            <legend>Change your credit card information here</legend>
-            
-          
+      
               <div class="input-group">
               <span class="col-sm-3">
               <label class="radio control-label"> <input type="radio"> <img class="visa" src="http://upload.wikimedia.org/wikipedia/en/1/16/Former_Visa_(company)_logo.svg" /></label>
@@ -33,24 +31,26 @@
          
             
             <div class="form-group">
-              <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>
+              <label class="col-sm-3 control-label grey" for="card-holder-name">Name on Card</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name">
+                <input type="text" class="form-control input-xs" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name">
               </div>
             </div>
             
             <div class="form-group">
-              <label class="col-sm-3 control-label" for="card-number">Card Number</label>
+              <label class="col-sm-3 control-label grey" for="card-number">Card Number</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" name="card-number" id="card-number" placeholder="Debit/Credit Card Number">
+                <input type="text" class="form-control input-xs" name="card-number" id="card-number" placeholder="Debit/Credit Card Number">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label" for="expiry-month">Expiration Date</label>
+              <label class="col-sm-3 control-label grey" for="expiry-month">Expiration Date</label>
               <div class="col-sm-9">
                 <div class="row">
                   <div class="col-xs-3">
-                    <select class="form-control col-sm-2" name="expiry-month" id="expiry-month">
+	     
+     	
+                    <select class="form-control" name="expiry-month" id="expiry-month">
                       <option>Month</option>
                       <option value="01">Jan (01)</option>
                       <option value="02">Feb (02)</option>
@@ -85,14 +85,14 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-3 control-label" for="cvv">Card CVV</label>
+              <label class="col-sm-3 control-label grey" for="cvv">Card CVV</label>
               <div class="col-sm-3">
-                <input type="text" class="form-control" name="cvv" id="cvv" placeholder="Security Code">
+                <input type="text" class="form-control input-sm" name="cvv" id="cvv" placeholder="Security Code">
               </div>
             </div>
             <div class="form-group">
               <div class="col-sm-offset-3 col-sm-9">
-                <button type="button" class="btn btn-success">Pay Now</button>
+                <button type="button" class="btn btn-success">Save</button>
               </div>
             </div>
           </fieldset>

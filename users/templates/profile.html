@@ -26,15 +26,15 @@
               <div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
                     
             <center>
-	            <h5 class="userName">{{user.first_name}} {{user.last_name}}</h5>  
+	            <span class="userName lead">{{user.first_name}} {{user.last_name}}</span>  
 	            
 	            <input id="input-21e" value="{{final_rating}}" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" >
 	                       			
 			</center>
             
-            	<p><span class="glyphicon glyphicon-map-marker"></span> Toronto, Ontario, Canada </p>
-                <p>Quests Completed: {{quests_complete}} </p>
-                <p>Quests Posted: {{quests_posted}} </p>                            
+            	<p class="grey small"><span class="glyphicon glyphicon-map-marker"></span> Toronto, Ontario, Canada<br>
+                Quests Completed: {{quests_complete}} <br>
+                Quests Posted: {{quests_posted}} </p>                            
             
          </div>	<!-- End of Well -->                
         </div>	<!-- ./column -->

@@ -159,6 +159,41 @@ button.btn {
 }
 
 
+select.form-control {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #dedede;
+	color: black;
+	
+  text-shadow: 0 0.7px 0 rgba(0, 0, 0, 0.1);
+  background-color: #f2f2f2;
+  *background-color: #e6e6e6;
+  background-image: -moz-linear-gradient(top, #fafafa, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #fafafa, #e6e6e6);
+  background-image: -o-linear-gradient(top, #fafafa, #e6e6e6);
+  background-image: linear-gradient(to bottom, #fafafa, #e6e6e6);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffafafa', endColorstr='#ffe6e6e6', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+select.form-control:hover,
+select.form-control:focus,
+select.form-control:active,
+select.form-control.active,
+select.form-control.disabled,
+select.form-control[disabled] {
+  color: #000000;
+  background-color: #e6e6e6;
+  *background-color: #d9d9d9;
+}
+
+select.form-control:active,
+select.form-control.active {
+  background-color: #cdcdcd \9;
+}
+
 
 /******** Pagination ************/
 .pagination li a {

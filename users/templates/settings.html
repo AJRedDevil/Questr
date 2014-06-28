@@ -3,6 +3,7 @@
 {% block localhead %}
     <!-- Custom CSS -->
     <link href={% static "css/settings.css" %} rel="stylesheet">
+    <link href={% static "css/social-buttons.css" %} rel="stylesheet">
 
     <!-- Custom Javascript -->
     <script src={% static "js/validator.js" %}></script>
@@ -16,7 +17,7 @@
         <nav class="nav-sidebar">
             <ul class="nav tabs well body-borders shadows">
             {% if settingstype ==  "general" %}
-              <li class="active"><a href="/user/settings"><p>Account</p></a></li>
+              <li class="active"><a href="/user/settings">Account</a></li>
             {% else %}
               <li class=""><a href="/user/settings">Account</a></li>
             {% endif %}
