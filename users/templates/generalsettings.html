@@ -4,19 +4,24 @@
     <div class="container">
     <div class="row">
       <div class="col-md-6 col-lg-6 column">
-        <div class="well">
-          <form class="form-horizontal" action="" method="post">{% csrf_token %}
+      
+      	<div class="panel panel-default shadows body-borders">
+		  <!-- Default panel contents -->
+		  <div class="panel-heading">
+			  <div class="panel-title lead">Change your general settings here</div>  
+		  </div>
+		  <div class="panel-body">
+		  	<form class="form-horizontal" action="" method="post">{% csrf_token %}
           <fieldset>
-            <legend>Change your general settings here</legend>
-
+          
             <!-- FirstName -->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="name">First Name</label>
+              <label class="col-md-4 control-label grey" for="name">First Name</label>
               <div class="col-md-8">
                 <input id="first_name" name="first_name" type="text" placeholder="" class="form-control" value={{user.first_name}}>
               </div>
 
-              <label class="col-md-4 control-label" for="name">Last Name</label>
+              <label class="col-md-4 control-label grey" for="name">Last Name</label>
               <div class="col-md-8">
                 <input id="last_name" name="last_name" type="text" placeholder="" class="form-control" value={{user.last_name}}>
               </div>
@@ -24,7 +29,7 @@
     
             <!-- Username -->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="name">Username</label>
+              <label class="col-md-4 control-label grey" for="name">Username</label>
               <div class="col-md-8">
                 <input id="displayname" name="displayname" type="text" placeholder="" class="form-control" value={{user.displayname}}>
               </div>
@@ -34,7 +39,7 @@
             {% endif %}
             <!-- Email -->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="name">Email</label>
+              <label class="col-md-4 control-label grey" for="name">Email</label>
               <div class="col-md-8">
                 <input id="email" name="email" type="text" placeholder="" class="form-control" value={{user.email}}>
               </div>
@@ -44,7 +49,7 @@
             {% endif %}            
             <!-- Language -->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="name">Language</label>
+              <label class="col-md-4 control-label grey" for="name">Language</label>
               <div class="col-md-8">
                 <div class="btn-group">          
                     <select type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
@@ -59,7 +64,7 @@
             
             <!-- Location -->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="name">City</label>
+              <label class="col-md-4 control-label grey" for="name">City</label>
               <div class="col-md-8">
                 <div class="btn-group">          
                   <select type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
@@ -80,7 +85,9 @@
             </div>
           </fieldset>
           </form>
-        </div>
+		  </div>
+      	</div>
+
       </div>
     </div>
 </div>
