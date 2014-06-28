@@ -9,11 +9,16 @@
 <div class="container">
   <div class="row">
       <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column">
-        <div class="well body-borders shadows other-well">
-          <form class="form-horizontal" action="" method="post">{% csrf_token %}
-          <fieldset>
-            <legend class="text-center grey"><h4>You're steps away from posting a quest!</h4></legend>
+      	
+      	
+      	<div class="panel panel-default shadows body-borders">
+         <div class="panel-heading">
+	         <h5 class="panel-title lead">Lets post a quest</h5>
+         </div>
+          <div class="panel-body">
             
+	          <form class="form-horizontal" action="" method="post">{% csrf_token %}
+          <fieldset>
             
             <!-- Name input-->
             <div class="form-group">
@@ -22,9 +27,7 @@
                 <input id="title" name="title" type="text" placeholder="Your title" class="form-control input-xs">
               </div>
             </div>
-            
-          
-    
+ 
     
             <!-- Offer input-->
             <div class="form-group">
@@ -158,10 +161,17 @@
             </div>
           </fieldset>
           </form>
-        </div>
+	          
+          </div>
+       </div>
+      
+      
+         
       </div>
   </div>
 </div>
+
+
 {% endblock content %}
 {% block scripts %}
 <script>
