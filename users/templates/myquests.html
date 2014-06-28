@@ -15,14 +15,15 @@
        <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 column">    
        
        
-	       <div class="panel panel-default shadows">
+	       <div class="panel panel-default shadows body-borders">
 		  <!-- Default panel contents -->
 		  <div class="panel-heading">
-			  <ul class="nav nav-tabs">
+			  <div class="panel-title lead">
+				  <ul>
                     <li>
                         <a href="{% url 'mytrades' %}">My Offers</a>
                     </li>
-                    <li class="active">
+                    <li class="active theme-colour">
                         <a href="{% url 'myposts' %}">My Posts</a>
                     </li>       
                     {% if user.is_shipper %}
@@ -31,6 +32,7 @@
                     </li>                                       
                     {% endif %}
                 </ul>
+			  </div>
 		  </div>
 
 		  <ul class="list-group">   
@@ -41,7 +43,7 @@
 				    <div class="col-xs-2 col-sm-2 col-md-2 column">
 					    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div></a>
 				    </div><!-- ./column -->
-				    <div class="col-xs-6 col-sm-6 col-md-6 column">
+				    <div class="col-xs-5 col-sm-5 col-md-5 column">
 				        <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
 				        <p class="list-group-item-text postDesc">{{quest.description}}</p>
 
@@ -50,11 +52,11 @@
                                     <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
                                 </div><!-- ./smallInfo -->
 				    </div><!-- ./column -->
-				    <div class="col-xs-1 col-sm-1 col-md-1 column">
-                    	<p>${{quest.reward}}</p>
+				    <div class="col-xs-2 col-sm-2 col-md-2 column">
+                    	<p class="grey">${{quest.reward}}</p>
 				    </div><!-- ./column -->
 				    <div class="col-xs-3 col-sm-3 col-md-3 column">
-	                    <p><span class="glyphicon glyphicon-time"></span>{{quest.creation_date}}</p>
+	                    <p class="grey"><span class="glyphicon glyphicon-time"></span>{{quest.creation_date}}</p>
 				    </div><!-- ./column -->
 				</div><!-- ./row -->
 				</li><!-- list-group-item -->	

@@ -26,22 +26,24 @@
     <div class="row">	
        <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 column"> 
           
-          <div class="panel panel-default shadows">
+          <div class="panel panel-default shadows body-borders">
 		  <!-- Default panel contents -->
 		  <div class="panel-heading">
-			  <ul class="nav nav-tabs">
+				<div class="panel-title lead">
+				  <ul>
                     <li class="active">
                         <a href="{% url 'mytrades' %}">My Offers</a>
                     </li>
                     <li>
                         <a href="{% url 'myposts' %}">My Posts</a>
-                    </li>                   
+                    </li>       
                     {% if user.is_shipper %}
                     <li>
                         <a href="{% url 'myposts' %}">My Shipments</a>
                     </li>                                       
                     {% endif %}
                 </ul>
+			  </div>	  		  
 		  </div>
 	
 	
@@ -53,12 +55,12 @@
                          <a href="/quest/{{quest.id}}">
                         <li class="list-group-item">
                             <div class="row clearfix">
-                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 column">
+                                <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
                                     <a href="/quest/{{quest.id}}">
                                         <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
                                     </a>
                                 </div><!-- ./column -->
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
+                                <div class="col-xs-5 col-sm-6 col-md-6 col-lg-6 column">
                                     <a href="/quest/{{quest.id}}"><h6> {{quest.title| title}}</h6></a>
                                       
                                     <p><a href="/user/{{shipper.0.displayname}}">{{shipper.0.first_name | title}}</a> is interested!</p>
@@ -67,7 +69,7 @@
                                     {% endcomment %}
                                      
                                 </div><!-- ./column -->
-                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 column">
+                                <div class="col-xs-2 col-sm-4 col-md-4 col-lg-4 column">
 	                                <a href="{{quest.id}}/accept/{{shipper.0.id}}" class="acceptUrl"><button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you've accepted his bid!">Accept</button></a>
 	                             </div><!-- ./column -->
                                     {% comment %}
@@ -95,12 +97,12 @@
                         {% for shipper in shippers %}
                         <li class="list-group-item">
                             <div class="row clearfix">
-                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 column">
+                                <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
                                     <a href="/quest/{{quest.id}}">
                                         <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
                                     </a>
                                 </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
+                                <div class="col-xs-7 col-sm-6 col-md-6 col-lg-6 column">
                                     <a href="/quest/{{quest.id}}">
                                         <h6> {{quest.title| title}} </h6>
                                     </a>
@@ -112,7 +114,7 @@
                                             {% endcomment %}                                            
                                     
                                 </div><!-- column -->
-                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
+                                <div class="col-xs-2 col-sm-4 col-md-4 col-lg-4 column">
                                   
                                         <button type="button" class="btn btn-embossed btn-info contact" data-toggle="modal" data-target="#myModal-{{shipper.0.id}}">Contact</button>
                                

@@ -61,6 +61,7 @@ hr {
 	background: #fafafa;
 }
 
+
 .panel-default {
 	background: rgba(255,255,255,0.94);
 }
@@ -72,6 +73,37 @@ hr {
 .panel-default .panel-heading .panel-title {
 	font-size: larger;
 	display: inline;
+}
+
+.panel-default .panel-heading .panel-title ul {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+.panel-default .panel-heading .panel-title ul li {
+	font-size: larger;
+	display: inline;	
+	margin: 0;
+}
+
+.panel-default .panel-heading .panel-title ul li.active a {
+	color: #5f97d8;
+	border-bottom: #5f97d8;
+	border-bottom-style: solid;
+	border-bottom-width: 4px;
+}
+
+.panel-default .panel-heading .panel-title ul li a {
+	margin-right: 30px;
+	color: #a5a5a5;
+}
+
+.panel-default .panel-heading .panel-title ul li a:hover {
+	color: #5f97d8;
+	border-bottom: #5f97d8;
+	border-bottom-style: solid;
+	border-bottom-width: 4px;	
 }
 
 .panel-default .panel-heading a.pull-right {
