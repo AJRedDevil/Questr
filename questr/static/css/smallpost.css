@@ -3,6 +3,13 @@
 	height:auto;
 	min-height: 100px;
 	background: rgba(255,255,255,0.94);
+	
+	border-bottom: 1px;
+	border-top: 1px;
+	border-left: none;
+	border-right: none;
+	border-color: #e9f0f5;
+	border-style: solid;
 }
 
 .list-group-item:hover {

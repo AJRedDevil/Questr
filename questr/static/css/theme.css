@@ -61,7 +61,6 @@ hr {
 	background: #fafafa;
 }
 
-
 .panel-default {
 	background: rgba(255,255,255,0.94);
 }
@@ -69,6 +68,12 @@ hr {
 .panel-default .panel-heading {
 	background: rgba(255,255,255,0.94);
 	color: #a5a5a5;
+	
+	border-bottom: 1px;
+	border-left: none;
+	border-right: none;
+	border-bottom-style: solid;
+	border-bottom-color: #e9f0f5;
 }
 .panel-default .panel-heading .panel-title {
 	font-size: larger;
@@ -279,13 +284,11 @@ input.form-control:focus, textarea.form-control:focus {
 	font-weight: bolder;
 }
 
-
 .navbar-left input.search {
-	border: none;
-	background: #92a8b5;
-	-webkit-box-shadow: 1px 1.5px 0 rgba(0, 0, 0, 0.15);
-	-moz-box-shadow: 1px 1.5px 0 rgba(0, 0, 0, 0.15);
-	box-shadow: 1px 1.5px 0 rgba(0, 0, 0, 0.15);
+	background: #bce0f5;
+	border-width: 3px;
+	border-style: solid;
+	border-color: aqua;
 }
 
 .nav button.btn span {
