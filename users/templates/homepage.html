@@ -15,7 +15,7 @@
    
 	    <div class="feature well shadows body-borders">
             {% if quest.item_images %}
-            <a  href="/quest/{{quest.id}}" class="image" title="Title"><img src={{quest.item_images}}></a>                  
+            <a  href="/quest/{{quest.id}}" class="image"><img src={{quest.item_images}}></a>                  
             {% else %}    
             <a  href="/quest/{{quest.id}}" class="image" title="Title">
             <div class="no-image">
@@ -24,7 +24,7 @@
             </a>
             {% endif %}            
             <div class="item-content">
-                <h6 class="title">{{quest.title | title}}</h6>
+                <a  href="/quest/{{quest.id}}" class="image"><h6 class="title">{{quest.title | title}}</h6></a>
 
                 <p>{{quest.description | truncatewords:10  }}</p>
            

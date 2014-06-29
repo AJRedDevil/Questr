@@ -51,6 +51,23 @@
 		  </div>
 
 		  <ul class="list-group">  
+			  
+			  
+			  
+			  
+			  <li class="list-group-item">
+				<div class="row clearfix">
+				    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+					    <p class="lead light-grey text-center">This user has no posts available.</p>
+				    </div><!-- ./column -->
+				</div><!-- ./row -->
+				</li><!-- list-group-item -->
+				
+				
+				
+				
+				
+				
 
 			  			<!-- Quest Post -->
                         {% paginate 5,5 questsbyuser %}
@@ -61,7 +78,7 @@
 				<li class="list-group-item">
 				<div class="row clearfix">
 				    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
-					    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div></a>
+					    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.item_images}});"></div></a>
 				    </div><!-- ./column -->
 				    <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5 column">
 				        <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
@@ -80,7 +97,6 @@
 				    </div><!-- ./column -->
 				</div><!-- ./row -->
 				</li><!-- list-group-item -->	
-			</a> 
                          
                         {% endfor %}
 		  </ul>
@@ -97,9 +113,25 @@
 		  	<a href="#" class="pull-right">View all</a>
 		  </div>
 		  <ul class="list-group">  
-		  	<!-- Quest Post -->
+		  	
+			<li class="list-group-item">
+				<div class="row clearfix">
+				    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+					    <p class="lead light-grey text-center">This user has no reviews.</p>
+				    </div><!-- ./column -->
+				</div><!-- ./row -->
+				</li><!-- list-group-item -->	  	
+		  	
+		  	
+		  	
             {% if allreviews %}
             {% for review in  allreviews %}
+         
+            
+            
+            
+            
+            
 				<li class="list-group-item">
 				<div class="row clearfix">
 				    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">

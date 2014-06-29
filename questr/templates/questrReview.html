@@ -13,29 +13,36 @@
 {% block content %}
 <div class="container">
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column">
+		<div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column">
+			<div class="panel panel-default shadows body-borders">
+         <div class="panel-heading">
+	         <div class="panel-title lead">Questr Review</div>
+         </div>
+          <div class="panel-body">
+
 			<label>Reviewing <b>{{ full_name }}</b></label></br>
 			<label>Quest <b>{{ current_quest.title }}</b></label>
 	       <form method="POST" action="/review/{{ current_quest.id }}/{{ shipper.id }}">
 	       		{% csrf_token %}
-				<div class="well body-borders shadows no-padding">
+			
 					<div class="row clearfix">
 					<div class="col-md-12 column">
 					<div class="row clearfix">
 					<div class="col-md-12 column">
-					<p class="grey">Was this Questr prompted and on time?</p>
-					<input id="input-21e" value="0" type="number" name="rating" class="rating" min=0 max=5 step=0.5 data-size="sm" >
-					<br>
-					<p class="grey">How was the condition of your package when it arrived?</p>
-					<input id="input-21e" value="0" type="number" name="rating" class="rating" min=0 max=5 step=0.5 data-size="sm" >
-					<br>
-					<p class="grey">Was the package what you expected to receive?</p>
-					<input id="input-21e" value="0" type="number" name="rating" class="rating" min=0 max=5 step=0.5 data-size="sm" >
-					<br>
-					<p class="grey">Overall, how would you rate the service you recieved from this Questr?</p>
-					<input id="input-21e" value="0" type="number" name="rating" class="rating" min=0 max=5 step=0.5 data-size="sm" >
-					</div>
-					</div>
+						<p class="grey">Was this Questr prompted and on time?</p>
+						<input id="input-21e" value="0" type="number" name="rating" class="rating" min=0 max=5 step=0.5 data-size="sm" >
+						<br>
+						<p class="grey">How was the condition of your package when it arrived?</p>
+						<input id="input-21e" value="0" type="number" name="rating" class="rating" min=0 max=5 step=0.5 data-size="sm" >
+						<br>
+						<p class="grey">Was the package what you expected to receive?</p>
+						<input id="input-21e" value="0" type="number" name="rating" class="rating" min=0 max=5 step=0.5 data-size="sm" >
+						<br>
+						<p class="grey">Overall, how would you rate the service you recieved from this Questr?</p>
+						<input id="input-21e" value="0" type="number" name="rating" class="rating" min=0 max=5 step=0.5 data-size="sm" >
+						
+					</div><!-- ./column -->
+					</div><!-- ./row -->
 					</div>
 					</div>
 					
@@ -46,14 +53,15 @@
 			            	<br>
 			                <textarea class="form-control" id="description" name="description" placeholder="Please enter your message here..." rows="5"></textarea>
 			            </div>
-			        <input type="submit" value="Finito!" name="subscribe" id="mc-embedded-subscribe" class="btn btn-warning btn-lg">
+			        <center><input type="submit" value="Finished" name="subscribe" id="mc-embedded-subscribe" class="btn btn-info"></center>
 					</div>
-					
 				</div>
 			</form>
-		</div>
-	</div>
-</div>	
+			</div><!-- ./panel-body -->
+			</div><!-- ./panel -->
+		</div><!-- ./column -->
+	</div><!-- ./row -->
+</div><!-- ./container -->
 {% endblock content %}
 {% block scripts %}
 

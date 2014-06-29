@@ -11,20 +11,56 @@
 {% block content %}
 <div class="container">
 	<div class="row">
-	<div class="col-md-8 col-md-offset-2 column">
-	<div class="well">
-		<p>Was this Questr prompted and on time?</p>
-		<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
-		<p>How was the condition of your package when it arrived?</p>
-		<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
-		<p>Was the package what you expected to receive?</p>
-		<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >		
-		<p>Overall, how would you rate the service you recieved from this Questr?</p>
-		<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" >
-	</div>
-	</div>
-	</div>
-</div>	
+		<div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column">
+			<div class="panel panel-default shadows body-borders">
+         <div class="panel-heading">
+	         <div class="panel-title lead">Questr Review</div>
+         </div>
+          <div class="panel-body">
+
+			<label>Reviewing <b>{{ full_name }}</b></label></br>
+			<label>Quest <b>{{ current_quest.title }}</b></label>
+	       <form method="POST" action="">
+	       		{% csrf_token %}
+			
+					<div class="row clearfix">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+					<div class="row clearfix">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+						<p class="grey">Was this Questr prompted and on time?</p>
+						<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="sm" >
+						<br>
+						<p class="grey">How was the condition of your package when it arrived?</p>
+						<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="sm" >
+						<br>
+						<p class="grey">Was the package what you expected to receive?</p>
+						<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="sm" >
+						<br>		
+						<p class="grey">Overall, how would you rate the service you recieved from this Questr?</p>
+						<input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="sm" >
+						<br>
+					</div><!-- ./column -->
+					</div><!-- ./row -->
+					</div>
+					</div>
+					
+					<div class="text-area">
+						<h6 class="grey">Let others know what you think</h6>
+			            <div class="form-group">
+			            	<input type="text" placeholder="Title" name="title" class="form-control input-sm">
+			            	<br>
+			                <textarea class="form-control" id="description" name="description" placeholder="Please enter your message here..." rows="5"></textarea>
+			            </div>
+			        <center><input type="submit" value="Finished" name="subscribe" id="mc-embedded-subscribe" class="btn btn-info"></center>
+					</div>
+				</div>
+			</form>
+			</div><!-- ./panel-body -->
+			</div><!-- ./panel -->
+		</div><!-- ./column -->
+	</div><!-- ./row -->
+</div><!-- ./container -->
+	
 {% endblock content %}
 {% block scripts %}
 <script>

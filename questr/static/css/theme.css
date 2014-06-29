@@ -256,6 +256,10 @@ select.form-control.active {
     width: 10px;
 }
 
+.item-image {
+	border-radius: 3px;
+}
+
 /************* Input Boxes *****************/
 
 input.form-control, input.form-control, textarea.form-control {
@@ -302,7 +306,6 @@ input.form-control:focus, textarea.form-control:focus {
 	height: auto;
 	float: left;
 }
-
 
 #notifications .dropdown-menu li a {
 	min-width: 350px;
@@ -374,11 +377,11 @@ nav .glyphicon {
 }
 
 .grey {
-	color: #787777;
+	color: #a8a8a8;
 }
 
 .light-grey {
-	color: #979797;
+	color: #BDC3C7;
 }
 
 .theme-colour {
