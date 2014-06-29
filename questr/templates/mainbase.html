@@ -62,11 +62,11 @@
 					  <ul class="nav navbar-nav navbar-right"> 
 				      
 				      		{% if pagetype == "public" %}
-	                        <li><a href="{% url 'login' %}">Login</a></li>
+	                        <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li>
 	               
-	                        <li><a href="{% url 'signup' %}">Signup</a></li>
+	                        <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-thumbs-up"></span>Signup</a></li>
 	
-	                        <li><a href="#">About Us</a></li>
+	                        <li><a href="#"><span class="glyphicon glyphicon-heart"></span>About Us</a></li>
 	        
 	                        {% endif %}
         		

@@ -14,30 +14,30 @@
     <div class="row clearfix">
  
   <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 column">
-        <nav class="nav-sidebar">
-            <ul class="nav tabs well body-borders shadows">
+        <nav class="nav-sidebar well body-borders shadows">
+            <ul class="nav tabs">
             {% if settingstype ==  "general" %}
-              <li class="active"><a href="/user/settings">Account</a></li>
+              <li class="active"><a href="/user/settings">Account<span class="glyphicon glyphicon-chevron-right"></span></a></li>
             {% else %}
-              <li class=""><a href="/user/settings">Account</a></li>
+              <li class=""><a href="/user/settings">Account<span class="glyphicon glyphicon-chevron-right"></span></a></li>
             {% endif %}
             
             {% if settingstype == "password" %}
-              <li class="active"><a href="/user/settings/password">Password</a></li>
+              <li class="active"><a href="/user/settings/password">Password<span class="glyphicon glyphicon-chevron-right"></span></a></li>
             {% else %}
-              <li class=""><a href="/user/settings/password">Password</a></li>
+              <li class=""><a href="/user/settings/password">Password<span class="glyphicon glyphicon-chevron-right"></span></a></li>
             {% endif %}
             
             {% if settingstype == "email" %}
-              <li class="active"><a href="/user/settings/email">Email Notifications</a></li>               
+              <li class="active"><a href="/user/settings/email">Email Notifications<span class="glyphicon glyphicon-chevron-right"></span></a></li>               
             {% else %}
-              <li class=""><a href="/user/settings/email">Email Notifications</a></li> 
+              <li class=""><a href="/user/settings/email">Email Notifications<span class="glyphicon glyphicon-chevron-right"></span></a></li> 
             {% endif %}
             
             {% if settingstype == "card" %}
-              <li class="active"><a href="/user/settings/card">Credit Card</a></li>                               
+              <li class="active"><a href="/user/settings/card">Credit Card<span class="glyphicon glyphicon-chevron-right"></span></a></li>                               
             {% else %}
-              <li class=""><a href="/user/settings/card">Credit Card</a></li>                               
+              <li class=""><a href="/user/settings/card"><span class="glyphicon glyphicon-credit-card"></span> Credit Card<span class="glyphicon glyphicon-chevron-right"></span></a></li>                               
             {% endif %}
             </ul>
         </nav>

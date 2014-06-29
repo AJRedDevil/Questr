@@ -13,22 +13,24 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 column">
-	         <div class="panel panel-default">
-		         <div class="panel-heading text-center">Sign in</div>
-		         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column panel-content">
+        	<div class="panel panel-default">
+	        	<div class="panel-heading">
+		        	<center><div class="panel-title lead">Sign in</div></center>
+		        </div>
+          <div class="panel-body">
     		    		
     		<!-- Login with Username and Password --> 
            <form action="" role="form" data-toggle="validator" class="signin" action="" method="post">{% csrf_token %}
            		<br>
                      
-                    <input type="email" class="form-control" name="username" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
+                    <input type="email" class="form-control input-sm" name="username" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
                     {% if auth_form.username.errors %}
                         {{ auth_form.username.errors }}
                     {% endif %}
                 <div class="help-block with-errors"></div>
             
                            
-	            <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+	            <input type="password" class="form-control input-sm" name="password" id="exampleInputPassword1" placeholder="Password">
 	            {% if auth_form.password.errors %}
 	                {{ auth_form.password.errors }}
 	            {% endif %}
@@ -66,11 +68,9 @@
                 {% endcomment %}
                 <a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i></button></a>       
             </center>
-            <br>
-        	</div>
-        </div>       
-        	<p class="text-center grey">Don't have a Questr account?  <a href="{% url 'signup' %}">Sign up</a> today.</p>
+        	</div>      
         </div>
+        <p class="text-center grey">Don't have a Questr account?  <a href="{% url 'signup' %}">Sign up</a> today.</p>
     </div>
 </div>
 

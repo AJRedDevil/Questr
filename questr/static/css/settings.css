@@ -1,15 +1,29 @@
+.nav-sidebar {
+	padding: 0;
+}
+
+
 .nav-sidebar li {
 	height: auto;
-	border: none;
+}
+
+.nav-sidebar li .glyphicon-chevron-right {
+	float: right;
+}
+
+.nav-sidebar ul {
+	padding: 0;
+	margin: 0;
 }
 
 .nav-sidebar a {
-    color: #787777;
+    color: #979797;
+    text-align: center;
+    font-size: small;
     -webkit-transition: all 0.08s linear;
     -moz-transition: all 0.08s linear;
     -o-transition: all 0.08s linear;
     transition: all 0.08s linear;
-    text-align: center;
 }
 .nav-sidebar li.active a { 
     cursor: default;

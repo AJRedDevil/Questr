@@ -17,7 +17,7 @@
 					  <h6 class="grey" for="name">First Name</h6>
 				  </div>
 				  <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 column">
-					  <input id="first_name" name="first_name" type="text" placeholder="" value={{user.first_name}} class="form-control input-sm">
+					  <input id="first_name" name="first_name" type="text" placeholder="" value={{user.first_name}} class="form-control input-xs">
 				  </div>
 			  </div><!-- ./row -->
 
@@ -26,7 +26,7 @@
 					  <h6 class="grey" for="name">Last Name</h6>
 				  </div>
 				  <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 column">
-					  <input id="last_name" name="last_name" type="text" placeholder="" class="form-control input-sm" value={{user.last_name}}>
+					  <input id="last_name" name="last_name" type="text" placeholder="" class="form-control input-xs" value={{user.last_name}}>
 				  </div>
 			  </div><!-- ./row -->
 			  
@@ -35,7 +35,7 @@
 					  <h6 class="grey" for="name">Username</h6>
 				  </div>
 				  <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 column">
-					  <input id="displayname" name="displayname" type="text" placeholder="" class="form-control input-sm" value={{user.displayname}}>
+					  <input id="displayname" name="displayname" type="text" placeholder="" class="form-control input-xs" value={{user.displayname}}>
 				  </div>
 			  </div><!-- ./row -->
 			  
@@ -47,7 +47,7 @@
 					  <h6 class="grey" for="name" text-right>Email</h6>
 				  </div>
 				  <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 column">
-					  <input id="email" name="email" type="text" placeholder="" class="form-control input-sm" value={{user.email}}>
+					  <input id="email" name="email" type="text" placeholder="" class="form-control input-xs" value={{user.email}}>
 				  </div>
 			  </div><!-- ./row -->
 			  {% if user_form.email.errors %}
@@ -87,7 +87,7 @@
 			  
 			  <div class="row clearfix">
 				  <div class="col-md-12 column text-center">
-					  <button type="submit" class="btn btn-primary btn-md">Save</button>
+					  <button type="submit" class="btn btn-info">Save</button>
 				  </div>
 			  </div><!-- ./row -->
 			  

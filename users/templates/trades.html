@@ -70,7 +70,7 @@
                                      
                                 </div><!-- ./column -->
                                 <div class="col-xs-2 col-sm-4 col-md-4 col-lg-4 column">
-	                                <a href="{{quest.id}}/accept/{{shipper.0.id}}" class="acceptUrl"><button class="btn btn-embossed btn-primary acceptBtn" rel="tooltip" title="We'll notify the user that you've accepted his bid!">Accept</button></a>
+	                                <a href="{{quest.id}}/accept/{{shipper.0.id}}" class="acceptUrl"><button class="btn btn-success" rel="tooltip" title="We'll notify the user that you've accepted his bid!">Accept</button></a>
 	                             </div><!-- ./column -->
                                     {% comment %}
                                  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 column">
@@ -119,7 +119,7 @@
                                         <button type="button" class="btn btn-embossed btn-info contact" data-toggle="modal" data-target="#myModal-{{shipper.0.id}}">Contact</button>
                                
                                         {% if not quest.status == "Reviewed" %}
-                                            <a href="/review/{{quest.id}}/{{shipper.0.id}}" class="reviewUrl"><button class="btn btn-embossed btn-inverse reviewBtn" rel="tooltip" title="We'll notify the user that you've reviewed his effort!">Review</button></a>
+                                            <a href="/review/{{quest.id}}/{{shipper.0.id}}" class="reviewUrl"><button class="btn btn-success" rel="tooltip" title="We'll notify the user that you've reviewed his effort!">Review</button></a>
                                         {% endif %}
                                 </div><!-- column -->
                             </div><!-- ./row -->
