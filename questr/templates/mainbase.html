@@ -60,7 +60,7 @@
 				  
 				  
 				  <div class="collapse navbar-collapse" id="navbar-collapse-01">
-					  <ul class="nav navbar-nav navbar-right"> 
+					  <ul class="nav navbar-nav navbar-left"> 
 				      
 				      		{% if pagetype == "public" %}
 	                        <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li>
@@ -97,34 +97,13 @@
                                             </div> 
                                         </a>  <!-- End of notification -->
                                     </li>
-                                    
                                 </ul>
-                            </li>                            
+                            </li>
+                                                        
 
                             {% endcomment %}             
                             
-                            <li class="dropdown">
-								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.first_name}}<span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="{% url 'mytrades' %}"><span class="glyphicon glyphicon-transfer"></span>My Trades</a></li>
-	                                <li>
-	                                    <a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span>My Profile</a>
-	                                </li>
-	             
-	                                <li>
-	                                    <a href="{% url 'settings' %}"><span class="glyphicon glyphicon-cog"></span>Settings</a>
-	                                </li>
-	                                <li>
-	                                    <a href="#">Help</a>
-	                                </li>
-	                                <li class="divider">
-	                                </li>
-	                                <li>
-	                                    <a href="{% url 'logout' %}">Logout</a>
-	                                </li>
-	                            </ul>
-							</li>
-							 
+                            							 
 							 	
 								 	<!--
 		                            	<div id="navButton">
@@ -153,7 +132,49 @@
 			                            -->
 			                            {% endif %}
  	      
-				    </ul>     
+				    </ul>   
+				    
+				    <ul class="nav navbar-nav navbar-right">
+				    	<li class="dropdown">
+				    		<a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bell"></span><span class="navbar-new">2</span></a>
+				    		<ul class="dropdown-menu">
+					    		<li>
+						    		<a>
+							    		<div class="row clearfix">
+							    			<div class="col-md-4 column">
+								    			<div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
+							    			</div>
+							    			<div class="col-md-8 column">You got a notification!</div>
+							    		</div>
+						    		</a>
+					    		</li>
+	                        </ul>
+	                    </li>
+	                    
+	                    <li class="dropdown">
+	                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.first_name}}<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li><a href="{% url 'mytrades' %}"><span class="glyphicon glyphicon-transfer"></span>My Trades</a></li>
+			                                <li>
+			                                    <a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span>My Profile</a>
+			                                </li>
+			             
+			                                <li>
+			                                    <a href="{% url 'settings' %}"><span class="glyphicon glyphicon-cog"></span>Settings</a>
+			                                </li>
+			                                <li>
+			                                    <a href="#">Help</a>
+			                                </li>
+			                                <li class="divider">
+			                                </li>
+			                                <li>
+			                                    <a href="{% url 'logout' %}">Logout</a>
+			                                </li>
+			                            </ul>
+	                            	</li>
+				    </ul>
+				    
+				    {% comment %}
 				    <form class="navbar-form navbar-left" action="#" role="search">{% csrf_token %}
 				      <div class="form-group">
 				        <div class="input-group">
@@ -164,6 +185,7 @@
 				        </div>
 				      </div>               
 				    </form>
+				    {% endcomment %}
 				    
 				    
 			              		    

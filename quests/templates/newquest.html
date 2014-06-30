@@ -40,7 +40,8 @@
             <!-- Location input-->
             <div class="form-group">
               <label class="col-md-4 control-label"><p class="grey">Pickup from</p></label>
-              <div class="col-md-8">        
+              <div class="col-md-8"> 
+                     
 	              <!-- Location input-->
 	            <div class="dropdown">
 				  
@@ -183,17 +184,4 @@
 
 {% endblock content %}
 {% block scripts %}
-<script>
-$(function() {
-	$("select").selectpicker({style: 'btn-sm btn-primary', menuStyle: 'dropdown-inverse'});
-
-// style: select toggle class name (which is .btn)
-// menuStyle: dropdown class name
-
-// You can always select by any other attribute, not just tag name.
-// Also you can leave selectpicker arguments blank to apply defaults.
-
-});
-</script>
-  
 {% endblock scripts %}
