@@ -14,136 +14,147 @@
 
 {% endblock localhead %}
 {% block content %}
+
+
 <div class="container">
     <div class="row">
       
         <!-- Profile -->
-        <div class="col-md-2">  
-         <div class="well">
+        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 column">  
+         <div class="well body-borders shadows">
              
-              <div class="ratio img-responsive img-circle profileImg" style="background-image: url({{publicuser.avatar_file_name}});"></div>
+              <div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
                     
             <center>
-              <h5 class="userName">{{publicuser.first_name}} {{publicuser.last_name}}</h5>  
+              <span class="userName lead">{{publicuser.first_name}} {{publicuser.last_name}}</span>  
               
-              <input id="input-21e" value="{{ final_rating }}" type="number" class="rating" min=0 max=100 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" >
+              <input id="input-21e" value="{{final_rating}}" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" >
                               
       </center>
             
-              <p><span class="glyphicon glyphicon-map-marker"></span> Toronto, Ontario, Canada </p>
-                <p><strong>Quests Completed: </strong> {{quests_complete}} </p>
-                <p><strong>Quests Posted: </strong> {{quests_posted}} </p>                            
+              <p class="grey small"><span class="glyphicon glyphicon-map-marker"></span> Toronto, Ontario, Canada<br>
+                Quests Completed: {{quests_complete}} <br>
+                Quests Posted: {{quests_posted}} </p>                            
             
          </div> <!-- End of Well -->                
-        </div>  <!-- End of column -->
+        </div>  <!-- ./column -->
     
     
-    
-    <!-- Current Quests -->
-    <div class="col-md-8">
-        <!-- Tab menu -->
-       <div class="col-md-12">  
-            <div class="tabbable" id="tabs-84205">
-                <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a href="#panel-535112" data-toggle="tab">My Quests</a>
-                    </li>
-                </ul>
-              
-                <div class="tab-content">
-                    <div class="tab-pane active" id="panel-535112"> 
-                        <!-- Quest Post -->
+ 
+ 
+        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">    
+         <div class="panel panel-default shadows body-borders">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        <div class="panel-title lead">Posts</div>
+        <a href="#" class="pull-right">View all</a>
+      </div>
+
+      <ul class="list-group">  
+        
+        
+        
+        
+{% if not questsbyuser %}
+      <li class="list-group-item">
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+                <p class="lead light-grey text-center">This user has no posts available.</p>
+            </div><!-- ./column -->
+        </div><!-- ./row -->
+        </li><!-- list-group-item -->
+{% else %}
+              <!-- Quest Post -->
                         {% paginate 5,5 questsbyuser %}
                         {% for quest in questsbyuser  %}
                          <!-- Quest Post -->
-                        <a href="#" class="list-group-item">
-                              <div class="media col-md-2">
-                                  <div  class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
-                              </div>
-                              <div class="col-md-6">
-                                <h4 class="list-group-item-heading postTitle">{{quest.title}}</h4>
-                                <p class="list-group-item-text postDesc">{{quest.description}}
-                                </p>
+                         
+                         
+        <li class="list-group-item">
+        <div class="row clearfix">
+            <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
+              <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.item_images}});"></div></a>
+            </div><!-- ./column -->
+            <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5 column">
+                <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
+                <p class="list-group-item-text postDesc">{{quest.description}}</p>
 
                                 <div class="smallInfo">
                                     <small class="light-grey"><span class="glyphicon glyphicon-user"></span>{{quest.questr_id.displayname}} &nbsp;&nbsp;
                                     <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
                                 </div><!-- ./smallInfo -->
-                              </div>
-                              <div class="col-md-4">
-                                  <p><span class="money">${{quest.reward}}</span><span class="postDate">{{quest.creation_date}}</span></p>
-                        </div>
-                             
-                        </a> 
-                         <!-- End of Quest Post -->
-                        {% endfor %}                                
-                    </div><!-- ./tab-pane -->
-                    {% show_pages %}
-                </div>
-            </div>     
-       </div> <!-- End of column/well -->
-        
+            </div><!-- ./column -->
+            <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 column">
+                      <p class="grey">${{quest.reward}}</p>
+            </div><!-- ./column -->
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column">
+                      <p class="grey"><span class="glyphicon glyphicon-time"></span>{{quest.creation_date}}</p>
+            </div><!-- ./column -->
+        </div><!-- ./row -->
+        </li><!-- list-group-item --> 
+                         
+                        {% endfor %}
+      </ul>
+                        
+        </div>  <!-- ./panel -->
+        {% show_pages %}
+{% endif %}
 
-  
-      
-       <div class="col-md-12 reviews">
-      <div class="panel panel-default">
-      <!-- Default panel contents -->
-      <div class="panel-heading">Reviews</div>
-        
-        
-        <div class="list-group">   
-          
-        
-        <!-- Quest Post -->
-          <a href="#" class="list-group-item">
-                <div class="media col-md-2">
-                  <div  class="ratio img-responsive img-circle" style="background-image: url(http://www.stars-arena.com/wp-content/uploads/2013/08/emma-watson-3.jpg);"></div>
-                </div>
-                <div class="col-md-6">
-                    <h6 class="list-group-item-heading postTitle"> Thanks a ton! </h6>
+{% if not allreviews %}
+                        <div class="panel panel-default shadows body-borders">
+                          <!-- Default panel contents -->
+                          <div class="panel-heading">
+                            <div class="panel-title lead">Reviews</div>
+                            <a href="#" class="pull-right">View all</a>
+                          </div>
+                          <ul class="list-group">  
+                            
+                            <li class="list-group-item">
+                                <div class="row clearfix">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+                                        <p class="lead light-grey text-center">This user has no reviews.</p>
+                                    </div><!-- ./column -->
+                                </div><!-- ./row -->
+                                </li><!-- list-group-item -->   
+{% else %}        
+            {% if allreviews %}
+            {% for review in  allreviews %}
+        <li class="list-group-item">
+        <div class="row clearfix">
+            <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
+                    <a href="/quest/{{review.quest_id}}">
+              <div  class="ratio img-responsive img-circle post-image" style="background-image: url({{review.quest_id.item_images}});"></div>
+                    </a>
+            </div><!-- ./column -->
+            <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5 column">
+                <h6 class="list-group-item-heading postTitle"> {{review.title}} </h6>
                     <p class="list-group-item-text postDesc">
-                      wordswrodswrodsworwldowrowrew                      
+                      {{review.description}}
                     </p>
-                    <div class="smallInfo">
-                      <small class="light-grey"><span class="glyphicon glyphicon-user"></span>usrname goes hre &nbsp;&nbsp;
+
+                                <div class="smallInfo">
+                                    <a href={% url 'getUserInfo' displayname=review.quest.questrs.displayname %}><small class="light-grey"><span class="glyphicon glyphicon-user"></span>{{review.quest.questrs.displayname}} &nbsp;&nbsp;</a>
                       <span class="glyphicon glyphicon-map-marker"></span>Only city+cuntry here</small>
-                      </div><!-- ./smallInfo -->
-                </div>
-                <div class="col-md-4">
-                    <p><span class="money">$10</span><span class="postDate"><input id="input-21e" value="0" type="number" class="rating" min=0 max=100 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" ></span></p>
-                    
-                </div>
-               
-          </a>  <!-- End of Quest Post -->
-          
-          <!-- Quest Post -->
-          <a href="#" class="list-group-item">
-                <div class="media col-md-2">
-                  <div  class="ratio img-responsive img-circle" style="background-image: url(http://www.stars-arena.com/wp-content/uploads/2013/08/emma-watson-3.jpg);"></div>
-                </div>
-                <div class="col-md-6">
-                    <h6 class="list-group-item-heading postTitle"> Thanks a ton! </h6>
-                    <p class="list-group-item-text postDesc">
-                      wordswrodswrodsworwldowrowrew                      
-                    </p>
-                    <div class="smallInfo">
-                      <small class="light-grey"><span class="glyphicon glyphicon-user"></span>usrname goes hre &nbsp;&nbsp;
-                      <span class="glyphicon glyphicon-map-marker"></span>Only city+cuntry here</small>
-                      </div><!-- ./smallInfo -->
-                </div>
-                <div class="col-md-4">
-                    <p><span class="money">$10</span><span class="postDate"><input id="input-21e" value="0" type="number" class="rating" min=0 max=100 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" ></span></p>
-                    
-                </div>
-               
-          </a>  <!-- End of Quest Post -->
-              
-        </div>  <!-- End of list-group -->
-      </div>
-        </div>  <!-- End of column -->
-    </div>  <!-- End of reviews -->     
-             
+                                </div><!-- ./smallInfo -->
+            </div><!-- ./column -->
+            <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 column">
+                      <p><span class="money">$10</span><span class="postDate">
+            </div><!-- ./column -->
+            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column">
+              <input id="input-21e" value="{{review.final_rating}}" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" ></span>
+            </div><!-- ./column -->
+        </div><!-- ./row -->
+        </li><!-- list-group-item -->
+            {% endfor %}
+            {% endif %}
+    {% endif %}
+                </ul>
+      </div><!-- ./panel -->
+        </div><!-- ./column -->
+        
+        
+        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 column"></div>
+        
                    
     </div>  <!-- End of row -->
 </div>  <!-- End of container -->

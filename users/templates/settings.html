@@ -1,5 +1,6 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
+{% load active %}
 {% block localhead %}
     <!-- Custom CSS -->
     <link href={% static "css/settings.css" %} rel="stylesheet">
@@ -12,28 +13,13 @@
 {% block nav-sidebar %}
     <div class="container">
     <div class="row clearfix">
- 
   <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 column">
         <nav class="nav-sidebar well body-borders shadows">
             <ul class="nav tabs">
-            {% if settingstype ==  "general" %}
-              <li class="active"><a href="/user/settings">Account<span class="glyphicon glyphicon-chevron-right"></span></a></li>
-            {% else %}
-              <li class=""><a href="/user/settings">Account<span class="glyphicon glyphicon-chevron-right"></span></a></li>
-            {% endif %}
-            
-            {% if settingstype == "password" %}
-              <li class="active"><a href="/user/settings/password">Password<span class="glyphicon glyphicon-chevron-right"></span></a></li>
-            {% else %}
-              <li class=""><a href="/user/settings/password">Password<span class="glyphicon glyphicon-chevron-right"></span></a></li>
-            {% endif %}
-            
-            
-            {% if settingstype == "card" %}
-              <li class="active"><a href="/user/settings/card">Credit Card<span class="glyphicon glyphicon-chevron-right"></span></a></li>                               
-            {% else %}
-              <li class=""><a href="/user/settings/card"><span class="glyphicon glyphicon-credit-card"></span> Credit Card<span class="glyphicon glyphicon-chevron-right"></span></a></li>                               
-            {% endif %}
+              <li class="{% navactive request 'settings' %}"><a href="{% url 'settings' %}">Account<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+              <li class="{% navactive request 'changepassword' %}"><a href="{% url 'changepassword' %}">Password<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+              <li class="{% navactive request 'emailsettings' %}"><a href="{% url 'emailsettings' %}">Email Notifications<span class="glyphicon glyphicon-chevron-right"></span></a></li>                               
+              <li class="{% navactive request 'cardsettings' %}"><a href="{% url 'cardsettings' %}"><span class="glyphicon glyphicon-credit-card"></span> Credit Card<span class="glyphicon glyphicon-chevron-right"></span></a></li>                              
             </ul>
         </nav>
       </div>  
