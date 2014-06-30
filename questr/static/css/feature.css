@@ -6,6 +6,12 @@ img {
 	border-top-right-radius: 5px; 
  }
  
+ hr {
+ 	margin-top: 0;
+	 margin-bottom: 2px;
+	 color: #fdfdfd;
+ }
+ 
  
  .content {
 	margin-top: 0;
@@ -46,6 +52,10 @@ img {
 	 text-overflow: ellipsis;
 	 white-space: nowrap;
 	 margin: 0 5px;
+ }
+ 
+ .feature .item-content p {
+	 margin: 0;
  }
  
 .feature .item-content .title {

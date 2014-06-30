@@ -13,7 +13,7 @@
         {% for quest in  allquests %}
         
    
-	    <div class="feature well shadows body-borders">
+	    <div class="feature well shadows no-borders">
             {% if quest.item_images %}
             <a  href="/quest/{{quest.id}}" class="image"><img src={{quest.item_images}}></a>                  
             {% else %}    
@@ -29,8 +29,8 @@
                 <p>{{quest.description | truncatewords:10  }}</p>
            
                 <div class="info">
-                
-         
+         	       <div class="divider"></div>
+	                <hr>
                 <a href="/user/{{quest.questrs.displayname}}"><p>{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p></a>
                 
                 <p class="grey">pay:</p>
