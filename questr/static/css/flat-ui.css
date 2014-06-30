@@ -1791,10 +1791,10 @@ select[multiple].navbar-form .btn {
 }
 .navbar-default {
 	color: #f8f8f8;
-  
-  -webkit-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.10);
-	-moz-box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.10);
-	box-shadow: 0px 1.5px 0 rgba(0, 0, 0, 0.10);
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.1);
+	border: none;
 }
 
 .navbar-default .navbar-toggle:before {

@@ -13,7 +13,7 @@
         {% for quest in  allquests %}
         
    
-	    <div class="feature well shadows no-borders">
+	    <div class="feature well shadows body-borders">
             {% if quest.item_images %}
             <a  href="/quest/{{quest.id}}" class="image"><img src={{quest.item_images}}></a>                  
             {% else %}    
@@ -22,7 +22,8 @@
 	            <h1><span class="glyphicon glyphicon-picture"></span></h1>
             </div>
             </a>
-            {% endif %}            
+            {% endif %}
+                 
             <div class="item-content">
                 <a  href="/quest/{{quest.id}}" class="image"><h6 class="title">{{quest.title | title}}</h6></a>
 
@@ -30,7 +31,7 @@
            
                 <div class="info">
          	       <div class="divider"></div>
-	                <hr>
+	          
                 <a href="/user/{{quest.questrs.displayname}}"><p>{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p></a>
                 
                 <p class="grey">pay:</p>
@@ -42,7 +43,14 @@
                         {% endif %}   
                 	              
                       <p class="grey"><span class="glyphicon glyphicon-time"></span>{% localtime on%} {{quest.creation_date | timesince }} {% endlocaltime %} ago</p>
+                      
+                      <hr>
                 </div>      
+                
+                <hr>
+                
+                
+            
             </div><!-- End of item-content -->   
 	    </div><!-- ./feature -->
      
