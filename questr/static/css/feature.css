@@ -7,8 +7,8 @@ img {
  }
  
  hr {
- 	margin-top: 2px;
-	 margin-bottom: 2px;
+ 	margin-top: 0px;
+	 margin-bottom: 0px;
 	 color: #fdfdfd;
  }
  
@@ -35,4 +35,27 @@ img {
 	border-top-right-radius: 5px;
 	border-bottom-left-radius: 0px;
 	border-bottom-right-radius: 0px;
+}
+
+.post input.rating {
+	margin: 0;
+}
+
+.post a.username, .post a.username p {
+	margin: 0;
+}
+
+.post .profile-pic {
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+.post .userbox {
+	margin: 0;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.post .userbox:hover {
+	background: #e5e5e5;
 }
