@@ -373,7 +373,7 @@
             3: 'label label-info',
             3.5: 'label label-primary',
             4: 'label label-primary',
-            4.5: 'label label-success',
+            4.9: 'label label-success',
             5: 'label label-success'
         },
         clearButton: '<i class="glyphicon glyphicon-minus-sign"></i>',

@@ -24,6 +24,11 @@ img {
 
  
 /************ Feature posts ***************/
+.post .post-info p {
+	margin: 0;
+	font-size: 9px;
+}
+
 .post .well {
 	padding: 0;
 }
