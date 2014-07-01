@@ -49,21 +49,6 @@
 		  </div>
 		
 		  <ul class="list-group">  
-			  
-<<<<<<< HEAD
-			  <li class="list-group-item">
-				<div class="row clearfix">
-				    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-					    <p class="lead light-grey text-center">This user has no posts available.</p>
-				    </div><!-- ./column -->
-				</div><!-- ./row -->
-				</li><!-- list-group-item -->
-				
-			
-=======
-			  
-			  
-			  
 {% if not questsbyuser %}
       <li class="list-group-item">
         <div class="row clearfix">
@@ -73,7 +58,6 @@
         </div><!-- ./row -->
         </li><!-- list-group-item -->
 {% else %}
->>>>>>> FETCH_HEAD
 			  			<!-- Quest Post -->
                         {% paginate 5,5 questsbyuser %}
                         {% for quest in questsbyuser  %}
@@ -107,29 +91,7 @@
 		  </ul>
                         
         </div>	<!-- ./panel -->
-        {% show_pages %}
-<<<<<<< HEAD
-        
-        
-        
-        <div class="panel panel-default shadows body-borders">
-		  <!-- Default panel contents -->
-		  <div class="panel-heading">
-		  	<div class="panel-title lead">Reviews</div>
-		  	<a href="#" class="pull-right">View all</a>
-		  </div>
-		  <ul class="list-group">  
-			<li class="list-group-item">
-				<div class="row clearfix">
-				    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-					    <p class="lead light-grey text-center">This user has no reviews.</p>
-				    </div><!-- ./column -->
-				</div><!-- ./row -->
-				</li><!-- list-group-item -->	  	
-		  	
-		  	
-		  	
-=======
+        {% show_pages %}		  	
 {% endif %}
 
 {% if not allreviews %}
@@ -149,8 +111,6 @@
                                 </div><!-- ./row -->
                                 </li><!-- list-group-item -->   
 {% else %}		  	
->>>>>>> FETCH_HEAD
-            {% if allreviews %}
             {% for review in  allreviews %}
 				<li class="list-group-item">
 				<div class="row clearfix">
@@ -180,7 +140,6 @@
 				</li><!-- list-group-item -->
             {% endfor %}
             {% endif %}
-    {% endif %}
                 </ul>
 			</div><!-- ./panel -->
         </div><!-- ./column -->
