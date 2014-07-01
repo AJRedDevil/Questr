@@ -108,8 +108,8 @@
 /**
  * Rating sizes
  */
-.rating-xl {
-    font-size: 4.89em;
+.rating-xl {	/** this is for the homepage **/
+    font-size: 0.5em;
 }
 
 .rating-lg {

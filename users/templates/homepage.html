@@ -3,17 +3,21 @@
 {% load tz %}
 {% block localhead %}
 <link href={% static "css/feature.css" %} rel="stylesheet">
+<link href={% static "css/star-rating.css" %} media="all" rel="stylesheet" type="text/css"/>
+
+<script src={% static "js/star-rating.js" %} type="text/javascript"></script>
 {% endblock localhead %}
 {% block content %}
 <!-- This is the main container (#scroll-container) -->
 <div class="container">
 <div class="row">
 <div class="col-md-10 col-md-offset-1 column">
-    <div class="content" id="scroll-container">
+<div class="js-masonry" id="post-container" data-masonry-options='{ "columnWidth": 0, "itemSelector": ".item" }'>
+   
         {% for quest in  allquests %}
         
-   
-	    <div class="feature well shadows body-borders">
+        <div class="col-xs-6 col-sm-6 col-md-3 col-md-3 column item">
+        <div class="well shadows body-borders">
             {% if quest.item_images %}
             <a  href="/quest/{{quest.id}}" class="image"><img src={{quest.item_images}}></a>                  
             {% else %}    
@@ -28,13 +32,13 @@
                 <a  href="/quest/{{quest.id}}" class="image"><h6 class="title">{{quest.title | title}}</h6></a>
 
                 <p>{{quest.description | truncatewords:10  }}</p>
-           
-                <div class="info">
-         	       <div class="divider"></div>
-	          
-                <a href="/user/{{quest.questrs.displayname}}"><p>{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p></a>
                 
-                <p class="grey">pay:</p>
+           
+           <div class="info">
+                <div class="row clearfix">
+	                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+		                <hr>
+		                <p class="grey">pay:</p>
                 
                         {# only allow shippers to see addresses #}
                         {% if user.is_shipper == True %}
@@ -43,22 +47,30 @@
                         {% endif %}   
                 	              
                       <p class="grey"><span class="glyphicon glyphicon-time"></span>{% localtime on%} {{quest.creation_date | timesince }} {% endlocaltime %} ago</p>
-                      
-                      <hr>
-                </div>      
-                
+                </div>
+	                </div>
                 <hr>
-                
-                
+                <div class="row clearfix">
+                	<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column">
+	                	<a href="/user/{{quest.questrs.displayname}}">
+                			<div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
+	                	</a>
+                	</div>
+                	<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
+                		<a href="/user/{{quest.questrs.displayname}}"><p>{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p></a>
+                		<input id="input-21e" value="{{final_rating}}" type="number" class="rating" min=0 max=5 step=0.5 data-size="xl" data-readonly="true" data-show-clear="false" data-show-caption="true" >
+                	</div>
+                </div>
+                </div><!-- ./info -->       
             
             </div><!-- End of item-content -->   
 	    </div><!-- ./feature -->
-     
+        </div><!-- ./item -->
         
-        
+
        {% endfor %}           
-            </div>  <!-- ./content --> 
-</div>       
+</div><!-- ./post-container -->
+</div><!-- ./column -->       
 </div><!-- ./row -->
 </div><!-- ./container -->
 {% comment %}
@@ -76,12 +88,18 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src={% static 'js/libs/jquery.masonry.min.js' %}></script>
-    <script src={% static 'js/base.js' %}></script>
-    <script src={% static 'js/script.js' %}></script>
+   <script src={% static 'js/libs/masonry.pkgd.min.js' %}></script>
+   <script>
+	   var container = document.querySelector('#post-container');
+		var msnry = new Masonry( post-container, {
+		  // options
+		  columnWidth: 0,
+		  itemSelector: '.item'
+		});
+   </script>
+    
     {% comment %}
     ## This is for google plus based authentication ##
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
            <script type="text/javascript">
                (function () {
                    var po = document.createElement('script');

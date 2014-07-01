@@ -7,7 +7,7 @@ img {
  }
  
  hr {
- 	margin-top: 0;
+ 	margin-top: 2px;
 	 margin-bottom: 2px;
 	 color: #fdfdfd;
  }
@@ -37,62 +37,13 @@ img {
 
  
 /************ Feature posts ***************/
-.feature {
-	width: 200px;
-	display: inline-block;
-	vertical-align: top;
-	margin: 7px;
-	padding: 0;
+.post {
+	display: inline;
+	position: relative;
+	 float:left;
  }
- 
- .feature .item-content {
-	  overflow: hidden;
-	 text-overflow: ellipsis;
-	 white-space: nowrap;
-	 margin: 0 5px;
- }
- 
- .feature .item-content p {
-	 margin: 0;
- }
- 
-.feature .item-content .title {
-	margin: 5px 0px;
-}
- 
-.feature .info {
-	padding: 0;
-	margin-left: 0;
-	margin-right: 0;
-	margin-top: 0;
-	margin-bottom: 10px;
-} 
- 
- .feature .info p {
-	font-size: x-small;
-	margin: 0;
-	padding: 0;
-	line-height: 9px;
-		 
- }
- 
- 
- /********* no image post **********/
- .feature .no-image {
- 	background: #5f97d8;
-	 max-width: 100%;
-	 padding: 0;
-	 border-top-left-radius: 5px; 
-	border-top-right-radius: 5px;
- }
- 
-.feature .no-image h1 {
-	text-align: center;
-	margin: 0;
-	padding-top: 12px;
-	padding-bottom: 18px;
-}
 
-.feature .no-image .glyphicon {
-	color: white;
-} 
+
+
+.item {  }
+.item.w2 { width: 50%; }
