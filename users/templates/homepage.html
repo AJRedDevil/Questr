@@ -9,20 +9,20 @@
 {% endblock localhead %}
 {% block content %}
 <!-- This is the main container (#scroll-container) -->
-<div class="container">
+<div class="container-fluid">
 <div class="row">
 <div class="col-md-10 col-md-offset-1 column">
-<div class="js-masonry" id="post-container" data-masonry-options='{ "columnWidth": 0, "itemSelector": ".item" }'>
+<div class="js-masonry" id="post-container" data-masonry-options='{ "columnWidth": 0, "itemSelector": ".post" }'>
    
         {% for quest in  allquests %}
         
-        <div class="col-xs-6 col-sm-6 col-md-3 col-md-3 column item">
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column post">
         <div class="well shadows body-borders">
             {% if quest.item_images %}
-            <a  href="/quest/{{quest.id}}" class="image"><img src={{quest.item_images}}></a>                  
+            <a  href="/quest/{{quest.id}}"><img src={{quest.item_images}} class="item-image"></a>                  
             {% else %}    
-            <a  href="/quest/{{quest.id}}" class="image" title="Title">
-            <div class="no-image">
+            <a  href="/quest/{{quest.id}}" title="Title">
+            <div class="no-image item-image">
 	            <h1><span class="glyphicon glyphicon-picture"></span></h1>
             </div>
             </a>
@@ -55,12 +55,12 @@
 	                	<a href="/user/{{quest.questrs.displayname}}">
                 			<div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
 	                	</a>
-                	</div>
+                	</div><!-- column -->
                 	<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
                 		<a href="/user/{{quest.questrs.displayname}}"><p>{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p></a>
                 		<input id="input-21e" value="{{final_rating}}" type="number" class="rating" min=0 max=5 step=0.5 data-size="xl" data-readonly="true" data-show-clear="false" data-show-caption="true" >
-                	</div>
-                </div>
+                	</div><!-- column -->
+                </div><!-- ./row -->
                 </div><!-- ./info -->       
             
             </div><!-- End of item-content -->   
@@ -94,7 +94,7 @@
 		var msnry = new Masonry( post-container, {
 		  // options
 		  columnWidth: 0,
-		  itemSelector: '.item'
+		  itemSelector: '.post'
 		});
    </script>
     

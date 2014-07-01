@@ -22,28 +22,17 @@ img {
     display: none;
 }
 
-#loader {
-	display: none;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	text-align: left;
-	opacity: .8;
-	background-color: #FFFFFF;
-}
-
-
  
 /************ Feature posts ***************/
-.post {
-	display: inline;
-	position: relative;
-	 float:left;
- }
+.post .well {
+	padding: 0;
+}
 
-
-
-.item {  }
-.item.w2 { width: 50%; }
+.post .item-image {
+	margin: 0;
+	
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
