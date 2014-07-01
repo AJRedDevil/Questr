@@ -1,5 +1,6 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
+{% load active %}
 {% block localhead %}
   <!-- Custom CSS -->
     <link href={% static "css/quest.css" %} rel="stylesheet">
@@ -123,7 +124,7 @@
 	              		<center>
 	              			<img src={% static 'img/minivan.png' %} style="width:100%; height:auto;" />
 	              			<p>Van</p>
-	              			<input type="radio" name="size" value="van">
+	              			<input type="radio" name="size" value="minivan">
 	              			</center> 	
               	 	</div>
 			     </div><!-- /input-group -->

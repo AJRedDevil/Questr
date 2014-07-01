@@ -45,7 +45,7 @@ def send_verfication_mail(user):
     mailing.send_verification_email(user, verf_link)
 
 def getShipper(shipper_id):
-    """List all the quests by a particular user"""
+    """List shipper information"""
     try:
         shipper = QuestrUserProfile.objects.filter(id=shipper_id)
     except QuestrUserProfile.DoesNotExist:
@@ -54,12 +54,12 @@ def getShipper(shipper_id):
     return shipper
 
 def getShippers():
-    """List all the quests by a particular user"""
+    """List all the shippers"""
     shippers = QuestrUserProfile.objects.filter(is_shipper='t')
     return shippers
 
 def getShippersOfQuest(questname):
-    """List of on shippers for a given quest"""
+    """List of shippers for a given quest"""
     shippers = str(Quests.objects.get(id=questname).shipper).split(',')
     return shippers
 

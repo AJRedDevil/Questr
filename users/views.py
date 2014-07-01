@@ -202,6 +202,14 @@ def myPosts(request):
     return render(request, 'myquests.html', locals())
 
 @login_required
+def myShipments(request):
+    pagetype="loggedin"
+    user = request.user
+    pagetitle = "My Shipments"
+    myshipments = quest_handler.getMyShipmnets(user.id)
+    return render(request, 'myshipments.html', locals())
+
+@login_required
 def getUserInfo(request, displayname):
     '''This is used to display user's public profile'''
     pagetype="loggedin"

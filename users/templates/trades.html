@@ -1,5 +1,6 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
+{% load active %}
 {% block localhead %}
     <!-- Custom CSS -->
     <link href={% static "css/smallpost.css" %} rel="stylesheet">
@@ -29,22 +30,22 @@
           <div class="panel panel-default shadows body-borders">
 		  <!-- Default panel contents -->
 		  <div class="panel-heading">
-				<div class="panel-title lead">
+    		<div class="panel-title lead">
 				  <ul>
-                    <li class="active">
+                    <li class="{% navactive request 'mytrades' %}"><a href="{% url 'mytrades' %}">
                         <a href="{% url 'mytrades' %}">My Offers</a>
                     </li>
-                    <li>
+                    <li class="{% navactive request 'myposts' %}"><a href="{% url 'myposts' %}">
                         <a href="{% url 'myposts' %}">My Posts</a>
                     </li>       
                     {% if user.is_shipper %}
-                    <li>
-                        <a href="{% url 'myposts' %}">My Shipments</a>
-                    </li>                                       
+                    <li class="{% navactive request 'myshipments' %}"><a href="{% url 'myshipments' %}">
+                        <a href="{% url 'myshipments' %}">My Shipments</a>
+                    </li>                                     
                     {% endif %}
                 </ul>
 			  </div>	  		  
-		  </div>
+    		</div>
 	
 	
 		  <ul class="list-group">   

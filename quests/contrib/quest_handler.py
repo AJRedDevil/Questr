@@ -21,6 +21,10 @@ def getQuestsByUser(questrs_id):
         return render(request,'404.html')
     return questsbysuer
 
+def getMyShipmnets(shipper_id):
+    myshipments = Quests.objects.filter(shipper=shipper_id)
+    return myshipments
+
 def getQuestsWithOffer(questrs_id):
     """Lists a user's quest where offers are put"""
     try:

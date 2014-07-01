@@ -1,5 +1,6 @@
 
 {% load staticfiles %}
+{% load active %}
 <html lang="en">
 <head>
     <meta property="og:title" content="Questr" />
@@ -72,9 +73,9 @@
 	                        {% endif %}
         		
 	                        {% if pagetype == "loggedin" %}
-	                        <li class="active"><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li> 
-                        	<li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span>My Profile</a></li>
-                        	<li><a href="{% url 'mytrades' %}"><span class="glyphicon glyphicon-transfer"></span>My Trades</a></li>
+                            <li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li> 
+                            <li class="{% navactive request 'profile' %}"><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span>My Profile</a></li>
+                            <li class="{% navactive request 'mytrades' %}"><a href="{% url 'mytrades' %}"><span class="glyphicon glyphicon-transfer"></span>My Trades</a></li>
                         	{% comment %}
                             <li><a href="/quest"><span class="glyphicon glyphicon-tree-deciduous"></span>Browse</a></li>                  
                             
@@ -131,7 +132,6 @@
 			                            </li>
 			                            
 			                            -->
-			                            {% endif %}
  	      
 				    </ul>   
 				    
@@ -153,9 +153,9 @@
 	                        </ul>
 	                    </li>
 	                    {% endcomment %}
-	                    <li><a href="{% url 'createquest' %}"><span class="glyphicon glyphicon-plus"></span></a></li>
-	                    <li class="dropdown">
-	                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
+                        <li class="{% navactive request 'createquest' %}"><a href="{% url 'createquest' %}"><span class="glyphicon glyphicon-plus"></span>Post</a></li>
+                        <li class="dropdown">
+	                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>&nbsp;</a>
 										<ul class="dropdown-menu">
 			                                <li>
 			                                    <a href="{% url 'settings' %}">Settings</a>
@@ -188,7 +188,7 @@
 				</nav><!-- /navbar -->
  
         <!-- Secondary navbar:  holds search, Quests, and Questrs -->
-
+        {% endif %}
 {% if message %}
     <!-- Secondary navbar:  to display message notifications -->
     <div class="row clearfix secondaryNavRow">
