@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^trades/$', userviews.myTrades, name='mytrades' ),
     url(r'^trades/(?P<quest_id>\d+)/accept/(?P<shipper_id>\d+)/$', userviews.acceptOffer, name='acceptOffer' ),
     url(r'^posts/$', userviews.myPosts, name='myposts' ),
+    url(r'^shipments/$', userviews.myShipments, name='myshipments' ),
     url(r'^forgotpassword/$', userviews.resetpassword, name='reset_password'),
     url(r'^(?P<displayname>[-_\w/.]+)/$', userviews.getUserInfo, name='getUserInfo'),
 )
