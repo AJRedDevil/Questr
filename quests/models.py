@@ -32,6 +32,7 @@ class Quests(models.Model):
     isaccepted = models.BooleanField(_('isaccepted'), default=False)
     isnotified = models.BooleanField(_('isnotified'), default=False)
     delivery_code = models.TextField(_('delivery_code'), default='121212')
+    ishidden = models.BooleanField(_('ishidden'), default=False)
 
     def get_delivery_code(self):
         return hashlib.sha256(str(timezone.now()) + str(self.creation_date)).hexdigest()

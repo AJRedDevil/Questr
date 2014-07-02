@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from libs import email_notifier
 
-from contrib import quest_handler
+from .contrib import quest_handler, mailing
 from users.contrib.user_handler import isShipper, getShippers
 from .forms import QuestCreationForm, QuestChangeForm
 from .models import Quests
@@ -139,4 +139,75 @@ def withdrawFromQuest(request, questname):
     quest_handler.delShipper(str(shipper.id), questname)
     message="You have retracted yourself from the quest"
     logging.warn(message)
+    return redirect('viewquest', questname=questname)
+
+@login_required
+def deletequest(request, questname):
+    """Deletes the quest
+    """
+    pagetitle="home"
+    try:
+        questdetails = Quests.objects.get(id=questname)
+    except Quests.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
+
+    if questdetails.questrs.id == request.user.id:
+        message=""
+        if questdetails.isaccepted:
+            message="Your quest has been accepted."
+        elif questdetails.shipper:
+            message="Shipper have applied to your quest."
+        if not message:
+            try:
+                Quests.objects.filter(id=questname).update(ishidden=True)
+            except Quests.DoesNotExist:
+                raise Http404
+                return render(request,'404.html')
+            message = "Your quest has been deleted!"
+            return redirect('home')
+        else:
+            return redirect('viewquest', questname=questname)
+    return redirect("home")
+
+@login_required
+def completequest(request, questname):
+    """Verify delivery code and set the quest as completed
+    Send the notification to the offerer and also the review link
+    """
+    pagetype="loggedin"
+    if request.method == "POST":
+        shipper = request.user
+        questname = questname
+        if quest_handler.isShipperForQuest(shipper.id, questname):
+            try:
+                questdetails = Quests.objects.get(id=questname, isaccepted=False)
+            except Quests.DoesNotExist:
+                raise Http404
+                return render(request,'404.html')
+            # Check if the owner and the user are the same
+            if questdetails.questrs.id == request.user.id:
+                return redirect('home')
+
+            if questdetails.status != 'accepted':
+                return redirect('home')
+            
+            delivery_code = request.POST['delivery_code']
+            # verify delivery code
+            if delivery_code:
+                message = "Empty delivery code"
+            elif questdetails.delivery_code != delivery_code:
+                message = "Incorrect delivery code. Please enter the correct delivery code." 
+
+            if message:
+                return redirect('viewquest', questname=questname) # return with message
+            else:
+                Quests.objects.filter(id=questname).update(status='completed')
+                mailing.send_quest_completion_email(questdetails.questr, questdetails, shipper.name, quest_handler.get_review_link(questname, shipper.id))
+                message="Quest completion mail has been sent to the Offerer."
+                return redirect('viewquest', questname=questname) # display message
+            return redirect('viewquest', questname=questname)
+        else:
+            message = "Imposter detected" # Correct message required
+            return redirect('viewquest', questname=questname)
     return redirect('viewquest', questname=questname)
