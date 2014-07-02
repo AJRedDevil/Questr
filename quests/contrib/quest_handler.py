@@ -9,13 +9,13 @@ import logging
 # Create your views here.
 def listfeaturedquests(questrs_id):
     """List all the featured quests"""
-    allquests = Quests.objects.all()
+    allquests = Quests.objects.filter(ishidden=False)
     return allquests
 
 def getQuestsByUser(questrs_id):
     """List all the quests by a particular user"""
     try:
-        questsbysuer = Quests.objects.filter(questrs_id=questrs_id)
+        questsbysuer = Quests.objects.filter(questrs_id=questrs_id, ishidden=False)
     except Quests.DoesNotExist:
         raise Http404
         return render(request,'404.html')
@@ -28,7 +28,7 @@ def getMyShipmnets(shipper_id):
 def getQuestsWithOffer(questrs_id):
     """Lists a user's quest where offers are put"""
     try:
-        questsWithOffer = Quests.objects.filter(questrs_id=questrs_id).exclude(shipper=None)
+        questsWithOffer = Quests.objects.filter(questrs_id=questrs_id, ishidden=False).exclude(shipper=None)
     except Quests.DoesNotExist:
         raise Http404
         return render(request,'404.html')
@@ -133,3 +133,9 @@ def prepNewQuestNotification(user, questdetails):
                                                 },
                     }
     return email_details
+
+def get_review_link(quest_id, shipper_id):
+    review_link = "{0}/review/{1}/{2}".format(settings.QUESTR_URL , quest_id, shipper_id)
+    return review_link
+
+
