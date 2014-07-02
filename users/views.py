@@ -227,6 +227,12 @@ def getUserInfo(request, displayname):
         return render(request,'broke.html')
 
     try:
+        allreviews = review_handler.get_review(publicuser.id)
+    except Exception, e:
+        raise e
+        return render(request,'broke.html')
+
+    try:
         final_rating = Review.objects.filter(reviewed=publicuser).aggregate(Avg('final_rating'))
     except Review.DoesNotExist:
         final_rating['final_rating__avg'] = 0.0
