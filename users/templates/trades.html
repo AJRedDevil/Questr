@@ -119,13 +119,7 @@
                                   
                                         <button type="button" class="btn btn-embossed btn-info contact" data-toggle="modal" data-target="#myModal-{{shipper.0.id}}">Contact</button>
                                
-                                        {% if not quest.status == "Reviewed" %}
-                                        <div class="input-group">
-									      <input type="text" class="form-control input-sm" placeholder="Enter Shipment Code">
-									      <span class="input-group-btn">
-									        <button class="btn btn-default" type="button">Enter</button>
-									      </span>
-									    </div><!-- /input-group -->
+                                        {% if quest.status == "Complete" %}
                                             <a href="/review/{{quest.id}}/{{shipper.0.id}}" class="reviewUrl"><button class="btn btn-success" rel="tooltip" title="We'll notify the user that you've reviewed his effort!">Review</button></a>
                                         {% endif %}
                                 </div><!-- column -->
