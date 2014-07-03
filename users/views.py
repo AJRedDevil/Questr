@@ -313,9 +313,9 @@ def saveUserInfo(request):
             request.session['displayname'] = request.POST['displayname']        
             backend = request.session['partial_pipeline']['backend']
             return redirect('social:complete', backend=backend)
-        return render(request, "user/edituserinfo.html",locals())
+        return render(request, "socialsignup.html",locals())
     else:
-        return render(request, "user/edituserinfo.html",locals())
+        return render(request, "socialsignup.html",locals())
 
 @is_alive
 def verify_email(request, user_code):

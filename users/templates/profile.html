@@ -1,6 +1,7 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
 {% load endless %}
+{% load tz %}
 {% block localhead %}
     <link href={% static "css/profile.css" %} rel="stylesheet">
     <link href={% static "css/smallpost.css" %} rel="stylesheet">
@@ -71,7 +72,7 @@
 				    </div><!-- ./column -->
 				    <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5 column">
 				        <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
-				        <p class="list-group-item-text postDesc">{{quest.description}}</p>
+				        <p class="list-group-item-text postDesc">{{quest.description | truncatechars:120 }}</p>
 
                                 <div class="smallInfo">
                                     <small class="light-grey"><span class="glyphicon glyphicon-user"></span>{{quest.questr_id.displayname}} &nbsp;&nbsp;
@@ -82,7 +83,7 @@
                     	<p class="grey">${{quest.reward}}</p>
 				    </div><!-- ./column -->
 				    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column">
-	                    <p class="grey"><span class="glyphicon glyphicon-time"></span>{{quest.creation_date}}</p>
+	                    <p class="grey"><span class="glyphicon glyphicon-time"></span>{{quest.creation_date | timesince }}</p>
 				    </div><!-- ./column -->
 				</div><!-- ./row -->
 				</li><!-- list-group-item -->	
