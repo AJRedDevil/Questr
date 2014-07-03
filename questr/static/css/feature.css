@@ -6,13 +6,6 @@ img {
 	border-top-right-radius: 5px; 
  }
  
- hr {
- 	margin-top: 0px;
-	 margin-bottom: 0px;
-	 color: #fdfdfd;
- }
- 
- 
  .content {
 	margin-top: 0;
 	margin-bottom: 0;
@@ -24,14 +17,42 @@ img {
 
  
 /************ Feature posts ***************/
+
+
 .post {
 	padding: 8px;
 }
 
-.post .post-info p {
+.post hr {
+	color: #fdfdfd;
+	margin-bottom: 0px;
+	margin-top: 0px;
+ }
+
+.post p {
 	margin: 0;
+}
+
+.post .title-desc {
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.post .title-desc h6, .post .title-desc p {
+	margin: 0;
+}
+
+
+
+.post .post-info {
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.post .post-info p {
 	font-size: 9px;
 	color: gray;
+	margin: 0;
 }
 
 .post .well {
@@ -56,17 +77,17 @@ img {
 	margin: 0;
 }
 
-.post .profile-pic {
-	margin-top: 3px;
-	margin-bottom: 3px;
-}
-
 .post .userbox {
 	margin: 0;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
 
+.post .userbox .column {
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
 .post .userbox:hover {
-	background: #e5e5e5;
+	background: rgba(95,151,216,0.07);
 }
