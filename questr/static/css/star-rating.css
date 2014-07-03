@@ -116,7 +116,7 @@
  * Rating sizes
  */
 .rating-xl {
-    font-size: 4.89em;
+    font-size: 0.5em;
 }
 
 .rating-lg {
@@ -132,7 +132,7 @@
 }
 
 .rating-xs {
-    font-size: 2em;
+    font-size: 1em;
 }
 
 /**

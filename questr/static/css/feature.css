@@ -31,6 +31,7 @@ img {
 .post .post-info p {
 	margin: 0;
 	font-size: 9px;
+	color: gray;
 }
 
 .post .well {
