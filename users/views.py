@@ -369,4 +369,5 @@ def resetpassword(request):
             message = "Please check your inbox for your new password"
             return render(request, "homepage.html", locals())
     pagetitle = "Reset Your Password"
+    pagetype  = "public"
     return render(request,"resetpassword.html", locals())
