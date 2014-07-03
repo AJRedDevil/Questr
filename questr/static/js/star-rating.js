@@ -13,12 +13,6 @@
     var DEFAULT_MAX = 5;
     var DEFAULT_STEP = 0.5;
 
-    var isNumberInputSupported = function () {
-        var i = document.createElement("input");
-        i.setAttribute("type", "number");
-        return i.type !== "text";
-    }
-
     var isEmpty = function (value, trim) {
         return typeof value === 'undefined' || value === null || value === undefined || value == []
             || value === '' || trim && $.trim(value) === '';
@@ -166,6 +160,7 @@
             if (self.showClear) {
                 self.$clear.attr({"class": self.getClearClass()});
             }
+            self.$element.removeClass('rating-loading');
         },
         checkDisabled: function () {
             var self = this;
@@ -251,7 +246,12 @@
             var self = this, precision = getDecimalPlaces(self.step),
                 percentage, val, maxWidth = self.$rating.width();
             percentage = (pos / maxWidth);
-            val = (self.min + Math.ceil(self.diff * percentage / self.step) * self.step);
+            if (self.rtl) {
+                val = (self.min + Math.floor(self.diff * percentage / self.step) * self.step);
+            }
+            else {
+                val = (self.min + Math.ceil(self.diff * percentage / self.step) * self.step);
+            }
             if (val < self.min) {
                 val = self.min;
             }
@@ -351,7 +351,7 @@
         size: 'md',
         showClear: true,
         showCaption: true,
-        defaultCaption: '{rating} %',
+        defaultCaption: '{rating} Stars',
         starCaptions: {
             0.5: 'Half Star',
             1: 'One Star',
@@ -373,7 +373,7 @@
             3: 'label label-info',
             3.5: 'label label-primary',
             4: 'label label-primary',
-            4.9: 'label label-success',
+            4.5: 'label label-success',
             5: 'label label-success'
         },
         clearButton: '<i class="glyphicon glyphicon-minus-sign"></i>',
@@ -388,14 +388,15 @@
         containerClass: null
     };
 
+
     /**
      * Convert automatically number inputs with class 'rating'
      * into the star rating control.
      */
+    $('input.rating').addClass('rating-loading');
 
     $(document).ready(function () {
-        var $input = isNumberInputSupported() ? $('input.rating[type=number]') : $('input.rating[type=text]'),
-            count = Object.keys($input).length;
+        var $input = $('input.rating'), count = Object.keys($input).length;
         if (count > 0) {
             $input.rating();
         }

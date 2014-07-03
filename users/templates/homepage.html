@@ -16,7 +16,8 @@
    
         {% for quest in  allquests %}
         
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column post well shadows body-borders">
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column post">
+        <div class="well shadows body-borders">
             {% if quest.item_images %}
             <a  href="/quest/{{quest.id}}"><img src={{quest.item_images}} class="item-image"></a>                  
             {% else %}    
@@ -30,7 +31,7 @@
             <div class="row clearfix">
                 <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
 	                <a  href="/quest/{{quest.id}}" class="image"><h6 class="title">{{quest.title | title}}</h6></a>
-	                <p>{{quest.description | truncatechars:120  }}</p>
+	                <p>{{quest.description | truncatewords:10  }}</p>
                 </div><!-- ./column -->
             </div><!-- ./row -->
     		<hr>	            
@@ -72,6 +73,8 @@
                 </div><!-- ./row -->
 
             
+              
+	    </div><!-- ./well -->
         </div><!-- ./post -->
         
 
