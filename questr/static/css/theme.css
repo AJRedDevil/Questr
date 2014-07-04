@@ -69,7 +69,6 @@ hr {
 .panel-default .panel-heading {
 	background: rgba(255,255,255,0.94);
 	color: #a5a5a5;
-	
 	border-bottom: 1px;
 	border-left: none;
 	border-right: none;
@@ -77,7 +76,7 @@ hr {
 	border-bottom-color: #e9f0f5;
 }
 .panel-default .panel-heading .panel-title {
-	font-size: larger;
+	font-size: 16px;
 	display: inline;
 }
 
@@ -280,7 +279,7 @@ input.form-control:focus, textarea.form-control:focus {
  
 /*************** Primary Navbar ***************/
 .brand {
-	z-index: 999;
+	z-index: 9;
 	position: absolute;
 	width: 100%;
 	margin-top: 6px;

@@ -43,25 +43,17 @@
             <div class="form-group">
               <label class="col-md-4 control-label"><p class="grey">Pickup from</p></label>
               <div class="col-md-8"> 
-                     
-	              <!-- Location input-->
-	            <div class="dropdown">
-				  
-				  <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-				    <span class="glyphicon glyphicon-map-marker theme-colour"></span> City
-				    <span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" name="srccity">
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mississauga</a></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Toronto</a></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Brampton</a></li>
-				  </ul>
-				</div>
+              
+	              <select class="selectpicker show-menu-arrow show-tick bob" data-size="5" name="srccity">
+					  <option data-icon="glyphicon glyphicon-map-marker theme-colour">City</option>
+					  <option>Mississauga</option>
+					  <option>Brampton</option>
+					  <option>Toronto</option>
+					</select>
               </div>  
             </div>  <!-- End of Form group -->
             </form>      
-  
-                    
+
                     
             <!-- Departure Address input-->
             <div class="form-group">
@@ -75,20 +67,14 @@
             
             <div class="form-group">
               <label class="col-md-4 control-label"><p class="grey">Deliver to</p></label>
-              <div class="col-md-8">      
-	              <!-- Location input-->
-	            <div class="dropdown">
-				  
-				  <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown">
-				    <span class="glyphicon glyphicon-map-marker theme-colour"></span> City
-				    <span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" name="dstcity">
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mississauga</a></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Toronto</a></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Brampton</a></li>
-				  </ul>
-				</div>
+              <div class="col-md-8"> 
+              
+         		<select class="selectpicker show-menu-arrow show-tick jon" data-size="5" name="dstcity">
+					  <option data-icon="glyphicon glyphicon-map-marker theme-colour">City</option>
+					  <option>Mississauga</option>
+					  <option>Brampton</option>
+					  <option>Toronto</option>
+					</select>
               </div>
             </div>  <!-- End of Form group -->                          
          
@@ -187,4 +173,13 @@
 
 {% endblock content %}
 {% block scripts %}
+<script>
+	$("select").selectpicker({style: 'btn-sm btn-primary', menuStyle: 'dropdown-inverse'});
+
+// style: select toggle class name (which is .btn)
+// menuStyle: dropdown class name
+
+// You can always select by any other attribute, not just tag name.
+// Also you can leave selectpicker arguments blank to apply defaults.
+</script>
 {% endblock scripts %}
