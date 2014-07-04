@@ -15,27 +15,27 @@ def listfeaturedquests(questrs_id):
 def getQuestsByUser(questrs_id):
     """List all the quests by a particular user"""
     try:
-        questsbysuer = Quests.objects.filter(questrs_id=questrs_id, ishidden=False)
+        questsbysuer = Quests.objects.filter(questrs_id=questrs_id, ishidden=False).exclude(isaccepted=True).exclude(status="Completed")
     except Quests.DoesNotExist:
         raise Http404
         return render(request,'404.html')
     return questsbysuer
 
 def getMyShipmnets(shipper_id):
-    myshipments = Quests.objects.filter(shipper=shipper_id)
+    myshipments = Quests.objects.filter(shipper=shipper_id).exclude(status="Completed")
     return myshipments
 
 def getQuestsWithOffer(questrs_id):
     """Lists a user's quest where offers are put"""
     try:
-        questsWithOffer = Quests.objects.filter(questrs_id=questrs_id, ishidden=False).exclude(shipper=None)
+        questsWithOffer = Quests.objects.filter(questrs_id=questrs_id, ishidden=False).exclude(shipper=None).exclude(status="Completed")
     except Quests.DoesNotExist:
         raise Http404
         return render(request,'404.html')
     return questsWithOffer
 
 def isShipperForQuest(shipper_id, questname):
-    """Returns if the current shipper is listed in for the quest"""
+    """Returns if the current shipper is listed in for the quest, the shipper_id has to be converted to string"""
     try:
         questdetails = Quests.objects.get(id=questname)
     except Quests.DoesNotExist:

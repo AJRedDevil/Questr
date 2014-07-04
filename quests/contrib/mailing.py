@@ -21,7 +21,7 @@ def __get_quest_completion_template(template_name, user, quest, shipper_name, re
 
     ###List Email Tags to be used###
     email_template.global_merge_vars = { 'REVIEW_LINK'  : review_link, 'COMPANY' : 'Questr Co', 'FIRST_NAME' : user.first_name , 
-                                        'QUEST_TITLE': quest.title, 'QUEST_OFFERING': quest.reward, 'QUEST_SHIPPER':shipper_name}
+                                        'QUEST_TITLE': quest.title, 'QUEST_OFFERING': str(quest.reward), 'QUEST_SHIPPER':shipper_name}
 
     return email_template
 
@@ -33,7 +33,7 @@ def send_quest_completion_email(user, quest, shipper_name, review_link):
     template_name = "Quest_Completion_Email"
     try:
         # msg = __get_quest_completion_template(template_name, user.first_name, user.email, review_link)
-        msg = __get_quest_completion_template(template_name, user, quest, review_link)
+        msg = __get_quest_completion_template(template_name, user, quest, shipper_name, review_link)
         logging.warn("Quest Completion email Sent")
         msg.send()
     except Exception, e:

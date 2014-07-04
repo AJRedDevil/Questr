@@ -54,11 +54,11 @@
                                 </div><!-- ./smallInfo -->
 				    </div><!-- ./column -->
 				  
-				    <form role="form">
+				    <form action="{% url 'completequest' questname=quest.id %}" role="form" method="post">{% csrf_token %}
             <div class="input-group">
-              <input type="text" class="form-control input-sm" placeholder="Enter Shipment Code">
+              <input type="text" class="form-control input-sm" name="delivery_code" placeholder="Enter Shipment Code">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Enter</button>
+                <button class="btn btn-default" type="Submit">Enter</button>
               </span>
             </div><!-- /input-group -->
 				    </form>

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from libs import email_notifier
 
 from .contrib import quest_handler, mailing
-from users.contrib.user_handler import isShipper, getShippers
+from users.contrib.user_handler import isShipper, getShippers, getQuestrDetails
 from .forms import QuestCreationForm, QuestChangeForm
 from .models import Quests
 
@@ -175,39 +175,43 @@ def completequest(request, questname):
     """Verify delivery code and set the quest as completed
     Send the notification to the offerer and also the review link
     """
+    #if already completed ignore
     pagetype="loggedin"
     if request.method == "POST":
         shipper = request.user
         questname = questname
-        if quest_handler.isShipperForQuest(shipper.id, questname):
+        if quest_handler.isShipperForQuest(str(shipper.id), questname):
             try:
-                questdetails = Quests.objects.get(id=questname, isaccepted=False)
+                questdetails = Quests.objects.get(id=questname, isaccepted=True)
             except Quests.DoesNotExist:
+                logging.debug("Quest not found")
                 raise Http404
                 return render(request,'404.html')
             # Check if the owner and the user are the same
             if questdetails.questrs.id == request.user.id:
                 return redirect('home')
 
-            if questdetails.status != 'accepted':
+            if questdetails.status != 'Accepted':
                 return redirect('home')
             
             delivery_code = request.POST['delivery_code']
             # verify delivery code
             if delivery_code:
-                message = "Empty delivery code"
-            elif questdetails.delivery_code != delivery_code:
-                message = "Incorrect delivery code. Please enter the correct delivery code." 
+                if questdetails.delivery_code != delivery_code:
+                    message = "Provided delivery code. Please enter the correct delivery code." 
+                    logging.debug("Provided delivery code \'%s\' doesn't match the one in the quest number %s", delivery_code, questdetails.id)
+                    logging.debug("returned to viewquest page of %s", questname)
+                    return redirect('viewquest', questname=questname) # return with message
+                else:
+                    Quests.objects.filter(id=questname).update(status='Completed')
+                    mailing.send_quest_completion_email(getQuestrDetails(questdetails.questrs_id), questdetails, shipper.first_name, quest_handler.get_review_link(questname, shipper.id))
+                    message="Quest completion mail has been sent to the Offerer."
+                    logging.debug("Quest completion email has been set to %s", shipper.email)
+                    return redirect('viewquest', questname=questname) # display message
 
-            if message:
-                return redirect('viewquest', questname=questname) # return with message
-            else:
-                Quests.objects.filter(id=questname).update(status='completed')
-                mailing.send_quest_completion_email(questdetails.questr, questdetails, shipper.name, quest_handler.get_review_link(questname, shipper.id))
-                message="Quest completion mail has been sent to the Offerer."
-                return redirect('viewquest', questname=questname) # display message
             return redirect('viewquest', questname=questname)
         else:
             message = "Imposter detected" # Correct message required
+            logging.debug(message)
             return redirect('viewquest', questname=questname)
     return redirect('viewquest', questname=questname)

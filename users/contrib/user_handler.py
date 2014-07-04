@@ -53,6 +53,15 @@ def getShipper(shipper_id):
         return render('404.html', locals())
     return shipper
 
+def getQuestrDetails(questr_id):
+    """List shipper information"""
+    try:
+        shipper = QuestrUserProfile.objects.get(id=questr_id)
+    except QuestrUserProfile.DoesNotExist:
+        raise Http404
+        return render('404.html', locals())
+    return shipper
+
 def getShippers():
     """List all the shippers"""
     shippers = QuestrUserProfile.objects.filter(is_shipper='t')

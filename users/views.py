@@ -185,6 +185,7 @@ def acceptOffer(request, quest_id, shipper_id):
     
     try:
         Quests.objects.filter(id=quest_id).update(shipper=shipper_id, isaccepted='t')
+        Quests.objects.filter(id=quest_id).update(status='Accepted')
     except Quests.DoesNotExist:
         raise Http404
         return render('404.html', locals())

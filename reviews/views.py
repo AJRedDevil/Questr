@@ -86,9 +86,11 @@ def review(request, quest_id, reviewed_id):
         return render('404.html', locals())
     try:
         is_reviewed = Review.objects.get(quest=current_quest, reviewed=shipper)
+        logging.warn(is_reviewed)
     except Review.DoesNotExist:
         is_reviewed=False
         return render(request, 'questrReview.html', locals())
+    logging.warn("redirecting to home")
     return redirect('home')
 
 
