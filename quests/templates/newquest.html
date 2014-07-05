@@ -132,20 +132,26 @@
               <label class="col-md-4 control-label" for="message"><p class="grey">Image of the item</p></label>
               <div class="col-md-8">
 		              <div class="no-image"><h1><span class="glyphicon glyphicon-picture"></span></h1></div>
-		              <input type="text" class="form-control input-sm" name="item_images" placeholder="Image Url" />
-		              <button class="btn btn-info" type="button">Upload</button>
 		   
 		              
             <div class="input-group">
                 <input type="text" class="form-control input-sm image-preview-filename" disabled="disabled">
                 <span class="input-group-btn">
-                    <div class="btn btn-default image-preview-input">
+                    <div class="btn btn-xs btn-info image-preview-input">
                         <span class="glyphicon glyphicon-folder-open"></span>
                         <span class="image-preview-input-title">Upload</span>
                         <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
                     </div>
                 </span>
             </div>
+            
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+  <div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"></div>
+  <div>
+    <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+  </div>
+</div>
             
 		    </div>
 		    </div>

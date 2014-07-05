@@ -905,8 +905,6 @@ fieldset[disabled] .btn-link:focus {
 }
 .btn-group.open .dropdown-toggle {
   color: rgba(255, 255, 255, 0.75);
-  -webkit-box-shadow: none;
-  box-shadow: none;
 }
 .btn-toolbar .btn.active {
   color: #ffffff;
@@ -1098,10 +1096,7 @@ label {
   line-height: 1.467;
   padding: 8px 12px;
   height: 42px;
-  -webkit-appearance: none;
-  border-radius: 6px;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  
   -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
   transition: border .25s linear, color .25s linear, background-color .25s linear;
 }
@@ -1109,8 +1104,6 @@ label {
 .form-control:focus {
   border-color: #1abc9c;
   outline: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
 }
 .form-control[disabled],
 .form-control[readonly],
@@ -1196,8 +1189,6 @@ select[multiple].input-hg {
 .has-warning .form-control {
   color: #f1c40f;
   border-color: #f1c40f;
-  -webkit-box-shadow: none;
-  box-shadow: none;
 }
 .has-warning .form-control:-moz-placeholder {
   color: #f1c40f;
@@ -1217,8 +1208,6 @@ select[multiple].input-hg {
 }
 .has-warning .form-control:focus {
   border-color: #f1c40f;
-  -webkit-box-shadow: none;
-  box-shadow: none;
 }
 .has-warning .input-group-addon {
   color: #f1c40f;
@@ -1236,8 +1225,6 @@ select[multiple].input-hg {
 .has-error .form-control {
   color: #e74c3c;
   border-color: #e74c3c;
-  -webkit-box-shadow: none;
-  box-shadow: none;
 }
 .has-error .form-control:-moz-placeholder {
   color: #e74c3c;
@@ -1257,8 +1244,6 @@ select[multiple].input-hg {
 }
 .has-error .form-control:focus {
   border-color: #e74c3c;
-  -webkit-box-shadow: none;
-  box-shadow: none;
 }
 .has-error .input-group-addon {
   color: #e74c3c;
@@ -1276,8 +1261,6 @@ select[multiple].input-hg {
 .has-success .form-control {
   color: #2ecc71;
   border-color: #2ecc71;
-  -webkit-box-shadow: none;
-  box-shadow: none;
 }
 .has-success .form-control:-moz-placeholder {
   color: #2ecc71;
@@ -1297,8 +1280,6 @@ select[multiple].input-hg {
 }
 .has-success .form-control:focus {
   border-color: #2ecc71;
-  -webkit-box-shadow: none;
-  box-shadow: none;
 }
 .has-success .input-group-addon {
   color: #2ecc71;
@@ -1850,7 +1831,6 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   }
 }
 .navbar-collapse {
-  box-shadow: none;
   padding-right: 21px;
   padding-left: 21px;
 }
@@ -2041,8 +2021,6 @@ select[multiple].navbar-input {
   height: auto;
 }
 .navbar-form {
-  -webkit-box-shadow: none;
-  box-shadow: none;
   margin-top: 0;
   margin-bottom: 0;
   padding-right: 19px;
@@ -2544,8 +2522,7 @@ select[multiple].navbar-form .btn {
   height: 42px;
   -webkit-appearance: none;
   border-radius: 6px;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+
   -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
   transition: border .25s linear, color .25s linear, background-color .25s linear;
 }
@@ -2576,8 +2553,6 @@ select[multiple].navbar-form .btn {
 .twitter-typeahead .tt-hint:focus {
   border-color: #1abc9c;
   outline: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
 }
 .twitter-typeahead .tt-query[disabled],
 .twitter-typeahead .tt-hint[disabled],
@@ -3605,8 +3580,6 @@ input.todo-search-field {
   line-height: 23px;
   padding: 5px 0;
   text-indent: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
 }
 input.todo-search-field:-moz-placeholder {
   color: #34495e;
