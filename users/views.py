@@ -88,7 +88,7 @@ def home(request):
     pagetype="loggedin"
     secondnav="listquestsecondnav"
     user = request.user
-    allquests = quest_handler.listfeaturedquests(user)
+    allquests = Quests.objects.filter(ishidden=False)
     # logging.warn(allquests)
     pagetitle = "Home"
     return render(request,'homepage.html', locals())

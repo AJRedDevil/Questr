@@ -23,7 +23,7 @@
         <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 column">  
          <div class="well body-borders shadows">
              
-              <div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
+              <div class="ratio img-responsive img-circle" style="background-image: url({{publicuser.avatar_file_name}});"></div>
                     
             <center>
               <span class="userName lead">{{publicuser.first_name}} {{publicuser.last_name}}</span>  
@@ -33,7 +33,9 @@
       </center>
             
               <p class="grey small"><span class="glyphicon glyphicon-map-marker"></span> Toronto, Ontario, Canada<br>
-                Quests Completed: {{quests_complete}} <br>
+                {% if publicuser.is_shipper %}
+                  Quests Completed: {{quests_complete}} <br>
+                {% endif %}
                 Quests Posted: {{quests_posted}} </p>                            
             
          </div> <!-- End of Well -->                

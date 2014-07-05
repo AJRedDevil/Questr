@@ -4,6 +4,7 @@ import logging
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect
+from django.db.models import Avg
 
 from .forms import ReviewForm
 from .models import Review
@@ -71,6 +72,9 @@ def review(request, quest_id, reviewed_id):
             review.rating_4=float(ratings[3])
             review.save()
             logging.debug("Review done by {0} on quest with id {1} which was complted by shipper {2}".format(request.user, quest_id, reviewed.get_full_name()))
+            final_rating = Review.objects.filter(reviewed=reviewed.id).aggregate(Avg('final_rating'))
+            final_rating = round(final_rating['final_rating__avg'], 1)
+            QuestrUserProfile.objects.filter(id=reviewed_id).update(rating=final_rating)
             return redirect('home')
     try:
         current_quest = Quests.objects.get(id=quest_id)

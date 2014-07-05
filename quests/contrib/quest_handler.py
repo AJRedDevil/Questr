@@ -22,7 +22,7 @@ def getQuestsByUser(questrs_id):
     return questsbysuer
 
 def getMyShipmnets(shipper_id):
-    myshipments = Quests.objects.filter(shipper=shipper_id).exclude(status="Completed")
+    myshipments = Quests.objects.filter(shipper=shipper_id)
     return myshipments
 
 def getQuestsWithOffer(questrs_id):

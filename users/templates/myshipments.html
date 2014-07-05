@@ -53,7 +53,9 @@
                                     <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
                                 </div><!-- ./smallInfo -->
 				    </div><!-- ./column -->
-				  
+          {% if quest.status == "Completed" %}
+              <a href="/review/{{quest.id}}/{{quest.questrs_id}}" class="reviewUrl"><button class="btn btn-success" rel="tooltip" title="We'll notify the user that you've reviewed his effort!">Review</button></a>
+          {% else %}
 				    <form action="{% url 'completequest' questname=quest.id %}" role="form" method="post">{% csrf_token %}
             <div class="input-group">
               <input type="text" class="form-control input-sm" name="delivery_code" placeholder="Enter Shipment Code">
@@ -62,7 +64,8 @@
               </span>
             </div><!-- /input-group -->
 				    </form>
-				    
+			    {% endif %}
+
 				</div><!-- ./row -->
 				</li><!-- list-group-item -->	
 			
