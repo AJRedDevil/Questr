@@ -253,10 +253,12 @@ p {
   margin: 0 0 15px;
 }
 .lead {
-  margin-bottom: 30px;
-  font-size: 24px;
-  line-height: 1.46428571;
-  font-weight: 300;
+	font-family: "Lato", Helvetica, Arial, sans-serif;
+	color: #34495e;
+	background-color: #ffffff;
+	font-size: inherit;
+	line-height: 1.46428571;
+	font-weight: 300;
 }
 @media (min-width: 768px) {
   .lead {
@@ -521,7 +523,7 @@ fieldset[disabled] .btn {
 .btn-default:active,
 .btn-default.active,
 .open .dropdown-toggle.btn-default {
-  background: #a1a6a9;
+  background: #a0a5a8;
   border-color: #a1a6a9;
 }
 .btn-default.disabled,
@@ -552,7 +554,7 @@ fieldset[disabled] .btn-default.active {
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
   color: #ffffff;
-  background-color: #48c9b0;
+  background-color: #49cab1;
   border-color: #48c9b0;
 }
 .btn-primary:active,
@@ -589,7 +591,7 @@ fieldset[disabled] .btn-primary.active {
 .btn-info.active,
 .open .dropdown-toggle.btn-info {
   color: #ffffff;
-  background-color: #5dade2;
+  background-color: #5daee3;
   border-color: #5dade2;
 }
 .btn-info:active,
@@ -834,7 +836,7 @@ fieldset[disabled] .btn-link:focus {
 .btn-warning .caret,
 .btn-danger .caret,
 .btn-info .caret {
-  border-top-color: #ffffff;
+  border-top-color: black;
 }
 .dropup .btn-default .caret {
   border-bottom-color: #ffffff;
@@ -844,7 +846,7 @@ fieldset[disabled] .btn-link:focus {
 .dropup .btn-warning .caret,
 .dropup .btn-danger .caret,
 .dropup .btn-info .caret {
-  border-bottom-color: #ffffff;
+  border-bottom-color: black;
 }
 .btn-group-xs > .btn {
   padding: 6px 9px;
@@ -914,7 +916,7 @@ fieldset[disabled] .btn-link:focus {
   margin: 0 1px;
 }
 .caret {
-  border-width: 8px 6px;
+  border-width: 6px 4px;
   border-bottom-color: #34495e;
   border-top-color: #34495e;
   border-style: solid;
@@ -988,9 +990,6 @@ fieldset[disabled] .btn-link:focus {
 .select .btn.btn-sm .filter-option {
   left: 13px;
   right: 33px;
-}
-.select .btn.btn-sm .caret {
-  right: 13px;
 }
 .select .btn.btn-xs .filter-option {
   left: 13px;
@@ -1516,7 +1515,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .form-group.focus .input-group-btn .btn-default,
 .input-group.focus .input-group-btn .btn-default {
   color: #ffffff;
-  background-color: #1abc9c;
+  background-color: #1bbd9d;
 }
 .form-group.focus .input-group-btn .btn-default:hover,
 .input-group.focus .input-group-btn .btn-default:hover,
@@ -1529,7 +1528,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .open .dropdown-toggle.form-group.focus .input-group-btn .btn-default,
 .open .dropdown-toggle.input-group.focus .input-group-btn .btn-default {
   color: #ffffff;
-  background-color: #48c9b0;
+  background-color: #49cab1;
   border-color: #48c9b0;
 }
 .form-group.focus .input-group-btn .btn-default:active,
@@ -1914,20 +1913,22 @@ fieldset[disabled] .input-group-btn .btn-default.active {
     margin-left: -21px;
   }
 }
+
 .navbar-toggle {
   border: none;
-  color: #34485f;
+  color: #34495e;
   margin: 0 0 0 21px;
   padding: 0 21px;
   height: 53px;
   line-height: 53px;
-  z-index: 99999999;
 }
 .navbar-toggle:before {
-  color: #17a186;
+  color: #16a085;
   content: "\e00c";
   font-family: "Flat-UI-Icons";
   font-size: 22px;
+  font-style: normal;
+  font-weight: normal;
   -webkit-font-smoothing: antialiased;
   -webkit-transition: color 0.25s linear;
   transition: color 0.25s linear;
@@ -2228,6 +2229,10 @@ select[multiple].navbar-form .btn {
 /***************** navbar font color *********************/
 .navbar-default .navbar-nav > li > a {
   color: #7F8C8D;
+  background-color: transparent;
+  border-bottom: transparent;
+  border-bottom-style: solid;
+  border-bottom-width: 3px;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
@@ -2978,20 +2983,17 @@ fieldset[disabled] .twitter-typeahead .tt-hint {
   border-radius: 6px;
 }
 .dropdown-menu {
-  background-color: #f3f4f5;
-  border: none;
+  background-color: white;
   display: block;
   margin-top: 8px;
   opacity: 0;
   padding: 0;
   visibility: hidden;
-  -webkit-box-shadow: none;
-  box-shadow: none;
   -webkit-transition: 0.25s;
   transition: 0.25s;
 }
 .open > .dropdown-menu {
-  margin-top: 18px !important;
+ 
   opacity: 1;
   visibility: visible;
 }
@@ -2999,7 +3001,6 @@ fieldset[disabled] .twitter-typeahead .tt-hint {
   border-radius: 0;
 }
 .dropdown-menu li:first-child > a {
-  border-radius: 6px 6px 0 0;
   padding-top: 8px;
 }
 .dropdown-menu li:last-child > a {
@@ -3010,7 +3011,7 @@ fieldset[disabled] .twitter-typeahead .tt-hint {
 .dropdown-menu li.selected > a,
 .dropdown-menu li.active > a.highlighted,
 .dropdown-menu li.selected > a.highlighted {
-  background: #1abc9c;
+  background: #5f97d8;
   color: #ffffff;
 }
 .dropdown-menu li.active > a:hover,
@@ -3021,7 +3022,7 @@ fieldset[disabled] .twitter-typeahead .tt-hint {
 .dropdown-menu li.selected > a:focus,
 .dropdown-menu li.active > a.highlighted:focus,
 .dropdown-menu li.selected > a.highlighted:focus {
-  background: #16a085;
+  background: #5f97d8;
   color: #ffffff;
 }
 .dropdown-menu li > a {
@@ -3046,7 +3047,7 @@ fieldset[disabled] .twitter-typeahead .tt-hint {
 .dropdown-menu li > a:hover,
 .dropdown-menu li > a:active,
 .dropdown-menu li > a:focus {
-  background: #e1e4e7;
+  background: #e2e5e8;
   color: inherit;
   outline: none;
 }
@@ -3125,7 +3126,7 @@ fieldset[disabled] .twitter-typeahead .tt-hint {
   transition: 0.25s;
 }
 .dropdown-inverse {
-  background-color: #34495e;
+  background-color: #d7d7d7;
   color: #cccccc;
   padding: 4px 0 6px;
 }
@@ -3144,7 +3145,7 @@ fieldset[disabled] .twitter-typeahead .tt-hint {
 }
 .dropdown-inverse li.active > a,
 .dropdown-inverse li.selected > a {
-  background: #1abc9c;
+  background: #5f97d8;
   color: #ffffff;
   position: relative;
   z-index: 1;
@@ -3152,10 +3153,6 @@ fieldset[disabled] .twitter-typeahead .tt-hint {
 .dropdown-inverse li dt {
   padding-left: 11px;
   padding-right: 11px;
-}
-.dropdown-inverse li .divider {
-  margin-left: 11px;
-  margin-right: 11px;
 }
 .dropdown-inverse li > a {
   border-radius: 2px;
@@ -3168,14 +3165,14 @@ fieldset[disabled] .twitter-typeahead .tt-hint {
   background: #2c3e50;
 }
 .dropdown-inverse li > a.highlighted {
-  background: #526476;
+  background: #516376;
 }
 .dropdown-inverse li > a.highlighted:hover,
 .dropdown-inverse li > a.highlighted:focus {
-  background: #677786;
+  background: #687887;
 }
 .dropdown-inverse li .divider {
-  background-color: #526476;
+  background-color: #516376;
   border-bottom-color: #526476;
 }
 /* ============================================================
