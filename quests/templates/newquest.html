@@ -45,15 +45,16 @@
             <form role="form">
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Pickup from</p></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column"> 
-              
-	              <select class="selectpicker show-menu-arrow show-tick bob" data-size="5" name="srccity">
+              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"> 
+	              <select class="selectpicker show-menu-arrow show-tick" data-size="5" name="srccity">
 					  <option data-icon="glyphicon glyphicon-map-marker theme-colour">City</option>
 					  <option>Mississauga</option>
 					  <option>Brampton</option>
 					  <option>Toronto</option>
 					</select>
-              </div>  
+              </div>
+              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"></div>
+                
             </div>  <!-- End of Form group -->
             </form>      
 
@@ -74,7 +75,7 @@
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Deliver to</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column"> 
               
-         		<select class="selectpicker show-menu-arrow show-tick jon" data-size="5" name="dstcity">
+         		<select class="selectpicker show-menu-arrow show-tick" data-size="5" name="dstcity">
 					  <option data-icon="glyphicon glyphicon-map-marker theme-colour">City</option>
 					  <option>Mississauga</option>
 					  <option>Brampton</option>
@@ -141,13 +142,10 @@
                <form role="form">
             <div class="form-group">
               <label class="col-md-4 control-label" for="message"><p class="grey">Image of the item</p></label>
-              <div class="col-xs-10 col-sm-8 col-md-8 col-lg-8 column">
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 		              <div class="no-image"><h1><span class="glyphicon glyphicon-picture"></span></h1></div>
-              </div>
 		              
-              <form role="form">
-            <div class="input-group">
-                <input type="text" class="form-control input-sm image-preview-filename" disabled="disabled">
+		              <input type="text" class="form-control input-sm image-preview-filename" disabled="disabled">
                 <span class="input-group-btn">
                     <div class="btn btn-xs btn-info image-preview-input">
                         <span class="glyphicon glyphicon-folder-open"></span>
@@ -155,12 +153,10 @@
                         <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
                     </div>
                 </span>
-            </div>
-              </form>
-            
-            
-            
-     
+              </div>
+              
+              <br>
+              
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">
                 <button type="submit" class="btn btn-info">Submit</button>
               </div><!-- ./column -->
@@ -176,7 +172,7 @@
 {% endblock content %}
 {% block scripts %}
 <script>
-	$("select").selectpicker({style: 'btn-sm btn-primary', menuStyle: 'dropdown-inverse'});
+	$("select").selectpicker({style: 'btn-sm btn-grad btn-info', menuStyle: 'dropdown-menu'});
 
 // style: select toggle class name (which is .btn)
 // menuStyle: dropdown class name

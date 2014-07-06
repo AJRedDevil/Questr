@@ -74,7 +74,8 @@ hr {
 	border-bottom-color: #e9f0f5;
 }
 .panel-default .panel-heading .panel-title {
-	font-size: 16px;
+	font-size: 24px;
+	color: grey;
 	display: inline;
 }
 
@@ -85,7 +86,6 @@ hr {
 }
 
 .panel-default .panel-heading .panel-title ul li {
-	font-size: larger;
 	display: inline;	
 	margin: 0;
 }
@@ -115,18 +115,15 @@ hr {
 }
 
 
-.panel-default .panel-content {
+.panel-default .panel-content, .panel-default panel-body {
 	background: rgba(255,255,255,0.94);
 }
 
 
 
 /************* Buttons ************/
-button.btn {
-	
-}
 
-.dropdown button.btn {
+.dropdown button.btn, .btn-grad {
 	border-style: solid;
 	border-width: 1px;
 	border-color: #dedede;
@@ -150,53 +147,24 @@ button.btn {
 .dropdown button.btn:active,
 .dropdown button.btn.active,
 .dropdown button.btn.disabled,
-.dropdown button.btn[disabled] {
+.dropdown button.btn[disabled],
+.btn-grad:hover,
+.btn-grad:focus,
+.btn-grad:active,
+.btn-grad:active,
+.btn-grad:disabled,
+.btn-grad[disabled] {
   color: #000000;
   background-color: #e6e6e6;
   *background-color: #d9d9d9;
 }
 
 .dropdown button.btn:active,
-.dropdown button.btn.active {
+.dropdown button.btn.active,
+.btn-grad.active,
+.btn-grad.active {
   background-color: #cdcdcd \9;
 }
-
-
-select.form-control {
-	border-style: solid;
-	border-width: 1px;
-	border-color: #dedede;
-	color: black;
-	
-  text-shadow: 0 0.7px 0 rgba(0, 0, 0, 0.1);
-  background-color: #f2f2f2;
-  *background-color: #e6e6e6;
-  background-image: -moz-linear-gradient(top, #fafafa, #e6e6e6);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#e6e6e6));
-  background-image: -webkit-linear-gradient(top, #fafafa, #e6e6e6);
-  background-image: -o-linear-gradient(top, #fafafa, #e6e6e6);
-  background-image: linear-gradient(to bottom, #fafafa, #e6e6e6);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffafafa', endColorstr='#ffe6e6e6', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-select.form-control:hover,
-select.form-control:focus,
-select.form-control:active,
-select.form-control.active,
-select.form-control.disabled,
-select.form-control[disabled] {
-  color: #000000;
-  background-color: #e6e6e6;
-  *background-color: #d9d9d9;
-}
-
-select.form-control:active,
-select.form-control.active {
-  background-color: #cdcdcd \9;
-}
-
 
 /******** Pagination ************/
 .pagination li a {
@@ -254,12 +222,7 @@ select.form-control.active {
     width: 10px;
 }
 
-.item-image {
-	border-radius: 3px;
-}
-
 /************* Input Boxes *****************/
-
 input.form-control, input.form-control, textarea.form-control {
 	border: 1px;
 	border-style: solid;
@@ -273,8 +236,6 @@ input.form-control:focus, textarea.form-control:focus {
 	border-color: #5f97d8;
 }
 
- 
- 
 /*************** Primary Navbar ***************/
 .brand {
 	z-index: 9;
