@@ -24,6 +24,10 @@ footer {
 	 list-style-type: none;
  }
  
+footer ul li {
+	display: inline;
+}
+ 
 hr {
 	display: block;
 	height: 1px;
@@ -336,11 +340,11 @@ nav .glyphicon {
 }
 
 .grey {
-	color: #a8a8a8;
+	color: #a3a3a3;
 }
 
 .light-grey {
-	color: #BDC3C7;
+	color: #cbcbd0;
 }
 
 .theme-colour {

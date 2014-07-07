@@ -143,6 +143,7 @@ body {
   font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
   font-size: 11px;
   line-height: 1.72222;
+  color: #434343;
 }
 a {
   -webkit-transition: 0.25s;
