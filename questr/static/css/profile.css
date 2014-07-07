@@ -19,6 +19,10 @@ input.rating {
 }
  
  
+.inline  {
+	display: inline;	
+}
+ 
 /*********** Tab Menu ************/
 .tabbable li.active a {
 	

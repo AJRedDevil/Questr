@@ -54,7 +54,7 @@
       <li class="list-group-item">
         <div class="row clearfix">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-                <p class="lead light-grey text-center">This user has no posts available.</p>
+                <p class="lead light-grey text-center">This user has no quests available.</p>
             </div><!-- ./column -->
         </div><!-- ./row -->
         </li><!-- list-group-item -->
@@ -68,16 +68,15 @@
 				<li class="list-group-item">
 				<div class="row clearfix">
 				    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
-					    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.item_images}});"></div></a>
+					    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-rounded" style="background-image: url({{quest.item_images}});"></div></a>
 				    </div><!-- ./column -->
 				    <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5 column">
 				        <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
 				        <p class="list-group-item-text postDesc">{{quest.description | truncatechars:120 }}</p>
 
-                                <div class="smallInfo">
-                                    <small class="light-grey"><span class="glyphicon glyphicon-user"></span>{{quest.questr_id.displayname}} &nbsp;&nbsp;
-                                    <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
-                                </div><!-- ./smallInfo -->
+				        <small class="light-grey"><span class="glyphicon glyphicon-map-marker"></span></small>
+				        <small class="grey">{{quest.dstaddress}}, {{quest.dstcity}}</small>
+              
 				    </div><!-- ./column -->
 				    <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 column">
                     	<p class="grey">${{quest.reward}}</p>
@@ -89,47 +88,46 @@
 				</li><!-- list-group-item -->	
                          
                         {% endfor %}
-		  </ul>
-                        
+		  </ul>              
         </div>	<!-- ./panel -->
         {% show_pages %}		  	
 {% endif %}
 
-{% if not allreviews %}
-                        <div class="panel panel-default shadows body-borders">
-                          <!-- Default panel contents -->
-                          <div class="panel-heading">
-                            <div class="panel-title lead">Reviews</div>
-                            <a href="#" class="pull-right">View all</a>
-                          </div>
-                          <ul class="list-group">  
-                            
-                            <li class="list-group-item">
-                                <div class="row clearfix">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-                                        <p class="lead light-grey text-center">This user has no reviews.</p>
-                                    </div><!-- ./column -->
-                                </div><!-- ./row -->
-                                </li><!-- list-group-item -->   
+
+        <div class="panel panel-default shadows body-borders">
+          <!-- Default panel contents -->
+          <div class="panel-heading">
+            <div class="panel-title lead">Reviews</div>
+            <a href="#" class="pull-right">View all</a>
+          </div>
+          
+          <ul class="list-group"> 
+          {% if not allreviews %} 
+            <li class="list-group-item">
+                <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+                        <p class="lead light-grey text-center">This user has no reviews.</p>
+                    </div><!-- ./column -->
+                </div><!-- ./row -->
+                </li><!-- list-group-item -->   
 {% else %}		  	
             {% for review in  allreviews %}
 				<li class="list-group-item">
 				<div class="row clearfix">
 				    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
                     <a href="/quest/{{review.quest_id}}">
-					    <div  class="ratio img-responsive img-circle post-image" style="background-image: url({{review.quest_id.item_images}});"></div>
+					    <div  class="ratio img-responsive img-circle" style="background-image: url({{review.quest_id.item_images}});"></div>
                     </a>
 				    </div><!-- ./column -->
 				    <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5 column">
-				        <h6 class="list-group-item-heading postTitle"> {{review.title}} </h6>
-                    <p class="list-group-item-text postDesc">
-                    	{{review.description}}
-                    </p>
+					    <h6 class="list-group-item-heading postTitle"> {{review.title}} </h6>
+					    <p class="list-group-item-text postDesc">{{review.description}}</p>
 
-                                <div class="smallInfo">
-                                    <a href={% url 'getUserInfo' displayname=review.quest.questrs.displayname %}><small class="light-grey"><span class="glyphicon glyphicon-user"></span>{{review.quest.questrs.displayname}} &nbsp;&nbsp;</a>
-                    	<span class="glyphicon glyphicon-map-marker"></span>Only city+cuntry here</small>
-                                </div><!-- ./smallInfo -->
+					    <small class="light-grey"><span class="glyphicon glyphicon-user"> </span> </small>
+					    <a href={% url 'getUserInfo' displayname=review.quest.questrs.displayname %}>{{review.quest.questrs.displayname}}</a> &nbsp;&nbsp;
+					    <small class="light-grey"><span class="glyphicon glyphicon-map-marker"></span>Only city+cuntry here</small>
+			
+                         
 				    </div><!-- ./column -->
 				    <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 column">
                     	<p><span class="money">$10</span><span class="postDate">
@@ -143,12 +141,8 @@
             {% endif %}
                 </ul>
 			</div><!-- ./panel -->
-        </div><!-- ./column -->
-        
-        
-        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 column"></div>
-        
-		  	           
+			
+        </div><!-- ./column -->	  	           
     </div>  <!-- End of row -->
 </div>  <!-- End of container -->
 
