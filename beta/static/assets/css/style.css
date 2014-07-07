@@ -3,6 +3,7 @@
 @import url("prettyPhoto.css") screen;
 @import url("hoverex-all.css") screen;
 
+
 /*	################################################################
 	1. GENERAL STRUCTURES
 ################################################################# */
@@ -70,6 +71,8 @@ a:focus {
   text-decoration: none;
   color:#01b2fe;
 }
+
+
 
 ::-moz-selection  {
 	color: #fff;
@@ -507,15 +510,40 @@ a:focus {
 	color: white;
 }
 
-#footerwrap i {
+#footerwrap facebook, twitter, linkedin, email {
 	font-size: 30px;
 	color: #bfc9d3;
 	padding-right: 25px;
+	-webkit-transition: background-color .4s linear, color .4s linear;
+	-moz-transition: background-color .4s linear, color .4s linear;
+	-o-transition: background-color .4s linear, color .4s linear;
+	-ms-transition: background-color .4s linear, color .4s linear;
+	transition: background-color .4s linear, color .4s linear;
 }
 
-#footerwrap i:hover {
-	color: #00b3fe
+#footerwrap facebook:hover {
+	color: #4f71c5;
 }
+
+
+#footerwrap twitter:hover {
+	color: #5dd7fc;
+}
+
+
+#footerwrap linkedin:hover {
+	color: #006699;
+}
+
+#footerwrap email:hover {
+	color: #ffffff;
+}
+
+
+
+
+
+
 
 #copyright {
 	margin: 0;
