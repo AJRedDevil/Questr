@@ -69,7 +69,15 @@
 				<li class="list-group-item">
 				<div class="row clearfix">
 				    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
-					    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.item_images}});"></div></a>
+              {% if quest.item_images %}
+              <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.item_images}});"></div></a>
+              {% else %}    
+              <a  href="/quest/{{quest.id}}" title="Title">
+              <div class="no-image item-image">
+                <h1><span class="glyphicon glyphicon-picture"></span></h1>
+              </div>
+              </a>
+              {% endif %}
 				    </div><!-- ./column -->
 				    <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5 column">
 				        <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
@@ -83,6 +91,33 @@
               <a href="/review/{{quest.id}}/{{quest.questrs_id}}" class="reviewUrl"><button class="btn btn-success" rel="tooltip" title="We'll notify the user that you've reviewed his effort!">Review</button></a>
               </div><!-- ./row -->
               </li><!-- list-group-item --> 
+            {% else %}
+            {# if the quest is completed and the questr has not been reviewed the review link should appear #}
+            <li class="list-group-item">
+              <div class="row clearfix">
+                <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
+                  {% if quest.item_images %}
+                  <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.item_images}});"></div></a>
+                  {% else %}    
+                  <a  href="/quest/{{quest.id}}" title="Title">
+                  <div class="no-image item-image">
+                    <h1><span class="glyphicon glyphicon-picture"></span></h1>
+                  </div>
+                  </a>
+                  {% endif %}
+                </div><!-- ./column -->
+                <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5 column">
+                  <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
+                  <p class="list-group-item-text postDesc">{{quest.description}}</p>
+
+                  <div class="smallInfo">
+                    <small class="light-grey">
+                      <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
+                    </div><!-- ./smallInfo -->
+                  </div><!-- ./column -->
+                  <p>You delivered this item for <a href="{% url 'getUserInfo' displayname=quest.questrs.displayname %}">{{quest.questrs.first_name | title}}</a> !</p>
+                </div><!-- ./row -->
+              </li><!-- list-group-item -->     
           {% endif %}
              {% endfor %}               
         </ul>	<!-- End of list-group -->

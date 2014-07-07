@@ -15,7 +15,7 @@ def listfeaturedquests(questrs_id):
 def getQuestsByUser(questrs_id):
     """List all the quests by a particular user"""
     try:
-        questsbysuer = Quests.objects.filter(questrs_id=questrs_id, ishidden=False).exclude(isaccepted=True).exclude(status="Completed")
+        questsbysuer = Quests.objects.filter(questrs_id=questrs_id, ishidden=False)
     except Quests.DoesNotExist:
         raise Http404
         return render(request,'404.html')

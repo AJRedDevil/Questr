@@ -38,11 +38,18 @@
 
 		  <ul class="list-group">   
 			  {% for quest in myquests %} 
-	
 				<li class="list-group-item">
 				<div class="row clearfix">
 				    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
-					    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-rounded" style="background-image: url({{quest.item_images}});"></div></a>
+              {% if quest.item_images %}
+              <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.item_images}});"></div></a>
+              {% else %}    
+              <a  href="/quest/{{quest.id}}" title="Title">
+              <div class="no-image item-image">
+                <h1><span class="glyphicon glyphicon-picture"></span></h1>
+              </div>
+              </a>
+              {% endif %}
 				    </div><!-- ./column -->
 				    <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5 column">
 				        <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
