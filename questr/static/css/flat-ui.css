@@ -255,15 +255,14 @@ p {
 }
 .lead {
 	font-family: "Lato", Helvetica, Arial, sans-serif;
-	color: #34495e;
-	background-color: #ffffff;
+	background-color: transparent;
 	font-size: inherit;
 	line-height: 1.46428571;
 	font-weight: 300;
 }
 @media (min-width: 768px) {
   .lead {
-    font-size: 30.006px;
+  	font-size: inherit;
   }
 }
 small,
