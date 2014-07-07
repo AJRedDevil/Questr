@@ -115,8 +115,14 @@ def applyForQuest(request, questname):
     # Check if the owner and the user are the same
     if questdetails.questrs.id == request.user.id:
         return redirect('home')
+
+    # get questr information
+    questr = getQuestrDetails(questdetails.questrs_id)
     # add a shipper to the quest
     quest_handler.addShipper(str(shipper.id), questname)
+    email_details = quest_handler.prepQuestAppliedNotification(shipper, questr, questdetails)
+    email_notifier.send_email_notification(questr, email_details)
+
     message="Your application has been sent to the quest owner"
     logging.warn(message)
     return redirect('viewquest', questname=questname)
@@ -203,10 +209,14 @@ def completequest(request, questname):
                     logging.debug("returned to viewquest page of %s", questname)
                     return redirect('viewquest', questname=questname) # return with message
                 else:
+                    questr = getQuestrDetails(questdetails.questrs_id)
                     Quests.objects.filter(id=questname).update(status='Completed')
-                    mailing.send_quest_completion_email(getQuestrDetails(questdetails.questrs_id), questdetails, shipper.first_name, quest_handler.get_review_link(questname, shipper.id))
+                    Quests.objects.filter(id=questname).update(is_complete='t')
+                    mailing.send_quest_completion_email(questr, questdetails, shipper.first_name, quest_handler.get_review_link(questname, shipper.id))
+                    logging.warn("Quest completion email has been sent to %s", questr.email)
+                    mailing.send_quest_completion_email(shipper, questdetails, questr.first_name, quest_handler.get_review_link(questname, questr.id))
+                    logging.warn("Quest completion email has been sent to %s", shipper.email)
                     message="Quest completion mail has been sent to the Offerer."
-                    logging.debug("Quest completion email has been set to %s", shipper.email)
                     return redirect('viewquest', questname=questname) # display message
 
             return redirect('viewquest', questname=questname)

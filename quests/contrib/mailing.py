@@ -34,7 +34,6 @@ def send_quest_completion_email(user, quest, shipper_name, review_link):
     try:
         # msg = __get_quest_completion_template(template_name, user.first_name, user.email, review_link)
         msg = __get_quest_completion_template(template_name, user, quest, shipper_name, review_link)
-        logging.warn("Quest Completion email Sent")
         msg.send()
     except Exception, e:
         logging.exception(str(e))

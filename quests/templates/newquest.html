@@ -16,33 +16,28 @@
 	         <div class="panel-title lead">Lets post a quest</div>
          </div>
           <div class="panel-body">
-	          <form class="form-horizontal" action="" method="post">{% csrf_token %}
+          <form class="form-horizontal" action="" method="post">{% csrf_token %}
           <fieldset>
             
             <!-- Name input-->
-            <form role="form">
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="grey">Title</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <input id="title" name="title" type="text" placeholder="Your title" class="form-control input-xs">
               </div><!-- ./column -->
             </div><!-- ./form-group -->
-            </form>
  
     
             <!-- Offer input-->
-            <form role="form">
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="grey">You're offering</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <input id="reward" name="reward" type="text" placeholder="$$$$" class="form-control input-xs">
               </div>
             </div><!-- ./form-group -->
-            </form>
           
  
             <!-- Location input-->
-            <form role="form">
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Pickup from</p></label>
               <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"> 
@@ -56,21 +51,17 @@
               <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"></div>
                 
             </div>  <!-- End of Form group -->
-            </form>      
 
                     
             <!-- Departure Address input-->
-            <form role="form">
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <input id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" class="form-control input-xs">
               </div>
             </div>
-            </form>
                     
                    
-            <form role="form">
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Deliver to</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column"> 
@@ -83,21 +74,17 @@
 					</select>
               </div>
             </div>  <!-- ./form-group -->  
-            </form>                        
          
          
          
             <!-- Departure Address input-->
-            <form role="form">
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <input id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" class="form-control input-xs">
               </div>
             </div>
-            </form>
                         
-            <form role="form">
             <div class="form-group" id="size">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Package Size</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
@@ -128,20 +115,17 @@
 			 </div>
             
             <!-- Message body -->
-            <form role="form">
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Your Message</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <textarea class="form-control" id="description" name="description" placeholder="Please enter your message here..." rows="5"></textarea>
               </div>
             </div>
-            </form>
             
           
                <!-- Image Uploader -->
-               <form role="form">
             <div class="form-group">
-              <label class="col-md-4 control-label" for="message"><p class="grey">Image of the item</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Image of the item</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 		              <div class="no-image"><h1><span class="glyphicon glyphicon-picture"></span></h1></div>
 		              
@@ -154,13 +138,15 @@
                     </div>
                 </span>
               </div>
+            </div>
               
               <br>
               
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">
                 <button type="submit" class="btn btn-info">Submit</button>
               </div><!-- ./column -->
-     
+               </form>
+
           </fieldset>     
           </div><!-- ./panel-body -->
        </div><!-- ./panel -->   

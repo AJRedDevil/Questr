@@ -21,6 +21,14 @@ def getQuestsByUser(questrs_id):
         return render(request,'404.html')
     return questsbysuer
 
+def getQuestDetails(quest_id):
+    try:
+        questdetails = Quests.objects.get(id=quest_id)
+    except Quests.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
+    return questdetails
+
 def getMyShipmnets(shipper_id):
     myshipments = Quests.objects.filter(shipper=shipper_id)
     return myshipments
@@ -28,7 +36,7 @@ def getMyShipmnets(shipper_id):
 def getQuestsWithOffer(questrs_id):
     """Lists a user's quest where offers are put"""
     try:
-        questsWithOffer = Quests.objects.filter(questrs_id=questrs_id, ishidden=False).exclude(shipper=None).exclude(status="Completed")
+        questsWithOffer = Quests.objects.filter(questrs_id=questrs_id, ishidden=False).exclude(shipper=None)
     except Quests.DoesNotExist:
         raise Http404
         return render(request,'404.html')
@@ -127,6 +135,62 @@ def prepNewQuestNotification(user, questdetails):
                                                 'quest_reward'      : str(questdetails.reward),
                                                 'quest_support_mail': quest_support_email,
                                                 'recipient_id'      : user.id,
+                                                'questr_unsubscription_link' : questr_unsubscription_link,
+                                                'company'           : "Questr Co"
+
+                                                },
+                    }
+    return email_details
+
+def prepOfferAcceptedNotification(user, questdetails):
+    """Prepare the details for notification emails for new quests"""
+    template_name="Offer_Accepted_Notification"
+    subject="Questr - Offer Accepted"
+    # quest_browse_link=settings.QUESTR_URL+"/quest"
+    quest_support_email="support@questr.co"
+    questr_unsubscription_link="http://questr.co/unsub"
+
+    email_details = {
+                        'subject' : subject,
+                        'template_name' : template_name,
+                        'global_merge_vars': {
+                                                'quest_public_link' : settings.QUESTR_URL+'/quest/'+str(questdetails.id),
+                                                'quest_description' : questdetails.description,
+                                                'user_first_name'   : user.first_name,
+                                                'email_unsub_link'  : questr_unsubscription_link,
+                                                'quest_title'       : questdetails.title,
+                                                'quest_reward'      : str(questdetails.reward),
+                                                'quest_support_mail': quest_support_email,
+                                                'recipient_id'      : user.id,
+                                                'questr_unsubscription_link' : questr_unsubscription_link,
+                                                'company'           : "Questr Co"
+
+                                                },
+                    }
+    return email_details
+
+def prepQuestAppliedNotification(shipper, questr, questdetails):
+    """Prepare the details for notification emails for new quests"""
+    template_name="Quest_Applied_Notification"
+    subject="Questr - Application Received"
+    # quest_browse_link=settings.QUESTR_URL+"/quest"
+    quest_support_email="support@questr.co"
+    questr_unsubscription_link="http://questr.co/unsub"
+
+    email_details = {
+                        'subject' : subject,
+                        'template_name' : template_name,
+                        'global_merge_vars': {
+                                                'quest_public_link' : settings.QUESTR_URL+'/quest/'+str(questdetails.id),
+                                                'questr_first_name'   : questr.first_name,
+                                                'shipper_first_name': shipper.first_name,                                                
+                                                'shipper_user_name': shipper.displayname,                                                
+                                                'shipper_profile_link'  : settings.QUESTR_URL+'/user/'+shipper.displayname,                                                
+                                                'email_unsub_link'  : questr_unsubscription_link,
+                                                'quest_title'       : questdetails.title,
+                                                'quest_reward'      : str(questdetails.reward),
+                                                'quest_support_mail': quest_support_email,
+                                                'recipient_id'      : questr.id,
                                                 'questr_unsubscription_link' : questr_unsubscription_link,
                                                 'company'           : "Questr Co"
 

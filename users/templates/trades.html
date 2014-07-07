@@ -88,14 +88,9 @@
                         </a>
                         {% endfor %}
                     {% endif %}
-                   
-                   
-                   
-          
-                   
-                   
-                    {% if quest.isaccepted %}
+                    {% if quest.isaccepted and not quest.is_complete and not quest.is_shipper_reviewed %}
                         {% for shipper in shippers %}
+                        <a href="/quest/{{quest.id}}">
                         <li class="list-group-item">
                             <div class="row clearfix">
                                 <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
@@ -119,7 +114,7 @@
                                   
                                         <button type="button" class="btn btn-embossed btn-info contact" data-toggle="modal" data-target="#myModal-{{shipper.0.id}}">Contact</button>
                                
-                                        {% if quest.status == "Completed" %}
+                                        {% if quest.is_complete and not quest.is_shipper_reviewed %}
                                             <a href="/review/{{quest.id}}/{{shipper.0.id}}" class="reviewUrl"><button class="btn btn-success" rel="tooltip" title="We'll notify the user that you've reviewed his effort!">Review</button></a>
                                         {% endif %}
                                 </div><!-- column -->
@@ -163,6 +158,37 @@
                                         </div><!-- /.modal-dalog -->
                                 </div><!-- /.modal -->
                         {% endfor %}
+                    {% elif quest.isaccepted and quest.is_complete and not quest.is_shipper_reviewed%}
+                        {% for shipper in shippers %}
+                        <a href="/quest/{{quest.id}}">
+                        <li class="list-group-item">
+                            <div class="row clearfix">
+                                <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
+                                    <a href="/quest/{{quest.id}}">
+                                        <div class="ratio img-responsive" style="background-image: url({{quest.item_images}});"></div>
+                                    </a>
+                                </div>
+                                <div class="col-xs-7 col-sm-6 col-md-6 col-lg-6 column">
+                                    <a href="/quest/{{quest.id}}">
+                                        <h6> {{quest.title| title}} </h6>
+                                    </a>
+                                       
+                                           <p> You've chosen <a href="/user/{{shipper.0.displayname}}">{{shipper.0.first_name | title}}</a></p>
+                                            {% comment %}
+                                            <a href="/user/{{shipper.0.displayname}}"><div class="ratio img-responsive img-circle post-image" style="background-image: url({{shipper.0.avatar_file_name}});"></div></a>
+                                            <button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal{{shipper.0.id}}">Contact</button>
+                                            {% endcomment %}                                            
+                                    
+                                </div><!-- column -->
+                                <div class="col-xs-2 col-sm-4 col-md-4 col-lg-4 column">
+                                  
+                                        <button type="button" class="btn btn-embossed btn-info contact" data-toggle="modal" data-target="#myModal-{{shipper.0.id}}">Contact</button>
+                                        <a href="/review/{{quest.id}}/{{shipper.0.id}}" class="reviewUrl"><button class="btn btn-success" rel="tooltip" title="We'll notify the user that you've reviewed his effort!">Review</button></a>
+                                </div><!-- column -->
+                            </div><!-- ./row -->
+                            </li>
+                        {% endfor %}
+                    {% elif quest.isaccepted and quest.is_complete and quest.is_reviewed%}
                     {% endif %}
                 {% endfor %}
 		  

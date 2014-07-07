@@ -31,6 +31,9 @@ class Quests(models.Model):
     # isprivate = models.BooleanField(_('isprivate'), default=True) # if posted under an offer this would be always set to True, else would be set as False
     isaccepted = models.BooleanField(_('isaccepted'), default=False)
     isnotified = models.BooleanField(_('isnotified'), default=False)
+    is_questr_reviewed = models.BooleanField(_('is_questr_reviewed'), default=False)
+    is_shipper_reviewed = models.BooleanField(_('is_shipper_reviewed'), default=False)
+    is_complete = models.BooleanField(_('is_complete'), default=False)
     delivery_code = models.TextField(_('delivery_code'), default='121212')
     ishidden = models.BooleanField(_('ishidden'), default=False)
 

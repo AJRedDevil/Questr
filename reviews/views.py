@@ -75,6 +75,19 @@ def review(request, quest_id, reviewed_id):
             final_rating = Review.objects.filter(reviewed=reviewed.id).aggregate(Avg('final_rating'))
             final_rating = round(final_rating['final_rating__avg'], 1)
             QuestrUserProfile.objects.filter(id=reviewed_id).update(rating=final_rating)
+
+            # if the guy being reviewed is the questr
+            # changing the types to integer for it's an integer comparision, IDs are integers
+            if int(questdetails.questrs_id) == int(reviewed_id):
+                logging.warn("shipper is reviewed")
+                Quests.objects.filter(id=quest_id).update(is_questr_reviewed='t')
+
+            # if the guy being reviewed is the shipper
+            # changing the types to integer for it's an integer comparision, IDs are integers
+            if int(questdetails.shipper) == int(reviewed_id):
+                logging.warn("questr is reviewed")
+                Quests.objects.filter(id=quest_id).update(is_shipper_reviewed='t')
+
             return redirect('home')
     try:
         current_quest = Quests.objects.get(id=quest_id)

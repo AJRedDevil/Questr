@@ -12,6 +12,8 @@ from django.shortcuts import render, redirect
 from .models import QuestrUserProfile, UserTransactional, QuestrToken
 from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, QuestrSocialSignupForm, SetPasswordForm, PasswordChangeForm
 
+from libs import email_notifier
+
 from access.requires import verified, is_alive
 from contrib import mailing, user_handler
 
@@ -180,12 +182,18 @@ def acceptOffer(request, quest_id, shipper_id):
     """Accepts a bid on a quest from a user"""
     pagetype="loggedin"
     user = request.user
+    # if the shipper doesn't exist
     if not user_handler.userExists(shipper_id):
+        logging.warn("User ID : %s not found, quest %s not accepted, returning to mytrades page", shipper_id, quest_id)
         return redirect('mytrades')    
     
     try:
         Quests.objects.filter(id=quest_id).update(shipper=shipper_id, isaccepted='t')
         Quests.objects.filter(id=quest_id).update(status='Accepted')
+        questdetails = quest_handler.getQuestDetails(quest_id)
+        shipper = user_handler.getQuestrDetails(shipper_id)
+        email_details = quest_handler.prepOfferAcceptedNotification(shipper, questdetails)
+        email_notifier.send_email_notification(shipper, email_details)
     except Quests.DoesNotExist:
         raise Http404
         return render('404.html', locals())

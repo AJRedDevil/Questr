@@ -38,7 +38,34 @@
 
 		  <ul class="list-group">   
 			  {% for quest in myshipments %} 
-	
+	       {% if not quest.is_complete %}
+         {# if the quest is not completed the enter shipment button should be displayed #}
+        <li class="list-group-item">
+        <div class="row clearfix">
+            <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
+              <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.item_images}});"></div></a>
+            </div><!-- ./column -->
+            <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5 column">
+                <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
+                <p class="list-group-item-text postDesc">{{quest.description}}</p>
+
+                                <div class="smallInfo">
+                                    <small class="light-grey">
+                                    <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
+                                </div><!-- ./smallInfo -->
+            </div><!-- ./column --> 
+        <form action="{% url 'completequest' questname=quest.id %}" role="form" method="post">{% csrf_token %}
+          <div class="input-group">
+            <input type="text" class="form-control input-sm" name="delivery_code" placeholder="Enter Shipment Code">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="Submit">Enter</button>
+            </span>
+          </div><!-- /input-group -->
+        </form>
+        </div><!-- ./row -->
+        </li><!-- list-group-item -->    
+         {% elif quest.is_complete and not quest.is_questr_reviewed %}
+         {# if the quest is completed and the questr has not been reviewed the review link should appear #}
 				<li class="list-group-item">
 				<div class="row clearfix">
 				    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
@@ -53,24 +80,10 @@
                                     <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
                                 </div><!-- ./smallInfo -->
 				    </div><!-- ./column -->
-          {% if quest.status == "Completed" %}
               <a href="/review/{{quest.id}}/{{quest.questrs_id}}" class="reviewUrl"><button class="btn btn-success" rel="tooltip" title="We'll notify the user that you've reviewed his effort!">Review</button></a>
-          {% else %}
-				    <form action="{% url 'completequest' questname=quest.id %}" role="form" method="post">{% csrf_token %}
-            <div class="input-group">
-              <input type="text" class="form-control input-sm" name="delivery_code" placeholder="Enter Shipment Code">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="Submit">Enter</button>
-              </span>
-            </div><!-- /input-group -->
-				    </form>
-			    {% endif %}
-
-				</div><!-- ./row -->
-				</li><!-- list-group-item -->	
-			
-              
-                   
+              </div><!-- ./row -->
+              </li><!-- list-group-item --> 
+          {% endif %}
              {% endfor %}               
         </ul>	<!-- End of list-group -->
 		 </div><!-- ./panel -->
