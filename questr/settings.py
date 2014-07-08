@@ -32,7 +32,9 @@ AWS_S3_SECURE_URLS = False
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_ACCESS_KEY_ID = os.environ['AMAZON_ACCESS_KEY_ID']
 AWS_S3_SECRET_ACCESS_KEY = os.environ['AMAZON_SECRET_ACCESS_KEY']
-AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
+# AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
+AWS_MEDIA_BUCKET = os.environ['AWS_MEDIA_BUCKET']
+AWS_STATIC_BUCKET = os.environ['AWS_STATIC_BUCKET']
 
 #Append Slash to all cals
 APPEND_SLASH = True
@@ -115,7 +117,7 @@ PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
-MEDIA_URL = '/media/'
+MEDIA_URL = '/questr-media/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_PATH, 'static'),
 )
@@ -163,6 +165,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'social.apps.django_app.context_processors.backends',
     'social.apps.django_app.context_processors.login_redirect',
     'django.core.context_processors.request',
+    'django.core.context_processors.media',
 )
 TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 TEMPLATE_DIRS = (TEMPLATE_PATH)
@@ -176,5 +179,9 @@ except ImportError:
 # Use amazon S3 storage only on production
 if not DEBUG:
     ##Use Amazon S3 as default storage
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    ##This for media
+    DEFAULT_FILE_STORAGE = 'libs.s3utils.MediaRootS3BotoStorage'
+    ##This for CSS
+    STATICFILES_STORAGE = 'libs.s3utils.StaticRootS3BotoStorage'
+    MEDIA_ROOT = '/%s/' % DEFAULT_FILE_STORAGE
+    MEDIA_URL = '//s3.amazonaws.com/%s/' % AWS_MEDIA_BUCKET

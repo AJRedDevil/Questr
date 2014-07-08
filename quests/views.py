@@ -80,13 +80,14 @@ def createquest(request):
 
     if request.method=="POST":
         now = timezone.now()
-        user_form = QuestCreationForm(data=request.POST)
+        user_form = QuestCreationForm(request.POST, request.FILES)
         # logging.warn(user_form.errors)
         # logging.warn(user_form.is_valid())
         if user_form.is_valid():
             quest_data = user_form.save(commit=False)
             quest_data.questrs_id=request.user.id
             quest_data.creation_date=now
+            quest_data.item_images = user_form.cleaned_data['item_images']
             quest_data.save()
             try:
                 shippers = getShippers()

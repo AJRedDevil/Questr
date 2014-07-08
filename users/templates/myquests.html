@@ -40,7 +40,7 @@
 				<div class="row clearfix">
 				    <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
               {% if quest.item_images %}
-              <a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-rounded" style="background-image: url({{quest.item_images}});"></div></a>
+              <a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-rounded" style="background-image: url({{MEDIA_URL}}{{quest.item_images}});"></div></a>
               {% else %}    
               <a  href="/quest/{{quest.id}}" title="Title">
               <div class="no-image img-rounded">
@@ -75,7 +75,7 @@
 								<div class="row clearfix">
 								<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 column">
 										<!-- profile img -->
-										<a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-circle profile-img" style="background-image:url({{quest.item_images}});"></div></a>	
+										<a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-circle profile-img" style="background-image:url({{MEDIA_URL}}{{quest.item_images}});"></div></a>	
 								</div>
 								<div class="col-xs-7 col-sm-7 col-md-8 col-lg-8 column">
 									<p>[username goes here] wants to accept your quest!</p>

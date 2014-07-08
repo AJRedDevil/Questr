@@ -16,7 +16,7 @@
 	         <div class="panel-title lead">Lets post a quest</div>
          </div>
           <div class="panel-body">
-          <form class="form-horizontal" action="" method="post">{% csrf_token %}
+          <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
           <fieldset>
             
             <!-- Name input-->
@@ -127,14 +127,11 @@
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Image of the item</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-		              <div class="no-image"><h1><span class="glyphicon glyphicon-picture"></span></h1></div>
-		              
-		              <input type="text" class="form-control input-sm image-preview-filename" disabled="disabled">
-                <span class="input-group-btn">
+		                <span class="input-group-btn">
                     <div class="btn btn-xs btn-info image-preview-input">
                         <span class="glyphicon glyphicon-folder-open"></span>
                         <span class="image-preview-input-title">Upload</span>
-                        <input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
+                        <input type="file" accept="image/png, image/jpeg, image/gif" name="item_images"/> <!-- rename it -->
                     </div>
                 </span>
               </div>

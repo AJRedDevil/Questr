@@ -15,7 +15,7 @@ class Quests(models.Model):
         blank=False)
     reward = models.DecimalField(_('reward'), decimal_places=2, 
         max_digits=1000)
-    item_images = models.URLField(_('item_images'), blank=True)
+    item_images = models.ImageField(_('item_images'), max_length=9999, upload_to='quest-item-cdn', blank=True)
     status = models.TextField(_('status'), default='new')
     creation_date = models.DateTimeField(_('creation_date'), 
         blank=False)

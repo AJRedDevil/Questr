@@ -36,7 +36,7 @@
                         <a href="{% url 'mytrades' %}">My Offers</a>
                     </li>
                     <li class="{% navactive request 'myposts' %}"><a href="{% url 'myposts' %}">
-                        <a href="{% url 'myposts' %}">My Posts</a>
+                        <a href="{% url 'myposts' %}">My Quests</a>
                     </li>       
                     {% if user.is_shipper %}
                     <li class="{% navactive request 'myshipments' %}"><a href="{% url 'myshipments' %}">
@@ -57,7 +57,7 @@
                             <div class="row clearfix">
                                 <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
                                     {% if quest.item_images %}
-                                    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-rounded" style="background-image: url({{quest.item_images}});"></div></a>
+                                    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-rounded" style="background-image: url({{MEDIA_URL}}{{quest.item_images}});"></div></a>
                                     {% else %}    
                                     <a  href="/quest/{{quest.id}}" title="Title">
                                     <div class="no-image img-rounded">
@@ -106,7 +106,7 @@
                             <div class="row clearfix">
                                 <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
                                     {% if quest.item_images %}
-                                    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-rounded" style="background-image: url({{quest.item_images}});"></div></a>
+                                    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-rounded" style="background-image: url({{MEDIA_URL}}{{quest.item_images}});"></div></a>
                                     {% else %}    
                                     <a  href="/quest/{{quest.id}}" title="Title">
                                     <div class="no-image img-rounded">
@@ -178,7 +178,7 @@
                             <div class="row clearfix">
                                 <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
                                     {% if quest.item_images %}
-                                    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.item_images}});"></div></a>
+                                    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{MEDIA_URL}}{{quest.item_images}});"></div></a>
                                     {% else %}    
                                     <a  href="/quest/{{quest.id}}" title="Title">
                                     <div class="no-image item-image">
@@ -214,7 +214,7 @@
                             <div class="row clearfix">
                                 <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
                                     {% if quest.item_images %}
-                                    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.item_images}});"></div></a>
+                                    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{MEDIA_URL}}{{quest.item_images}});"></div></a>
                                     {% else %}    
                                     <a  href="/quest/{{quest.id}}" title="Title">
                                     <div class="no-image item-image">

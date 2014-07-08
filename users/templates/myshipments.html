@@ -25,7 +25,7 @@
                           <a href="{% url 'mytrades' %}">My Offers</a>
                       </li>
                       <li class="{% navactive request 'myposts' %}"><a href="{% url 'myposts' %}">
-                          <a href="{% url 'myposts' %}">My Posts</a>
+                          <a href="{% url 'myposts' %}">My Quests</a>
                       </li>       
                       {% if user.is_shipper %}
                       <li class="{% navactive request 'myshipments' %}"><a href="{% url 'myshipments' %}">
@@ -43,7 +43,7 @@
         <li class="list-group-item">
         <div class="row clearfix">
             <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
-              <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.item_images}});"></div></a>
+              <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{MEDIA_URL}}{{quest.item_images}});"></div></a>
             </div><!-- ./column -->
             <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5 column">
                 <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
@@ -70,7 +70,7 @@
 				<div class="row clearfix">
 				    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
               {% if quest.item_images %}
-              <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.item_images}});"></div></a>
+              <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{MEDIA_URL}}{{quest.item_images}});"></div></a>
               {% else %}    
               <a  href="/quest/{{quest.id}}" title="Title">
               <div class="no-image item-image">
@@ -97,7 +97,7 @@
               <div class="row clearfix">
                 <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
                   {% if quest.item_images %}
-                  <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.item_images}});"></div></a>
+                  <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{MEDIA_URL}}{{quest.item_images}});"></div></a>
                   {% else %}    
                   <a  href="/quest/{{quest.id}}" title="Title">
                   <div class="no-image item-image">
