@@ -14,9 +14,6 @@ body {
  
 footer {
 	border-top: 1px solid #ddd;
-	margin-top: 35px;
-	padding-top: 6px;
-	text-align: center;
 	background: white;
 }
  
@@ -25,7 +22,11 @@ footer {
  }
  
 footer ul li {
-	display: inline;
+
+}
+
+footer ul.list li {
+	margin-bottom: -6px;
 }
  
 hr {
