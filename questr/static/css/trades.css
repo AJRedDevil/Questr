@@ -28,3 +28,9 @@ hr {
 	margin: 0;
 }
 
+
+.profile-img {
+	max-width: 10px;
+	max-height: 10px;
+	background: aqua;	
+}

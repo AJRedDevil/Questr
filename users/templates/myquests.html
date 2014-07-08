@@ -24,7 +24,7 @@
                           <a href="{% url 'mytrades' %}">My Offers</a>
                       </li>
                       <li class="{% navactive request 'myposts' %}"><a href="{% url 'myposts' %}">
-                          <a href="{% url 'myposts' %}">My Posts</a>
+                          <a href="{% url 'myposts' %}">My Quests</a>
                       </li>       
                       {% if user.is_shipper %}
                       <li class="{% navactive request 'myshipments' %}"><a href="{% url 'myshipments' %}">
@@ -41,10 +41,10 @@
 				<div class="row clearfix">
 				    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
               {% if quest.item_images %}
-              <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.item_images}});"></div></a>
+              <a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-rounded" style="background-image: url({{quest.item_images}});"></div></a>
               {% else %}    
               <a  href="/quest/{{quest.id}}" title="Title">
-              <div class="no-image item-image">
+              <div class="no-image img-rounded">
                 <h1><span class="glyphicon glyphicon-picture"></span></h1>
               </div>
               </a>
@@ -54,22 +54,45 @@
 				        <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
 				        <p class="list-group-item-text postDesc">{{quest.description}}</p>
 
-                                <div class="smallInfo">
                                     <small class="light-grey">
                                     <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
-                                </div><!-- ./smallInfo -->
+                                
 				    </div><!-- ./column -->
-				    <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 column">
+	    <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 column">
                     	<p class="grey">${{quest.reward}}</p>
 				    </div><!-- ./column -->
 				    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column">
 	                    <p class="grey"><span class="glyphicon glyphicon-time"></span>{{quest.creation_date}}</p>
 				    </div><!-- ./column -->
-				</div><!-- ./row -->
+				    <div class="col-xs-8 col-sm-10 col-md-10 col-lg-10 column">
+				    	<br>
+						<ul class="list-group">
+							<li class="list-group-item">
+								<div class="row clearfix">
+								<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 column">
+										<!-- profile img -->
+										<a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-circle profile-img" style="background-image:url({{quest.item_images}});"></div></a>	
+								</div>
+									<p class="inline">[username goes here] wants to accept your quest!</p>
+									<button class="btn btn-xs btn-danger inline" style="float:right;">Reject</button>
+									<button class="btn btn-xs btn-info inline" style="float:right;">Accept</button>
+								</div><!-- ./row -->
+							</li>
+							<li class="list-group-item">
+								<div class="row clearfix">
+								<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 column">
+										<!-- profile img -->
+										<a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-circle profile-img" style="background-image:url({{quest.item_images}});"></div></a>	
+								</div>
+									<p class="inline">[username goes here] wants to accept your quest!</p>
+									<button class="btn btn-xs btn-danger inline" style="float:right;">Reject</button>
+									<button class="btn btn-xs btn-info inline" style="float:right;">Accept</button>
+								</div><!-- ./row -->
+							</li>
+						</ul>
+					</div>
 				</li><!-- list-group-item -->	
-			
-              
-                   
+						                   
              {% endfor %}               
         </ul>	<!-- End of list-group -->
 		 </div><!-- ./panel -->
