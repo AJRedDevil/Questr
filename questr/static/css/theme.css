@@ -15,6 +15,7 @@ body {
 footer {
 	border-top: 1px solid #ddd;
 	background: white;
+	padding-top: 15px;
 }
  
  footer ul {
