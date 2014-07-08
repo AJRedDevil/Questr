@@ -70,6 +70,8 @@
                                     <a href="/quest/{{quest.id}}"><h6> {{quest.title| title}}</h6></a>
                                       
                                     <p><a href="/user/{{shipper.0.displayname}}">{{shipper.0.first_name | title}}</a> is interested!</p>
+                                    
+                                    
                                     {% comment %}
                                     <a href="/user/{{shipper.0.displayname}}"><div class="ratio img-responsive img-circle post-image" style="background-image: url({{shipper.0.avatar_file_name}});"></div></a>
                                     {% endcomment %}
@@ -78,6 +80,8 @@
                                 <div class="col-xs-2 col-sm-4 col-md-4 col-lg-4 column">
 	                                <a href="{{quest.id}}/accept/{{shipper.0.id}}" class="acceptUrl"><button class="btn btn-success" rel="tooltip" title="We'll notify the user that you've accepted his bid!">Accept</button></a>
 	                             </div><!-- ./column -->
+                                   
+                                   
                                     {% comment %}
                                  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 column">
                                   	<button type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#myModal">Contact</button>
@@ -93,6 +97,8 @@
                         </a>
                         {% endfor %}
                     {% endif %}
+                   
+                   
                     {% if quest.isaccepted and not quest.is_complete and not quest.is_shipper_reviewed %}
                         {% for shipper in shippers %}
                         <a href="/quest/{{quest.id}}">
@@ -246,7 +252,6 @@
 {% comment %}
     <script>
 $(function() {
-       
     $(".acceptBtn").click(function(){
         $( ".alert" ).show( "slow" );
         $(".acceptBtn").html("Leave a review");

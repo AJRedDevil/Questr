@@ -34,4 +34,13 @@
 </div>
 {% endblock content %}
 {% block scripts %}
+<script>
+	$("select").selectpicker({style: 'btn-sm btn-grad btn-info', menuStyle: 'dropdown-menu'});
+
+// style: select toggle class name (which is .btn)
+// menuStyle: dropdown class name
+
+// You can always select by any other attribute, not just tag name.
+// Also you can leave selectpicker arguments blank to apply defaults.
+</script>
 {% endblock scripts %}
