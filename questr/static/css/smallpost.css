@@ -3,7 +3,6 @@
 	height:auto;
 	min-height: 100px;
 	background: rgba(255,255,255,0.94);
-	
 	border-bottom: 1px;
 	border-top: 1px;
 	border-left: none;
@@ -18,14 +17,6 @@
 
 .list-group-item .post-image {
 	margin: 0;
-}
-
-.list-group-item .media {
-	margin: 0;
-}
-
-.list-group-item button {
-	float: right;
 }
 
 .list-group-item .col-md-4 p span.money {
@@ -46,5 +37,4 @@
 	margin: 0;
 	padding: 0;
 }
-
 

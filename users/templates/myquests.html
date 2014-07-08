@@ -4,7 +4,6 @@
 {% block localhead %}
     <!-- Custom CSS -->
     <link href={% static "css/smallpost.css" %} rel="stylesheet">
-    <link href={% static "css/profile.css" %} rel="stylesheet">
     <link href={% static "css/trades.css" %} rel="stylesheet">
     
     <!-- Custom Javascript -->
@@ -39,7 +38,7 @@
 			  {% for quest in myquests %} 
 				<li class="list-group-item">
 				<div class="row clearfix">
-				    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
+				    <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
               {% if quest.item_images %}
               <a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-rounded" style="background-image: url({{quest.item_images}});"></div></a>
               {% else %}    
@@ -50,7 +49,7 @@
               </a>
               {% endif %}
 				    </div><!-- ./column -->
-				    <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5 column">
+				    <div class="col-xs-9 col-sm-5 col-md-5 col-lg-5 column">
 				        <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
 				        <p class="list-group-item-text postDesc">{{quest.description}}</p>
 
@@ -58,39 +57,41 @@
                                     <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
                                 
 				    </div><!-- ./column -->
-	    <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 column">
-                    	<p class="grey">${{quest.reward}}</p>
+				    <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
+					    <p class="grey">${{quest.reward}}</p>
 				    </div><!-- ./column -->
 				    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column">
-	                    <p class="grey"><span class="glyphicon glyphicon-time"></span>{{quest.creation_date}}</p>
+	                    <p class="light-grey inline"><span class="glyphicon glyphicon-time"></span></p><p class="grey inline"> {{quest.creation_date}}</p>
 				    </div><!-- ./column -->
-				    <div class="col-xs-8 col-sm-10 col-md-10 col-lg-10 column">
-				    	<br>
+				   
+				   
+				   
+				   
+				    <!-- offers -->
+				    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 column">
+					    <br>
 						<ul class="list-group">
-							<li class="list-group-item">
+							<li class="list-group-item" style="background:transparent;">
 								<div class="row clearfix">
-								<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 column">
+								<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 column">
 										<!-- profile img -->
 										<a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-circle profile-img" style="background-image:url({{quest.item_images}});"></div></a>	
 								</div>
-									<p class="inline">[username goes here] wants to accept your quest!</p>
-									<button class="btn btn-xs btn-danger inline" style="float:right;">Reject</button>
-									<button class="btn btn-xs btn-info inline" style="float:right;">Accept</button>
-								</div><!-- ./row -->
-							</li>
-							<li class="list-group-item">
-								<div class="row clearfix">
-								<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 column">
-										<!-- profile img -->
-										<a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-circle profile-img" style="background-image:url({{quest.item_images}});"></div></a>	
+								<div class="col-xs-7 col-sm-7 col-md-8 col-lg-8 column">
+									<p>[username goes here] wants to accept your quest!</p>
 								</div>
-									<p class="inline">[username goes here] wants to accept your quest!</p>
-									<button class="btn btn-xs btn-danger inline" style="float:right;">Reject</button>
-									<button class="btn btn-xs btn-info inline" style="float:right;">Accept</button>
+								<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column">
+									<button class="btn btn-xs btn-info inline" style="float:left;">Accept</button>
+								</div>
 								</div><!-- ./row -->
 							</li>
+							
+							
 						</ul>
-					</div>
+					</div><!-- ./column -->
+					
+					
+					
 				</li><!-- list-group-item -->	
 						                   
              {% endfor %}               
