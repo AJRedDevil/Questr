@@ -63,12 +63,12 @@
       
                 <div class="row clearfix userbox">
                 	<a href="/user/{{quest.questrs.displayname}}" class="username">
-                	<div class="col-xs-5 col-sm-5 col-md-3 col-lg-3 column">
+                	<div class="col-xs-4 col-sm-5 col-md-3 col-lg-3 column no-padding">
                 		<div class="ratio img-responsive img-circle" style="background-image: url({{quest.questrs.avatar_file_name}});"></div>
                 	</div><!-- column -->
-                	<div class="col-xs-7 col-sm-7 col-md-9 col-lg-9 column">
-                		<p>{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p>
-                		<input id="input-21e" value="{{quest.questrs.rating}}" type="number" class="rating" min=0 max=5 step=0.5 data-size="xl" data-readonly="true" data-show-clear="false" data-show-caption="true" >
+                	<div class="col-xs-8 col-sm-7 col-md-9 col-lg-9 column no-margin no-padding">
+                		<p class="no-margin">{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p>
+                		<input id="input-21e" value="{{quest.questrs.rating}}" type="number" class="rating no-margin" min=0 max=5 step=0.5 data-size="xl" data-readonly="true" data-show-clear="false" data-show-caption="true" >
                 	</div><!-- column -->
                 	</a>
                 </div><!-- ./row -->
