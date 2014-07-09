@@ -14,14 +14,11 @@
     <div class="row">
        <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 column">    
        
-	       <div class="panel panel-default shadows body-borders">
-		  <!-- Default panel contents -->
-		  <div class="panel-heading">
+           <div class="panel panel-default shadows body-borders">
+          <!-- Default panel contents -->
+          <div class="panel-heading">
              <div class="panel-title lead">
                   <ul>
-                      <li class="{% navactive request 'mytrades' %}"><a href="{% url 'mytrades' %}">
-                          <a href="{% url 'mytrades' %}">My Offers</a>
-                      </li>
                       <li class="{% navactive request 'myposts' %}"><a href="{% url 'myposts' %}">
                           <a href="{% url 'myposts' %}">My Quests</a>
                       </li>       
@@ -34,95 +31,255 @@
               </div>              
             </div>
 
-		  <ul class="list-group">   
-			  {% for quest in myquests %} 
-				<li class="list-group-item">
-				<div class="row clearfix">
-				    <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
-              {% if quest.item_images %}
-              <a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-rounded" style="background-image: url({{MEDIA_URL}}{{quest.item_images}});"></div></a>
-              {% else %}    
-              <a  href="/quest/{{quest.id}}" title="Title">
-              <div class="no-image img-rounded">
-                <h1><span class="glyphicon glyphicon-picture"></span></h1>
-              </div>
-              </a>
-              {% endif %}
-				    </div><!-- ./column -->
-				    <div class="col-xs-9 col-sm-5 col-md-5 col-lg-5 column">
-				        <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
-				        <p class="list-group-item-text postDesc">{{quest.description}}</p>
+          <ul class="list-group">
+            {% if not questswithoffers and not questswithoutoffers %}
+            <!-- shows if user has no quests available -->
+            <li class="list-group-item">
+                <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+                        <h3 class="lead light-grey text-center no-margin" style="background:transparent;">You have no quests up.</h3>
+                        
+                        <a href="{% url 'createquest' %}">
+                            <p class="lead light-grey text-center no-margin" style="background:transparent;">
+                                <span class="glyphicon glyphicon-plus-sign"></span> Start questing!
+                            </p>
+                        </a>
+                    </div><!-- ./column -->
+                </div><!-- ./row -->
+            </li><!-- list-group-item -->
+                
+            {% endif %}
+            {% if questswithoutoffers %}
+                {% for quest in questswithoutoffers %}
+                    <li class="list-group-item">
+                    <div class="row clearfix">
+                        <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
+                        {% if quest.item_images %}
+                            <a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-rounded" style="background-image: url({{MEDIA_URL}}{{quest.item_images}});"></div></a>
+                        {% else %}    
+                            <a  href="/quest/{{quest.id}}" title="Title">
+                            <div class="no-image img-rounded">
+                              <h1><span class="glyphicon glyphicon-picture"></span></h1>
+                            </div>
+                            </a>
+                        {% endif %}
+                                </div><!-- ./column -->
+                                    <div class="col-xs-9 col-sm-5 col-md-5 col-lg-5 column">
+                                      <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
+                                          <p class="list-group-item-text postDesc">{{quest.description}}</p>
+                                      <small class="light-grey">
+                                          <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}
+                                      </small>
+                                    </div><!-- ./column -->
+                                <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
+                                    <p class="grey">${{quest.reward}}</p>
+                                </div><!-- ./column -->
+                                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column">
+                                    <p class="light-grey inline"><span class="glyphicon glyphicon-time"></span></p><p class="grey inline"> {{quest.creation_date}}</p>
+                                </div><!-- ./column -->
+                                <div class="col-xs-7 col-sm-7 col-md-8 col-lg-8 column">
+                                    <p>You are yet to receive an application from one of our shippers!</p>
+                                </div>                           
+                {% endfor %}       
+            {% endif %}
 
+            {% for quest,shippers in shipperlist.items %} 
+                {% if not quest.isaccepted %}
+                        <a href="/quest/{{quest.id}}">
+                        <li class="list-group-item">
+                            <div class="row clearfix">
+                                <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
+                                {% if quest.item_images %}
+                                    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-rounded" style="background-image: url({{MEDIA_URL}}{{quest.item_images}});"></div></a>
+                                {% else %}    
+                                    <a  href="/quest/{{quest.id}}" title="Title">
+                                        <div class="no-image img-rounded">
+                                        <h1><span class="glyphicon glyphicon-picture"></span></h1>
+                                        </div>
+                                    </a>
+                                {% endif %}
+                                </div><!-- ./column -->
+                                <div class="col-xs-9 col-sm-5 col-md-5 col-lg-5 column">
+                                    <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
+                                        <p class="list-group-item-text postDesc">{{quest.description}}</p>
+                                        <small class="light-grey">
+                                            <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}
+                                        </small>
+                                </div><!-- ./column -->
+                                <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
+                                    <p class="grey">${{quest.reward}}</p>
+                                </div><!-- ./column -->
+                                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column">
+                                <p class="light-grey inline"><span class="glyphicon glyphicon-time"></span></p><p class="grey inline"> {{quest.creation_date}}</p>
+                                </div><!-- ./column -->
+
+                                <!-- offers -->
+                            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 column no-margin">
+                                <ul class="list-group no-margin">
+                                    {% for shipper in shippers %}
+                                    <!-- begin for loop here -->
+                                    <li class="list-group-item" style="background:transparent;">
+                                        <div class="col-xs-7 col-sm-7 col-md-8 col-lg-8 column">
+                                            <p><a href="{% url 'getUserInfo' displayname=shipper.0.displayname%}">{{ shipper.0.first_name }}</a> wants to accept your quest!</p>
+                                        </div>
+                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column">
+                                            <a href="{% url 'acceptOffer' quest_id=quest.id shipper_id=shipper.0.id %}" class="acceptUrl"><button class="btn btn-xs btn-info inline" style="float:left;">accept</button></a>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                    <!-- ./end for loop here -->
+                                </ul>
+                            </div><!-- ./column -->
+                {% endif %}
+                {% if quest.isaccepted and not quest.is_complete and not quest.is_shipper_reviewed %}
+                    {% for shipper in shippers %}
+                    <a href="/quest/{{quest.id}}">
+                    <li class="list-group-item">
+                        <div class="row clearfix">
+                            <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
+                                {% if quest.item_images %}
+                                <a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-rounded" style="background-image: url({{MEDIA_URL}}{{quest.item_images}});"></div></a>
+                                {% else %}    
+                                <a  href="/quest/{{quest.id}}" title="Title">
+                                <div class="no-image img-rounded">
+                                  <h1><span class="glyphicon glyphicon-picture"></span></h1>
+                                </div>
+                                </a>
+                                {% endif %}
+                            </div>
+                            <div class="col-xs-9 col-sm-5 col-md-5 col-lg-5 column">
+                                <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title | title}}</h6></a>
+                                    <p class="list-group-item-text postDesc">{{quest.description}}</p>
                                     <small class="light-grey">
-                                    <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
-                                
-				    </div><!-- ./column -->
-				    <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
-					    <p class="grey">${{quest.reward}}</p>
-				    </div><!-- ./column -->
-				    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column">
-	                    <p class="light-grey inline"><span class="glyphicon glyphicon-time"></span></p><p class="grey inline"> {{quest.creation_date}}</p>
-				    </div><!-- ./column -->
-				   
-				   
-				   
-				    
-				    <!-- offers -->
-				    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 column no-margin">
-					    <br>
-						<ul class="list-group no-margin">
-						
-							<!-- begin for loop here -->
-							<li class="list-group-item" style="background:transparent;">
-								<div class="row clearfix">
-								<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1 column">
-										<!-- profile img -->
-										<a href="/quest/{{quest.id}}"><div class="ratio img-responsive img-circle profile-img" style="background-image:url({{MEDIA_URL}}{{quest.item_images}});"></div></a>	
-								</div>
-								<div class="col-xs-7 col-sm-7 col-md-8 col-lg-8 column">
-									<p>[username goes here] wants to accept your quest!</p>
-								</div>
-								<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column">
-								
-								
-								
-								
-								
-									<button class="btn btn-xs btn-info inline" style="float:left;">Accept</button>
-									
-									
-									
-									
-								</div>
-								</div><!-- ./row -->
-							</li>
-							<!-- ./end for loop here -->
-							
-						</ul>
-					</div><!-- ./column -->
-					
-					
-				</li><!-- list-group-item -->	
-				
-				<!-- shows if user has no quests available -->
-				<li class="list-group-item">
-					<div class="row clearfix">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-							<h3 class="lead light-grey text-center no-margin" style="background:transparent;">You have no quests up.</h3>
-							
-							<a href="{% url 'createquest' %}">
-								<p class="lead light-grey text-center no-margin" style="background:transparent;">
-									<span class="glyphicon glyphicon-plus-sign"></span> Start questing!
-								</p>
-							</a>
-						</div><!-- ./column -->
-					</div><!-- ./row -->
-		        </li><!-- list-group-item -->
-						                   
-             {% endfor %}               
-        </ul>	<!-- End of list-group -->
-		 </div><!-- ./panel -->
-    </div>  <!-- ./column -->          
+                                        <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}
+                                    </small>
+                            </div><!-- ./column -->
+                            <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
+                                <p class="grey">${{quest.reward}}</p>
+                            </div><!-- ./column -->
+                            <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column">
+                            <p class="light-grey inline"><span class="glyphicon glyphicon-time"></span></p><p class="grey inline"> {{quest.creation_date}}</p>
+                            </div><!-- ./column -->
+                            <div class="col-xs-2 col-sm-4 col-md-4 col-lg-4 column">
+                                <button type="button" class="btn btn-info popover-right" data-container="body" data-toggle="popover" data-placement="right" data-content="{{questdetails.delivery_code}}">
+                                Show Delivery Code
+                                </button>
+                                    <button type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#myModal-{{shipper.0.id}}">Contact</button>
+                            </div><!-- column -->
+                        </div><!-- ./row -->
+                        </li>
+                       
+                        
+                            <!-- Modal -->
+                            <div id="myModal-{{shipper.0.id}}" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 column">
+                                              
+                                            <div class="row clearfix">
+                                                <div class="col-xs-12 col-sm-12 col-md-12 column">
+                                                    <div class="ratio img-responsive img-circle" style="background-image: url({{shipper.0.avatar_file_name}});"></div>
+                                                    <center><h5 id="shipperName">{{shipper.0.first_name}} {{shipper.0.last_name}}</h5></center>
+                                                    <div class="col-xs-3 col-sm-3 col-md-3 column"></div>
+                                                    <div class="col-xs-9 col-sm-9 col-md-9 column">
+                                                        <input id="input-21e" value="{{final_rating}}" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" >
+                                                    </div> 
+                                                         
+                                                </div>
+                                            </div><!-- ./row -->
+                                            
+                                            <div class="row clearfix">
+                                                <div class="col-xs-12 col-sm-12 col-md-12 column">
+                                                    <p><strong>Location: </strong> Toronto, Ontario, Canada </p>
+                                                    <p><strong><span class="glyphicon glyphicon-earphone"></span></strong> Phone number goes here </p>
+                                                    <p><strong>Quests Completed: </strong> {{quests_complete}} </p>
+                                                    <p><strong>Quests Posted: </strong> {{questes_posted}} </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <div class="btn-group">
+                                                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                  
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dalog -->
+                            </div><!-- /.modal -->
+                        {% endfor %}
+                    {% elif quest.isaccepted and quest.is_complete and not quest.is_shipper_reviewed%}
+                        {% for shipper in shippers %}
+                        <a href="/quest/{{quest.id}}">
+                        <li class="list-group-item">
+                            <div class="row clearfix">
+                                <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
+                                    {% if quest.item_images %}
+                                    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{MEDIA_URL}}{{quest.item_images}});"></div></a>
+                                    {% else %}    
+                                    <a  href="/quest/{{quest.id}}" title="Title">
+                                    <div class="no-image item-image">
+                                      <h1><span class="glyphicon glyphicon-picture"></span></h1>
+                                    </div>
+                                    </a>
+                                    {% endif %}
+                                </div>
+                                <div class="col-xs-9 col-sm-5 col-md-5 col-lg-5 column">
+                                    <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
+                                        <p class="list-group-item-text postDesc">{{quest.description}}</p>
+                                        <small class="light-grey">
+                                            <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}
+                                        </small>
+                                </div><!-- ./column -->
+                                <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
+                                    <p class="grey">${{quest.reward}}</p>
+                                </div><!-- ./column -->
+                                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column">
+                                <p class="light-grey inline"><span class="glyphicon glyphicon-time"></span></p><p class="grey inline"> {{quest.creation_date}}</p>
+                                </div><!-- ./column -->
+                                <div class="col-xs-2 col-sm-4 col-md-4 col-lg-4 column">                                  
+                                        <button type="button" class="btn btn-embossed btn-info contact" data-toggle="modal" data-target="#myModal-{{shipper.0.id}}">Contact</button>
+                                        <a href="/review/{{quest.id}}/{{shipper.0.id}}" class="reviewUrl"><button class="btn btn-success" rel="tooltip" title="We'll notify the user that you've reviewed his effort!">Review</button></a>
+                                </div><!-- column -->
+                            </div><!-- ./row -->
+                            </li>
+                        {% endfor %}
+                    {% elif quest.isaccepted and quest.is_complete and quest.is_shipper_reviewed %}
+                        {% for shipper in shippers %}
+                        <a href="/quest/{{quest.id}}">
+                        <li class="list-group-item">
+                            <div class="row clearfix">
+                                <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 column">
+                                    {% if quest.item_images %}
+                                    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{MEDIA_URL}}{{quest.item_images}});"></div></a>
+                                    {% else %}    
+                                    <a  href="/quest/{{quest.id}}" title="Title">
+                                    <div class="no-image item-image">
+                                      <h1><span class="glyphicon glyphicon-picture"></span></h1>
+                                    </div>
+                                    </a>
+                                    {% endif %}
+                                </div>
+                                <div class="col-xs-7 col-sm-6 col-md-6 col-lg-6 column">
+                                    <a href="/quest/{{quest.id}}">
+                                        <h6> {{quest.title| title}} </h6>
+                                    </a>
+                                       
+                                           <p><a href="{% url 'getUserInfo' displayname=shipper.0.displayname %}">{{shipper.0.first_name | title}}</a> delivered this to you !</p>
+                                            {% comment %}
+                                            <a href="/user/{{shipper.0.displayname}}"><div class="ratio img-responsive img-circle post-image" style="background-image: url({{shipper.0.avatar_file_name}});"></div></a>
+                                            <button type="button" class="btn btn-embossed btn-primary contact" data-toggle="modal" data-target="#myModal{{shipper.0.id}}">Contact</button>
+                                            {% endcomment %}                                            
+                                    
+                                </div><!-- column -->
+                            </div><!-- ./row -->
+                            </li>
+                        {% endfor %}                  
+                    {% endif %}
+    
+            {% endfor %}    
+                </li><!-- list-group-item -->   
+            </ul>   <!-- End of list-group -->
+         </div><!-- ./panel -->
+        </div>  <!-- ./column -->          
     </div>  <!-- ./row -->
 </div>  <!-- ./container -->
 

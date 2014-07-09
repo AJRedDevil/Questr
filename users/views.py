@@ -158,24 +158,25 @@ def userSettings(request):
 
 @login_required
 def myTrades(request):
-    pagetype="loggedin"
-    user = request.user
-    pagetitle = "My Trades"
-    shipperlist = {} #init blank dict
+    # pagetype="loggedin"
+    # user = request.user
+    # pagetitle = "My Trades"
+    # shipperlist = {} #init blank dict
     
-    questswithoffers = quest_handler.getQuestsWithOffer(user.id) # list of the logged in user's quest where offers are put
+    # questswithoffers = quest_handler.getQuestsWithOffer(user.id) # list of the logged in user's quest where offers are put
 
-    for quest in questswithoffers:
-        shippers = user_handler.getShippersOfQuest(quest.id) # for each quest get the individual shippers
-        shipper_object_list = []
-        for shipper_id in shippers:
-            # build a dict of quest and shipper objects
-            shipper_object_list.append(user_handler.getShipper(shipper_id) )
+    # for quest in questswithoffers:
+    #     shippers = user_handler.getShippersOfQuest(quest.id) # for each quest get the individual shippers
+    #     shipper_object_list = []
+    #     for shipper_id in shippers:
+    #         # build a dict of quest and shipper objects
+    #         shipper_object_list.append(user_handler.getShipper(shipper_id) )
         
-        shipperlist[quest]=shipper_object_list
+    #     shipperlist[quest]=shipper_object_list
     
-    # logging.warn(shipperlist)
-    return render(request, 'trades.html', locals())
+    # # logging.warn(shipperlist)
+    # return render(request, 'trades.html', locals())
+    return redirect('myposts')
 
 @login_required
 def acceptOffer(request, quest_id, shipper_id):
@@ -206,8 +207,22 @@ def acceptOffer(request, quest_id, shipper_id):
 def myPosts(request):
     pagetype="loggedin"
     user = request.user
-    pagetitle = "My Posts"
-    myquests = quest_handler.getQuestsByUser(user)
+    pagetitle = "My Trades"
+    shipperlist = {} #init blank dict
+    
+    questswithoffers = quest_handler.getQuestsWithOffer(user.id) # list of the logged in user's quest where offers are put
+    questswithoutoffers = quest_handler.getQuestsByUser(user.id) # list of the logged in user's quest where offers aren't put
+
+    for quest in questswithoffers:
+        shippers = user_handler.getShippersOfQuest(quest.id) # for each quest get the individual shippers
+        shipper_object_list = []
+        for shipper_id in shippers:
+            # build a dict of quest and shipper objects
+            shipper_object_list.append(user_handler.getShipper(shipper_id) )
+        
+        shipperlist[quest]=shipper_object_list
+    
+    # logging.warn(shipperlist)
     return render(request, 'myquests.html', locals())
 
 @login_required
