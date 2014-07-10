@@ -94,6 +94,7 @@
 			<div class="col-md-10 col-md-offset-1 column">
 				<div class="col-lg-4">
 					<h4>What is Questr?</h4>
+					<div class="hline"></div>
 					<p>
 					One of the world's first, Questr is a crowdshipping platform that provides cheap, fast, and economical shipments within Greater Toronto Area.
 					<br>
@@ -110,6 +111,23 @@
 					<p><a href="{% url 'about' %}#FAQ" class="smoothScroll">Is Questr safe?</a></p>
 					<p><a href="{% url 'about' %}#FAQ" class="smoothScroll">How much does Questr value safety?</a></p>
 					<br>
+				</div>
+
+				<div class="col-lg-4">
+					<h4>Say hi to us</h4>
+					<div class="hline"></div>
+					<p></p>
+					<form action="/beta/contactus" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
+						<div class="form-group">
+							<input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Your name">
+							<p></p>
+							<input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Your email address">
+							<p></p>
+							<textarea name="message" class="form-control" rows="3" placeholder="Your message"></textarea>
+						</div>
+						<p></p>
+						<button type="submit" class="btn btn-embossed btn-default">Send</button>
+					</form>
 				</div>
 			</div>
 		</div><! --/row -->
