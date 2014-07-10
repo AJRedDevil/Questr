@@ -34,51 +34,67 @@
 
   <!-- Menu -->
   
-
-  
-  
-  
-  <div class="container">
+<!-- Main Navbar -->
+  <div class="container brand">
     <div class="row clearfix">
-      <div class="col-md-12 column">
-        
-        <nav class="menu" id="theMenu">
-          <div class="menu-wrap">
-            <h1 class="logo"><a href="{% url 'index' %}#home">Questr</a></h1>
-            <i class="fa fa-times menu-close"></i>
-            <a href="{% url 'index' %}" class="smoothScroll">Home</a>
-            <a href="{%url 'about'%}#how-questr-works" class="smoothScroll">How Questr works</a>
-            <a href="{% url 'about' %}" class="smoothScroll">About</a>
-            <a href="{% url 'about'%}#FAQ" class="smoothScroll">FAQ</a>     
-          </div>
-          
-          <!-- Menu button -->
-          <div id="menuToggle">
-            <i class="fa fa-bars"></i>
-          </div>
-
-        </nav>    
+      <div class="col-md-2 col-md-offset-5 column">
+          <center><a href="{% url 'mainindex' %}">QUESTR</a></center>
       </div>
     </div>
   </div>
-  
-  
+              <nav class="navbar navbar-default" role="navigation">
+                
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          
+          
+          <div class="collapse navbar-collapse" id="navbar-collapse-01">
+            <ul class="nav navbar-nav navbar-left"> 
+              <li>
+                <a href="{% url 'index' %}" class="smoothScroll">Home</a>
+              </li>
+              <li>
+                <a href="{%url 'about'%}#how-questr-works" class="smoothScroll">How Questr works</a>
+              </li>
+              <li>
+                <a href="{% url 'about' %}" class="smoothScroll">About</a>
+              </li>
+              <li>
+                <a href="{% url 'about'%}#FAQ" class="smoothScroll">FAQ</a>     
+              </li>
+            </ul>   
+            
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="{% url 'about' %}" class="smoothScroll">About</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'about'%}#FAQ" class="smoothScroll">FAQ</a>     
+                  </li>
+                </ul>
+              </li>
+            </ul>
+                      
+            
+                            
+          </div><!-- /.navbar-collapse -->
+        </nav><!-- /navbar -->
+ 
 
 <!-- *****************************************************************************************************************
  HEADERWRAP
  ***************************************************************************************************************** -->
  <div id="headerwrap">
 <div class="container">
-<!--
-<div class="row">
-<div class="col-md-12 column">
-<ul id="navbar">
-<li><a href="#"><p>Sign in</p></a></li>
-<center><li class="brand"><a href="#"><h4>QUESTR</h4></a></li></center>
-</ul>
-</div>
-</div>
--->
 
 <div class="row">
   <div class="col-lg-6">
