@@ -1,183 +1,389 @@
 {% load staticfiles %}
-
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/img/favicon.png">
+    <link rel="shortcut icon" href={% static "assets/ico/favicon.ico" %}>
 
-    <title>Questr</title>
+    <title>Home | Questr</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
-
-    <!-- Fonts from Google Fonts -->
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap, JQuery, Awesome Fonts -->
+    <link href={% static "bootstrap/css/bootstrap.min.css" %} rel="stylesheet">
+    <link href={% static "css/flat-ui.css" %} rel="stylesheet">
+    <link href={% static "css/theme.css" %} rel="stylesheet">
+    <link href={% static "css/social-buttons.css" %} rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     
+    <link href={% static "assets/css/style.css" %} rel="stylesheet">
+    
+    
+     <!-- Custom JS -->
+     <script src={% static "js/jquery-1.10.0.min.js" %}></script>
+    <script src={% static "bootstrap/js/bootstrap.min.js" %}></script>
+    <script src={% static "bootstrap/js/bootstrap-select.js" %}></script>
+    <script src={% static "bootstrap/js/tooltip.js" %}></script>
+   
+    
+    
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
 
   <body>
 
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#"><b>QUESTR</b></a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"></a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+  <!-- Menu -->
+  
+<!-- Main Navbar -->
+  <div class="container brand">
+    <div class="row clearfix">
+      <div class="col-md-2 col-md-offset-5 column">
+          <center><a href="{% url 'mainindex' %}">QUESTR</a></center>
       </div>
     </div>
+  </div>
+              <nav class="navbar navbar-default" role="navigation">
+                
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          
+          
+          <div class="collapse navbar-collapse" id="navbar-collapse-01">
+            <ul class="nav navbar-nav navbar-left"> 
+              <li>
+                <a href="{% url 'index' %}" class="smoothScroll">Home</a>
+              </li>
+              <li>
+                <a href="{%url 'about'%}#how-questr-works" class="smoothScroll">How Questr works</a>
+              </li>
+              <li>
+                <a href="{% url 'about' %}" class="smoothScroll">About</a>
+              </li>
+              <li>
+                <a href="{% url 'about'%}#FAQ" class="smoothScroll">FAQ</a>     
+              </li>
+            </ul>   
+            
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="{% url 'about' %}" class="smoothScroll">About</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'about'%}#FAQ" class="smoothScroll">FAQ</a>     
+                  </li>
+                </ul>
+              </li>
+            </ul>
+                      
+            
+                            
+          </div><!-- /.navbar-collapse -->
+        </nav><!-- /navbar -->
+ 
 
-	<div id="headerwrap">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<h1>World's first<br>peer-to-peer courier.<br>Coming this May.</h1>
-						<form action="http://questr.us8.list-manage1.com/subscribe/post?u=2dd229ae45dbf10c17fd6fec4&amp;id=7f3d74a524" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_blank" novalidate>
-							<input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="Enter your email address" required>
-    						<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-    						<style="position: absolute; left: -5000px;" input type="text" name="b_2dd229ae45dbf10c17fd6fec4_7f3d74a524" value="">
-							<input type="submit" value="Invite me!" name="subscribe" id="mc-embedded-subscribe" class="btn btn-warning btn-lg">
-						</form>	
-				</div><!-- /col-lg-6 -->
-				<div class="col-lg-6">
-					<img class="img-responsive" src=" {% static 'assets/img/header.png' %}" alt="">
-				</div><!-- /col-lg-6 -->
-				
-			</div><!-- /row -->
-		</div><!-- /container -->
-	</div><!-- /headerwrap -->
-	
-	
-	<div class="container">
-		<div class="row mt centered">
-			<div class="col-lg-6 col-lg-offset-3">
-				<h1>What is Questr?</h1>
-							
-				<h3>Questr is the new way to get your orders to your doorstep.<br>
-					As fast as the most expensive shipping option for a fraction of the cost.</h3>
-			</div>
-		</div><!-- /row -->
-		<hr>
-	</div><!-- /container -->
-		
-		
-		
-	<div class="container">
-		<div class="row mt centered">
-		<h1>How does it work?</h1>
-		<h3>On Questr, there are two types of users: people who need things, and people who can bring things.*</h3>
-		<h5>*One account and rule them both!</h5>
-			<div class="col-lg-6">
-						
-				<h4>If you need something far away...</h4>
-				<p>You are in Canada and looking to buy some vegemite. <br> You check online, and prices go for 600% of what marmite would normally go for in Austrailia!  (with regular shipping!!!!)</p>
-			</div><!--/col-lg-6 -->
+<!-- *****************************************************************************************************************
+ HEADERWRAP
+ ***************************************************************************************************************** -->
+ <div id="headerwrap">
+<div class="container">
 
-			<div class="col-lg-6">
-				<h4>If you are at somewhere far away...</h4>
-				<p>
-				You are travelling from Australia to Canada, and you still have plenty of space in your suitcases after getting gifts for all of your friends. Questr can help you cut the cost of your flight tickets by going on a quest.
-				
-				</p>
-			
-			</div><!--/col-lg-6 -->
-			</div><!-- /row -->
-			
-			
-			
-			
-		<div class="row mt centered">
-			<div class="col-lg-6">
-				<h4>Post A Quest</h4>
-				<p>You post a quest, offering - say - $5, to see if anyone travelling from Austailia is willing to get him some vegemite.</p>
-			</div><!--/col-lg-6 -->
+<div class="row">
+  <div class="col-lg-6">
+    <h1 class="text-left">
+      <br>
+      Canada's first crowdshipping platform.
+      <br>
+    </h1>
+    <h3 class="text-left">
+      Cheapest, fastest, 24/7 shipments<br>within Greater Toronto Area.
+    </h3>
+    
+    <form action="/beta/join" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
+        <div class="form-group">
+          <input type="email" name="EMAIL" class="form-control" id="exampleInputEmail1" placeholder="Your email address">
+            <button type="submit" class="btn btn-embossed btn-inverse btn-hg">Notify me</button>
+          <center></center>
+        </div>
+      </form>
+</div>
+<div class="col-lg-6">
+<br><br>
+<img class="img-responsive" src={% static "assets/img/header.png" %} alt="">
+</div>
+</div><!-- /row -->
 
-			<div class="col-lg-6">
-				<h4>Post An Offer</h4>
-				<p>You offer help to see if anyone in Canada wants something from Australia.</p>
-			</div><!--/col-lg-6 -->
-		</div><!-- /row -->
-		
+</div><!-- /container -->
+</div><!-- /headerwrap -->
 
-		<div class="row mt centered">
-			<div class="col-lg-6">
-				<h4>Pick one of the bids</h4>
-				<p>It seems many people are coming to Canada from Australia recently. Pick the bidder who will be nearest to you or coming soonest.</p>
-			</div><!--/col-lg-6 -->
 
-			<div class="col-lg-6">
-				<h4>Pick one of the bids</h4>
-				<p>Lots of people in Canada need things from Australia. Pick someone who will be nearest to you or offers the most bounty.</p>
-			</div><!--/col-lg-6 -->
-		</div><!-- /row -->
-	
-		<div class="row mt centered">
-				<h4>See contact info and start talking</h4>
-				<p>Once you have picked one or have been picked, both parties' contacts will be revealed, so you can talk about where you will meet, or carnation of which color you will carry.</p>
-		</div><!-- /row -->
-		
-		<div class="row mt centered">
-						
-				<h4>Meet up and leave a review</h4>
-				<p>Was the person you met nice, quick, or just purely horrible? Leave a review and let others know!</p>
 
-		</div><!-- /row -->
-		
-			
-			
-	</div><!-- /container -->
-	
-	
-	
-	
-	
+  <!-- *****************************************************************************************************************
+   SERVICE LOGOS
+   ***************************************************************************************************************** -->
+   <div id="service">
+    <div class="container">
+      <div class="row centered">
+      <div class="col-md-10 col-md-offset-1 column">
+        <div class="col-md-4">
+          <i class="fa fa-dollar"></i>
+          <h4>Cheapest</h4>
+          <p>Starting from only $6, Questr offers the cheapest shipping options available in the entire Canada.</p>
+          
+        </div>
+        <div class="col-md-4">
+          <i class="fa fa-bolt"></i>
+          <h4>Fastest</h4>
+          <p>Less than 30 minutes from STC to Square One. Decentralized logistics makes shipping lightning fast.</p>
+          
+        </div>
+        <div class="col-md-4">
+          <i class="fa fa-clock-o"></i>
+          <h4>Available 86,400 seconds a day</h4>
+          <p>Questr is always here, twenty-four-seven, no matter it's rush hour on Friday or midnight on Christmas Eve.</p>
+        </div>  
+      </div>          
+      </div>
+    </div><! --/container -->
+   </div><! --/service -->
+   
+     
+  <!-- *****************************************************************************************************************
+   MIDDLE CONTENT
+   ***************************************************************************************************************** -->
 
-	<div class="container">
-		<hr>
-		<div class="row centered">
-			<div class="col-lg-6 col-lg-offset-3">
-			<h1>Sign Up To Be A Beta Tester</h1>
-				<img src=" {% static 'assets/img/ser02.png' %}" width="180" alt="">
-				<form class="form-inline" role="form">
-				  <div class="form-group">
-				    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter your email address">
-				  </div>
-				  <button type="submit" class="btn btn-warning btn-lg">Invite Me!</button>
-				</form>					
-			</div>
-			<div class="col-lg-3"></div>
-		</div><!-- /row -->
-		<hr>
-		<p class="centered">Questr - 2014</p>
-	</div><!-- /container -->
-	
+   <div class="container mtb">
+    <div class="row">
+    <div class="col-md-10 col-md-offset-1 column">
+      <div class="col-lg-4">
+        <h4>What is Questr?</h4>
+        <p>
+          One of the world's first, Questr is a crowdshipping platform that provides cheap, fast, and economical shipments within Greater Toronto Area.
+          <br>
+          Unlike traditional courier companies like Canada Post or UPS, Questr's shippers deliver packages directly to the destination without the hassle of going to local facility, saving much time and labour.
+        </p>
+        <br>
+      </div>
+      
+      <div class="col-lg-4">
+        <h4>A few more details</h4>
+        <div class="hline"></div>
+        <p><a href="{% url 'about' %}" class="smoothScroll">More About Questr</a></p>
+        <p><a href="{% url 'about' %}#how-questr-works" class="smoothScroll">How does Questr work?</a></p>
+        <p><a href="{% url 'about' %}#FAQ" class="smoothScroll">Is Questr safe?</a></p>
+        <p><a href="{% url 'about' %}#FAQ" class="smoothScroll">How much does Questr value safety?</a></p>
+        <br>
+      </div>
+    </div>
+    </div><! --/row -->
+   </div><! --/container -->
 
+
+   <!-- *****************************************************************************************************************
+   MENTIONED
+   ***************************************************************************************************************** -->
+   <div id="twrap">
+     <div class="container">
+      <div class="row centered">
+        <h4>WE'RE MENTIONED IN</h4> 
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5 column">
+          <a href="http://skift.com/2014/03/27/daily-travel-startup-watch-opendoor-coexperiences-and-more/"><img src={% static "assets/img/clients/client01.png" %} class="img-responsive"></a>
+        </div>
+      </div><! --/row -->
+     </div><! --/container -->
+   </div><! --/cwrap -->
+  <!-- *****************************************************************************************************************
+   FOOTER
+   ***************************************************************************************************************** -->
+   <div id="footerwrap">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3">
+          <h4>About US</h4>
+          <div class="hline-w"></div>
+          <p>
+            Questr is Canada's first crowdshipping platform and aims to provide cheaper, faster, and more economical shipping using the Internet way of thinking.
+            The startup was founded in March of 2014 by two undergraduate students at the University of Western Ontario.
+          </p>
+        </div>
+        <div class="col-lg-3">
+          <h4>Find Us</h4>
+          <div class="hline-w"></div>
+          <p>
+            Questr at the moment is a project in development and is expected to start functioning in late June. 
+            <br>
+            If you are interested in talking to us - joining us, investing in us, or simply saying hi - please email us at hello@questr.co or use the contact form provided above.
+          </p>
+        </div>
+        <div class="col-lg-3">
+          <h4>Say hi to us</h4>
+          <div class="hline-w"></div>
+            
+          <form action="/beta/contactus" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
+              <div class="form-group">
+              <input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Your name">
+              <br>
+              <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Your email address">
+              <br>
+              <textarea name="message" class="form-control" rows="3" placeholder="Your message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-embossed btn-default">Send</button>
+          </form>
+        </div>
+        <div class="col-lg-3">
+          <h4>Social Us</h4>
+          <div class="hline-w"></div>
+          <p>
+            <a href="https://www.facebook.com/questrco"><facebook class="fa fa-facebook"></facebook></a>
+            <a href="https://twitter.com/questrco"><twitter class="fa fa-twitter"></twitter></a>
+            <a href="http://linkedin.com/company/questr"><linkedin class="fa fa-linkedin"></linkedin></a>
+            <a href="mailto:hello@questr.co"><email class="fa fa-envelope"></email></a>
+          </p>  
+        </div>
+
+      </div><! --/row -->
+      <div class="row clearfix">
+        <div class="col-md-12 column">
+          <br><br><br>
+          <p class="text-center">2014 Questr Co</p>
+        </div>
+      </div>
+    </div><! --/container -->
+   </div><! --/footerwrap -->
+
+   
+   
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src=" {% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="assets/js/modernizr.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src={% static "assets/js/bootstrap.min.js" %}></script>
+    <script src={% static "assets/js/retina-1.1.0.js" %}></script>
+    <script src={% static "assets/js/jquery.hoverdir.js" %}></script>
+    <script src={% static "assets/js/jquery.hoverex.min.js" %}></script>
+    <script src={% static "assets/js/jquery.prettyPhoto.js" %}></script>
+    <script src={% static "assets/js/jquery.isotope.min.js" %}></script>
+    <script src={% static "assets/js/custom.js" %}></script>
+    <script src={% static "assets/js/smoothscroll.js" %}></script>
+    <script src={% static "assets/js/main.js" %}></script>
+    
+    <script src={% static "assets/js/jquery-ui-1.10.3.custom.min.js" %}></script>
+    <script src={% static "assets/js/jquery.ui.touch-punch.min.js" %}></script>
+    <script src={% static "assets/js/bootstrap.min.js" %}></script>
+    <script src={% static "assets/js/bootstrap-select.js" %}></script>
+    <script src={% static "assets/js/bootstrap-switch.js" %}></script>
+    <script src={% static "assets/js/flatui-checkbox.js" %}></script>
+    <script src={% static "assets/js/flatui-radio.js" %}></script>
+    <script src={% static "assets/js/jquery.tagsinput.js" %}></script>
+    <script src={% static "assets/js/jquery.placeholder.js" %}></script>
+    <script src={% static "assets/js/typeahead.js" %}></script>
+    <script src={% static "assets/js/google-code-prettify/prettify.js" %}></script>
+    <script src={% static "assets/js/application.js" %}></script>
+    
+    
+    
+    
+    
+
+<script>
+// Portfolio
+(function($) {
+  "use strict";
+  var $container = $('.portfolio'),
+    $items = $container.find('.portfolio-item'),
+    portfolioLayout = 'fitRows';
+    
+    if( $container.hasClass('portfolio-centered') ) {
+      portfolioLayout = 'masonry';
+    }
+        
+    $container.isotope({
+      filter: '*',
+      animationEngine: 'best-available',
+      layoutMode: portfolioLayout,
+      animationOptions: {
+      duration: 750,
+      easing: 'linear',
+      queue: false
+    },
+    masonry: {
+    }
+    }, refreshWaypoints());
+    
+    function refreshWaypoints() {
+      setTimeout(function() {
+      }, 1000);   
+    }
+        
+    $('nav.portfolio-filter ul a').on('click', function() {
+        var selector = $(this).attr('data-filter');
+        $container.isotope({ filter: selector }, refreshWaypoints());
+        $('nav.portfolio-filter ul a').removeClass('active');
+        $(this).addClass('active');
+        return false;
+    });
+    
+    function getColumnNumber() { 
+      var winWidth = $(window).width(), 
+      columnNumber = 1;
+    
+      if (winWidth > 1200) {
+        columnNumber = 5;
+      } else if (winWidth > 950) {
+        columnNumber = 4;
+      } else if (winWidth > 600) {
+        columnNumber = 3;
+      } else if (winWidth > 400) {
+        columnNumber = 2;
+      } else if (winWidth > 250) {
+        columnNumber = 1;
+      }
+        return columnNumber;
+      }       
+      
+      function setColumns() {
+        var winWidth = $(window).width(), 
+        columnNumber = getColumnNumber(), 
+        itemWidth = Math.floor(winWidth / columnNumber);
+        
+        $container.find('.portfolio-item').each(function() { 
+          $(this).css( { 
+          width : itemWidth + 'px' 
+        });
+      });
+    }
+    
+    function setPortfolio() { 
+      setColumns();
+      $container.isotope('reLayout');
+    }
+      
+    $container.imagesLoaded(function () { 
+      setPortfolio();
+    });
+    
+    $(window).on('resize', function () { 
+    setPortfolio();          
+  });
+})(jQuery);
+</script>
   </body>
 </html>
