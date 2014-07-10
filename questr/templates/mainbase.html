@@ -1,298 +1,293 @@
-
 {% load staticfiles %}
 {% load active %}
 <html lang="en">
-<head>
+	<head>
 
-	<!-- Facebook OpenGraph -->
-    <meta property="og:title" content="Questr" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://www.questr.co" />
-    <meta property="og:image" content={% static "img/logo.png" %} />
-    <meta proptery="og:description" content="Questr, cheapest, fastest, 24/7 delivery within GTA." />
-    <meta content="text/html; charset=utf-8" http-equiv="content-type">
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+		<!-- Facebook OpenGraph -->
+	    <meta property="og:title" content="Questr" />
+	    <meta property="og:type" content="website" />
+	    <meta property="og:url" content="http://www.questr.co" />
+	    <meta property="og:image" content={% static "img/logo.png" %} />
+	    <meta proptery="og:description" content="Questr, cheapest, fastest, 24/7 delivery within GTA." />
+	    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+	    <meta charset="utf-8">
+	    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Questr - {{pagetitle | title}}</title>
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+	    <title>Questr - {{pagetitle | title}}</title>
+	    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	    <!--[if lt IE 9]>
+	      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
 
-    <!-- Bootstrap, JQuery, Awesome Fonts -->
-    <link href={% static "bootstrap/css/bootstrap.min.css" %} rel="stylesheet">
-    <link href={% static "css/flat-ui.css" %} rel="stylesheet">
-    <link href={% static "css/theme.css" %} rel="stylesheet">
-    <link href={% static "css/social-buttons.css" %} rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    
-    <!-- Custom JS -->
-    <script src={% static "js/jquery-1.10.0.min.js" %}></script>
-    <script src={% static "bootstrap/js/bootstrap.min.js" %}></script>
-    <script src={% static "bootstrap/js/bootstrap-select.js" %}></script>
-    <script src={% static "bootstrap/js/tooltip.js" %}></script>
-     
-	<!-- Google Analytics -->
-    <script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	    <!-- Bootstrap, JQuery, Awesome Fonts -->
+	    <link href={% static "bootstrap/css/bootstrap.min.css" %} rel="stylesheet">
+	    <link href={% static "css/flat-ui.css" %} rel="stylesheet">
+	    <link href={% static "css/theme.css" %} rel="stylesheet">
+	    <link href={% static "css/social-buttons.css" %} rel="stylesheet">
+	    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	    
+	    <!-- Custom JS -->
+	    <script src={% static "js/jquery-1.10.0.min.js" %}></script>
+	    <script src={% static "bootstrap/js/bootstrap.min.js" %}></script>
+	    <script src={% static "bootstrap/js/bootstrap-select.js" %}></script>
+	    <script src={% static "bootstrap/js/tooltip.js" %}></script>
+	     
+		<!-- Google Analytics -->
+	    <script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-	  ga('create', 'UA-52727900-1', 'auto');
-	  ga('send', 'pageview');
+		  ga('create', 'UA-52727900-1', 'auto');
+		  ga('send', 'pageview');
 
-	</script>
-
-
-    {% block localhead %}
-    {% endblock localhead %}
-</head>
-
-<body id="start">
-    <!-- This is the overlay DIV that is displayed while loading a new page -->
-
-<!-- Main Navbar -->
-  <div class="container brand">
-  	<div class="row clearfix">
-  		<div class="col-md-2 col-md-offset-5 column">
-  				<center><a href="{% url 'mainindex' %}">QUESTR</a></center>
-  		</div>
-  	</div>
-  </div>
-            	<nav class="navbar navbar-default" role="navigation">
-            		
-				  <div class="navbar-header">
-				    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-					    <span class="sr-only">Toggle navigation</span>
-					    <span class="icon-bar"></span>
-					    <span class="icon-bar"></span>
-					    <span class="icon-bar"></span>
-				    </button>
-				  </div>
-				  
-				  
-				  <div class="collapse navbar-collapse" id="navbar-collapse-01">
-					  <ul class="nav navbar-nav navbar-left"> 
-				      
-				      		{% if pagetype == "public" %}
-	                        <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li>
-	               
-	                        <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-thumbs-up"></span>Signup</a></li>
-	
-	                        <li><a href="#"><span class="glyphicon glyphicon-heart"></span>About Us</a></li>
-	        
-	                        {% endif %}
-        		
-	                        {% if pagetype == "loggedin" %}
-                            <li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li> 
-                            <li class="{% navactive request 'profile' %}"><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span>My Profile</a></li>
-                            <li class="{% navactive request 'mytrades' %}"><a href="{% url 'mytrades' %}"><span class="glyphicon glyphicon-transfer"></span>My Trades</a></li>
-                        	{% comment %}
-                            <li><a href="/quest"><span class="glyphicon glyphicon-tree-deciduous"></span>Browse</a></li>                  
-                            
-                            <li class="dropdown" id="notifications">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="navbar-new">2</span></a>
-                                <ul class="dropdown-menu">
-
-                                    <li>
-                                        <!-- Notification -->
-                                        <a href="#" class="list-group-item">
-                                    
-                                            <div class="media col-md-3 imgBox">
-                                                <div class="ratio img-responsive" style="background-image: url(http://www.stars-arena.com/wp-content/uploads/2013/08/emma-watson-3.jpg);"></div>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="smallInfo">
-                                                    <small class="light-grey">Emma Watson left you a comment: Hello World ;)</small>
-                                                </div><!-- ./smallInfo -->
-                                        
-                                            
-                                            </div> 
-                                        </a>  <!-- End of notification -->
-                                    </li>
-                                </ul>
-                            </li>
-                                                        
-
-                            {% endcomment %}             
-                            
-                            							 
-							 	
-								 	<!--
-		                            	<div id="navButton">
-				                            <div class="input-group">
-				                                
-				                                <span class="input-group-btn">
-				                                
-				                                	<a href="{{nav_link_1}}">	
-				                                	<button class="btn btn-default" type="button">	
-						                       			<div class="ratio img-responsive profileImg" style="background-image: url({{user.avatar_file_name}});"></div> 
-				                                	</button>
-					                       			</a>
-				                                
-				                                 	<a href="#" class="dropdown-toggle userMenu" data-toggle="dropdown">
-						                            	<button class="btn btn-default combo" type="button">
-					                                    	{{user.first_name}}<strong class="caret"></strong>
-					                                    </button>
-				                                 	</a>
-		         					                                 	
-				                                </span>  
-			                                </div>
-			                            </div>    				 
-			                            </form>			 
-			                            </li>
-			                            
-			                            -->
- 	      
-				    </ul>   
-				    
-				    <ul class="nav navbar-nav navbar-right">
-				    	{% comment %}
-				    	<li class="dropdown">
-				    		<a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bell"></span><span class="navbar-new">2</span></a>
-				    		<ul class="dropdown-menu">
-					    		<li>
-						    		<a>
-							    		<div class="row clearfix">
-							    			<div class="col-md-4 column">
-								    			<div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
-							    			</div>
-							    			<div class="col-md-8 column">You got a notification!</div>
-							    		</div>
-						    		</a>
-					    		</li>
-	                        </ul>
-	                    </li>
-	                    {% endcomment %}
-                        <li class="{% navactive request 'createquest' %}"><a href="{% url 'createquest' %}"><span class="glyphicon glyphicon-plus-sign"></span></a></li>
-                        <li class="dropdown">
-	                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
-										<ul class="dropdown-menu">
-			                                <li>
-			                                    <a href="{% url 'settings' %}">Settings</a>
-			                                </li>
-			                                <li class="divider">
-			                                </li>
-			                                <li>
-			                                    <a href="{% url 'logout' %}">Logout</a>
-			                                </li>
-			                            </ul>
-	                            	</li>
-				    </ul>
-				    
-				    {% comment %}
-				    <form class="navbar-form navbar-left" action="#" role="search">{% csrf_token %}
-				      <div class="form-group">
-				        <div class="input-group">
-				          <input class="form-control search" id="navbarInput-01" type="search" placeholder="Search">
-				          <span class="input-group-btn">
-				            <button type="submit" class="btn"><span class="fui-search"></span></button>
-				          </span>            
-				        </div>
-				      </div>               
-				    </form>
-				    {% endcomment %}
-				    
-				    
-			              		    
-				  </div><!-- /.navbar-collapse -->
-				</nav><!-- /navbar -->
- 
-        <!-- Secondary navbar:  holds search, Quests, and Questrs -->
-        {% endif %}
-{% if message %}
-    <!-- Secondary navbar:  to display message notifications -->
-    <div class="row clearfix secondaryNavRow">
-        <div class="col-md-12 column">
-            {{message}}
-        </div>
-    </div><!-- End of Secondary navbar -->
-{% endif %}
-
-{% comment %}
-    {% if secondnav == "listquestsecondnav" %}
-        <!-- Secondary navbar:  holds search, Quests, and Questrs -->
-        <div class="row clearfix secondaryNavRow">
-            <div class="col-md-12 column">
-            
-
-                    <ul>
-                        <li class="active quest"><a href="#">Quests</a></li>
-                        <li class="questr"><a href="#">Questrs</a></li>
-                    </ul>
-                
-            </div>
-        </div><!-- End of Secondary navbar -->
-        {% endif %}
-{% endcomment %}
-    </div><!-- End of navbar-container -->    
-
-<div id="loader"></div>
-
-{% block content %}    
-{% endblock content %}
-<footer>
-<div class="container">
+		</script>
 
 
+	    {% block localhead %}
+	    {% endblock localhead %}
+	</head>
 
-<div class="row clearfix">
-			<br>
-	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
-		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column">
-			<h5 class="no-margin">Questr</h5>
-			<small class="no-margin no-padding">Canada's first crowdshipping platform</small>
+	<body id="start">
+	    <!-- This is the overlay DIV that is displayed while loading a new page -->
+
+	<!-- Main Navbar -->
+	  <div class="container brand">
+	  	<div class="row clearfix">
+	  		<div class="col-md-2 col-md-offset-5 column">
+	  				<center><a href="{% url 'mainindex' %}">QUESTR</a></center>
+	  		</div>
+	  	</div>
+	  </div>
+	            	<nav class="navbar navbar-default" role="navigation">
+	            		
+					  <div class="navbar-header">
+					    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+						    <span class="sr-only">Toggle navigation</span>
+						    <span class="icon-bar"></span>
+						    <span class="icon-bar"></span>
+						    <span class="icon-bar"></span>
+					    </button>
+					  </div>
+					  
+					  
+					  <div class="collapse navbar-collapse" id="navbar-collapse-01">
+						  <ul class="nav navbar-nav navbar-left"> 
+					      
+					      		{% if pagetype == "public" %}
+		                        <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+		               
+		                        <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-thumbs-up"></span>Signup</a></li>
+		
+		                        <li><a href="#"><span class="glyphicon glyphicon-heart"></span>About Us</a></li>
+		        
+		                        {% endif %}
+	        		
+		                        {% if pagetype == "loggedin" %}
+	                            <li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li> 
+	                            <li class="{% navactive request 'profile' %}"><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span>My Profile</a></li>
+	                            <li class="{% navactive request 'mytrades' %}"><a href="{% url 'mytrades' %}"><span class="glyphicon glyphicon-transfer"></span>My Trades</a></li>
+	                        	{% comment %}
+	                            <li><a href="/quest"><span class="glyphicon glyphicon-tree-deciduous"></span>Browse</a></li>                  
+	                            
+	                            <li class="dropdown" id="notifications">
+	                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="navbar-new">2</span></a>
+	                                <ul class="dropdown-menu">
+
+	                                    <li>
+	                                        <!-- Notification -->
+	                                        <a href="#" class="list-group-item">
+	                                    
+	                                            <div class="media col-md-3 imgBox">
+	                                                <div class="ratio img-responsive" style="background-image: url(http://www.stars-arena.com/wp-content/uploads/2013/08/emma-watson-3.jpg);"></div>
+	                                            </div>
+	                                            <div class="col-md-9">
+	                                                <div class="smallInfo">
+	                                                    <small class="light-grey">Emma Watson left you a comment: Hello World ;)</small>
+	                                                </div><!-- ./smallInfo -->
+	                                        
+	                                            
+	                                            </div> 
+	                                        </a>  <!-- End of notification -->
+	                                    </li>
+	                                </ul>
+	                            </li>
+	                                                        
+
+	                            {% endcomment %}             
+	                            
+	                            							 
+								 	
+									 	<!--
+			                            	<div id="navButton">
+					                            <div class="input-group">
+					                                
+					                                <span class="input-group-btn">
+					                                
+					                                	<a href="{{nav_link_1}}">	
+					                                	<button class="btn btn-default" type="button">	
+							                       			<div class="ratio img-responsive profileImg" style="background-image: url({{user.avatar_file_name}});"></div> 
+					                                	</button>
+						                       			</a>
+					                                
+					                                 	<a href="#" class="dropdown-toggle userMenu" data-toggle="dropdown">
+							                            	<button class="btn btn-default combo" type="button">
+						                                    	{{user.first_name}}<strong class="caret"></strong>
+						                                    </button>
+					                                 	</a>
+			         					                                 	
+					                                </span>  
+				                                </div>
+				                            </div>    				 
+				                            </form>			 
+				                            </li>
+				                            
+				                            -->
+	 	      
+					    </ul>   
+					    
+					    <ul class="nav navbar-nav navbar-right">
+					    	{% comment %}
+					    	<li class="dropdown">
+					    		<a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bell"></span><span class="navbar-new">2</span></a>
+					    		<ul class="dropdown-menu">
+						    		<li>
+							    		<a>
+								    		<div class="row clearfix">
+								    			<div class="col-md-4 column">
+									    			<div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
+								    			</div>
+								    			<div class="col-md-8 column">You got a notification!</div>
+								    		</div>
+							    		</a>
+						    		</li>
+		                        </ul>
+		                    </li>
+		                    {% endcomment %}
+	                        <li class="{% navactive request 'createquest' %}"><a href="{% url 'createquest' %}"><span class="glyphicon glyphicon-plus-sign"></span></a></li>
+	                        <li class="dropdown">
+		                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
+											<ul class="dropdown-menu">
+				                                <li>
+				                                    <a href="{% url 'settings' %}">Settings</a>
+				                                </li>
+				                                <li class="divider">
+				                                </li>
+				                                <li>
+				                                    <a href="{% url 'logout' %}">Logout</a>
+				                                </li>
+				                            </ul>
+		                            	</li>
+					    </ul>
+					    
+					    {% comment %}
+					    <form class="navbar-form navbar-left" action="#" role="search">{% csrf_token %}
+					      <div class="form-group">
+					        <div class="input-group">
+					          <input class="form-control search" id="navbarInput-01" type="search" placeholder="Search">
+					          <span class="input-group-btn">
+					            <button type="submit" class="btn"><span class="fui-search"></span></button>
+					          </span>            
+					        </div>
+					      </div>               
+					    </form>
+					    {% endcomment %}
+					    
+					    
+				              		    
+					  </div><!-- /.navbar-collapse -->
+					</nav><!-- /navbar -->
+	 
+	        <!-- Secondary navbar:  holds search, Quests, and Questrs -->
+	        {% endif %}
+	{% if message %}
+	    <!-- Secondary navbar:  to display message notifications -->
+	    <div class="row clearfix secondaryNavRow">
+	        <div class="col-md-12 column">
+	            {{message}}
+	        </div>
+	    </div><!-- End of Secondary navbar -->
+	{% endif %}
+
+	{% comment %}
+	    {% if secondnav == "listquestsecondnav" %}
+	        <!-- Secondary navbar:  holds search, Quests, and Questrs -->
+	        <div class="row clearfix secondaryNavRow">
+	            <div class="col-md-12 column">
+	            
+
+	                    <ul>
+	                        <li class="active quest"><a href="#">Quests</a></li>
+	                        <li class="questr"><a href="#">Questrs</a></li>
+	                    </ul>
+	                
+	            </div>
+	        </div><!-- End of Secondary navbar -->
+	        {% endif %}
+	{% endcomment %}
+	    </div><!-- End of navbar-container -->    
+
+	<div id="loader"></div>
+
+	{% block content %}    
+	{% endblock content %}
+	<footer>
+		<div class="container">
+			<div class="row clearfix">
+				<br>
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column">
+						<h5 class="no-margin">Questr</h5>
+						<small class="no-margin no-padding">Canada's first crowdshipping platform</small>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column">
+						<ul class="list">
+							<li><b><small class="grey">Company</small></b></li>
+							<li><small>About</small></li>
+							<li><small>Press</small></li>
+							<li><small>Join us</small></li>
+							<li><small>Contact us</small></li>
+						</ul>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column">
+						<ul class="list">
+							<li><b><small class="grey">Community</small></b></li>
+							<li><small>Why crowdshipping?</small></li>
+							<li><small>Trust & Safety</small></li>
+							<li><small>Terms & Privacy</small></li>
+							<li><small>Frequently Asked Questions</small></li>
+							
+						</ul>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column">
+						<ul class="list">
+							<li><b><small class="grey">Social</small></b></li>
+					        <p>
+					          <a href="https://www.facebook.com/questrco"><facebook class="fa fa-facebook"></facebook></a>
+					          <a href="https://twitter.com/questrco"><twitter class="fa fa-twitter"></twitter></a>
+					          <a href="http://linkedin.com/company/questr"><linkedin class="fa fa-linkedin"></linkedin></a>
+					          <a href="mailto:hello@questr.co"><email class="fa fa-envelope"></email></a>
+					        </p> 
+						</ul>
+					</div><!-- ./column -->
+				</div><!-- ./column -->
+			</div><!-- ./row -->
+
+			<div class="row clearfix">
+				<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+						<br>
+						<small class="grey">Copyright © 2014 Questr Inc.</small>
+						<br>
+						<br>
+					</div>
+				</div>
+			</div><!-- ./row -->
 		</div>
-		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column">
-			<ul class="list">
-				<li><b><small class="grey">Company</small></b></li>
-				<li><small>About</small></li>
-				<li><small>Press</small></li>
-				<li><small>Join us</small></li>
-				<li><small>Contact us</small></li>
-			</ul>
-		</div>
-		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column">
-			<ul class="list">
-				<li><b><small class="grey">Community</small></b></li>
-				<li><small>Why crowdshipping?</small></li>
-				<li><small>Trust & Safety</small></li>
-				<li><small>Terms & Privacy</small></li>
-				<li><small>Frequently Asked Questions</small></li>
-				
-			</ul>
-		</div>
-		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column">
-			<ul class="list">
-				<li><b><small class="grey">Social</small></b></li>
-		        <p>
-		          <a href="https://www.facebook.com/questrco"><facebook class="fa fa-facebook"></facebook></a>
-		          <a href="https://twitter.com/questrco"><twitter class="fa fa-twitter"></twitter></a>
-		          <a href="http://linkedin.com/company/questr"><linkedin class="fa fa-linkedin"></linkedin></a>
-		          <a href="mailto:hello@questr.co"><email class="fa fa-envelope"></email></a>
-		        </p> 
-			</ul>
-		</div><!-- ./column -->
-	</div><!-- ./column -->
-</div><!-- ./row -->
+	</footer>
 
-<div class="row clearfix">
-	<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-			<br>
-			<small class="grey">Copyright © 2014 Questr Inc.</small>
-			<br>
-			<br>
-		</div>
-	</div>
-</div><!-- ./row -->
-</div>
-</div>
-</footer>
-
-{% block scripts %}
-{% endblock scripts %}
-</body>
+	{% block scripts %}
+	{% endblock scripts %}
+	</body>
 </html>
