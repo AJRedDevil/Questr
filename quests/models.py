@@ -43,11 +43,75 @@ class Quests(models.Model):
     def __unicode__(self):
         return str(self.id )
 
+    def create_item_images_normal(self):
+        import os
+        from PIL import Image
+        from django.core.files.storage import default_storage as storage
+        if not self.item_images:
+            logging.warn("No item image")
+            return ""
+        file_path = self.item_images.name
+        logging.warn(file_path)
+        filename_base, filename_ext = os.path.splitext(file_path)
+        normal_file_path = "%s_%s_normal.jpg" % (filename_base, self.id)
+        logging.warn(normal_file_path)
+        if storage.exists(normal_file_path):
+            logging.warn("File exists already")
+            return "exists"
+        try:
+            # resize the original image and return url path of the normalnail
+            f = storage.open(file_path, 'r')
+            image = Image.open(f)
+            logging.warn(image)
+            width, height = image.size
+            logging.warn(image.size)
+            if width > height:
+                delta = width - height
+                left = int(delta/2)
+                upper = 0
+                right = height + left
+                lower = height
+            else:
+                delta = height - width
+                left = 0
+                upper = int(delta/2)
+                right = width
+                lower = width + upper
+
+            image = image.crop((left, upper, right, lower))
+            image = image.resize((500, 500), Image.ANTIALIAS)
+
+            f_normal = storage.open(normal_file_path, "w")
+            image.save(f_normal, "JPEG")
+            f_normal.close()
+            logging.warn("everything went fine")
+            return "success"
+        except Exception, e:
+            logging.warn("error")
+            logging.warn(e)
+            return "error"
+
+    def get_item_images_normal_url(self):
+        import os
+        from django.core.files.storage import default_storage as storage
+        if not self.item_images:
+            return ""
+        file_path = self.item_images.name
+        filename_base, filename_ext = os.path.splitext(file_path)
+        normal_file_path = "%s_%s_normal.jpg" % (filename_base, self.id)
+        logging.warn(normal_file_path)
+        if storage.exists(normal_file_path):
+            logging.warn(storage.url(normal_file_path))
+            return storage.url(normal_file_path)
+        return ""
+
         #Overriding
     def save(self, *args, **kwargs):
         # get a delivery code with 3 letters from the first and 2 from the last
         self.delivery_code = self.get_delivery_code()[:3]+self.get_delivery_code()[-2:]
         super(Quests, self).save(*args, **kwargs)
+        self.create_item_images_normal()
+
 
 
 class QuestComments(models.Model):
