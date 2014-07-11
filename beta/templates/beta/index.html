@@ -1,89 +1,181 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
-    <!-- Bootstrap, JQuery, Awesome Fonts -->
-    <link href={% static "bootstrap/css/bootstrap.min.css" %} rel="stylesheet">
-    <link href={% static "css/flat-ui.css" %} rel="stylesheet">
-    <link href={% static "css/theme.css" %} rel="stylesheet">
-    <link href={% static "css/social-buttons.css" %} rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    
-    <link href={% static "assets/css/index.css" %} rel="stylesheet">
-    
-    
-    <!-- Custom JS -->
-    <script src={% static "js/jquery-1.10.0.min.js" %}></script>
-    <script src={% static "bootstrap/js/bootstrap.min.js" %}></script>
-    <script src={% static "bootstrap/js/bootstrap-select.js" %}></script>
-    <script src={% static "bootstrap/js/tooltip.js" %}></script>
+    <link href={% static "assets/css/index.css" %} rel="stylesheet"> 
+
+	<script src={% static "assets/js/pace.js" %}></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
 {% endblock localhead %}
 
 {% block content %}
-	<!-- *****************************************************************************************************************
-	 HEADERWRAP
-	 ***************************************************************************************************************** -->
-	 <div id="headerwrap">
+<div class="preloader"></div>
+	
+    <! -- ******************** MASTHEAD SECTION ******************** -->	
+	<main id="top" class="masthead" role="main">
 		<div class="container">
-
+			<div class="logo"> <a href="index.html#"><img src="images/logo.png" alt="logo"></a>
+			</div>
+ 
+			<h1>Canada's <strong>first</strong> crowdshipping platform. <br>
+			Cheapest, fastest, 24/7 shipments<br>within Greater Toronto Area.</h1>
+ 
 			<div class="row">
-				<div class="col-lg-6">
-				    <h1 class="text-left">
-				      <br>
-				      Canada's first crowdshipping platform.
-				      <br>
-				    </h1>
-				    <h3 class="text-left">
-				      Cheapest, fastest, 24/7 shipments<br>within Greater Toronto Area.
-				    </h3>
-				    
-				    <form action="/beta/join" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
+				<div class="col-md-6 col-sm-12 col-md-offset-3 subscribe">
+					<form class="form-horizontal" role="form" action="subscribe.php" id="subscribeForm" method="POST">
+						<div class="form-group">
+							<div class="col-md-7 col-sm-6 col-sm-offset-1 col-md-offset-0">
+								<form action="/beta/join" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
 				        <div class="form-group">
-							<input type="email" name="EMAIL" class="form-control" id="exampleInputEmail1" placeholder="Your email address">
-							<p></p>
-							<button type="submit" class="btn btn-embossed btn-inverse btn-hg">Notify me</button>
-				          	<center></center>
+							<input class="form-control input-lg" name="email" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required">
 				        </div>
 				    </form>
+							</div>
+							<div class="col-md-5 col-sm-4">
+								<button type="submit" class="btn btn-embossed btn-info btn-hg">Notify me</button>
+							</div>
+						</div>
+					</form>
+					<span id="result" class="alertMsg"></span> </div>
 				</div>
-
-				<div class="col-lg-6">
-					<br><br>
-					<img class="img-responsive" src={% static "assets/img/header.png" %} alt="">
-				</div>
-			</div><!-- /row -->
-		</div><!-- /container -->
-	</div><!-- /headerwrap -->
-
-
-
-	<!-- *****************************************************************************************************************
-	SERVICE LOGOS
-	***************************************************************************************************************** -->
-	<div id="service">
-		<div class="container">
-		  <div class="row centered">
-			<div class="col-md-10 col-md-offset-1 column">
-			    <div class="col-md-4">
-			      <i class="fa fa-dollar"></i>
-			      <h4>Cheapest</h4>
-			      <p>Starting from only $6, Questr offers the cheapest shipping options available in the entire Canada.</p>
-			    </div>
-
-			    <div class="col-md-4">
-			      <i class="fa fa-bolt"></i>
-			      <h4>Fastest</h4>
-			      <p>Less than 30 minutes from STC to Square One. Decentralized logistics makes shipping lightning fast.</p>  
-			    </div>
-
-			    <div class="col-md-4">
-			      <i class="fa fa-clock-o"></i>
-			      <h4>Available 86,400 seconds a day</h4>
-			      <p>Questr is always here, twenty-four-seven, no matter it's rush hour on Friday or midnight on Christmas Eve.</p>
-			    </div>  
-			</div>          
-		  </div>
+ 
+				<a href="index.html#explore" class="scrollto">
+				<p>SCROLL DOWN TO EXPLORE</p>
+				<p class="scrollto--arrow"><img src={% static "assets/img/scroll_down.png" %} alt="scroll down arrow"></p>
+				</a>
 		</div><! --/container -->
-	</div><! --/service -->
+	</main><! --/main -->
+ 
+
+    <! -- ******************** FEATURES SECTION ******************** -->	
+	<div class="container" id="explore">
+ 
+		<div class="section-title">
+			<h2>What is Questr?</h2>
+			<h4>Subtitle shit goes here</h4>
+			<p>One of the world's first, Questr is a crowdshipping platform that provides cheap, fast, and economical shipments within Greater Toronto Area.
+				<br>
+					Unlike traditional courier companies like Canada Post or UPS, Questr's shippers deliver packages directly to the destination without the hassle of going to local facility, saving much time and labour.
+			</p>
+		</div>
+ 
+		<div class="section-title">
+			<h2>More information about your product.</h2>
+			<h4>Always detail some important features.</h4>
+		</div>
+		
+		<section class="row features">
+			<div class="col-sm-6 col-md-3">
+			
+				<div class="thumbnail"> 
+					<img src="images/service_01.png" alt="analytics-icon">
+					<div class="caption">
+						<h3>Cheapest</h3>
+						<p>Starting from only $6, Questr offers the cheapest shipping options available in the entire Canada.</p>
+					</div>
+				</div><! --/thumbnail -->
+			</div><! --/col-sm-6-->
+ 
+			<div class="col-sm-6 col-md-3">
+				<div class="thumbnail"> 
+					<img src="images/service_02.png" alt="analytics-icon">
+					<div class="caption">
+						<h3>Fastest</h3>
+						<p>Less than 30 minutes from STC to Square One. Decentralized logistics makes shipping lightning fast.</p>
+					</div>
+				</div><! --/thumbnail -->
+			</div><! --/col-sm-6-->
+ 
+			<div class="col-sm-6 col-md-3">
+				<div class="thumbnail"> 
+					
+					<div class="caption">
+						<h3>Available Everyday</h3>
+						<p>Questr is always here, twenty-four-seven, no matter it's rush hour on Friday or midnight on Christmas Eve.</p>
+					</div>
+				</div><! --/thumbnail -->
+			</div><! --/col-sm-6-->
+		</section><! --/section -->
+ 
+
+	    <! -- ******************** CLIENTS SECTION ******************** -->	 
+		<div class="section-title">
+			<h2>We're mentioned in</h2>
+			<h4>We've got traction son</h4>
+		</div>
+	
+		<section class="row clientlogo breath">
+			<div class="col-md-12 text-center"> 
+				<a href="http://skift.com/2014/03/27/daily-travel-startup-watch-opendoor-coexperiences-and-more/"><img src={% static "assets/img/clients/client01.png" %} class="img-responsive"></a>
+			</div>
+		</section><! --/section -->
+ 
+	</div><! --/container -->
+  
+
+	    <! -- ******************** PRICING LIST ******************** -->	  
+		<div class="container">
+ 
+			<div class="section-title">
+				<h2>Questr compared to other competitors</h2>
+				<h4>They've got nothing on us when it comes to same day delivery</h4>
+			</div>
+			<section class="row breath planpricing">
+			
+				<div class="col-md-4">
+					<div class="pricing color1">
+						<div class="planname">Questr</div>
+						<div class="price"> <span class="curr">$</span>1<span class="per">/KM</span></div>
+						<div class="billing">so cheap</div>
+					</div><! --/pricing -->
+				</div><! --/col-md-4-->
+				
+				<div class="col-md-4">
+					<div class="pricing color2">
+						<div class="planname">daiwu</div>
+						<div class="price"> <span class="curr">$</span>49<span class="per">/KM</span></div>
+						<div class="billing">the man's a joke</div>
+					</div><! --/pricing -->
+				</div><! --/col-md-4-->
+				
+				<div class="col-md-4">
+					<div class="pricing color3">
+						<div class="planname">Fedex</div>
+						<div class="price"> <span class="curr">$</span>99<span class="per">/KM</span></div>
+						<div class="billing">horrendous</div>
+					</div><! --/pricing -->
+				</div><! --/col-md-4-->
+			</section><!-- /section planpricing -->
+ 
+
+	    <! -- ******************** FAQ ******************** -->  
+	    {% comment %}
+		<div class="section-title">
+			<h5>Frequently Asked Questions</h5>
+		</div>
+		
+		<section class="row faq breath">
+			<div class="col-md-6">
+				<h6></h6>
+				<p></p>
+				<h6></h6>
+				<p></p>
+			</div><! --/col-md-6 -->
+			
+			<div class="col-md-6">
+				<h6></h6>
+				<p></p>
+				<h6></h6>
+				<p></p>
+			</div><! --/col-md-6 -->
+		</section><! --/section faq -->
+		{% endcomment %}
+	</div><! --/container -->
+ 
+
+
+
+
+
 	   
 	     
 	<!-- *****************************************************************************************************************
@@ -93,16 +185,6 @@
 	<div class="container mtb">
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1 column">
-				<div class="col-lg-4">
-					<h4>What is Questr?</h4>
-					<div class="hline"></div>
-					<p>
-					One of the world's first, Questr is a crowdshipping platform that provides cheap, fast, and economical shipments within Greater Toronto Area.
-					<br>
-					Unlike traditional courier companies like Canada Post or UPS, Questr's shippers deliver packages directly to the destination without the hassle of going to local facility, saving much time and labour.
-					</p>
-					<br>
-				</div>
 
 				<div class="col-lg-4">
 					<h4>A few more details</h4>
@@ -134,132 +216,24 @@
 		</div><! --/row -->
 	</div><! --/container -->
 
-
-	<!-- *****************************************************************************************************************
-	MENTIONED
-	***************************************************************************************************************** -->
-	<div id="twrap">
-		<div class="container">
-			<div class="row centered">
-				<h4>WE'RE MENTIONED IN</h4> 
-				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5 column">
-				<a href="http://skift.com/2014/03/27/daily-travel-startup-watch-opendoor-coexperiences-and-more/"><img src={% static "assets/img/clients/client01.png" %} class="img-responsive"></a>
-				</div>
-			</div><! --/row -->
-		</div><! --/container -->
-	</div><! --/cwrap -->
 {% endblock content %}
 
 {% block scripts %}
+<script src={% static "assets/js/jquery.js" %}></script>
+<script src={% static "assets/js/bootstrap.js" %}></script>
+<script src={% static "assets/js/easing.js" %}></script>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="assets/js/modernizr.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src={% static "assets/js/bootstrap.min.js" %}></script>
-  	<script src={% static "assets/js/retina-1.1.0.js" %}></script>
-  	<script src={% static "assets/js/jquery.hoverdir.js" %}></script>
-  	<script src={% static "assets/js/jquery.hoverex.min.js" %}></script>
-  	<script src={% static "assets/js/jquery.prettyPhoto.js" %}></script>
-    <script src={% static "assets/js/jquery.isotope.min.js" %}></script>
-    <script src={% static "assets/js/custom.js" %}></script>
-    <script src={% static "assets/js/smoothscroll.js" %}></script>
-    <script src={% static "assets/js/main.js" %}></script>
+ 
+<script>
+ $(function() {
+    $('.scrollto, .gototop').bind('click',function(event){
+		 var $anchor = $(this);
+		 $('html, body').stop().animate({
+         scrollTop: $($anchor.attr('href')).offset().top
+          }, 1500,'easeInOutExpo');
+     event.preventDefault();
+      });
+  });
+</script>
     
-    <script src={% static "assets/js/jquery-ui-1.10.3.custom.min.js" %}></script>
-    <script src={% static "assets/js/jquery.ui.touch-punch.min.js" %}></script>
-    <script src={% static "assets/js/bootstrap.min.js" %}></script>
-    <script src={% static "assets/js/bootstrap-select.js" %}></script>
-    <script src={% static "assets/js/bootstrap-switch.js" %}></script>
-    <script src={% static "assets/js/flatui-checkbox.js" %}></script>
-    <script src={% static "assets/js/flatui-radio.js" %}></script>
-    <script src={% static "assets/js/jquery.tagsinput.js" %}></script>
-    <script src={% static "assets/js/jquery.placeholder.js" %}></script>
-    <script src={% static "assets/js/typeahead.js" %}></script>
-    <script src={% static "assets/js/google-code-prettify/prettify.js" %}></script>
-    <script src={% static "assets/js/application.js" %}></script>
-    
-	<script>
-		// Portfolio
-		(function($) {
-		  "use strict";
-		  var $container = $('.portfolio'),
-		    $items = $container.find('.portfolio-item'),
-		    portfolioLayout = 'fitRows';
-		    
-		    if( $container.hasClass('portfolio-centered') ) {
-		      portfolioLayout = 'masonry';
-		    }
-		        
-		    $container.isotope({
-		      filter: '*',
-		      animationEngine: 'best-available',
-		      layoutMode: portfolioLayout,
-		      animationOptions: {
-		      duration: 750,
-		      easing: 'linear',
-		      queue: false
-		    },
-		    masonry: {
-		    }
-		    }, refreshWaypoints());
-		    
-		    function refreshWaypoints() {
-		      setTimeout(function() {
-		      }, 1000);   
-		    }
-		        
-		    $('nav.portfolio-filter ul a').on('click', function() {
-		        var selector = $(this).attr('data-filter');
-		        $container.isotope({ filter: selector }, refreshWaypoints());
-		        $('nav.portfolio-filter ul a').removeClass('active');
-		        $(this).addClass('active');
-		        return false;
-		    });
-		    
-		    function getColumnNumber() { 
-		      var winWidth = $(window).width(), 
-		      columnNumber = 1;
-		    
-		      if (winWidth > 1200) {
-		        columnNumber = 5;
-		      } else if (winWidth > 950) {
-		        columnNumber = 4;
-		      } else if (winWidth > 600) {
-		        columnNumber = 3;
-		      } else if (winWidth > 400) {
-		        columnNumber = 2;
-		      } else if (winWidth > 250) {
-		        columnNumber = 1;
-		      }
-		        return columnNumber;
-		      }       
-		      
-		      function setColumns() {
-		        var winWidth = $(window).width(), 
-		        columnNumber = getColumnNumber(), 
-		        itemWidth = Math.floor(winWidth / columnNumber);
-		        
-		        $container.find('.portfolio-item').each(function() { 
-		          $(this).css( { 
-		          width : itemWidth + 'px' 
-		        });
-		      });
-		    }
-		    
-		    function setPortfolio() { 
-		      setColumns();
-		      $container.isotope('reLayout');
-		    }
-		      
-		    $container.imagesLoaded(function () { 
-		      setPortfolio();
-		    });
-		    
-		    $(window).on('resize', function () { 
-		    setPortfolio();          
-		  });
-		})(jQuery);
-	</script>
 {% endblock scripts %}
