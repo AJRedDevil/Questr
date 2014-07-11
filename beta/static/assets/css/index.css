@@ -103,7 +103,7 @@ a:hover,a:focus{color:#5173bd;}
 	padding:80px 15px;
 	color:#FFF;
 	text-align:center;
-	text-shadow:0 1px 0 rgba(0,0,0,.1);
+	text-shadow:0px 1px 2px rgba(0,0,0,0.5);
 	background-color:#6883cc;
 	background-image:url("../img/aidsss.jpg");
 	background-repeat:no-repeat;
@@ -114,6 +114,10 @@ a:hover,a:focus{color:#5173bd;}
 	-o-background-size:cover;
 	background-size:cover;
 	}
+
+.masthead h1, h6 {
+	color: white;
+}	
 
 .masthead .container{
 	animation:fadein 2s;
