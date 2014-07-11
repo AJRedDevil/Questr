@@ -1,13 +1,57 @@
-{% extends "mainbase.html" %}
 {% load staticfiles %}
-{% block localhead %}
-    <link href={% static "assets/css/about.css" %} rel="stylesheet"> 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href={% static "assets/ico/favicon.ico" %}>
 
-	<script src={% static "assets/js/pace.js" %}></script>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
-{% endblock localhead %}
+    <title>Frequently Asked Questions | Questr</title>
 
-{% block content %}
+    <!-- Bootstrap core CSS -->
+    <link href={% static "bootstrap/css/bootstrap.min.css" %} rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href={% static "assets/css/style.css" %} rel="stylesheet">
+    <link href={% static "assets/css/font-awesome.min.css" %} rel="stylesheet">
+
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src={% static "assets/js/modernizr.js" %}></script>
+  </head>
+
+  <body>
+
+    <!-- Menu -->
+    <nav class="menu" id="theMenu">
+        <div class="menu-wrap">
+            <h1 class="logo"><a href="{% url 'index' %}#home">Questr</a></h1>
+            <i class="fa fa-times menu-close"></i>
+            <a href="{% url 'index' %}" class="smoothScroll">Home</a>
+            <a href="{% url 'about' %}#how-questr-works" class="smoothScroll">How Questr works</a>
+            <a href="{% url 'about' %}" class="smoothScroll">About</a>
+            <a href="{% url 'about' %}#FAQ" class="smoothScroll">FAQ</a>
+
+
+            
+            
+            
+        </div>
+        
+        <!-- Menu button -->
+        <div id="menuToggle"><i class="fa fa-bars"></i></div>
+    </nav>
 
     <!-- *****************************************************************************************************************
      BLUE WRAP
@@ -22,7 +66,7 @@
 
      
     <!-- *****************************************************************************************************************
-     MORE ABOUT
+     AGENCY ABOUT
      ***************************************************************************************************************** -->
 
      <div class="container mtb">
@@ -49,7 +93,7 @@
      ***************************************************************************************************************** -->
 
      
-     <div class="container" id="how-it-works">
+     <div class="container" id="hiwwrap">
         <a name="how-questr-works"></a>
         <div class="row centered">
         <div class="col-md-12 column">
@@ -113,38 +157,38 @@
      </div><! --/container -->
      
     <!-- *****************************************************************************************************************
-     FAQ
+     OUR CLIENTS
      ***************************************************************************************************************** -->
      <a name="FAQ"></a>
      <div id="cwrap">
          <div class="container">
             <div class="row centered">
-                <h4>Frequently Asked Questions</h4>
+                <h3>Frequently Asked Questions</h3>
                 <div class="col-md-10 col-md-offset-1 column">
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     <i class="fa fa-thumbs-up" style="font-size: 75px;"></i>
-                    <h4>Is Questr as safe as other companies?</h4>
+                    <h3>Is Questr as safe as other companies?</h3>
                     <p>
                         Questr utilizes a multitude of security measures, such as credit card binding, photo ID verification, and a review system, to make sure that each shipment is just as safe and even more trackable and traceable. Oh, you can also choose a shipper of your own liking. 
                     </p>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     <i class="fa fa-heart" style="font-size: 75px;"></i>
-                    <h4>How much does Questr value safety?</h4>
+                    <h3>How much does Questr value safety?</h3>
                     <p>
                         Questr has a zero tolerance policy towards frauds and other unethical and illegal activities. If detected, a user, along their associated cell phone number, email address, social network account, credit card, and photo id, will be immediately and permanently banned and put on our blacklist.
                     </p>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     <i class="fa fa-legal" style="font-size: 75px;"></i>
-                    <h4>How can I make sure if a user is credible?</h4>
+                    <h3>How can I make sure if a user is credible?</h3>
                     <p>
                         Besides what Questr does automatically for you, you can also go to a shipper's profile and go over the reviews that have been provided by other users.
                     </p>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     <i class="fa fa-clock-o" style="font-size: 75px;"></i>
-                    <h4>When will Questr be coming to T.O.?</h4>
+                    <h3>When will Questr be coming to T.O.?</h3>
                     <p>
                         An excellent service isn't built overnight. We are working hard with the team, and are expecting to send out our beta test invitations in late June of 2014.
                     </p>
@@ -155,24 +199,160 @@
          </div><! --/container -->
      </div><! --/cwrap -->
 
-{% endblock content %}
+    <!-- *****************************************************************************************************************
+     FOOTER
+     ***************************************************************************************************************** -->
+     <div id="footerwrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h4>About US</h4>
+                    <div class="hline-w"></div>
+                    <p>
+                        Questr is Canada's first crowdshipping platform and aims to provide cheaper, faster, and more economical shipping using the Internet way of thinking.
+                        The startup was founded in March of 2014 by two undergraduate students at the University of Western Ontario.
+                    </p>
+                </div>
+                <div class="col-lg-3">
+                    <h4>Find Us</h4>
+                    <div class="hline-w"></div>
+                    <p>
+                        Questr at the moment is a project in development and is expected to start functioning in late June. 
+                        <br>
+                        If you are interested in talking to us - joining us, investing in us, or simply saying hi - please email us at hello@questr.co or use the contact form provided above.
+                    </p>
+                </div>
+                <div class="col-lg-3">
+                    <h4>Say hi to us</h4>
+                    <div class="hline-w"></div>
+                        
+                    <form action="/beta/contactus" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
+                        <div class="form-group">
+                        <input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Your name">
+                        <br>
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Your email address">
+                        <br>
+                        <textarea name="message" class="form-control" rows="3" placeholder="Your message"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-embossed btn-default">Send</button>
+                    </form>
+                </div>
+                <div class="col-lg-3"> 
+                    <h4>Social Us</h4>
+                    <div class="hline-w"></div>
+                    <p>
+                        <a href="https://www.facebook.com/questrco"><i class="fa fa-facebook"></i></a>
+                        <a href="https://twitter.com/questrco"><i class="fa fa-twitter"></i></a>
+                        <a href="http://linkedin.com/company/questr"><i class="fa fa-linkedin"></i></a>
+                        <a href="mailto:hello@questr.co"><i class="fa fa-envelope"></i></a>
+                    </p>    
+                </div>
 
-{% block scripts %}
-<script src={% static "assets/js/jquery.js" %}></script>
-<script src={% static "assets/js/bootstrap.js" %}></script>
-<script src={% static "assets/js/easing.js" %}></script>
+            </div><! --/row -->
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <br><br><br>
+                    <p class="text-center">2014 Questr Co</p>
+                </div>
+            </div>
+        </div><! --/container -->
+     </div><! --/footerwrap -->
+     
+   <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src={% static "assets/js/bootstrap.min.js" %}></script>
+    <script src={% static "assets/js/retina-1.1.0.js" %}></script>
+    <script src={% static "assets/js/jquery.hoverdir.js" %}></script>
+    <script src={% static "assets/js/jquery.hoverex.min.js" %}></script>
+    <script src={% static "assets/js/jquery.prettyPhoto.js" %}></script>
+    <script src={% static "assets/js/jquery.isotope.min.js" %}></script>
+    <script src={% static "assets/js/custom.js" %}></script>
+    <script src={% static "assets/js/smoothscroll.js" %}></script>
+    <script src={% static "assets/js/main.js" %}></script>
 
- 
-<script>
- $(function() {
-    $('.scrollto, .gototop').bind('click',function(event){
-		 var $anchor = $(this);
-		 $('html, body').stop().animate({
-         scrollTop: $($anchor.attr('href')).offset().top
-          }, 1500,'easeInOutExpo');
-     event.preventDefault();
-      });
-  });
+    <script>
+// Portfolio
+(function($) {
+    "use strict";
+    var $container = $('.portfolio'),
+        $items = $container.find('.portfolio-item'),
+        portfolioLayout = 'fitRows';
+        
+        if( $container.hasClass('portfolio-centered') ) {
+            portfolioLayout = 'masonry';
+        }
+                
+        $container.isotope({
+            filter: '*',
+            animationEngine: 'best-available',
+            layoutMode: portfolioLayout,
+            animationOptions: {
+            duration: 750,
+            easing: 'linear',
+            queue: false
+        },
+        masonry: {
+        }
+        }, refreshWaypoints());
+        
+        function refreshWaypoints() {
+            setTimeout(function() {
+            }, 1000);   
+        }
+                
+        $('nav.portfolio-filter ul a').on('click', function() {
+                var selector = $(this).attr('data-filter');
+                $container.isotope({ filter: selector }, refreshWaypoints());
+                $('nav.portfolio-filter ul a').removeClass('active');
+                $(this).addClass('active');
+                return false;
+        });
+        
+        function getColumnNumber() { 
+            var winWidth = $(window).width(), 
+            columnNumber = 1;
+        
+            if (winWidth > 1200) {
+                columnNumber = 5;
+            } else if (winWidth > 950) {
+                columnNumber = 4;
+            } else if (winWidth > 600) {
+                columnNumber = 3;
+            } else if (winWidth > 400) {
+                columnNumber = 2;
+            } else if (winWidth > 250) {
+                columnNumber = 1;
+            }
+                return columnNumber;
+            }       
+            
+            function setColumns() {
+                var winWidth = $(window).width(), 
+                columnNumber = getColumnNumber(), 
+                itemWidth = Math.floor(winWidth / columnNumber);
+                
+                $container.find('.portfolio-item').each(function() { 
+                    $(this).css( { 
+                    width : itemWidth + 'px' 
+                });
+            });
+        }
+        
+        function setPortfolio() { 
+            setColumns();
+            $container.isotope('reLayout');
+        }
+            
+        $container.imagesLoaded(function () { 
+            setPortfolio();
+        });
+        
+        $(window).on('resize', function () { 
+        setPortfolio();          
+    });
+})(jQuery);
 </script>
-    
-{% endblock scripts %}
+  </body>
+</html>
