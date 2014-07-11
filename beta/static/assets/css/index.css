@@ -116,6 +116,7 @@ a:hover,a:focus{color:#5173bd;}
 	-moz-background-size:cover;
 	-o-background-size:cover;
 	background-size:cover;
+	height: 100%;
 	}
 
 .masthead h1, h6 {
@@ -127,6 +128,8 @@ a:hover,a:focus{color:#5173bd;}
 	-moz-animation:fadein 2s;
 	-webkit-animation:fadein 2s;
 	-o-animation:fadein 2s;
+	padding-left: 10%;
+	padding-right: 10%;
 	}
 
 .loading *{
