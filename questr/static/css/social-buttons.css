@@ -22,3 +22,5 @@ facebook:hover{color:#4568b8;}
 twitter:hover{color:#1ab2e8;}
 linkedin:hover{color:#007ebd;}
 email:hover{color:#cecece;}
+
+facebook:active,twitter:active,linkedin:active,email:active{color:rgba(180,180,180,1);}
