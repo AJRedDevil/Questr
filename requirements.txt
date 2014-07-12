@@ -1,4 +1,5 @@
 Django==1.6.2
+PIL==1.1.7
 Pillow==2.4.0
 South==0.8.4
 autoenv==1.0.0
@@ -22,4 +23,8 @@ requests==2.2.1
 requests-oauthlib==0.4.0
 six==1.6.1
 static==1.0.2
+stevedore==0.15
+virtualenv==1.11.6
+virtualenv-clone==0.2.5
+virtualenvwrapper==4.3
 wsgiref==0.1.2
