@@ -36,6 +36,9 @@ AWS_S3_SECRET_ACCESS_KEY = os.environ['AMAZON_SECRET_ACCESS_KEY']
 AWS_MEDIA_BUCKET = os.environ['AWS_MEDIA_BUCKET']
 AWS_STATIC_BUCKET = os.environ['AWS_STATIC_BUCKET']
 
+# Google maps
+GOOGLE_MAPS_SERVER_KEY = os.environ['GOOGLE_MAPS_SERVER_KEY']
+
 #Append Slash to all cals
 APPEND_SLASH = True
 # SECURITY WARNING: don't run with debug turned on in production!
