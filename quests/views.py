@@ -7,7 +7,7 @@ from libs import email_notifier, geomaps, pricing
 
 from .contrib import quest_handler, mailing
 from users.contrib.user_handler import isShipper, getShippers, getQuestrDetails
-from .forms import QuestCreationForm, QuestChangeForm
+from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm
 from .models import Quests
 
 import logging
@@ -80,9 +80,10 @@ def newquest(request):
 
     if request.method=="POST":
         now = timezone.now()
-        user_form = QuestCreationForm(request.POST, request.FILES)
+        user_form = QuestCreationForm(request.POST)
         # logging.warn(user_form.errors)
         # logging.warn(user_form.is_valid())
+        # logging.warn(user_form)
         if user_form.is_valid():
             title = user_form.cleaned_data['title']
             description = user_form.cleaned_data['description']
@@ -91,8 +92,9 @@ def newquest(request):
             dstcity = user_form.cleaned_data['dstcity']
             dstaddress = user_form.cleaned_data['dstaddress']
             size = user_form.cleaned_data['size']
-            item_images = user_form.cleaned_data['item_images']
             # For distance
+            #the distance and price hsa to be set up into a temp database, also the 
+            #image file needs to be on a temp folder for processign to reduce API calls
             maps = geomaps.GMaps()
             origin = srcaddress+', '+srccity
             destination = dstaddress+', '+dstcity
@@ -116,33 +118,15 @@ def confirmquest(request):
 
     if request.method=="POST":
         now = timezone.now()
-        user_form = QuestCreationForm(request.POST, request.FILES)
+        user_form = QuestConfirmForm(request.POST, request.FILES)
         # logging.warn(user_form.errors)
+        # logging.warn(user_form)
         # logging.warn(user_form.is_valid())
         if user_form.is_valid():
-            ##Maps and price processing start##
-            srccity = user_form.cleaned_data['srccity']
-            srcaddress = user_form.cleaned_data['srcaddress']
-            dstcity = user_form.cleaned_data['dstcity']
-            dstaddress = user_form.cleaned_data['dstaddress']
-            size = user_form.cleaned_data['size']
-            # For distance
-            maps = geomaps.GMaps()
-            origin = srcaddress+', '+srccity
-            destination = dstaddress+', '+dstcity
-            maps.set_geo_args(dict(origin=origin, destination=destination))
-            distance = maps.get_total_distance()
-            # For price
-            price = pricing.WebPricing()
-            price.set_factors(distance, mode=size)
-            ##Maps and price processing end##
             quest_data = user_form.save(commit=False)
             quest_data.questrs_id=request.user.id
             quest_data.creation_date=now
             quest_data.item_images = user_form.cleaned_data['item_images']
-            quest_data.reward = price.get_price()
-            #the distance and price hsa to be set up into a temp database, also the 
-            #image file needs to be on a temp folder for processign to reduce API calls
             quest_data.save()
             try:
                 shippers = getShippers()

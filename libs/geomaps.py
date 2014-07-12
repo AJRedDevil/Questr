@@ -44,7 +44,7 @@ class GMaps(object):
 		if self.__status:
 			for route in self.__result['routes']:
 				for leg in route['legs']:
-					__distance =  int(leg['distance']['value'])/1000.0
+					__distance =  round(int(leg['distance']['value'])/1000.0, 2)
 		return __distance
 
 

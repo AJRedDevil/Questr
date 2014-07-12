@@ -107,10 +107,10 @@ class WebPricing(object):
 			return math.floor( 6 + self.__size_handling_fee + self.__distance * 2.5 * self.__size_modifier)
 
 	def __get_weekend_price(self):
-		return math.floor( 6 + self.__size_handling_fee + self.__distance * 2.5 * self.__size_modifier)
+		return round(math.floor( 6 + self.__size_handling_fee + self.__distance * 2.5 * self.__size_modifier), 2)
 
 	def __get_weekday_price(self):
-		return math.floor( 4 + self.__size_handling_fee + self.__distance * 1.7 * self.__size_modifier)
+		return round(math.floor( 4 + self.__size_handling_fee + self.__distance * 1.7 * self.__size_modifier), 2)
 
 	# def get_price(self):
 	# 	starting_hour = self.__current_datetime.hours

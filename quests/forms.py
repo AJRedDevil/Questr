@@ -13,7 +13,26 @@ class QuestCreationForm(forms.ModelForm):
     """
     class Meta:
         model = Quests
-        exclude = ['questrs','status','creation_date','is_accepted', 'shipper', 'delivery_code', 'reward']
+        exclude = ['questrs','status','creation_date','is_accepted', 'shipper', 'delivery_code', 'reward','item_images']
+        # widget = {
+        #     'title' : forms.TextInput(attrs = { 'placeholder': 'Title'}),
+        #     'reward' : forms.TextInput(attrs = { 'placeholder': "You're offering"}),            
+        #     'Package Type' : forms.RadioSelect(attrs = { 'default': "1"}),
+        #     'srcaddress' : forms.TextInput(attrs = { 'placeholder': "Departure Address"}),
+        #     'dstaddress' : forms.TextInput(attrs = { 'placeholder': "Destination Address"}),
+        #     'srccity' : forms.TextInput(attrs = { 'placeholder': "Departure City"}),
+        #     'dstcity' : forms.TextInput(attrs = { 'placeholder': "Destination City"}),
+        #     'description' : forms.TextInput(attrs = { 'placeholder': "Description"}),
+        #     'item_images' : forms.TextInput(attrs = { 'placeholder': "Image"}),
+        # }
+
+class QuestConfirmForm(forms.ModelForm):
+    """
+    A form that creates a post, from the given data
+    """
+    class Meta:
+        model = Quests
+        exclude = ['questrs','status','creation_date','is_accepted', 'shipper', 'delivery_code',]
         # widget = {
         #     'title' : forms.TextInput(attrs = { 'placeholder': 'Title'}),
         #     'reward' : forms.TextInput(attrs = { 'placeholder': "You're offering"}),            
