@@ -40,9 +40,9 @@
             <div class="row clearfix">
                 <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column post-info">
                 	
-	                <p>pay:<br>	
-	                From: {{quest.srcaddress}}<br>
-	                To: {{quest.dstaddress}}<br>
+	                <p>Pay:${{quest.reward}}<br>	
+	                From: {{quest.srcaddress}}, {{quest.srccity}}, Canada<br>
+	                To: {{quest.dstaddress}}, {{quest.dstcity}}, Canada<br>
 	                <span class="glyphicon glyphicon-time grey"></span>{% localtime on%} {{quest.creation_date | timesince }} {% endlocaltime %} ago
 	                </p>
                

@@ -96,12 +96,12 @@ class Quests(models.Model):
         from django.core.files.storage import default_storage as storage
         if not self.item_images:
             return ""
-        file_path = self.item_images.name
-        filename_base, filename_ext = os.path.splitext(file_path)
-        normal_file_path = "%s_%s_normal.jpg" % (filename_base, self.id)
+        normal_file_path = self.item_images.name
+        # filename_base, filename_ext = os.path.splitext(file_path)
+        # normal_file_path = "%s_%s_normal.jpg" % (filename_base, self.id)
         logging.warn(normal_file_path)
         if storage.exists(normal_file_path):
-            logging.warn(storage.url(normal_file_path))
+            # logging.warn(storage.url(normal_file_path))
             return storage.url(normal_file_path)
         return ""
 

@@ -202,4 +202,23 @@ def get_review_link(quest_id, shipper_id):
     review_link = "{0}/review/{1}/{2}".format(settings.QUESTR_URL , quest_id, shipper_id)
     return review_link
 
-
+def update_resized_image(quest_id):
+    import os
+    from django.core.files.storage import default_storage as storage
+    questdetails = getQuestDetails(quest_id)
+    if not questdetails.item_images:
+        return ""
+    file_path = questdetails.item_images.name
+    logging.warn(file_path)
+    filename_base, filename_ext = os.path.splitext(file_path)
+    normal_file_path = "%s_%s_normal.jpg" % (filename_base, questdetails.id)
+    logging.warn(normal_file_path)
+    try:
+        Quests.objects.filter(id=quest_id).update(item_images=normal_file_path)
+    except Quests.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
+    logging.warn(storage.exists(file_path))
+    if storage.exists(file_path):
+        storage.delete(file_path)
+    return ""

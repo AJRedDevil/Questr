@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 
-from libs import email_notifier
+from libs import email_notifier, geomaps, pricing
 
 from .contrib import quest_handler, mailing
 from users.contrib.user_handler import isShipper, getShippers, getQuestrDetails
@@ -72,7 +72,7 @@ def editquest(request, questname):
     return render(request,'404.html')
 
 @login_required
-def createquest(request):
+def newquest(request):
     """creates new quest and sends notification to shippers"""
     from users.contrib.user_handler import getShipper
     pagetype="loggedin"
@@ -84,10 +84,65 @@ def createquest(request):
         # logging.warn(user_form.errors)
         # logging.warn(user_form.is_valid())
         if user_form.is_valid():
+            title = user_form.cleaned_data['title']
+            description = user_form.cleaned_data['description']
+            srccity = user_form.cleaned_data['srccity']
+            srcaddress = user_form.cleaned_data['srcaddress']
+            dstcity = user_form.cleaned_data['dstcity']
+            dstaddress = user_form.cleaned_data['dstaddress']
+            size = user_form.cleaned_data['size']
+            item_images = user_form.cleaned_data['item_images']
+            # For distance
+            maps = geomaps.GMaps()
+            origin = srcaddress+', '+srccity
+            destination = dstaddress+', '+dstcity
+            maps.set_geo_args(dict(origin=origin, destination=destination))
+            distance = maps.get_total_distance()
+            # For price
+            price = pricing.WebPricing()
+            price.set_factors(distance, mode=size)
+            reward = price.get_price()
+            pagetitle = "Confirm your Quest"
+            return render(request, 'confirmquest.html', locals())  
+    pagetitle = "Confirm your Quest"
+    return render(request, 'newquest.html', locals())  
+
+@login_required
+def confirmquest(request):
+    """creates new quest and sends notification to shippers"""
+    from users.contrib.user_handler import getShipper
+    pagetype="loggedin"
+    user = request.user
+
+    if request.method=="POST":
+        now = timezone.now()
+        user_form = QuestCreationForm(request.POST, request.FILES)
+        # logging.warn(user_form.errors)
+        # logging.warn(user_form.is_valid())
+        if user_form.is_valid():
+            ##Maps and price processing start##
+            srccity = user_form.cleaned_data['srccity']
+            srcaddress = user_form.cleaned_data['srcaddress']
+            dstcity = user_form.cleaned_data['dstcity']
+            dstaddress = user_form.cleaned_data['dstaddress']
+            size = user_form.cleaned_data['size']
+            # For distance
+            maps = geomaps.GMaps()
+            origin = srcaddress+', '+srccity
+            destination = dstaddress+', '+dstcity
+            maps.set_geo_args(dict(origin=origin, destination=destination))
+            distance = maps.get_total_distance()
+            # For price
+            price = pricing.WebPricing()
+            price.set_factors(distance, mode=size)
+            ##Maps and price processing end##
             quest_data = user_form.save(commit=False)
             quest_data.questrs_id=request.user.id
             quest_data.creation_date=now
             quest_data.item_images = user_form.cleaned_data['item_images']
+            quest_data.reward = price.get_price()
+            #the distance and price hsa to be set up into a temp database, also the 
+            #image file needs to be on a temp folder for processign to reduce API calls
             quest_data.save()
             try:
                 shippers = getShippers()
@@ -97,10 +152,12 @@ def createquest(request):
             except Exception, e:
                 logging.warn(e)
                 pass
+            quest_handler.update_resized_image(quest_data.id)
             message="Your quest has been created!"
+            logging.warn(message)
             return redirect('home')
     pagetitle = "Create a Quest"
-    return render(request, 'newquest.html', locals())  
+    return redirect('home')
 
 @login_required
 def applyForQuest(request, questname):

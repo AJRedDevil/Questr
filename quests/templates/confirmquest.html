@@ -1,0 +1,152 @@
+{% extends "mainbase.html" %}
+{% load staticfiles %}
+{% load active %}
+{% block localhead %}
+  <!-- Custom CSS -->
+    <link href={% static "css/quest.css" %} rel="stylesheet">
+{% endblock localhead %}
+{% block content %}
+<div class="container">
+  <div class="row">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 column">
+        
+        
+        <div class="panel panel-default shadows body-borders">
+         <div class="panel-heading">
+             <div class="panel-title lead">Lets post a quest</div>
+         </div>
+          <div class="panel-body">
+          <form class="form-horizontal" action="{% url 'confirmquest' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+          <fieldset>
+            
+            <!-- Name input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="grey">Title</p></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="title" name="title" type="text" class="form-control input-xs" value="{{title}}" readonly="yes">
+              </div><!-- ./column -->
+            </div><!-- ./form-group -->
+ 
+    
+            <!-- Offer input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="grey">You're offering</p></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="reward" name="reward" type="text" class="form-control input-xs" value="{{reward}}" readonly="yes">
+              </div>
+            </div><!-- ./form-group -->
+
+            <!-- Offer input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="grey">Distance</p></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="reward" name="reward" type="text" class="form-control input-xs" value="{{distance}}" readonly="yes">
+              </div>
+            </div><!-- ./form-group -->          
+ 
+            <!-- Location input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Pickup from</p></label>
+              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"> 
+                  <select class="selectpicker show-menu-arrow show-tick" data-size="5" name="srccity" value="{{srccity}}" readonly="yes">
+                      <option>{{srccity}}</option>
+                    </select>
+              </div>
+              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"></div>
+                
+            </div>  <!-- End of Form group -->
+
+                    
+            <!-- Departure Address input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" class="form-control input-xs" value="{{srcaddress}}" readonly="Yes">
+              </div>
+            </div>
+                    
+                   
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Deliver to</p></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column"> 
+              
+                <select class="selectpicker show-menu-arrow show-tick" data-size="5" name="dstcity" value="{{dstcity}}" readonly="yes">
+                      <option>{{dstcity}}</option>
+                    </select>
+              </div>
+            </div>  <!-- ./form-group -->  
+         
+         
+         
+            <!-- Departure Address input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" class="form-control input-xs" value="{{dstaddress}}" readonly="yes">
+              </div>
+            </div>
+                        
+            <div class="form-group" id="size">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Package Size</p></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                 <div class="input-group col-sm-12 col-md-12 col-lg-12 column"> 
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
+                        <center>
+                            <img src={% static '' %}img/{{size}}.png %} style="width:100%; height:auto;" />            
+                            <p>{{size | title}}</p>
+                            <input type="radio" name="size" value="backpack" checked="checked"> 
+                        </center>   
+                    </div>   
+                 </div><!-- /input-group -->
+              </div>
+             </div>
+            
+            <!-- Message body -->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Your Message</p></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <textarea class="form-control" id="description" name="description" rows="5" readonly="yes">{{description}}</textarea>
+              </div>
+            </div>
+
+                           <!-- Image Uploader -->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Please upload an image relative to your quest before you confirm!</p></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                    <span class="input-group-btn">
+                    <div class="btn btn-xs btn-info image-preview-input">
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                        <span class="image-preview-input-title">Upload</span>
+                        <input type="file" accept="image/png, image/jpeg, image/gif" name="item_images" value={{item_images}}/> <!-- rename it -->
+                    </div>
+                </span>
+              </div>
+            </div>
+                          
+              <br>
+              
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">
+                <button type="submit" class="btn btn-info">Confirm</button>
+              </div><!-- ./column -->
+               </form>
+
+          </fieldset>     
+          </div><!-- ./panel-body -->
+       </div><!-- ./panel -->   
+      </div><!-- ./column -->
+  </div><!-- ./row -->
+</div><!-- ./container -->
+
+
+{% endblock content %}
+{% block scripts %}
+<script>
+    $("select").selectpicker({style: 'btn-sm btn-grad btn-info', menuStyle: 'dropdown-menu'});
+
+// style: select toggle class name (which is .btn)
+// menuStyle: dropdown class name
+
+// You can always select by any other attribute, not just tag name.
+// Also you can leave selectpicker arguments blank to apply defaults.
+</script>
+{% endblock scripts %}

@@ -86,7 +86,7 @@
 	        		
 		                        {% if pagetype == "loggedin" %}
 	                            <li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li> 
-	                            <li class="{% navactive request 'createquest' %}"><a href="{% url 'createquest' %}"><span class="glyphicon glyphicon-plus-sign"></span>Request a delivery</a></li>
+	                            <li class="{% navactive request 'newquest' %}"><a href="{% url 'newquest' %}"><span class="glyphicon glyphicon-plus-sign"></span>Request a delivery</a></li>
 	                            
 	                            <li class="{% navactive request 'mytrades' %}"><a href="{% url 'mytrades' %}"><span class="glyphicon glyphicon-transfer"></span>My Trades</a></li>
 	                        	{% comment %}
