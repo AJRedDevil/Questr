@@ -11,14 +11,15 @@
 <div class="preloader"></div>
 	
     <! -- ******************** MASTHEAD SECTION ******************** -->	
-	<main id="top" class="masthead">
+	<section id="top" class="masthead">
 		<div class="container">
-			<br><br><br><br><br>
-			<h2>Canada's first crowdshipping platform.</h2>
-			<h6>Cheapest, fastest, 24/7 shipments<br>within Greater Toronto Area.</h6>
- 
 			<div class="row">
-				<div class="col-md-4 col-sm-12 col-md-offset-4 subscribe">
+				<div class="col-md-12 column">
+					<br><br><br><br><br>
+					<h2>Canada's first crowdshipping platform.</h2>
+					<h6>Cheapest, fastest, 24/7 shipments<br>within Greater Toronto Area.</h6>
+				</div>
+				<div class="col-md-4 col-md-offset-4 subscribe">
 					<form class="form-horizontal" role="form" action="subscribe.php" id="subscribeForm" method="POST">
 						<div class="form-group">
 							<div class="col-md-7 col-sm-6 col-sm-offset-1 col-md-offset-0">
@@ -37,23 +38,25 @@
 				</div>
 
 		</div><! --/container -->
-	</main><! --/main -->
+	</section><! --/main -->
  
 
     <! -- ******************** FEATURES SECTION ******************** -->	
-	<div class="container" id="explore">
-		<div class="col-md-10 col-md-offset-1 column">
-			<div class="section-title">
-				<h2>What is Questr?</h2>
-				<p>One of the world's first, Questr is a crowdshipping platform that provides cheap, fast, and economical shipments within Greater Toronto Area.
-					<br>
-						Unlike traditional courier companies like Canada Post or UPS, Questr's shippers deliver packages directly to the destination without the hassle of going to local facility, saving much time and labour.
-				</p>
-			</div>
-		</div>
+	<div class="container page" id="explore">
+		<div class="row clearfix">
+			<div class="col-md-10 col-md-offset-1 column">
+				<div class="section-title">
+					<h2>What is Questr?</h2>
+					<p>One of the world's first, Questr is a crowdshipping platform that provides cheap, fast, and economical shipments within Greater Toronto Area.
+						<br>
+							Unlike traditional courier companies like Canada Post or UPS, Questr's shippers deliver packages directly to the destination without the hassle of going to local facility, saving much time and labour.
+					</p>
+				</div><!-- ./section-title -->
+			</div><!-- ./column -->
+		</div><!-- ./row -->
 
 		
-		<section class="row features">
+		<div class="row clearfix features">
 			<div class="col-md-10 col-md-offset-1 column">
 				<div class="col-md-4">
 					<div class="thumbnail"> 
@@ -87,8 +90,8 @@
 						</div>
 					</div><! --/thumbnail -->
 				</div><! --/.column -->
-			</div>
-		</section><! --/section -->
+			</div><! --/.column -->
+		</div><! --/row -->
  
 
 	    <! -- ******************** MENTIONS SECTION ******************** -->	 
@@ -104,13 +107,9 @@
 				</a>
 			</div>
 		</section><! --/section -->
- 
-	</div><! --/container -->
-  
-
-	    <! -- ******************** PRICING LIST ******************** -->	  
-		<div class="container">
- 
+	
+		<! -- ******************** PRICING LIST ******************** -->	  
+		<div class="row clearfix">
 			<div class="section-title">
 				<h2>Questr compared to other competitors</h2>
 				<h4>They've got nothing on us when it comes to same day delivery</h4>
@@ -141,40 +140,9 @@
 					</div><! --/pricing -->
 				</div><! --/col-md-4-->
 			</section><!-- /section planpricing -->
- 
-
-	    <! -- ******************** FAQ ******************** -->  
-	    {% comment %}
-		<div class="section-title">
-			<h5>Frequently Asked Questions</h5>
-		</div>
-		
-		<section class="row faq breath">
-			<div class="col-md-6">
-				<h6></h6>
-				<p></p>
-				<h6></h6>
-				<p></p>
-			</div><! --/col-md-6 -->
-			
-			<div class="col-md-6">
-				<h6></h6>
-				<p></p>
-				<h6></h6>
-				<p></p>
-			</div><! --/col-md-6 -->
-		</section><! --/section faq -->
-		{% endcomment %}
-	</div><! --/container -->
- 
-
-
-
-
-
-	   
-	     
-	<!-- *****************************************************************************************************************
+	
+	
+			<!-- *****************************************************************************************************************
 	MIDDLE CONTENT
 	***************************************************************************************************************** -->
 
@@ -211,6 +179,39 @@
 			</div>
 		</div><! --/row -->
 	</div><! --/container -->
+	
+	
+	</div><! --/container -->
+  
+
+	    
+ 
+
+	    <! -- ******************** FAQ ******************** -->  
+	    {% comment %}
+		<div class="section-title">
+			<h5>Frequently Asked Questions</h5>
+		</div>
+		
+		<section class="row faq breath">
+			<div class="col-md-6">
+				<h6></h6>
+				<p></p>
+				<h6></h6>
+				<p></p>
+			</div><! --/col-md-6 -->
+			
+			<div class="col-md-6">
+				<h6></h6>
+				<p></p>
+				<h6></h6>
+				<p></p>
+			</div><! --/col-md-6 -->
+		</section><! --/section faq -->
+	</div><! --/container -->
+{% endcomment %}
+	     
+	
 
 {% endblock content %}
 
