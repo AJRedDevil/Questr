@@ -37,7 +37,7 @@ DATABASES = {
 # DATABASES['default'] =  dj_database_url.config("django.db.backends.postgresql_psycopg2")
 TIME_ZONE = 'Asia/Kathmandu'
 ##Media contents in amazonaws
-AWS_MEDIA_BUCKET = os.environ['AWS_MEDIA_BUCKET']
+AWS_MEDIA_BUCKET = os.environ['AWS_LOCAL_MEDIA_BUCKET']
 DEFAULT_FILE_STORAGE = 'libs.s3utils.MediaRootS3BotoStorage'
 MEDIA_ROOT = '/%s/' % DEFAULT_FILE_STORAGE
 MEDIA_URL = '//s3.amazonaws.com/%s/' % AWS_MEDIA_BUCKET
