@@ -1,0 +1,41 @@
+
+h1, h2, h3, h4, h5, h6, p, b, i, li {
+	font-family: "Arial";
+	color:rgba(50,50,50,1);
+	font-size: 14px;
+}
+
+h1 {
+	font-size: 40px;
+	font-weight: bold;
+}
+
+h2 {
+	font-size: 16px;
+	text-decoration: underline;
+	font-weight: bold;
+}
+h3 {
+	font-size: 16px;
+	text-decoration: underline;
+}
+
+
+
+a {
+	text-decoration:none;
+	color: #3399db;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+
+a:hover{
+	color:#4568b8;
+}
+
+a:active{
+	color:rgba(180,180,180,1);
+}
