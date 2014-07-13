@@ -2,7 +2,7 @@
 Attributes for social network icons in the footer
 */
 
-facebook, twitter, linkedin, email{
+facebook, twitter, linkedin, tumblr, email{
   font-size:28px;
   font-weight:500;
   margin:10px 0;
@@ -21,6 +21,7 @@ email{
 facebook:hover{color:#4568b8;}
 twitter:hover{color:#1ab2e8;}
 linkedin:hover{color:#007ebd;}
-email:hover{color:#cecece;}
+tumblr:hover{color:#507490;}
+email:hover{color:#5b85a5;}
 
-facebook:active,twitter:active,linkedin:active,email:active{color:rgba(180,180,180,1);}
+facebook:active,twitter:active,linkedin:active,tumblr:active,email:active{color:rgba(180,180,180,1);}
