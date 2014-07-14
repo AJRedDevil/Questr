@@ -77,9 +77,9 @@ hr {
 	border-bottom-right-radius: 5px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
-	border-width: 0.1px;
+	border-width: 0.5px;
 	border-style: solid;
-	border-color: #fdfdfd;
+	border-color: rgba(0, 0, 0, 1);
 }
 
 .no-borders {
@@ -103,8 +103,6 @@ hr {
 	background: rgba(255,255,255,0.94);
 	color: #a5a5a5;
 	border-bottom: 1px;
-	border-left: none;
-	border-right: none;
 	border-bottom-style: solid;
 	border-bottom-color: #e9f0f5;
 }
