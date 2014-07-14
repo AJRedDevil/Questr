@@ -13,7 +13,7 @@
         
         <div class="panel panel-default shadows body-borders">
          <div class="panel-heading">
-             <div class="panel-title lead">Lets post a quest</div>
+             <div class="panel-title lead">Request a delivery</div>
          </div>
           <div class="panel-body">
           <form class="form-horizontal" action="{% url 'confirmquest' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
@@ -30,7 +30,7 @@
     
             <!-- Offer input-->
             <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="grey">You're offering</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="grey">Shipping fee</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <input id="reward" name="reward" type="text" class="form-control input-xs" value="{{reward}}" readonly="yes">
               </div>
@@ -46,7 +46,7 @@
  
             <!-- Location input-->
             <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Pickup from</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Pick up from</p></label>
               <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"> 
                   <select class="selectpicker show-menu-arrow show-tick" data-size="5" name="srccity" value="{{srccity}}" readonly="yes">
                       <option>{{srccity}}</option>
@@ -67,7 +67,7 @@
                     
                    
             <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Deliver to</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Drop off at</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column"> 
               
                 <select class="selectpicker show-menu-arrow show-tick" data-size="5" name="dstcity" value="{{dstcity}}" readonly="yes">

@@ -13,7 +13,7 @@
       	
       	<div class="panel panel-default shadows body-borders">
          <div class="panel-heading">
-	         <div class="panel-title lead">Lets post a quest</div>
+	         <div class="panel-title lead">Request a delivery</div>
          </div>
           <div class="panel-body">
           <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
@@ -30,10 +30,10 @@
     
             <!-- Location input-->
             <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Pickup from</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Pick up from</p></label>
               <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"> 
 	              <select class="selectpicker show-menu-arrow show-tick" data-size="5" name="srccity">
-					  <option><span class="glyphicon glyphicon-map-marker theme-colour"></span> City</option>
+					  <option><span class="glyphicon glyphicon-map-marker theme-colour"></span>City</option>
 					  <option>Mississauga</option>
 					  <option>Brampton</option>
 					  <option>Toronto</option>
@@ -54,7 +54,7 @@
                     
                    
             <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Deliver to</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Drop off at</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column"> 
               
          		<select class="selectpicker show-menu-arrow show-tick" data-size="5" name="dstcity">
@@ -77,7 +77,7 @@
             </div>
                         
             <div class="form-group" id="size">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Package Size</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Delivery size</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
               	 <div class="input-group col-sm-12 col-md-12 col-lg-12 column">	
               	 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
@@ -109,7 +109,7 @@
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Your Message</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <textarea class="form-control" id="description" name="description" placeholder="Please enter your message here..." rows="5"></textarea>
+                <textarea class="form-control" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5"></textarea>
               </div>
             </div>
                           
