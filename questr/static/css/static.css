@@ -1,0 +1,30 @@
+
+@charset "utf-8";
+
+body{
+	font-family: "Helvetica Neue";
+	font-size: 14px;
+}
+
+h1, h2, h3, h4, h5, h6, p{
+	color: rgba(120,120,120,1);
+}
+
+
+.banner{
+	width:100%;
+	height: 20%;
+	max-height: 200px;
+	text-align: center;
+	padding-top: 5%;
+	padding-bottom: 5%;
+	padding-left: 20%;
+	padding-right: 20%;
+
+	background: url("../img/banner.jpg") no-repeat center center;
+	background-size: 100% 200px;
+}
+
+
+
+
