@@ -139,14 +139,10 @@
 						<div class="billing">horrendous</div>
 					</div><! --/pricing -->
 				</div><! --/col-md-4-->
+				</section><!-- /section planpricing -->
 				
 				<div class="col-md-10 col-md-offset-1 column">
-					<section id="about">
-					
-				
-					    
-					    <div class="ten columns centered make-it-appear-top">
-					   
+					   				   
 					   		  <center><h3 class="lead">Skills</h3></center>
 					   		  
 					   		  <ul class="bargraph">
@@ -166,20 +162,12 @@
 									    <li class="photoshop">PHOTOSHOP</li>
 									    <li class="jquery">JQUERY</li>
 									    <li class="axure">AXURE RP PRO</li>
-									</ul>		 	
-									<br>		  
-	 
-					  </div>
-					</section>
-				</div>
-			</section><!-- /section planpricing -->
-	
-	
+									</ul>		 		  
+						</div><!-- ./column -->			
+		</div><!-- ./row -->
 			<!-- *****************************************************************************************************************
 	MIDDLE CONTENT
 	***************************************************************************************************************** -->
-
-	<div class="container mtb">
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1 column">
 
@@ -193,7 +181,7 @@
 					<br>
 				</div>
 
-				<div class="col-lg-4">
+				<div class="col-lg-4 column">
 					<h4>Say hi to us</h4>
 					<div class="hline"></div>
 					<p></p>
@@ -208,12 +196,12 @@
 						<p></p>
 						<button type="submit" class="btn btn-embossed btn-default">Send</button>
 					</form>
-				</div>
-			</div>
-		</div><! --/row -->
-	</div><! --/container -->
-	
-	
+				</div><! -- ./column -->
+			</div><! -- ./column -->
+		</div><! -- ./row -->
+		
+		
+		{% endblock content %}
 	</div><! --/container -->
   
 
@@ -245,8 +233,6 @@
 {% endcomment %}
 	     
 	
-
-{% endblock content %}
 
 {% block scripts %}
 <script src={% static "assets/js/jquery.js" %}></script>
