@@ -4418,3 +4418,11 @@ footer p {
 .mal {
   margin-left: 20px;
 }
+
+
+::selection {
+	background: #d7eeff; /* Safari */
+	}
+::-moz-selection {
+	background: #d7eeff; /* Firefox */
+}
