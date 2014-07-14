@@ -44,6 +44,10 @@ footer ul.list li.social-links {
 footer ul.list li small {
 	font-weight: 500;
 }
+
+footer ul.list li small.title {
+	font-weight: bold;
+}
  
 hr {
 	display: block;
@@ -211,8 +215,8 @@ hr {
   background: transparent;
   border-style: solid;
   border-width: 2px;
-  border-color: #c6d0d7;
-  color: #c6d0d7;
+  border-color: #b7c8d4;
+  color: #b7c8d4;
 }
 
 .twitter .btn-circle:hover {
