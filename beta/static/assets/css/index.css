@@ -97,6 +97,7 @@ p{font-size:17px;font-weight:300;margin:10px 0;color: #646464;}
 	}
 .breath{margin:50px auto;}
 
+
 .highlight{background:#f4f4f4;margin-top:40px;}
 
 .masthead{
@@ -300,9 +301,6 @@ to {
 }
 .section-title h4 {
 	color:#94a3a8;
-}
-.heroimg img, .clientlogo img {
-	max-width:100%;
 }
 
 
