@@ -1,7 +1,7 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
-    <link href={% static "css/static.css" %} rel="stylesheet"> 
+  <link href={% static "css/static.css" %} rel="stylesheet"> 
 	<script src={% static "assets/js/pace.js" %}></script>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
 {% endblock localhead %}
@@ -11,6 +11,40 @@
   <h1>Contact Questr</h1>
   <h2>Let us help you in whichever way you want!</h2>
 </div>    
+
+<div class="container mtb">
+  <div class="row">
+
+    <div class="col-lg-4">
+      <h4>Social Media</h4>
+      <div class="hline"></div>
+        <p><a href="https://www.facebook.com/questrco"><facebook-large class="fa fa-facebook"></facebook-large>Facebook</a></p>
+        <p><a href="https://twitter.com/questrco"><twitter-large class="fa fa-twitter"></twitter-large>Twitter</a></p>
+        <p><a href="http://linkedin.com/company/questr"><linkedin-large class="fa fa-linkedin"></linkedin-large>LinkedIn</a></p>
+        <p><a href="http://questrco.tumblr.com"><tumblr-large class="fa fa-tumblr"></tumblr-large>Tumblr</a></p>
+        <p><wechat-large class="fa fa-wechat" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></wechat-large>WeChat</p>
+        <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on right</button>      
+        <br>
+    </div>
+
+    <div class="col-lg-4">
+      <h4>Say hi to us</h4>
+      <div class="hline"></div>
+      <p></p>
+      <form action="/beta/contactus" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
+        <div class="form-group">
+          <input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Your name">
+          <p></p>
+          <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Your email address">
+          <p></p>
+          <textarea name="message" class="form-control" rows="3" placeholder="Your message"></textarea>
+        </div>
+        <p></p>
+        <button type="submit" class="btn btn-embossed btn-default">Send</button>
+      </form>
+    </div>
+  </div><! --/row -->
+</div><! --/container -->
 
 	
 
