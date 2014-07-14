@@ -18,6 +18,10 @@ footer {
 	border-width: 1px;
 	border-style: solid;
 	border-color: #fdfdfd;
+	
+	position: absolute;
+	bottom: 0;
+	 width:100%;
 }
  
  footer ul {

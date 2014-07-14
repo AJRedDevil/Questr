@@ -21,7 +21,11 @@ hr {
 
 /******************* Signin **********************/
 #signin {
-	background: #34495E;
+	background: #99a1a7;
+}
+
+#signin .panel {
+	margin-top: 20px;
 }
 
 input
