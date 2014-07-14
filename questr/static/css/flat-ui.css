@@ -1817,11 +1817,10 @@ fieldset[disabled] .input-group-btn .btn-default.active {
 }
 .navbar {
 	background: white;
-  font-size: 12px;
-  min-height: 13px;
-  margin-bottom: 10px;
-  border: none;
-  padding: 0;
+	font-size: 12px;
+	min-height: 13px;
+	margin-bottom: 10px;
+	padding: 0;
 }
 @media (min-width: 768px) {
   .navbar-header {
@@ -2202,10 +2201,6 @@ select[multiple].navbar-form .btn {
 }
 .navbar-default {
 	color: #f8f8f8;
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 0px 0 0 rgba(0, 0, 0, 0.1);
-	-webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 0px 0 0 rgba(0, 0, 0, 0.1);
-	-moz-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 0px 0 0 rgba(0, 0, 0, 0.1);
-	border: none;
 }
 
 .navbar-default .navbar-toggle:before {

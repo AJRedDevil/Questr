@@ -19,9 +19,6 @@ body {
 footer {
 	background: white;
 	padding-top: 15px;
-	border-width: 1px;
-	border-style: solid;
-	border-color: #fdfdfd;
 	
 	position: absolute;
 	display: block;
@@ -66,11 +63,14 @@ hr {
 	padding: 0;
 }
 
-.body-borders {
+.body-prop {
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
+}
+
+.border-colours {
 	border: 1px solid;
 	border-color: #e5e6e9 #dfe0e4 #d0d1d5;
 	-webkit-border-width: 3px;
@@ -440,6 +440,10 @@ nav .glyphicon {
 
 .light-grey {
 	color: #9197a3;
+}
+
+.lighter-grey {
+	color: #e9eaed;
 }
 
 .theme-colour {
