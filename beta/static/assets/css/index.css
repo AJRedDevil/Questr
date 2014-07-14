@@ -514,3 +514,112 @@ padding: 40px 15px;
 
 }
 
+
+
+/************ graph ***************/
+/**** 	PROGRESS BAR ****/
+ul.bargraph {
+    list-style: none;
+    padding-left:0;
+    width:100%;
+    height: 100%;
+}
+
+ul.bargraph li {
+	 color: white;
+	 text-align: center;
+	 font-family: 'latoregular', sans-serif;
+	color: white;
+}
+
+    
+ul.bargraph li.htmlcss {
+background: #447bf4;
+width:100%;
+float: left;
+}
+
+ul.bargraph li.sass {
+	background: #c576f9;
+	width: 50%;
+}
+ 
+ul.bargraph li.javascript {
+background: #EF465B;
+width:70%;
+}
+ 
+ul.bargraph li.bootstrap {
+background: #58b664;
+width:100%;
+}
+
+ul.bargraph li.gumby {
+	background: #4ed1d1;
+	width: 40%;
+}
+ 
+ul.bargraph li.php {
+background: #E55A6B;
+width:65%;
+}
+ 
+ul.bargraph li.cplus {
+background: #E28159;
+width:85%;
+}
+ 
+ul.bargraph li.c {
+background: #F99C1C;
+width:80%;
+}
+ 
+ul.bargraph li.objectivec {
+background: #F4D41E;
+width:74%;
+}
+ 
+ul.bargraph li.java {
+background: #97B546;
+width:85%;
+}
+ 
+ul.bargraph li.sql {
+background: #36B669;
+width:80%;
+}
+ 
+ul.bargraph li.assembly {
+background: #42BDA5;
+width:25%;
+}
+
+ul.bargraph li.sketch {
+	background: #52d8ae;
+	width: 94%;
+}
+
+ul.bargraph li.photoshop {
+	background: #b1d952;
+	width: 90%;
+}
+
+ul.bargraph li.jquery {
+	background: #d95b52;
+	width: 75%;
+}
+
+ul.bargraph li.axure {
+	background: #52bed9;
+	width: 95%;
+}
+ 
+ul.bargraph li.blue {
+background: #00AEEF;
+width:20%;
+}
+ 
+ul.bargraph li.xaxis img {
+width: 100%; 
+height: auto;
+}
