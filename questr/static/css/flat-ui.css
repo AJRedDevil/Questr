@@ -266,6 +266,7 @@ p {
 small,
 .small {
   font-size: 10px;
+  font-weight: 600;
   line-height: 2.067;
 }
 .text-muted {
@@ -4162,7 +4163,7 @@ footer {
 }
 footer a {
   color: #9aa4af;
-  font-weight: 100;
+  font-weight: 700;
 }
 footer p {
   font-size: 15px;

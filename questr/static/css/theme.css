@@ -28,8 +28,12 @@ footer ul.list li {
 	margin-bottom: -6px;
 }
 
+footer ul.list li.social-links {
+	margin-top: 5px;
+}
+
 footer ul.list li small {
-	font-weight: 1;
+	font-weight: 500;
 }
  
 hr {
@@ -182,6 +186,80 @@ hr {
 .btn-grad.active {
   background-color: #cdcdcd \9;
 }
+
+
+.btn-circle span {
+	color: #cbcbd0;
+}
+
+
+.btn-circle {
+  width: 26px;
+  height: 26px;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 50%;
+  background: transparent;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #c6d0d7;
+  color: #c6d0d7;
+}
+
+.twitter .btn-circle:hover {
+	border-color: #1ab2e8;
+	color: #1ab2e8;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+
+.facebook .btn-circle:hover {
+	border-color: #4568b8;
+	color: #4568b8;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+
+.tumblr .btn-circle:hover {
+	border-color: #507490;
+	color: #507490;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+
+.linkedin .btn-circle:hover {
+	border-color: #007ebd;
+	color: #007ebd;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+
+.email .btn-circle:hover {
+	border-color: #5b85a5;
+	color: #5b85a5;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+
+
+
 
 /******** Pagination ************/
 .pagination li a {
@@ -351,10 +429,7 @@ nav .glyphicon {
 }
 
 .grey {
-/**
 	color: #7F8C8D;
-	**/
-	color: #07e0f0;
 }
 
 
@@ -388,14 +463,3 @@ nav .glyphicon {
 .no-image .glyphicon {
 	color: white;
 } 
-
-
-
-
-.circle {
-	width: 200px;
-    height: 200px;
-    border-radius: 50%;
-}
-
-
