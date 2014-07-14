@@ -78,8 +78,9 @@ hr {
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	border-width: 0.5px;
+	-webkit-border-width: 1.5px;
 	border-style: solid;
-	border-color: rgba(0, 0, 0, 1);
+	border-color: #e5e6e9 #dfe0e4 #d0d1d5;
 }
 
 .no-borders {
@@ -368,9 +369,9 @@ input.form-control:focus, textarea.form-control:focus {
 }
 
 .profileImg {
-	width: 40px;
-	height: auto;
 	float: left;
+	max-height: 10px;
+	display: inline-block;
 }
 
 #notifications .dropdown-menu li a {
