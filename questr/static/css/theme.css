@@ -354,7 +354,7 @@ nav .glyphicon {
 /**
 	color: #7F8C8D;
 	**/
-	color: #07dfef;
+	color: #07e0f0;
 }
 
 
@@ -390,5 +390,12 @@ nav .glyphicon {
 } 
 
 
+
+
+.circle {
+	width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
 
 
