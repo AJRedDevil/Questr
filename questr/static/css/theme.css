@@ -68,6 +68,7 @@ hr {
 	border-bottom-right-radius: 5px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
+	background: white;
 }
 
 .border-colours {
@@ -82,7 +83,7 @@ hr {
  
  /*************** Well, Panels ***************/
 .well {
-	background: white; 
+	background: white;
 }
 
 .other-well {
