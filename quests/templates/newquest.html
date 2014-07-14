@@ -12,9 +12,10 @@
       	
       	
       	<div class="panel panel-default shadows body-borders">
-         <div class="panel-heading">
-	         <div class="panel-title lead">Request a delivery</div>
-         </div>
+	         <div class="panel-heading">
+		         <div class="panel-title lead">Request a delivery</div>
+	         </div><!-- ./panel-heading -->
+          
           <div class="panel-body">
           <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
           <fieldset>
@@ -38,32 +39,30 @@
 					  <option>Brampton</option>
 					  <option>Toronto</option>
 					</select>
-              </div>
-              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"></div>
-                
-            </div>  <!-- End of Form group -->
-
+              </div><!-- ./column -->
+              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"></div>  
+            </div>  <!-- ./form-group -->
                     
             <!-- Departure Address input-->
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <input id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" class="form-control input-xs">
-              </div>
-            </div>
+              </div><!-- ./column -->
+            </div><!-- ./form-group -->
                     
                    
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Drop off at</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column"> 
               
-         		<select class="selectpicker show-menu-arrow show-tick" data-size="5" name="dstcity">
+	              <select class="selectpicker show-menu-arrow show-tick" data-size="5" name="dstcity">
 					  <option data-icon="glyphicon glyphicon-map-marker theme-colour">City</option>
 					  <option>Mississauga</option>
 					  <option>Brampton</option>
 					  <option>Toronto</option>
-					</select>
-              </div>
+					  </select>
+              </div><!-- ./column -->
             </div>  <!-- ./form-group -->  
          
          
@@ -73,8 +72,8 @@
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <input id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" class="form-control input-xs">
-              </div>
-            </div>
+              </div><!-- ./column -->
+            </div><!-- ./form-group -->
                         
             <div class="form-group" id="size">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Delivery size</p></label>
@@ -86,43 +85,46 @@
               	 			<p>Backpack</p>
               	 			<input type="radio" name="size" value="backpack"> 
               	 		</center>	
-              	 	</div>   
+              	 	</div><!-- ./column -->  
               	 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
 	              		<center>
 	              			<img src={% static 'img/car.png' %} style="width:100%; height:auto;" />
 	              			<p>Car</p>
 	              			<input type="radio" name="size" value="car">
 	              		</center>	
-              	 	</div>
+              	 	</div><!-- ./column -->
               	 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
 	              		<center>
 	              			<img src={% static 'img/minivan.png' %} style="width:100%; height:auto;" />
 	              			<p>Van</p>
 	              			<input type="radio" name="size" value="minivan">
 	              			</center> 	
-              	 	</div>
+              	 	</div><!-- ./column -->
 			     </div><!-- /input-group -->
-			  </div>
-			 </div>
+			  </div><!-- ./column -->
+			 </div><!-- ./form-group -->
             
             <!-- Message body -->
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Your Message</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <textarea class="form-control" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5"></textarea>
-              </div>
-            </div>
+              </div><!-- ./column -->
+            </div><!-- ./form-group -->
                           
               <br>
               
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">
                 <button type="submit" class="btn btn-info">Continue</button>
               </div><!-- ./column -->
-               </form>
-
-          </fieldset>     
+               
+               
+          </fieldset>
+          </form>     
           </div><!-- ./panel-body -->
-       </div><!-- ./panel -->   
+       </div><!-- ./panel -->  
+       
+        
       </div><!-- ./column -->
   </div><!-- ./row -->
 </div><!-- ./container -->
