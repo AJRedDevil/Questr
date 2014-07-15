@@ -2,8 +2,8 @@
 Attributes for social network icons in the footer
 */
 
-facebook, twitter, linkedin, tumblr, wechat, email{
-  font-size:28px;
+.facebook, .twitter, .linkedin, .tumblr, .wechat, .email{
+  font-size:20px;
   font-weight:500;
   margin:10px 0;
   color:rgba(120,120,120,1);
@@ -14,49 +14,16 @@ facebook, twitter, linkedin, tumblr, wechat, email{
   transition:all 0.3s ease;
 }
 
-email{
+.email{
   font-size:22px;
 }
 
-
-facebook-large, twitter-large, linkedin-large, tumblr-large, wechat-large, email-large{
-  font-size:32px;
-  font-weight:500;
-  margin:10px 0;
-  color:rgba(120,120,120,1);
-
-  -moz-transition:all 0.3s ease;
-  -webkit-transition:all 0.3s ease;
-  -ms-transition:all 0.3s ease;
-  -o-transition:all 0.3s ease;
-  transition:all 0.3s ease;
-
-  display: inline-block;
-  width: 45px;
-  height: 45px;
-  line-height: 45px;
-  text-align: center;
-  vertical-align: middle;
-  margin: 10px;
-
-  -moz-border-radius: 60px;
-  -webkit-border-radius: 60px;
-  border-radius: 60px;
-  -moz-box-shadow: 0px 0px 2px #888;
-  -webkit-box-shadow: 0px 0px 2px #888;
-  box-shadow: 0px 0px 2px #888;
-
-}
-
-facebook:hover, facebook-large:hover{color:#4568b8;}
-twitter:hover, twitter-large:hover{color:#1ab2e8;}
-linkedin:hover, linkedin-large:hover{color:#007ebd;}
-tumblr:hover, tumblr-large:hover{color:#507490;}
-wechat:hover, wechat-large:hover{color:#a1d92d;}
-email:hover, email-large:hover{color:#5b85a5;}
+.facebook:hover {color:#4568b8;}
+.twitter:hover  {color:#1ab2e8;}
+.linkedin:hover {color:#007ebd;}
+.tumblr:hover   {color:#507490;}
+.wechat:hover   {color:#a1d92d;}
+.email:hover    {color:#5b85a5;}
 
 
-facebook:active,twitter:active,linkedin:active,tumblr:active,email:active{color:rgba(180,180,180,1);}
-
-facebook-large:active, twitter-large:active, linkedin-large:active, tumblr-large:active, wechat-large:active, email-large:active{color:rgba(180,180,180,1);}
-
+.facebook:active,.twitter:active,.linkedin:active,.tumblr:active,.email:active{color:rgba(180,180,180,1);}
