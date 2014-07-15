@@ -464,7 +464,6 @@ a.thumbnail.active {
 }
 
 .btn {
-  border: none;
   font-size: 15px;
   font-weight: normal;
   line-height: 1.4;
@@ -508,7 +507,6 @@ fieldset[disabled] .btn {
 }
 .btn-default {
   color: #ffffff;
-  background-color: #bdc3c7;
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -517,7 +515,6 @@ fieldset[disabled] .btn {
 .open .dropdown-toggle.btn-default {
   color: #ffffff;
   background-color: #cacfd2;
-  border-color: #cacfd2;
 }
 .btn-default:active,
 .btn-default.active,
@@ -875,7 +872,6 @@ fieldset[disabled] .btn-link:focus {
   margin-left: 0;
 }
 .btn-group > .btn + .dropdown-toggle {
-  border-left: 2px solid rgba(52, 73, 94, 0.15);
   padding-left: 12px;
   padding-right: 12px;
 }
@@ -915,9 +911,9 @@ fieldset[disabled] .btn-link:focus {
   margin: 0 1px;
 }
 .caret {
-  border-width: 6px 4px;
-  border-bottom-color: #34495e;
-  border-top-color: #34495e;
+  border-width: 4px 3px;
+  border-bottom-color: #4e5665;
+  border-top-color: #4e5665;
   border-style: solid;
   border-bottom-style: none;
   -webkit-transition: 0.25s;
@@ -972,7 +968,7 @@ fieldset[disabled] .btn-link:focus {
   width: 100%;
 }
 .select .btn {
-  width: 220px;
+  width: 40px;
 }
 .select .btn.btn-hg .filter-option {
   left: 20px;
@@ -1009,12 +1005,9 @@ fieldset[disabled] .btn-link:focus {
 }
 .select .btn .caret {
   position: absolute;
-  right: 16px;
+  right: 12px;
   top: 50%;
   margin-top: -3px;
-}
-.select .btn .dropdown-toggle {
-  border-radius: 6px;
 }
 .select .btn .dropdown-menu {
   min-width: 100%;
@@ -1044,8 +1037,8 @@ fieldset[disabled] .btn-link:focus {
   cursor: default;
 }
 .select .caret {
-  border-bottom-color: #ffffff;
-  border-top-color: #ffffff;
+  border-bottom-color: #4e5665;
+  border-top-color: #4e5665;
 }
 legend {
   display: block;
@@ -1142,6 +1135,7 @@ select.input-sm {
   height: 35px;
   line-height: 35px;
 }
+
 textarea.input-sm,
 select[multiple].input-sm {
   height: auto;
@@ -4412,12 +4406,4 @@ footer p {
 .mhl,
 .mal {
   margin-left: 20px;
-}
-
-
-::selection {
-	background: #d7eeff; /* Safari */
-	}
-::-moz-selection {
-	background: #d7eeff; /* Firefox */
 }

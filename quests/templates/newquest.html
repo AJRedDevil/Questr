@@ -33,7 +33,7 @@
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Pick up from</p></label>
               <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"> 
-	              <select class="selectpicker show-menu-arrow show-tick" data-size="5" name="srccity">
+	              <select class="selectpicker" data-size="5" name="srccity">
 					  <option><span class="glyphicon glyphicon-map-marker theme-colour"></span>City</option>
 					  <option>Mississauga</option>
 					  <option>Brampton</option>
@@ -133,7 +133,7 @@
 {% endblock content %}
 {% block scripts %}
 <script>
-	$("select").selectpicker({style: 'btn-sm btn-grad btn-info', menuStyle: 'dropdown-menu'});
+	$("select").selectpicker({style: 'btn btn-sm btn-default dropdown-toggle btn-grad', menuStyle: 'dropdown-menu'});
 
 // style: select toggle class name (which is .btn)
 // menuStyle: dropdown class name

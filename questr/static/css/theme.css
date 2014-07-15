@@ -149,23 +149,36 @@ hr {
 
 /************* Buttons ************/
 
-.dropdown button.btn, .btn-grad {
-	border-style: solid;
-	border-width: 1px;
-	border-color: #dedede;
-	color: black;
+button.classic {
 	
-  text-shadow: 0 0.7px 0 rgba(0, 0, 0, 0.1);
-  background-color: #f2f2f2;
-  *background-color: #e6e6e6;
-  background-image: -moz-linear-gradient(top, #fafafa, #e6e6e6);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#e6e6e6));
-  background-image: -webkit-linear-gradient(top, #fafafa, #e6e6e6);
-  background-image: -o-linear-gradient(top, #fafafa, #e6e6e6);
-  background-image: linear-gradient(to bottom, #fafafa, #e6e6e6);
+}
+
+.dropdown button.btn, .btn-grad {
+  background-color: #ffffff;
+  *background-color: #f6f7f8;
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #f6f7f8 100%);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f6f7f8));
+  background-image: -webkit-linear-gradient(top, #ffffff, #f6f7f8);
+  background-image: -o-linear-gradient(top, #ffffff, #f6f7f8);
+  background-image: linear-gradient(to bottom, #ffffff, #f6f7f8);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffafafa', endColorstr='#ffe6e6e6', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  
+  
+border: 1px solid;
+-webkit-border-radius: 2px;
+-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+-webkit-box-sizing: content-box;
+font-family: 'Helvetica Neue', Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif;
+-webkit-font-smoothing: antialiased;
+font-weight: bold;
+text-align: center;
+vertical-align: middle;
+
+border-color: #cdced0 #c5c6c8 #b6b7b9;
+color: #4e5665;
+text-shadow: 0 1px 0 #fff;
 }
 
 .dropdown button.btn:hover,
