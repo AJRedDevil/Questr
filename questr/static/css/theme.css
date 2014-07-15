@@ -16,6 +16,8 @@ body {
 	overflow-x: hidden;
  }
  
+ 
+/************ footer ****************/
 footer {
 	background: white;
 	padding-top: 20px;
@@ -41,6 +43,139 @@ footer ul.list li.social-links {
 footer small.title {
 	font-weight: bold;
 }
+
+.btn-circle span {
+	color: #cbcbd0;
+}
+
+.btn-circle-large span {
+	color: #cbcbd0;
+}
+
+.btn-circle {
+	width: 26px;
+	height: 26px;
+	text-align: center;
+	padding: 5px 0;
+	font-size: 12px;
+	line-height: 1.428571429;
+	border-radius: 50%;
+	background: transparent;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #b7c8d4;
+	color: #b7c8d4;
+	margin-right: 1px;
+
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+
+}
+
+.btn-circle-large {
+	width: 46px;
+	height: 46px;
+	text-align: center;
+	padding: 5px 0;
+	font-size: 24px;
+	line-height: 1.428571429;
+	border-radius: 50%;
+	background: transparent;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #b7c8d4;
+	color: #b7c8d4;
+	margin-right: 5px;
+
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+
+}
+
+.twitter .btn-circle:hover,  .twitter .btn-circle-large:hover {
+	border-color: #1ab2e8;
+	color: #1ab2e8;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+
+.facebook .btn-circle:hover, .facebook .btn-circle-large:hover {
+	border-color: #4568b8;
+	color: #4568b8;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+
+.tumblr .btn-circle:hover, .tumblr .btn-circle-large:hover {
+	border-color: #507490;
+	color: #507490;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+
+.linkedin .btn-circle:hover, .linkedin .btn-circle-large:hover {
+	border-color: #007ebd;
+	color: #007ebd;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+
+.email .btn-circle:hover, .email .btn-circle-large:hover {
+	border-color: rgba(150,150,150,1);
+	color: rgba(150,150,150,1);
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+
+.wechat .btn-circle:hover, .wechat .btn-circle-large:hover {
+	border-color: #a1d92d;
+	color: #a1d92d;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+/************ ./footer ****************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  
 hr {
@@ -148,11 +283,6 @@ hr {
 
 
 /************* Buttons ************/
-
-button.classic {
-	
-}
-
 .btn-classic {
   background-color: #ffffff;
   *background-color: #f6f7f8;
@@ -181,6 +311,16 @@ color: #4e5665;
 text-shadow: 0 1px 0 #fff;
 }
 
+
+.btn-classic:hover,
+.btn-classic:focus,
+.btn-classic:active,
+.btn-classic.active,
+.btn-classic.disabled,
+.btn-classic[disabled] {
+	color: #4e5665;
+}
+
 .dropdown button.btn:hover,
 .dropdown button.btn:focus,
 .dropdown button.btn:active,
@@ -206,120 +346,6 @@ text-shadow: 0 1px 0 #fff;
 }
 
 
-.btn-circle span {
-	color: #cbcbd0;
-}
-
-.btn-circle-large span {
-	color: #cbcbd0;
-}
-
-
-.btn-circle {
-	width: 26px;
-	height: 26px;
-	text-align: center;
-	padding: 5px 0;
-	font-size: 12px;
-	line-height: 1.428571429;
-	border-radius: 50%;
-	background: transparent;
-	border-style: solid;
-	border-width: 2px;
-	border-color: #b7c8d4;
-	color: #b7c8d4;
-	margin-right: 1px;
-
-	-moz-transition:all 0.3s ease;
-	-webkit-transition:all 0.3s ease;
-	-ms-transition:all 0.3s ease;
-	-o-transition:all 0.3s ease;
-	transition:all 0.3s ease;
-
-}
-
-.btn-circle-large {
-	width: 46px;
-	height: 46px;
-	text-align: center;
-	padding: 5px 0;
-	font-size: 24px;
-	line-height: 1.428571429;
-	border-radius: 50%;
-	background: transparent;
-	border-style: solid;
-	border-width: 2px;
-	border-color: #b7c8d4;
-	color: #b7c8d4;
-	margin-right: 5px;
-
-	-moz-transition:all 0.3s ease;
-	-webkit-transition:all 0.3s ease;
-	-ms-transition:all 0.3s ease;
-	-o-transition:all 0.3s ease;
-	transition:all 0.3s ease;
-
-}
-
-.twitter .btn-circle:hover,  .twitter .btn-circle-large:hover {
-	border-color: #1ab2e8;
-	color: #1ab2e8;
-	-moz-transition:all 0.3s ease;
-	-webkit-transition:all 0.3s ease;
-	-ms-transition:all 0.3s ease;
-	-o-transition:all 0.3s ease;
-	transition:all 0.3s ease;
-}
-
-.facebook .btn-circle:hover, .facebook .btn-circle-large:hover {
-	border-color: #4568b8;
-	color: #4568b8;
-	-moz-transition:all 0.3s ease;
-	-webkit-transition:all 0.3s ease;
-	-ms-transition:all 0.3s ease;
-	-o-transition:all 0.3s ease;
-	transition:all 0.3s ease;
-}
-
-.tumblr .btn-circle:hover, .tumblr .btn-circle-large:hover {
-	border-color: #507490;
-	color: #507490;
-	-moz-transition:all 0.3s ease;
-	-webkit-transition:all 0.3s ease;
-	-ms-transition:all 0.3s ease;
-	-o-transition:all 0.3s ease;
-	transition:all 0.3s ease;
-}
-
-.linkedin .btn-circle:hover, .linkedin .btn-circle-large:hover {
-	border-color: #007ebd;
-	color: #007ebd;
-	-moz-transition:all 0.3s ease;
-	-webkit-transition:all 0.3s ease;
-	-ms-transition:all 0.3s ease;
-	-o-transition:all 0.3s ease;
-	transition:all 0.3s ease;
-}
-
-.email .btn-circle:hover, .email .btn-circle-large:hover {
-	border-color: rgba(150,150,150,1);
-	color: rgba(150,150,150,1);
-	-moz-transition:all 0.3s ease;
-	-webkit-transition:all 0.3s ease;
-	-ms-transition:all 0.3s ease;
-	-o-transition:all 0.3s ease;
-	transition:all 0.3s ease;
-}
-
-.wechat .btn-circle:hover, .wechat .btn-circle-large:hover {
-	border-color: #a1d92d;
-	color: #a1d92d;
-	-moz-transition:all 0.3s ease;
-	-webkit-transition:all 0.3s ease;
-	-ms-transition:all 0.3s ease;
-	-o-transition:all 0.3s ease;
-	transition:all 0.3s ease;
-}
 
 
 

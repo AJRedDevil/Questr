@@ -2977,8 +2977,8 @@ fieldset[disabled] .twitter-typeahead .tt-hint {
   opacity: 0;
   padding: 0;
   visibility: hidden;
-  -webkit-transition: 0.25s;
-  transition: 0.25s;
+  -webkit-transition: 0.15s;
+  transition: 0.15s;
 }
 .open > .dropdown-menu {
  
@@ -3017,8 +3017,10 @@ fieldset[disabled] .twitter-typeahead .tt-hint {
   color: rgba(52, 73, 94, 0.75);
   padding: 6px 15px 8px;
   text-decoration: none;
-  -webkit-transition: background-color 0.25s;
-  transition: background-color 0.25s;
+  font-size: 10px;
+  font-weight: 550;
+  -webkit-transition: background-color 0.15s;
+  transition: background-color 0.15s;
 }
 .dropdown-menu li > a:before,
 .dropdown-menu li > a:after {
