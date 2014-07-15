@@ -143,7 +143,7 @@ body {
   font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
   font-size: 11px;
   line-height: 1.72222;
-  color: #434343;
+  color: #141823;
 }
 a {
   -webkit-transition: 0.25s;
@@ -968,7 +968,7 @@ fieldset[disabled] .btn-link:focus {
   width: 100%;
 }
 .select .btn {
-  width: 40px;
+  width: 45px;
 }
 .select .btn.btn-hg .filter-option {
   left: 20px;
