@@ -41,13 +41,10 @@ footer ul.list li.social-links {
 	margin-top: 5px;
 }
 
-footer ul.list li small {
-	font-weight: 500;
-}
-
-footer ul.list li small.title {
+footer small.title {
 	font-weight: bold;
 }
+
  
 hr {
 	display: block;
