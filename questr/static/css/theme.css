@@ -238,6 +238,11 @@ hr {
 	display: inline;
 }
 
+.panel-default label.control-label p {
+	font-weight: 600;
+	color: #666;
+}
+
 .panel-default .panel-heading .panel-title ul {
 	display: inline;
 	margin: 0;
@@ -427,7 +432,7 @@ select option {
 input.form-control, input.form-control, textarea.form-control {
 	border: 1px;
 	border-style: solid;
-	border-color: #e2e2e2;
+	border-color: #d1d3d7;
 	background: white;
 }
 
@@ -528,10 +533,6 @@ nav .glyphicon {
  
 .white {
 	color: white;
-}
-
-.blue {
-	color: #507ecd;
 }
 
 .grey {

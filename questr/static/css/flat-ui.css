@@ -140,10 +140,15 @@ you can use the generic selector below, but it's slower:
   border-top-color: #34495e !important;
 }
 body {
-  font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
-  font-size: 11px;
-  line-height: 1.72222;
-  color: #141823;
+	font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+	font-size: 11px;
+	color: #333;
+line-height: 1.28;
+margin: 0;
+padding: 0;
+text-align: left;
+direction: ltr;
+unicode-bidi: embed;
 }
 a {
   -webkit-transition: 0.25s;
@@ -249,9 +254,10 @@ h6,
   font-size: 14px;
 }
 p {
-  font-size: 12px;
-  line-height: 1.72222;
-  margin: 0 0 15px;
+	font-size: 13px;
+	font-weight: normal;
+	line-height: 1.38;
+	font-family:Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif;
 }
 .lead {
 	font-family: "Lato", Helvetica, Arial, sans-serif;
