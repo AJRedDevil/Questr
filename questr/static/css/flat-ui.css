@@ -1131,10 +1131,6 @@ fieldset[disabled] .form-control {
   line-height: 1.462;
   border-radius: 6px;
 }
-select.input-sm {
-  height: 35px;
-  line-height: 35px;
-}
 
 textarea.input-sm,
 select[multiple].input-sm {
@@ -1147,10 +1143,7 @@ select[multiple].input-sm {
   line-height: 1.235;
   border-radius: 6px;
 }
-select.input-lg {
-  height: 45px;
-  line-height: 45px;
-}
+
 textarea.input-lg,
 select[multiple].input-lg {
   height: auto;
@@ -1161,10 +1154,6 @@ select[multiple].input-lg {
   font-size: 22px;
   line-height: 1.318;
   border-radius: 6px;
-}
-select.input-hg {
-  height: 53px;
-  line-height: 53px;
 }
 textarea.input-hg,
 select[multiple].input-hg {
@@ -2206,7 +2195,7 @@ select[multiple].navbar-form .btn {
 }
 .navbar-default .navbar-toggle:hover:before,
 .navbar-default .navbar-toggle:focus:before {
-  color: #1abc9c;
+  color: #1bbd9d;
 }
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
@@ -3037,10 +3026,12 @@ fieldset[disabled] .twitter-typeahead .tt-hint {
 .dropdown-menu li > a:hover,
 .dropdown-menu li > a:active,
 .dropdown-menu li > a:focus {
-  background: #e2e5e8;
-  color: inherit;
+  background: #b0b0b0;
+  color: white;
   outline: none;
 }
+
+
 .dropdown-menu li > a.highlighted {
   background: #c9cfd4;
   color: #ffffff;

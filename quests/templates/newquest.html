@@ -33,8 +33,8 @@
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Pick up from</p></label>
               <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"> 
-	              <select class="selectpicker" data-size="5" name="srccity">
-					  <option><span class="glyphicon glyphicon-map-marker theme-colour"></span>City</option>
+	              <select class="btn-classic" data-size="5" name="srccity">
+					  <option>Choose a city</option>
 					  <option>Mississauga</option>
 					  <option>Brampton</option>
 					  <option>Toronto</option>
@@ -56,8 +56,8 @@
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Drop off at</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column"> 
               
-	              <select class="selectpicker show-menu-arrow show-tick" data-size="5" name="dstcity">
-					  <option data-icon="glyphicon glyphicon-map-marker theme-colour">City</option>
+	              <select class="btn-classic" data-size="5" name="dstcity">
+					  <option data-icon="glyphicon glyphicon-map-marker theme-colour">Choose a city</option>
 					  <option>Mississauga</option>
 					  <option>Brampton</option>
 					  <option>Toronto</option>
@@ -132,13 +132,5 @@
 
 {% endblock content %}
 {% block scripts %}
-<script>
-	$("select").selectpicker({style: 'btn-classic', menuStyle: 'dropdown-menu'});
 
-// style: select toggle class name (which is .btn)
-// menuStyle: dropdown class name
-
-// You can always select by any other attribute, not just tag name.
-// Also you can leave selectpicker arguments blank to apply defaults.
-</script>
 {% endblock scripts %}
