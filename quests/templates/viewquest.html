@@ -73,6 +73,22 @@
 					
 
 					<div class="col-sm-6 col-md-6 col-lg-6 column">
+					
+						<div class="panel panel-default body-prop border-colours">
+							<div class="panel-heading">
+						    	<p class="light-grey inline"><span class="glyphicon glyphicon-time"></span> Posted: {{questdetails.creation_date}}</p>
+						    </div>
+						    <div class="panel-footer">
+							    {# Only allowing shippers to view addresses #}
+								{% if user.is_shipper or isOwner %}
+								<p class="light-grey">
+									Departure Address: {{questdetails.srcaddress}},{{questdetails.srccity}}<br>
+									Destination Address: {{questdetails.dstaddress}},{{questdetails.dstcity}}
+								</p>
+								{% endif %}
+						    </div>
+						</div>
+					
 						<div class="well body-prop border-colours">
 							
 							<div class="row clearfix">
