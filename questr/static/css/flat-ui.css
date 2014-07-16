@@ -139,20 +139,10 @@ you can use the generic selector below, but it's slower:
   border-bottom-color: #34495e !important;
   border-top-color: #34495e !important;
 }
-body {
-	font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
-	font-size: 11px;
-	color: #333;
-line-height: 1.28;
-margin: 0;
-padding: 0;
-text-align: left;
-direction: ltr;
-unicode-bidi: embed;
-}
+
 a {
-  -webkit-transition: 0.25s;
-  transition: 0.25s;
+  -webkit-transition: 0.15s;
+  transition: 0.15s;
 }
 a:hover,
 a:focus {
@@ -162,21 +152,7 @@ a:focus {
 a:focus {
   outline: none;
 }
-.img-rounded {
-  border-radius: 6px;
-}
-.img-thumbnail {
-  padding: 4px;
-  line-height: 1.72222;
-  background-color: #ffffff;
-  border: 2px solid #bdc3c7;
-  border-radius: 6px;
-  -webkit-transition: all 0.25s ease-in-out;
-  transition: all 0.25s ease-in-out;
-  display: inline-block;
-  max-width: 100%;
-  height: auto;
-}
+
 .img-comment {
   font-size: 15px;
   line-height: 1.2;
@@ -195,10 +171,10 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: inherit;
-  font-weight: 700;
-  line-height: 1.1;
-  color: inherit;
+	font-family:Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif;
+	font-weight: 700;
+	line-height: 1.1;
+	color: inherit;
 }
 h1 small,
 h2 small,
@@ -271,9 +247,11 @@ p {
 }
 small,
 .small {
+	font-family:Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif;
   font-size: 10px;
   font-weight: 500;
-  line-height: 2.067;
+  line-height: 1.167;
+  text-rendering: optimizeLegibility;
 }
 .text-muted {
   color: #bdc3c7;
