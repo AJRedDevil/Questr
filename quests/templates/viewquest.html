@@ -74,6 +74,38 @@
 
 					<div class="col-sm-6 col-md-6 col-lg-6 column">
 					
+						<div class="well body-prop border-colours">
+							<h5 class="grey no-margin inline">{% if isOwner %}
+								<span class="label label-info">{{questdetails.status}} </span>
+							{% endif %} {{questdetails.title}}
+							</h5>
+							
+							{% if isOwner %}								
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="float:right;"><i class="fa fa-chevron-down lighter-grey"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
+									<li class="divider"></li>
+	                                <li>
+	                                    <a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+	                                </li>
+	                            </ul>
+							{% endif %}
+							
+							{# Only allowing shippers to apply for quests #}
+								{% if user.is_shipper and not isShipperForQuest and not questdetails.isaccepted and not isOwner %}
+								<a href="apply"><button type="button" class="btn btn-xs btn-success btn-embossed offerBtn">Apply</button></a>
+								{% endif %}
+								{% if user.is_shipper and isShipperForQuest and not questdetails.isaccepted and not isOwner %}
+								<a href="withdraw"><button type="button" class="btn btn-xs btn-default offerBtn">Withdraw</button></a>
+								{% endif %}
+								
+								{% if isOwner %}
+								<button type="button" class="btn btn-xs btn-success btn-embossed popover-right offerBtn" data-container="body" data-toggle="popover" data-placement="right" data-content="{{questdetails.delivery_code}}">
+								Show Delivery Code
+								</button>           		              
+								{% endif %}
+						</div>
+					
 						<div class="panel panel-default body-prop border-colours">
 							<div class="panel-heading">
 						    	<p class="light-grey inline"><span class="glyphicon glyphicon-time"></span> Posted: {{questdetails.creation_date}} <br>
@@ -96,73 +128,18 @@
 							    </p>
 						    </div>
 						</div>
-					
-						<div class="well body-prop border-colours">
-							
-							<div class="row clearfix">
-								<div class="col-xs-10 col-sm-10 col-md-10 column">
-									<span id="title" class="grey lead">{{questdetails.title}}</span>
-									{% if isOwner %}
-									<span class="label label-info">{{questdetails.status}}</span>
-									{% endif %}
+						
+						<div class="panel panel-default body-prop border-colours">
+							<div class="panel-body">
+								<p class="light-grey">Description:</p>
+								<div class="col-md-10 col-md-offset-1 column">
+									<p>{{questdetails.description}}</p>
 								</div>
-								<div class="col-xs-2 col-sm-2 col-md-2 column">
-									{% if isOwner %}								
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="float:right;"><i class="fa fa-chevron-down lighter-grey"></i></a>
-										<ul class="dropdown-menu">
-											<li><a href="edit"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>
-											<li class="divider"></li>
-			                                <li>
-			                                    <a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-trash"></span> Delete</a>
-			                                </li>
-			                            </ul>
-									{% endif %}
-								</div>	
-							</div>	<!-- ./row -->
-							
-							<div class="row clearfix">
-								<br>
-								<div class="col-md-8 column inBodyWell">
-									
-									{# Only allowing shippers to apply for quests #}
-									{% if user.is_shipper and not isShipperForQuest and not questdetails.isaccepted and not isOwner %}
-									<a href="apply"><button type="button" class="btn btn-success offerBtn">Apply</button></a>
-									{% endif %}
-									{% if user.is_shipper and isShipperForQuest and not questdetails.isaccepted and not isOwner %}
-									<a href="withdraw"><button type="button" class="btn btn-default offerBtn">Withdraw</button></a>
-									{% endif %}
-									
-									{% if isOwner %}
-									<button type="button" class="btn btn-info popover-right" data-container="body" data-toggle="popover" data-placement="right" data-content="{{questdetails.delivery_code}}">
-									Show Delivery Code
-									</button>           		              
-									{% endif %}
-								</div>	
-								<div class="col-md-4 column"></div>	
-							</div>	<!-- ./row -->
-								
-							<div class="row clearfix">
-							<div class="col-md-10 column">						
-								<p>{{questdetails.description}}</p>
-								
-								{# Only allowing shippers to view addresses #}
-								{% if user.is_shipper or isOwner %}
-								<small class="light-grey">
-									Departure Address: {{questdetails.srcaddress}},{{questdetails.srccity}}<br>
-									Destination Address: {{questdetails.dstaddress}},{{questdetails.dstcity}}
-								</small>
-								{% endif %}
-							</div><!-- ./column 10 -->
-							<div class="col-md-2 column">
-								<center>
-									<p>Size</p>
-									<img src={% static '' %}img/{{questdetails.size}}.png style="width:40px; height:auto;" />
-									<p>{{questdetails.size}}</p>
-								</center>
-							</div><!-- ./column 2 -->
-							</div><!-- ./row -->
-						</div>	<!-- ./well -->
-					</div>	<!-- End of column -->
+							</div>
+						</div>
+						
+						
+					</div>	<!-- ./column -->
 				
 				
 				

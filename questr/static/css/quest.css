@@ -1,3 +1,4 @@
+
 .itemImage {
 	width: 100%;
 }
@@ -21,10 +22,7 @@
 }
 
 
-.titleContainer .row .titleColumn button {
-	float: right;
-	margin: 0px;
-}
+
 
 .inBodyWell {
 	background: #f8f8f8;
@@ -107,4 +105,9 @@ hr {
 
 #side-profile .link:hover {
 	background: aqua;
+}
+
+.offerBtn {
+	float: right;
+	margin: 0px;
 }
