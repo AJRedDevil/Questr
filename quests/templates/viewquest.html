@@ -109,31 +109,60 @@
 					
 						<div class="panel panel-default body-prop border-colours">
 							<div class="panel-heading">
-						    	<p class="light-grey inline"><span class="glyphicon glyphicon-time"></span> Posted: {{questdetails.creation_date}} <br>
-						    		<span class="glyphicon glyphicon-time"></span> Expires: 
-						    	</p>
+								<p class="lighter-grey inline">
+									<span class="glyphicon glyphicon-time"></span> Posted:  
+								</p>
+								<p class="light-grey inline">
+									{{questdetails.creation_date}}
+								</p>
+								<p class="lighter-grey inline">
+								<br>
+									<span class="glyphicon glyphicon-time"></span> Expires: 
+								</p>
+								<p class="light-grey inline">
+									
+								</p>
 						    </div>
 						    <div class="panel-body">
 							    {# Only allowing shippers to view addresses #}
 								{% if user.is_shipper or isOwner %}
-								<p class="light-grey">
-									Departure Address: {{questdetails.srcaddress}}, {{questdetails.srccity}}<br>
-									Destination Address: {{questdetails.dstaddress}}, {{questdetails.dstcity}}
+								<p class="lighter-grey inline">
+									Departure Address: 
+								</p>
+								<p class="light-grey inline">
+									{{questdetails.srcaddress}}, {{questdetails.srccity}}
+								</p>
+								<p class="lighter-grey inline">
+								<br>
+									Destination Address: 
+								</p>
+								<p class="light-grey inline">
+									{{questdetails.dstaddress}}, {{questdetails.dstcity}}
 								</p>
 								{% endif %}
-								<small class="grey" id="btn-map">view map <i class="fa fa-caret-down"></i></small>
+								<br><br>
+								<a href="#"><small class="light-grey" id="btn-map">view map <i class="fa fa-caret-down"></i></small></a>
 						    </div>
 						    <div class="panel-footer">
-							    <p class="light-grey">
-							    	Size: {{questdetails.size}} <br>
-							    	Pays: ${{questdetails.reward}}
-							    </p>
+						    	<p class="lighter-grey inline">
+									Size: 
+								</p>
+								<p class="light-grey inline">
+									{{questdetails.size}}
+								</p>
+								<p class="lighter-grey inline">
+								<br>
+									Pays:
+								</p>
+								<p class="light-grey inline">
+									${{questdetails.reward}}
+								</p>
 						    </div>
 						</div>
 						
 						<div class="panel panel-default body-prop border-colours">
 							<div class="panel-body">
-								<p class="light-grey">Description:</p>
+								<p class="lighter-grey">Description:</p>
 								<div class="col-md-10 col-md-offset-1 column">
 									<p>{{questdetails.description}}</p>
 								</div>
