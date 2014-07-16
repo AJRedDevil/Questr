@@ -76,16 +76,24 @@
 					
 						<div class="panel panel-default body-prop border-colours">
 							<div class="panel-heading">
-						    	<p class="light-grey inline"><span class="glyphicon glyphicon-time"></span> Posted: {{questdetails.creation_date}}</p>
+						    	<p class="light-grey inline"><span class="glyphicon glyphicon-time"></span> Posted: {{questdetails.creation_date}} <br>
+						    		<span class="glyphicon glyphicon-time"></span> Expires: 
+						    	</p>
 						    </div>
-						    <div class="panel-footer">
+						    <div class="panel-body">
 							    {# Only allowing shippers to view addresses #}
 								{% if user.is_shipper or isOwner %}
 								<p class="light-grey">
-									Departure Address: {{questdetails.srcaddress}},{{questdetails.srccity}}<br>
-									Destination Address: {{questdetails.dstaddress}},{{questdetails.dstcity}}
+									Departure Address: {{questdetails.srcaddress}}, {{questdetails.srccity}}<br>
+									Destination Address: {{questdetails.dstaddress}}, {{questdetails.dstcity}}
 								</p>
 								{% endif %}
+						    </div>
+						    <div class="panel-footer">
+							    <p class="light-grey">
+							    	Size: {{questdetails.size}} <br>
+							    	Pays: ${{questdetails.reward}}
+							    </p>
 						    </div>
 						</div>
 					
@@ -115,7 +123,7 @@
 							<div class="row clearfix">
 								<br>
 								<div class="col-md-8 column inBodyWell">
-									<p>Offer: ${{questdetails.reward}}</p>
+									
 									{# Only allowing shippers to apply for quests #}
 									{% if user.is_shipper and not isShipperForQuest and not questdetails.isaccepted and not isOwner %}
 									<a href="apply"><button type="button" class="btn btn-success offerBtn">Apply</button></a>
