@@ -58,13 +58,6 @@ footer small.title {
 	font-weight: bold;
 }
 
-.btn-circle span {
-	color: #cbcbd0;
-}
-
-.btn-circle-large span {
-	color: #cbcbd0;
-}
 
 .btn-circle {
 	width: 26px;
@@ -77,32 +70,9 @@ footer small.title {
 	background: transparent;
 	border-style: solid;
 	border-width: 2px;
-	border-color: #b7c8d4;
-	color: #b7c8d4;
+	border-color: #9aa4af;
+	color: #9aa4af;
 	margin-right: 1px;
-
-	-moz-transition:all 0.3s ease;
-	-webkit-transition:all 0.3s ease;
-	-ms-transition:all 0.3s ease;
-	-o-transition:all 0.3s ease;
-	transition:all 0.3s ease;
-
-}
-
-.btn-circle-large {
-	width: 46px;
-	height: 46px;
-	text-align: center;
-	padding: 5px 0;
-	font-size: 24px;
-	line-height: 1.428571429;
-	border-radius: 50%;
-	background: transparent;
-	border-style: solid;
-	border-width: 2px;
-	border-color: #b7c8d4;
-	color: #b7c8d4;
-	margin-right: 5px;
 
 	-moz-transition:all 0.3s ease;
 	-webkit-transition:all 0.3s ease;
