@@ -249,7 +249,7 @@ small,
 .small {
 	font-family:Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif;
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.167;
   text-rendering: optimizeLegibility;
 }
