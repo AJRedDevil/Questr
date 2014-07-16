@@ -34,18 +34,25 @@ footer {
 	width:100%;
 	margin-top: 220px;
 }
- 
- footer ul {
-	 list-style-type: none;
- }
 
-footer ul.list li {
-	margin-bottom: -6px;
+footer ul {
+	padding: 0;
 }
 
-footer ul.list li.social-links {
+footer ul li {
+	list-style-type: none;
+}
+
+footer ul.social-links {
+	padding: 0;	
 	margin-top: 5px;
 }
+
+footer ul.social-links li {
+	display: inline;
+}
+
+
 
 footer small.title {
 	font-weight: bold;
@@ -499,6 +506,7 @@ nav .glyphicon {
 	font-size: large;
 	margin-right: 6px;
 }
+
 
 
 /*************** Secondary Navbar ***************/
