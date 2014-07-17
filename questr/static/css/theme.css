@@ -328,8 +328,6 @@ vertical-align: middle;
 border-color: #cdced0 #c5c6c8 #b6b7b9;
 color: #4e5665;
 text-shadow: 0 1px 0 #fff;
-
-
 }
 
 select {
@@ -349,7 +347,6 @@ select option {
 
 }
 
-
 .btn-classic:hover,
 .btn-classic:focus,
 .btn-classic:active,
@@ -358,6 +355,9 @@ select option {
 .btn-classic[disabled] {
 	color: #4e5665;
 }
+
+
+
 
 .dropdown button.btn:hover,
 .dropdown button.btn:focus,

@@ -2,115 +2,94 @@
 {% block tabcontent %}
 <div class="tab-pane active text-style" id="tab1">
     <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-lg-6 column">
-      
-      	<div class="panel panel-default shadows body-borders">
-		  <!-- Default panel contents -->
-		  <div class="panel-heading">
-			  <div class="panel-title lead">Change your general settings here</div>  
-		  </div>
-		  <div class="panel-body">{% csrf_token %}
-			  
-			  <div class="row clearfix">
-				  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column text-right">
-					  <h6 class="grey" for="name">First Name</h6>
-				  </div>
-				  <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 column">
-					  <input id="first_name" name="first_name" type="text" placeholder="" value={{user.first_name}} class="form-control input-xs">
-				  </div>
-			  </div><!-- ./row -->
-
-			  <div class="row clearfix">
-				  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column text-right">
-					  <h6 class="grey" for="name">Last Name</h6>
-				  </div>
-				  <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 column">
-					  <input id="last_name" name="last_name" type="text" placeholder="" class="form-control input-xs" value={{user.last_name}}>
-				  </div>
-			  </div><!-- ./row -->
-			  
-			  <div class="row clearfix">
-				  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column text-right">
-					  <h6 class="grey" for="name">Username</h6>
-				  </div>
-				  <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 column">
-					  <input id="displayname" name="displayname" type="text" placeholder="" class="form-control input-xs" value={{user.displayname}}>
-				  </div>
-			  </div><!-- ./row -->
-			  
-			  {% if user_form.displayname.errors %}
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+      	
+      	<div class="panel panel-default body-prop border-colours">
+	         <div class="panel-heading">
+		         <div class="panel-title light-grey">Change your general settings here</div>
+	         </div><!-- ./panel-heading -->
+          
+          <div class="panel-body">{% csrf_token %}
+          <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+          <fieldset>
+            
+            <!-- Name input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="light-grey">First Name</p></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="first_name" name="first_name" type="text" placeholder="" value={{user.first_name}} class="form-control input-xs">
+              </div><!-- ./column -->
+            </div><!-- ./form-group -->
+            
+            <!-- Name input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="light-grey">Last Name</p></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="last_name" name="last_name" type="text" placeholder="" value={{user.last_name}} class="form-control input-xs">
+              </div><!-- ./column -->
+            </div><!-- ./form-group -->
+ 
+            <!-- Name input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="light-grey">Username</p></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="displayname" name="displayname" type="text" placeholder="" class="form-control input-xs" value={{user.displayname}}>
+              </div><!-- ./column -->
+            </div><!-- ./form-group -->
+    
+            {% if user_form.displayname.errors %}
                 {{ user_form.displayname.errors }}
-            {% endif %}
-			  <div class="row clearfix">
-				  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column text-right">
-					  <h6 class="grey" for="name" text-right>Email</h6>
-				  </div>
-				  <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 column">
-					  <input id="email" name="email" type="text" placeholder="" class="form-control input-xs" value={{user.email}}>
-				  </div>
-			  </div><!-- ./row -->
-			  {% if user_form.email.errors %}
+                {% endif %}
+            <!-- Name input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="light-grey">Email</p></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="email" name="email" type="text" placeholder="" class="form-control input-xs" value={{user.email}}>
+              </div><!-- ./column -->
+            </div><!-- ./form-group -->
+            {% if user_form.email.errors %}
                 {{ user_form.email.errors }}
-            {% endif %} 
-			  
-			  <div class="row clearfix">
-				  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column text-right">
-					  <h6 class="grey">Language</h6>
-				  </div>
-				  <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 column">
-					  <div class="form-group">        
-						  <select class="selectpicker show-menu-arrow show-tick" data-size="5">         
-							  <option value="English">English</option>
-							  <option value="French">French</option>
-						  </select>                  
-                    </div> <!-- ./form-group -->
-				  </div>
-			  </div><!-- ./row -->
-			  
-			  <div class="row clearfix">
-				  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column text-right">
-					  <h6 class="grey">City</h6>
-				  </div>
-				  <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 column">
-					  <div class="form-group">        
-						  <select class="selectpicker show-menu-arrow show-tick no-margin" data-size="5">             
-	                        <option value="Mississauga">Mississauga</option>
-	                        <option value="Toronto">Toronto</option>
-	                        <option value="Brampton">Brampton</option>
-                    </select>                
-                    </div> <!-- End of btn-group -->
-				  </div><!-- ./column -->
-			  </div><!-- ./row -->
-			  
-			  <div class="row clearfix">
-				  <div class="col-md-12 column text-center">
-					  <button type="submit" class="btn btn-info">Save</button>
-				  </div>
-			  </div><!-- ./row -->
-			  
-			  <div class="row clearfix">
-				  <div class="col-md-4 column">
+            {% endif %}
+    
+            <!-- Location input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="light-grey">Language</p></label>
+              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"> 
+	              <select class="btn-classic" data-size="5" name="language">
+					  <option value="English">English</option>
+					  <option value="French">French</option>
+					</select>
+              </div><!-- ./column -->
+              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"></div>  
+            </div>  <!-- ./form-group -->
+                   
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="light-grey">Location</p></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column"> 
+	              <select class="btn-classic" data-size="5" name="city">
+					  <option data-icon="glyphicon glyphicon-map-marker theme-colour">Choose a city</option>
+					  <option>Mississauga</option>
+					  <option>Brampton</option>
+					  <option>Toronto</option>
+					  </select>
 					  
-				  </div>
-				  <div class="col-md-8 column">
-					  
-				  </div>
-			  </div><!-- ./row -->
-			  
-			  <div class="row clearfix">
-				  <div class="col-md-4 column">
-					  
-				  </div>
-				  <div class="col-md-8 column">
-					  
-				  </div>
-			  </div><!-- ./row -->
-			  
+              </div><!-- ./column -->
+            </div>  <!-- ./form-group -->  
+                      
+              <br>
+              
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">
+                <button type="submit" class="btn btn-info">Continue</button>
+              </div><!-- ./column -->
+               
+               
+          </fieldset>
+          </form>     
+          </div><!-- ./panel-body -->
+       </div><!-- ./panel -->
+      
 
-		  
-		  </div>
-      	</div>
 
       </div>
     </div>
