@@ -651,3 +651,30 @@ height: auto;
 	font-weight: 800;
 	padding: 3px 10px 2px;
 }
+
+
+
+
+
+
+
+
+
+
+
+/*************** new header *******************/
+.img-src {
+    position: absolute;
+    background-position: center;
+    -webkit-background-size: cover;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.img-src.blurred-img {
+  opacity: 0;
+}
+
+

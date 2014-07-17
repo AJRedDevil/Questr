@@ -10,12 +10,11 @@
 {% block content %}
 <div class="preloader"></div>
 	
-    <! -- ******************** MASTHEAD SECTION ******************** -->	
+    <! -- ******************** MASTHEAD SECTION ******************** -->
+	
 	<div id="top" class="masthead">
 		<section class="masthead-body">
-			<br><br><br><br><br><br><br>
-			<br><br><br><br><br><br>
-			
+		
 			<h2>Canada's first crowdshipping platform.</h2>
 			<h3 style="color:white;">Cheapest, fastest, 24/7 shipments within Greater Toronto Area.</h3>
 			{% comment %}
@@ -47,6 +46,11 @@
     <! -- ******************** FEATURES SECTION ******************** -->	
 	<div class="container page" id="explore">
 		<div class="row clearfix">
+			<div id="blurred-image-container">
+			    <div class="img-src" style="background-image: url('{% static '/assets/img/cross.jpg' %}')"></div>
+			    <div class="img-src" style="background-image: url('{% static '/assets/img/cross-blur.jpg' %}')"></div>
+			</div>
+		
 			<div class="col-md-10 col-md-offset-1 column">
 				<div class="section-title">
 					<h2>What is Questr?</h2>
@@ -316,6 +320,7 @@
 <script src={% static "assets/js/jquery.js" %}></script>
 <script src={% static "assets/js/bootstrap.js" %}></script>
 <script src={% static "assets/js/easing.js" %}></script>
+<script src={% static "assets/js/index.js" %}></script>
 
  
 <script>
@@ -328,6 +333,15 @@
      event.preventDefault();
       });
   });
+  
+ $(function() { 
+  $(window).scroll(function(e) {
+    var s = $(window).scrollTop(),
+        opacityVal = (s / 150.0);
+
+    $('.blurred-image').css('opacity', opacityVal);
+    });
+});
 </script>
     
 {% endblock scripts %}
