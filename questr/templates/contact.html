@@ -4,6 +4,8 @@
   <link href={% static "css/static.css" %} rel="stylesheet"> 
 	<script src={% static "assets/js/pace.js" %}></script>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+	
+	<script src={% static "bootstrap/js/tooltip.js" %} type="text/javascript"></script>
 {% endblock localhead %}
 
 {% block content %}
@@ -23,7 +25,9 @@
         <p><a class="linkedin" target="_blank" href="http://linkedin.com/company/questr"><button class="btn-circle-large"><i class="fa fa-linkedin"></i></button>LinkedIn</a></p>
         <p><a class="tumblr" target="_blank" href="http://questrco.tumblr.com"><button class="btn-circle-large"><i class="fa fa-tumblr"></i></button>Tumblr</a></p>
         <p><a class="wechat" href="http://questrco.tumblr.com"><button class="btn-circle-large"><i class="fa fa-wechat"></i></button>WeChat</a></p>
-        <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on right</button>      
+       
+        <button type="button" class="btn btn-default popover-right" data-container="body" data-toggle="popover" data-placement="right" data-content="EBOLA">Tooltip on right</button>
+          
         <br>
     </div>
 
@@ -66,6 +70,11 @@
      event.preventDefault();
       });
   });
+  
+  $(".popover-right").popover({
+			placement: 'right'
+		});
 </script>
+
     
 {% endblock scripts %}

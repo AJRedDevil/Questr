@@ -101,11 +101,9 @@ p{font-size:17px;font-weight:300;margin:10px 0;color: #646464;}
 .highlight{background:#f4f4f4;margin-top:40px;}
 
 .masthead{
-	z-index: 1;
 	min-height: 100%;
     width: 100%;
 	position: absolute;
-	
 	background-color: aqua;
 	background-image:url("../img/cross.jpg");
 	background-repeat:no-repeat;
@@ -122,10 +120,8 @@ p{font-size:17px;font-weight:300;margin:10px 0;color: #646464;}
 }	
 
 .masthead .masthead-body {
-	padding-top: 50px;
+	padding-top: 30px;
 	text-align: center;
-	position: fixed;
-	z-index: -1;
 	width: 100%;
 
 	animation:fadein 2s;
