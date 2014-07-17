@@ -14,7 +14,7 @@ Weekdays
 Off-peak hours        
 floor( 4 + SIZE_HANDLING_FEE + (DISTANCE_IN_KM - 2) * 1.7 * SIZE_MODIFIER)
 Peak hours            
-floor( 4 + SIZE_HANDLING_FEE + (DISTANCE_IN_KM - 2) * 2.2 * SIZE_MODIFIER)    
+floor( 4 + SIZE_HANDLING_FEE + (DISTANCE_IN_KM - 2) * 2.0 * SIZE_MODIFIER)    
 Low hours        
 floor( 6 + SIZE_HANDLING_FEE + (DISTANCE_IN_KM - 2) * 2.5 * SIZE_MODIFIER) 
 
@@ -27,14 +27,14 @@ floor(10 + SIZE_HANDLING_FEE + (DISTANCE_IN_KM - 2) * 3.0 * SIZE_MODIFIER)
 
 
 SIZE_MODIFIER
-Backpack    1.0
-Car        1.2
+Backpack   1.0
+Car        1.0
 Minivan    2.0
 
 SIZE_HANDLING_FEE
-    Backpack      2
-    Car          3
-    Minivan    12
+Backpack   2
+Car        3
+Minivan    12
 
 Off-peak hours
 1100-1400, 2000-2300
@@ -74,7 +74,7 @@ class WebPricing(object):
 	# 	return today + datetime.timedelta(days=1)
 
 	def __get_size_modifier(self):
-		return dict(backpack=1.0, car=1.2, minivan=2.0)
+		return dict(backpack=1.0, car=1.0, minivan=2.0)
 
 	def __get_size_handling_fee(self):
 		return dict(backpack=2, car=3, minivan=12)
@@ -98,13 +98,13 @@ class WebPricing(object):
 		if is_weekend:
 			return math.floor( 6 + self.__size_handling_fee + self.__distance * 2.5 * self.__size_modifier)
 		else:
-			return math.floor( 4 + self.__size_handling_fee + self.__distance * 2.2 * self.__size_modifier)
+			return math.floor( 4 + self.__size_handling_fee + self.__distance * 2.0 * self.__size_modifier)
 
 	def __get_low_hours_price(self, is_weekend=False):
 		if is_weekend:
 			return math.floor( 10 + self.__size_handling_fee + self.__distance * 3.0 * self.__size_modifier)
 		else:
-			return math.floor( 6 + self.__size_handling_fee + self.__distance * 2.5 * self.__size_modifier)
+			return math.floor(  6 + self.__size_handling_fee + self.__distance * 2.5 * self.__size_modifier)
 
 	def __get_weekend_price(self):
 		return round(math.floor( 6 + self.__size_handling_fee + self.__distance * 2.5 * self.__size_modifier), 2)
@@ -139,3 +139,4 @@ if __name__ == "__main__":
 	webpricing = WebPricing()
 	webpricing.set_factors(11.7)
 	print webpricing.get_price()
+	
