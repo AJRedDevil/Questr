@@ -12,9 +12,12 @@
 	
     <! -- ******************** MASTHEAD SECTION ******************** -->
 	
+
+
+
 	<div id="top" class="masthead">
 		<section class="masthead-body">
-		
+
 			<h2>Canada's first crowdshipping platform.</h2>
 			<h3 style="color:white;">Cheapest, fastest, 24/7 shipments within Greater Toronto Area.</h3>
 			{% comment %}
@@ -46,11 +49,6 @@
     <! -- ******************** FEATURES SECTION ******************** -->	
 	<div class="container page" id="explore">
 		<div class="row clearfix">
-			<div id="blurred-image-container">
-			    <div class="img-src" style="background-image: url('{% static '/assets/img/cross.jpg' %}')"></div>
-			    <div class="img-src" style="background-image: url('{% static '/assets/img/cross-blur.jpg' %}')"></div>
-			</div>
-		
 			<div class="col-md-10 col-md-offset-1 column">
 				<div class="section-title">
 					<h2>What is Questr?</h2>
@@ -61,6 +59,12 @@
 				</div><!-- ./section-title -->
 			</div><!-- ./column -->
 		</div><!-- ./row -->
+
+     <div id="row clearfix features">
+    <div class="img-src" style="background-image:url('http://f.cl.ly/items/2P3u1l3J3V2q3n2Y1a1s/gold.jpeg')"></div>
+    <div class="img-src blurred-image" style="background-image:url('http://f.cl.ly/items/1r2a3F0D1w270o2C380G/0x50-n10b.jpeg');opacity:0"></div>
+	</div>
+
 
 		
 		<div class="row clearfix features">
@@ -320,7 +324,7 @@
 <script src={% static "assets/js/jquery.js" %}></script>
 <script src={% static "assets/js/bootstrap.js" %}></script>
 <script src={% static "assets/js/easing.js" %}></script>
-<script src={% static "assets/js/index.js" %}></script>
+<!-- <script src={% static "assets/js/index.js" %}></script> -->
 
  
 <script>
@@ -333,6 +337,19 @@
      event.preventDefault();
       });
   });
+
+$(document).ready(function() {
+    $(window).scroll(function(e) {
+        var s = $(window).scrollTop(),
+            d = $(document).height(),
+            c = $(window).height(),
+            opacityVal = (s / 100);
+
+        $('.blurred-image').css('opacity', opacityVal);
+    });
+});
+
+
 </script>
     
 {% endblock scripts %}
