@@ -20,23 +20,11 @@
     <div class="col-lg-4">
       <h4>Message us on a social network</h4>
       <div class="hline"></div>
-<<<<<<< HEAD
-        <p><a class="facebook" target="_blank" href="https://www.facebook.com/questrco"><button class="btn-circle-large"><i class="fa fa-facebook"></i></button>Facebook</a></p> 
-        <p><a class="twitter" target="_blank" href="https://twitter.com/questrco"><button class="btn-circle-large"><i class="fa fa-twitter"></i></button>Twitter</a></p>
-        <p><a class="linkedin" target="_blank" href="http://linkedin.com/company/questr"><button class="btn-circle-large"><i class="fa fa-linkedin"></i></button>LinkedIn</a></p>
-        <p><a class="tumblr" target="_blank" href="http://questrco.tumblr.com"><button class="btn-circle-large"><i class="fa fa-tumblr"></i></button>Tumblr</a></p>
-        <p><a class="wechat" href="http://questrco.tumblr.com"><button class="btn-circle-large"><i class="fa fa-wechat"></i></button>WeChat</a></p>
-       
-        <button type="button" class="btn btn-default popover-right" data-container="body" data-toggle="popover" data-placement="right" data-content="EBOLA">Tooltip on right</button>
-          
-=======
         <p><a class="facebook" target="_blank" href="https://www.facebook.com/questrco"><button class="btn-circle-md"><i class="fa fa-facebook"></i></button>Facebook</a></p> 
         <p><a class="twitter" target="_blank" href="https://twitter.com/questrco"><button class="btn-circle-md"><i class="fa fa-twitter"></i></button>Twitter</a></p>
         <p><a class="linkedin" target="_blank" href="http://linkedin.com/company/questr"><button class="btn-circle-md"><i class="fa fa-linkedin"></i></button>LinkedIn</a></p>
         <p><a class="tumblr" target="_blank" href="http://questrco.tumblr.com"><button class="btn-circle-md"><i class="fa fa-tumblr"></i></button>Tumblr</a></p>
-        <p><a class="wechat" href="http://questrco.tumblr.com"><button class="btn-circle-md"><i class="fa fa-wechat"></i></button>WeChat</a></p>
-        <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on right</button>      
->>>>>>> FETCH_HEAD
+        <p><a class="wechat popover-right" data-container="body" data-toggle="popover" data-placement="right"><button type="button" class="btn btn-circle-md"><i class="fa fa-wechat"></i></button>WeChat</a></p>
         <br>
     </div>
 
@@ -79,10 +67,16 @@
      event.preventDefault();
       });
   });
+
+  var img = '<img src="{% static "img/contacts/wechat.jpeg" %}"/>';
   
   $(".popover-right").popover({
-			placement: 'right'
+			placement: 'right', 
+      title: 'Add Questr or scan the QR code below', 
+      content: img, 
+      html:true 
 		});
+
 </script>
 
     
