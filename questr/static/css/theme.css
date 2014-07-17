@@ -82,7 +82,7 @@ footer small.title {
 }
 
 
-.btn-circle-large {
+.btn-circle-md {
 	width: 46px;
 	height: 46px;
 	text-align: center;
@@ -107,7 +107,7 @@ footer small.title {
 
 
 
-.twitter .btn-circle:hover,  .twitter .btn-circle-large:hover {
+.twitter .btn-circle:hover,  .twitter .btn-circle-md:hover {
 	border-color: #1ab2e8;
 	color: #1ab2e8;
 	-moz-transition:all 0.3s ease;
@@ -117,7 +117,7 @@ footer small.title {
 	transition:all 0.3s ease;
 }
 
-.facebook .btn-circle:hover, .facebook .btn-circle-large:hover {
+.facebook .btn-circle:hover, .facebook .btn-circle-md:hover {
 	border-color: #4568b8;
 	color: #4568b8;
 	-moz-transition:all 0.3s ease;
@@ -127,7 +127,7 @@ footer small.title {
 	transition:all 0.3s ease;
 }
 
-.tumblr .btn-circle:hover, .tumblr .btn-circle-large:hover {
+.tumblr .btn-circle:hover, .tumblr .btn-circle-md:hover {
 	border-color: #507490;
 	color: #507490;
 	-moz-transition:all 0.3s ease;
@@ -137,7 +137,7 @@ footer small.title {
 	transition:all 0.3s ease;
 }
 
-.linkedin .btn-circle:hover, .linkedin .btn-circle-large:hover {
+.linkedin .btn-circle:hover, .linkedin .btn-circle-md:hover {
 	border-color: #007ebd;
 	color: #007ebd;
 	-moz-transition:all 0.3s ease;
@@ -147,7 +147,7 @@ footer small.title {
 	transition:all 0.3s ease;
 }
 
-.email .btn-circle:hover, .email .btn-circle-large:hover {
+.email .btn-circle:hover, .email .btn-circle-md:hover {
 	border-color: rgba(150,150,150,1);
 	color: rgba(150,150,150,1);
 	-moz-transition:all 0.3s ease;
@@ -157,7 +157,7 @@ footer small.title {
 	transition:all 0.3s ease;
 }
 
-.wechat .btn-circle:hover, .wechat .btn-circle-large:hover {
+.wechat .btn-circle:hover, .wechat .btn-circle-md:hover {
 	border-color: #a1d92d;
 	color: #a1d92d;
 	-moz-transition:all 0.3s ease;
