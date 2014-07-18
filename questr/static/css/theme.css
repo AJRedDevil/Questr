@@ -107,6 +107,29 @@ footer small.title {
 
 
 
+.btn-circle-lg {
+	width: 90px;
+	height: 90px;
+	text-align: center;
+	padding: 5px 0;
+	font-size: 60px;
+	line-height: 1.428571429;
+	border-radius: 50%;
+	background: transparent;
+	border-style: solid;
+	border-width: 3px;
+	border-color: #b7c8d4;
+	color: #b7c8d4;
+
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	-ms-transition:all 0.3s ease;
+	-o-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+
+}
+
+
 .twitter .btn-circle:hover,  .twitter .btn-circle-md:hover {
 	border-color: #1ab2e8;
 	color: #1ab2e8;
@@ -166,6 +189,11 @@ footer small.title {
 	-o-transition:all 0.3s ease;
 	transition:all 0.3s ease;
 }
+
+
+
+
+
 /************ ./footer ****************/
 
 
@@ -590,3 +618,6 @@ nav .glyphicon {
 .no-image .glyphicon {
 	color: white;
 } 
+
+
+

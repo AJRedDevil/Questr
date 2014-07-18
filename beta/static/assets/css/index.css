@@ -2,6 +2,7 @@
 @charset "utf-8";
 html {
 	background: none repeat scroll 0 0 white;
+	overflow-x: visible !important; 
 }
 
 body{
@@ -112,25 +113,28 @@ p{font-size:17px;font-weight:300;margin:10px 0;color: #646464;}
 	-moz-background-size:cover;
 	-o-background-size:cover;
 	background-size:cover;
+
+	padding-top: 30px;
+	text-align: center;
+	width: 100%;
+
+	padding-left: 10%;
+	padding-right: 10%;
 	}
+
+.masthead.blurred-image{
+    background-image:url('../img/cross-blurred.jpg');
+    opacity:0;
+    min-height: 100%;
+    width: 100% !important;
+    z-index: 1;
+}
+
 	
 .masthead h2, h6 {
 	color: white;
 }	
 
-.masthead .masthead-body {
-	padding-top: 30px;
-	text-align: center;
-	width: 100%;
-
-	animation:fadein 2s;
-	-moz-animation:fadein 2s;
-	-webkit-animation:fadein 2s;
-	-o-animation:fadein 2s;
-	padding-left: 10%;
-	padding-right: 10%;
-	}
-	
 .masthead .container h2 {
 	text-shadow: 0px 1px 2px rgba(0,0,0,0.5);
 }	 
@@ -621,16 +625,6 @@ height: auto;
 
 
 
-
-
-
-
-
-
-
-
-
-
 /*************** Graph 2 ****************/
 .progress {
     position: relative;
@@ -652,21 +646,27 @@ height: auto;
 }
 
 
-
-
-
-
-
-
-
-.img-src { 
-    position: absolute;
-    height: 1000px;
-    background-position: center;
-    -webkit-background-size: cover;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+/************** Features and Icons ***********/
+.cheapest, .fastest, .available{
+  font-size:60px;
+  font-weight:normal;
+  color:rgba(80,80,80,1);
+  -moz-transition:all 0.5s ease;
+  -webkit-transition:all 0.5s ease;
+  -ms-transition:all 0.5s ease;
+  -o-transition:all 0.5s ease;
+  transition:all 0.5s ease;
 }
 
+
+.cheapest:hover{
+	color: #48b97b;
+}
+
+.fastest:hover{
+	color: #fde13f;
+}
+
+.available:hover{
+	color: #3fadea;
+}
