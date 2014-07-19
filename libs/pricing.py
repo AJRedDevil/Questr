@@ -28,7 +28,7 @@ floor(10 + SIZE_HANDLING_FEE + (DISTANCE_IN_KM - 2) * 3.0 * SIZE_MODIFIER)
 
 SIZE_MODIFIER
 Backpack   1.0
-Car        1.0
+Car        1.2
 Minivan    2.0
 
 SIZE_HANDLING_FEE
