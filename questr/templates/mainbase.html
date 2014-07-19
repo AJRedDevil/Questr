@@ -86,9 +86,9 @@
 	
                 {% if pagetype == "loggedin" %}
                 <li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li> 
-                <li class="{% navactive request 'newquest' %}"><a href="{% url 'newquest' %}"><span class="glyphicon glyphicon-plus-sign"></span>Request a delivery</a></li>
+                <li class="{% navactive request 'newquest' %}"><a href="{% url 'newquest' %}"><span class="glyphicon glyphicon-plus-sign"></span>Request a shipment</a></li>
                 
-                <li class="{% navactive request 'mytrades' %}"><a href="{% url 'mytrades' %}"><span class="glyphicon glyphicon-transfer"></span>My Trades</a></li>
+                <li class="{% navactive request 'mytrades' %}"><a href="{% url 'mytrades' %}"><span class="glyphicon glyphicon-transfer"></span>My shipments</a></li>
             	{% comment %}
                 <li><a href="/quest"><span class="glyphicon glyphicon-tree-deciduous"></span>Browse</a></li>                  
                 
@@ -166,7 +166,9 @@
 	                {% comment %}
                 	<span class="ratio img-responsive img-circle profileImg" style="background-image: url({{user.avatar_file_name}});"></span>
                 	{% endcomment %}
-                	<span class="userName">{{user.first_name}} {{user.last_name}}</span>
+                	<span class="userName" style="line-height:18px;">
+                		{{user.first_name}} {{user.last_name}}
+                	</span>
                 	
                 </a>
 

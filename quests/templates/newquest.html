@@ -13,7 +13,7 @@
       	
       	<div class="panel panel-default body-prop border-colours">
 	         <div class="panel-heading">
-		         <div class="panel-title light-grey">Request a delivery</div>
+		         <div class="panel-title light-grey">Request a shipment</div>
 	         </div><!-- ./panel-heading -->
           
           <div class="panel-body">
@@ -24,7 +24,7 @@
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="light-grey">Title</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <input id="title" name="title" type="text" placeholder="your title" class="form-control input-xs">
+                <input id="title" name="title" type="text" placeholder="Shipment title" class="form-control input-xs">
               </div><!-- ./column -->
             </div><!-- ./form-group -->
  
@@ -76,7 +76,7 @@
             </div><!-- ./form-group -->
                         
             <div class="form-group" id="size">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="light-grey">Delivery size</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="light-grey">Package size</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
               	 <div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">	
               	 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
@@ -96,7 +96,7 @@
               	 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
 	              		<center>
 	              			<img src={% static 'img/minivan.png' %} style="width:100%; height:auto;" />
-	              			<p class="grey">Van</p>
+	              			<p class="grey">Minivan</p>
 	              			<input type="radio" name="size" value="minivan">
 	              			</center> 	
               	 	</div><!-- ./column -->
@@ -106,7 +106,7 @@
             
             <!-- Message body -->
             <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="light-grey">Your Message</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="light-grey">Message</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <textarea class="form-control" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5"></textarea>
               </div><!-- ./column -->
