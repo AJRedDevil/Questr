@@ -85,18 +85,18 @@ footer small.title {
 
 
 .btn-circle-md {
-	width: 46px;
-	height: 46px;
+	width: 90px;
+	height: 90px;
 	text-align: center;
 	padding: 5px 0;
-	font-size: 24px;
+	font-size: 36px;
 	line-height: 1.428571429;
 	border-radius: 50%;
 	background: transparent;
 	border-style: solid;
-	border-width: 2px;
-	border-color: #b7c8d4;
-	color: #b7c8d4;
+	border-width: 3px;
+	border-color: #8f8f8f;
+	color: #8f8f8f;
 	margin-right: 5px;
 
 	-moz-transition:all 0.3s ease;

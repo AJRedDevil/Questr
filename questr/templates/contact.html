@@ -20,38 +20,50 @@
   <div class="row">
 
     <br><br><br><br>
+    <section class="col-md-8 col-md-offset-2" style="%background-color:red; padding:8%; padding-top:0px;">
+      <form action="/beta/contactus" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate style="*background-color:blue; text-align:center;">{% csrf_token %}
+        <div class="form-group" style="*background-color:green; width:100%;">
+          <input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Name" style="*background-color:yellow; width:100%;">
+          <p></p>
+          <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+          <p></p>
+          <textarea name="message" class="form-control" rows="3" placeholder="Message" style="min-height:200px;"></textarea>
+        </div>
+        <p></p>
+        <button type="submit" class="btn btn-embossed btn-default" style="background-color:#ff0042;">Send</button>
+      </form>
+    </section><!-- /section planpricing -->
 
-    <div class="col-lg-4">
-      <h4>Message us on a social network</h4>
+    <div class="col-md-8 col-md-offset-2" style="%background-color:red; padding:8%; text-align-center;">
+            <hr>
+    </div>
+
+    <div class="col-md-8 col-md-offset-2" style="%background-color:red; padding:8%; padding-top:0px; text-align:center;">
+
+
+      <h4>...or find us on a social network</h4>
       <div class="hline"></div>
-        <p><a class="facebook" target="_blank" href="https://www.facebook.com/questrco"><button class="btn-circle-md"><i class="fa fa-facebook"></i></button>Facebook</a></p> 
-        <p><a class="twitter" target="_blank" href="https://twitter.com/questrco"><button class="btn-circle-md"><i class="fa fa-twitter"></i></button>Twitter</a></p>
-        <p><a class="linkedin" target="_blank" href="http://linkedin.com/company/questr"><button class="btn-circle-md"><i class="fa fa-linkedin"></i></button>LinkedIn</a></p>
-        <p><a class="tumblr" target="_blank" href="http://questrco.tumblr.com"><button class="btn-circle-md"><i class="fa fa-tumblr"></i></button>Tumblr</a></p>
-        <p><a class="wechat popover-right" data-container="body" data-toggle="popover" data-placement="right"><button type="button" class="btn btn-circle-md"><i class="fa fa-wechat"></i></button>WeChat</a></p>
+        <p>
+          <a class="facebook" target="_blank" href="https://www.facebook.com/questrco"><button class="btn-circle-md"><i class="fa fa-facebook"></i></button></a>
+          <a class="twitter" target="_blank" href="https://twitter.com/questrco"><button class="btn-circle-md"><i class="fa fa-twitter"></i></button></a>
+        </p>
+        <p>
+          <a class="linkedin" target="_blank" href="http://linkedin.com/company/questr"><button class="btn-circle-md"><i class="fa fa-linkedin"></i></button></a>
+          <a class="tumblr" target="_blank" href="http://questrco.tumblr.com"><button class="btn-circle-md"><i class="fa fa-tumblr"></i></button></a>
+        </p>
+        <p>
+          <a class="wechat popover-right" data-container="body" data-toggle="popover" data-placement="right"><button type="button" class="btn btn-circle-md"><i class="fa fa-wechat"></i></button></a>
+        </p>
         <br>
     </div>
 
-    <div class="col-lg-4">
-      <h4>Email us right here</h4>
-      <div class="hline"></div>
-      <p></p>
-      <form action="/beta/contactus" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
-        <div class="form-group">
-          <input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Your name">
-          <p></p>
-          <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Your email address">
-          <p></p>
-          <textarea name="message" class="form-control" rows="3" placeholder="Your message"></textarea>
-        </div>
-        <p></p>
-        <button type="submit" class="btn btn-embossed btn-default">Send</button>
-      </form>
-    </div>
-  </div><! --/row -->
+ </div><! --/row -->
 </div><! --/container -->
 
-
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
 
 {% endblock content %}
 
