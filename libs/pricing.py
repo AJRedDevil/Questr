@@ -37,13 +37,13 @@ Car        3
 Minivan    12
 
 Off-peak hours
-1100-1400, 2000-2300
+1100-1500, 2000-2300
 
 Peak hours
-0800-1000, 1500-1900
+0800-1100, 1500-2000
 
 Low hours
-0000-0700
+0000-0800
 
 """
 
@@ -80,7 +80,7 @@ class WebPricing(object):
 		return dict(backpack=2, car=3, minivan=12)
 
 	def __hourly_modifier(self):
-		return dict(off_peak_hours=range(11,15)+range(20,24), peak_hours=range(8,12)+range(15,20),low_hours=range(0,8))
+		return dict(off_peak_hours=range(11,15)+range(20,24), peak_hours=range(8,11)+range(15,20),low_hours=range(0,8))
 
 	def __working_hours(self):
 		days = self.__future_datetime.days
