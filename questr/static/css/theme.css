@@ -29,9 +29,11 @@ footer {
 	padding-top: 20px;
 	position: absolute;
 	bottom: 0px;
+	left: 0px;
 	display: block;
 	width:100%;
 	margin-top: 220px;
+
 }
 
 footer ul {
@@ -551,6 +553,7 @@ nav .glyphicon {
 	margin: 0;
 	padding: 0;
 	height: 30px;
+
 }
 
 .secondaryNavRow ul li:hover {
