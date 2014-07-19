@@ -465,7 +465,8 @@ to {
 }
 .pricing .planname {
 	text-transform:uppercase;
-	font-weight:600;
+	font-weight:300;
+	font-size:20px;
 }
 .pricing .price {
 	font-size:52px;
@@ -475,7 +476,8 @@ to {
 .pricing .billing {
 	text-transform:uppercase;
 	color:#FFF;
-	opacity:0.7;
+	font-size:14px;
+	font-weight: 300;
 }
 .pricing .price .curr {
 	display:inline-block;
