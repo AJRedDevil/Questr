@@ -13,26 +13,29 @@ def index(request):
 def loadPage(request, template):
     return render(request, template, locals())
 
-def contactUs(request):
+def contact(request):
     return render(request, 'contact.html', locals())
 
-def aboutUs(request):
-    return render(request, 'beta/about.html', locals())
+def about(request):
+    return render(request, 'about.html', locals())
 
 def news(request):
     return render(request, 'news.html', locals())
 
-def joinus(request):
+def join(request):
     return render(request, 'join.html', locals())
 
-def whyQuestr(request):
-    return render(request, 'whyquestr.html', locals())
+def crowdshipping(request):
+    return render(request, 'crowdshipping.html', locals())
 
 def trust(request):
     return render(request, 'trust.html', locals())
 
 def terms(request):
     return render(request, 'terms.html', locals())
+
+def privacy(request):
+    return render(request, 'privacy.html', locals())
 
 def faq(request):
     return render(request, 'faq.html', locals())
