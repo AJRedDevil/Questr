@@ -173,8 +173,8 @@ footer small.title {
 }
 
 .email .btn-circle:hover, .email .btn-circle-md:hover {
-	border-color: rgba(150,150,150,1);
-	color: rgba(150,150,150,1);
+	border-color: rgba(190,190,190,1);
+	color: rgba(190,190,190,1);
 	-moz-transition:all 0.3s ease;
 	-webkit-transition:all 0.3s ease;
 	-ms-transition:all 0.3s ease;
