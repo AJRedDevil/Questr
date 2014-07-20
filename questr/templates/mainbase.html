@@ -75,7 +75,7 @@
 	  <div class="collapse navbar-collapse" id="navbar-collapse-01">
 		  <ul class="nav navbar-nav navbar-left"> 
 	      
-	      		{% if pagetype == "public" %}
+	      		{% if not pagetype %}
                 <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li>
        
                 <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span>Signup</a></li>
@@ -266,19 +266,19 @@
 					<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3 column no-padding">
 						<small class="title light-grey">Company</small>
 						<ul>
-							<li><a href="#"><small>About</small></a></li>
+							<li><a href="{% url 'aboutus' %}"><small>About</small></a></li>
 							<li><a href="http://questrco.tumblr.com"><small>News & Blog</small></a></li>
-							<li><a href="#"><small>Join us</small></a></li>
-							<li><a href="#"><small>Contact us</small></a></li>
+							<li><a href="{% url 'joinus' %}"><small>Join us</small></a></li>
+							<li><a href="{% url 'contactus' %}"><small>Contact us</small></a></li>
 						</ul>
 					</div><!-- ./column -->
 					<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3 column no-padding">
 						<small class="title light-grey">Community</small>
 						<ul>
-							<li><a href="#"><small>Why crowdshipping?</small></a></li>
-							<li><a href="#"><small>Trust & Safety</small></a></li>
-							<li><a href="#"><small>Terms & Privacy</small></a></li>
-							<li><a href="#"><small>Frequently Asked Questions</small></a></li>
+							<li><a href="{% url 'whyquestr' %}"><small>Why crowdshipping?</small></a></li>
+							<li><a href="{% url 'trust' %}"><small>Trust & Safety</small></a></li>
+							<li><a href="{% url 'terms' %}"><small>Terms & Privacy</small></a></li>
+							<li><a href="{% url 'faq' %}"><small>Frequently Asked Questions</small></a></li>
 						</ul>
 					</div><!-- ./column -->
 					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 column text-center">

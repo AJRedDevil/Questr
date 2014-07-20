@@ -6,13 +6,36 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     if request.user.is_authenticated():
         return redirect('home')
-    pagetype="public"
     # plus_id = getattr(settings, 'SOCIAL_AUTH_GOOGLE_PLUS_KEY', None) ###disabled google plus##
     # plus_scope = ' '.join(GooglePlusAuth.DEFAULT_SCOPE) ###disabled google plus##
-    return render(request, 'beta/index.html', locals())
+    return render(request, 'index.html', locals())
 
 def loadPage(request, template):
     return render(request, template, locals())
+
+def contactUs(request):
+    return render(request, 'contact.html', locals())
+
+def aboutUs(request):
+    return render(request, 'beta/about.html', locals())
+
+def news(request):
+    return render(request, 'news.html', locals())
+
+def joinus(request):
+    return render(request, 'join.html', locals())
+
+def whyQuestr(request):
+    return render(request, 'whyquestr.html', locals())
+
+def trust(request):
+    return render(request, 'trust.html', locals())
+
+def terms(request):
+    return render(request, 'terms.html', locals())
+
+def faq(request):
+    return render(request, 'faq.html', locals())
 
 def questReview(request):
     pagetype="loggedin"
