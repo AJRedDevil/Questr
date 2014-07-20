@@ -11,8 +11,8 @@ import logging as log
 from libs import mailchimp_handler, validations, email_notifier
 
 def index(request):
-	messageResponse = "Canada's first<br>peer-to-peer courier.<br>Coming soon."
-	return render(request, 'beta/index.html', locals())
+    pagetype="public"
+    return render(request, 'beta/index.html', locals())
 
 def about(request):
 	messageResponse = "Canada's first<br>peer-to-peer courier.<br>Coming soon."

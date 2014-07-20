@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     if request.user.is_authenticated():
         return redirect('home')
+    pagetype="public"
     # plus_id = getattr(settings, 'SOCIAL_AUTH_GOOGLE_PLUS_KEY', None) ###disabled google plus##
     # plus_scope = ' '.join(GooglePlusAuth.DEFAULT_SCOPE) ###disabled google plus##
     return render(request, 'beta/index.html', locals())
