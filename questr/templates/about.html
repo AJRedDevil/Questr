@@ -1,8 +1,96 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
+  <link href={% static "css/static.css" %} rel="stylesheet"> 
+	<script src={% static "assets/js/pace.js" %}></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
+	
+	<script src={% static "bootstrap/js/tooltip.js" %} type="text/javascript"></script>
 {% endblock localhead %}
+
 {% block content %}
+<div class="banner">
+  <div class="banner title">
+    <h1>About Questr</h1>
+  </div>
+</div>    
+
+<div class="container mtb">
+  <div class="row">
+    <br><br><br><br>
+	<section class="col-md-8 col-md-offset-2">
+		<p>
+	        Founded in March of 2014 by two undergraduate students at the University of Western Ontario and based in Toronto, Questr is one of world's (and definitely Canada's) first peer-to-peer courier services. Questr believes in using the Internet way of thinking to improve the world and aims to make consumer delivery much cheaper, faster, and more economical.
+	    </p>
+	    <p>
+	        Unlike traditional courier companies like Canada Post or UPS or FedEx, Questr breaks down the centralized logistics and lets its users deliver the packages. A shipper user gets packages and delivers them to the destination directly without the hassle of going to local facilities, saving much time and labour that leads to a higher shipping cost. At the same time, the shipper monetizes the extra space on their bike or in their car. By utilizing a multitude of security measures, such as credit card binding, photo ID verification, and a review system, each shipment is guaranteed to be just as safe and even more trackable and traceable. 
+		</p>
+	</section>
+	<section class="col-md-8 col-md-offset-2" style="text-align:center;">
+		<div class="col-md-4">
+			<img src={% static "img/team/qin.jpg" %} class="img-circle">
+			<h5>Frank Qin</h5>
+			<h6>Co-Founder</h6>
+		</div><! --/col-md-4-->
+		<div class="col-md-4">
+			<img src={% static "img/team/donvvo.jpg" %} class="img-circle">
+			<h5>Don Vo</h5>
+			<h6>Co-Founder</h6>
+		</div><! --/col-md-4-->
+		<div class="col-md-4">
+			<img src={% static "img/team/new.jpg" %} class="img-circle">
+			<h5>Is that you?</h5>
+		</div><! --/col-md-4-->
+	</section>
+	<section class="col-md-8 col-md-offset-2" style="text-align:center;">
+		<div class="col-md-4">
+			<img src={% static "img/team/gaumire.jpg" %} class="img-circle">
+			<h5>Gaurav Ghimire</h5>
+		</div><! --/col-md-4-->
+		<div class="col-md-4">
+			<img src={% static "img/team/ajan.jpg" %} class="img-circle">
+			<h5>Ajan Lal Shrestha</h5>
+		</div><! --/col-md-4-->
+		<div class="col-md-4">
+			<img src={% static "img/team/new.jpg" %} class="img-circle">
+			<h5>Is that you?</h5>
+		</div><! --/col-md-4-->
+	</section>
+
+ </div><! --/row -->
+</div><! --/container -->
+
+
+
 {% endblock content %}
+
 {% block scripts %}
+<script src={% static "assets/js/jquery.js" %}></script>
+<script src={% static "assets/js/bootstrap.js" %}></script>
+<script src={% static "assets/js/easing.js" %}></script>
+
+ 
+<script>
+ $(function() {
+    $('.scrollto, .gototop').bind('click',function(event){
+		 var $anchor = $(this);
+		 $('html, body').stop().animate({
+         scrollTop: $($anchor.attr('href')).offset().top
+          }, 1500,'easeInOutExpo');
+     event.preventDefault();
+      });
+  });
+
+  var img = '<img src="{% static "img/contacts/wechat.jpeg" %}"/>';
+  
+  $(".popover-right").popover({
+			placement: 'right', 
+      title: 'Add Questr or scan the QR code below', 
+      content: img, 
+      html:true 
+		});
+
+</script>
+
+    
 {% endblock scripts %}
