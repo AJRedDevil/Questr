@@ -80,7 +80,7 @@
        
                 <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span>Signup</a></li>
 
-                <li><a href={% url 'faq' %}><span class="glyphicon glyphicon-question-sign"></span>FAQ</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-heart"></span>About Us</a></li>
 
                 {% endif %}
 	
@@ -249,39 +249,63 @@
 	{% endblock content %}
 
 	<br><br><br><br>
-
-	<footer class="border-colours" >
-
-
-		<div class="col-md-12">
-			
-			<div class="col-md-4">
-				<i class="light-grey copyright">Copyright © 2014 Questr Inc. All rights reserved.</i>
-			</div><!-- ./column -->
-
-			<div class="col-md-4" style="">
-				<a class="facebook" target="_blank" href="https://www.facebook.com/questrco"><button class="btn-circle"><i class="fa fa-facebook"></i></button></a>
-
-				<a class="twitter" target="_blank" href="https://twitter.com/questrco"><button class="btn-circle"><i class="fa fa-twitter"></i></button></a>
-
-				<a class="linkedin" target="_blank" href="http://linkedin.com/company/questr"><button class="btn-circle"><i class="fa fa-linkedin"></i></button></a>
-
-				<a class="email" target="_blank" href="mailto:hello@questr.co"><button class="btn-circle"><i class="fa fa-envelope"></i></button></a>
-			</div>
-
-			<div class="col-md-4">
-				<a href="{% url 'faq' %}">Frequently Asked Questions</a>
-				<i>|</i>
-				<a href="{% url 'contact' %}">Contact us</a>
-				<i>|</i>
-				<a href="{% url 'terms' %}">Terms of Service</a>
-				<i>|</i>
-				<a href="{% url 'privacy' %}">Privacy Policy</a>
-			</div><!-- ./column -->
-
-		</div><!-- ./column -->
-
-
+	<br><br><br><br>
+	<br><br><br><br>
+	
+	<footer class="border-colours">
+		<div class="container">
+			<div class="row clearfix">
+				<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column no-padding">
+					
+					<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3 column no-padding">
+						<h5 class="no-margin grey">Questr</h5>
+						<small class="no-margin no-padding light-grey title">Canada's first crowdshipping platform.</small>
+						<br>
+						<small class="light-grey copyright">Copyright © 2014 Questr Inc.</small>
+					</div><!-- ./column -->
+					<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3 column no-padding">
+						<small class="title light-grey">Company</small>
+						<ul>
+							<li><a href="{% url 'about' %}"><small>About</small></a></li>
+							<li><a href="http://questrco.tumblr.com"><small>News & Blog</small></a></li>
+							<li><a href="{% url 'join' %}"><small>Join us</small></a></li>
+							<li><a href="{% url 'contact' %}"><small>Contact us</small></a></li>
+						</ul>
+					</div><!-- ./column -->
+					<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3 column no-padding">
+						<small class="title light-grey">Community</small>
+						<ul>
+							<li><a href="{% url 'crowdshipping' %}"><small>Why crowdshipping?</small></a></li>
+							<li><a href="{% url 'trust' %}"><small>Trust & Safety</small></a></li>
+							<li><a href="{% url 'terms' %}"><small>Terms of Service</small></a></li>
+							<li><a href="{% url 'privacy' %}"><small>Privacy Policy</small></a></li>
+							<li><a href="{% url 'faq' %}"><small>Frequently Asked Questions</small></a></li>
+						</ul>
+					</div><!-- ./column -->
+					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 column text-center">
+						<small class="title light-grey">Social</small>
+						<ul class="social-links">
+							<li>
+								<a class="facebook" target="_blank" href="https://www.facebook.com/questrco"><button class="btn-circle"><i class="fa fa-facebook"></i></button></a>
+							</li>
+							<li>
+					          	<a class="twitter" target="_blank" href="https://twitter.com/questrco"><button class="btn-circle"><i class="fa fa-twitter"></i></button></a>
+							</li>
+							<li>
+					          	<a class="linkedin" target="_blank" href="http://linkedin.com/company/questr"><button class="btn-circle"><i class="fa fa-linkedin"></i></button></a>
+							</li>
+							<li>
+					          	<a class="tumblr" target="_blank" href="http://questrco.tumblr.com"><button class="btn-circle"><i class="fa fa-tumblr"></i></button></a>
+							</li>
+					        <li>
+					          	<a class="email" target="_blank" href="mailto:hello@questr.co"><button class="btn-circle"><i class="fa fa-envelope"></i></button></a>
+					        </li> 
+						</ul>
+					</div><!-- ./column -->
+					
+				</div><!-- ./column -->
+			</div><!-- ./row -->
+		</div><!-- ./container -->
 	</footer>
 
 	{% block scripts %}
