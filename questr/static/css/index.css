@@ -105,7 +105,6 @@ p {font-size:17px;font-weight:300;margin:10px 0;color:#646464;}
 .masthead{
 	height: 100%;
     width: 100%;
-	position: absolute;
     position:fixed;
 	background-image: url('../img/cross.jpg');
 	background-repeat:no-repeat;
@@ -125,7 +124,7 @@ p {font-size:17px;font-weight:300;margin:10px 0;color:#646464;}
     width: 100% !important;
 }
 	
-.masthead h2, h6 {
+.masthead h2, h3 {
 	color: white;
 	margin-top: 0px;
 }	
