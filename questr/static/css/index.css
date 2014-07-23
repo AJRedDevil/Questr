@@ -1,33 +1,29 @@
-html {
-	background: none repeat scroll 0 0 white;
-	overflow-x: visible !important; 
-}
+@charset "utf-8";
 
 body{
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	background:white;
+	font-family:'Open Sans',Arial,sans-serif;
+	background:#FFF;
 	font-weight:300;
 	height:100%;
-	width: 100%;
 	margin:0;
 	padding:0;
 	color:#94a3a8;
 	}
-
+	
 strong,b{
 	font-weight:600;
 	}
 
-h1{font-size:50px;font-weight:300;line-height:60px;margin:25px 0;}
-h2{font-size:40px;font-weight:300;margin:15px 0;}
-h3{font-size:20px;font-weight:500;margin:10px 0;color:grey;   }
-h4{font-size:20px;font-weight:500;margin:10px 0;color:#384047;}
-h5{font-size:28px;font-weight:500;margin:15px 0;color:#384047;}
-h6{font-size:16px;font-weight:400;margin:10px 0;color:#384047;}
-p {font-size:17px;font-weight:300;margin:10px 0;color:#646464;}
+h1{font-size:50px;line-height:60px;margin:25px 0;}
+h2{font-size:40px;font-weight:600;margin:15px 0;}
+h3{font-size:20px;margin:10px 0;font-weight:600;}
+h4{font-size:20px;margin:10px 0;}
+h5{font-size:28px;font-weight:600;margin:15px 0;color:#384047;}
+h6{font-size:16px;font-weight:600;margin:10px 0;color:#384047;}
 
+a{color:#5173bd;}
+a:hover,a:focus{color:#5173bd;}
 
-/**************************** Loading screen ************************************/
 .preloader{
 	background-color:#FFFFFF;
 	position:fixed;
@@ -80,8 +76,6 @@ p {font-size:17px;font-weight:300;margin:10px 0;color:#646464;}
 	}
 	
 .pace.pace-inactive{display:none;}
-/**************************** ./Loading screen ************************************/
-
 
 .btn,.btn-lg,.input-lg{border-radius:3px;}
 
@@ -97,19 +91,18 @@ p {font-size:17px;font-weight:300;margin:10px 0;color:#646464;}
 	padding:10px 28px;
 	height:52px;
 	}
+.breath{margin:50px auto;}
 
 .highlight{background:#f4f4f4;margin-top:40px;}
-
-
-
-/**************************** Masthead ************************************/
-
-.blurred-image-container {
 	
-}
+	
+	
+	
+/*========== 1.   ==============*/	
 
-.img-src {
+.img-src { 
     position: absolute;
+    height: 1000px;
     background-position: center;
     -webkit-background-size: cover;
     top: 0;
@@ -118,98 +111,18 @@ p {font-size:17px;font-weight:300;margin:10px 0;color:#646464;}
     right: 0;
 }
 
-.img-src.blurred-img {
-  opacity: 0;
-}
-
-.masthead {
-	position:fixed;
-	padding:80px 15px;
-	color:#FFF;
-	text-align:center;
-	text-shadow:0 1px 0 rgba(0,0,0,.1);
-	font-family: "HelveticaNeue-Light";
-
-	height: 100%;
+.layout-foreground {
+    background: white;
+    height: 2800px;
     width: 100%;
-	background-image: url('../img/cross.jpg');
-	background-repeat:no-repeat;
-	background-position:center center;
-	background-attachment: fixed;
-	-webkit-background-size:cover;
-	-moz-background-size:cover;
-	-o-background-size:cover;
-	background-size:cover;
+    position: absolute;
+    z-index: 5;
+    margin-top: 450px;
+    padding-bottom: 80px;
+    text-align: center;
 }
 
-.blurred-image{
-    background-image:url('../img/cross-blurred.jpg');
-	background-repeat:no-repeat;
-	background-position:center center;
-	background-attachment: fixed;
-	-webkit-background-size:cover;
-	-moz-background-size:cover;
-	-o-background-size:cover;
-	background-size:cover;
-    
-    opacity:0;
-    height: 100%;
-    width: 100% !important;
-}
 
-.masthead .container{
-	animation:fadein 2s;
-	-moz-animation:fadein 2s;
-	-webkit-animation:fadein 2s;
-	-o-animation:fadein 2s;
-}
-
-/**************************** ./Masthead ************************************/
-
-
-.pic {
-    height: 120px;
-    width: 120px;
-    border-radius: 50%;
-    margin-top: -50px;
-    border: 5px solid #fff;
-    background: url("../img/logo-bw.png" );
-	-webkit-background-size:cover;
-	-moz-background-size:cover;
-	-o-background-size:cover;
-	background-size:cover;
-	position: absolute;
-}
-
-.pic-show {
-	opacity: 0;
-	position: relative;
-    height: 120px;
-    width: 120px;
-    border-radius: 50%;
-    margin-top: -50px;
-    border: 5px solid #fff;
-    background: url("../img/logo-bw.png" );
-	-webkit-background-size:cover;
-	-moz-background-size:cover;
-	-o-background-size:cover;
-	background-size:cover;
-	-moz-transition:all 0.3s ease;
-	-webkit-transition:all 0.3s ease;
-	-ms-transition:all 0.3s ease;
-	-o-transition:all 0.3s ease;
-	transition:all 0.3s ease;
-}
-
-/*
-.pic:hover {
-    background: url("../img/logo.png" );
-	-webkit-background-size:cover;
-	-moz-background-size:cover;
-	-o-background-size:cover;
-	background-size:cover;
-}
-*/
 
 .loading *{
 	-webkit-animation:none!important;
@@ -267,6 +180,40 @@ to {
 }
 }
 /*animation ends*/
+
+.logo {
+	padding: 45px 0;
+	text-align:center;
+}
+.btn-large {
+	font-size:18px;
+	padding:20px 50px;
+	margin:5px 10px;
+}
+.btn-success {
+	background-color: #2ecc71;
+	background-image:none;
+	border: 0;
+	-webkit-box-shadow: 0 3px 0 rgba(2, 154, 67, 1);
+	box-shadow: 0 3px 0 rgba(2, 154, 67, 1);
+	line-height: 1.8;
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active {
+	background-color: #29c36a;
+	color:#FFF;
+	border: 0;
+	-webkit-box-shadow: 0 3px 0 rgba(2, 139, 61, 1);
+	box-shadow: 0 3px 0 rgba(2, 139, 61, 1);
+}
+.btn-primary {
+	background-color: #2db6d8;
+	background-image:none;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+	background-color: #209ab8!important;
+	color:#FFF!important;
+}
 .subscribe {
 	padding: 45px 0;
 }
@@ -277,20 +224,12 @@ to {
 	padding: 5px 17px;
 }
 
-
-.page {
-	background: none repeat scroll 0 0 white;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    height: auto;
-
-    margin-top: 800px;
-    position: relative;
-    width: 100%;
-}
 /*========== 3. HERO IMAGE ==============*/
 
 .section-title {
 	text-align:center;
+	margin-top:60px;
+	margin-bottom:30px;
 }
 .section-title h2 {
 	color:#384047;
@@ -298,15 +237,39 @@ to {
 .section-title h4 {
 	color:#94a3a8;
 }
-
-
+.heroimg img, .clientlogo img {
+	max-width:100%;
+}
 /*========== 4. FEATURES ==============*/
 
+.features {
+	margin:25px 0;
+}
+.thumbnail {
+	border:0;
+	text-align:center;
+}
+.thumbnail .caption p {
+	color: #94a3a8;
+}
+/*Hover Animation*/
 
-
-
-
-/*========== 5. MENTIONS ==============*/
+.thumbnail img {
+	-moz-transition:all 0.6s ease;
+	-webkit-transition:all 0.6s ease;
+	-ms-transition:all 0.6s ease;
+	-o-transition:all 0.6s ease;
+	transition:all 0.6s ease;
+}
+.thumbnail:hover img {
+	-moz-transform:scale(1.05);
+	-webkit-transform:scale(1.05);
+	-o-transform:scale(1.05);
+	-ms-transform:scale(1.05);
+	transform:scale(1.05);
+	z-index:2;
+}
+/*========== 5. TESTIMONIALS ==============*/
 
 .testblock {
 	width:100%;
@@ -383,8 +346,7 @@ to {
 }
 .pricing .planname {
 	text-transform:uppercase;
-	font-weight:300;
-	font-size:20px;
+	font-weight:600;
 }
 .pricing .price {
 	font-size:52px;
@@ -394,8 +356,7 @@ to {
 .pricing .billing {
 	text-transform:uppercase;
 	color:#FFF;
-	font-size:14px;
-	font-weight: 300;
+	opacity:0.7;
 }
 .pricing .price .curr {
 	display:inline-block;
@@ -434,80 +395,9 @@ to {
 	z-index:2;
 }
 
+/*========== 7. FAQ ==============*/
 
-
-
-
-/*==========9. CUSTOM MEDIA QUERIES==============*/
-
-
-/*MEDIA QUERIES*/
-
-@media (max-width: 991px) {
- h1 {
-font-size: 35px;
-line-height: 50px;
-margin: 15px 0;
+.faq p {
+	margin-bottom:25px;
 }
- h2 {
-font-size: 35px;
-}
- .testimonials [class*="col-"]:not(:first-child) {
- margin-top: 40px;
-}
- .planpricing [class*="col-"]:not(:first-child) {
- margin-top: 30px;
-}
-
-}
- @media (max-width: 767px) {
- h1 {
-font-size: 30px;
-line-height: 40px;
-}
- h2 {
-font-size: 30px;
-line-height: 40px;
-}
- .subscribe [class*="col-"]:not(:first-child) {
- margin-top: 30px;
-}
-
- @media (max-width: 480px) {
-	 /*Media Queries for smaller devices*/
-	 .masthead {
-		 background-attachment: scroll;
-		 }
-	}
-
-
-/************** Features and Icons ***********/
-.cheapest, .fastest, .available{
-  font-size:60px;
-  font-weight:normal;
-  color:rgba(80,80,80,1);
-  -moz-transition:all 0.5s ease;
-  -webkit-transition:all 0.5s ease;
-  -ms-transition:all 0.5s ease;
-  -o-transition:all 0.5s ease;
-  transition:all 0.5s ease;
-}
-
-.cheapest:hover{
-	color: #48b97b;
-}
-
-.fastest:hover{
-	color: #fde13f;
-}
-
-.available:hover{
-	color: #3fadea;
-}
-
-
-
-
-
-
 

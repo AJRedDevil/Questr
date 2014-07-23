@@ -1844,13 +1844,11 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   }
 }
 .navbar-static-top {
-  z-index: 1000;
   border-width: 0;
   border-radius: 0;
 }
 .navbar-fixed-top,
 .navbar-fixed-bottom {
-  z-index: 1030;
   border-radius: 0;
 }
 .navbar-fixed-top {
