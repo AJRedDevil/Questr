@@ -62,19 +62,19 @@
 	    </button>
 	  </div>
 	    
-	  <div class="collapse navbar-collapse" id="navbar-collapse-01">
-		  <ul class="nav navbar-nav navbar-left"> 
+	<div class="collapse navbar-collapse" id="navbar-collapse-01">
+		{% if not pagetype %}
+		  	<ul class="nav navbar-nav navbar-left"> 
 	      
-	      		{% if not pagetype %}
                 <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li>
        
                 <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span>Signup</a></li>
 
                 <li><a href={% url 'faq' %}><span class="glyphicon glyphicon-question-sign"></span>FAQ</a></li>
-
-                {% endif %}
-	
-                {% if pagetype == "loggedin" %}
+            </ul>
+	    {% endif %}
+        {% if pagetype == "loggedin" %}
+        	<ul class="nav navbar-nav navbar-left"> 
                 <li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li> 
                 <li class="{% navactive request 'newquest' %}"><a href="{% url 'newquest' %}"><span class="glyphicon glyphicon-plus-sign"></span>Request a shipment</a></li>
                 
@@ -129,63 +129,62 @@
                 </form>			 
                 </li>          
    				{% endcomment %}	      
-   		</ul>   
-	    
-	    <ul class="nav navbar-nav navbar-right">
-	    	{% comment %}
-	    	<li class="dropdown">
-	    		<a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bell"></span><span class="navbar-new">2</span></a>
-	    		<ul class="dropdown-menu">
-		    		<li>
-			    		<a>
-				    		<div class="row clearfix">
-				    			<div class="col-md-4 column">
-					    			<div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
-				    			</div>
-				    			<div class="col-md-8 column">You got a notification!</div>
-				    		</div>
-			    		</a>
-		    		</li>
-                </ul>
-            </li>
-            {% endcomment %}
-            
-            <li class="dropdown">
-            	
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	                {% comment %}
-                	<span class="ratio img-responsive img-circle profileImg" style="background-image: url({{user.avatar_file_name}});"></span>
-                	{% endcomment %}
-                	<span class="userName" style="line-height:18px;">
-                		{{user.first_name}} {{user.last_name}}
-                	</span>
-                	
-                </a>
+   			</ul>   
+		    <ul class="nav navbar-nav navbar-right">
+		    	{% comment %}
+		    	<li class="dropdown">
+		    		<a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bell"></span><span class="navbar-new">2</span></a>
+		    		<ul class="dropdown-menu">
+			    		<li>
+				    		<a>
+					    		<div class="row clearfix">
+					    			<div class="col-md-4 column">
+						    			<div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
+					    			</div>
+					    			<div class="col-md-8 column">You got a notification!</div>
+					    		</div>
+				    		</a>
+			    		</li>
+	                </ul>
+	            </li>
+	            {% endcomment %}
+	            
+	            <li class="dropdown">
+	            	
+	                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		                {% comment %}
+	                	<span class="ratio img-responsive img-circle profileImg" style="background-image: url({{user.avatar_file_name}});"></span>
+	                	{% endcomment %}
+	                	<span class="userName" style="line-height:18px;">
+	                		{{user.first_name}} {{user.last_name}}
+	                	</span>
+	                	
+	                </a>
 
-				<ul class="dropdown-menu dropdown-menu-left">
-					<li class="{% navactive request 'profile' %}">
-						<a href="{% url 'profile' %}">
-							<span class="glyphicon glyphicon-user"></span>
-							My profile
-						</a>
-					</li>
-                    <li>
-                        <a href="{% url 'settings' %}">
-                        	<span class="glyphicon glyphicon-cog"></span>
-                        	Settings
-                        </a>
-                    </li>
-                    </li>
-                    <li>
-                        <a href="{% url 'logout' %}">
-                        	<span class="glyphicon glyphicon-off"></span>
-                        	Logout
-                        </a>
-                    </li>
-                </ul>
-        	</li>
-	    </ul>
-	    
+					<ul class="dropdown-menu dropdown-menu-left">
+						<li class="{% navactive request 'profile' %}">
+							<a href="{% url 'profile' %}">
+								<span class="glyphicon glyphicon-user"></span>
+								My profile
+							</a>
+						</li>
+	                    <li>
+	                        <a href="{% url 'settings' %}">
+	                        	<span class="glyphicon glyphicon-cog"></span>
+	                        	Settings
+	                        </a>
+	                    </li>
+	                    </li>
+	                    <li>
+	                        <a href="{% url 'logout' %}">
+	                        	<span class="glyphicon glyphicon-off"></span>
+	                        	Logout
+	                        </a>
+	                    </li>
+	                </ul>
+	        	</li>
+		    </ul>
+		{% endif %}
 	    {% comment %}
 	    <form class="navbar-form navbar-left" action="#" role="search">{% csrf_token %}
 	      <div class="form-group">
@@ -198,23 +197,12 @@
 	      </div>               
 	    </form>
 	    {% endcomment %}      		    
-	  </div><!-- /.navbar-collapse -->
+		</div><!-- /.navbar-collapse -->
+
 	</nav><!-- /navbar -->
 	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	        <!-- Secondary navbar:  holds search, Quests, and Questrs -->
-	        {% endif %}
+  <!-- Secondary navbar:  holds search, Quests, and Questrs -->
+
 	{% if message %}
 	    <!-- Secondary navbar:  to display message notifications -->
 	    <div class="row clearfix secondaryNavRow">
