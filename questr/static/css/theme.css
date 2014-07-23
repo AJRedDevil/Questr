@@ -11,6 +11,7 @@ body {
 	position: relative;
 	margin: 0;
 	min-height: 100%;
+	width: 100%;
 	font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
 	font-size: 11px;
 	color: #141823;

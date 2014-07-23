@@ -51,16 +51,6 @@
 	<body id="start">
 	    <!-- This is the overlay DIV that is displayed while loading a new page -->
 
-	<!-- Main Navbar -->
-	<div class="container brand">
-		<div class="row clearfix">
-			<div class="col-md-2 col-md-offset-5 column">
-					<center><a href="{% url 'mainindex' %}">QUESTR</a></center>
-			</div>
-		</div>
-	</div>
-	
-
 	<nav class="navbar navbar-default border-colours" role="navigation">
 		
 	  <div class="navbar-header">
@@ -207,12 +197,21 @@
 	        </div>
 	      </div>               
 	    </form>
-	    {% endcomment %}
-	    
-	    
-              		    
+	    {% endcomment %}      		    
 	  </div><!-- /.navbar-collapse -->
 	</nav><!-- /navbar -->
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	 
 	        <!-- Secondary navbar:  holds search, Quests, and Questrs -->
 	        {% endif %}
@@ -241,14 +240,15 @@
 	        </div><!-- End of Secondary navbar -->
 	        {% endif %}
 	{% endcomment %}
-	    </div><!-- End of navbar-container -->    
+   
+
+
 
 	<div id="loader"></div>
 
 	{% block content %}    
 	{% endblock content %}
 
-	<br><br><br><br>
 
 	<footer class="border-colours" >
 
