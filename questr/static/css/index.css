@@ -26,6 +26,7 @@ h5{font-size:28px;font-weight:500;margin:15px 0;color:#384047;}
 h6{font-size:16px;font-weight:400;margin:10px 0;color:#384047;}
 p {font-size:17px;font-weight:300;margin:10px 0;color:#646464;}
 
+
 /**************************** Loading screen ************************************/
 .preloader{
 	background-color:#FFFFFF;
@@ -102,10 +103,35 @@ p {font-size:17px;font-weight:300;margin:10px 0;color:#646464;}
 
 
 /**************************** Masthead ************************************/
-.masthead{
+
+.blurred-image-container {
+	
+}
+
+.img-src {
+    position: absolute;
+    background-position: center;
+    -webkit-background-size: cover;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.img-src.blurred-img {
+  opacity: 0;
+}
+
+.masthead {
+	position:fixed;
+	padding:80px 15px;
+	color:#FFF;
+	text-align:center;
+	text-shadow:0 1px 0 rgba(0,0,0,.1);
+	font-family: "HelveticaNeue-Light";
+
 	height: 100%;
     width: 100%;
-    position:fixed;
 	background-image: url('../img/cross.jpg');
 	background-repeat:no-repeat;
 	background-position:center center;
@@ -114,32 +140,30 @@ p {font-size:17px;font-weight:300;margin:10px 0;color:#646464;}
 	-moz-background-size:cover;
 	-o-background-size:cover;
 	background-size:cover;
-	text-align: center;
 }
 
 .blurred-image{
     background-image:url('../img/cross-blurred.jpg');
+	background-repeat:no-repeat;
+	background-position:center center;
+	background-attachment: fixed;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
+	-o-background-size:cover;
+	background-size:cover;
+    
     opacity:0;
     height: 100%;
     width: 100% !important;
 }
-	
-.masthead h2, h3 {
-	color: white;
-	margin-top: 0px;
-}	
 
-.masthead h2, h3 {
-	font-family: "HelveticaNeue-Light";
-}	
-
-.masthead .container h2 {
-	text-shadow: 0px 1px 2px rgba(0,0,0,0.5);
-}	 
-
-.masthead .container h2 {
-	text-shadow: 0px 1px 2px rgba(0,0,0,0.35);
+.masthead .container{
+	animation:fadein 2s;
+	-moz-animation:fadein 2s;
+	-webkit-animation:fadein 2s;
+	-o-animation:fadein 2s;
 }
+
 /**************************** ./Masthead ************************************/
 
 
@@ -279,30 +303,9 @@ to {
 /*========== 4. FEATURES ==============*/
 
 
-.thumbnail {
-	border:0;
-	text-align:center;
-}
-.thumbnail .caption p {
-	color: #94a3a8;
-}
-/*Hover Animation*/
 
-.thumbnail img {
-	-moz-transition:all 0.6s ease;
-	-webkit-transition:all 0.6s ease;
-	-ms-transition:all 0.6s ease;
-	-o-transition:all 0.6s ease;
-	transition:all 0.6s ease;
-}
-.thumbnail:hover img {
-	-moz-transform:scale(1.05);
-	-webkit-transform:scale(1.05);
-	-o-transform:scale(1.05);
-	-ms-transform:scale(1.05);
-	transform:scale(1.05);
-	z-index:2;
-}
+
+
 /*========== 5. MENTIONS ==============*/
 
 .testblock {
