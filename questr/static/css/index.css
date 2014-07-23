@@ -20,11 +20,11 @@ strong,b{
 
 h1{font-size:50px;font-weight:300;line-height:60px;margin:25px 0;}
 h2{font-size:40px;font-weight:300;margin:15px 0;}
-h3{font-size:20px;font-weight:500;margin:10px 0; color: grey;}
+h3{font-size:20px;font-weight:500;margin:10px 0;color:grey;   }
 h4{font-size:20px;font-weight:500;margin:10px 0;color:#384047;}
 h5{font-size:28px;font-weight:500;margin:15px 0;color:#384047;}
 h6{font-size:16px;font-weight:400;margin:10px 0;color:#384047;}
-p{font-size:17px;font-weight:300;margin:10px 0;color: #646464;}
+p {font-size:17px;font-weight:300;margin:10px 0;color:#646464;}
 
 /**************************** Loading screen ************************************/
 .preloader{
