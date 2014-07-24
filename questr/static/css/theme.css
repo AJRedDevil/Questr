@@ -27,8 +27,8 @@ body {
 /************ footer ****************/
 footer {
 	background: white;
-	position: relative;
-
+	position: fixed;
+	bottom: 0px;
 	display: block;
 	width:100%;
 	vertical-align: middle;
