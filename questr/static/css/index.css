@@ -103,12 +103,15 @@ a:hover,a:focus{color:#5173bd;}
 .img-src { 
     position: absolute;
     height: 1000px;
-    background-position: center;
-    -webkit-background-size: cover;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+	background: url("../img/cross.jpg") no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
 .layout-foreground {
@@ -122,6 +125,20 @@ a:hover,a:focus{color:#5173bd;}
     text-align: center;
 }
 
+.blurred-image {
+	opacity: 0;
+	background: url("../img/cross-blurred.jpg") no-repeat center center fixed;     
+	position: absolute;
+    height: 1000px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
 
 
 .loading *{
