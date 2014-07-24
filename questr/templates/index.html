@@ -182,17 +182,14 @@
 	
 
 	    <! -- ******************** HOW QUESTR WORKS div ******************** -->
-	    <div class="row clearfix">
+		<div class="row breath">
 			<div class="col-md-12 column">	 
 				<div class="section-title">
 					<h2>Streamlined experience</h2>
 					<h4>Shipping things has never been so easy like this.</h4>
 				</div>
 			</div>
-	    </div>
-		
-		
-		<div class="row breath">
+			
             <div class="col-md-8 col-md-offset-2 column">
                 <div class="col-lg-6 col-md-6 col-sm-6">
 			    	<i class="glyphicon glyphicon-edit" style="font-size: 70px; color:#f1a148;"></i>	
@@ -201,7 +198,7 @@
 			        <p>
 			            Tell us where to pick up & drop off, and the size of the package. Shippers around you will be notified and apply for the shipment, choose one of your own liking.  After choosing a shipper, a deposit will be charged.
 			        </p>
-                </div>
+                </div><!-- ./column -->
                
                 <div class="col-lg-6 col-md-6 col-sm-6">
 			        
@@ -209,20 +206,21 @@
 		        	<h4>2. Pickup</h4>
 		        	<h3>5 ~ 10 minutes</h3>
 			        <p>The chosen shipper will call and confirm the details, then they'll come and pick up the package and start driving right away.</p>
-                </div> 
-            </div>	
+                </div><!-- ./column -->
+            </div><!-- ./column -->	
+		</div><!-- ./row -->
 
+		<div class="row clearix">
             <div class="col-md-8 col-md-offset-2 column">
                 <div class="col-lg-6 col-md-6 col-sm-6">
 		        	<i class="glyphicon glyphicon-download" style="font-size: 70px; color:#ff7a7b;"></i>
 			        <h4>3. Dropoff</h4>
 			        <h3>15 ~ 90 minutes</h3>
-			        </div><!-- he wrap -->
 			        <p>
 			            The shipper will drive the package undistractably and directly to the dropoff location.                    
 			            Nothing will stop them from shipping your package.
 			        </p>
-                </div>
+                </div><!-- ./column -->
                 <div class="col-lg-6 col-md-6 col-sm-6"> 
 			        <i class="glyphicon glyphicon-thumbs-up" style="font-size: 70px; color:#6d5b47;"></i>
 			        <h4>4. Finish & Rate</h4>
@@ -232,7 +230,7 @@
 			            Opinions matter. If you think your shipper was a good one, let them and other people know since this is crucial for a community. After submitting your review, the deposit will be released to the shipper.
 			        </p>
                 </div>
-            </div>
+            </div><!-- ./column -->
   		</div><! --/row -->	
 
 
@@ -331,8 +329,6 @@
 
 
 {% endblock content %}
-	
-
 {% block scripts %}
 <!--<script src={% static "js/index.js" %}></script> -->
 <script>
