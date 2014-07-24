@@ -25,14 +25,7 @@
 	    <link href={% static "css/theme.css" %} rel="stylesheet">
 	    <link href={% static "css/social-buttons.css" %} rel="stylesheet">
 	    <link href={% static "css/normalize.css" %} rel="stylesheet"> 
-	   
 	    
-	    <!-- Custom JS -->
-	    <script type='text/javascript' src={% static "js/jquery.min.js" %}></script> 
-	    <script src={% static "bootstrap/js/bootstrap.min.js" %}></script>
-	    <script src={% static "bootstrap/js/bootstrap-select.js" %}></script>
-	    <script src={% static "bootstrap/js/tooltip.js" %}></script>
-	    <script src={% static "js/modernizr.js" %}></script>
 	     
 		<!-- Google Analytics -->
 	    <script>
@@ -44,9 +37,6 @@
 		  ga('create', 'UA-52727900-1', 'auto');
 		  ga('send', 'pageview');
 		</script>
-
-
-
 
 	    {% block localhead %}
 	    {% endblock localhead %}
@@ -278,5 +268,13 @@
 
 	{% block scripts %}
 	{% endblock scripts %}
+	
+	<script type='text/javascript' src={% static "js/jquery.min.js" %}></script> 
+	    <script src={% static "bootstrap/js/bootstrap.min.js" %}></script>
+	    <script src={% static "bootstrap/js/bootstrap-select.js" %}></script>
+	    <script src={% static "bootstrap/js/tooltip.js" %}></script>
+	    <script src={% static "js/modernizr.js" %}></script>
 	</body>
+
+	    
 </html>
