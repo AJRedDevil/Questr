@@ -1783,11 +1783,14 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   margin-top: 10px;
 }
 .navbar {
-	background: white;
+	background: transparent;
 	font-size: 12px;
 	min-height: 13px;
 	margin-bottom: 0px;
 	padding: 0;
+	z-index: 999;
+	border: none;
+	margin-top: 20px;
 }
 @media (min-width: 768px) {
   .navbar-header {
@@ -1806,7 +1809,7 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   
   }
   .navbar-collapse .navbar-nav.navbar-right:last-child {
-    margin-right: -21px;
+    margin-right: -11px;
   }
   .navbar > .container .navbar-collapse .navbar-nav.navbar-right:last-child {
     margin-right: -36px;
@@ -1858,22 +1861,26 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   margin-bottom: 0;
   border-width: 0;
 }
-.navbar-brand {
-  font-size: 24px;
+a.navbar-brand {
+  font-size: 28px;
   line-height: 1.042;
   font-weight: 700;
-  padding: 14px 21px;
+   z-index: 999;
+   color: white;
+    margin-left: 50px;
 }
 
 .navbar-brand > [class*="fui-"] {
   font-size: 19px;
   line-height: 1.263;
   vertical-align: top;
+   z-index: 999;
 }
 @media (min-width: 768px) {
   .navbar > .container .navbar-brand,
   .navbar > .container-fluid .navbar-brand {
     margin-left: -21px;
+     z-index: 999;
   }
 }
 
@@ -2186,12 +2193,16 @@ select[multiple].navbar-form .btn {
 }
 
 /***************** navbar font color *********************/
+
+/**
 .navbar-default .navbar-nav > li > a {
   color: white;
   background-color: transparent;
   border-bottom: transparent;
   border-bottom-style: solid;
-  border-bottom-width: 3px;
+  border-bottom-width: 3px; 
+  margin-right: 10px;
+  font-weight: 200;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
@@ -2210,6 +2221,46 @@ select[multiple].navbar-form .btn {
   border-bottom-style: solid;
   border-bottom-width: 3px;
 }
+
+**/
+
+.navbar-default .navbar-nav > li > a {
+  color: white;
+  text-shadow: 0px 1px 2px rgba(0,0,0,0.1);
+  
+  background: rgba(243,243,243,0.21);
+  border-radius: 10%;
+  
+  border: none;
+  padding-top: 7px;
+  padding-bottom: 9px;
+  padding-left: 10px;
+  
+  
+  margin-right: 10px;
+  font-weight: 200;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: white;
+  text-shadow: 0px 1px 2px rgba(0,0,0,0.9);
+  background-color: rgba(255,255,255,0.62);
+  
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+	color: white;
+  text-shadow: 0px 1px 2px rgba(0,0,0,0.9);
+  background-color: rgba(255,255,255,0.62);
+}
+
+
+
+
+
+
+
 .navbar-default .navbar-nav > .disabled > a,
 .navbar-default .navbar-nav > .disabled > a:hover,
 .navbar-default .navbar-nav > .disabled > a:focus {
@@ -2326,10 +2377,12 @@ select[multiple].navbar-form .btn {
   line-height: 1;
   padding-top: 26px;
   padding-bottom: 26px;
+   z-index: 999;
 }
 .navbar-lg .navbar-brand > [class*="fui-"] {
   font-size: 24px;
   line-height: 1;
+   z-index: 999;
 }
 .navbar-lg .navbar-nav > li > a {
   font-size: 15px;

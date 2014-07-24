@@ -51,20 +51,16 @@
 	<body id="start">
 	    <!-- This is the overlay DIV that is displayed while loading a new page -->
 
-	<nav class="navbar navbar-default border-colours" role="navigation">
+	<nav class="navbar navbar-default" role="navigation">
 		
 	  <div class="navbar-header">
-	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-		    <span class="sr-only">Toggle navigation</span>
-		    <span class="icon-bar"></span>
-		    <span class="icon-bar"></span>
-		    <span class="icon-bar"></span>
-	    </button>
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> 
+		  <a class="navbar-brand" href="#" style="color:white;">Questr</a>
 	  </div>
 	    
 	<div class="collapse navbar-collapse" id="navbar-collapse-01">
 		{% if not pagetype %}
-		  	<ul class="nav navbar-nav navbar-left"> 
+		  	<ul class="nav navbar-nav navbar-right"> 
 	      
                 <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li>
        
@@ -238,7 +234,7 @@
 	{% endblock content %}
 
 
-	<footer class="border-colours" >
+	<footer>
 
 
 		<div class="col-md-12">
@@ -247,7 +243,7 @@
 				<i class="light-grey copyright">Copyright © 2014 Questr Inc. All rights reserved.</i>
 			</div><!-- ./column -->
 
-			<div class="col-md-4" style="">
+			<div class="col-md-4">
 				<a class="facebook" target="_blank" href="https://www.facebook.com/questrco"><button class="btn-circle"><i class="fa fa-facebook"></i></button></a>
 
 				<a class="twitter" target="_blank" href="https://twitter.com/questrco"><button class="btn-circle"><i class="fa fa-twitter"></i></button></a>
