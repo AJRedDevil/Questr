@@ -28,7 +28,7 @@
 	   
 	    
 	    <!-- Custom JS -->
-	    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+	    <script type='text/javascript' src={% static "js/jquery.min.js" %}></script> 
 	    <script src={% static "bootstrap/js/bootstrap.min.js" %}></script>
 	    <script src={% static "bootstrap/js/bootstrap-select.js" %}></script>
 	    <script src={% static "bootstrap/js/tooltip.js" %}></script>
@@ -43,6 +43,8 @@
 		  ga('create', 'UA-52727900-1', 'auto');
 		  ga('send', 'pageview');
 		</script>
+
+
 
 
 	    {% block localhead %}
