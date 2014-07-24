@@ -12,33 +12,30 @@
 	
 		<div class="img-src"></div>
 		<div class="blurred-image"></div>
-		
-		<div class="container">
-		
-			<h2>Canada's first crowdshipping platform.</h2>
 			
-			<h3>Cheaper, faster, 24/7 shipments now available in Greater Toronto Area.</h3>
-
-			<div class="col-md-4 col-md-offset-4 subscribe">
-				<form class="form-horizontal" role="form" action="subscribe.php" id="subscribeForm" method="POST">
-					<div class="form-group">
-						<div class="col-md-7 col-sm-6 col-sm-offset-1 column">
-							<form action="/beta/join" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}</form>
-						</div><!--./column -->
-					</div><!--./form-group -->		
-						
-					<div class="form-group">
-						<input class="form-control input-lg" name="email" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required">
-					</div><! --./form-group -->
-				</form>	
-			</div><!--./subscribe -->
-		 
-			<div class="col-md-5 col-sm-4 column">
-				<button type="submit" class="btn btn-embossed btn-info btn-hg">Notify me</button>
-			</div><!--./column -->
-			<span id="result" class="alertMsg"></span> 
-		</div>
-	</div><! -- ./container -->
+			<div class="container">
+				<div class="row clearfix">
+					<div class="col-md-12">
+						<h2>Canada's first crowdshipping platform.</h2>
+				
+						<h3>Cheaper, faster, 24/7 shipments now available in Greater Toronto Area.</h3>
+					</div><!--./column -->
+				</div><!--./row -->
+				
+				<div class="row clearfix">
+					<div class="col-md-4 column subscribe">
+						<form class="form-horizontal" role="form" action="subscribe.php" id="subscribeForm" method="POST">
+							<div class="form-group">
+								<form action="/beta/join" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}</form>
+								<input class="form-control input-lg" name="email" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required">
+								<button type="submit" class="btn btn-embossed btn-info btn-hg">Notify me</button>
+						<span id="result" class="alertMsg"></span>
+							</div><!--./form-group -->		
+						</form>
+					</div><!-- ./column -->
+				</div><!-- ./row -->
+			</div><! -- ./container -->
+	</div><! -- ./container-fluid -->
 
 
  
@@ -329,8 +326,8 @@
 				</div><! -- ./column -->
 			</div><! -- ./column -->
 		</div><! -- ./row -->
-	</div>
-</div>
+	</div><! -- ./container-fluid -->
+</div><! -- ./wrapper -->
 
 
 {% endblock content %}
