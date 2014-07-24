@@ -235,60 +235,47 @@
 
 
 	    <! -- ******************** FAQ div ******************** -->	 
-		<div class="section-title">
-			<h2>Hmm...</h2>
-			<h4>A few more details</h4>
-		</div>
+		
 	
 		<div class="row breath">
+			<div class="col-md-12 column">
+				<div class="section-title">
+					<h2>Hmm...</h2>
+					<h4>A few more details</h4>
+				</div><!-- ./section-title -->
+			</div><!-- ./column -->
+		
             <div class="col-md-8 col-md-offset-2 column">
-                
-                
                 <div class="col-lg-4 col-md-4 col-sm-4">
-                	
-                   		<i class="fa fa-shield" style="font-size: 70px; color:#e37cb4;"></i>
-               			<h4>Is Questr as safe as other shipping companies?</h4>
-                
-                    <p>
-                        Questr utilizes a multitude of security measures, including credit card binding, photo ID verification, and a review system, to make sure that each shipment is just as safe and even more trackable and traceable. Oh, you can also choose a shipper of your own liking. 
-                    </p>
-                </div>
+	                <i class="fa fa-shield" style="font-size: 70px; color:#e37cb4;"></i>
+	                <h4>Is Questr as safe as other shipping companies?</h4>
+	                
+	                <p>Questr utilizes a multitude of security measures, including credit card binding, photo ID verification, and a review system, to make sure that each shipment is just as safe and even more trackable and traceable. Oh, you can also choose a shipper of your own liking. 
+	                </p>
+                </div><!-- ./column -->
                 <div class="col-lg-4 col-md-4 col-sm-4">
-                	
-                    	<i class="fa fa-heart" style="font-size: 70px; color:#fe3d36;"></i>
-                    	<h4>How much does Questr value ethics and safety?</h4>
-      
-                    <p>
-                        Questr has a zero tolerance policy towards frauds and other unethical and illegal activities. If detected, a user, along their associated cell phone number, email address, social network account, credit card, and photo id, will be immediately and permanently banned and put on our blacklist.
-                    </p>
-                </div>
-                
+		        	<i class="fa fa-heart" style="font-size: 70px; color:#fe3d36;"></i>
+		        	<h4>How much does Questr value ethics and safety?</h4>
+		        	
+		        	<p>Questr has a zero tolerance policy towards frauds and other unethical and illegal activities. If detected, a user, along their associated cell phone number, email address, social network account, credit card, and photo id, will be immediately and permanently banned and put on our blacklist.
+		            </p>
+                </div><!-- ./column -->
                 <div class="col-lg-4 col-md-4 col-sm-4">
-                	
-                    	<i class="fa fa-legal" style="font-size: 70px; color:#f1a148;"></i>
-                    	<h4>How can I make sure whether a shipper is credible?</h4>
-               
-                    <p>
-                        Besides what Questr does automatically for you, you can also go to a shipper's profile and go over the reviews that have been provided by other users.
-                    </p>
-           
-                </div>
-                
-                	
-            </div>
+					<i class="fa fa-legal" style="font-size: 70px; color:#f1a148;"></i>
+					<h4>How can I make sure whether a shipper is credible?</h4>
+					
+					<p>Besides what Questr does automatically for you, you can also go to a shipper's profile and go over the reviews that have been provided by other users.</p>
+                </div><!-- ./column -->	
+            </div><!-- ./column -->
 		</div><! --/row -->	
 	
-
-	    <! -- ******************** MENTIONS div ******************** -->	
+	    <! -- ******************** MENTIONS ******************** -->	
 	    <div class="row clearfix">
 			<div class="col-md-12 column"> 
-			<div class="section-title">
-				<h2>We're mentioned in</h2>
-			</div>
-			</div>
-	    </div>
-		
-		<div class="row breath">
+				<div class="section-title">
+					<h2>We're mentioned in</h2>
+				</div><!-- ./section-title -->
+			</div><!-- ./column -->
 			<div class="col-md-8 col-md-offset-2 column">
 					<div class="col-md-2 col-md-offset-5 column"> 
 						<center>
@@ -296,34 +283,34 @@
 								<img src={% static "img/mentioned/skift.png" %} class="img-responsive">
 							</a>
 						</center>	
-					</div>
-			</div>
-		</div><! --/row -->	
-
-		
+					</div><!-- ./column -->
+			</div><!-- ./column -->
+	    </div><!-- ./row -->
+			
+			
+			
 	<!-- *****************************************************************************************************************
 	Say hi to us
 	***************************************************************************************************************** -->
 		<div class="row clearfix">
 			<div class="col-md-10 col-md-offset-1 column">
-				<div class="col-md-4 col-md-offset-4 column">
-					<h4>Say hi to us</h4>
-					<div class="hline"></div>
-					<p></p>
-					<form action="/beta/contactus" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate style="*background-color:blue; text-align:center;">{% csrf_token %}
-						<div class="form-group" style="*background-color:green; width:100%;">
-							<input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Name" style="*background-color:yellow; width:100%;">
-							<p></p>
-							<input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-							<p></p>
-							<textarea name="message" class="form-control" rows="3" placeholder="Message" style="min-height:200px;"></textarea>
-						</div>
-						<p></p>
-						<button type="submit" class="btn btn-embossed btn-default" style="background-color:#ff0042;">Send</button>
-					</form>
-				</div><! -- ./column -->
+				<div class="section-title">
+					<h2>Say hi</h2>
+				</div><!-- ./section-title -->
+			</div><!-- ./column -->
+			
+			<div class="col-md-4 col-md-offset-4 column">
+				<form action="/beta/contactus" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
+					<div class="form-group" style="*background-color:green; width:100%;">
+						<input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Name" style="*background-color:yellow; width:100%;">
+						<input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+						<textarea name="message" class="form-control" rows="3" placeholder="Message" style="min-height:200px;"></textarea>
+					</div><!-- ./form-group -->
+					<button type="submit" class="btn btn-embossed btn-default" style="background-color:#ff0042;">Send</button>
+				</form>	
 			</div><! -- ./column -->
 		</div><! -- ./row -->
+		
 	</div><! -- ./container-fluid -->
 </div><! -- ./wrapper -->
 
