@@ -2187,7 +2187,7 @@ select[multiple].navbar-form .btn {
 
 /***************** navbar font color *********************/
 .navbar-default .navbar-nav > li > a {
-  color: #9197a3;
+  color: white;
   background-color: transparent;
   border-bottom: transparent;
   border-bottom-style: solid;

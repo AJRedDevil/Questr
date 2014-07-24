@@ -14,7 +14,7 @@
 		<div class="blurred-image"></div>
 			
 			<div class="container masthead">
-				<br><br><br><br><br><br><br><br><br>
+				<br><br><br><br><br><br><br><br><br><br><br>
 				<div class="row clearfix">
 					<div class="col-md-12 column">
 						
@@ -30,10 +30,16 @@
 				
 						<form class="form-horizontal" role="form" action="subscribe.php" id="subscribeForm" method="POST">
 							<div class="form-group">
-								<form action="/beta/join" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}</form>
-								<input class="form-control input-lg" name="email" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required">
-								<button type="submit" class="btn btn-embossed btn-info btn-hg">Notify me</button>
+							<div class="col-md-6 column no-padding">
+								<form action="/beta/join" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline no-margin" target="_top" role="form" novalidate>{% csrf_token %}</form>
+								<input class="form-control input-lg no-margin" name="email" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required">
 						<span id="result" class="alertMsg"></span>
+							</div>
+							<div class="col-md-6 column no-padding">
+								<button type="submit" class="btn btn-embossed btn-warning btn-hg no-margin">Notify me</button>
+							</div>
+						
+						
 							</div><!--./form-group -->		
 						</form>
 				
