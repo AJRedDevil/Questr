@@ -197,12 +197,6 @@ footer small.title {
 }
 
 
-
-
-
-
-
- 
 hr {
 	display: block;
 	height: 1px;
@@ -307,6 +301,7 @@ hr {
 
 .panel-default .panel-content, .panel-default panel-body {
 	background: white;
+	border: none;
 }
 
 .panel-default .panel-footer {
