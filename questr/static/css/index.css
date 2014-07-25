@@ -15,10 +15,10 @@ strong,b{
 h1{font-size:50px;line-height:60px;margin:25px 0;font-weight: 100;}
 h2{font-size:40px;font-weight:600;margin:15px 0;font-weight: 100;}
 h3{font-size:20px;margin:10px 0;font-weight:400;font-weight: 100;}
-h4{font-size:20px;margin:10px 0;font-weight:400;}
+h4{font-size:20px;margin:10px 0;font-weight:400;color: #656565;}
 h5{font-size:28px;font-weight:400;margin:15px 0;color:#384047;}
 h6{font-size:16px;font-weight:400;margin:10px 0;color:#384047;}
-p{font-size: 16px;font-weight: 100;margin: 10px 0;}
+p{font-size: 16px;font-weight: 100;margin: 7px 0;color: #666;}
 
 .preloader{
 	background-color:#FFFFFF;
@@ -92,8 +92,21 @@ p{font-size: 16px;font-weight: 100;margin: 10px 0;}
 .highlight{background:#f4f4f4;margin-top:40px;}
 	
 	
+/*========== MODULE   ==============*/
+.section {
+	margin-top: 50px;
+	padding: 50px 0px;
+	
+}
+
+.grey {
+	background: #f9f9f9;
+}
 	
 	
+	
+	
+
 /*========== 1.   ==============*/	
 
 .masthead {
@@ -203,35 +216,6 @@ to {
 	padding: 45px 0;
 	text-align:center;
 }
-.btn-large {
-	font-size:18px;
-	padding:20px 50px;
-	margin:5px 10px;
-}
-.btn-success {
-	background-color: #2ecc71;
-	background-image:none;
-	border: 0;
-	-webkit-box-shadow: 0 3px 0 rgba(2, 154, 67, 1);
-	box-shadow: 0 3px 0 rgba(2, 154, 67, 1);
-	line-height: 1.8;
-}
-.btn-success:hover, .btn-success:focus, .btn-success:active {
-	background-color: #29c36a;
-	color:#FFF;
-	border: 0;
-	-webkit-box-shadow: 0 3px 0 rgba(2, 139, 61, 1);
-	box-shadow: 0 3px 0 rgba(2, 139, 61, 1);
-}
-.btn-primary {
-	background-color: #2db6d8;
-	background-image:none;
-	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-}
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-	background-color: #209ab8!important;
-	color:#FFF!important;
-}
 .subscribe {
 	padding: 45px 0;
 }
@@ -246,14 +230,13 @@ to {
 
 .section-title {
 	text-align:center;
-	margin-top:60px;
 	margin-bottom:30px;
 }
 .section-title h2 {
 	color:#384047;
 }
 .section-title h4 {
-	color:#94a3a8;
+	color:#8a8a8a;
 }
 .heroimg img, .clientlogo img {
 	max-width:100%;
@@ -267,9 +250,7 @@ to {
 	border:0;
 	text-align:center;
 }
-.thumbnail .caption p {
-	color: #94a3a8;
-}
+
 /*Hover Animation*/
 
 .thumbnail img {

@@ -2243,16 +2243,16 @@ select[multiple].navbar-form .btn {
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
   color: white;
-  text-shadow: 0px 1px 2px rgba(0,0,0,0.9);
-  background-color: rgba(255,255,255,0.62);
+  text-shadow: 0px 1px 2px rgba(0,0,0,0.7);
+  background-color: rgba(255,255,255,0.72);
   
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
 	color: white;
-  text-shadow: 0px 1px 2px rgba(0,0,0,0.9);
-  background-color: rgba(255,255,255,0.62);
+  text-shadow: 0px 1px 2px rgba(0,0,0,0.7);
+  background-color: rgba(255,255,255,0.72);
 }
 
 
