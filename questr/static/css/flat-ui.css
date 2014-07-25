@@ -2228,7 +2228,7 @@ select[multiple].navbar-form .btn {
   color: white;
   text-shadow: 0px 1px 2px rgba(0,0,0,0.1);
   
-  background: rgba(243,243,243,0.21);
+  background: rgba(255,255,255,0.18);
   border-radius: 10%;
   
   border: none;
@@ -2244,7 +2244,7 @@ select[multiple].navbar-form .btn {
 .navbar-default .navbar-nav > li > a:focus {
   color: white;
   text-shadow: 0px 1px 2px rgba(0,0,0,0.7);
-  background-color: rgba(255,255,255,0.72);
+  background-color: rgba(255,255,255,0.50);
   
 }
 .navbar-default .navbar-nav > .active > a,
@@ -2252,7 +2252,7 @@ select[multiple].navbar-form .btn {
 .navbar-default .navbar-nav > .active > a:focus {
 	color: white;
   text-shadow: 0px 1px 2px rgba(0,0,0,0.7);
-  background-color: rgba(255,255,255,0.72);
+  background-color: rgba(255,255,255,0.50);
 }
 
 
