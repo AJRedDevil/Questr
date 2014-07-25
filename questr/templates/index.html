@@ -7,13 +7,12 @@
 
 {% block content %}
 <div class="wrapper">
-    
 	<div class="container-fluid">
 	
 		<div class="img-src"></div>
 		<div class="blurred-image"></div>
 			
-			<div class="container masthead">
+			<div class="container masthead fadeIn fadeIn-1s">
 				<br><br><br><br><br><br><br><br><br><br><br>
 				<div class="row clearfix">
 					<div class="col-md-12 column">
@@ -346,6 +345,10 @@
 		    $(".blurred-image").css("opacity", opacityVal);
 	    });
 	});
+	
+$( document.masthead ).click(function() {
+  $( "div:hidden:first" ).fadeIn( "slow" );
+});
 </script>
     
 {% endblock scripts %}
