@@ -28,18 +28,7 @@
                 <input id="title" name="title" type="text" class="form-control" value="{{questdetails.title}}"></input>
               </div>
             </div>
-            
-          
-    
-    
-            <!-- Offer input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="name">You're offering</label>
-              <div class="col-md-8">
-                <input id="reward" name="reward" type="text" class="form-control" value="{{questdetails.reward}}">
-              </div>
-            </div>
-          
+                      
  
             <!-- Location input-->
             <div class="form-group">
@@ -147,33 +136,11 @@
                 <textarea class="form-control" id="description" name="description" rows="5">{{questdetails.description}}</textarea>
               </div>
             </div>
-            
-          
-               <!-- Image Uploader -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="message">Image of the item</label>
-              <div class="col-md-8">
-              	<img style="width:260px; height:auto;" src="{{MEDIA_URL}}{{questdetails.item_images}}">
-              
-                <form class="navbar-form navbar-right">
-					<span class="form-group">			        
-			            <div class="input-group">
-			                <input type="text" class="form-control" name="item_images" value="{{questdetails.item_images}}" />
-			                <span class="input-group-btn">
-			                	<button class="btn btn-danger" type="button">
-			                    	Upload   
-			                    </button>
-			                </span>
-			            </div>
-					</span>                           
-			    </form>
-		    </div>
-		    </div>
-            
+
             <!-- Form actions -->
             <div class="form-group">
               <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-info">Save</button>
+                <button type="submit" class="btn btn-info">Confirm</button>
               </div>
             </div>
           </fieldset>

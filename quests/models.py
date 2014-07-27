@@ -108,7 +108,8 @@ class Quests(models.Model):
         #Overriding
     def save(self, *args, **kwargs):
         # get a delivery code with 3 letters from the first and 2 from the last
-        self.delivery_code = self.get_delivery_code()[:3]+self.get_delivery_code()[-2:]
+        if not self.delivery_code:
+            self.delivery_code = self.get_delivery_code()[:3]+self.get_delivery_code()[-2:]
         super(Quests, self).save(*args, **kwargs)
         self.create_item_images_normal()
 

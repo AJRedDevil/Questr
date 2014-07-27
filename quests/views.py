@@ -7,7 +7,7 @@ from libs import email_notifier, geomaps, pricing
 
 from .contrib import quest_handler, mailing
 from users.contrib.user_handler import isShipper, getShippers, getQuestrDetails
-from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm
+from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm, QuestConfirmChangeForm
 from .models import Quests
 
 import logging
@@ -52,24 +52,103 @@ def editquest(request, questname):
         return render(request,'404.html')
 
     if request.method=="POST":
-        if questdetails.questrs.id == request.user.id:
+        # if questdetails.questrs.id == request.user.id:
+        #     instance=get_object_or_404(Quests, id=questname)
+        #     user_form = QuestChangeForm(data=request.POST, instance=instance)
+        #     # logging.warn(user_form.errors)
+        #     # logging.warn(user_form.is_valid())
+        #     if user_form.is_valid():
+        #         quest_data = user_form.save(commit=False)
+        #         quest_data.save()
+        #         message = "Your quest has been updated!"
+        #         return redirect('viewquest', questname=questname)
+        from users.contrib.user_handler import getShipper
+        pagetype="loggedin"
+        if questdetails.questrs.id == user.id:
             instance=get_object_or_404(Quests, id=questname)
             user_form = QuestChangeForm(data=request.POST, instance=instance)
             # logging.warn(user_form.errors)
             # logging.warn(user_form.is_valid())
+            # logging.warn(user_form)
             if user_form.is_valid():
-                quest_data = user_form.save(commit=False)
-                quest_data.save()
-                message = "Your quest has been updated!"
-                return redirect('viewquest', questname=questname)
+                title = user_form.cleaned_data['title']
+                description = user_form.cleaned_data['description']
+                srccity = user_form.cleaned_data['srccity']
+                srcaddress = user_form.cleaned_data['srcaddress']
+                dstcity = user_form.cleaned_data['dstcity']
+                dstaddress = user_form.cleaned_data['dstaddress']
+                size = user_form.cleaned_data['size']
+                # For distance
+                #the distance and price hsa to be set up into a temp database, also the 
+                #image file needs to be on a temp folder for processign to reduce API calls
+                maps = geomaps.GMaps()
+                origin = srcaddress+', '+srccity
+                destination = dstaddress+', '+dstcity
+                maps.set_geo_args(dict(origin=origin, destination=destination))
+                distance = maps.get_total_distance()
+                # For price
+                price = pricing.WebPricing()
+                price.set_factors(distance, mode=size)
+                reward = price.get_price()
+                pagetitle = "Confirm your Quest"
+                return render(request, 'confirmquestedit.html', locals())  
+        pagetitle="Edit - " + questdetails.title
+        return render(request, 'editquest.html', locals())  
 
     # Check if the owner and the user are the same
-    if questdetails.questrs.id == request.user.id:
+    if questdetails.questrs.id == user.id:
         pagetitle="Edit - " + questdetails.title
         return render(request, 'editquest.html', locals())
 
     raise Http404
     return render(request,'404.html')
+
+@login_required
+def confirmeditquest(request, questname):
+    pagetype="loggedin"
+    user = request.user
+    questname=questname
+    try:
+        questdetails = Quests.objects.get(id=questname)
+    except Quests.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
+
+    if request.method=="POST":
+        # if questdetails.questrs.id == request.user.id:
+        #     instance=get_object_or_404(Quests, id=questname)
+        #     user_form = QuestChangeForm(data=request.POST, instance=instance)
+        #     # logging.warn(user_form.errors)
+        #     # logging.warn(user_form.is_valid())
+        #     if user_form.is_valid():
+        #         quest_data = user_form.save(commit=False)
+        #         quest_data.save()
+        #         message = "Your quest has been updated!"
+        #         return redirect('viewquest', questname=questname)
+        from users.contrib.user_handler import getShipper
+        pagetype="loggedin"
+        if questdetails.questrs.id == user.id:
+            instance=get_object_or_404(Quests, id=questname)
+            user_form = QuestConfirmChangeForm(data=request.POST, instance=instance)
+            # logging.warn(user_form.errors)
+            # logging.warn(user_form.is_valid())
+            # logging.warn(user_form)
+            if user_form.is_valid():
+                quest_data = user_form.save(commit=False)
+                quest_data.save()
+                pagetitle = "Confirm your Quest"
+                return redirect(viewquest, questname=questdetails.id)
+        pagetitle="Edit - " + questdetails.title
+        return render(request, 'editquest.html', locals())  
+
+    # Check if the owner and the user are the same
+    if questdetails.questrs.id == user.id:
+        pagetitle="Edit - " + questdetails.title
+        return render(request, 'confirmeditquest.html', locals())
+
+    raise Http404
+    return render(request,'404.html')
+
 
 @login_required
 def newquest(request):
