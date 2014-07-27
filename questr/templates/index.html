@@ -2,72 +2,57 @@
 {% load staticfiles %}
 {% block localhead %}
     <link href={% static "css/index.css" %} rel="stylesheet"> 
-
-	<script src={% static "js/pace.js" %}></script>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
 {% endblock localhead %}
 
 {% block content %}
-<!--
-<div class="preloader"></div>
--->
+<div class="wrapper">
+	<div class="container-fluid">
 	
-    <! -- ******************** MASTHEAD div ******************** -->
-	<div class="masthead">
-	
-		<br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br>
-
-		<h2>Canada's first crowdshipping platform.</h2>
-		
-		<h3 style="color:white; font-weight: bolder;">Cheaper, faster, 24/7 shipments now available in Greater Toronto Area.</h3>
-
-			{% comment %}
-				<div class="col-md-4 col-md-offset-4 subscribe">
-					<form class="form-horizontal" role="form" action="subscribe.php" id="subscribeForm" method="POST">
-						<div class="form-group">
-							<div class="col-md-7 col-sm-6 col-sm-offset-1 column">
-								<form action="/beta/join" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
-									
-									<div class="form-group">
-										<input class="form-control input-lg" name="email" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required">
-									</div><! --./form-group -->
-								</form>
+		<div class="img-src"></div>
+		<div class="blurred-image"></div>
+			
+			<div class="container masthead fadeIn fadeIn-1s">
+				<br><br><br><br><br><br><br><br><br><br><br>
+				<div class="row clearfix">
+					<div class="col-md-12 column">
+						
+						<h2>Canada's first crowdshipping platform.</h2>
+				
+						<h3>Cheaper, faster, 24/7 shipments now available in Greater Toronto Area.</h3>
+				
+					</div><!--./column -->
+				</div><!--./row -->
+				
+				<div class="row clearfix">
+					<div class="col-md-4 col-md-offset-4 column subscribe">
+				
+						<form class="form-horizontal" role="form" action="subscribe.php" id="subscribeForm" method="POST">
+							<div class="form-group">
+							<div class="col-md-6 column no-padding">
+								<form action="/beta/join" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline no-margin" target="_top" role="form" novalidate>{% csrf_token %}</form>
+								<input class="form-control input-lg no-margin" name="email" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required">
+						<span id="result" class="alertMsg"></span>
 							</div>
-				        </div>
-				    </form>
-				 </div><! --./subscribe -->
-				<div class="col-md-5 col-sm-4 column">
-					<button type="submit" class="btn btn-embossed btn-info btn-hg">Notify me</button>
-				</div><! --./column -->
+							<div class="col-md-6 column no-padding">
+								<button type="submit" class="btn btn-embossed btn-warning btn-hg no-margin">Notify me</button>
+							</div>
+						
+						
+							</div><!--./form-group -->		
+						</form>
+				
+					</div><!-- ./column -->
+				</div><!-- ./row -->
+			</div><! -- ./container -->
+	</div><! -- ./container-fluid -->
 
-					<span id="result" class="alertMsg"></span> </div>
-				</div>
-			{% endcomment %}
 
-	</div><! -- ./masthead -->
-
-
-
-	<div id="top-blurred" class="masthead blurred-image">
-
-		<br><br><br><br><br><br><br>
-		<br><br><br><br><br><br><br>
-
-		<h2>Canada's first crowdshipping platform.</h2>
-		<h3 style="color:white; font-weight: bolder;">Cheaper, faster, 24/7 shipments now available in Greater Toronto Area.</h3>
-
-	</div><! -- ./masthead -->
  
-
     <! -- ******************** FEATURES ******************** -->	
-	<div class="page">	
-		<div class="row clearfix">
-			<div class="col-md-10 col-md-offset-1 column" style="text-align:center;">
-				<img class="pic" src={% static "img/logo-bw.png" %}>
-				<img class="pic-show" src={% static "img/logo.png" %}>
+	<div class="container layout-foreground">	
+		<div class="row clearfix section">
+			<div class="col-md-10 col-md-offset-1 column">
 				<div class="section-title">
-		
 					<h2>What is Questr?</h2>
 					<h4>
 						Questr is a crowdshipping platform that provides cheap, fast shipments within GTA.
@@ -75,11 +60,14 @@
 						Unlike other courier companies, Questr's shippers deliver packages directly to the destination without the hassle of going to local facilities.
 					</h4>
 				</div><!-- ./section-title -->
+				
 			</div><!-- ./column -->
 		</div><!-- ./row -->
 		
 		<div class="row clearfix">
 			<div class="col-md-10 col-md-offset-1 column">
+			
+			
 				<div class="col-md-4">
 					<div class="thumbnail"> 
 						<div class="caption">
@@ -89,7 +77,6 @@
 						</div>
 					</div><! --/thumbnail -->
 				</div><! --/.column -->
-
 				<div class="col-md-4">
 					<div class="thumbnail"> 
 						<div class="caption">
@@ -99,7 +86,6 @@
 						</div>
 					</div><! --/thumbnail -->
 				</div><! --/.column -->
-
 				<div class="col-md-4">
 					<div class="thumbnail"> 
 						<div class="caption">
@@ -116,7 +102,7 @@
  
 	
 		<! -- ******************** PRICING LIST ******************** -->	  
-		<div class="row clearfix">
+		<div class="row clearfix section grey">
 			<div class="col-md-12 column">
 				<div class="section-title">
 					<h2>Simplistic size options</h2>
@@ -154,17 +140,19 @@
 						<div class="billing" style="font-weight:bolder;">For moving and IKEA furniture hunters</div>
 					</div><! --/pricing -->
 				</div><!-- ./column -->
-
-				<div class="col-md-10 col-md-offset-1 column">
-					<div class="div-title">
-						<p>
-							* For shipments less than 2 kilometers in distance, no per km fees will be charged.
-							<br>
-							** Shipping rates may change at night and during weekends.
-						</p>
-					</div><!-- ./div-title -->
-				</div><!-- ./column -->
 			</div><!-- ./row -->
+
+			<div class="col-md-10 col-md-offset-1 column">
+				<div class="div-title">
+					<p>
+						* For shipments less than 2 kilometers in distance, no per km fees will be charged.
+						<br>
+						** Shipping rates may change at night and during weekends.
+					</p>
+				</div><!-- ./div-title -->
+			</div><!-- ./column -->
+		</div><!-- ./row -->
+	
 				
 			<!--
 			<div class="col-md-10 col-md-offset-1 column" >
@@ -200,110 +188,103 @@
 				</div>
 
 			</div><!-- ./column -->		
-		</div><!-- ./row -->
+
 	
 
-	    <! -- ******************** HOW QUESTR WORKS div ******************** -->	 
-		<div class="section-title">
-			<h2>Streamlined experience</h2>
-			<h4>Shipping things has never been so easy like this.</h4>
-		</div>
-		<div class="row breath">
+	    <! -- ******************** HOW QUESTR WORKS div ******************** -->
+		<div class="row section">
+			<div class="col-md-12 column">	 
+				<div class="section-title">
+					<h2>Streamlined experience</h2>
+					<h4>Shipping things has never been so easy like this.</h4>
+				</div>
+			</div><!-- ./column -->
+			
+			
             <div class="col-md-8 col-md-offset-2 column">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-			        <div style="text-align:center;">
-			        	<i class="glyphicon glyphicon-edit" style="font-size: 70px; color:#f1a148;"></i>
-				        <h4>1. Request & Pick</h4>
-			        	<h3>3 minutes</h3>
-			        </div><!-- he wrap -->
+			    	<i class="glyphicon glyphicon-edit" style="font-size: 70px; color:#f1a148;"></i>	
+			    	<h4>1. Request & Pick</h4>
+				    <h3>3 minutes</h3>
 			        <p>
 			            Tell us where to pick up & drop off, and the size of the package. Shippers around you will be notified and apply for the shipment, choose one of your own liking.  After choosing a shipper, a deposit will be charged.
 			        </p>
-                </div>
+                </div><!-- ./column -->
+               
                 <div class="col-lg-6 col-md-6 col-sm-6">
-			        <div style="text-align:center;">
-			        	<i class="glyphicon glyphicon-upload" style="font-size: 70px; color:#00b69d;"></i>
-			        	<h4>2. Pickup</h4>
-			        	<h3>5 ~ 10 minutes</h3>
-			        </div><!-- he wrap -->
-			        <p>
-			            The chosen shipper will call and confirm the details, then they'll come and pick up the package and start driving right away.
-			        </p>
-                </div>
-            </div>	
+		        	<i class="glyphicon glyphicon-upload" style="font-size: 70px; color:#00b69d;"></i>
+		        	<h4>2. Pickup</h4>
+		        	<h3>5 ~ 10 minutes</h3>
+			        <p>The chosen shipper will call and confirm the details, then they'll come and pick up the package and start driving right away.</p>
+                </div><!-- ./column -->  
+		</div><!-- ./row -->
 
-
+		<div class="row clearix">
             <div class="col-md-8 col-md-offset-2 column">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-     		        <div style="text-align:center;">
-			        	<i class="glyphicon glyphicon-download" style="font-size: 70px; color:#ff7a7b;"></i>
-				        <h4>3. Dropoff</h4>
-				        <h3>15 ~ 90 minutes</h3>
-			        </div><!-- he wrap -->
+		        	<i class="glyphicon glyphicon-download" style="font-size: 70px; color:#ff7a7b;"></i>
+			        <h4>3. Dropoff</h4>
+			        <h3>15 ~ 90 minutes</h3>
 			        <p>
 			            The shipper will drive the package undistractably and directly to the dropoff location.                    
 			            Nothing will stop them from shipping your package.
 			        </p>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-			        <div style="text-align:center;">
-				        <i class="glyphicon glyphicon-thumbs-up" style="font-size: 70px; color:#6d5b47;"></i>
-				        <h4>4. Finish & Rate</h4>
-				        <h3>30 seconds</h3>
-			        </div><!-- he wrap -->
+                </div><!-- ./column -->
+                <div class="col-lg-6 col-md-6 col-sm-6"> 
+			        <i class="glyphicon glyphicon-thumbs-up" style="font-size: 70px; color:#6d5b47;"></i>
+			        <h4>4. Finish & Rate</h4>
+			        <h3>30 seconds</h3>
+			        
 			        <p>
 			            Opinions matter. If you think your shipper was a good one, let them and other people know since this is crucial for a community. After submitting your review, the deposit will be released to the shipper.
 			        </p>
                 </div>
-            </div>
-
-  		</div><! --/div -->	
+            </div><!-- ./column -->
+  		</div><! --/row -->	
 
 
 	    <! -- ******************** FAQ div ******************** -->	 
-		<div class="section-title">
-			<h2>Hmm...</h2>
-			<h4>A few more details</h4>
-		</div>
+		
 	
-		<div class="row breath">
+		<div class="row section grey">
+			<div class="col-md-12 column">
+				<div class="section-title">
+					<h2>FAQ</h2>
+					<h4>We get this a lot.</h4>
+				</div><!-- ./section-title -->
+			</div><!-- ./column -->
+		
             <div class="col-md-8 col-md-offset-2 column">
                 <div class="col-lg-4 col-md-4 col-sm-4">
-                	<div style="text-align:center;">
-                   		<i class="fa fa-shield" style="font-size: 70px; color:#e37cb4;"></i>
-               			<h4>Is Questr as safe as other shipping companies?</h4>
-                	</div>
-                    <p>
-                        Questr utilizes a multitude of security measures, including credit card binding, photo ID verification, and a review system, to make sure that each shipment is just as safe and even more trackable and traceable. Oh, you can also choose a shipper of your own liking. 
-                    </p>
-                </div>
+	                <i class="fa fa-shield" style="font-size: 70px; color:#e37cb4;"></i>
+	                <h4>Is Questr as safe as other shipping companies?</h4>
+	                
+	                <p>Questr utilizes a multitude of security measures, including credit card binding, photo ID verification, and a review system, to make sure that each shipment is just as safe and even more trackable and traceable. Oh, you can also choose a shipper of your own liking. 
+	                </p>
+                </div><!-- ./column -->
                 <div class="col-lg-4 col-md-4 col-sm-4">
-                	<div style="text-align:center;">
-                    	<i class="fa fa-heart" style="font-size: 70px; color:#fe3d36;"></i>
-                    	<h4>How much does Questr value ethics and safety?</h4>
-                    </div>
-                    <p>
-                        Questr has a zero tolerance policy towards frauds and other unethical and illegal activities. If detected, a user, along their associated cell phone number, email address, social network account, credit card, and photo id, will be immediately and permanently banned and put on our blacklist.
-                    </p>
-                </div>
+		        	<i class="fa fa-heart" style="font-size: 70px; color:#fe3d36;"></i>
+		        	<h4>How much does Questr value ethics and safety?</h4>
+		        	
+		        	<p>Questr has a zero tolerance policy towards frauds and other unethical and illegal activities. If detected, a user, along their associated cell phone number, email address, social network account, credit card, and photo id, will be immediately and permanently banned and put on our blacklist.
+		            </p>
+                </div><!-- ./column -->
                 <div class="col-lg-4 col-md-4 col-sm-4">
-                	<div style="text-align:center;">
-                    	<i class="fa fa-legal" style="font-size: 70px; color:#f1a148;"></i>
-                    	<h4>How can I make sure whether a shipper is credible?</h4>
-                    </div>
-                    <p>
-                        Besides what Questr does automatically for you, you can also go to a shipper's profile and go over the reviews that have been provided by other users.
-                    </p>
-                </div>
-            </div>	
-		</div><! --/div -->	
-
-	    <! -- ******************** MENTIONS div ******************** -->	 
-		<div class="section-title">
-			<h2>We're mentioned in</h2>
-		</div>
+					<i class="fa fa-legal" style="font-size: 70px; color:#f1a148;"></i>
+					<h4>How can I make sure whether a shipper is credible?</h4>
+					
+					<p>Besides what Questr does automatically for you, you can also go to a shipper's profile and go over the reviews that have been provided by other users.</p>
+                </div><!-- ./column -->	
+            </div><!-- ./column -->
+		</div><! --/row -->	
 	
-		<div class="row breath">
+	    <! -- ******************** MENTIONS ******************** -->	
+	    <div class="row clearfix section">
+			<div class="col-md-12 column"> 
+				<div class="section-title">
+					<h2>We're mentioned in</h2>
+				</div><!-- ./section-title -->
+			</div><!-- ./column -->
 			<div class="col-md-8 col-md-offset-2 column">
 					<div class="col-md-2 col-md-offset-5 column"> 
 						<center>
@@ -311,78 +292,62 @@
 								<img src={% static "img/mentioned/skift.png" %} class="img-responsive">
 							</a>
 						</center>	
-					</div>
-			</div>
-		</div><! --/div -->	
-
-		
+					</div><!-- ./column -->
+			</div><!-- ./column -->
+	    </div><!-- ./row -->
+			
+			
+			
 	<!-- *****************************************************************************************************************
-	MIDDLE CONTENT
+	Say hi to us
 	***************************************************************************************************************** -->
-		<div class="row clearfix">
+		<div class="row clearfix section grey">
 			<div class="col-md-10 col-md-offset-1 column">
-				<div class="col-md-4 col-md-offset-4 column">
-					<h4>Say hi to us</h4>
-					<div class="hline"></div>
-					<p></p>
-					<form action="/beta/contactus" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate style="*background-color:blue; text-align:center;">{% csrf_token %}
-						<div class="form-group" style="*background-color:green; width:100%;">
-							<input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Name" style="*background-color:yellow; width:100%;">
-							<p></p>
-							<input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-							<p></p>
-							<textarea name="message" class="form-control" rows="3" placeholder="Message" style="min-height:200px;"></textarea>
-						</div>
-						<p></p>
-						<button type="submit" class="btn btn-embossed btn-default" style="background-color:#ff0042;">Send</button>
-					</form>
-				</div><! -- ./column -->
+				<div class="section-title">
+					<h2>Say hi</h2>
+				</div><!-- ./section-title -->
+			</div><!-- ./column -->
+			
+			<div class="col-md-4 col-md-offset-4 column">
+				<form action="/beta/contactus" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
+					<div class="form-group" style="*background-color:green; width:100%;">
+						<input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Name" style="*background-color:yellow; width:100%;">
+						<input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+						<textarea name="message" class="form-control" rows="3" placeholder="Message" style="min-height:200px;"></textarea>
+					</div><!-- ./form-group -->
+					<button type="submit" class="btn btn-embossed btn-default" style="background-color:#ff0042;">Send</button>
+				</form>	
 			</div><! -- ./column -->
 		</div><! -- ./row -->
 		
-	</div>
-
-
-{% endblock content %}
+	</div><! -- ./container-fluid -->
 	
+{% endblock content %}
+</div><! -- ./wrapper -->
 
 {% block scripts %}
-<script src={% static "js/jquery.js" %}></script>
-<script src={% static "js/bootstrap.js" %}></script>
-<script src={% static "js/easing.js" %}></script>
-<!-- <script src={% static "js/index.js" %}></script> -->
 
- 
+<!--<script src={% static "js/index.js" %}></script> -->
 <script>
- $(function() {
-    $('.scrollto, .gototop').bind('click',function(event){
-		 var $anchor = $(this);
-		 $('html, body').stop().animate({
-         scrollTop: $($anchor.attr('href')).offset().top
-          }, 1500,'easeInOutExpo');
-     event.preventDefault();
-      });
-  });
+	$(document).ready(function() {
+		
+	    $(window).scroll(function(e) {
+	        var img = $('.img-src'),
+	        	s   = $(window).scrollTop(),
+	        	f   = $(document).scrollTop(),
+	            d   = $(document).height(),
+	            c   = $(window).height(),
+	            opacityVal = (s / 150);
 
-$(document).ready(function() {
-    $(window).scroll(function(e) {
-        var s = $(window).scrollTop(),
-        	f = $(document).scrollTop(),
-            d = $(document).height(),
-            c = $(window).height(),
-            opacityVal = (f / 160);
- 
-        $('.blurred-image').css('opacity', opacityVal);
-        $('.pic-show').css('opacity', opacityVal/1.5);
-        $('#top h2').css('margin-top', f/15);  
-        $('#top h3').css('margin-top', f/8);     
-        $('#top-blurred h2').css('margin-top', f/15);
-        $('#top-blurred h3').css('margin-top', f/8);     
-       
-    });
+	        //img.css('-webkit-filter', "blur(" + Math.min(s/20,40) + "px)");
+
+		    $(".blurred-image").css("opacity", opacityVal);
+	    });
+	});
+	
+$( document.masthead ).click(function() {
+  $( "div:hidden:first" ).fadeIn( "slow" );
 });
-
-
 </script>
     
 {% endblock scripts %}

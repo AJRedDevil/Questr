@@ -1,38 +1,31 @@
-html {
-	background: none repeat scroll 0 0 white;
-	overflow-x: visible !important; 
-}
+@charset "utf-8";
 
 body{
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	background:white;
+	background:#FFF;
 	font-weight:300;
-	height:100%;
-	width: 100%;
-	margin:0;
-	padding:0;
-	color:#94a3a8;
+	color:rgba(0,0,0,0.8);
 	}
 
+	
 strong,b{
 	font-weight:600;
 	}
 
-h1{font-size:50px;font-weight:300;line-height:60px;margin:25px 0;}
-h2{font-size:40px;font-weight:300;margin:15px 0;}
-h3{font-size:20px;font-weight:500;margin:10px 0;color:grey;   }
-h4{font-size:20px;font-weight:500;margin:10px 0;color:#384047;}
-h5{font-size:28px;font-weight:500;margin:15px 0;color:#384047;}
+h1{font-size:50px;line-height:60px;margin:25px 0;font-weight: 100;}
+h2{font-size:40px;font-weight:600;margin:15px 0;font-weight: 100;}
+h3{font-size:20px;margin:10px 0;font-weight:400;font-weight: 100;}
+h4{font-size:20px;margin:10px 0;font-weight:400;color: #656565;}
+h5{font-size:28px;font-weight:400;margin:15px 0;color:#384047;}
 h6{font-size:16px;font-weight:400;margin:10px 0;color:#384047;}
-p {font-size:17px;font-weight:300;margin:10px 0;color:#646464;}
+p{font-size: 16px;font-weight: 100;margin: 7px 0;color: #666;}
 
-/**************************** Loading screen ************************************/
 .preloader{
 	background-color:#FFFFFF;
 	position:fixed;
 	width:100%;
 	height:100%;
-	z-index:9999999;
+	z-index:99999900000009;
 	}
 
 .pace{
@@ -79,8 +72,6 @@ p {font-size:17px;font-weight:300;margin:10px 0;color:#646464;}
 	}
 	
 .pace.pace-inactive{display:none;}
-/**************************** ./Loading screen ************************************/
-
 
 .btn,.btn-lg,.input-lg{border-radius:3px;}
 
@@ -92,101 +83,126 @@ p {font-size:17px;font-weight:300;margin:10px 0;color:#646464;}
 	
 .input-lg{height:55px;}
 
-.btn-lg,.btn-group-lg>.btn{
-	padding:10px 28px;
-	height:52px;
-	}
 
 .highlight{background:#f4f4f4;margin-top:40px;}
-
-
-
-/**************************** Masthead ************************************/
-.masthead{
-	height: 100%;
-    width: 100%;
-	position: absolute;
-    position:fixed;
-	background-image: url('../img/cross.jpg');
-	background-repeat:no-repeat;
-	background-position:center center;
-	background-attachment: fixed;
-	-webkit-background-size:cover;
-	-moz-background-size:cover;
-	-o-background-size:cover;
-	background-size:cover;
-	text-align: center;
+	
+	
+/*========== MODULE   ==============*/
+.section {
+	margin-top: 50px;
+	padding: 50px 0px;
+	
 }
 
-.blurred-image{
-    background-image:url('../img/cross-blurred.jpg');
-    opacity:0;
-    height: 100%;
-    width: 100% !important;
+.grey {
+	background: #f9f9f9;
 }
 	
-.masthead h2, h6 {
+	
+	
+.navbar {
+	background: transparent;
+	font-size: 12px;
+	min-height: 13px;
+	margin-bottom: 0px;
+	padding: 0;
+	z-index: 999;
+	border: none;
+	margin-top: 20px;
+}
+
+a.navbar-brand {
+  font-size: 28px;
+  line-height: 1.042;
+  font-weight: 700;
+   z-index: 999;
+   color: white;
+    margin-left: 50px;
+    padding: 0;
+}
+	
+.navbar-default .navbar-nav > li > a {
+  color: white;
+  text-shadow: 0px 1px 2px rgba(0,0,0,0.1);
+  
+  background: rgba(255,255,255,0.18);
+  border-radius: 10%;
+  
+  border: none;
+  padding-top: 7px;
+  padding-bottom: 9px;
+  padding-left: 10px;
+  
+  
+  margin-right: 10px;
+  font-weight: 200;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: white;
+  text-shadow: 0px 1px 2px rgba(0,0,0,0.7);
+  background-color: rgba(255,255,255,0.50);
+  
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
 	color: white;
-	margin-top: 0px;
+  text-shadow: 0px 1px 2px rgba(0,0,0,0.7);
+  background-color: rgba(255,255,255,0.50);
 }	
 
-.masthead h2, h3 {
-	font-family: "HelveticaNeue-Light";
-}	
+	
 
-.masthead .container h2 {
+/*========== 1.   ==============*/	
+
+.masthead {
+	color: white;	
+	text-align: center;
 	text-shadow: 0px 1px 2px rgba(0,0,0,0.5);
-}	 
+	-webkit-animation-delay: 0.5s;
 
-.masthead .container h2 {
-	text-shadow: 0px 1px 2px rgba(0,0,0,0.35);
-}
-/**************************** ./Masthead ************************************/
-
-
-.pic {
-    height: 120px;
-    width: 120px;
-    border-radius: 50%;
-    margin-top: -50px;
-    border: 5px solid #fff;
-    background: url("../img/logo-bw.png" );
-	-webkit-background-size:cover;
-	-moz-background-size:cover;
-	-o-background-size:cover;
-	background-size:cover;
-	position: absolute;
 }
 
-.pic-show {
+.img-src { 
+    position: absolute;
+    height: 800px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	background: url("../img/cross.jpg") no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.blurred-image {
 	opacity: 0;
-	position: relative;
-    height: 120px;
-    width: 120px;
-    border-radius: 50%;
-    margin-top: -50px;
-    border: 5px solid #fff;
-    background: url("../img/logo-bw.png" );
-	-webkit-background-size:cover;
-	-moz-background-size:cover;
-	-o-background-size:cover;
-	background-size:cover;
-	-moz-transition:all 0.3s ease;
-	-webkit-transition:all 0.3s ease;
-	-ms-transition:all 0.3s ease;
-	-o-transition:all 0.3s ease;
-	transition:all 0.3s ease;
+	background: url("../img/cross-blurred.jpg") no-repeat center center fixed;     
+	position: absolute;
+    height: 800px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 
-/*
-.pic:hover {
-    background: url("../img/logo.png" );
-	-webkit-background-size:cover;
-	-moz-background-size:cover;
-	-o-background-size:cover;
-	background-size:cover;
+.layout-foreground {
+    background: white;
+    height: auto;
+    width: 100%;
+    position: absolute;
+    z-index: 5;
+    margin-top: 250px;
+    padding-bottom: 80px;
+    text-align: center;
 }
-*/
 
 .loading *{
 	-webkit-animation:none!important;
@@ -244,6 +260,11 @@ to {
 }
 }
 /*animation ends*/
+
+.logo {
+	padding: 45px 0;
+	text-align:center;
+}
 .subscribe {
 	padding: 45px 0;
 }
@@ -254,39 +275,31 @@ to {
 	padding: 5px 17px;
 }
 
-
-.page {
-	background: none repeat scroll 0 0 white;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    height: auto;
-
-    margin-top: 800px;
-    position: relative;
-    width: 100%;
-}
 /*========== 3. HERO IMAGE ==============*/
 
 .section-title {
 	text-align:center;
+	margin-bottom:30px;
 }
 .section-title h2 {
 	color:#384047;
 }
 .section-title h4 {
-	color:#94a3a8;
+	color:#8a8a8a;
 }
-
-
+.heroimg img, .clientlogo img {
+	max-width:100%;
+}
 /*========== 4. FEATURES ==============*/
 
-
+.features {
+	margin:25px 0;
+}
 .thumbnail {
 	border:0;
 	text-align:center;
 }
-.thumbnail .caption p {
-	color: #94a3a8;
-}
+
 /*Hover Animation*/
 
 .thumbnail img {
@@ -304,7 +317,7 @@ to {
 	transform:scale(1.05);
 	z-index:2;
 }
-/*========== 5. MENTIONS ==============*/
+/*========== 5. TESTIMONIALS ==============*/
 
 .testblock {
 	width:100%;
@@ -381,8 +394,7 @@ to {
 }
 .pricing .planname {
 	text-transform:uppercase;
-	font-weight:300;
-	font-size:20px;
+	font-weight:600;
 }
 .pricing .price {
 	font-size:52px;
@@ -392,8 +404,7 @@ to {
 .pricing .billing {
 	text-transform:uppercase;
 	color:#FFF;
-	font-size:14px;
-	font-weight: 300;
+	opacity:0.7;
 }
 .pricing .price .curr {
 	display:inline-block;
@@ -432,75 +443,10 @@ to {
 	z-index:2;
 }
 
+/*========== 7. FAQ ==============*/
 
-
-
-
-/*==========9. CUSTOM MEDIA QUERIES==============*/
-
-
-/*MEDIA QUERIES*/
-
-@media (max-width: 991px) {
- h1 {
-font-size: 35px;
-line-height: 50px;
-margin: 15px 0;
-}
- h2 {
-font-size: 35px;
-}
- .testimonials [class*="col-"]:not(:first-child) {
- margin-top: 40px;
-}
- .planpricing [class*="col-"]:not(:first-child) {
- margin-top: 30px;
-}
-
-}
- @media (max-width: 767px) {
- h1 {
-font-size: 30px;
-line-height: 40px;
-}
- h2 {
-font-size: 30px;
-line-height: 40px;
-}
- .subscribe [class*="col-"]:not(:first-child) {
- margin-top: 30px;
-}
-
- @media (max-width: 480px) {
-	 /*Media Queries for smaller devices*/
-	 .masthead {
-		 background-attachment: scroll;
-		 }
-	}
-
-
-/************** Features and Icons ***********/
-.cheapest, .fastest, .available{
-  font-size:60px;
-  font-weight:normal;
-  color:rgba(80,80,80,1);
-  -moz-transition:all 0.5s ease;
-  -webkit-transition:all 0.5s ease;
-  -ms-transition:all 0.5s ease;
-  -o-transition:all 0.5s ease;
-  transition:all 0.5s ease;
-}
-
-.cheapest:hover{
-	color: #48b97b;
-}
-
-.fastest:hover{
-	color: #fde13f;
-}
-
-.available:hover{
-	color: #3fadea;
+.faq p {
+	margin-bottom:25px;
 }
 
 
@@ -508,4 +454,60 @@ line-height: 40px;
 
 
 
+/* END OF BASE SITE STYLE
+---------------------------------------------------- */
 
+/* Pure CSS3 jQuery-Like fadeIn
+---------------------------------------------------- */
+.fadeIn {
+	/* CSS needed for animation
+	---------------------------------------------------- */
+	opacity:0;
+	-webkit-animation:fadeIn ease-in 1;
+	-moz-animation:fadeIn ease-in 1;
+	-o-animation:fadeIn ease-in 1;
+	animation:fadeIn ease-in 1;
+	-webkit-animation-fill-mode:forwards;
+	-moz-animation-fill-mode:forwards;
+	-o-animation-fill-mode:forwards;
+	animation-fill-mode:forwards;
+}
+
+/* Animation Times - Time for image to fade in
+---------------------------------------------------- */
+.fadeIn-1s {
+	-webkit-animation-duration:1s;
+	-moz-animation-duration:1s;
+	-o-animation-duration:1s;
+	animation-duration:1s;
+}
+
+.fadeIn-2s {
+	-webkit-animation-duration:2s;
+	-moz-animation-duration:2s;
+	-o-animation-duration:2s;
+	animation-duration:2s;
+}
+
+/* Animation Delay - Time for image to be delayed
+---------------------------------------------------- */
+.fadeIn-Delay-1s {
+	-webkit-animation-delay:1s;
+	-moz-animation-delay:1s;
+	-o-animation-delay:1s;
+	animation-delay:1s;
+}
+
+.fadeIn-Delay-2s {
+	-webkit-animation-delay:2s;
+	-moz-animation-delay:2s;
+	-o-animation-delay:2s;
+	animation-delay:2s;
+}
+
+/* Key Frames
+---------------------------------------------------- */
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-o-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
