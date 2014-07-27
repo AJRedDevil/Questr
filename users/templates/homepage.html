@@ -4,8 +4,6 @@
 {% block localhead %}
 <link href={% static "css/feature.css" %} rel="stylesheet">
 <link href={% static "css/star-rating.css" %} media="all" rel="stylesheet" type="text/css"/>
-
-<script src={% static "js/star-rating.js" %} type="text/javascript"></script>
 {% endblock localhead %}
 {% block content %}
 <!-- This is the main container (#scroll-container) -->
@@ -87,10 +85,10 @@
 {% endcomment %}
 {% endblock content %}
 {% block scripts %}
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+  
+	<script src={% static "js/star-rating.js" %} type="text/javascript"></script>
    <script src={% static 'js/libs/masonry.pkgd.min.js' %}></script>
+   
    <script>
 	   var container = document.querySelector('#post-container');
 		var msnry = new Masonry( post-container, {
@@ -99,6 +97,8 @@
 		  itemSelector: '.post'
 		});
    </script>
+    
+    
     
     {% comment %}
     ## This is for google plus based authentication ##
