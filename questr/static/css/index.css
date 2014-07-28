@@ -6,7 +6,6 @@ body{
 	font-weight:300;
 	color:rgba(0,0,0,0.8);
 	}
-
 	
 strong,b{
 	font-weight:600;
@@ -97,9 +96,7 @@ p{font-size: 16px;font-weight: 100;margin: 7px 0;color: #666;}
 .grey {
 	background: #f9f9f9;
 }
-	
-	
-	
+
 .navbar {
 	background: transparent;
 	font-size: 12px;
@@ -155,6 +152,8 @@ a.navbar-brand {
 }	
 
 	
+
+
 
 /*========== 1.   ==============*/	
 

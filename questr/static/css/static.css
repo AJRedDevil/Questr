@@ -2,41 +2,7 @@
 @charset "utf-8";
 
 body{
-	font-family: "Helvetica Neue";
 	font-size: 14px;
-}
-
-h1{
-	color: rgba(240,240,240,1);
-	text-shadow: 0px 1px rgba(120,120,120,1);
-	font-weight: lighter;
-	font-size: 48px;
-}
-
-h3, h4, h5, h6, p{
-	color: rgba(120,120,120,1);
-}
-
-h2{
-	font-size: 20px;
-	color: rgba(240,240,240,1);
-	text-shadow: 0px 1px rgba(100,100,100,1);
-	font-weight: lighter;
-}
-
-hr {
-  -moz-border-bottom-colors: none;
-  -moz-border-image: none;
-  -moz-border-left-colors: none;
-  -moz-border-right-colors: none;
-  -moz-border-top-colors: none;
-  border-color: rgba(180,180,180,1); 
-  -moz-use-text-color #FFFFFF;
-  border-style: solid none;
-  border-width: 1px 0;
-  margin: 18px 0;
-  height: 0px;
-  border-radius: 1px;
 }
 
 
