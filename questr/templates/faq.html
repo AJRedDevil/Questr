@@ -6,24 +6,30 @@
 {% endblock localhead %}
 
 {% block content %}
+
+
 <div class="wrapper">
-
-<div class="container">
-
-	<div class="row clearfix">	
-		<div class="banner">
-		  <div class="banner title">
-			  <h1>Frequently Asked Questions</h1>
-		  </div><!-- ./banner --> 
-	</div><!-- ./row -->    
-
-
-  <div class="row clearfix">
-    <div class="col-md-8 col-md-offset-2 column">
+	
+	<div class="container-fluid">
+		<div class="img-src"></div>
+		<div class="blurred-image"></div>
+		<div class="container masthead fadeIn fadeIn-1s">
+			<br><br><br>
+			<div class="row clearfix">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+					<h2>Frequently asked questions.</h2>
+					<br><br><br>
+				</div><!--./column -->
+			</div><!--./row -->
+			
+		</div><! -- ./container -->
+	</div><! -- ./container-fluid -->
+ 
+    <! -- ******************** FEATURES ******************** -->	
+	<div class="container layout-foreground">	 
+		<div class="row section grey">
+			<div class="col-md-8 col-md-offset-2 column">
     	<div class="panel-group" id="accordion">
-			
-			
-			
 			
 			<div class="panel panel-default" id="panel1">
 				<div class="panel-heading">
@@ -196,29 +202,42 @@
 					</div><!-- ./panel-body -->
 				</div><!-- ./panel-collapse -->
 			</div><!-- ./panel-default -->	
-			
-			
-			
-			
-				
 		</div><!-- ./panel-group -->
     </div><!-- ./column -->
- </div><! --/row -->
-</div><! --/container -->
-{% endblock content %}
+		</div><! --/row -->	
+		{% endblock content %}
+	</div><! -- ./container-fluid -->
 </div><! -- ./wrapper -->
 
 
 {% block scripts %} 
 <script src={% static "bootstrap/js/tooltip.js" %} type="text/javascript"></script>
 <script>
+$(document).ready(function() {	
+    $(window).scroll(function(e) {
+        var img = $('.img-src'),
+        	s   = $(window).scrollTop(),
+        	f   = $(document).scrollTop(),
+            d   = $(document).height(),
+            c   = $(window).height(),
+            opacityVal = (s / 150);
+
+        //img.css('-webkit-filter', "blur(" + Math.min(s/20,40) + "px)");
+
+	    $(".blurred-image").css("opacity", opacityVal);
+    });
+});
+	
+$( document.masthead ).click(function() {
+  $( "div:hidden:first" ).fadeIn( "slow" );
+});
+
   $(".popover-right").popover({
 			placement: 'right', 
       title: 'Add Questr or scan the QR code below', 
       content: img, 
       html:true 
 		});
-
 </script>
 
     
