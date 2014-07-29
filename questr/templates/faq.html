@@ -1,40 +1,41 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
+<link href={% static "css/index.css" %} rel="stylesheet">
   <link href={% static "css/static.css" %} rel="stylesheet"> 
 {% endblock localhead %}
 
 {% block content %}
 <div class="wrapper">
 
-<div class="banner">
-  <div class="banner title">
-    <h1>Frequently Asked Questions</h1>
-  </div>
-</div>    
-
 <div class="container">
-  <div class="row">
-    <br>
-    <section class="col-md-8 col-md-offset-2">
-    		
+
+	<div class="row clearfix">	
+		<div class="banner">
+		  <div class="banner title">
+			  <h1>Frequently Asked Questions</h1>
+		  </div><!-- ./banner --> 
+	</div><!-- ./row -->    
+
+
+  <div class="row clearfix">
+    <div class="col-md-8 col-md-offset-2 column">
     	<div class="panel-group" id="accordion">
+			
+			
+			
 			
 			<div class="panel panel-default" id="panel1">
 				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" href="#collapseOne" data-parent="#accordion">
-						What is Questr?
-						</a>
-					</h4>
-				</div>
+					<h4 class="panel-title"><a data-toggle="collapse" href="#collapseOne" data-parent="#accordion">What is Questr?</a></h4>
+				</div><!-- ./panel-heading -->
 				<div id="collapseOne" class="panel-collapse collapse collapse">
 					<div class="panel-body">
 						<h6>
 							Questr is a crowdshipping - or a peer-to-peer shipping - company. Essentially it is a courier company, but with a different mindset from that of traditional courier companies.
 						</h6>
-					</div>
-				</div>
+					</div><!-- ./panel-body -->
+				</div><!-- ./panel-collapse -->
 			</div><!-- ./panel-default -->
 			
 			<div class="panel panel-default" id="panel2">
@@ -44,16 +45,16 @@
 						How is Questr different from other courier services?
 						</a>
 					</h4>
-				</div>
+				</div><!-- ./panel-heading -->
 				<div id="collapseTwo" class="panel-collapse collapse">
 					<div class="panel-body">
 						<h6>
 							Unlike traditional courier companies like Canada Post or UPS or FedEx, Questr's shippers get packages and deliver them to the destination directly without the hassle of going to local facilities, saving much time and labour that leads to a higher shipping cost, by breaking down the centralized logistics and letting the crowd deliver the packages.  
 						</h6>
-					</div>
-				</div>
+					</div><!-- ./panel-body -->
+				</div><!-- ./panel-collapse -->
 			</div><!-- ./panel-default -->
-			
+	
 			<div class="panel panel-default" id="panel3">
 				<div class="panel-heading">
 					<h4 class="panel-title">
@@ -61,14 +62,14 @@
 						Is Questr safe?
 						</a>
 					</h4>
-				</div>
+				</div><!-- ./panel-heading -->
 				<div id="collapseThree" class="panel-collapse collapse">
 					<div class="panel-body">
 						<h6>
 							Safety is Questr's top priority. By utilizing a multitude of security measures, Questr is guaranteed to be not only just as safe, but also even more trackable and traceable.
 						</h6>
-					</div>
-				</div>
+					</div><!-- ./panel-body -->
+				</div><!-- ./panel-collapse -->
 			</div><!-- ./panel-default -->
 			
 			<div class="panel panel-default" id="panel3.1">
@@ -78,14 +79,14 @@
 						How does Questr verify its shippers?
 						</a>
 					</h4>
-				</div>
+				</div><!-- ./panel-heading -->
 				<div id="collapseThree1" class="panel-collapse collapse">
 					<div class="panel-body">
 						<h6>
 							Questr verifies its shippers in a number of ways, including credit card binding, driver's license binding, cell phone verification, etc. 
 						</h6>
-					</div>
-				</div>
+					</div><!-- ./panel-body -->
+				</div><!-- ./panel-collapse -->
 			</div><!-- ./panel-default -->
 			
 			<div class="panel panel-default" id="panel4">
@@ -95,14 +96,14 @@
 						How fast does Questr delivery its packages?
 						</a>
 					</h4>
-				</div>
+				</div><!-- ./panel-heading -->
 				<div id="collapseFour" class="panel-collapse collapse">
 					<div class="panel-body">
 						<h6>
 							Once a shipper picks up a package, s/he does not need to go to a local sorting facilities but driving directly from the pickup locaiton to dropoff location. A package from Scarborough Town Centre to Square One Mall may only take fourty-five minutes if the traffic is reasonably good.
 						</h6>
-					</div>
-				</div>
+					</div><!-- ./panel-body -->
+				</div><!-- ./panel-collapse -->
 			</div><!-- ./panel-default -->
 			
 			<div class="panel panel-default" id="panel5">
@@ -112,7 +113,7 @@
 						How much does a Questr shipment cost?
 						</a>
 					</h4>
-				</div>
+				</div><!-- ./panel-heading -->
 				<div id="collapseFive" class="panel-collapse collapse">
 					<div class="panel-body">
 						<h6>
@@ -120,8 +121,8 @@
 							<br>
 							At night or during weekends, shipping reates are slightly more expensive.
 						</h6>
-					</div>
-				</div>
+					</div><!-- ./panel-body -->
+				</div><!-- ./panel-collapse -->
 			</div><!-- ./panel-default -->	
 			
 			<div class="panel panel-default" id="panel5.1">
@@ -131,7 +132,7 @@
 						Backpack, car, minivan, what's the difference?
 						</a>
 					</h4>
-				</div>
+				</div><!-- ./panel-heading -->
 				<div id="collapseFive1" class="panel-collapse collapse">
 					<div class="panel-body">
 						<h6>
@@ -141,8 +142,8 @@
 							<br>
 							A minivan package can be requested for moving purposes. Each costs $16 + $3.4/km.
 						</h6>
-					</div>
-				</div>
+					</div><!-- ./panel-body -->
+				</div><!-- ./panel-collapse -->
 			</div><!-- ./panel-default -->	
 				
 			<div class="panel panel-default" id="panel6">
@@ -152,19 +153,15 @@
 						Where is Questr currently available?
 						</a>
 					</h4>
-				</div>
+				</div><!-- ./panel-heading -->
 				<div id="collapse6" class="panel-collapse collapse">
 					<div class="panel-body">
 						<h6>
 							Starting from July 28th, 2014, Questr is first available in Greater Toronto Area. 
 						</h6>
-					</div>
-				</div>
+					</div><!-- ./panel-body -->
+				</div><!-- ./panel-collapse -->
 			</div><!-- ./panel-default -->	
-			
-			
-			
-			
 			
 			<div class="panel panel-default" id="panel7">
 				<div class="panel-heading">
@@ -173,14 +170,14 @@
 						How do I become a shipper?
 						</a>
 					</h4>
-				</div>
+				</div><!-- ./panel-heading -->
 				<div id="collapse7" class="panel-collapse collapse">
 					<div class="panel-body">
 						<h6>
 							Go to <a href="{% url 'contact' %}">Contact Us</a> and let us know you are interested. We will get back to you within 8 hours.
 						</h6>
-					</div>
-				</div>
+					</div><!-- ./panel-body -->
+				</div><!-- ./panel-collapse -->
 			</div><!-- ./panel-default -->	
 			
 			<div class="panel panel-default" id="panel8">
@@ -190,17 +187,22 @@
 						What kind of vehicle do I need in order to become a shipper?
 						</a>
 					</h4>
-				</div>
+				</div><!-- ./panel-heading -->
 				<div id="collapse8" class="panel-collapse collapse">
 					<div class="panel-body">
 						<h6>
 							A bike, a scooter, a car, anything that can get you around the city quickly.
 						</h6>
-					</div>
-				</div>
+					</div><!-- ./panel-body -->
+				</div><!-- ./panel-collapse -->
 			</div><!-- ./panel-default -->	
+			
+			
+			
+			
+				
 		</div><!-- ./panel-group -->
-    </section><!-- /section planpricing -->
+    </div><!-- ./column -->
  </div><! --/row -->
 </div><! --/container -->
 {% endblock content %}
