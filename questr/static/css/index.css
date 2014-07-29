@@ -93,7 +93,7 @@ p{font-size: 16px;font-weight: 100;margin: 7px 0;color: #666;}
 /*========== MODULE   ==============*/
 .section {
 	margin-top: 0px;
-	padding: 50px 0px;
+	padding: 50px 50px;
 	
 }
 
@@ -157,7 +157,6 @@ a.navbar-brand {
 
 	
 /*========== 1.   ==============*/	
-
 .masthead {
 	color: white;	
 	text-align: center;
@@ -279,7 +278,6 @@ to {
 }
 
 /*========== 3. HERO IMAGE ==============*/
-
 .section-title {
 	text-align:center;
 	margin-bottom:30px;
