@@ -51,7 +51,7 @@
 	<div class="container layout-foreground">	
 	
 		<div class="row clearfix section">
-			<div class="col-md-10 col-md-offset-1 column">
+			<div class="col-xs-12 col-md-10 col-md-offset-1 column">
 				<div class="section-title">
 					<h2>What is Questr?</h2>
 					<h4>
@@ -61,7 +61,7 @@
 					</h4>
 				</div><!-- ./section-title -->
 			</div><!-- ./column -->
-			<div class="col-md-10 col-md-offset-1 column">
+			<div class="col--12 col-md-10 col-md-offset-1 column">
 					
 				<div class="col-md-4">
 					<div class="thumbnail"> 
@@ -104,7 +104,7 @@
 				</div>
 			</div>
 			
-			<div class="col-md-10 col-md-offset-1">
+			<div class="col-md-10 col-md-offset-1 column">
 			
 				<div class="col-md-4">
 					<div class="pricing color1">
@@ -147,7 +147,7 @@
 				</div><!-- ./div-title -->
 			</div>
 		
-		</div><!-- ./row -->
+		</div><!-- ./section -->
 		
 
 	    <! -- ******************** HOW QUESTR WORKS div ******************** -->
@@ -179,32 +179,32 @@
 				</div>
 			</div><!-- ./row -->
 			
-		<div class="row">
-            <div class="col-md-8 col-md-offset-2 column">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-		        	<i class="glyphicon glyphicon-download" style="font-size: 70px; color:#ff7a7b;"></i>
-			        <h4>3. Dropoff</h4>
-			        <h3>15 ~ 90 minutes</h3>
-			        <p>
-			            The shipper will drive the package undistractably and directly to the dropoff location.                    
-			            Nothing will stop them from shipping your package.
-			        </p>
-                </div><!-- ./column -->
-                <div class="col-lg-6 col-md-6 col-sm-6"> 
-			        <i class="glyphicon glyphicon-thumbs-up" style="font-size: 70px; color:#6d5b47;"></i>
-			        <h4>4. Finish & Rate</h4>
-			        <h3>30 seconds</h3>
-			        
-			        <p>
-			            Opinions matter. If you think your shipper was a good one, let them and other people know since this is crucial for a community. After submitting your review, the deposit will be released to the shipper.
-			        </p>
-                </div>
-            </div><!-- ./column -->
-  		</div><! --/row -->	
-			</div><! --/section -->
+			<div class="row">
+	            <div class="col-md-8 col-md-offset-2 column">
+	                <div class="col-lg-6 col-md-6 col-sm-6">
+			        	<i class="glyphicon glyphicon-download" style="font-size: 70px; color:#ff7a7b;"></i>
+				        <h4>3. Dropoff</h4>
+				        <h3>15 ~ 90 minutes</h3>
+				        <p>
+				            The shipper will drive the package undistractably and directly to the dropoff location.                    
+				            Nothing will stop them from shipping your package.
+				        </p>
+	                </div><!-- ./column -->
+	                <div class="col-lg-6 col-md-6 col-sm-6"> 
+				        <i class="glyphicon glyphicon-thumbs-up" style="font-size: 70px; color:#6d5b47;"></i>
+				        <h4>4. Finish & Rate</h4>
+				        <h3>30 seconds</h3>
+				        
+				        <p>
+				            Opinions matter. If you think your shipper was a good one, let them and other people know since this is crucial for a community. After submitting your review, the deposit will be released to the shipper.
+				        </p>
+	                </div><!-- ./column -->
+	            </div><!-- ./column -->
+            </div><! --/row -->	
+  		</div><!-- ./section -->
 			
 	    <! -- ******************** FAQ div ******************** -->	 
-		<div class="row section grey">
+		<div class="row clearfix section grey">
 			<div class="col-md-12 column">
 				<div class="section-title">
 					<h2>FAQ</h2>
@@ -233,15 +233,13 @@
 					<p>Besides what Questr does automatically for you, you can also go to a shipper's profile and go over the reviews that have been provided by other users.</p>
                 </div><!-- ./column -->	
             </div><!-- ./column -->
-		</div><! --/row -->	
+		</div><! -- ./section -->	
 		
 	
 	    <! -- ******************** MENTIONS ******************** -->	
 	    <div class="row clearfix section">
 			<div class="col-md-12 column"> 
-				<div class="section-title">
-					<h2>We're mentioned in</h2>
-				</div><!-- ./section-title -->
+				<div class="section-title"><h2>We're mentioned in</h2></div><!-- ./section-title -->
 			</div><!-- ./column -->
 			<div class="col-md-8 col-md-offset-2 column">
 					<div class="col-md-2 col-md-offset-5 column"> 
@@ -252,8 +250,7 @@
 						</center>	
 					</div><!-- ./column -->
 			</div><!-- ./column -->
-	    </div><!-- ./row -->
-			
+	    </div><!-- ./section -->		
 			
 			
 	<!-- *****************************************************************************************************************
@@ -264,8 +261,7 @@
 				<div class="section-title">
 					<h2>Say hi</h2>
 				</div><!-- ./section-title -->
-			</div><!-- ./column -->
-			
+			</div><!-- ./column -->	
 			<div class="col-md-4 col-md-offset-4 column">
 				<form action="/beta/contactus" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
 					<div class="form-group" style="*background-color:green; width:100%;">
@@ -276,8 +272,8 @@
 					<button type="submit" class="btn btn-embossed btn-default" style="background-color:#ff0042;">Send</button>
 				</form>	
 			</div><! -- ./column -->
-		</div><! -- ./row -->
-	{% endblock content %}
+		</div><! -- ./section -->
+		{% endblock content %}
 	</div><! -- ./container-fluid -->
 </div><! -- ./wrapper -->
 

@@ -246,36 +246,33 @@
 
 	<footer>
 
-
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column" id="footer-column">
-			
-			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
-				<i class="light-grey copyright">Copyright © 2014 Questr Inc. All rights reserved.</i>
-			</div><!-- ./column -->
-
-			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
+		<div class="row clearfix">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column" id="footer-column">
 				
-				<a class="facebook" target="_blank" href="https://www.facebook.com/questrco"><button class="btn-circle"><i class="fa fa-facebook"></i></button></a>
+				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column">
+					<i class="light-grey copyright">Copyright © 2014 Questr Inc. All rights reserved.</i>
+					<br>
+					<a class="facebook" target="_blank" href="https://www.facebook.com/questrco"><button class="btn-circle"><i class="fa fa-facebook"></i></button></a>
+	
+					<a class="twitter" target="_blank" href="https://twitter.com/questrco"><button class="btn-circle"><i class="fa fa-twitter"></i></button></a>
+	
+					<a class="linkedin" target="_blank" href="http://linkedin.com/company/questr"><button class="btn-circle"><i class="fa fa-linkedin"></i></button></a>
+	
+					<a class="email" target="_blank" href="mailto:hello@questr.co"><button class="btn-circle"><i class="fa fa-envelope"></i></button></a>
+				</div><!-- ./column -->
 
-				<a class="twitter" target="_blank" href="https://twitter.com/questrco"><button class="btn-circle"><i class="fa fa-twitter"></i></button></a>
-
-				<a class="linkedin" target="_blank" href="http://linkedin.com/company/questr"><button class="btn-circle"><i class="fa fa-linkedin"></i></button></a>
-
-				<a class="email" target="_blank" href="mailto:hello@questr.co"><button class="btn-circle"><i class="fa fa-envelope"></i></button></a>
-			</div>
-
-			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
-				<a href="{% url 'faq' %}">Frequently Asked Questions</a>
-				<i>|</i>
-				<a href="{% url 'contact' %}">Contact Us</a>
-				<i>|</i>
-				<a href="{% url 'terms' %}">Terms of Service</a>
-				<i>|</i>
-				<a href="{% url 'privacy' %}">Privacy Policy</a>
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+					<a href="{% url 'faq' %}">Frequently Asked Questions</a>
+					<i>|</i>
+					<a href="{% url 'contact' %}">Contact Us</a>
+					<i>|</i>
+					<a href="{% url 'terms' %}">Terms of Service</a>
+					<i>|</i>
+					<a href="{% url 'privacy' %}">Privacy Policy</a>
+				</div><!-- ./column -->
+	
 			</div><!-- ./column -->
-
-		</div><!-- ./column -->
-
+		</div>
 
 	</footer>
 	<!-- Google Analytics -->
