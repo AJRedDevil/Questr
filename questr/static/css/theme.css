@@ -499,8 +499,11 @@ input.form-control:focus, textarea.form-control:focus {
 
 .profileImg {
 	float: left;
-	max-height: 10px;
-	display: inline-block;
+	max-height: 30px;
+	max-width: 30px;
+	display: block;
+	margin: 0;
+
 }
 
 #notifications .dropdown-menu li a {
