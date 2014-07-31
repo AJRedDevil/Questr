@@ -20,8 +20,8 @@
 	    <![endif]-->
 
 	    <link href={% static "bootstrap/css/bootstrap.min.css" %} rel="stylesheet">
-	    <link href={% static "css/theme.css" %} rel="stylesheet">
 	    <link href={% static "css/flat-ui.css" %} rel="stylesheet">
+	    <link href={% static "css/theme.css" %} rel="stylesheet">
 	    <link href={% static "css/normalize.css" %} rel="stylesheet"> 
 	    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	  
@@ -81,10 +81,10 @@
 	
        
         	<ul class="nav navbar-nav navbar-left"> 
-                <li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li> 
-                <li class="{% navactive request 'newquest' %}"><a href="{% url 'newquest' %}"><span class="glyphicon glyphicon-plus-sign"></span>Request a shipment</a></li>
+                <li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a></li> 
+                <li class="{% navactive request 'newquest' %}"><a href="{% url 'newquest' %}">Request a shipment</a></li>
                 
-                <li class="{% navactive request 'mytrades' %}"><a href="{% url 'mytrades' %}"><span class="glyphicon glyphicon-transfer"></span>My shipments</a></li>
+                <li class="{% navactive request 'mytrades' %}"><a href="{% url 'mytrades' %}">My shipments</a></li>
             	{% comment %}
                 <li><a href="/quest"><span class="glyphicon glyphicon-tree-deciduous"></span>Browse</a></li>                  
                 
@@ -157,18 +157,14 @@
 	            
 	            
 	            <li class="dropdown">
-	                
-		            <a href="{% url 'profile' %}">
-			            <span style="width:30px;height30px;padding-top:0px;padding-down:0px;display:block;">
+		              <a href="#" class="dropdown-toggle inline no-margin no-padding" data-toggle="dropdown">
+		              	<span class="no-margin" style="min-width:30px;min-height:30px;max-height:30px;max-width:30px;display:block;">
 	                		<span class="ratio img-responsive img-circle profileImg" style="background-image: url({{user.avatar_file_name}});"></span>
+	                		{{user.first_name}} {{user.last_name}}
+	                		<i class="fa fa-caret-down"></i>
 	                	</span>
 		              </a>
-		             
-		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<span class="userName">
-							{{user.first_name}} {{user.last_name}}
-						</span>
-		              </a>
+		           
 	       
 
 					<ul class="dropdown-menu dropdown-menu-left">

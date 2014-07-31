@@ -499,8 +499,6 @@ input.form-control:focus, textarea.form-control:focus {
 
 .profileImg {
 	float: left;
-	max-height: 30px;
-	max-width: 30px;
 	display: block;
 	margin: 0;
 

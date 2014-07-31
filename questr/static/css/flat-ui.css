@@ -1810,7 +1810,7 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   
   }
   .navbar-collapse .navbar-nav.navbar-right:last-child {
-    margin-right: -11px;
+    margin-right: 100px;
   }
   .navbar > .container .navbar-collapse .navbar-nav.navbar-right:last-child {
     margin-right: -36px;
@@ -1891,12 +1891,14 @@ a.navbar-brand {
 }
 
 .navbar-nav > li > a {
-  padding: 9px 16px;
+  padding: 6px 0px;
   line-height: 13px;
   font-weight: 700;
   z-index: 999;
   text-align: center;
   height: auto;
+ 
+  vertical-align: middle;
 }
 .navbar-nav .dropdown-toggle .caret {
   border-top-color: #16a085;
@@ -2158,17 +2160,17 @@ select[multiple].navbar-form .btn {
   border-width: 2px;
 }
 
-
 /***************** navbar font color *********************/
-
 .navbar-default .navbar-nav > li > a {
   color: grey;
   background-color: transparent;
   border-bottom: transparent;
   border-bottom-style: solid;
   border-bottom-width: 2px; 
-  margin-right: 10px;
-  font-weight: 200;
+  margin-right: 30px;
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 30px;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
