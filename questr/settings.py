@@ -75,7 +75,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
     'endless_pagination',
-    'beta',
     'mailchimp',
     'users',
     'djrill',
