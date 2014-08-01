@@ -1891,7 +1891,10 @@ a.navbar-brand {
 }
 
 .navbar-nav > li > a {
-  padding: 6px 0px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 0px;
+	padding-right: 4px;
   line-height: 13px;
   font-weight: 700;
   z-index: 999;
