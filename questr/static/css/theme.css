@@ -31,11 +31,9 @@ body {
 /************ footer ****************/
 footer {
 	background: white;
-	/**
 	position: absolute;
 	bottom: 0px;
 	left: 0;
-	**/
 	width:100%;
 	font-size: 14px;
 	text-align: center;
@@ -474,15 +472,6 @@ input.form-control:focus, textarea.form-control:focus {
 }
 
 /*************** Primary Navbar ***************/
-.brand {
-	z-index: 9;
-	position: absolute;
-	width: 100%;
-	margin-top: 6px;
-	background: none;
-	font-size: 18px;
-	font-weight: bolder;
-}
 
 .navbar-left input.search {
 	background: #bce0f5;
@@ -501,7 +490,6 @@ input.form-control:focus, textarea.form-control:focus {
 	float: left;
 	display: block;
 	margin: 0;
-
 }
 
 #notifications .dropdown-menu li a {

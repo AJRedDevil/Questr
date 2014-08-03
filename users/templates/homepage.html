@@ -7,6 +7,7 @@
 {% endblock localhead %}
 {% block content %}
 <!-- This is the main container (#scroll-container) -->
+<div id="wrapper">
 <div class="container-fluid">
 <div class="row">
 <div class="col-md-10 col-md-offset-1 column">
@@ -72,7 +73,9 @@
 </div><!-- ./post-container -->
 </div><!-- ./column -->       
 </div><!-- ./row -->
+{% endblock content %}
 </div><!-- ./container -->
+</div><!-- ./wrapper -->
 {% comment %}
 <div id="pages">
     <a href="index.html"></a>
@@ -83,7 +86,7 @@
     <a href="loadpage/page6.html"></a>
 </div>
 {% endcomment %}
-{% endblock content %}
+
 {% block scripts %}
   
 	<script src={% static "js/star-rating.js" %} type="text/javascript"></script>
