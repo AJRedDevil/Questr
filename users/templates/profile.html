@@ -16,7 +16,7 @@
 
 
 <div class="container">
-    <div class="row">
+    <div class="row clearfix">
 	    
         <!-- Profile -->
         <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 column">  
@@ -170,11 +170,10 @@
 		  </ul>              
         </div>	<!-- ./panel -->
 		</div>
-	</div>
-</div>
+	</div><!-- ./row -->
+	{% endblock content %}
+</div><!-- ./container -->
 
-
-{% endblock content %}
 {% block scripts %}
 <script> 
 	  jQuery(document).ready(function () {
