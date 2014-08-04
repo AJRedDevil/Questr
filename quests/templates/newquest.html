@@ -6,31 +6,29 @@
     <link href={% static "css/quest.css" %} rel="stylesheet">
 {% endblock localhead %}
 {% block content %}
-<div class="container">
-  <div class="row">
+
+<div class="container-fluid">
+  <div class="row clearfix">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 column">
       	
-      	
-      	<div class="panel panel-default body-prop border-colours">
-	         <div class="panel-heading">
+	      <div class="panel panel-default body-prop border-colours">
+		      <div class="panel-heading">
 		         <div class="panel-title light-grey">Request a shipment</div>
 	         </div><!-- ./panel-heading -->
           
-          <div class="panel-body">
-          <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+		      <div class="panel-body">
+			      <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
 
-            
-            <!-- Name input-->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="light-grey">Title</p></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <input id="title" name="title" type="text" placeholder="Shipment title" class="form-control input-xs">
-              </div><!-- ./column -->
+					<!-- Name input-->
+					<div class="form-group">
+	            <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="light-grey">Title</p></label>
+	            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+		            <input id="title" name="title" type="text" placeholder="Shipment title" class="form-control input-xs">
+		        </div><!-- ./column -->
             </div><!-- ./form-group -->
- 
-    
-            <!-- Location input-->
-            <div class="form-group">
+					
+					<!-- Location input-->
+					<div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="light-grey">Pick up from</p></label>
               <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"> 
 	              <select class="btn-classic" data-size="5" name="srccity">
@@ -42,20 +40,19 @@
               </div><!-- ./column -->
               <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"></div>  
             </div>  <!-- ./form-group -->
-                    
-            <!-- Departure Address input-->
-            <div class="form-group">
+					        
+					<!-- Departure Address input-->
+					<div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <input id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" class="form-control input-xs">
               </div><!-- ./column -->
             </div><!-- ./form-group -->
-                    
-                   
-            <div class="form-group">
+					        
+					       
+					<div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="light-grey">Drop off at</p></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column"> 
-              
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">   
 	              <select class="btn-classic" data-size="5" name="dstcity">
 					  <option data-icon="glyphicon glyphicon-map-marker theme-colour">Choose a city</option>
 					  <option>Mississauga</option>
@@ -64,18 +61,16 @@
 					  </select>
               </div><!-- ./column -->
             </div>  <!-- ./form-group -->  
-         
-         
-         
-            <!-- Departure Address input-->
-            <div class="form-group">
+					
+					<!-- Departure Address input-->
+					<div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <input id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" class="form-control input-xs">
               </div><!-- ./column -->
             </div><!-- ./form-group -->
-                        
-            <div class="form-group" id="size">
+					            
+					<div class="form-group" id="size">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="light-grey">Package size</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
               	 <div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">	
@@ -103,34 +98,29 @@
 			     </div><!-- /input-group -->
 			  </div><!-- ./column -->
 			 </div><!-- ./form-group -->
-            
-            <!-- Message body -->
-            <div class="form-group">
+					
+					<!-- Message body -->
+					<div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="light-grey">Message</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <textarea class="form-control" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5"></textarea>
               </div><!-- ./column -->
             </div><!-- ./form-group -->
-                          
-              <br>
-              
-              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">
+					             
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">
                 <button type="submit" class="btn btn-info">Continue</button>
               </div><!-- ./column -->
-               
-               
-   
-          </form>     
-          </div><!-- ./panel-body -->
-       </div><!-- ./panel -->  
-       
-        
+				</form>     
+			  </div><!-- ./panel-body -->
+		  </div><!-- ./panel -->
+		  
+		    
       </div><!-- ./column -->
   </div><!-- ./row -->
-</div><!-- ./container -->
+  {% endblock content %}
+</div><!-- ./container-fluid -->
 
 
-{% endblock content %}
 {% block scripts %}
 
 {% endblock scripts %}

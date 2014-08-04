@@ -4,45 +4,42 @@
 {% block localhead %}
     <!-- Custom CSS -->
     <link href={% static "css/smallpost.css" %} rel="stylesheet">
-    <link href={% static "css/profile.css" %} rel="stylesheet">
-    <link href={% static "css/trades.css" %} rel="stylesheet">
     
     <!-- Custom Javascript -->
     <script src={% static "js/validator.js" %}></script>
 {% endblock localhead %}
 {% block content %}
-<div class="container">
-    <div class="row">
+
+<div class="container-fluid">
+    <div class="row clearfix">
        <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 column">    
       
-       
 	       <div class="panel panel-default shadows body-borders">
-		  <!-- Default panel contents -->
-		  <div class="panel-heading">
-             <div class="panel-title lead">
-                  <ul>
-                      <li class="{% navactive request 'myposts' %}"><a href="{% url 'myposts' %}">
-                          <a href="{% url 'myposts' %}">My Quests</a>
-                      </li>       
-                      {% if user.is_shipper %}
-                      <li class="{% navactive request 'myshipments' %}"><a href="{% url 'myshipments' %}">
-                          <a href="{% url 'myshipments' %}">My Shipments</a>
-                      </li>                                       
-                      {% endif %}
-                  </ul>
-              </div>              
-            </div>
-
-		  <ul class="list-group">   
+		       <!-- Default panel contents -->
+		       <div class="panel-heading">
+			       <div class="panel-title lead">
+				       <ul>
+					       <li class="{% navactive request 'myposts' %}">
+						       <a href="{% url 'myposts' %}">My Quests</a>
+	                      </li>       
+	                      {% if user.is_shipper %}
+	                      <li class="{% navactive request 'myshipments' %}">
+		                      <a href="{% url 'myshipments' %}">My Shipments</a>
+	                      </li>                                       
+	                      {% endif %}
+	                  </ul>
+                  </div><!-- ./panel-title -->              
+               </div><!-- ./panel-head -->
+		       <ul class="list-group">   
 			  {% for quest in myshipments %} 
-	       {% if not quest.is_complete %}
-         {# if the quest is not completed the enter shipment button should be displayed #}
-        <li class="list-group-item">
-        <div class="row clearfix">
-            <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
-              <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.get_item_images_normal_url}});"></div></a>
-            </div><!-- ./column -->
-            <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5 column">
+			  {% if not quest.is_complete %}
+			  {# if the quest is not completed the enter shipment button should be displayed #}
+			  <li class="list-group-item">
+				  <div class="row clearfix">
+					  <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
+		            <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.get_item_images_normal_url}});"></div></a>
+		            </div><!-- ./column -->
+					  <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5 column">
                 <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
                 <p class="list-group-item-text postDesc">{{quest.description}}</p>
 
@@ -51,7 +48,7 @@
                                     <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
                                 </div><!-- ./smallInfo -->
             </div><!-- ./column --> 
-        <form action="{% url 'completequest' questname=quest.id %}" role="form" method="post">{% csrf_token %}
+					  <form action="{% url 'completequest' questname=quest.id %}" role="form" method="post">{% csrf_token %}
           <div class="input-group">
             <input type="text" class="form-control input-sm" name="delivery_code" placeholder="Enter Shipment Code">
             <span class="input-group-btn">
@@ -59,15 +56,17 @@
             </span>
           </div><!-- /input-group -->
         </form>
-        </div><!-- ./row -->
-        </li><!-- list-group-item -->    
-         {% elif quest.is_complete and not quest.is_questr_reviewed %}
-         {# if the quest is completed and the questr has not been reviewed the review link should appear #}
-				<li class="list-group-item">
-				<div class="row clearfix">
+				  </div><!-- ./row -->
+			  </li><!-- list-group-item -->   
+        
+         
+			  {% elif quest.is_complete and not quest.is_questr_reviewed %}
+			  {# if the quest is completed and the questr has not been reviewed the review link should appear #}
+			  <li class="list-group-item">
+				  <div class="row clearfix">
 				    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column">
-              {% if quest.item_images %}
-              <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.get_item_images_normal_url}});"></div></a>
+					    {% if quest.item_images %}
+					    <a href="/quest/{{quest.id}}"><div class="ratio img-responsive item-image" style="background-image: url({{quest.get_item_images_normal_url}});"></div></a>
               {% else %}    
               <a  href="/quest/{{quest.id}}" title="Title">
               <div class="no-image item-image">
@@ -76,6 +75,9 @@
               </a>
               {% endif %}
 				    </div><!-- ./column -->
+				    
+				    
+				    
 				    <div class="col-xs-8 col-sm-5 col-md-5 col-lg-5 column">
 				        <a href="/quest/{{quest.id}}"><h6 class="list-group-item-heading postTitle">{{quest.title}}</h6></a>
 				        <p class="list-group-item-text postDesc">{{quest.description}}</p>
@@ -116,14 +118,21 @@
                 </div><!-- ./row -->
               </li><!-- list-group-item -->     
           {% endif %}
-             {% endfor %}               
+             {% endfor %}  
+             
+                          
         </ul>	<!-- End of list-group -->
+		       
 		 </div><!-- ./panel -->
     </div>  <!-- ./column -->          
     </div>  <!-- ./row -->
-</div>  <!-- ./container -->
+    {% endblock content %}
+</div><!-- ./container -->
 
 
-{% endblock content %}    
+
+
+
+    
 {% block scripts %}     
 {% endblock scripts %}  

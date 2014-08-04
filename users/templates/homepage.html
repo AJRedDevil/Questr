@@ -7,12 +7,11 @@
 {% endblock localhead %}
 {% block content %}
 <!-- This is the main container (#scroll-container) -->
-<div id="wrapper">
 <div class="container-fluid">
-<div class="row">
+<div class="row clearfix">
 <div class="col-md-10 col-md-offset-1 column">
 <div class="js-masonry" id="post-container" data-masonry-options='{ "columnWidth": 0, "itemSelector": ".post" }'>
-   
+    
         {% for quest in  allquests %}
         
         <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column post">
@@ -75,7 +74,7 @@
 </div><!-- ./row -->
 {% endblock content %}
 </div><!-- ./container -->
-</div><!-- ./wrapper -->
+
 {% comment %}
 <div id="pages">
     <a href="index.html"></a>

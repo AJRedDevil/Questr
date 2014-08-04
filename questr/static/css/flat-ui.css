@@ -1809,7 +1809,7 @@ fieldset[disabled] .input-group-btn .btn-default.active {
 	  padding-left: 60px;
   }
   .navbar-collapse .navbar-nav.navbar-left:first-child > li:first-child a {
-  
+	  margin-right: 60px;
   }
   .navbar-collapse .navbar-nav.navbar-right:last-child {
     margin-right: 100px;
@@ -1818,7 +1818,7 @@ fieldset[disabled] .input-group-btn .btn-default.active {
     margin-right: -36px;
   }
   .navbar-collapse .navbar-nav.navbar-right:last-child > .dropdown:last-child > a {
-    border-radius: 0 6px 6px 0;
+   
   }
   .navbar-collapse .navbar-form.navbar-right:last-child {
     margin-right: -17px;

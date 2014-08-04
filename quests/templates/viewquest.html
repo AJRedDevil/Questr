@@ -222,12 +222,10 @@
 	        </div><!-- /.modal-dalog -->
 			</div><!-- /.modal -->
 	    </div><!-- ./row -->
+	    {% endblock content %}
 	</div><!-- ./container -->
-	
-	
-
   
-{% endblock content %}
+
 {% block scripts %} 
 <script>	  
 jQuery(document).ready(function () {
@@ -242,10 +240,6 @@ jQuery(document).ready(function () {
 		$(".popover-right").popover({
 			placement: 'right'
 		});
-});		
-		
-		
-	
-		
+});			
 </script>   
 {% endblock scripts %}
