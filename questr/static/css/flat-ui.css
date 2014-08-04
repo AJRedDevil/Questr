@@ -2884,10 +2884,9 @@ select[multiple].navbar-form .btn {
   border-radius: 6px;
 }
 .dropdown-menu {
-  background-color: white;
+  background-color: rgba(255,255,255,0.95);
   display: block;
   margin-top: 8px;
-  opacity: 0;
   padding: 0;
   visibility: hidden;
   -webkit-transition: 0.15s;
