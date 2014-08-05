@@ -75,6 +75,7 @@ img {
 
 .post .userbox {
 	margin: 0;
+	padding: 5px;
 	border-bottom-left-radius: 1px;
 	border-bottom-right-radius: 1px;
 }

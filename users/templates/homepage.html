@@ -81,8 +81,7 @@
 			<hr>	            
 	            
 	        <div class="row clearfix">
-	            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column post-info">
-	            	
+	            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column post-info">	
 	                <p class="light-grey">Pay: ${{quest.reward}}<br>	
 	                {% if user.is_shipper == True %}
 	                 From: {{quest.srcaddress}}, {{quest.srccity}}, Canada<br>
@@ -93,10 +92,10 @@
 	              </div><!-- ./column -->
 	        </div><!-- ./row -->
 	           
-	            <hr>
-	  
-	            <div class="row clearfix userbox">
-	            	<a href="/user/{{quest.questrs.displayname}}" class="username">
+            <hr>
+  
+            <div class="row clearfix userbox">
+            	<a href="/user/{{quest.questrs.displayname}}" class="username">
 	            	<div class="col-xs-4 col-sm-5 col-md-3 col-lg-3 column">
 	            		<div class="ratio img-responsive img-circle" style="background-image: url({{quest.questrs.avatar_file_name}});"></div>
 	            	</div><!-- column -->
@@ -104,13 +103,15 @@
 	            		<p class="no-margin">{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p>
 	            		<input id="input-21e" value="{{quest.questrs.rating}}" type="number" class="rating no-margin" min=0 max=5 step=0.5 data-size="xl" data-readonly="true" data-show-clear="false" data-show-caption="true" >
 	            	</div><!-- column -->
-	            	</a>
-	            </div><!-- ./row -->   
+            	</a>
+            </div><!-- ./row -->  
+	             
 	    </div><!-- ./white -->
 	</div><!-- ./post -->
        {% endfor %}           
 </div><!-- ./post-container -->
 </div><!-- ./column -->
+
 </div><!-- ./row -->
 {% endblock content %}
 </div><!-- ./container -->

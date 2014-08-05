@@ -42,9 +42,6 @@ body {
 /************ footer ****************/
 footer {
 	background: white;
-	position: absolute;
-	bottom: 0px;
-	left: 0;
 	width:100%;
 	font-size: 14px;
 	text-align: center;
