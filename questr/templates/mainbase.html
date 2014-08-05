@@ -66,6 +66,8 @@
 
 
 	{% if pagetype == "loggedin" %}
+	
+	
 	<nav class="navbar navbar-default border-colours" role="navigation">
 		
 	  <div class="navbar-header">
@@ -136,6 +138,20 @@
                 </li>          
    				{% endcomment %}	      
    			</ul>   
+   			
+   			
+   			
+   			<form class="navbar-form navbar-left no-padding" role="search">{% csrf_token %}
+						<div class="form-group no-margin">
+							<input type="text" class="form-control search" />
+						</div>
+						<button>dada</button>
+					</form>
+					
+					
+					
+   	
+	    
 		    <ul class="nav navbar-nav navbar-right">
 		    	{% comment %}
 		    	<li class="dropdown">
@@ -189,54 +205,16 @@
 	                </ul>
 	        	</li>
 		    </ul>
-		
-	    {% comment %}
-	    <form class="navbar-form navbar-left" action="#" role="search">{% csrf_token %}
-	      <div class="form-group">
-	        <div class="input-group">
-	          <input class="form-control search" id="navbarInput-01" type="search" placeholder="Search">
-	          <span class="input-group-btn">
-	            <button type="submit" class="btn"><span class="fui-search"></span></button>
-	          </span>            
-	        </div>
-	      </div>               
-	    </form>
-	    {% endcomment %}      		    
+		    
 		</div><!-- /.navbar-collapse -->
 
 	</nav><!-- /navbar -->
 	{% endif %}
 	 
-	 
-  <!-- Secondary navbar:  holds search, Quests, and Questrs -->
-
-	{% if message %}
-	    <!-- Secondary navbar:  to display message notifications -->
-	    <div class="row clearfix secondaryNavRow">
-	        <div class="col-md-12 column">
-	            {{message}}
-	        </div>
-	    </div><!-- End of Secondary navbar -->
-	{% endif %}
-
-	{% comment %}
-	    {% if secondnav == "listquestsecondnav" %}
-	        <!-- Secondary navbar:  holds search, Quests, and Questrs -->
-	        <div class="row clearfix secondaryNavRow">
-	            <div class="col-md-12 column">
-	            
-
-	                    <ul>
-	                        <li class="active quest"><a href="#">Quests</a></li>
-	                        <li class="questr"><a href="#">Questrs</a></li>
-	                    </ul>
-	                
-	            </div>
-	        </div><!-- End of Secondary navbar -->
-	        {% endif %}
-	{% endcomment %}
- 
-
+	  
+	  
+	  
+	  
 	<div id="loader"></div>
 	
 	<div id="wrapper">
@@ -249,15 +227,20 @@
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column" id="footer-column">
 				
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column">
-					<i class="light-grey copyright">Copyright © 2014 Questr Inc. All rights reserved.</i>
-					<br>
+					<i class="copyright">Copyright © 2014 Questr Inc. All rights reserved.</i>
+					<ul>
+						<li>
 					<a class="facebook" target="_blank" href="https://www.facebook.com/questrco"><button class="btn-circle"><i class="fa fa-facebook"></i></button></a>
-	
+						</li>
+						<li>
 					<a class="twitter" target="_blank" href="https://twitter.com/questrco"><button class="btn-circle"><i class="fa fa-twitter"></i></button></a>
-	
+						</li>
+						<li>
 					<a class="linkedin" target="_blank" href="http://linkedin.com/company/questr"><button class="btn-circle"><i class="fa fa-linkedin"></i></button></a>
-	
+						</li>
+						<li>
 					<a class="email" target="_blank" href="mailto:hello@questr.co"><button class="btn-circle"><i class="fa fa-envelope"></i></button></a>
+						</li>
 				</div><!-- ./column -->
 
 				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
