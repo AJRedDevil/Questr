@@ -2,8 +2,8 @@ a {white-space: nowrap;}
  
 img {
 	max-width: 100%;
-	border-top-left-radius: 5px; 
-	border-top-right-radius: 5px; 
+	border-top-left-radius: 1px; 
+	border-top-right-radius: 1px; 
  }
  
  .content {
@@ -41,8 +41,6 @@ img {
 	margin: 0;
 }
 
-
-
 .post .post-info {
 	margin-bottom: 5px;
 	margin-top: 5px;
@@ -61,8 +59,8 @@ img {
 .post .item-image {
 	margin: 0;
 	
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
+	border-top-left-radius: 1px;
+	border-top-right-radius: 1px;
 	border-bottom-left-radius: 0px;
 	border-bottom-right-radius: 0px;
 }
@@ -77,13 +75,13 @@ img {
 
 .post .userbox {
 	margin: 0;
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 1px;
+	border-bottom-right-radius: 1px;
 }
 
 .post .userbox .column {
-	margin-bottom: 5px;
-	margin-top: 5px;
+	margin-bottom: 2px;
+	margin-top: 2px;
 }
 
 .post .userbox:hover {

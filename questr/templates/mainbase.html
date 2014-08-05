@@ -20,7 +20,7 @@
 	    <![endif]-->
 
 	    <link href={% static "bootstrap/css/bootstrap.min.css" %} rel="stylesheet">
-	    <link href={% static "css/flat-ui.css" %} rel="stylesheet">
+	
 	    <link href={% static "css/theme.css" %} rel="stylesheet">
 	    <link href={% static "css/normalize.css" %} rel="stylesheet"> 
 	    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -67,8 +67,7 @@
 
 	{% if pagetype == "loggedin" %}
 	
-	
-	<nav class="navbar navbar-default border-colours" role="navigation">
+	<nav class="navbar navbar-default" role="navigation">
 		
 	  <div class="navbar-header">
 		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
@@ -84,7 +83,6 @@
        
         	<ul class="nav navbar-nav navbar-left"> 
                 <li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a></li> 
-                <li class="{% navactive request 'newquest' %}"><a href="{% url 'newquest' %}">Request a shipment</a></li>
                 
                 <li class="{% navactive request 'mytrades' %}"><a href="{% url 'mytrades' %}">My shipments</a></li>
             	{% comment %}
@@ -138,14 +136,13 @@
                 </li>          
    				{% endcomment %}	      
    			</ul>   
-   			
-   			
-   			
-   			<form class="navbar-form navbar-left no-padding" role="search">{% csrf_token %}
+   
+   
+   			<form class="navbar-form navbar-left" role="search">{% csrf_token %}
 						<div class="form-group no-margin">
 							<input type="text" class="form-control search" />
 						</div>
-						<button>dada</button>
+						<button type="submit" class="btn" id="search-btn"><i class="fa fa-search"></i></button>
 					</form>
 					
 					
@@ -173,11 +170,13 @@
 	            
 	            
 	            <li class="dropdown">
-		              <a href="#" class="dropdown-toggle no-margin no-padding" data-toggle="dropdown" style="background:aqua;">
-			              <span class="no-margin no-padding" style="min-height:10px;max-height:30px;max-width:30px;display:inline-block;">
+		              <a href="#" class="dropdown-toggle no-margin no-padding" data-toggle="dropdown">
+		              	{% comment %}
+			              <span class="no-margin no-padding" style="min-height:30px;max-height:30px;min-width:30px;max-width:30px;display:inline-block;">
 				              <span class="ratio img-responsive img-circle profileImg" style="background-image: url({{user.avatar_file_name}});"></span>
 				          </span>
-				          {{user.first_name}} {{user.last_name}} <i class="fa fa-caret-down"></i>
+				          {% endcomment %}
+				           {{user.first_name}} {{user.last_name}} <i class="fa fa-caret-down"></i>
 		              </a>
 		           
 	       
@@ -204,6 +203,13 @@
 	                    </li>
 	                </ul>
 	        	</li>
+	        	
+	        	<li>
+	        		<a href="{% url 'newquest' %}" class="btn btn-default" id="post-shipment">
+		        		Post a shipment!
+	        		</a>
+	        	</li>
+	        	
 		    </ul>
 		    
 		</div><!-- /.navbar-collapse -->
