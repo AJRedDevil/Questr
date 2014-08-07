@@ -67,7 +67,7 @@
 						<div class="col-md-6 column">			
 							
 							<label for="inputEmail" class="control-label grey">Email</label>
-			                <input type="email" class="form-control input-sm" name="email" id="inputEmail" placeholder="youremail@example.com" data-error="Bruh, that email address is invalid" required>
+			                <input type="email" class="form-control input-sm" name="email" id="inputEmail" placeholder="" data-error="Bruh, that email address is invalid" required>
 			                <div class="help-block with-errors"></div>
 			                {% if user_form.email.errors %}
 			                    {{user_form.email.errors}}
@@ -151,7 +151,7 @@
     		<div class="col-md-10 col-md-offset-1 column">
 	    		<div class="col-md-8 column">	
 	              <hr>
-	              <small class="small lead grey" id="disclaimer">By continuing, I agree to Questr's <a href="#">Seller Agreement</a> and <a href="#">E-Sign Consent</a>.</small>
+	              <small class="small lead grey" id="disclaimer">By continuing, I agree to Questr's <a href="{% url 'terms' %}">Terms of Service</a> and <a href="{% url 'privacy' %}">Privacy Policy</a>.</small>
 	              <button type="submit" class="btn btn-embossed btn-info" id="createAccBtn">Create Account</button>
 	    		</div>
 	    		<div class="col-md-4 column">
