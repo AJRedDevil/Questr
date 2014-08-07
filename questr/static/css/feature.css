@@ -33,11 +33,11 @@ img {
 }
 
 .post .title-desc {
-	margin-bottom: 5px;
-	margin-top: 5px;
+	margin-bottom: 4px;
+	margin-top: 4px;
 }
 
-.post .title-desc h6, .post .title-desc p {
+.post .title-desc h5, .post .title-desc p {
 	margin: 0;
 }
 

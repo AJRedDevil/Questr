@@ -421,9 +421,6 @@ select option {
 
 
 
-
-
-
 /******** Pagination ************/
 .pagination li a {
 	color: #777777;
@@ -493,7 +490,6 @@ input.form-control:focus, textarea.form-control:focus {
 
 
 
-
 /*************** Primary Navbar ***************/
 .navbar {
 	background: white;
@@ -545,6 +541,9 @@ input.form-control:focus, textarea.form-control:focus {
 .navbar #search-btn {
 	background: transparent;
 	color: grey;
+	position: absolute;
+	margin-bottom: 30px;
+	z-index: 9999;
 }
 
 
@@ -607,14 +606,18 @@ input.form-control:focus, textarea.form-control:focus {
  }
 
 .no-image span.pay {
-	max-width: 100px;
-	display: block;
+	width: auto;
+	display: inline-block;
+	
 }
  
 .no-image span.pay h3 {
-	background: rgba(0,0,0,0.7);
+	background: rgba(0,0,0,0.6);
 	color: white;
 	font-weight: 300;
+	text-align: center;
+	display: block;
+	padding: 4px 10px;
 }
  
 .no-image h1 {
