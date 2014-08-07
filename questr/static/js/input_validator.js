@@ -5,6 +5,7 @@ Add onChange="functionName(id) in input to validate
 /* Change input style if invalid */
 function warning(textfield){
 	textfield.style.borderColor = 'red';
+    textfield.style.color = 'red';
     return;
 }
 
@@ -13,8 +14,9 @@ function warning(textfield){
 /* Check if required input is empty, ideally on sumbission and orChange */
 function isEmpty(textfield){
     var pattern = /^\s*$/;
-    if (!pattern.test(textfield)){
-        warning(textfield);
+    var current = this.id;
+    if (!pattern.test(current)){
+        warning(current);
     }
     return;
 }
@@ -50,6 +52,7 @@ function isValidPostalAndZipCode(postalcode) {
 
 /* Check if a password meets requirement */
 function isValidPassword() {
+    var pattern = /^(a-zA-Z0-9){6,32}$/;
 
 }
 
