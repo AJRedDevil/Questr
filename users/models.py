@@ -49,6 +49,7 @@ class QuestrUserProfile(AbstractBaseUser):
     notifications = models.BooleanField(_('notifications'), default=False)
     is_shipper = models.BooleanField(_('is_shipper'), default=False)
     rating = models.DecimalField(_('rating'), default='0', max_digits=5, decimal_places=2)
+    notificationprefs = models.CharField(_('notificationprefs'), default='{}', max_length=9999)
 
 
     USERNAME_FIELD = 'email'

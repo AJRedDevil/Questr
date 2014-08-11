@@ -228,3 +228,16 @@ PasswordChangeForm.base_fields = OrderedDict(
     (k, PasswordChangeForm.base_fields[k])
     for k in ['old_password', 'new_password1', 'new_password2']
 )
+
+
+class NotifPrefForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(NotifPrefForm, self).__init__(*args, **kwargs)
+
+    PACKAGE_SELECTION = (('car','Car'),('backpack','Backpack'),('minivan','Minivan'))
+    NOTIF_SELECTION = (('newquest','Someone posts a new quest'),('applyquest','My posted quests are applied'))
+
+    package = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=PACKAGE_SELECTION)
+    notif = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=NOTIF_SELECTION)
+
+

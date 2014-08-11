@@ -10,12 +10,27 @@
 			  <div class="panel-title lead">Posts</div>  
 		  </div>
 		  <div class="panel-body">
+        <form class="form-horizontal" action="{% url 'notificationsettings' %}" method="post" >{% csrf_token %}
+
 		  	<h2></h2>
-            <p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum 
-              iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla 
-              facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit 
-              augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,</p>
-              <hr> 
+            <p>I want to receive notifications for quests with below sizes</p>
+              <hr>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+              <input id="package" type="checkbox" name="package" value="backpack" class="form-control input-xs" >Backpack
+              <input id="package" type="checkbox" name="package" value="car" class="form-control input-xs" >Car
+              <input id="package" type="checkbox" name="package" value="minivan" class="form-control input-xs" >Minivan
+              </div><!-- ./column -->
+            <p>I want to receive notifications When ... </p>
+              <hr>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+              <input id="notif" type="checkbox" name="notif" value="newquest" class="form-control input-xs" >Someone posts a new quest
+              <input id="notif" type="checkbox" name="notif" value="applyquest" class="form-control input-xs" >My posted quests are applied
+              </div><!-- ./column -->
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">
+          <button type="submit" class="btn btn-info">Save</button>
+        </div><!-- ./column -->
+        </form>
 		  </div>
       	</div>
       </div>

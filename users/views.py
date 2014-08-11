@@ -10,7 +10,7 @@ from django.db.models import Avg
 from django.http import Http404
 from django.shortcuts import render, redirect
 from .models import QuestrUserProfile, UserTransactional, QuestrToken
-from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, QuestrSocialSignupForm, SetPasswordForm, PasswordChangeForm
+from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, QuestrSocialSignupForm, SetPasswordForm, PasswordChangeForm, NotifPrefForm
 
 from libs import email_notifier
 
@@ -323,6 +323,26 @@ def emailSettings(request):
     pagetype="loggedin"
     user = request.user
     settingstype="email"
+    user_form = NotifPrefForm()
+    return render(request, "emailsettings.html",locals())
+
+def notificationsettings(request):
+    """Change's user's personal settings"""
+    pagetype="loggedin"
+    user = request.user
+    settingstype="Notifications"
+    if request.method == "POST":
+        user_form = NotifPrefForm(request.POST)
+        if not user_form.is_valid():
+            logging.warn(user_form.errors)
+        if user_form.is_valid():
+            prefdict = {}
+            for prefs in user_form:
+                prefdict = user_form.cleaned_data
+
+            QuestrUserProfile.objects.filter(id=request.user.id).update(notificationprefs=prefdict)
+
+    user_form = NotifPrefForm()
     return render(request, "emailsettings.html",locals())
 
 def saveUserInfo(request):
