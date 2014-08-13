@@ -24,7 +24,7 @@
 					    <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">{% csrf_token %}
     
                      
-           			<input type="email" name="email" class="form-control" ng-model="user.email">
+           			<input type="email" name="email" class="form-control" ng-model="user.email" placeholder="Email Address">
                     <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>                   
             
                     <p> 
@@ -54,7 +54,7 @@
            
 					    <hr>
 
-	                <h6 class="grey">Sign in with</h6>
+	                <h6>Sign in with</h6>
 	                <a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i></button></a>
 	                <a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i></button></a>
 	                

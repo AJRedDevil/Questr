@@ -9,10 +9,10 @@
 {% endblock localhead %}
 {% block content%}
 
-<div class="container">
+<div class="container" ng-app="validationApp" data-ng-app="myApp" ng-controller="mainController">
     <div class="row clearfix">
         <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 column">
-	    	<h3 class="lead grey"><span class="glyphicon glyphicon-user blue"></span> Create your Questr account with</h3>
+	    	<h3 class="lead grey"><span class="glyphicon glyphicon-user"></span> Create your Questr account with</h3>
 	         
         	<center>
         		<br>
@@ -42,14 +42,24 @@
 	        </div><!-- ./col-md-10 -->
 	    </div><!-- ./row -->
 	    
-	    <form action="" method="post">{% csrf_token %}
+	    
+	    
+	    
+
+
+	    
+	    
+	    
+	    
+	    
+	    <form name="userForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
 	    <div class="container">	
 	    	<br>
 	    	<div class="row clearfix">
 				<div class="col-md-10 col-md-offset-1 column">
 					<div class="row clearfix">
 						<div class="col-md-12 column">
-							<h6 class="lead grey">Or the old fashion way</h6>
+							<h6 class="lead">Or the old fashion way</h6>
 						</div>
 					</div>
 				</div>
@@ -65,10 +75,12 @@
 					
 					<div class="row clearfix">
 						<div class="col-md-6 column">			
-							
-							<label for="inputEmail" class="control-label grey">Email</label>
-			                <input type="email" class="form-control input-sm" name="email" id="inputEmail" placeholder="" data-error="Bruh, that email address is invalid" required>
-			                <div class="help-block with-errors"></div>
+							<div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+								<label for="inputEmail" class="control-label">Email</label>
+								<input type="email" name="email" class="form-control" ng-model="user.email">
+								<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+							</div>
+			              
 			                {% if user_form.email.errors %}
 			                    {{user_form.email.errors}}
 			                {% endif %}
@@ -77,15 +89,36 @@
 							
 						</div><!-- ./col-md-6 -->						
 					</div><!-- ./row -->
+		
+		
+		
+		
 					
 					
 					
-					<label for="inputPassword" class="control-label grey">Password</label>
+					
+					
+Password: <input ng-model="user.password" type="password" name="password" data-ng-class="{'ng-invalid':myForm.confirmPassword.$error.match}" />
+        Confirm: <input ng-model="user.passwordConfirm" type="password" data-match="user.password" name="confirmPassword" />
+        <div data-ng-show="myForm.confirmPassword.$error.match">Passwords do not match!</div>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<label for="inputPassword" class="control-label">Password</label>
 					<div class="row clearfix">
 						<div class="col-md-6 column">
 						           
 							<input type="password" data-toggle="validator" data-minlength="6" class="form-control input-sm" name="password1" id="inputPassword" placeholder="" required>
-							<span class="help-block"><p class="grey">Minimum of 6 characters</p></span>
+							<span class="help-block"><p>Minimum of 6 characters</p></span>
 						</div>
 						<div class="col-md-6 column">
 							
@@ -102,7 +135,7 @@
 				</div><!-- ./col-md-8 -->
 				<div class="col-md-4 column">
 					<hr>
-					<p class="grey">Already a member?  Sign in <a href="{% url 'login' %}">here.</a></p>
+					<p>Already a member?  Sign in <a href="{% url 'login' %}">here.</a></p>
 				</div>
 			</div>
 		</div>
@@ -116,19 +149,19 @@
     		<div class="col-md-10 col-md-offset-1 column">
     		<div class="col-md-4 column">
  
-                <label for="username" class="control-label grey">Username</label>
+                <label for="username" class="control-label">Username</label>
                 <input type="text" class="form-control input-sm" name="displayname" id="username" placeholder="" required>
                 {% if user_form.displayname.errors %}
                     {{user_form.displayname.errors}}
                 {% endif %}
                 
-                <label for="firstName" class="control-label grey">First Name</label>
+                <label for="firstName" class="control-label">First Name</label>
                 <input type="text" class="form-control input-sm" name="first_name" id="first_name" placeholder="" required>   
                 {% if user_form.first_name.errors %}
                     {{user_form.first_name.errors}}
                 {% endif %}   
               
-                <label for="username" class="control-label grey">Last Name</label>
+                <label for="username" class="control-label">Last Name</label>
                 <input type="text" class="form-control input-sm" name="last_name" id="last_name" placeholder="" required>
                 {% if user_form.last_name.errors %}
                     {{user_form.last_name.errors}}
@@ -151,7 +184,7 @@
     		<div class="col-md-10 col-md-offset-1 column">
 	    		<div class="col-md-8 column">	
 	              <hr>
-	              <small class="small lead grey" id="disclaimer">By continuing, I agree to Questr's <a href="{% url 'terms' %}">Terms of Service</a> and <a href="{% url 'privacy' %}">Privacy Policy</a>.</small>
+	              <small class="small lead" id="disclaimer">By continuing, I agree to Questr's <a href="{% url 'terms' %}">Terms of Service</a> and <a href="{% url 'privacy' %}">Privacy Policy</a>.</small>
 	              <button type="submit" class="btn btn-embossed btn-info" id="createAccBtn">Create Account</button>
 	    		</div>
 	    		<div class="col-md-4 column">
@@ -161,6 +194,10 @@
     </div><!-- ./row -->                  
 </form>
 </div><!-- ./container -->
+
+
+
+
 
 {% endblock %}    
 {% block scripts %}
