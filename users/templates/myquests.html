@@ -39,7 +39,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
                         <h3 class="lead light-grey text-center no-margin" style="background:transparent;">You have no quests up.</h3>
                         
-                        <a href="{% url 'createquest' %}">
+                        <a href="{% url 'newquest' %}">
                             <p class="lead light-grey text-center no-margin" style="background:transparent;">
                                 <span class="glyphicon glyphicon-plus-sign"></span> Start questing!
                             </p>
@@ -163,7 +163,7 @@
                             <p class="light-grey inline"><span class="glyphicon glyphicon-time"></span></p><p class="grey inline"> {{quest.creation_date}}</p>
                             </div><!-- ./column -->
                             <div class="col-xs-2 col-sm-4 col-md-4 col-lg-4 column">
-                                <button type="button" class="btn btn-info popover-right" data-container="body" data-toggle="popover" data-placement="right" data-content="{{questdetails.delivery_code}}">
+                                <button type="button" class="btn btn-info popover-right" data-container="body" data-toggle="popover" data-placement="right" data-content="{{quest.delivery_code}}">
                                 Show Delivery Code
                                 </button>
                                     <button type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#myModal-{{shipper.0.id}}">Contact</button>

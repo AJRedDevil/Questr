@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from libs import email_notifier, geomaps, pricing
 
-from .contrib import quest_handler, mailing
+from .contrib import quest_handler
 from users.contrib.user_handler import isShipper, getShippers, getQuestrDetails
 from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm, QuestConfirmChangeForm
 from .models import Quests
@@ -185,6 +185,7 @@ def newquest(request):
             reward = price.get_price()
             pagetitle = "Confirm your Quest"
             return render(request, 'confirmquest.html', locals())  
+        logging.warn("Form has errors, %s ", user_form.errors)
     pagetitle = "Confirm your Quest"
     return render(request, 'newquest.html', locals())  
 
@@ -333,10 +334,16 @@ def completequest(request, questname):
                     questr = getQuestrDetails(questdetails.questrs_id)
                     Quests.objects.filter(id=questname).update(status='Completed')
                     Quests.objects.filter(id=questname).update(is_complete='t')
-                    mailing.send_quest_completion_email(questr, questdetails, shipper.first_name, quest_handler.get_review_link(questname, shipper.id))
-                    logging.warn("Quest completion email has been sent to %s", questr.email)
-                    mailing.send_quest_completion_email(shipper, questdetails, questr.first_name, quest_handler.get_review_link(questname, questr.id))
+                    ## Send notification to shipper
+                    questr_review_link = quest_handler.get_review_link(questname, questr.id)
+                    email_details = quest_handler.prepQuestCompleteNotification(shipper, questr, questdetails, questr_review_link)
+                    email_notifier.send_email_notification(shipper, email_details)
                     logging.warn("Quest completion email has been sent to %s", shipper.email)
+                    ## Send notification to questr
+                    shipper_review_link = quest_handler.get_review_link(questname, shipper.id)
+                    email_details = quest_handler.prepQuestCompleteNotification(questr, questr, questdetails, shipper_review_link)
+                    email_notifier.send_email_notification(questr, email_details)
+                    logging.warn("Quest completion email has been sent to %s", questr.email)
                     message="Quest completion mail has been sent to the Offerer."
                     return redirect('viewquest', questname=questname) # display message
 

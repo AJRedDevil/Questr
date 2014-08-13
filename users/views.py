@@ -15,7 +15,7 @@ from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuth
 from libs import email_notifier
 
 from access.requires import verified, is_alive
-from contrib import mailing, user_handler
+from contrib import user_handler
 
 from quests.contrib import quest_handler
 from quests.models import Quests
@@ -77,7 +77,12 @@ def resend_verification_email(request):
         try:
             user = QuestrUserProfile.objects.get(email=user_email)
             if user and not user.email_status:
-                user_handler.send_verfication_mail(user)
+                verf_link = user_handler.get_verification_url(user)
+                logging.warn("verification link is %s", verf_link)
+                email_details = user_handler.prepWelcomeNotification(user, verf_link)
+                logging.warn("What goes in the email is \n %s", email_details)
+                email_notifier.send_email_notification(user, email_details)
+                # user_handler.send_verfication_mail(user)
         except QuestrUserProfile.DoesNotExist:
             raise Http404
             return render(request,'404.html')
@@ -409,9 +414,10 @@ def resetpassword(request):
             new_random_password = user_handler.get_random_password()
             user.set_password(new_random_password)
             user.save()
-            mailing.send_reset_password_email(user, new_random_password)
+            email_details = user_handler.prepPasswordResetNotification(user, new_random_password)
+            email_notifier.send_email_notification(user, email_details)
             message = "Please check your inbox for your new password"
-            return render(request, "homepage.html", locals())
+            return redirect('home')
     pagetitle = "Reset Your Password"
     pagetype  = "public"
     return render(request,"resetpassword.html", locals())

@@ -45,11 +45,21 @@ from users.models import QuestrUserProfile
 
 @login_required
 def review(request, quest_id, reviewed_id):
+    """Reviews a user for a quest, where reviewed_id is the id of the user being reviewed"""
+    logging.warn("User being reviewed is %s", reviewed_id)
+    logging.warn("User who is reviewing is %s", request.user.id)
+    # If the user tries to review himself
+    if int(reviewed_id)==int(request.user.id):
+        return redirect('home')
     if request.method == "POST":
         """
         update the shipper review from the offerer
         calculate the final rating
         """
+        # If the user tries to review himself
+        if int(reviewed_id)==int(request.user.id):
+            return redirect('home')
+
         ratings = request.POST.getlist('rating')
         try:
             questdetails = Quests.objects.get(id=quest_id)
@@ -107,7 +117,8 @@ def review(request, quest_id, reviewed_id):
     except Review.DoesNotExist:
         is_reviewed=False
         return render(request, 'questrReview.html', locals())
-    logging.warn("redirecting to home")
+
+    logging.warn("redirecting to home")    
     return redirect('home')
 
 

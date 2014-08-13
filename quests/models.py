@@ -20,7 +20,6 @@ class Quests(models.Model):
     creation_date = models.DateTimeField(_('creation_date'), 
         blank=False)
     size = models.TextField(_('size'), default="backpack")
-    # rating = models.IntegerField(_('rating'), default='0')
     shipper = models.TextField(_('shipper'), blank=True, null=True) # if posted under an offer this would be a single digit (pk of questr object of the offerer)
     # qr_code = models.URLField(_('qr_code'), blank=True)
     srccity = models.TextField(_('srccity'), default="Toronto") # this is the source city
@@ -28,7 +27,6 @@ class Quests(models.Model):
     srcaddress = models.TextField(_('srcaddress')) # this would be a dict of address attributes     
     srcaddress = models.TextField(_('srcaddress')) # this would be a dict of address attributes 
     dstaddress = models.TextField(_('dstaddress')) # this would be a dict of address attributes
-    # isprivate = models.BooleanField(_('isprivate'), default=True) # if posted under an offer this would be always set to True, else would be set as False
     isaccepted = models.BooleanField(_('isaccepted'), default=False)
     isnotified = models.BooleanField(_('isnotified'), default=False)
     is_questr_reviewed = models.BooleanField(_('is_questr_reviewed'), default=False)
@@ -36,6 +34,8 @@ class Quests(models.Model):
     is_complete = models.BooleanField(_('is_complete'), default=False)
     delivery_code = models.TextField(_('delivery_code'), default='121212')
     ishidden = models.BooleanField(_('ishidden'), default=False)
+    distance = models.DecimalField(_('distance'), decimal_places=2,
+        max_digits=1000, default=0)
 
     def get_delivery_code(self):
         return hashlib.sha256(str(timezone.now()) + str(self.creation_date)).hexdigest()
@@ -92,23 +92,29 @@ class Quests(models.Model):
             return "error"
 
     def get_item_images_normal_url(self):
+        """Returns the url of the aws bucket object"""
         import os
         from django.core.files.storage import default_storage as storage
+        default_file_path = "/static/img/default.png"
         if not self.item_images:
-            return ""
+            return default_file_path
         normal_file_path = self.item_images.name
-        # filename_base, filename_ext = os.path.splitext(file_path)
-        # normal_file_path = "%s_%s_normal.jpg" % (filename_base, self.id)
-        logging.warn(normal_file_path)
-        if storage.exists(normal_file_path):
-            # logging.warn(storage.url(normal_file_path))
-            return storage.url(normal_file_path)
-        return ""
+
+        ##See if the AWS connection exists or works if doesn't return default file path
+        try:
+            if storage.exists(normal_file_path):
+                # logging.warn(storage.url(normal_file_path))
+                return storage.url(normal_file_path)
+        except Exception, e:
+            return default_file_path
+
+        return default_file_path
+
 
         #Overriding
     def save(self, *args, **kwargs):
         # get a delivery code with 3 letters from the first and 2 from the last
-        if not self.delivery_code:
+        if self.delivery_code=='121212':
             self.delivery_code = self.get_delivery_code()[:3]+self.get_delivery_code()[-2:]
         super(Quests, self).save(*args, **kwargs)
         self.create_item_images_normal()

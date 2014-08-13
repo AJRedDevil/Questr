@@ -132,11 +132,14 @@ def prepNewQuestNotification(user, questdetails):
                                                 'user_first_name'   : user.first_name,
                                                 'email_unsub_link'  : questr_unsubscription_link,
                                                 'quest_title'       : questdetails.title,
+                                                'quest_size'      : questdetails.size,
                                                 'quest_reward'      : str(questdetails.reward),
+                                                'quest_distance'      : str(questdetails.distance),
+                                                'quest_creation_date'      : questdetails.creation_date.strftime('%m-%d-%Y'),
                                                 'quest_support_mail': quest_support_email,
-                                                'recipient_id'      : user.id,
                                                 'questr_unsubscription_link' : questr_unsubscription_link,
-                                                'company'           : "Questr Co"
+                                                'quest_application_link' : settings.QUESTR_URL+'/quest/'+str(questdetails.id)+'/apply/',
+                                                'company'           : "Questr Co",
 
                                                 },
                     }
@@ -159,10 +162,13 @@ def prepOfferAcceptedNotification(user, questdetails):
                                                 'user_first_name'   : user.first_name,
                                                 'email_unsub_link'  : questr_unsubscription_link,
                                                 'quest_title'       : questdetails.title,
+                                                'quest_size'      : questdetails.size,
                                                 'quest_reward'      : str(questdetails.reward),
+                                                'quest_distance'      : str(questdetails.distance),
+                                                'quest_creation_date'      : questdetails.creation_date.strftime('%m-%d-%Y'),
                                                 'quest_support_mail': quest_support_email,
-                                                'recipient_id'      : user.id,
                                                 'questr_unsubscription_link' : questr_unsubscription_link,
+                                                'quest_shipment_link' : settings.QUESTR_URL+'/user/trades/',
                                                 'company'           : "Questr Co"
 
                                                 },
@@ -182,20 +188,55 @@ def prepQuestAppliedNotification(shipper, questr, questdetails):
                         'template_name' : template_name,
                         'global_merge_vars': {
                                                 'quest_public_link' : settings.QUESTR_URL+'/quest/'+str(questdetails.id),
+                                                'quest_description' : questdetails.description,
                                                 'questr_first_name'   : questr.first_name,
                                                 'shipper_first_name': shipper.first_name,                                                
+                                                'shipper_last_name': shipper.last_name,                                                
                                                 'shipper_user_name': shipper.displayname,                                                
                                                 'shipper_profile_link'  : settings.QUESTR_URL+'/user/'+shipper.displayname,                                                
                                                 'email_unsub_link'  : questr_unsubscription_link,
                                                 'quest_title'       : questdetails.title,
+                                                'quest_size'      : questdetails.size,
                                                 'quest_reward'      : str(questdetails.reward),
+                                                'quest_distance'      : str(questdetails.distance),
+                                                'quest_creation_date'      : questdetails.creation_date.strftime('%m-%d-%Y'),
                                                 'quest_support_mail': quest_support_email,
-                                                'recipient_id'      : questr.id,
+                                                'quest_shipment_link' : settings.QUESTR_URL+'/user/trades/',
+                                                'company'           : "Questr Co"
+
+                                                },
+                    }
+    return email_details
+
+def prepQuestCompleteNotification(shipper, questr, questdetails, review_link):
+    """Prepare the details for notification emails for completion of quests"""
+    template_name="Quest_Completion_Notification"
+    subject="Questr - Quest Completed"
+    # quest_browse_link=settings.QUESTR_URL+"/quest"
+    quest_support_email="support@questr.co"
+    questr_unsubscription_link="http://questr.co/unsub"
+
+    email_details = {
+                        'subject' : subject,
+                        'template_name' : template_name,
+                        'global_merge_vars': {
+                                                'quest_public_link' : settings.QUESTR_URL+'/quest/'+str(questdetails.id),
+                                                'review_link' : review_link,
+                                                'quest_description' : questdetails.description,
+                                                'user_first_name'   : questr.first_name,
+                                                'quest_title'       : questdetails.title,
+                                                'quest_size'      : questdetails.size,
+                                                'quest_reward'      : str(questdetails.reward),
+                                                'quest_distance'      : str(questdetails.distance),
+                                                'quest_creation_date'      : questdetails.creation_date.strftime('%m-%d-%Y'),
+                                                'quest_support_mail': quest_support_email,
                                                 'questr_unsubscription_link' : questr_unsubscription_link,
                                                 'company'           : "Questr Co"
 
                                                 },
                     }
+
+    logging.warn(email_details)
     return email_details
 
 def get_review_link(quest_id, shipper_id):

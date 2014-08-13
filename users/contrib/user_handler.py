@@ -4,7 +4,7 @@ from random import choice
 from django.conf import settings
 from django.http import Http404
 
-import mailing
+import logging
 from users.models import QuestrUserProfile, UserTransactional, QuestrToken
 from quests.models import Quests
 
@@ -15,7 +15,54 @@ def get_random_password():
 	random_password = ''.join([choice('1234567890qwertyuiopasdfghjklzxcvbnm') for i in range(7)])
 	return random_password
 
-def __get_verification_url(user=None): 
+def prepPasswordResetNotification(questr, new_password):
+    """Prepare the details for notification of resetting of password"""
+    template_name="RESET_PASSWORD_EMAIL"
+    subject="Questr - Your password has been reset !"
+    quest_support_email="support@questr.co"
+    questr_unsubscription_link="http://questr.co/unsub"
+
+    email_details = {
+                        'subject' : subject,
+                        'template_name' : template_name,
+                        'global_merge_vars': {
+                                                'questr_first_name'   : questr.first_name,
+                                                'questr_last_name'   : questr.last_name,
+                                                'new_password'      : new_password,
+                                                'quest_support_mail': quest_support_email,
+                                                'questr_unsubscription_link' : questr_unsubscription_link,
+                                                'company'           : "Questr Co",
+                                                },
+                    }
+
+    logging.warn("Password reset email is prepared")
+    return email_details
+
+
+def prepWelcomeNotification(questr, verf_link):
+    """Prepare the details for notification emails after new user registers"""
+    template_name="Welcome_Email"
+    subject="Questr - Please verify your email !"
+    quest_support_email="support@questr.co"
+    questr_unsubscription_link="http://questr.co/unsub"
+
+    email_details = {
+                        'subject' : subject,
+                        'template_name' : template_name,
+                        'global_merge_vars': {
+                                                'questr_first_name'   : questr.first_name,
+                                                'questr_last_name'   : questr.last_name,
+                                                'quest_support_mail': quest_support_email,
+                                                'questr_unsubscription_link' : questr_unsubscription_link,
+                                                'company'           : "Questr Co",
+                                                'verf_link'         : verf_link,
+                                                },
+                    }
+
+    logging.warn("Welcome email is prepared")
+    return email_details
+
+def get_verification_url(user=None): 
     """
         Returns the verification url.
     """
@@ -36,13 +83,6 @@ def __get_verification_url(user=None):
         questr_token.save()
         verf_link = "{0}/user/email/confirm/{1}?questr_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_user_code(), token_id)
     return verf_link
-
-def send_verfication_mail(user):
-    """
-        Sends the verification email to the user
-    """
-    verf_link = __get_verification_url(user)
-    mailing.send_verification_email(user, verf_link)
 
 def getShipper(shipper_id):
     """List shipper information"""
