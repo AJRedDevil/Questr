@@ -1,6 +1,18 @@
 
     var app = angular.module('myApp', []);
-    app.directive('match', function () {
+    
+
+
+
+// create angular app
+	var validationApp = angular.module('validationApp', []);
+
+	// create angular controller
+	validationApp.controller('mainController', function($scope) {
+		
+	});
+	
+	validationApp.directive('match', function () {
         return {
             require: 'ngModel',
             restrict: 'A',
@@ -16,15 +28,5 @@
             }
         };
     });
-
-
-
-// create angular app
-	var validationApp = angular.module('validationApp', []);
-
-	// create angular controller
-	validationApp.controller('mainController', function($scope) {
-		
-	});
 
 	

@@ -19,6 +19,17 @@ hr {
 	padding: 0;
 }
 
+.ng-invalid.ng-dirty {
+ border-color: red; 
+}
+
+.ng-valid.ng-dirty {
+    border-color: green; 
+}
+
+
+
+
 /******************* Signin **********************/
 #signin {
 	background: #99a1a7;
@@ -28,9 +39,9 @@ hr {
 	margin-top: 20px;
 }
 
-input
 
 /******************* reset password **********************/
 #reset-pass {
 	background: #34495E;
 }
+

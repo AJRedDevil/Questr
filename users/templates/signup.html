@@ -9,7 +9,7 @@
 {% endblock localhead %}
 {% block content%}
 
-<div class="container" ng-app="validationApp" data-ng-app="myApp" ng-controller="mainController">
+<div class="container" ng-app="validationApp" ng-controller="mainController">
     <div class="row clearfix">
         <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 column">
 	    	<h3 class="lead grey"><span class="glyphicon glyphicon-user"></span> Create your Questr account with</h3>
@@ -41,15 +41,9 @@
         	</center>
 	        </div><!-- ./col-md-10 -->
 	    </div><!-- ./row -->
-	    
-	    
-	    
-	    
-
-
-	    
-	    
-	    
+	   
+    
+    
 	    
 	    
 	    <form name="userForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
@@ -77,7 +71,7 @@
 						<div class="col-md-6 column">			
 							<div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
 								<label for="inputEmail" class="control-label">Email</label>
-								<input type="email" name="email" class="form-control" ng-model="user.email">
+								<input type="email" name="email" class="form-control ng-pristine ng-invalid" ng-model="user.email" required />
 								<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
 							</div>
 			              
@@ -89,40 +83,19 @@
 							
 						</div><!-- ./col-md-6 -->						
 					</div><!-- ./row -->
-		
-		
-		
-		
-					
-					
-					
-					
-					
-Password: <input ng-model="user.password" type="password" name="password" data-ng-class="{'ng-invalid':myForm.confirmPassword.$error.match}" />
-        Confirm: <input ng-model="user.passwordConfirm" type="password" data-match="user.password" name="confirmPassword" />
-        <div data-ng-show="myForm.confirmPassword.$error.match">Passwords do not match!</div>
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
+						
 					
 					<label for="inputPassword" class="control-label">Password</label>
 					<div class="row clearfix">
-						<div class="col-md-6 column">
-						           
-							<input type="password" data-toggle="validator" data-minlength="6" class="form-control input-sm" name="password1" id="inputPassword" placeholder="" required>
+						<div class="col-md-6 column">    
+							<input class="form-control ng-pristine ng-invalid" ng-model="user.password" type="password" name="password" data-ng-class="{'ng-invalid':myForm.confirmPassword.$error.match}" required />
 							<span class="help-block"><p>Minimum of 6 characters</p></span>
+							<div data-ng-show="myForm.confirmPassword.$error.match">Passwords do not match!</div>
 						</div>
 						<div class="col-md-6 column">
 							
-							<input type="password" class="form-control input-sm" name="password2" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Type it again" required>
+							<input class="form-control ng-pristine ng-invalid" ng-model="user.passwordConfirm" type="password" data-match="user.password" name="confirmPassword" required />
+							
 							<div class="help-block with-errors"></div>
 							{% if user_form.password2.errors %}
 							{{user_form.password2.errors}}
@@ -142,8 +115,7 @@ Password: <input ng-model="user.password" type="password" name="password" data-n
 	</div>
 </div>
 	    
-	    
-	    
+	       
 	    
 	    <div class="row clearfix">
     		<div class="col-md-10 col-md-offset-1 column">
@@ -194,7 +166,6 @@ Password: <input ng-model="user.password" type="password" name="password" data-n
     </div><!-- ./row -->                  
 </form>
 </div><!-- ./container -->
-
 
 
 
