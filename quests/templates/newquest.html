@@ -7,7 +7,7 @@
 {% endblock localhead %}
 {% block content %}
 
-<div class="container-fluid">
+<div class="container-fluid" ng-app="validationApp" ng-controller="mainController">
 	<div class="row clearfix">
 		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 column">
 			<div class="panel panel-default body-prop border-colours">
@@ -16,12 +16,13 @@
 				</div><!-- ./panel-heading -->
 
 				<div class="panel-body">
-					<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+					<form class="form-horizontal" action="" method="post" enctype="multipart/form-data" name="myForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
 						<!-- Name input-->
-						<div class="form-group">
+						<div class="form-group" ng-class="{ 'has-error' : myForm.title.$invalid && !myForm.title.$pristine }">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="light-grey">Title</p></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-							<input id="title" name="title" type="text" placeholder="Shipment title" class="form-control input-xs">
+								<input class="form-control ng-pristine ng-invalid" ng-model="user.email" name="title" type="text" placeholder="Shipment title" required />
+								<span class="error" ng-show="myForm.userName.$error.required">
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 
@@ -59,7 +60,7 @@
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="light-grey">Message</p></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-								<textarea class="form-control" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5"></textarea>
+								<textarea class="form-control" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5" required></textarea>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 
@@ -86,7 +87,7 @@
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-								<input id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" class="form-control input-xs">
+								<input id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" class="form-control input-xs" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 
@@ -109,7 +110,7 @@
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-								<input id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" class="form-control input-xs">
+								<input id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" class="form-control input-xs" required>
 								
 								<p>Distance</p>
 							</div><!-- ./column -->
@@ -130,11 +131,6 @@
 
 
 {% block scripts %}
-<script>
-$(document).ready(function(){
-  $("p").click(function(){
-    $(this).hide();
-  });
-});
-</script>
+<!-- Custom Javascript -->
+  <script src={% static "js/validator.js" %}></script>
 {% endblock scripts %}

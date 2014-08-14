@@ -4,8 +4,7 @@
   <!-- CSS -->
   <link href={% static "css/sign.css" %} rel="stylesheet">
   <link href={% static "css/social-buttons.css" %} rel="stylesheet">
-  <!-- Custom Javascript -->
-  <script src={% static "js/validator.js" %}></script>
+  
 {% endblock localhead %}
 {% block content%}
 
@@ -167,9 +166,8 @@
 </form>
 </div><!-- ./container -->
 
-
-
-
 {% endblock %}    
 {% block scripts %}
+<!-- Custom Javascript -->
+  <script src={% static "js/validator.js" %}></script>
 {% endblock scripts %}

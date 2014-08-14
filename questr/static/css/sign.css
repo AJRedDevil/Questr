@@ -19,16 +19,6 @@ hr {
 	padding: 0;
 }
 
-.ng-invalid.ng-dirty {
- border-color: red; 
-}
-
-.ng-valid.ng-dirty {
-    border-color: green; 
-}
-
-
-
 
 /******************* Signin **********************/
 #signin {
