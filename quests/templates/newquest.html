@@ -16,7 +16,7 @@
 				</div><!-- ./panel-heading -->
 
 				<div class="panel-body">
-					<form class="form-horizontal" action="" method="post" enctype="multipart/form-data" name="myForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
+					<form class="form-horizontal" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" name="myForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
 						<!-- Name input-->
 						<div class="form-group" ng-class="{ 'has-error' : myForm.title.$invalid && !myForm.title.$pristine }">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="light-grey">Title</p></label>
@@ -83,13 +83,39 @@
 							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"></div>  
 						</div>  <!-- ./form-group -->
 
-						<!-- Departure Address input-->
+						<!-- Pickup Address input-->
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 								<input id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" class="form-control input-xs" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
+
+						<!-- Pickup Name input-->
+						<div class="form-group">
+							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+								<input id="srcname" name="srcname" type="text" placeholder="Name of the sender" class="form-control input-xs" required>
+							</div><!-- ./column -->
+						</div><!-- ./form-group -->
+
+
+						<!-- Pickup Phone input-->
+						<div class="form-group">
+							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+								<input id="srcphone" name="srcphone" type="text" placeholder="Phone number" class="form-control input-xs" required>
+							</div><!-- ./column -->
+						</div><!-- ./form-group -->
+
+						<!-- Pickup Postal Code input-->
+						<div class="form-group">
+							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+								<input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="Postal Code" class="form-control input-xs" required>
+							</div><!-- ./column -->
+						</div><!-- ./form-group -->
+
 
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="light-grey">Drop off at</p></label>
@@ -106,15 +132,39 @@
 							</div><!-- ./column -->
 						</div>  <!-- ./form-group -->  
 
-						<!-- Departure Address input-->
+						<!-- Dropoff Address input-->
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 								<input id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" class="form-control input-xs" required>
 								
-								<p>Distance</p>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
+
+						<!-- Dropoff Name input-->
+						<div class="form-group">
+							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+								<input id="dstname" name="dstname" type="text" placeholder="Name of the receiver" class="form-control input-xs" required>
+							</div><!-- ./column -->
+						</div><!-- ./form-group -->
+
+						<!-- Dropoff Phone input-->
+						<div class="form-group">
+							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+								<input id="dstphone" name="dstphone" type="text" placeholder="Phone number" class="form-control input-xs" required>
+							</div><!-- ./column -->
+						</div><!-- ./form-group -->
+
+						<!-- Dropoff Postal Code input-->
+						<div class="form-group">
+							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+								<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="Postal Code" class="form-control input-xs" required>
+							</div><!-- ./column -->
+						</div><!-- ./form-group -->
+
 
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">
 							<button type="submit" class="btn btn-info">Continue</button>

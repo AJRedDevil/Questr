@@ -85,8 +85,8 @@
 	        <div class="row clearfix">
 	            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column post-info">	
 	                {% if user.is_shipper == True %}
-	                 From: {{quest.srcaddress}}, {{quest.srccity}}, Canada<br>
-	                 To: {{quest.dstaddress}}, {{quest.dstcity}}, Canada<br>
+	                 From: {{quest.pickup.srcaddress}}, {{quest.pickup.srccity}}, Canada<br>
+	                 To: {{quest.dropoff.dstaddress}}, {{quest.dropoff.dstcity}}, Canada<br>
 	                {% endif %} 
 	                <span class="glyphicon glyphicon-time"></span>{% localtime on%} {{quest.creation_date | timesince }} {% endlocaltime %} ago
 	                </p>   

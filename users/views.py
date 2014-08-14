@@ -1,6 +1,5 @@
 
 
-import logging
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
@@ -21,6 +20,9 @@ from quests.contrib import quest_handler
 from quests.models import Quests
 from reviews.models import Review
 from reviews.contrib import review_handler
+
+import simplejson as json
+import logging
 
 # Create your views here.
 def logout(request):
@@ -346,14 +348,16 @@ def notificationsettings(request):
     settingstype="Notifications"
     if request.method == "POST":
         user_form = NotifPrefForm(request.POST)
-        if not user_form.is_valid():
-            logging.warn(user_form.errors)
         if user_form.is_valid():
             prefdict = {}
-            for prefs in user_form:
-                prefdict = user_form.cleaned_data
-
+            package = user_form.cleaned_data['package']
+            notif = user_form.cleaned_data['notif']
+            prefdict['package'] = package
+            prefdict['notif'] = notif
             QuestrUserProfile.objects.filter(id=request.user.id).update(notificationprefs=prefdict)
+
+        if user_form.errors:
+            logging.warn("Form has errors, %s ", user_form.errors)
 
     user_form = NotifPrefForm()
     return render(request, "emailsettings.html",locals())
