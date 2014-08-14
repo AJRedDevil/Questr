@@ -4,9 +4,9 @@ import views as userviews
 
 urlpatterns = patterns('',
     url(r'', include('social.apps.django_app.urls', namespace='social')),
-    url(r'^$', userviews.login, name='user'),
+    url(r'^$', userviews.signin, name='user'),
     url(r'^signup/$', userviews.signup, name='signup'),
-    url(r'^login/$', userviews.login, name='login'),
+    url(r'^signin/$', userviews.signin, name='signin'),
     url(r'^home/$', userviews.home, name='home'),
     url(r'^profile/$', userviews.profile, name='profile'),
     url(r'^profile/save/.*', userviews.saveUserInfo, name='saveprofile'), # commented for later use

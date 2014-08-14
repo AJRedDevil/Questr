@@ -18,45 +18,38 @@
 			    
 			    <div class="panel-body">
 				   
-				    <form name="userForm" ng-submit="submitForm()" novalidate>
-    		
-					    <!-- Login with Username and Password --> 
-					    <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">{% csrf_token %}
-    
-                     
-           			<input type="email" name="email" class="form-control" ng-model="user.email" placeholder="Email Address">
-                    <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>                   
-            
-                    <p> 
-                    {% if auth_form.username.errors %}
-                    	{{ auth_form.username.errors }}
-                    {% endif %}
-                    </p>
-        
-                    <div class="help-block with-errors"></div>
-            
-                    <input type="password" class="form-control input-sm" name="password" id="exampleInputPassword1" placeholder="Password">
-                    <p> 
-	            {% if auth_form.password.errors %}
-	            {{ auth_form.password.errors }}
-	            {% endif %}
-	            {% if auth_form.errors %}
-	                {{ auth_form.non_field_errors }}
-	            {% endif %}
-	          </p>
+				    <form action="{%url 'signin'%}" method="post" name="userForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
+                        <!-- Login with Username and Password --> 
+                        <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+                            <input type="email" name="username" class="form-control" ng-model="user.email" placeholder="Email Address">
+                            <p> 
+                            {% if auth_form.username.errors %}
+                            	{{ auth_form.username.errors }}
+                            {% endif %}
+                            </p>
+                
+                            <div class="help-block with-errors"></div>
+                            <input type="password" class="form-control input-sm" name="password" id="exampleInputPassword1" placeholder="Password">
+                            <p> 
+            	            {% if auth_form.password.errors %}
+            	            {{ auth_form.password.errors }}
+            	            {% endif %}
+            	            {% if auth_form.errors %}
+            	                {{ auth_form.non_field_errors }}
+            	            {% endif %}
+                            </p>
+                            
+                            <a href="{% url 'reset_password' %}"><small>Forgot password?</small></a>
                         
-                    <a href="{% url 'reset_password' %}"><small>Forgot password?</small></a>
-                    
-                    <center><button type="submit" class="btn btn-sm btn-embossed btn-info">Sign in</button></center>
-			</div> <!-- ./form-group -->
-           
+                            <center><button type="submit" class="btn btn-sm btn-embossed btn-info">Sign in</button></center>
+                        </div> <!-- ./form-group -->
 				    </form>
            
-					    <hr>
+                    <hr>
 
 	                <h6>Sign in with</h6>
-	                <a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i></button></a>
-	                <a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i></button></a>
+                    <a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i></button></a>
+                    <a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i></button></a>
 	                
 	                {% comment %}
 	                ## This is for google plus based authentication ##

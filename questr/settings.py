@@ -129,7 +129,7 @@ AUTH_USER_MODEL = 'users.QuestrUserProfile'
 
 # For Social Network Authentication
 # User Model
-LOGIN_URL = '/user/login/'
+LOGIN_URL = '/user/signin/'
 # LOGIN_ERROR_URL = '/user/login/'
 LOGIN_REDIRECT_URL = '/user/home/'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/'

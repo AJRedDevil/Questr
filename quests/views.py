@@ -185,7 +185,8 @@ def newquest(request):
             reward = price.get_price()
             pagetitle = "Confirm your Quest"
             return render(request, 'confirmquest.html', locals())  
-        logging.warn("Form has errors, %s ", user_form.errors)
+        if user_form.errors:
+            logging.warn("Form has errors, %s ", user_form.errors)
     pagetitle = "Confirm your Quest"
     return render(request, 'newquest.html', locals())  
 

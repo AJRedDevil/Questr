@@ -45,7 +45,7 @@
     
 	    
 	    
-	    <form name="userForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
+	    <form action="{% url 'signup' %}" method="post" name="userForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
 	    <div class="container">	
 	    	<br>
 	    	<div class="row clearfix">
@@ -87,13 +87,13 @@
 					<label for="inputPassword" class="control-label">Password</label>
 					<div class="row clearfix">
 						<div class="col-md-6 column">    
-							<input class="form-control ng-pristine ng-invalid" ng-model="user.password" type="password" name="password" data-ng-class="{'ng-invalid':myForm.confirmPassword.$error.match}" required />
+							<input class="form-control ng-pristine ng-invalid" ng-model="user.password" type="password" name="password1" data-ng-class="{'ng-invalid':myForm.confirmPassword.$error.match}" required />
 							<span class="help-block"><p>Minimum of 6 characters</p></span>
 							<div data-ng-show="myForm.confirmPassword.$error.match">Passwords do not match!</div>
 						</div>
 						<div class="col-md-6 column">
 							
-							<input class="form-control ng-pristine ng-invalid" ng-model="user.passwordConfirm" type="password" data-match="user.password" name="confirmPassword" required />
+							<input class="form-control ng-pristine ng-invalid" ng-model="user.passwordConfirm" type="password" data-match="user.password" name="password2" required />
 							
 							<div class="help-block with-errors"></div>
 							{% if user_form.password2.errors %}
@@ -107,7 +107,7 @@
 				</div><!-- ./col-md-8 -->
 				<div class="col-md-4 column">
 					<hr>
-					<p>Already a member?  Sign in <a href="{% url 'login' %}">here.</a></p>
+					<p>Already a member?  Sign in <a href="{% url 'signin' %}">here.</a></p>
 				</div>
 			</div>
 		</div>

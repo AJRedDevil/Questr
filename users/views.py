@@ -28,7 +28,7 @@ def logout(request):
     auth_logout(request)
     return redirect('index')
     
-def login(request):
+def signin(request):
     """Home view, displays login mechanism"""
     pagetype="public"
     ## if authenticated redirect to user's homepage directly ##
@@ -39,6 +39,9 @@ def login(request):
         if auth_form.is_valid():
             auth_login(request, auth_form.get_user())
             return redirect('home')
+
+        if auth_form.errors:
+            logging.warn("Login Form has errors, %s ", auth_form.errors)
     pagetitle = "Login"
     return render(request, 'signin.html', locals())
 
@@ -50,16 +53,21 @@ def signup(request):
         return redirect('home')
     if request.method == "POST":
         user_form = QuestrUserCreationForm(request.POST)
-        logging.warn(user_form.is_valid())
-        logging.warn(user_form.errors)
         if user_form.is_valid():
             userdata = user_form.save()
             authenticate(username=userdata.email, password=userdata.password)
             userdata.backend='django.contrib.auth.backends.ModelBackend'
             auth_login(request, userdata)
-            user_handler.send_verfication_mail(userdata)
+            verf_link = user_handler.get_verification_url(userdata)
+            logging.warn("verification link is %s", verf_link)
+            email_details = user_handler.prepWelcomeNotification(userdata, verf_link)
+            logging.warn("What goes in the email is \n %s", email_details)
+            email_notifier.send_email_notification(userdata, email_details)
             pagetitle = "Please verify your email !"
             return render(request, 'thankyou.html', locals())
+
+        if user_form.errors:
+            logging.warn("Login Form has errors, %s ", user_form.errors)
         pagetitle = "Signup"
         return render(request, 'signup.html', locals())
     else:
@@ -367,6 +375,7 @@ def saveUserInfo(request):
         return render(request, "socialsignup.html",locals())
 
 @is_alive
+@login_required
 def verify_email(request, user_code):
     """
         Verifies email of the user and redirect to the home page
