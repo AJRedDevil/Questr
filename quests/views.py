@@ -76,10 +76,15 @@ def editquest(request, questname):
                 description = user_form.cleaned_data['description']
                 srccity = user_form.cleaned_data['srccity']
                 srcaddress = user_form.cleaned_data['srcaddress']
+                quest_data = user_form.save(commit=False)
                 srcpostalcode = user_form.cleaned_data['srcpostalcode']
+                srcname = user_form.cleaned_data['srcname']
+                srcphone = user_form.cleaned_data['srcphone']
                 dstcity = user_form.cleaned_data['dstcity']
                 dstaddress = user_form.cleaned_data['dstaddress']
                 dstpostalcode = user_form.cleaned_data['dstpostalcode']
+                dstname = user_form.cleaned_data['dstname']
+                dstphone = user_form.cleaned_data['dstphone']
                 size = user_form.cleaned_data['size']
                 # For distance
                 #the distance and price hsa to be set up into a temp database, also the 
@@ -95,6 +100,9 @@ def editquest(request, questname):
                 reward = price.get_price()
                 pagetitle = "Confirm your Quest"
                 return render(request, 'confirmquestedit.html', locals())  
+            if user_form.errors:
+                logging.warn("Form has errors, %s ", user_form.errors)
+
         pagetitle="Edit - " + questdetails.title
         return render(request, 'editquest.html', locals())  
 
@@ -133,16 +141,44 @@ def confirmeditquest(request, questname):
         if questdetails.questrs.id == user.id:
             instance=get_object_or_404(Quests, id=questname)
             user_form = QuestConfirmChangeForm(data=request.POST, instance=instance)
-            # logging.warn(user_form.errors)
-            # logging.warn(user_form.is_valid())
-            # logging.warn(user_form)
             if user_form.is_valid():
+                pickupdict = {}
+                dropoffdict = {}
+                srccity = user_form.cleaned_data['srccity']
+                srcaddress = user_form.cleaned_data['srcaddress']
                 quest_data = user_form.save(commit=False)
+                srcpostalcode = user_form.cleaned_data['srcpostalcode']
+                srcname = user_form.cleaned_data['srcname']
+                srcphone = user_form.cleaned_data['srcphone']
+                dstcity = user_form.cleaned_data['dstcity']
+                dstaddress = user_form.cleaned_data['dstaddress']
+                dstpostalcode = user_form.cleaned_data['dstpostalcode']
+                dstname = user_form.cleaned_data['dstname']
+                dstphone = user_form.cleaned_data['dstphone']
+                ## categorizing source and destination info
+                pickupdict['city'] = srccity
+                pickupdict['address'] = srcaddress
+                pickupdict['postalcode'] = srcpostalcode
+                pickupdict['name'] = srcname
+                pickupdict['phone'] = srcphone
+                dropoffdict['city'] = dstcity
+                dropoffdict['address'] = dstaddress
+                dropoffdict['postalcode'] = dstpostalcode
+                dropoffdict['name'] = dstname
+                dropoffdict['phone'] = dstphone
+                ##Submit dict to the field
+                # logging.warn("Pickup dict %s", pickupdict)
+                # logging.warn("Dropoff dict %s", dropoffdict)
+                quest_data = user_form.save(commit=False)
+                quest_data.pickup = json.dumps(pickupdict)
+                quest_data.dropoff = json.dumps(dropoffdict)
                 quest_data.save()
                 pagetitle = "Confirm your Quest"
                 return redirect(viewquest, questname=questdetails.id)
+            if user_form.errors:
+                logging.warn("Form has errors, %s ", user_form.errors)
         pagetitle="Edit - " + questdetails.title
-        return render(request, 'editquest.html', locals())  
+        return redirect('editquest',questname=questdetails.id)
 
     # Check if the owner and the user are the same
     if questdetails.questrs.id == user.id:
@@ -224,16 +260,16 @@ def confirmquest(request):
             dstname = user_form.cleaned_data['dstname']
             dstphone = user_form.cleaned_data['dstphone']
             ## categorizing source and destination info
-            pickupdict['srccity'] = srccity
-            pickupdict['srcaddress'] = srcaddress
-            pickupdict['srcpostalcode'] = srcpostalcode
-            pickupdict['srcname'] = srcname
-            pickupdict['srcphone'] = srcphone
-            dropoffdict['dstcity'] = dstcity
-            dropoffdict['dstaddress'] = dstaddress
-            dropoffdict['dstpostalcode'] = dstpostalcode
-            dropoffdict['dstname'] = dstname
-            dropoffdict['dstphone'] = dstphone
+            pickupdict['city'] = srccity
+            pickupdict['address'] = srcaddress
+            pickupdict['postalcode'] = srcpostalcode
+            pickupdict['name'] = srcname
+            pickupdict['phone'] = srcphone
+            dropoffdict['city'] = dstcity
+            dropoffdict['address'] = dstaddress
+            dropoffdict['postalcode'] = dstpostalcode
+            dropoffdict['name'] = dstname
+            dropoffdict['phone'] = dstphone
             ##Submit dict to the field
             # logging.warn("Pickup dict %s", pickupdict)
             # logging.warn("Dropoff dict %s", dropoffdict)

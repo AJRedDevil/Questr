@@ -37,6 +37,15 @@
               </div>
             </div><!-- ./form-group -->
 
+            <!-- Distance input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="grey">Distance</p></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="distance" name="distance" type="text" class="form-control input-xs" value="{{distance}}" readonly="yes">
+              </div>
+            </div><!-- ./form-group -->          
+
+
             <!-- Location input-->
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Pick up from</p></label>
@@ -47,10 +56,10 @@
               </div>
               <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"></div>
                 
-            </div>  <!-- End of Form group -->    
-          
- 
-            <!-- Departure Address input-->
+            </div>  <!-- End of Form group -->
+
+                    
+            <!-- Pickup Address input-->
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
@@ -58,6 +67,30 @@
               </div>
             </div>
 
+            <!-- Pickup Name input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="srcname" name="srcname" type="text" placeholder="Departure Address" class="form-control input-xs" value="{{srcname}}" readonly="Yes">
+              </div>
+            </div>
+
+            <!-- Pickup Phone input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="srcphone" name="srcphone" type="text" placeholder="Departure Address" class="form-control input-xs" value="{{srcphone}}" readonly="Yes">
+              </div>
+            </div>
+                    
+            <!-- Pickup Postal input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="Departure Address" class="form-control input-xs" value="{{srcpostalcode}}" readonly="Yes">
+              </div>
+            </div>
+                   
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Drop off at</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column"> 
@@ -67,13 +100,38 @@
                     </select>
               </div>
             </div>  <!-- ./form-group -->  
-                    
-                    
-            <!-- Departure Address input-->
+            
+            
+            
+            <!-- Dropoff Address input-->
             <div class="form-group">
               <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <input id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" class="form-control input-xs" value="{{dstaddress}}" readonly="yes">
+              </div>
+            </div>
+                  
+            <!-- Dropoff Name input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="dstname" name="dstname" type="text" placeholder="Destination Address" class="form-control input-xs" value="{{dstname}}" readonly="yes">
+              </div>
+            </div>
+
+            <!-- Dropoff Phone input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="dstphone" name="dstphone" type="text" placeholder="Destination Address" class="form-control input-xs" value="{{dstphone}}" readonly="yes">
+              </div>
+            </div>                                   
+
+            <!-- Dropoff Postal input-->
+            <div class="form-group">
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+                <input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="Departure Address" class="form-control input-xs" value="{{dstpostalcode}}" readonly="Yes">
               </div>
             </div>
                     
