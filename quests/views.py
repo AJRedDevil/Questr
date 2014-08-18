@@ -52,6 +52,11 @@ def editquest(request, questname):
         raise Http404
         return render(request,'404.html')
 
+    if questdetails.shipper:
+        # This has to return a message [ The quest has already been applied for, can't be edited now ]
+        # Later on any edits by any Questr should notify the shippers.
+        return redirect('home')
+
     if request.method=="POST":
         # if questdetails.questrs.id == request.user.id:
         #     instance=get_object_or_404(Quests, id=questname)
@@ -410,6 +415,19 @@ def completequest(request, questname):
                     questr = getQuestrDetails(questdetails.questrs_id)
                     Quests.objects.filter(id=questname).update(status='Completed')
                     Quests.objects.filter(id=questname).update(is_complete='t')
+
+                    ## Update the delivered date
+                    now = timezone.now()
+                    Quests.objects.filter(id=questname).update(delivery_date=now)
+
+                    ## Reload questdetails to get in the delivery date from quest
+                    try:
+                        questdetails = Quests.objects.get(id=questname, isaccepted=True)
+                    except Quests.DoesNotExist:
+                        logging.debug("Quest not found")
+                        raise Http404
+                        return render(request,'404.html')
+                    
                     ## Send notification to shipper
                     questr_review_link = quest_handler.get_review_link(questname, questr.id)
                     email_details = quest_handler.prepQuestCompleteNotification(shipper, questr, questdetails, questr_review_link)

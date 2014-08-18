@@ -34,6 +34,8 @@ class Quests(models.Model):
     ishidden = models.BooleanField(_('ishidden'), default=False)
     distance = models.DecimalField(_('distance'), decimal_places=2,
         max_digits=1000, default=0)
+    delivery_date = models.DateTimeField(_('delivery_date'), 
+        blank=True, null=True)
 
     def get_delivery_code(self):
         return hashlib.sha256(str(timezone.now()) + str(self.creation_date)).hexdigest()
