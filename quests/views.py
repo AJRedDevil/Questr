@@ -38,6 +38,7 @@ def viewquest(request, questname):
     if questdetails.questrs.id == request.user.id:
         isOwner = True
 
+    pagetitle=questdetails.title
     isShipperForQuest=quest_handler.isShipperForQuest(str(user.id), questname)
     return render(request, 'viewquest.html', locals())
 
@@ -188,7 +189,7 @@ def confirmeditquest(request, questname):
     # Check if the owner and the user are the same
     if questdetails.questrs.id == user.id:
         pagetitle="Edit - " + questdetails.title
-        return render(request, 'confirmeditquest.html', locals())
+        return redirect('editquest',questname=questdetails.id)
 
     raise Http404
     return render(request,'404.html')
@@ -238,7 +239,7 @@ def newquest(request):
             return render(request, 'confirmquest.html', locals())  
         if user_form.errors:
             logging.warn("Form has errors, %s ", user_form.errors)
-    pagetitle = "Confirm your Quest"
+    pagetitle = "Create your Quest"
     return render(request, 'newquest.html', locals())  
 
 @login_required
@@ -301,7 +302,7 @@ def confirmquest(request):
         if user_form.errors:
             logging.warn("Form has errors, %s ", user_form.errors)
 
-    pagetitle = "Create a Quest"
+    message="There were some errors creating your quest, please try again !"
     return redirect('home')
 
 @login_required
