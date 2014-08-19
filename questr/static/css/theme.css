@@ -578,13 +578,7 @@ input.form-control:focus, textarea.form-control:focus {
 
 
 
-
-
-
-
-
-
-
+ /********* Generic Theme classes **********/
 .grey {
 	background: #f9f9f9;
 }
@@ -607,6 +601,10 @@ input.form-control:focus, textarea.form-control:focus {
 
 .theme-colour {
 	color: #3498db;
+}
+
+.top-margin {
+	margin-top: 8px;
 }
 
 
