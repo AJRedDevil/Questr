@@ -5,6 +5,7 @@ from django.utils import timezone
 from users.models import *
 
 import logging
+import jsonfield
 
 class Quests(models.Model):
     questrs = models.ForeignKey(QuestrUserProfile)
@@ -22,11 +23,8 @@ class Quests(models.Model):
     size = models.TextField(_('size'), default="backpack")
     shipper = models.TextField(_('shipper'), blank=True, null=True) # if posted under an offer this would be a single digit (pk of questr object of the offerer)
     # qr_code = models.URLField(_('qr_code'), blank=True)
-    srccity = models.TextField(_('srccity'), default="Toronto") # this is the source city
-    dstcity = models.TextField(_('dstcity'), default="Toronto") # this is the destination city
-    srcaddress = models.TextField(_('srcaddress')) # this would be a dict of address attributes     
-    srcaddress = models.TextField(_('srcaddress')) # this would be a dict of address attributes 
-    dstaddress = models.TextField(_('dstaddress')) # this would be a dict of address attributes
+    pickup = jsonfield.JSONField(_('pickup'), default={})
+    dropoff = jsonfield.JSONField(_('pickup'), default={})
     isaccepted = models.BooleanField(_('isaccepted'), default=False)
     isnotified = models.BooleanField(_('isnotified'), default=False)
     is_questr_reviewed = models.BooleanField(_('is_questr_reviewed'), default=False)
@@ -36,6 +34,8 @@ class Quests(models.Model):
     ishidden = models.BooleanField(_('ishidden'), default=False)
     distance = models.DecimalField(_('distance'), decimal_places=2,
         max_digits=1000, default=0)
+    delivery_date = models.DateTimeField(_('delivery_date'), 
+        blank=True, null=True)
 
     def get_delivery_code(self):
         return hashlib.sha256(str(timezone.now()) + str(self.creation_date)).hexdigest()

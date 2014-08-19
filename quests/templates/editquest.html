@@ -36,10 +36,10 @@
               <div class="col-md-8">        
       
       
-	              <div class="btn-group">
+              <div class="btn-group">
 					  <select name="srccity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
-            {% if questdetails.srccity %}
-              <option default value="{{questdetails.srccity}}">{{questdetails.srccity}}</option>
+            {% if questdetails.pickup.city %}
+              <option default value="{{questdetails.pickup.city}}">{{questdetails.pickup.city}}</option>
               <option value="-----------">-----------</option>
             {% endif %}
               <option value="Toronto">Toronto</option> 
@@ -55,10 +55,34 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="name"></label>
               <div class="col-md-8">
-                <input id="srcaddress" name="srcaddress" type="text" class="form-control" value="{{questdetails.srcaddress}}">
+                <input id="srcaddress" name="srcaddress" type="text" class="form-control" value="{{questdetails.pickup.address}}">
               </div>
             </div>
-                    
+
+            <!-- Departure Name input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name"></label>
+              <div class="col-md-8">
+                <input id="srcname" name="srcname" type="text" class="form-control" value="{{questdetails.pickup.name}}">
+              </div>
+            </div>                    
+
+
+            <!-- Departure Phone input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name"></label>
+              <div class="col-md-8">
+                <input id="srcphone" name="srcphone" type="text" class="form-control" value="{{questdetails.pickup.phone}}">
+              </div>
+            </div>
+
+            <!-- Departure Postalcode input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name"></label>
+              <div class="col-md-8">
+                <input id="srcpostalcode" name="srcpostalcode" type="text" class="form-control" value="{{questdetails.pickup.postalcode}}">
+              </div>
+            </div>
                     
             <!-- Location input-->
             <div class="form-group">
@@ -67,8 +91,8 @@
       
         <div class="btn-group">      
         	<select name="dstcity" type="text" class="form-control multiselect multiselect-icon" role="multiselect">   
-            {% if questdetails.dstcity %}
-              <option default value="{{questdetails.dstcity}}">{{questdetails.dstcity}}</option>
+            {% if questdetails.dropoff.city %}
+              <option default value="{{questdetails.dropoff.city}}">{{questdetails.dropoff.city}}</option>
               <option value="-----------">-----------</option>
             {% endif %}
               <option value="Toronto">Toronto</option> 
@@ -83,10 +107,34 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="name"></label>
               <div class="col-md-8">
-                <input id="dstaddress" name="dstaddress" type="text" class="form-control" value="{{questdetails.dstaddress}}">
+                <input id="dstaddress" name="dstaddress" type="text" class="form-control" value="{{questdetails.dropoff.address}}">
               </div>
             </div>
                         
+            <!-- Destination Name input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name"></label>
+              <div class="col-md-8">
+                <input id="dstname" name="dstname" type="text" class="form-control" value="{{questdetails.dropoff.name}}">
+              </div>
+            </div>
+
+            <!-- Destination Address input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name"></label>
+              <div class="col-md-8">
+                <input id="dstphone" name="dstphone" type="text" class="form-control" value="{{questdetails.dropoff.phone}}">
+              </div>
+            </div>
+
+            <!-- Destination Address input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="name"></label>
+              <div class="col-md-8">
+                <input id="dstpostalcode" name="dstpostalcode" type="text" class="form-control" value="{{questdetails.dropoff.postalcode}}">
+              </div>
+            </div>
+
              <!-- Message body -->
             <div class="form-group">
               <label class="col-md-4 control-label" for="message">Package Size</label>

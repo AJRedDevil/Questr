@@ -216,6 +216,15 @@ def prepQuestCompleteNotification(shipper, questr, questdetails, review_link):
     quest_support_email="support@questr.co"
     questr_unsubscription_link="http://questr.co/unsub"
 
+    # Calculating the delivery time for the quest
+    quest_creation_date = questdetails.creation_date
+    quest_delivery_date = questdetails.delivery_date
+    timedelta = quest_delivery_date - quest_creation_date
+    timedelta_arr = str(timedelta).split(':')
+    hours = timedelta_arr[0]
+    minutes = timedelta_arr[1]
+    delivery_time = str(hours)+' hours and '+str(minutes)+' minutes'
+
     email_details = {
                         'subject' : subject,
                         'template_name' : template_name,
@@ -229,6 +238,7 @@ def prepQuestCompleteNotification(shipper, questr, questdetails, review_link):
                                                 'quest_reward'      : str(questdetails.reward),
                                                 'quest_distance'      : str(questdetails.distance),
                                                 'quest_creation_date'      : questdetails.creation_date.strftime('%m-%d-%Y'),
+                                                'delivery_time'      : delivery_time,
                                                 'quest_support_mail': quest_support_email,
                                                 'questr_unsubscription_link' : questr_unsubscription_link,
                                                 'company'           : "Questr Co"

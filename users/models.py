@@ -1,11 +1,12 @@
 
 
-import hashlib
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 
+import jsonfield
+import hashlib
 
 # Create your models here.
 class QuestrUserManager(BaseUserManager):
@@ -49,7 +50,7 @@ class QuestrUserProfile(AbstractBaseUser):
     notifications = models.BooleanField(_('notifications'), default=False)
     is_shipper = models.BooleanField(_('is_shipper'), default=False)
     rating = models.DecimalField(_('rating'), default='0', max_digits=5, decimal_places=2)
-    notificationprefs = models.CharField(_('notificationprefs'), default='{}', max_length=9999)
+    notificationprefs = jsonfield.JSONField(_('notificationprefs'), default='{}', max_length=9999)
 
 
     USERNAME_FIELD = 'email'

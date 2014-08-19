@@ -11,6 +11,7 @@ from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm, QuestCo
 from .models import Quests
 
 import logging
+import simplejson as json
 
 @login_required
 def listallquests(request):
@@ -51,6 +52,11 @@ def editquest(request, questname):
         raise Http404
         return render(request,'404.html')
 
+    if questdetails.shipper:
+        # This has to return a message [ The quest has already been applied for, can't be edited now ]
+        # Later on any edits by any Questr should notify the shippers.
+        return redirect('home')
+
     if request.method=="POST":
         # if questdetails.questrs.id == request.user.id:
         #     instance=get_object_or_404(Quests, id=questname)
@@ -75,15 +81,22 @@ def editquest(request, questname):
                 description = user_form.cleaned_data['description']
                 srccity = user_form.cleaned_data['srccity']
                 srcaddress = user_form.cleaned_data['srcaddress']
+                quest_data = user_form.save(commit=False)
+                srcpostalcode = user_form.cleaned_data['srcpostalcode']
+                srcname = user_form.cleaned_data['srcname']
+                srcphone = user_form.cleaned_data['srcphone']
                 dstcity = user_form.cleaned_data['dstcity']
                 dstaddress = user_form.cleaned_data['dstaddress']
+                dstpostalcode = user_form.cleaned_data['dstpostalcode']
+                dstname = user_form.cleaned_data['dstname']
+                dstphone = user_form.cleaned_data['dstphone']
                 size = user_form.cleaned_data['size']
                 # For distance
                 #the distance and price hsa to be set up into a temp database, also the 
                 #image file needs to be on a temp folder for processign to reduce API calls
                 maps = geomaps.GMaps()
-                origin = srcaddress+', '+srccity
-                destination = dstaddress+', '+dstcity
+                origin = srcaddress+', '+srccity+', '+srcpostalcode
+                destination = dstaddress+', '+dstcity+', '+dstpostalcode
                 maps.set_geo_args(dict(origin=origin, destination=destination))
                 distance = maps.get_total_distance()
                 # For price
@@ -92,6 +105,9 @@ def editquest(request, questname):
                 reward = price.get_price()
                 pagetitle = "Confirm your Quest"
                 return render(request, 'confirmquestedit.html', locals())  
+            if user_form.errors:
+                logging.warn("Form has errors, %s ", user_form.errors)
+
         pagetitle="Edit - " + questdetails.title
         return render(request, 'editquest.html', locals())  
 
@@ -130,16 +146,44 @@ def confirmeditquest(request, questname):
         if questdetails.questrs.id == user.id:
             instance=get_object_or_404(Quests, id=questname)
             user_form = QuestConfirmChangeForm(data=request.POST, instance=instance)
-            # logging.warn(user_form.errors)
-            # logging.warn(user_form.is_valid())
-            # logging.warn(user_form)
             if user_form.is_valid():
+                pickupdict = {}
+                dropoffdict = {}
+                srccity = user_form.cleaned_data['srccity']
+                srcaddress = user_form.cleaned_data['srcaddress']
                 quest_data = user_form.save(commit=False)
+                srcpostalcode = user_form.cleaned_data['srcpostalcode']
+                srcname = user_form.cleaned_data['srcname']
+                srcphone = user_form.cleaned_data['srcphone']
+                dstcity = user_form.cleaned_data['dstcity']
+                dstaddress = user_form.cleaned_data['dstaddress']
+                dstpostalcode = user_form.cleaned_data['dstpostalcode']
+                dstname = user_form.cleaned_data['dstname']
+                dstphone = user_form.cleaned_data['dstphone']
+                ## categorizing source and destination info
+                pickupdict['city'] = srccity
+                pickupdict['address'] = srcaddress
+                pickupdict['postalcode'] = srcpostalcode
+                pickupdict['name'] = srcname
+                pickupdict['phone'] = srcphone
+                dropoffdict['city'] = dstcity
+                dropoffdict['address'] = dstaddress
+                dropoffdict['postalcode'] = dstpostalcode
+                dropoffdict['name'] = dstname
+                dropoffdict['phone'] = dstphone
+                ##Submit dict to the field
+                # logging.warn("Pickup dict %s", pickupdict)
+                # logging.warn("Dropoff dict %s", dropoffdict)
+                quest_data = user_form.save(commit=False)
+                quest_data.pickup = json.dumps(pickupdict)
+                quest_data.dropoff = json.dumps(dropoffdict)
                 quest_data.save()
                 pagetitle = "Confirm your Quest"
                 return redirect(viewquest, questname=questdetails.id)
+            if user_form.errors:
+                logging.warn("Form has errors, %s ", user_form.errors)
         pagetitle="Edit - " + questdetails.title
-        return render(request, 'editquest.html', locals())  
+        return redirect('editquest',questname=questdetails.id)
 
     # Check if the owner and the user are the same
     if questdetails.questrs.id == user.id:
@@ -162,21 +206,28 @@ def newquest(request):
         user_form = QuestCreationForm(request.POST)
         # logging.warn(user_form.errors)
         # logging.warn(user_form.is_valid())
-        # logging.warn(user_form)
+        logging.warn(user_form)
         if user_form.is_valid():
+            logging.warn(user_form.fields)
             title = user_form.cleaned_data['title']
+            size = user_form.cleaned_data['size']
             description = user_form.cleaned_data['description']
             srccity = user_form.cleaned_data['srccity']
             srcaddress = user_form.cleaned_data['srcaddress']
+            srcpostalcode = user_form.cleaned_data['srcpostalcode']
+            srcname = user_form.cleaned_data['srcname']
+            srcphone = user_form.cleaned_data['srcphone']
             dstcity = user_form.cleaned_data['dstcity']
             dstaddress = user_form.cleaned_data['dstaddress']
-            size = user_form.cleaned_data['size']
+            dstpostalcode = user_form.cleaned_data['dstpostalcode']
+            dstname = user_form.cleaned_data['dstname']
+            dstphone = user_form.cleaned_data['dstphone']
             # For distance
             #the distance and price hsa to be set up into a temp database, also the 
             #image file needs to be on a temp folder for processign to reduce API calls
             maps = geomaps.GMaps()
-            origin = srcaddress+', '+srccity
-            destination = dstaddress+', '+dstcity
+            origin = srcaddress+', '+srccity+', '+srcpostalcode
+            destination = dstaddress+', '+dstcity+', '+dstpostalcode
             maps.set_geo_args(dict(origin=origin, destination=destination))
             distance = maps.get_total_distance()
             # For price
@@ -200,11 +251,36 @@ def confirmquest(request):
     if request.method=="POST":
         now = timezone.now()
         user_form = QuestConfirmForm(request.POST, request.FILES)
-        # logging.warn(user_form.errors)
-        # logging.warn(user_form)
-        # logging.warn(user_form.is_valid())
         if user_form.is_valid():
+            pickupdict = {}
+            dropoffdict = {}
+            srccity = user_form.cleaned_data['srccity']
+            srcaddress = user_form.cleaned_data['srcaddress']
+            srcpostalcode = user_form.cleaned_data['srcpostalcode']
+            srcname = user_form.cleaned_data['srcname']
+            srcphone = user_form.cleaned_data['srcphone']
+            dstcity = user_form.cleaned_data['dstcity']
+            dstaddress = user_form.cleaned_data['dstaddress']
+            dstpostalcode = user_form.cleaned_data['dstpostalcode']
+            dstname = user_form.cleaned_data['dstname']
+            dstphone = user_form.cleaned_data['dstphone']
+            ## categorizing source and destination info
+            pickupdict['city'] = srccity
+            pickupdict['address'] = srcaddress
+            pickupdict['postalcode'] = srcpostalcode
+            pickupdict['name'] = srcname
+            pickupdict['phone'] = srcphone
+            dropoffdict['city'] = dstcity
+            dropoffdict['address'] = dstaddress
+            dropoffdict['postalcode'] = dstpostalcode
+            dropoffdict['name'] = dstname
+            dropoffdict['phone'] = dstphone
+            ##Submit dict to the field
+            # logging.warn("Pickup dict %s", pickupdict)
+            # logging.warn("Dropoff dict %s", dropoffdict)
             quest_data = user_form.save(commit=False)
+            quest_data.pickup = json.dumps(pickupdict)
+            quest_data.dropoff = json.dumps(dropoffdict)
             quest_data.questrs_id=request.user.id
             quest_data.creation_date=now
             quest_data.item_images = user_form.cleaned_data['item_images']
@@ -221,6 +297,10 @@ def confirmquest(request):
             message="Your quest has been created!"
             logging.warn(message)
             return redirect('home')
+
+        if user_form.errors:
+            logging.warn("Form has errors, %s ", user_form.errors)
+
     pagetitle = "Create a Quest"
     return redirect('home')
 
@@ -335,6 +415,19 @@ def completequest(request, questname):
                     questr = getQuestrDetails(questdetails.questrs_id)
                     Quests.objects.filter(id=questname).update(status='Completed')
                     Quests.objects.filter(id=questname).update(is_complete='t')
+
+                    ## Update the delivered date
+                    now = timezone.now()
+                    Quests.objects.filter(id=questname).update(delivery_date=now)
+
+                    ## Reload questdetails to get in the delivery date from quest
+                    try:
+                        questdetails = Quests.objects.get(id=questname, isaccepted=True)
+                    except Quests.DoesNotExist:
+                        logging.debug("Quest not found")
+                        raise Http404
+                        return render(request,'404.html')
+                    
                     ## Send notification to shipper
                     questr_review_link = quest_handler.get_review_link(questname, questr.id)
                     email_details = quest_handler.prepQuestCompleteNotification(shipper, questr, questdetails, questr_review_link)
