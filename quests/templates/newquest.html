@@ -18,15 +18,8 @@
 				<div ng-view></div>
 
 				<div class="panel-body">
-<<<<<<< HEAD
-<<<<<<< HEAD
-					<form class="form-horizontal" action="" method="post" enctype="multipart/form-data" name="postForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
-=======
+
 					<form class="form-horizontal" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" name="myForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
->>>>>>> FETCH_HEAD
-=======
-					<form class="form-horizontal" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" name="myForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
->>>>>>> fc49779004549211f02642226e9f23191ddea910
 						<!-- Name input-->
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="light-grey">Title</p></label>
@@ -73,8 +66,6 @@
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 
-
-
 						<!-- Location input-->
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="light-grey">Pick up from</p></label>
@@ -92,14 +83,8 @@
 							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"></div>  
 						</div>  <!-- ./form-group -->
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-						<!-- Departure Address input-->
-=======
 						<!-- Pickup Address input-->
->>>>>>> FETCH_HEAD
+
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
@@ -125,44 +110,12 @@
 						</div><!-- ./form-group -->
 
 						<!-- Pickup Postal Code input-->
-=======
-						<!-- Pickup Address input-->
->>>>>>> fc49779004549211f02642226e9f23191ddea910
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 								<input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="Postal Code" class="form-control input-xs" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
-
-<<<<<<< HEAD
-=======
-						<!-- Pickup Name input-->
-						<div class="form-group">
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-								<input id="srcname" name="srcname" type="text" placeholder="Name of the sender" class="form-control input-xs" required>
-							</div><!-- ./column -->
-						</div><!-- ./form-group -->
-
-
-						<!-- Pickup Phone input-->
-						<div class="form-group">
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-								<input id="srcphone" name="srcphone" type="text" placeholder="Phone number" class="form-control input-xs" required>
-							</div><!-- ./column -->
-						</div><!-- ./form-group -->
-
-						<!-- Pickup Postal Code input-->
-						<div class="form-group">
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-								<input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="Postal Code" class="form-control input-xs" required>
-							</div><!-- ./column -->
-						</div><!-- ./form-group -->
-
->>>>>>> fc49779004549211f02642226e9f23191ddea910
 
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="light-grey">Drop off at</p></label>
