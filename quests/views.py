@@ -302,6 +302,7 @@ def confirmquest(request):
         if user_form.errors:
             logging.warn("Form has errors, %s ", user_form.errors)
 
+    pagetitle = "Create a Quest"
     message="There were some errors creating your quest, please try again !"
     return redirect('home')
 

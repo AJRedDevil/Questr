@@ -14,7 +14,7 @@
     <div class="row clearfix">
        <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 column">    
       
-	       <div class="panel panel-default shadows body-borders">
+	       <div class="panel panel-default shadows body-borders top-margin">
 		       <!-- Default panel contents -->
 		       <div class="panel-heading">
 			       <div class="panel-title lead">
@@ -26,7 +26,7 @@
 	                      <li class="{% navactive request 'myshipments' %}">
 		                      <a href="{% url 'myshipments' %}">My Shipments</a>
 	                      </li>                                       
-	                      {% endif %}
+	                      {% endif %} 
 	                  </ul>
                   </div><!-- ./panel-title -->              
                </div><!-- ./panel-head -->
@@ -111,8 +111,11 @@
 
                   <div class="smallInfo">
                     <small class="light-grey">
-                      <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}</small>
-                    </div><!-- ./smallInfo -->
+                      <span class="glyphicon glyphicon-map-marker"></span>{{quest.dstaddress}}, {{quest.dstcity}}
+                    </small>
+                  </div><!-- ./smallInfo -->
+
+
                   </div><!-- ./column -->
                   <p>You delivered this item for <a href="{% url 'getUserInfo' displayname=quest.questrs.displayname %}">{{quest.questrs.first_name | title}}</a> !</p>
                 </div><!-- ./row -->

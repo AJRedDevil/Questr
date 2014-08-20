@@ -3,7 +3,7 @@
 {% load active %}
 {% block localhead %}
   <!-- Custom CSS -->
-    <link href={% static "css/quest.css" %} rel="stylesheet">
+ 
 {% endblock localhead %}
 {% block content %}
 <div class="container">
@@ -17,11 +17,10 @@
          </div>
           <div class="panel-body">
           <form class="form-horizontal" action="{% url 'confirmquest' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-          <fieldset>
             
             <!-- Name input-->
             <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="grey">Title</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p>Title</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <input id="title" name="title" type="text" class="form-control input-xs" value="{{title}}" readonly="yes">
               </div><!-- ./column -->
@@ -30,7 +29,7 @@
     
             <!-- Offer input-->
             <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="grey">Shipping fee</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p>Shipping fee</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <input id="reward" name="reward" type="text" class="form-control input-xs" value="{{reward}}" readonly="yes">
               </div>
@@ -38,7 +37,7 @@
 
             <!-- Distance input-->
             <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="grey">Distance</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p>Distance</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <input id="distance" name="distance" type="text" class="form-control input-xs" value="{{distance}}" readonly="yes">
               </div>
@@ -46,7 +45,7 @@
  
             <!-- Location input-->
             <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Pick up from</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p>Pick up from</p></label>
               <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"> 
                   <select class="selectpicker show-menu-arrow show-tick" data-size="5" name="srccity" value="{{srccity}}" readonly="yes">
                       <option>{{srccity}}</option>
@@ -90,7 +89,7 @@
             </div>
                    
             <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="grey">Drop off at</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p>Drop off at</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column"> 
               
                 <select class="selectpicker show-menu-arrow show-tick" data-size="5" name="dstcity" value="{{dstcity}}" readonly="yes">
@@ -134,7 +133,7 @@
             </div>
 
             <div class="form-group" id="size">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Package Size</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p>Package Size</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                  <div class="input-group col-sm-12 col-md-12 col-lg-12 column"> 
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
@@ -150,7 +149,7 @@
             
             <!-- Message body -->
             <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Your Message</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p>Your Message</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                 <textarea class="form-control" id="description" name="description" rows="5" readonly="yes">{{description}}</textarea>
               </div>
@@ -158,7 +157,7 @@
 
                            <!-- Image Uploader -->
             <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="grey">Please upload an image relative to your quest before you confirm!</p></label>
+              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p>Please upload an image relative to your quest before you confirm!</p></label>
               <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
                     <span class="input-group-btn">
                     <div class="btn btn-xs btn-info image-preview-input">
@@ -176,8 +175,7 @@
                 <button type="submit" class="btn btn-info">Confirm</button>
               </div><!-- ./column -->
                </form>
-
-          </fieldset>     
+    
           </div><!-- ./panel-body -->
        </div><!-- ./panel -->   
       </div><!-- ./column -->

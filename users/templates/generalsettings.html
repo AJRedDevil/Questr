@@ -5,14 +5,14 @@
     <div class="row clearfix">
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
       	
-      	<div class="panel panel-default body-prop border-colours">
+      	<div class="panel panel-default body-prop border-colours top-margin">
 	         <div class="panel-heading">
 		         <div class="panel-title light-grey">Change your general settings here</div>
 	         </div><!-- ./panel-heading -->
           
           <div class="panel-body">{% csrf_token %}
           <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-          <fieldset>
+          
             
             <!-- Name input-->
             <div class="form-group">
@@ -84,7 +84,7 @@
               </div><!-- ./column -->
                
                
-          </fieldset>
+          
           </form>     
           </div><!-- ./panel-body -->
        </div><!-- ./panel -->

@@ -7,7 +7,7 @@
 {% endblock localhead %}
 {% block content %}
 
-<div class="container-fluid" ng-app="validationApp" ng-controller="mainController">
+<div class="container-fluid">
 	<div class="row clearfix">
 		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 column">
 			<div class="panel panel-default body-prop border-colours">
@@ -15,14 +15,16 @@
 					<div class="panel-title light-grey">Request a shipment</div>
 				</div><!-- ./panel-heading -->
 
+				<div ng-view></div>
+
 				<div class="panel-body">
+
 					<form class="form-horizontal" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" name="myForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
 						<!-- Name input-->
-						<div class="form-group" ng-class="{ 'has-error' : myForm.title.$invalid && !myForm.title.$pristine }">
+						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="light-grey">Title</p></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-								<input class="form-control ng-pristine ng-invalid" ng-model="user.email" name="title" type="text" placeholder="Shipment title" required />
-								<span class="error" ng-show="myForm.userName.$error.required">
+								<input class="form-control ng-pristine ng-invalid" ng-model="user.title" name="title" type="text" placeholder="Shipment title" required />
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 
@@ -34,22 +36,22 @@
 									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
 										<center>
 											<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />       	 	
-											<p class="grey">Backpack</p>
-											<input type="radio" name="size" value="backpack"> 
+											<p>Backpack</p>
+											<input type="radio" name="size" ng-model="user.size" value="backpack" ng-model="user.backapck" required> 
 										</center>	
 									</div><!-- ./column -->  
 									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
 										<center>
 											<img src={% static 'img/car.png' %} style="width:100%; height:auto;" />
-											<p class="grey">Car</p>
-											<input type="radio" name="size" value="car">
+											<p>Car</p>
+											<input type="radio" name="size" ng-model="user.size" value="car" ng-model="user.car" required>
 										</center>	
 									</div><!-- ./column -->
 									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
 										<center>
 											<img src={% static 'img/minivan.png' %} style="width:100%; height:auto;" />
-											<p class="grey">Minivan</p>
-											<input type="radio" name="size" value="minivan">
+											<p>Minivan</p>
+											<input type="radio" name="size" ng-model="user.size" value="minivan" ng-model="user.van" required>
 										</center> 	
 									</div><!-- ./column -->
 								</div><!-- /input-group -->
@@ -60,17 +62,15 @@
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="light-grey">Message</p></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-								<textarea class="form-control" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5" required></textarea>
+								<textarea class="form-control ng-pristine ng-invalid" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5" ng-model="user.description" required></textarea>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
-
-
 
 						<!-- Location input-->
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="light-grey">Pick up from</p></label>
 							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"> 
-								<select class="btn-classic" data-size="5" name="srccity">
+								<select class="btn-classic" data-size="5" name="srccity" ng-model="user.city" required>
 									<option>Choose a city</option>
 									<option>Toronto</option>
 									<option>Brampton</option>
@@ -84,10 +84,11 @@
 						</div>  <!-- ./form-group -->
 
 						<!-- Pickup Address input-->
+
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-								<input id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" class="form-control input-xs" required>
+								<input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" ng-model="user.departure" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 
@@ -116,11 +117,10 @@
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 
-
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="light-grey">Drop off at</p></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">   
-								<select class="btn-classic" data-size="5" name="dstcity">
+								<select class="btn-classic" data-size="5" name="dstcity" ng-model="user.city2" required>
 									<option>Choose a city</option>
 									<option>Toronto</option>
 									<option>Brampton</option>
@@ -136,7 +136,7 @@
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-								<input id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" class="form-control input-xs" required>
+								<input class="form-control input-xs ng-pristine ng-invalid" id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" ng-model="user.destination" required>
 								
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
@@ -167,7 +167,7 @@
 
 
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">
-							<button type="submit" class="btn btn-info">Continue</button>
+							<button type="submit" class="btn btn-info" ng-disabled="postForm.$invalid || isUnchanged(user)">Continue</button>
 						</div><!-- ./column -->
 					</form>     
 				</div><!-- ./panel-body -->
