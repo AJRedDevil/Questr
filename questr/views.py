@@ -15,40 +15,50 @@ def index(request):
         return redirect('home')
     # plus_id = getattr(settings, 'SOCIAL_AUTH_GOOGLE_PLUS_KEY', None) ###disabled google plus##
     # plus_scope = ' '.join(GooglePlusAuth.DEFAULT_SCOPE) ###disabled google plus##
+    pagetitle = "Cheaper, faster, 24/7 shipments in GTA"
     return render(request, 'index.html', locals())
 
 def loadPage(request, template):
     return render(request, template, locals())
 
 def contact(request):
+    pagetitle = "Contact US"
     return render(request, 'contact.html', locals())
 
 def about(request):
+    pagetitle = "About Us"
     return render(request, 'about.html', locals())
 
 def news(request):
+    pagetitle = "In the news !"
     return render(request, 'news.html', locals())
 
 def join(request):
+    pagetitle = "Join Us"
     return render(request, 'join.html', locals())
 
 def crowdshipping(request):
     return render(request, 'crowdshipping.html', locals())
 
 def trust(request):
+    pagetitle = "Trust"
     return render(request, 'trust.html', locals())
 
 def terms(request):
+    pagetitle = "Terms of Service"
     return render(request, 'terms.html', locals())
 
 def privacy(request):
+    pagetitle = "Privacy Policy"
     return render(request, 'privacy.html', locals())
 
 def faq(request):
+    pagetitle = "Frequently Asked Questions"
     return render(request, 'faq.html', locals())
 
 def thankyou(request):
     messageResponse = "Thanks for joining us.<br>Please check your mailbox.</b>"
+    pagetitle = "Thanks for joining us !"
     return render(request, 'thankyou.html', locals())
 
 # function to join the invitee's subscription list
@@ -115,8 +125,10 @@ def contactus(request):
                     # Error for 
                     log.debug(str(e))
                     messageResponse = "Something went wrong! We're looking onto it!"
+                    pagetitle = "Contact Us"
                     return render(request, 'index.html', locals())
             else:
+                pagetitle = "Contact Us"
                 messageResponse="Please provide us with a valid email address!"
                 return render(request, 'index.html', locals())
     else:

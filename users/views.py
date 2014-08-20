@@ -330,7 +330,9 @@ def cardSettings(request):
     pagetype="loggedin"
     user = request.user
     settingstype="card"
+    pagetitle = "Card Settings"
     return render(request, "cardsettings.html",locals())
+
 
 @login_required
 def emailSettings(request):
@@ -338,6 +340,7 @@ def emailSettings(request):
     pagetype="loggedin"
     user = request.user
     settingstype="email"
+    pagetitle = "Email Settings"
     user_form = NotifPrefForm()
     return render(request, "emailsettings.html",locals())
 
@@ -360,6 +363,7 @@ def notificationsettings(request):
             logging.warn("Form has errors, %s ", user_form.errors)
 
     user_form = NotifPrefForm()
+    pagetitle = "Email Notification Settings"
     return render(request, "emailsettings.html",locals())
 
 def saveUserInfo(request):
