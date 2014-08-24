@@ -104,7 +104,15 @@
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-								<input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" ng-model="user.departure" required>
+								<input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" ng-model="user.departure" ng-minlength="3" ng-maxlength="100" required>
+								<!-- Address Erorrs-->
+								<div ng-show="form.srcaddress.$dirty && form.srcaddress.$invalid">Invalid:
+							   		<span ng-show="form.srcaddress.$error.required">A description is required</span>
+							   		<span style="color:red" ng-show="form.srcaddress.$error.minlength">
+						        	Your Address Should Contain Atleast 3 Characters</span>
+						       		<span style="color:red" ng-show="form.srcaddress.$error.maxlength">
+						        	Sorry You are Exceeding the Limit</span>
+							    </div>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 						{{user_form.srcaddress.errors}}
@@ -156,8 +164,15 @@
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-								<input class="form-control input-xs ng-pristine ng-invalid" id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" ng-model="user.destination" required />
-								
+								<input class="form-control input-xs ng-pristine ng-invalid" id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" ng-model="user.destination" ng-minlength="3" ng-maxlength="100" required>
+								<!-- Address Erorrs-->
+								<div ng-show="form.dstaddress.$dirty && form.dstaddress.$invalid">Invalid:
+							   		<span ng-show="form.dstaddress.$error.required">A description is required</span>
+							   		<span style="color:red" ng-show="form.dstaddress.$error.minlength">
+						        	Your Address Should Contain Atleast 3 Characters</span>
+						       		<span style="color:red" ng-show="form.dstaddress.$error.maxlength">
+						        	Sorry You are Exceeding the Limit</span>
+							    </div>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 						{{user_form.dstaddress.errors}}
