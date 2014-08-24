@@ -6,8 +6,16 @@ from users.models import *
 
 import logging
 import jsonfield
+import hashlib
 
 class Quests(models.Model):
+    PACKAGE_SELECTION = (('car','Car'),('backpack','Backpack'),('minivan','Minivan'))
+    STATUS_SELECTION = (('new','New'),('accepted','Accepted'),('completed','Completed'))
+
+    ## Calculating delivery code before hand and inserting it as default so that it won't be tampered with.
+    hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now())).hexdigest()
+    calc_delivery_code = hashstring[:3]+hashstring[-2:]
+
     questrs = models.ForeignKey(QuestrUserProfile)
     # pretty_url = models.CharField(_('pretty_url'), 
     #     max_length=1000, blank=True)
@@ -17,11 +25,11 @@ class Quests(models.Model):
     reward = models.DecimalField(_('reward'), decimal_places=2, 
         max_digits=1000)
     item_images = models.ImageField(_('item_images'), max_length=9999, upload_to='quest-item-cdn', blank=True)
-    status = models.TextField(_('status'), default='new')
+    status = models.TextField(_('status'), choices=STATUS_SELECTION, default='new')
     creation_date = models.DateTimeField(_('creation_date'), 
         blank=False)
-    size = models.TextField(_('size'), default="backpack")
-    shipper = models.TextField(_('shipper'), blank=True, null=True) # if posted under an offer this would be a single digit (pk of questr object of the offerer)
+    size = models.TextField(_('size'), choices=PACKAGE_SELECTION, default="backpack")
+    shipper = models.TextField(_('shipper'), blank=True, null=True) 
     # qr_code = models.URLField(_('qr_code'), blank=True)
     pickup = jsonfield.JSONField(_('pickup'), default={})
     dropoff = jsonfield.JSONField(_('pickup'), default={})
@@ -30,15 +38,12 @@ class Quests(models.Model):
     is_questr_reviewed = models.BooleanField(_('is_questr_reviewed'), default=False)
     is_shipper_reviewed = models.BooleanField(_('is_shipper_reviewed'), default=False)
     is_complete = models.BooleanField(_('is_complete'), default=False)
-    delivery_code = models.TextField(_('delivery_code'), default='121212')
+    delivery_code = models.TextField(_('delivery_code'), default=calc_delivery_code)
     ishidden = models.BooleanField(_('ishidden'), default=False)
     distance = models.DecimalField(_('distance'), decimal_places=2,
         max_digits=1000, default=0)
     delivery_date = models.DateTimeField(_('delivery_date'), 
         blank=True, null=True)
-
-    def get_delivery_code(self):
-        return hashlib.sha256(str(timezone.now()) + str(self.creation_date)).hexdigest()
 
     def __unicode__(self):
         return str(self.id )
@@ -113,9 +118,6 @@ class Quests(models.Model):
 
         #Overriding
     def save(self, *args, **kwargs):
-        # get a delivery code with 3 letters from the first and 2 from the last
-        if self.delivery_code=='121212':
-            self.delivery_code = self.get_delivery_code()[:3]+self.get_delivery_code()[-2:]
         super(Quests, self).save(*args, **kwargs)
         self.create_item_images_normal()
 

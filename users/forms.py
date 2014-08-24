@@ -14,7 +14,6 @@ class QuestrUserChangeForm(UserChangeForm):
     def __init__(self, *args, **kwargs):
         super(forms.ModelForm, self).__init__(*args, **kwargs)
         for fieldname in ['username']:
-            self.fields[fieldname].help_text = None
             del self.fields['password']
             del self.fields['username']
 
@@ -26,6 +25,26 @@ class QuestrUserChangeForm(UserChangeForm):
         model = QuestrUserProfile
         # fields = ['first_name','last_name','username','email','phone','biography','privacy']
         fields = ['first_name','last_name','displayname','email']
+        widgets = {
+            'first_name' : forms.TextInput(attrs={'placeholder':'First Name'}),
+            'last_name' : forms.TextInput(attrs={'placeholder':'Last Name'}),
+            'displayname' : forms.TextInput(attrs={'placeholder':'Your Username'}),
+            'email' : forms.TextInput(attrs={'placeholder':'you@example.com'}),
+        }
+        error_messages = {
+            'first_name' : {
+                'required' : 'Your first name is required!',
+            },
+            'last_name' : {
+                'required' : 'Your last name is required!',
+            },
+            'email' : {
+                'required' : 'Please provide with a valid email address!',
+            },
+            'displayname' : {
+                'required' : 'You need a username, don\'t you ?',
+            },
+        }
         # exclude = ('username.help_text',)
 
 
@@ -37,16 +56,33 @@ class QuestrSocialSignupForm(forms.ModelForm):
         model = QuestrUserProfile
         fields = ['first_name','last_name','displayname','email']
         exclude = ('username.help_text',)
+        widgets = {
+            'first_name' : forms.TextInput(attrs={'placeholder':'First Name'}),
+            'last_name' : forms.TextInput(attrs={'placeholder':'Last Name'}),
+            'displayname' : forms.TextInput(attrs={'placeholder':'Your Username'}),
+            'email' : forms.TextInput(attrs={'placeholder':'you@example.com'}),
+        }
+        error_messages = {
+            'first_name' : {
+                'required' : 'Your first name is required!',
+            },
+            'last_name' : {
+                'required' : 'Your last name is required!',
+            },
+            'email' : {
+                'required' : 'Please provide with a valid email address!',
+            },
+            'displayname' : {
+                'required' : 'You need a username, don\'t you ?',
+            },
+        }
+
 
 
 class QuestrUserCreationForm(forms.ModelForm):
     """
     A form that creates a user, from the given data
     """
-    error_messages = {
-        'duplicate_username': _("A user with that username already exists."),
-        'password_mismatch': _("The two password fields didn't match."),
-    }
     displayname = forms.RegexField(label=_("Username"), max_length=30,
         regex=r'^[\w.\.+-]+$',
         help_text=_("Required. 30 characters or fewer. Letters, digits and "
@@ -73,18 +109,41 @@ class QuestrUserCreationForm(forms.ModelForm):
             'password2' : forms.PasswordInput(attrs = { 'placeholder': 'Confirm Password'}),
         }
 
-    def clean_username(self):
-        # Since User.username is unique, this check is redundant,
-        # but it sets a nicer error message than the ORM. See #13147.
-        displayname = self.cleaned_data["displayname"]
-        try:
-            QuestrUserProfile._default_manager.get(displayname=displayname)
-        except QuestrUserProfile.DoesNotExist:
-            return displayname
-        raise forms.ValidationError(
-            self.error_messages['duplicate_username'],
-            code='duplicate_username',
-        )
+        error_messages = {
+            'password_mismatch': _("The two password fields didn't match. Please re-verify your passwords !"),
+
+            'first_name' : {
+                'required' : 'Your first name is required!',
+            },
+            'last_name' : {
+                'required' : 'Your last name is required!',
+            },
+            'email' : {
+                'required' : 'Please provide with a valid email address!',
+            },
+            'displayname' : {
+                'required' : 'You need a username, don\'t you ?',
+            },
+            'password1' : {
+                'required' : 'Please provide with a password !',
+            },
+            'password2' : {
+                'required' : 'Please provide with a password confirmation !',
+            },
+        }
+
+    # def clean_username(self):
+    #     # Since User.username is unique, this check is redundant,
+    #     # but it sets a nicer error message than the ORM. See #13147.
+    #     displayname = self.cleaned_data["displayname"]
+    #     try:
+    #         QuestrUserProfile._default_manager.get(displayname=displayname)
+    #     except QuestrUserProfile.DoesNotExist:
+    #         return displayname
+    #     raise forms.ValidationError(
+    #         self.error_messages['duplicate_username'],
+    #         code='duplicate_username',
+    #     )
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -153,10 +212,6 @@ class QuestrLocalAuthenticationForm(forms.Form):
                 )
         return self.cleaned_data
 
-    def check_for_test_cookie(self):
-        warnings.warn("check_for_test_cookie is deprecated; ensure your login "
-                "view is CSRF-protected.", DeprecationWarning)
-
     def get_user_id(self):
         if self.user_cache:
             return self.user_cache.id
@@ -172,6 +227,12 @@ class SetPasswordForm(forms.Form):
     """
     error_messages = {
         'password_mismatch': _("The two password fields didn't match."),
+        'password1' : {
+            'required' : 'Please provide with a password !',
+        },
+        'password2' : {
+            'required' : 'Please provide with a password confirmation !',
+        },
     }
     new_password1 = forms.CharField(label=_("New password"),
                                     widget=forms.PasswordInput)

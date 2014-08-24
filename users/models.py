@@ -35,10 +35,13 @@ class QuestrUserManager(BaseUserManager):
 
 class QuestrUserProfile(AbstractBaseUser):
     id = models.AutoField(_('id'), primary_key=True)
-    displayname = models.CharField(_('displayname'), max_length=30, unique=True)
+    displayname = models.CharField(_('displayname'), max_length=30, unique=True, 
+        error_messages={'unique' : 'The username provided is already taken !'})
     first_name = models.CharField(_('first_name'), max_length=30)
     last_name = models.CharField(_('last_name'), max_length=30)
-    email = models.EmailField(_('email'), max_length=100, unique=True)
+    email = models.EmailField(_('email'), max_length=100, unique=True,
+        error_messages={'unique' : 'It seems you already have an account registered with that email!'})
+
     email_status = models.BooleanField(_('email_status'), default=False)
     phone = models.CharField(_('phone'), max_length=15, blank=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
@@ -51,12 +54,12 @@ class QuestrUserProfile(AbstractBaseUser):
     is_shipper = models.BooleanField(_('is_shipper'), default=False)
     rating = models.DecimalField(_('rating'), default='0', max_digits=5, decimal_places=2)
     notificationprefs = jsonfield.JSONField(_('notificationprefs'), default='{}', max_length=9999)
+    is_active = models.BooleanField(default=True)
 
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name','displayname']
 
-    is_active = models.BooleanField(default=True)
 
     objects = QuestrUserManager()
 

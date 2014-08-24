@@ -27,7 +27,7 @@
 								<input class="form-control ng-pristine ng-invalid" ng-model="user.title" name="title" type="text" placeholder="Shipment title" required />
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
-
+						{{user_form.title.errors}}
 						<!-- Size input-->
 						<div class="form-group" id="size">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="light-grey">Package size</p></label>
@@ -57,7 +57,7 @@
 								</div><!-- /input-group -->
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
-
+						{{user_form.size.errors}}
 						<!-- Message body -->
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="light-grey">Message</p></label>
@@ -71,7 +71,6 @@
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="light-grey">Pick up from</p></label>
 							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"> 
 								<select class="btn-classic" data-size="5" name="srccity" ng-model="user.city" required>
-									<option>Choose a city</option>
 									<option>Toronto</option>
 									<option>Brampton</option>
 									<option>Markham</option>
@@ -82,7 +81,7 @@
 							</div><!-- ./column -->
 							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"></div>  
 						</div>  <!-- ./form-group -->
-
+						{{user_form.srccity.errors}}
 						<!-- Pickup Address input-->
 
 						<div class="form-group">
@@ -91,6 +90,7 @@
 								<input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" ng-model="user.departure" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
+						{{user_form.srcaddress.errors}}
 
 						<!-- Pickup Name input-->
 						<div class="form-group">
@@ -99,6 +99,7 @@
 								<input id="srcname" name="srcname" type="text" placeholder="Name of the sender" class="form-control input-xs" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
+						{{user_form.srcname.errors}}
 
 
 						<!-- Pickup Phone input-->
@@ -108,6 +109,7 @@
 								<input id="srcphone" name="srcphone" type="text" placeholder="Phone number" class="form-control input-xs" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
+						{{user_form.srcphone.errors}}
 
 						<!-- Pickup Postal Code input-->
 						<div class="form-group">
@@ -116,12 +118,12 @@
 								<input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="Postal Code" class="form-control input-xs" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
+						{{user_form.srcpostalcode.errors}}
 
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="light-grey">Drop off at</p></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">   
 								<select class="btn-classic" data-size="5" name="dstcity" ng-model="user.city2" required>
-									<option>Choose a city</option>
 									<option>Toronto</option>
 									<option>Brampton</option>
 									<option>Markham</option>
@@ -131,6 +133,7 @@
 								</select>
 							</div><!-- ./column -->
 						</div>  <!-- ./form-group -->  
+						{{user_form.dstcity.errors}}
 
 						<!-- Dropoff Address input-->
 						<div class="form-group">
@@ -140,6 +143,7 @@
 								
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
+						{{user_form.dstaddress.errors}}
 
 						<!-- Dropoff Name input-->
 						<div class="form-group">
@@ -148,6 +152,7 @@
 								<input id="dstname" name="dstname" type="text" placeholder="Name of the receiver" class="form-control input-xs" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
+						{{user_form.dstname.errors}}
 
 						<!-- Dropoff Phone input-->
 						<div class="form-group">
@@ -156,6 +161,7 @@
 								<input id="dstphone" name="dstphone" type="text" placeholder="Phone number" class="form-control input-xs" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
+						{{user_form.dstphone.errors}}
 
 						<!-- Dropoff Postal Code input-->
 						<div class="form-group">
@@ -164,6 +170,7 @@
 								<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="Postal Code" class="form-control input-xs" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
+						{{user_form.dstpostalcode.errors}}
 
 
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">

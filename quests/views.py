@@ -7,7 +7,7 @@ from libs import email_notifier, geomaps, pricing
 
 from .contrib import quest_handler
 from users.contrib.user_handler import isShipper, getShippers, getQuestrDetails
-from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm, QuestConfirmChangeForm
+from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm
 from .models import Quests
 
 import logging
@@ -146,7 +146,7 @@ def confirmeditquest(request, questname):
         pagetype="loggedin"
         if questdetails.questrs.id == user.id:
             instance=get_object_or_404(Quests, id=questname)
-            user_form = QuestConfirmChangeForm(data=request.POST, instance=instance)
+            user_form = QuestConfirmForm(data=request.POST, instance=instance)
             if user_form.is_valid():
                 pickupdict = {}
                 dropoffdict = {}
@@ -207,9 +207,9 @@ def newquest(request):
         user_form = QuestCreationForm(request.POST)
         # logging.warn(user_form.errors)
         # logging.warn(user_form.is_valid())
-        logging.warn(user_form)
+        # logging.warn(user_form)
         if user_form.is_valid():
-            logging.warn(user_form.fields)
+            # logging.warn(user_form.fields)
             title = user_form.cleaned_data['title']
             size = user_form.cleaned_data['size']
             description = user_form.cleaned_data['description']
@@ -239,6 +239,7 @@ def newquest(request):
             return render(request, 'confirmquest.html', locals())  
         if user_form.errors:
             logging.warn("Form has errors, %s ", user_form.errors)
+
     pagetitle = "Create your Quest"
     return render(request, 'newquest.html', locals())  
 
@@ -255,6 +256,7 @@ def confirmquest(request):
         if user_form.is_valid():
             pickupdict = {}
             dropoffdict = {}
+            size = user_form.cleaned_data['size']
             srccity = user_form.cleaned_data['srccity']
             srcaddress = user_form.cleaned_data['srcaddress']
             srcpostalcode = user_form.cleaned_data['srcpostalcode']
@@ -276,14 +278,24 @@ def confirmquest(request):
             dropoffdict['postalcode'] = dstpostalcode
             dropoffdict['name'] = dstname
             dropoffdict['phone'] = dstphone
-            ##Submit dict to the field
-            # logging.warn("Pickup dict %s", pickupdict)
-            # logging.warn("Dropoff dict %s", dropoffdict)
+            # Recalculate distance and price to prevent any arbitrary false attempt.
+            # For distance
+            maps = geomaps.GMaps()
+            origin = srcaddress+', '+srccity+', '+srcpostalcode
+            destination = dstaddress+', '+dstcity+', '+dstpostalcode
+            maps.set_geo_args(dict(origin=origin, destination=destination))
+            distance = maps.get_total_distance()
+            # For price
+            price = pricing.WebPricing()
+            price.set_factors(distance, mode=size)
+            reward = price.get_price()
             quest_data = user_form.save(commit=False)
+            ##Submit dict to the field
             quest_data.pickup = json.dumps(pickupdict)
             quest_data.dropoff = json.dumps(dropoffdict)
             quest_data.questrs_id=request.user.id
             quest_data.creation_date=now
+            quest_data.reward=reward
             quest_data.item_images = user_form.cleaned_data['item_images']
             quest_data.save()
             try:
