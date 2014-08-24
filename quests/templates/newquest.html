@@ -71,7 +71,15 @@
 						<div class="form-group">
 							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="light-grey">Message</p></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-								<textarea class="form-control ng-pristine ng-invalid" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5" ng-model="user.description" required></textarea>
+								<textarea class="form-control ng-pristine ng-invalid" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5" ng-model="user.description" ng-minlength="3" ng-maxlength="400" required></textarea>
+								<!-- Description Erorrs-->
+								<div ng-show="form.description.$dirty && form.description.$invalid">Invalid:
+							   		<span ng-show="form.description.$error.required">A description is required</span>
+							   		<span style="color:red" ng-show="form.description.$error.minlength">
+						        	Your Title Should Contain Atleast 3 Characters</span>
+						       		<span style="color:red" ng-show="form.description.$error.maxlength">
+						        	Sorry You are Exceeding the Limit</span>
+							    </div>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 
