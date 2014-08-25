@@ -73,10 +73,7 @@
 								<input type="email" name="email" class="form-control ng-pristine ng-invalid" ng-model="user.email" required />
 								<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
 							</div>
-			              
-			                {% if user_form.email.errors %}
-			                    {{user_form.email.errors}}
-			                {% endif %}
+                            {{user_form.email.errors}}			              
 						</div>
 						<div class="col-md-6 column">
 							
@@ -91,15 +88,14 @@
 							<span class="help-block"><p>Minimum of 6 characters</p></span>
 							<div data-ng-show="myForm.confirmPassword.$error.match">Passwords do not match!</div>
 						</div>
+                        {{user_form.password1.errors}}
 						<div class="col-md-6 column">
 							
 							<input class="form-control ng-pristine ng-invalid" ng-model="user.passwordConfirm" type="password" data-match="user.password" name="password2" required />
 							
 							<div class="help-block with-errors"></div>
-							{% if user_form.password2.errors %}
-							{{user_form.password2.errors}}
-							{% endif %}
 						</div><!-- ./col-md-6 -->						
+                        {{user_form.password2.errors}}
 					</div><!-- ./row -->
 					
 					

@@ -11,19 +11,17 @@ from .models import QuestrUserProfile
 import logging
 
 class QuestrUserChangeForm(UserChangeForm):
+    """
+    Form to edit user details, this only changes the general details of the user and not the password
+    """
     def __init__(self, *args, **kwargs):
         super(forms.ModelForm, self).__init__(*args, **kwargs)
         for fieldname in ['username']:
             del self.fields['password']
             del self.fields['username']
 
-            #changed label for form items
-        # self.fields['privacy'].label = "Privacy"
-        # self.fields['biography'].label = "Your biography"
-
     class Meta:
         model = QuestrUserProfile
-        # fields = ['first_name','last_name','username','email','phone','biography','privacy']
         fields = ['first_name','last_name','displayname','email']
         widgets = {
             'first_name' : forms.TextInput(attrs={'placeholder':'First Name'}),
@@ -45,10 +43,12 @@ class QuestrUserChangeForm(UserChangeForm):
                 'required' : 'You need a username, don\'t you ?',
             },
         }
-        # exclude = ('username.help_text',)
 
 
 class QuestrSocialSignupForm(forms.ModelForm):
+    """
+    This is for when the user signs up with a social account
+    """
     def __init__(self, *args, **kwargs):
         super(forms.ModelForm, self).__init__(*args, **kwargs)
 
@@ -81,7 +81,7 @@ class QuestrSocialSignupForm(forms.ModelForm):
 
 class QuestrUserCreationForm(forms.ModelForm):
     """
-    A form that creates a user, from the given data
+    A form that creates a user, from the given data, this runs when the user uses the signup form 
     """
     displayname = forms.RegexField(label=_("Username"), max_length=30,
         regex=r'^[\w.\.+-]+$',
@@ -91,10 +91,12 @@ class QuestrUserCreationForm(forms.ModelForm):
             'invalid': _("This value may contain only letters, numbers and "
                          "./+/-/_ characters.")})
     password1 = forms.CharField(label=_("Password"),
-        widget=forms.PasswordInput)
+        widget=forms.PasswordInput, min_length=6, 
+        error_messages={'min_length' : 'The password has to be more than 6 characters !',})
     password2 = forms.CharField(label=_("Password confirmation"),
-        widget=forms.PasswordInput,
-        help_text=_("Enter the same password as above, for verification."))
+        widget=forms.PasswordInput, min_length=6,
+        help_text=_("Enter the same password as above, for verification."),
+        error_messages={'min_length' : 'The password has to be more than 6 characters !',})
 
 
     class Meta:
@@ -126,6 +128,7 @@ class QuestrUserCreationForm(forms.ModelForm):
             },
             'password1' : {
                 'required' : 'Please provide with a password !',
+                'min_length' : 'The password has to be more than 6 characters !',
             },
             'password2' : {
                 'required' : 'Please provide with a password confirmation !',
