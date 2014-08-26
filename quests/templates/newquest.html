@@ -8,38 +8,36 @@
 {% block content %}
 
 <div class="container-fluid">
-	<div class="row clearfix">
-		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 column">
-			<div class="panel panel-default body-prop border-colours">
-				<div class="panel-heading">
-					<div class="panel-title light-grey">Request a shipment</div>
-				</div><!-- ./panel-heading -->
-
-		
-
-				<div class="panel-body" ng-app="postApp" ng-controller="mainController">
-
-					<form class="form-horizontal css-form" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" name="form" ng-submit="submitForm()" novalidate>{% csrf_token %}
-						<!-- Name input-->
+	<div class="row clearfix white">
+		<div class="col-md-10 col-md-offset-1" ng-app="postApp" ng-controller="mainController">
+			<div class="col-md-12 column">
+				<h3 class="lead light-grey">request a shipment</h3>
+			</div>
+			
+			<form class="form-horizontal css-form" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" name="form" ng-submit="submitForm()" novalidate>{% csrf_token %}
+				<div class="col-md-6 column">
+					<!-- Name input-->
 						<div class="form-group">
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p class="light-grey">Title</p></label>
+							<label class="control-label" for="name"><p class="light-grey">Title</p></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 								<input class="form-control ng-pristine ng-invalid" ng-model="user.title" name="title" type="text" placeholder="Shipment title" ng-minlength="3" ng-maxlength="40" required>
+								<p>{{user.title}}</p> 
 								<!-- Title Error -->
-								
 								<div ng-show="form.title.$dirty && form.title.$invalid">Invalid:
 							   		<span ng-show="form.title.$error.required">A title is required</span>
 							   		<span style="color:red" ng-show="form.title.$error.minlength">
 						        	Your Title Should Contain Atleast 3 Characters</span>
 						       		<span style="color:red" ng-show="form.title.$error.maxlength">
 						        	Sorry You are Exceeding the Limit</span>
-							    </div>
+							    </div> 
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 						{{user_form.title.errors}}
+
+
 						<!-- Size input-->
 						<div class="form-group" id="size">
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="light-grey">Package size</p></label>
+							<label class="control-label" for="message"><p class="light-grey">Package size</p></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 								<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">	
 									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
@@ -67,9 +65,12 @@
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 						{{user_form.size.errors}}
+
+
+
 						<!-- Message body -->
 						<div class="form-group">
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p class="light-grey">Message</p></label>
+							<label class="control-label" for="message"><p class="light-grey">Message</p></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 								<textarea class="form-control ng-pristine ng-invalid" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5" ng-model="user.description" ng-minlength="3" ng-maxlength="400" required></textarea>
 								<!-- Description Erorrs-->
@@ -83,9 +84,11 @@
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 
-						<!-- Location input-->
+				</div><!-- ./column -->
+				<div class="col-md-4 column">
+					<!-- Location input-->
 						<div class="form-group">
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="light-grey">Pick up from</p></label>
+							<label class="control-label"><p class="light-grey">Pick up from</p></label>
 							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"> 
 								<select class="btn-classic" data-size="5" name="srccity" ng-model="user.city" required>
 									<option>Toronto</option>
@@ -102,7 +105,7 @@
 						<!-- Pickup Address input-->
 
 						<div class="form-group">
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+							<label class="control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 								<input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" ng-model="user.departure" ng-minlength="3" ng-maxlength="100" required>
 								<!-- Address Erorrs-->
@@ -119,7 +122,7 @@
 
 						<!-- Pickup Name input-->
 						<div class="form-group">
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+							<label class="control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 								<input id="srcname" name="srcname" type="text" placeholder="Name of the sender" class="form-control input-xs" ng-model="user.srcname" required>
 							</div><!-- ./column -->
@@ -129,7 +132,7 @@
 
 						<!-- Pickup Phone input-->
 						<div class="form-group">
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+							<label class="control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 								<input id="srcphone" name="srcphone" type="text" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.srcphone" required>
 							</div><!-- ./column -->
@@ -138,7 +141,7 @@
 
 						<!-- Pickup Postal Code input-->
 						<div class="form-group">
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+							<label class="control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 								<input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="Postal Code" class="form-control ng-pristine ng-invalid" ng-model="user.srcpostalcode" required>
 							</div><!-- ./column -->
@@ -146,7 +149,7 @@
 						{{user_form.srcpostalcode.errors}}
 
 						<div class="form-group">
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p class="light-grey">Drop off at</p></label>
+							<label class="control-label"><p class="light-grey">Drop off at</p></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">   
 								<select class="btn-classic" data-size="5" name="dstcity" ng-model="user.city2" required>
 									<option>Toronto</option>
@@ -162,7 +165,7 @@
 
 						<!-- Dropoff Address input-->
 						<div class="form-group">
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+							<label class="control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 								<input class="form-control input-xs ng-pristine ng-invalid" id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" ng-model="user.destination" ng-minlength="3" ng-maxlength="100" required>
 								<!-- Address Erorrs-->
@@ -179,7 +182,7 @@
 
 						<!-- Dropoff Name input-->
 						<div class="form-group">
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+							<label class="control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 								<input id="dstname" name="dstname" type="text" placeholder="Name of the receiver" class="form-control ng-pristine ng-invalid" ng-model="user.dstname" required>
 							</div><!-- ./column -->
@@ -188,7 +191,7 @@
 
 						<!-- Dropoff Phone input-->
 						<div class="form-group">
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+							<label class="control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 
 								<input id="dstphone" name="dstphone" type="text" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.dstphone" required>
@@ -198,7 +201,7 @@
 
 						<!-- Dropoff Postal Code input-->
 						<div class="form-group"
-							<label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
+							<label class="control-label" for="name"></label>
 							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
 								<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="Postal Code" class="form-control ng-pristine ng-invalid" ng-model="user.dstpostalcode" required>
 							</div><!-- ./column -->
@@ -206,13 +209,23 @@
 						{{user_form.dstpostalcode.errors}}
 
 
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">
-							<button type="submit" class="btn btn-info" ng-disabled="postForm.$invalid || isUnchanged(user)">Continue</button>
-						</div><!-- ./column -->
-					</form>     
-				</div><!-- ./panel-body -->
-			</div><!-- ./panel -->
-
+					<iframe
+					  width="450"
+					  height="250"
+					  frameborder="0" style="border:0"
+					  src="https://www.google.com/maps/embed/v1/directions
+					  ?key=API_KEY
+					  &origin=Oslo+Norway
+					  &destination=Telemark+Norway
+					  &avoid=tolls|highways">
+					</iframe>
+				</div>
+				<div class="col-md-2 column">
+					Total Cost
+					<button type="submit" class="btn btn-info" ng-disabled="postForm.$invalid || isUnchanged(user)">Continue</button>
+				</div>
+			</form>
+		</div>
 
 		</div><!-- ./column -->
 	</div><!-- ./row -->
@@ -222,5 +235,12 @@
 
 {% block scripts %}
 <!-- Custom Javascript -->
-  <script src={% static "js/validator.js" %}></script>
+ <script type="text/javascript">
+ 	
+ 		var userTitleInput = element(by.model('user.title'));
+ 	
+
+ </script>
+
+
 {% endblock scripts %}

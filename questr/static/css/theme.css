@@ -2,6 +2,10 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
+.lead {
+	font-weight: 200;
+}
+
 
 label {
 	font-weight: 400;

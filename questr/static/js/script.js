@@ -24,7 +24,6 @@
     });
 
 
-
 var postApp = angular.module('postApp', []);
   
 postApp.controller('mainController', ['$scope', function($scope) {
