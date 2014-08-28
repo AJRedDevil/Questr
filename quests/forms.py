@@ -1,9 +1,7 @@
 
 
 from django import forms
-from django.utils.translation import ugettext_lazy as _
 from .models import Quests
-import logging
 
 
 
@@ -217,3 +215,47 @@ class QuestChangeForm(forms.ModelForm):
                 'required' : 'A title is required !',
             },
         }
+
+class DistancePriceForm(forms.Form):
+    """
+    A form to get distance relative information 
+    """
+    def __init__(self, *args, **kwargs):
+        super(DistancePriceForm, self).__init__(*args, **kwargs)
+
+    CITY_SELECTION = (('Toronto','Toronto'),('Brampton','Brampton'),('Markham','Markham'),
+                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'))
+    PACKAGE_SELECTION = (('car','Car'),('backpack','Backpack'),('minivan','Minivan'))
+
+    srccity = forms.ChoiceField(
+        choices=CITY_SELECTION,
+        error_messages={
+                        'required' : 'Name of the city is required !',
+                        'invalid_choice' : 'Please select one of the options available !'
+                        }
+        )
+    size = forms.ChoiceField(
+        choices=PACKAGE_SELECTION,
+        error_messages={'required' : 'We need to know how you like your item to be shipped!',
+                        'invalid_choice' : 'Please select one of the options available !',
+                        }
+        )
+    srcaddress = forms.CharField(
+        error_messages={'required' : 'Street/Apt. Address where the shipment is to be picked up from is required !',}
+        )
+    srcpostalcode = forms.CharField(
+        error_messages={'required' : 'Your postcode is required !',}
+        )
+    dstcity = forms.ChoiceField(
+        choices=CITY_SELECTION,
+        error_messages={'required' : 'Name of the city is required !',
+                        'invalid_choice' : 'Please select one of the options available !',
+                        }
+        )
+    dstaddress = forms.CharField(
+        error_messages={'required' : 'Street/Apt. Address where the shipment is to be picked up from is required !',}
+        )
+    dstpostalcode = forms.CharField(
+        error_messages={'required' : 'Your postcode is required !',}
+        )
+

@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 
 from libs import email_notifier, geomaps, pricing
 
 from .contrib import quest_handler
 from users.contrib.user_handler import isShipper, getShippers, getQuestrDetails
-from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm
+from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm, DistancePriceForm
 from .models import Quests
 
 import logging
@@ -69,7 +69,6 @@ def editquest(request, questname):
         #         quest_data.save()
         #         message = "Your quest has been updated!"
         #         return redirect('viewquest', questname=questname)
-        from users.contrib.user_handler import getShipper
         pagetype="loggedin"
         if questdetails.questrs.id == user.id:
             instance=get_object_or_404(Quests, id=questname)
@@ -461,3 +460,37 @@ def completequest(request, questname):
             logging.debug(message)
             return redirect('viewquest', questname=questname)
     return redirect('viewquest', questname=questname)
+
+@login_required
+def getDistanceAndPrice(request):
+    if request.method == "POST":
+        user_form = DistancePriceForm(request.POST)
+        if user_form.is_valid():
+            srccity = user_form.cleaned_data['srccity']
+            srcaddress = user_form.cleaned_data['srcaddress']
+            srcpostalcode = user_form.cleaned_data['srcpostalcode']
+            dstcity = user_form.cleaned_data['dstcity']
+            dstaddress = user_form.cleaned_data['dstaddress']
+            dstpostalcode = user_form.cleaned_data['dstpostalcode']
+            size = user_form.cleaned_data['size']
+            # For distance
+            #the distance and price hsa to be set up into a temp database, also the 
+            #image file needs to be on a temp folder for processign to reduce API calls
+            maps = geomaps.GMaps()
+            origin = srcaddress+', '+srccity+', '+srcpostalcode
+            destination = dstaddress+', '+dstcity+', '+dstpostalcode
+            maps.set_geo_args(dict(origin=origin, destination=destination))
+            distance = maps.get_total_distance()
+            # For price
+            price = pricing.WebPricing()
+            price.set_factors(distance, mode=size)
+            reward = price.get_price()
+            resultdict = {}
+            resultdict['distance'] = distance
+            resultdict['price'] = reward
+            return HttpResponse(json.dumps(resultdict),content_type="application/json")
+        if user_form.errors:
+            logging.warn("Form has errors, %s ", user_form.errors)
+            resultdict['status'] = 500
+            resultdict['message'] = "Internal Server Error"
+            return HttpResponse(json.dumps(resultdict),content_type="application/json")

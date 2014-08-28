@@ -8,7 +8,6 @@ from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import authenticate, get_user_model
 from django.utils.translation import ugettext_lazy as _
 from .models import QuestrUserProfile
-import logging
 
 class QuestrUserChangeForm(UserChangeForm):
     """
