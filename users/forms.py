@@ -91,12 +91,19 @@ class QuestrUserCreationForm(forms.ModelForm):
                          "./+/-/_ characters.")})
     password1 = forms.CharField(label=_("Password"),
         widget=forms.PasswordInput, min_length=6, 
-        error_messages={'min_length' : 'The password has to be more than 6 characters !',})
+        error_messages={'required' : 'Please provide with a password !',
+                        'min_length' : 'The password has to be more than 6 characters !',
+                        })
     password2 = forms.CharField(label=_("Password confirmation"),
         widget=forms.PasswordInput, min_length=6,
         help_text=_("Enter the same password as above, for verification."),
-        error_messages={'min_length' : 'The password has to be more than 6 characters !',})
+        error_messages={'required' : 'Please provide with a password confirmation !',
+                        'min_length' : 'The password has to be more than 6 characters !',
+                        })
 
+    error_messages = {
+        'password_mismatch': _("The two password fields didn't match. Please re-verify your passwords !"),
+        }
 
     class Meta:
         model = QuestrUserProfile
@@ -111,8 +118,6 @@ class QuestrUserCreationForm(forms.ModelForm):
         }
 
         error_messages = {
-            'password_mismatch': _("The two password fields didn't match. Please re-verify your passwords !"),
-
             'first_name' : {
                 'required' : 'Your first name is required!',
             },
@@ -124,13 +129,6 @@ class QuestrUserCreationForm(forms.ModelForm):
             },
             'displayname' : {
                 'required' : 'You need a username, don\'t you ?',
-            },
-            'password1' : {
-                'required' : 'Please provide with a password !',
-                'min_length' : 'The password has to be more than 6 characters !',
-            },
-            'password2' : {
-                'required' : 'Please provide with a password confirmation !',
             },
         }
 
