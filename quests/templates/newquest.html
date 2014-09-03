@@ -12,14 +12,20 @@
 		<div class="col-md-10 col-md-offset-1" ng-app="postApp" ng-controller="mainController">
 			<div class="col-md-12 column">
 				<h3 class="lead light-grey">request a shipment</h3>
-			</div>
+			</div><!-- ./column -->
+
+
+
 			
 			<form class="form-horizontal css-form" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" name="form" ng-submit="submitForm()" novalidate>{% csrf_token %}
-				<div class="col-md-6 column">
+				
+
+
+				<div class="col-md-10 column">
 					<!-- Name input-->
 						<div class="form-group">
 							<label class="control-label" for="name"><p class="light-grey">Title</p></label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+							<div class="">
 								<input class="form-control ng-pristine ng-invalid" ng-model="user.title" name="title" type="text" placeholder="Shipment title" ng-minlength="3" ng-maxlength="40" required>
 								<p>{{user.title}}</p> 
 								<!-- Title Error -->
@@ -38,7 +44,7 @@
 						<!-- Size input-->
 						<div class="form-group" id="size">
 							<label class="control-label" for="message"><p class="light-grey">Package size</p></label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+							<div class="">
 								<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">	
 									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
 										<center>
@@ -71,7 +77,7 @@
 						<!-- Message body -->
 						<div class="form-group">
 							<label class="control-label" for="message"><p class="light-grey">Message</p></label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+							<div class="">
 								<textarea class="form-control ng-pristine ng-invalid" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5" ng-model="user.description" ng-minlength="3" ng-maxlength="400" required></textarea>
 								<!-- Description Erorrs-->
 								<div ng-show="form.description.$dirty && form.description.$invalid">Invalid:
@@ -84,12 +90,10 @@
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 
-				</div><!-- ./column -->
-				<div class="col-md-4 column">
-					<!-- Location input-->
+						<!-- Location input-->
 						<div class="form-group">
 							<label class="control-label"><p class="light-grey">Pick up from</p></label>
-							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"> 
+							<div class=""> 
 								<select class="btn-classic" data-size="5" name="srccity" ng-model="user.city" required>
 									<option>Toronto</option>
 									<option>Brampton</option>
@@ -123,17 +127,17 @@
 						<!-- Pickup Name input-->
 						<div class="form-group">
 							<label class="control-label" for="name"></label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-								<input id="srcname" name="srcname" type="text" placeholder="Name of the sender" class="form-control input-xs" ng-model="user.srcname" required>
+							<div class="col-md-4 column">
+								<input id="srcname" name="srcname" type="text" placeholder="Name of the sender" class="form-control input-xs" ng-model="user.srcname"  required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 						{{user_form.srcname.errors}}
-
+uy
 
 						<!-- Pickup Phone input-->
 						<div class="form-group">
 							<label class="control-label" for="name"></label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+							<div class="col-md-4 column">
 								<input id="srcphone" name="srcphone" type="text" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.srcphone" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
@@ -142,7 +146,7 @@
 						<!-- Pickup Postal Code input-->
 						<div class="form-group">
 							<label class="control-label" for="name"></label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+							<div class="col-md-2 column">
 								<input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="Postal Code" class="form-control ng-pristine ng-invalid" ng-model="user.srcpostalcode" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
@@ -183,7 +187,7 @@
 						<!-- Dropoff Name input-->
 						<div class="form-group">
 							<label class="control-label" for="name"></label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+							<div class="col-md-4 column">
 								<input id="dstname" name="dstname" type="text" placeholder="Name of the receiver" class="form-control ng-pristine ng-invalid" ng-model="user.dstname" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
@@ -192,9 +196,8 @@
 						<!-- Dropoff Phone input-->
 						<div class="form-group">
 							<label class="control-label" for="name"></label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-
-								<input id="dstphone" name="dstphone" type="text" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.dstphone" required>
+							<div class="col-md-4 column">
+								<input id="dstphone" name="dstphone" type="number" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.dstphone" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 						{{user_form.dstphone.errors}}
@@ -202,12 +205,16 @@
 						<!-- Dropoff Postal Code input-->
 						<div class="form-group"
 							<label class="control-label" for="name"></label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+							<div class="col-md-2 column">
 								<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="Postal Code" class="form-control ng-pristine ng-invalid" ng-model="user.dstpostalcode" required>
 							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 						{{user_form.dstpostalcode.errors}}
+				</div><!-- ./column -->
 
+				<div class="col-md-2 column">
+					Total Cost
+					<button type="submit" class="btn btn-info" ng-disabled="postForm.$invalid || isUnchanged(user)">Continue</button>
 
 					<iframe
 					  width="450"
@@ -219,14 +226,8 @@
 					  &destination=Telemark+Norway
 					  &avoid=tolls|highways">
 					</iframe>
-				</div>
-				<div class="col-md-2 column">
-					Total Cost
-					<button type="submit" class="btn btn-info" ng-disabled="postForm.$invalid || isUnchanged(user)">Continue</button>
-				</div>
+				</div><!-- ./column -->
 			</form>
-		</div>
-
 		</div><!-- ./column -->
 	</div><!-- ./row -->
 	{% endblock content %}
