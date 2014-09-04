@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 
-from libs import email_notifier, geomaps, pricing
+from libs import email_notifier, geomaps, pricing, stripeutils
 
 from .contrib import quest_handler
 from users.contrib.user_handler import isShipper, getShippers, getQuestrDetails
@@ -297,6 +297,7 @@ def confirmquest(request):
             quest_data.reward=reward
             quest_data.item_images = user_form.cleaned_data['item_images']
             quest_data.save()
+            return redirect('pay',questname=quest_data)
             try:
                 shippers = getShippers()
                 for shipper in shippers: # send notifcations to all the shippers
@@ -494,3 +495,16 @@ def getDistanceAndPrice(request):
             resultdict['status'] = 500
             resultdict['message'] = "Internal Server Error"
             return HttpResponse(json.dumps(resultdict),content_type="application/json")
+
+def setnewpayment(request, questname):
+    quest_data = quest_handler.getQuestDetails(questname)
+    price = quest_data.reward
+    if request.method == "POST":
+        chargeme = stripeutils.PayStripe()
+        result = chargeme.charge(request.POST['stripeToken'],int(price*100))
+        if result['status'] == "pass":
+            return redirect('home')
+        else:
+            return redirect('pay', questname=quest_data)
+    
+    return render(request, 'newpayment.html', locals())
