@@ -11,14 +11,16 @@
 <div class="container-fluid" ng-app="validationApp" ng-controller="mainController">
     <div class="row clearfix">
 	    <div class="col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 column">
+	    	<br><br><br>
 		    <div class="panel panel-default">
 			    <div class="panel-heading">
 				    <center><div class="panel-title lead">Sign in</div></center>
 		        </div>
 			    
 			    <div class="panel-body">
+			    	<div class="col-md-12 column">
 				   
-				    <form action="{%url 'signin'%}" method="post" name="userForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
+				    	<form action="{%url 'signin'%}" method="post" name="userForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
                         <!-- Login with Username and Password --> 
                         <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
                             <input type="email" name="username" class="form-control" ng-model="user.email" placeholder="Email Address">
@@ -43,36 +45,36 @@
                         
                             <center><button type="submit" class="btn btn-sm btn-embossed btn-info">Sign in</button></center>
                         </div> <!-- ./form-group -->
-				    </form>
-           
-                    <hr>
+				    	</form>
 
-	                <h6>Sign in with</h6>
-                    <a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i></button></a>
-                    <a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i></button></a>
-	                
-	                {% comment %}
-	                ## This is for google plus based authentication ##
-	                    {% if plus_id %}
-	                    <form id="google-plus" method="post" action="{% url 'social:complete' 'google-plus' %}">{% csrf_token %}
-	                      <input id="at" type="hidden" name="access_token" value="" />
-	                      <input id="code" type="hidden" name="code" value="" />
-	        
-	                      <div id="signinButton">
-	                        <span class="g-signin" data-scope="{{ plus_scope }}"
-	                                               data-clientid="{{ plus_id }}"
-	                                               data-redirecturi="postmessage"
-	                                               data-accesstype="offline"
-	                                               data-cookiepolicy="single_host_origin"
-	                                               data-callback="signInCallback">
-	                        </span>
-	                      </div>
-	                    </form>
-	                    {% endif %}
-	                {% endcomment %}
-	                
-	                <a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i></button></a>       
-         
+				    	<center>
+					    	<h6>Sign in with</h6>
+		                    <a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i></button></a>
+		                    <a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i></button></a>
+			                
+			                {% comment %}
+			                ## This is for google plus based authentication ##
+			                    {% if plus_id %}
+			                    <form id="google-plus" method="post" action="{% url 'social:complete' 'google-plus' %}">{% csrf_token %}
+			                      <input id="at" type="hidden" name="access_token" value="" />
+			                      <input id="code" type="hidden" name="code" value="" />
+			        
+			                      <div id="signinButton">
+			                        <span class="g-signin" data-scope="{{ plus_scope }}"
+			                                               data-clientid="{{ plus_id }}"
+			                                               data-redirecturi="postmessage"
+			                                               data-accesstype="offline"
+			                                               data-cookiepolicy="single_host_origin"
+			                                               data-callback="signInCallback">
+			                        </span>
+			                      </div>
+			                    </form>
+			                    {% endif %}
+			                {% endcomment %}
+			                
+			                <a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i></button></a> 
+		            	</center>
+					</div><!-- ./column -->
 			    </div><!-- ./panel-body -->	  
 		    </div><!-- ./panel-default -->
 	    </div><!-- ./column -->    

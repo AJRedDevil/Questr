@@ -11,16 +11,13 @@
 		<div class="blurred-image"></div>
 			
 			<div class="container masthead fadeIn fadeIn-1s">
-				<br><br><br><br><br><br><br><br><br><br><br>
 				<div class="row clearfix">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-
 						<h1>{{messageResponse}}</h1>
 						
-						<h2>Canada's first crowdshipping platform.</h2>
+						<h2>World's first crowdshipping platform.</h2>
 				
 						<h3>Cheaper, faster, 24/7 shipments now available in Greater Toronto Area.</h3>
-				
 					</div><!--./column -->
 				</div><!--./row -->
 				
@@ -29,30 +26,28 @@
 						<form class="form-horizontal" role="form" action="{% url 'join'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" novalidate>{% csrf_token %}
 				
 							<div class="form-group">
-							<div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 column">
 								
-								<input class="form-control input-lg no-margin" name="EMAIL" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required">
-						<span id="result" class="alertMsg"></span>
-							</div>
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-								<center><button type="submit" class="btn btn-embossed btn-warning btn-hg no-margin">Notify me</button></center>
-							</div>
-						
-						
+								<div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 column">
+									<input class="form-control input-lg no-margin" name="EMAIL" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required">
+									<span id="result" class="alertMsg"></span>
+								</div><!-- ./column -->
+
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+									<center><button type="submit" class="btn no-margin btn-lg embossed-heavy big-button">Notify me</button></center>
+								</div><!-- ./column -->
 							</div><!--./form-group -->		
 						</form>
-						<br><br><br><br><br><br><br><br><br><br><br>
-					</div><!-- ./column -->
+					</div><!-- ./subscribe -->
 				</div><!-- ./row -->
-			</div><! -- ./container -->
-	</div><! -- ./container-fluid -->
+			</div><!-- ./container -->
+	</div><!-- ./container-fluid -->
 
 
-    <! -- ******************** FEATURES ******************** -->	
+    <!-- ******************** FEATURES ******************** -->	
 	<div class="container layout-foreground">	
 	
-		<div class="row clearfix section">
-			<div class="col-xs-12 col-md-10 col-md-offset-1 column">
+		<div class="row clearfix section" id="what-is">
+			<div class="col-md-10 col-md-offset-1 column">
 				<div class="section-title">
 					<h2>What is Questr?</h2>
 					<h4>
@@ -62,40 +57,38 @@
 					</h4>
 				</div><!-- ./section-title -->
 			</div><!-- ./column -->
-			<div class="col--12 col-md-10 col-md-offset-1 column">
-					
-				<div class="col-md-4">
+			<div class="col-md-10 col-md-offset-1 column">	
+				<div class="col-md-4 column">
 					<div class="thumbnail"> 
 						<div class="caption">
-							<span class="cheapest"><i class="glyphicon glyphicon-usd" style="font-size: 60px; text-align: center;"></i></span>
+							<span><i class="glyphicon glyphicon-usd"></i></span>
 							<h3>Cheaper</h3>
 							<p>Starting from only $6, Questr offers the cheapest shipping options available in the entire Canada.</p>
-						</div>
-					</div><! --/thumbnail -->
-				</div><! --/.column -->
-				<div class="col-md-4">
+						</div><!-- ./caption -->
+					</div><!--/thumbnail -->
+				</div><!--/.column -->
+				<div class="col-md-4 column">
 					<div class="thumbnail"> 
 						<div class="caption">
-							<span class="fastest"><i class="glyphicon glyphicon-flash" style="font-size: 60px; text-align: center;"></i></span>
+							<span class="fastest"><i class="glyphicon glyphicon-flash"></i></span>
 							<h3>Faster</h3>
 							<p>Less than 1 hour from STC to Square One. Decentralized logistics makes shipping lightning fast.</p>
-						</div>
-					</div><! --/thumbnail -->
-				</div><! --/.column -->
-				<div class="col-md-4">
+						</div><!-- ./caption -->
+					</div><!--/thumbnail -->
+				</div><!--/.column -->
+				<div class="col-md-4 column">
 					<div class="thumbnail"> 
 						<div class="caption">
-							<span class="available"><i class="glyphicon glyphicon-time" style="font-size: 60px; text-align: center;"></i></span>
+							<span><i class="glyphicon glyphicon-time"></i></span>
 							<h3>Available 24/7</h3>
 							<p>86,400 seconds a day, 7 days a week, no matter it's rush hour on Friday or midnight on Christmas Eve.</p>
-						</div>
-					</div><! --/thumbnail -->
-				</div><! --/.column -->
-
-			</div><! --/.column -->
-		</div><! --/row -->
+						</div><!-- ./caption -->
+					</div><!--/thumbnail -->
+				</div><!--/.column -->
+			</div><!--/.column -->
+		</div><!--/row -->
  
-		<! -- ******************** PRICING LIST ******************** -->	  
+		<!-- ******************** PRICING LIST ******************** -->	  
 		<div class="row clearfix section grey">
 			
 			<div class="col-md-12 column">
@@ -114,8 +107,8 @@
 							<span class="curr">$</span>6<span class="per">+1.7/KM * **</span>
 						</div>
 						<div class="billing" style="font-weight:bolder;">A pile of documents, or a takeout order</div>
-					</div><! --/pricing -->
-				</div><! --/col-md-4-->
+					</div><!--/pricing -->
+				</div><!--/col-md-4-->
 				
 				<div class="col-md-4 column">
 					<div class="pricing color2">
@@ -124,8 +117,8 @@
 							<span class="curr">$</span>6<span class="per">+2/KM * **</span>
 						</div>
 						<div class="billing" style="font-weight:bolder;">4-6 moving boxes</div>
-					</div><! --/pricing -->
-				</div><! --/col-md-4-->
+					</div><!--/pricing -->
+				</div><!--/col-md-4-->
 				
 				<div class="col-md-4">
 					<div class="pricing color3">
@@ -134,7 +127,7 @@
 							<span class="curr">$</span>16<span class="per">+3.4/KM * **</span>
 						</div>
 						<div class="billing" style="font-weight:bolder;">For moving and IKEA furniture hunters</div>
-					</div><! --/pricing -->
+					</div><!--/pricing -->
 				</div><!-- ./column -->
 			</div>
 	
@@ -151,7 +144,7 @@
 		</div><!-- ./section -->
 		
 
-	    <! -- ******************** HOW QUESTR WORKS div ******************** -->
+	    <!-- ******************** HOW QUESTR WORKS div ******************** -->
 		<div class="row clearfix section">
 			
 			<div class="row">
@@ -201,10 +194,10 @@
 				        </p>
 	                </div><!-- ./column -->
 	            </div><!-- ./column -->
-            </div><! --/row -->	
+            </div><!--/row -->	
   		</div><!-- ./section -->
 			
-	    <! -- ******************** FAQ div ******************** -->	 
+	    <!-- ******************** FAQ div ******************** -->	 
 		<div class="row clearfix section grey">
 			<div class="col-md-12 column">
 				<div class="section-title">
@@ -234,10 +227,10 @@
 					<p>Besides what Questr does automatically for you, you can also go to a shipper's profile and go over the reviews that have been provided by other users.</p>
                 </div><!-- ./column -->	
             </div><!-- ./column -->
-		</div><! -- ./section -->	
+		</div><!-- ./section -->	
 		
-	
-	    <! -- ******************** MENTIONS ******************** -->	
+		{% comment %}
+	    <!-- ******************** MENTIONS ******************** -->	
 	    <div class="row clearfix section">
 			<div class="col-md-12 column"> 
 				<div class="section-title"><h2>We're mentioned in</h2></div><!-- ./section-title -->
@@ -251,35 +244,44 @@
 						</center>	
 					</div><!-- ./column -->
 			</div><!-- ./column -->
-	    </div><!-- ./section -->		
+	    </div><!-- ./section -->	
+	    {% endcomment %}	
 			
 			
 	<!-- *****************************************************************************************************************
 	Say hi to us
 	***************************************************************************************************************** -->
-		<div class="row clearfix section grey">
+		<div class="row clearfix section" id="say-hi">
 			<div class="col-md-10 col-md-offset-1 column">
 				<div class="section-title">
 					<h2>Say hi</h2>
 				</div><!-- ./section-title -->
-			</div><!-- ./column -->	
+			</div><!-- ./column -->
+
+
 			<div class="col-md-4 col-md-offset-4 column">
 				<form action="{% url 'contactus'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
-					<div class="form-group" style="*background-color:green; width:100%;">
-						<input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Name" style="*background-color:yellow; width:100%;">
+
+
+					<div class="form-group">
+						<input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Name">
 						<input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
 						<textarea name="message" class="form-control" rows="3" placeholder="Message" style="min-height:200px;"></textarea>
 					</div><!-- ./form-group -->
-					<button type="submit" class="btn btn-embossed btn-default" style="background-color:#ff0042;">Send</button>
+					<button type="submit" class="btn btn-default empty-button">Send</button>
 				</form>	
-			</div><! -- ./column -->
-		</div><! -- ./section -->
+			</div><!-- ./column -->
+		</div><!-- ./section -->
+		
+
+
+
+
 		{% endblock content %}
-	</div><! -- ./container-fluid -->
-</div><! -- ./wrapper -->
+	</div><!-- ./container-fluid -->
+</div><!-- ./wrapper -->
 
 {% block scripts %}
-
 <!--<script src={% static "js/index.js" %}></script> -->
 <script>
 	$(document).ready(function() {

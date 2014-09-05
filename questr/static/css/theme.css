@@ -513,28 +513,31 @@ outline: 0 none;
 	border-bottom: 1px solid #E4E6E3; 
 	border-radius: 0;
 	padding: 0px 50px;
-
 }
 
 .navbar-default .navbar-nav > li > a {
-  background-color: transparent;
-  border-bottom: transparent;
+ 	color: #3498DB;
+ 	background: white;
+ 	font-weight: 400;
 }
+
 .navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-  color: #3498db;
-  background-color: transparent;
+.navbar-default .navbar-nav > li > a:focus,
+ .navbar-default .navbar-nav > li {
+  color: white;
+  background-color: #5abdff;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
   color: #3498db;
-  background-color: transparent;
+  background-color: black;
 }
 
 .navbar .navbar-brand {
-	color: #3498db; 
+	color: #3498DB; 
 	font-size: 25px;
+	font-weight: 500;
 }
 
 .navbar-default .dropdown-menu {
@@ -612,6 +615,7 @@ outline: 0 none;
 }
 
 
+
  /********* no image post **********/
 .no-image {
  	background: #3498db;
@@ -643,6 +647,11 @@ outline: 0 none;
 }
 
 
+
+/********* HOME PAGE **********/
+.masthead {
+	position: relative;
+}
 
 
 
