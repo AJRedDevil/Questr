@@ -31,7 +31,7 @@
 									{% else %}
 					            
 						            <a data-target="#lightbox" data-toggle="modal" href="#">
-							            <img alt="itemImage" class="itemImage img-rounded" src="{{MEDIA_URL}}{{questdetails.item_images}}">
+							            <img alt="itemImage" class="itemImage img-rounded" src="{{questdetails.get_item_images_normal_url}}">
 						            </a>
 						            {% endif %}
 							
@@ -142,7 +142,8 @@
 								</p>
 								{% endif %}
 								<br><br>
-								<a href="#"><small class="light-grey" id="btn-map">view map <i class="fa fa-caret-down"></i></small></a>
+								{# <a href="#"><small class="light-grey" id="btn-map">view map <i class="fa fa-caret-down"></i></small></a> #}
+								<img alt="itemImage" class="itemImage img-rounded" src="{{questdetails.map_image}}">
 						    </div>
 						    <div class="panel-footer">
 						    	<p class="lighter-grey inline">

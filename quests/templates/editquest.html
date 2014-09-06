@@ -153,7 +153,7 @@
                   </div>     
               	 	<div class="col-md-4 column">
 	              		<center>
-	              			<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />
+	              			<img src={% static 'img/car.png' %} style="width:100%; height:auto;" />
 	              			<p>Car</p>
                       {% if questdetails.size == "car" %}
                       <input type="radio" name="size" value="car" checked="checked">                         
@@ -164,12 +164,12 @@
               	 	</div>
               	 	<div class="col-md-4 column">
 	              		<center>
-	              			<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />
+	              			<img src={% static 'img/minivan.png' %} style="width:100%; height:auto;" />
 	              			<p>Van</p>
-                      {% if questdetails.size == "van" %}
-                      <input type="radio" name="size" value="van" checked="checked">                         
+                      {% if questdetails.size == "minivan" %}
+                      <input type="radio" name="size" value="minivan" checked="checked">                         
                       {% else %}
-                      <input type="radio" name="size" value="van">
+                      <input type="radio" name="size" value="minivan">
                       {% endif %}
 	              			</center> 	
               	 	</div>
@@ -184,7 +184,9 @@
                 <textarea class="form-control" id="description" name="description" rows="5">{{questdetails.description}}</textarea>
               </div>
             </div>
-
+            <div class="panel-body">
+              <img alt="itemImage" class="itemImage img-rounded" src="{{questdetails.map_image}}">
+            </div>   
             <!-- Form actions -->
             <div class="form-group">
               <div class="col-md-12 text-center">
