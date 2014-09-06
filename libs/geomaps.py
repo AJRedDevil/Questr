@@ -1,13 +1,13 @@
 
 
 
-import Image
+# import Image
 import logging as log
 import simplejson
 import urllib
-from cStringIO import StringIO
+# from cStringIO import StringIO
 from django.conf import settings
-from pprint import pprint
+# from pprint import pprint
 
 
 class GMaps(object):
