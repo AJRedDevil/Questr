@@ -530,8 +530,8 @@ outline: 0 none;
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: #3498db;
-  background-color: black;
+  color: white;
+  background-color: #5abdff;
 }
 
 .navbar .navbar-brand {
