@@ -81,7 +81,6 @@ def editquest(request, questname):
                 description = user_form.cleaned_data['description']
                 srccity = user_form.cleaned_data['srccity']
                 srcaddress = user_form.cleaned_data['srcaddress']
-                quest_data = user_form.save(commit=False)
                 srcpostalcode = user_form.cleaned_data['srcpostalcode']
                 srcname = user_form.cleaned_data['srcname']
                 srcphone = user_form.cleaned_data['srcphone']
@@ -99,6 +98,7 @@ def editquest(request, questname):
                 destination = dstaddress+', '+dstcity+', '+dstpostalcode
                 maps.set_geo_args(dict(origin=origin, destination=destination))
                 distance = maps.get_total_distance()
+                map_image = maps.fetch_static_map()
                 # For price
                 price = pricing.WebPricing()
                 price.set_factors(distance, mode=size)
@@ -149,6 +149,7 @@ def confirmeditquest(request, questname):
             if user_form.is_valid():
                 pickupdict = {}
                 dropoffdict = {}
+                size = user_form.cleaned_data['size']
                 srccity = user_form.cleaned_data['srccity']
                 srcaddress = user_form.cleaned_data['srcaddress']
                 quest_data = user_form.save(commit=False)
@@ -171,12 +172,30 @@ def confirmeditquest(request, questname):
                 dropoffdict['postalcode'] = dstpostalcode
                 dropoffdict['name'] = dstname
                 dropoffdict['phone'] = dstphone
+                # Recalculate distance and price to prevent any arbitrary false attempt.
+                # For distance
+                maps = geomaps.GMaps()
+                origin = srcaddress+', '+srccity+', '+srcpostalcode
+                destination = dstaddress+', '+dstcity+', '+dstpostalcode
+                maps.set_geo_args(dict(origin=origin, destination=destination))
+                distance = maps.get_total_distance()
+                map_image = maps.fetch_static_map()
+                # For price
+                price = pricing.WebPricing()
+                price.set_factors(distance, mode=size)
+                reward = price.get_price()
+                quest_data = user_form.save(commit=False)
+                ##Submit dict to the field
                 ##Submit dict to the field
                 # logging.warn("Pickup dict %s", pickupdict)
                 # logging.warn("Dropoff dict %s", dropoffdict)
                 quest_data = user_form.save(commit=False)
                 quest_data.pickup = json.dumps(pickupdict)
                 quest_data.dropoff = json.dumps(dropoffdict)
+                quest_data.map_image = map_image
+                quest_data.reward=reward
+                quest_data.item_images = user_form.cleaned_data['item_images']
+                quest_data.map_image = map_image
                 quest_data.save()
                 pagetitle = "Confirm your Quest"
                 return redirect(viewquest, questname=questdetails.id)
@@ -230,6 +249,8 @@ def newquest(request):
             destination = dstaddress+', '+dstcity+', '+dstpostalcode
             maps.set_geo_args(dict(origin=origin, destination=destination))
             distance = maps.get_total_distance()
+            map_image = maps.fetch_static_map()
+            logging.warn(map_image)
             # For price
             price = pricing.WebPricing()
             price.set_factors(distance, mode=size)
@@ -284,6 +305,7 @@ def confirmquest(request):
             destination = dstaddress+', '+dstcity+', '+dstpostalcode
             maps.set_geo_args(dict(origin=origin, destination=destination))
             distance = maps.get_total_distance()
+            map_image = maps.fetch_static_map()
             # For price
             price = pricing.WebPricing()
             price.set_factors(distance, mode=size)
@@ -296,6 +318,7 @@ def confirmquest(request):
             quest_data.creation_date=now
             quest_data.reward=reward
             quest_data.item_images = user_form.cleaned_data['item_images']
+            quest_data.map_image = map_image
             quest_data.save()
             return redirect('pay',questname=quest_data)
             try:

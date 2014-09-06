@@ -35,9 +35,13 @@ AWS_S3_SECRET_ACCESS_KEY = os.environ['AMAZON_SECRET_ACCESS_KEY']
 # AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
 AWS_MEDIA_BUCKET = os.environ['AWS_MEDIA_BUCKET']
 AWS_STATIC_BUCKET = os.environ['AWS_STATIC_BUCKET']
+AWS_HEADERS = {
+        'Cache-Control': 'max-age=86400',
+}
 
 # Google maps
 GOOGLE_MAPS_SERVER_KEY = os.environ['GOOGLE_MAPS_SERVER_KEY']
+GOOGLE_MAPS_BROWSER_KEY = os.environ['GOOGLE_MAPS_SERVER_KEY']
 
 #Append Slash to all cals
 APPEND_SLASH = True
