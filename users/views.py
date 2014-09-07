@@ -434,7 +434,7 @@ def resetpassword(request):
             email_details = user_handler.prepPasswordResetNotification(user, new_random_password)
             email_notifier.send_email_notification(user, email_details)
             message = "Please check your inbox for your new password"
-            return redirect('home')
+            return redirect('signin')
     pagetitle = "Reset Your Password"
     pagetype  = "public"
     return render(request,"resetpassword.html", locals())

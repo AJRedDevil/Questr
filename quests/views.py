@@ -101,8 +101,7 @@ def editquest(request, questname):
                 map_image = maps.fetch_static_map()
                 # For price
                 price = pricing.WebPricing()
-                price.set_factors(distance, mode=size)
-                reward = price.get_price()
+                reward = price.get_price(distance)
                 pagetitle = "Confirm your Quest"
                 return render(request, 'confirmquestedit.html', locals())  
             if user_form.errors:
@@ -182,8 +181,7 @@ def confirmeditquest(request, questname):
                 map_image = maps.fetch_static_map()
                 # For price
                 price = pricing.WebPricing()
-                price.set_factors(distance, mode=size)
-                reward = price.get_price()
+                reward = price.get_price(distance)
                 quest_data = user_form.save(commit=False)
                 ##Submit dict to the field
                 ##Submit dict to the field
@@ -253,8 +251,7 @@ def newquest(request):
             logging.warn(map_image)
             # For price
             price = pricing.WebPricing()
-            price.set_factors(distance, mode=size)
-            reward = price.get_price()
+            reward = price.get_price(distance)
             pagetitle = "Confirm your Quest"
             return render(request, 'confirmquest.html', locals())  
         if user_form.errors:
@@ -308,8 +305,7 @@ def confirmquest(request):
             map_image = maps.fetch_static_map()
             # For price
             price = pricing.WebPricing()
-            price.set_factors(distance, mode=size)
-            reward = price.get_price()
+            reward = price.get_price(distance)
             quest_data = user_form.save(commit=False)
             ##Submit dict to the field
             quest_data.pickup = json.dumps(pickupdict)
@@ -507,8 +503,7 @@ def getDistanceAndPrice(request):
             distance = maps.get_total_distance()
             # For price
             price = pricing.WebPricing()
-            price.set_factors(distance, mode=size)
-            reward = price.get_price()
+            reward = price.get_price(distance)
             resultdict = {}
             resultdict['distance'] = distance
             resultdict['price'] = reward

@@ -1,49 +1,49 @@
 
 
-import datetime
-import logging as log
+import pytz
 import math
-from django.utils import timezone
 
+import logging as log
+
+from django.utils import timezone
+from django.conf import settings
 
 """
 First revision
 This revision is intended to serve Questr only when there is no mobile app to determine the available-online shipper ratio.
+floor( rate_meter_drop + (distance - 2) * $/km ) 
 
 Weekdays
 Off-peak hours        
-floor( 4 + SIZE_HANDLING_FEE + (DISTANCE_IN_KM - 2) * 1.7 * SIZE_MODIFIER)
+floor( RATE_METER_DROP_WEEKDAY + (DISTANCE_IN_KM - 2) * 1.7)
 Peak hours            
-floor( 4 + SIZE_HANDLING_FEE + (DISTANCE_IN_KM - 2) * 2.0 * SIZE_MODIFIER)    
+floor( RATE_METER_DROP_WEEKDAY + (DISTANCE_IN_KM - 2) * 2.0)    
 Low hours        
-floor( 6 + SIZE_HANDLING_FEE + (DISTANCE_IN_KM - 2) * 2.5 * SIZE_MODIFIER) 
+floor( RATE_METER_DROP_WEEKDAY + (DISTANCE_IN_KM - 2) * 2.5) 
 
 Weekend
 Normal, Peak hours    
-floor( 6 + SIZE_HANDLING_FEE + (DISTANCE_IN_KM - 2) * 2.5 * SIZE_MODIFIER)
+floor( RATE_METER_DROP_WEEKEND + (DISTANCE_IN_KM - 2) * 2.5)
 Low hours        
-floor(10 + SIZE_HANDLING_FEE + (DISTANCE_IN_KM - 2) * 3.0 * SIZE_MODIFIER)
+floor( RATE_METER_DROP_WEEKEND + (DISTANCE_IN_KM - 2) * 3.0)
 
+RATE_METER_DROP_WEEKDAY
+Backpack   	4
+Car        	6
+Minivan    	10
+Truck		90
 
-
-SIZE_MODIFIER
-Backpack   1.0
-Car        1.2
-Minivan    2.0
-
-SIZE_HANDLING_FEE
-Backpack   2
-Car        3
-Minivan    12
+RATE_METER_DROP_WEEKEND
+Backpack   	6
+Car        	8
+Minivan    	10
+Truck		90
 
 Off-peak hours
-1100-1500, 2000-2300
+0900-2100
 
 Peak hours
-0800-1100, 1500-2000
-
-Low hours
-0000-0800
+2200-0800
 
 """
 
@@ -52,65 +52,67 @@ class WebPricing(object):
 	"""
 	def __init__(self):
 		# self.__total_time = total_time # total_time
-		self.__current_datetime = timezone.now()
+		self.__current_datetime = timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE))
+		self.is_weekend = True if self.__current_datetime.weekday() <=5 else False
+		self.clock_hour = self.__current_datetime.hour
+		self.__rate_meter_drop_weekend = dict(backpack=6, car=8, minivan=10, truck=90)
+		self.__rate_per_km_weekend = dict(backpack=1.0, car=1.20, minivan=2.2, truck=90)
+		self.__rate_meter_drop_weekday = dict(backpack=4, car=6, minivan=10, truck=90)
+		self.__rate_per_km_weekday = dict(backpack=0.8, car=1.0, minivan=2.0, truck=75)
+		self.__hourlist = dict(off_peak_hours=range(8,22),peak_hours=range(22,24)+range(0,9))
+		self.peak_hours = True if self.clock_hour in self.__hourlist['peak_hours'] else False
+
 		# self.__future_datetime = self.__get_future_datetime()
 		# self.__tomorrow = self.__get_tomorrow_datetime()
+	
+	def __get_meter_drop_rate(self, mode='backpack'):
+		if self.is_weekend or self.peak_hours:
+		    rate_meter_drop = self.__rate_meter_drop_weekend[mode]
+		rate_meter_drop = self.__rate_meter_drop_weekday[mode]
+		return rate_meter_drop
+
+	def __get_rate_per_km(self, mode='backpack'):
+		if self.is_weekend or self.peak_hours:
+		    rate_per_km = self.__rate_per_km_weekend[mode]
+		rate_per_km = self.__rate_per_km_weekday[mode]
+		return rate_per_km
 		
+	# def set_factors(self, distance, mode='backpack'):
+	# 	self.__size_meter_drop = self.__get_size_meter_drop()[mode]
+	# 	self.__distance = (distance - 2) if distance > 2 else 0
+	# 	log.warn("Size Handling fee : %f" % self.__size_meter_drop)
+	# 	log.warn("Size modifier : %f" % self.__size_modifier)
+	# 	log.warn("Distance : %f" % self.__distance)
 
-	def set_factors(self, distance, mode='backpack'):
-		self.__size_handling_fee = self.__get_size_handling_fee()[mode]
-		self.__size_modifier = self.__get_size_modifier()[mode]
-		self.__distance = (distance - 2) if distance > 2 else 0
-		log.warn("Size Handling fee : %f" % self.__size_handling_fee)
-		log.warn("Size modifier : %f" % self.__size_modifier)
-		log.warn("Distance : %f" % self.__distance)
+	# def __working_hours(self):
+	# 	days = self.__future_datetime.days
+	# 	seconds = datetime.timedelta(self.__future_datetime.seconds)
+	# 	hours, minutes = tuple(str(seconds).split(":")[:-1])
+	# 	return days, hours
 
+	# def __get_off_peak_price(self, is_weekend=False):
+	# 	if is_weekend:
+	# 		return math.floor( 6 + self.__size_meter_drop + self.__distance * 2.5 * self.__size_modifier)
+	# 	else:
+	# 		return math.floor( 4 + self.__size_meter_drop + self.__distance * 1.7 * self.__size_modifier)
 
-	# def __get_future_datetime(self):
-	# 	return self.__current_datetime + datetime.timedelta(hours=self.__total_time['hours'], minutes=self.__total_time['minutes'])
+	# def __get_peak_hours_price(self, is_weekend=False):
+	# 	if is_weekend:
+	# 		return math.floor( 6 + self.__size_meter_drop + self.__distance * 2.5 * self.__size_modifier)
+	# 	else:
+	# 		return math.floor( 4 + self.__size_meter_drop + self.__distance * 2.0 * self.__size_modifier)
 
-	# def __get_tomorrow_datetime(self):
-	# 	today = datetime.date.today()
-	# 	return today + datetime.timedelta(days=1)
+	# def __get_low_hours_price(self, is_weekend=False):
+	# 	if is_weekend:
+	# 		return math.floor( 10 + self.__size_meter_drop + self.__distance * 3.0 * self.__size_modifier)
+	# 	else:
+	# 		return math.floor(  6 + self.__size_meter_drop + self.__distance * 2.5 * self.__size_modifier)
 
-	def __get_size_modifier(self):
-		return dict(backpack=1.0, car=1.0, minivan=2.0)
+	def __get_weekend_price(self, distance, shipment_mode):
+		return round(math.floor(self.__get_meter_drop_rate(shipment_mode) + distance * self.__get_rate_per_km(shipment_mode)))
 
-	def __get_size_handling_fee(self):
-		return dict(backpack=2, car=3, minivan=12)
-
-	def __hourly_modifier(self):
-		return dict(off_peak_hours=range(11,15)+range(20,24), peak_hours=range(8,11)+range(15,20),low_hours=range(0,8))
-
-	def __working_hours(self):
-		days = self.__future_datetime.days
-		seconds = datetime.timedelta(self.__future_datetime.seconds)
-		hours, minutes = tuple(str(seconds).split(":")[:-1])
-		return days, hours
-
-	def __get_off_peak_price(self, is_weekend=False):
-		if is_weekend:
-			return math.floor( 6 + self.__size_handling_fee + self.__distance * 2.5 * self.__size_modifier)
-		else:
-			return math.floor( 4 + self.__size_handling_fee + self.__distance * 1.7 * self.__size_modifier)
-
-	def __get_peak_hours_price(self, is_weekend=False):
-		if is_weekend:
-			return math.floor( 6 + self.__size_handling_fee + self.__distance * 2.5 * self.__size_modifier)
-		else:
-			return math.floor( 4 + self.__size_handling_fee + self.__distance * 2.0 * self.__size_modifier)
-
-	def __get_low_hours_price(self, is_weekend=False):
-		if is_weekend:
-			return math.floor( 10 + self.__size_handling_fee + self.__distance * 3.0 * self.__size_modifier)
-		else:
-			return math.floor(  6 + self.__size_handling_fee + self.__distance * 2.5 * self.__size_modifier)
-
-	def __get_weekend_price(self):
-		return round(math.floor( 6 + self.__size_handling_fee + self.__distance * 2.5 * self.__size_modifier), 2)
-
-	def __get_weekday_price(self):
-		return round(math.floor( 4 + self.__size_handling_fee + self.__distance * 1.7 * self.__size_modifier), 2)
+	def __get_weekday_price(self, distance, shipment_mode):
+		return round(math.floor(self.__get_meter_drop_rate(shipment_mode) + distance * self.__get_rate_per_km(shipment_mode)))
 
 	# def get_price(self):
 	# 	starting_hour = self.__current_datetime.hours
@@ -126,17 +128,30 @@ class WebPricing(object):
 
 	# 	pass
 
-	def get_price(self):
-		"""Returns the price according to the distance set
-		"""
-		is_weekend = True if self.__current_datetime.weekday() <=5 else False
-		if is_weekend:
-			return self.__get_weekend_price()
-		else:
-			return self.__get_weekday_price()
+	def get_price(self, distance, shipment_mode='backpack'):
+		"""Checks if it's a peak hour or a weekend, and returns the respective price for the distance"""
+		self.__distance = (float(distance) - 2) if float(distance) > 2 else 0
+		self.__shipment_mode = shipment_mode
+
+		if self.is_weekend or self.peak_hours:
+			# log.warn("Travelling %s km on %s at %s00 hrs, a charge of $%s is incurred" % self.__distance, self.__shipment_mode, self.clock_hour, self.__get_weekend_price(self.__distance, self.__shipment_mode))
+			log.warn("Shipping {0} km(s) on {1} at {2}00 hrs, a charge of {3} is incurred".format(self.__distance, self.__shipment_mode, self.clock_hour, self.__get_weekend_price(self.__distance, self.__shipment_mode)))
+			return self.__get_weekend_price(self.__distance, self.__shipment_mode)
+	    
+			# log.warn("Travelling %s km on %s at %s00 hrs, a charge of $%s is incurred" % self.__distance, self.__shipment_mode, self.clock_hour, self.__get_weekday_price(self.__distance, self.__shipment_mode))
+		log.warn("Shipping {0} km(s) on {1} at {2}00 hrs, a charge of {3} is incurred".format(self.__distance, self.__shipment_mode, self.clock_hour, self.__get_weekday_price(self.__distance, self.__shipment_mode)))
+		return self.__get_weekday_price(self.__distance, self.__shipment_mode)
+
+
+	# def get_price(self):
+	# 	"""Returns the price according to the distance set
+	# 	"""
+	# 	is_weekend = True if self.__current_datetime.weekday() <=5 else False
+	# 	if is_weekend:
+	# 		return self.__get_weekend_price()
+	# 	else:
+	# 		return self.__get_weekday_price()
 
 if __name__ == "__main__":
 	webpricing = WebPricing()
-	webpricing.set_factors(11.7)
-	print webpricing.get_price()
-	
+	print webpricing.get_price(60)
