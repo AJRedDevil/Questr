@@ -2,10 +2,13 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
+a {
+	color: #3498DB;
+}
+
 .lead {
 	font-weight: 200;
 }
-
 
 label {
 	font-weight: 400;
@@ -44,19 +47,26 @@ body {
 	overflow-x: hidden;
  }
  
+/************ Theme ****************/
+.accent-color, .accent-color:hover {
+	color: #5abdff;
+}
+
+
  
 /************ footer ****************/
 footer {
 	background: white;
 	width:100%;
 	font-size: 14px;
+	font-weight: 400;
 	text-align: center;
 	border: none;
 	color: #7f8c8d;
 }
 
 footer .row {
-	padding:15px;
+	padding: 40px 0 0 0;
 }
 
 footer ul {
