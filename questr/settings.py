@@ -35,13 +35,10 @@ AWS_S3_SECRET_ACCESS_KEY = os.environ['AMAZON_SECRET_ACCESS_KEY']
 # AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
 AWS_MEDIA_BUCKET = os.environ['AWS_MEDIA_BUCKET']
 AWS_STATIC_BUCKET = os.environ['AWS_STATIC_BUCKET']
-AWS_HEADERS = {
-        'Cache-Control': 'max-age=86400',
-}
 
 # Google maps
 GOOGLE_MAPS_SERVER_KEY = os.environ['GOOGLE_MAPS_SERVER_KEY']
-GOOGLE_MAPS_BROWSER_KEY = os.environ['GOOGLE_MAPS_SERVER_KEY']
+GOOGLE_MAPS_BROWSER_KEY = os.environ['GOOGLE_MAPS_BROWSER_KEY']
 
 #Append Slash to all cals
 APPEND_SLASH = True
@@ -120,10 +117,10 @@ QUESTR_URL = os.environ['QUESTR_URL']
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 # Static asset configuration
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
-MEDIA_URL = '/questr-media/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = 'http://s3.amazonaws.com/%s/' % AWS_STATIC_BUCKET
+# MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
+# MEDIA_URL = '/questr-media/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_PATH, 'static'),
 )
@@ -133,7 +130,7 @@ AUTH_USER_MODEL = 'users.QuestrUserProfile'
 
 # For Social Network Authentication
 # User Model
-LOGIN_URL = '/user/signin/'
+LOGIN_URL = '/user/login/'
 # LOGIN_ERROR_URL = '/user/login/'
 LOGIN_REDIRECT_URL = '/user/home/'
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
