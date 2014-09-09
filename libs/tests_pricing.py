@@ -4,6 +4,8 @@ import logging as log
 import pytz
 import math
 
+from datetime import datetime, time
+
 from django.utils import timezone
 from django.conf import settings
 from django.test.client import Client
@@ -27,17 +29,26 @@ class PricingTestCase(TestCase):
         self.__rate_per_km_weekend = dict(backpack=1.0, car=1.20, minivan=2.2, truck=90)
         self.__rate_meter_drop_weekday = dict(backpack=4, car=6, minivan=10, truck=90)
         self.__rate_per_km_weekday = dict(backpack=0.8, car=1.0, minivan=2.0, truck=75)
-        self.__hourlist = dict(off_peak_hours=range(8,22),peak_hours=range(22,24)+range(0,9))
+        self.__hourlist = dict(off_peak_hours={'start_hr': 8, 'start_min':00, 'end_hr':21,'end_min':59})
         
         ## Test Data ##
         self.data = {
                 'distance' : '5.2',
                 'mode' : 'backpack',
-                'hour' : '02'
+                'time_hr' : 22,
+                'time_min': 22
         }
 
-        self.peak_hours = True if self.data['hour'] in self.__hourlist['peak_hours'] else False
+        self.peak_hours = self.is_peak_hour()
 
+    def is_peak_hour(self):
+        cur_time = time(self.data['time_hr'], self.data['time_min'])
+        start_time = time(self.__hourlist['off_peak_hours']['start_hr'],self.__hourlist['off_peak_hours']['start_min'])
+        end_time = time(self.__hourlist['off_peak_hours']['end_hr'],self.__hourlist['off_peak_hours']['end_min'])
+        if cur_time >= start_time and cur_time <= end_time:
+            return False
+        else:
+            return True
 
     def tests_get_rate_meter_drop(self, expected_value=6):
         mode = self.data['mode']
@@ -53,12 +64,14 @@ class PricingTestCase(TestCase):
         mode = self.data['mode']
         if self.is_weekend or self.peak_hours:
             return self.__rate_meter_drop_weekend[mode]
-        return self.__rate_meter_drop_weekday[mode]
+        else:
+            return self.__rate_meter_drop_weekday[mode]
 
     def __get_rate_per_km(self, mode):
         if self.is_weekend or self.peak_hours:
             return self.__rate_per_km_weekend[mode]
-        return self.__rate_per_km_weekday[mode]
+        else:
+            return self.__rate_per_km_weekday[mode]
 
     def tests_is_price_for_weekend(self):
         """Testing if price is true for weekend"""
@@ -73,6 +86,7 @@ class PricingTestCase(TestCase):
     def tests_is_price_for_weekday(self):
         """Testing if price is true for weekday"""
         self.is_weekend = False
+        self.peak_hours = False
         expected_value = 6.0 # Price
         data = self.data
         self.__distance = (float(data['distance']) - 2) if float(data['distance']) > 2 else 0
@@ -94,10 +108,12 @@ class PricingTestCase(TestCase):
         data = self.data
         self.__distance = (float(data['distance']) - 2) if float(data['distance']) > 2 else 0
         self.__shipment_mode = data['mode']
-        self.__hour = self.__current_datetime.hour
 
         if self.is_weekend or self.peak_hours:
             return round(math.floor(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode)))
-        
-        return round(math.floor(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode)))
+        else:
+            return round(math.floor(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode)))
+
+    def tests_if_hour_in_peak_hours(self):
+        self.assertEqual(self.peak_hours, True)
 
