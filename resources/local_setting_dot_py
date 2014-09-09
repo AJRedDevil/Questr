@@ -36,8 +36,13 @@ DATABASES = {
 # import dj_database_url
 # DATABASES['default'] =  dj_database_url.config("django.db.backends.postgresql_psycopg2")
 TIME_ZONE = 'Asia/Kathmandu'
-##Media contents in amazonaws
-AWS_MEDIA_BUCKET = os.environ['AWS_LOCAL_MEDIA_BUCKET']
-DEFAULT_FILE_STORAGE = 'libs.s3utils.MediaRootS3BotoStorage'
-MEDIA_ROOT = '/%s/' % DEFAULT_FILE_STORAGE
-MEDIA_URL = '//s3.amazonaws.com/%s/' % AWS_MEDIA_BUCKET
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
+MEDIA_URL = '/media/'
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_PATH, 'static'),
+)
