@@ -497,12 +497,8 @@ to {
 #what-is .glyphicon {
 	font-size: 50px;
 	text-align: center;
+	color: white;
 }
-
-
-
-
-
 
 
 
@@ -515,7 +511,7 @@ to {
 
 
 
-
+	
 
 
 
@@ -538,9 +534,32 @@ to {
 
 
 .circle {
-	padding: 20px;
-	border-radius: 50%;
+  position: relative;
+	  padding-bottom: 100%;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  background-color: #3498DB;
 }
+
+	.circle__grandparent {
+		  position: absolute;
+		  width: 100%;
+		  height: 100%;
+	}
+
+		.circle__parent {
+			  display: table;
+  width:auto;
+  			height: 100%;
+  			width: 100%;
+		}
+
+			.circle__child {
+  display: table-cell;
+				  vertical-align: middle;
+  				text-align: center;
+			}
 
 
 
