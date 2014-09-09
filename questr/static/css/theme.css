@@ -66,7 +66,7 @@ footer {
 }
 
 footer .row {
-	padding: 40px 0 0 0;
+	padding: 40px 0 20px 0;
 }
 
 footer ul {
@@ -103,8 +103,8 @@ footer small.title {
 	background: transparent;
 	border-style: solid;
 	border-width: 2px;
-	border-color: #9aa4af;
-	color: #9aa4af;
+	border-color: #3498DB;
+	color: #3498DB;
 	margin-right: 1px;
 
 	-moz-transition:all 0.3s ease;
@@ -500,17 +500,18 @@ select option {
 
 /************* Input Boxes *****************/
 input.form-control, input.form-control, textarea.form-control {
-	border: 1px;
+	border: 2px;
 	border-style: solid;
-	border-color: #dce0e0;
+	border-color: #ecf0f1;
 	background: white;
-	box-shadow: 0px 0px 0px black;
+	box-shadow: none;
 	border-radius: 2px;
 }
 
 input.form-control:focus, input.form-control:active, textarea.form-control:focus {
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);
-outline: 0 none;
+	box-shadow: none;
+	border-width: 2px;
+	border-color: #3498DB;
 }
 
 
