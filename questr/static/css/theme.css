@@ -595,10 +595,26 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 }
 
 
+@media screen and (min-width:768px){
+    .navbar-brand-centered {
+        position: absolute;
+        left: 50%;
+        display: block;
+        width: 160px;
+        text-align: center;
+        background-color: #eee;
+    }
+    .navbar>.container .navbar-brand-centered, 
+    .navbar>.container-fluid .navbar-brand-centered {
+        margin-left: -80px;
+    }
+}
+
+
 
  /********* Generic Theme classes **********/
 .grey {
-	background: #f9f9f9;
+	color: #f9f9f9;
 }
 
 .white {

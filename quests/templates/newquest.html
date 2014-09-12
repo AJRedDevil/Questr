@@ -2,50 +2,32 @@
 {% load staticfiles %}
 {% load active %}
 {% block localhead %}
+
   <!-- Custom CSS -->
     <link href={% static "css/quest.css" %} rel="stylesheet">
 {% endblock localhead %}
 {% block content %}
 
-<div class="container-fluid">
-	<div class="row clearfix white">
-		<div class="col-md-10 col-md-offset-1" ng-app="postApp" ng-controller="mainController">
-			<div class="col-md-12 column">
-				<h3 class="lead light-grey">request a shipment</h3>
-			</div><!-- ./column -->
-
-
-
-			
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<h3 class="lead light-grey">request a shipment</h3>
+		</div><!-- ./column -->
+		<div class="col-md-12 column">
 			<form class="form-horizontal css-form" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" name="form" ng-submit="submitForm()" novalidate>{% csrf_token %}
-				
-
-
-				<div class="col-md-10 column">
+				<div class="row clearfix">
 					<!-- Name input-->
+					<div class="col-md-6 column">
 						<div class="form-group">
-							<label class="control-label" for="name"><p class="light-grey">Title</p></label>
-							<div class="">
-								<input class="form-control ng-pristine ng-invalid" ng-model="user.title" name="title" type="text" placeholder="Shipment title" ng-minlength="3" ng-maxlength="40" required>
-								<p>{{user.title}}</p> 
-								<!-- Title Error -->
-								<div ng-show="form.title.$dirty && form.title.$invalid">Invalid:
-							   		<span ng-show="form.title.$error.required">A title is required</span>
-							   		<span style="color:red" ng-show="form.title.$error.minlength">
-						        	Your Title Should Contain Atleast 3 Characters</span>
-						       		<span style="color:red" ng-show="form.title.$error.maxlength">
-						        	Sorry You are Exceeding the Limit</span>
-							    </div> 
-							</div><!-- ./column -->
+							<input class="form-control ng-pristine ng-invalid" name="title" type="text" placeholder="Title">
 						</div><!-- ./form-group -->
-						{{user_form.title.errors}}
+					{{user_form.title.errors}}
+					</div><!-- ./column -->
 
-
-						<!-- Size input-->
+					<!-- Size input-->
+					<div class="col-md-4 column">
 						<div class="form-group" id="size">
-							<label class="control-label" for="message"><p class="light-grey">Package size</p></label>
-							<div class="">
-								<div class="input-group col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">	
+								<div class="input-group">
 									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
 										<center>
 											<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />       	 	
@@ -68,180 +50,164 @@
 										</center> 	
 									</div><!-- ./column -->
 								</div><!-- /input-group -->
-							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 						{{user_form.size.errors}}
+					</div><!-- ./column -->
 
 
-
-						<!-- Message body -->
-						<div class="form-group">
-							<label class="control-label" for="message"><p class="light-grey">Message</p></label>
-							<div class="">
-								<textarea class="form-control ng-pristine ng-invalid" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5" ng-model="user.description" ng-minlength="3" ng-maxlength="400" required></textarea>
-								<!-- Description Erorrs-->
-								<div ng-show="form.description.$dirty && form.description.$invalid">Invalid:
-							   		<span ng-show="form.description.$error.required">A description is required</span>
-							   		<span style="color:red" ng-show="form.description.$error.minlength">
-						        	Your Title Should Contain Atleast 3 Characters</span>
-						       		<span style="color:red" ng-show="form.description.$error.maxlength">
-						        	Sorry You are Exceeding the Limit</span>
-							    </div>
-							</div><!-- ./column -->
+					<!-- Message body -->
+					<div class="col-md-6 column">
+						<div class="form-group">			
+							<textarea class="form-control ng-pristine ng-invalid" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5" ng-model="user.description" ng-minlength="3" ng-maxlength="400" required></textarea>
+							<!-- Description Erorrs-->
+							<div ng-show="form.description.$dirty && form.description.$invalid">Invalid:
+						   		<span ng-show="form.description.$error.required">A description is required</span>
+						   		<span style="color:red" ng-show="form.description.$error.minlength">
+					        	Your Title Should Contain Atleast 3 Characters</span>
+					       		<span style="color:red" ng-show="form.description.$error.maxlength">
+					        	Sorry You are Exceeding the Limit</span>
+						    </div>
 						</div><!-- ./form-group -->
+					</div><!-- ./column -->
+				</div><!-- ./row -->
 
+
+				<div class="row clearfix" id="destination">
+
+					<div class="col-md-12 column"><p>Pickup from:</p></div>
+
+					<div class="col-md-2 column">
 						<!-- Location input-->
 						<div class="form-group">
-							<label class="control-label"><p class="light-grey">Pick up from</p></label>
-							<div class=""> 
-								<select class="btn-classic" data-size="5" name="srccity" ng-model="user.city" required>
-									<option>Toronto</option>
-									<option>Brampton</option>
-									<option>Markham</option>
-									<option>Mississauga</option>
-									<option>Richmond Hill</option>
-									<option>Vaughan</option>
-								</select>
-							</div><!-- ./column -->
-							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"></div>  
+							<select class="btn-classic" data-size="5" name="srccity" ng-model="user.city" required>
+								<option>Toronto</option>
+								<option>Brampton</option>
+								<option>Markham</option>
+								<option>Mississauga</option>
+								<option>Richmond Hill</option>
+								<option>Vaughan</option>
+							</select>
 						</div>  <!-- ./form-group -->
 						{{user_form.srccity.errors}}
-						<!-- Pickup Address input-->
+					</div>
 
+					<div class="col-md-4 column">
+						<!-- Pickup Address input-->
 						<div class="form-group">
-							<label class="control-label" for="name"></label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
+							
 								<input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" ng-model="user.departure" ng-minlength="3" ng-maxlength="100" required>
 								<!-- Address Erorrs-->
-								<div ng-show="form.srcaddress.$dirty && form.srcaddress.$invalid">Invalid:
-							   		<span ng-show="form.srcaddress.$error.required">A description is required</span>
-							   		<span style="color:red" ng-show="form.srcaddress.$error.minlength">
-						        	Your Address Should Contain Atleast 3 Characters</span>
-						       		<span style="color:red" ng-show="form.srcaddress.$error.maxlength">
-						        	Sorry You are Exceeding the Limit</span>
-							    </div>
-							</div><!-- ./column -->
+				
 						</div><!-- ./form-group -->
 						{{user_form.srcaddress.errors}}
+					</div><!-- ./column -->
 
+					<div class="clearfix"></div>
+
+
+					<div class="col-md-3 column">
 						<!-- Pickup Name input-->
 						<div class="form-group">
-							<label class="control-label" for="name"></label>
-							<div class="col-md-4 column">
-								<input id="srcname" name="srcname" type="text" placeholder="Name of the sender" class="form-control input-xs" ng-model="user.srcname"  required>
-							</div><!-- ./column -->
+							<input id="srcname" name="srcname" type="text" placeholder="Name of the sender" class="form-control input-xs" ng-model="user.srcname"  required>
 						</div><!-- ./form-group -->
 						{{user_form.srcname.errors}}
-uy
+					</div><!-- ./column -->
 
+					<div class="col-md-4 column">
 						<!-- Pickup Phone input-->
 						<div class="form-group">
-							<label class="control-label" for="name"></label>
-							<div class="col-md-4 column">
-								<input id="srcphone" name="srcphone" type="text" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.srcphone" required>
-							</div><!-- ./column -->
+							<input id="srcphone" name="srcphone" type="text" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.srcphone" required>
 						</div><!-- ./form-group -->
 						{{user_form.srcphone.errors}}
+					</div>
 
+
+
+					<div class="col-md-4 column">
 						<!-- Pickup Postal Code input-->
 						<div class="form-group">
-							<label class="control-label" for="name"></label>
-							<div class="col-md-2 column">
 								<input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="Postal Code" class="form-control ng-pristine ng-invalid" ng-model="user.srcpostalcode" required>
-							</div><!-- ./column -->
 						</div><!-- ./form-group -->
 						{{user_form.srcpostalcode.errors}}
+					</div>
 
+					<div class="clearfix"></div>
+
+					<div class="">
+					<div class="col-md-12 column">
+						<p>Drop off at:</p>
+					</div>
+
+
+					<div class="col-md-4 column">
 						<div class="form-group">
-							<label class="control-label"><p class="light-grey">Drop off at</p></label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">   
-								<select class="btn-classic" data-size="5" name="dstcity" ng-model="user.city2" required>
-									<option>Toronto</option>
-									<option>Brampton</option>
-									<option>Markham</option>
-									<option>Mississauga</option>
-									<option>Richmond Hill</option>
-									<option>Vaughan</option>
-								</select>
-							</div><!-- ./column -->
+							<select class="btn-classic" data-size="5" name="dstcity" ng-model="user.city2" required>
+								<option>Toronto</option>
+								<option>Brampton</option>
+								<option>Markham</option>
+								<option>Mississauga</option>
+								<option>Richmond Hill</option>
+								<option>Vaughan</option>
+							</select>
 						</div>  <!-- ./form-group -->  
 						{{user_form.dstcity.errors}}
+					</div>
 
+					<div class="col-md-4 column">
 						<!-- Dropoff Address input-->
 						<div class="form-group">
-							<label class="control-label" for="name"></label>
-							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-								<input class="form-control input-xs ng-pristine ng-invalid" id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" ng-model="user.destination" ng-minlength="3" ng-maxlength="100" required>
-								<!-- Address Erorrs-->
-								<div ng-show="form.dstaddress.$dirty && form.dstaddress.$invalid">Invalid:
-							   		<span ng-show="form.dstaddress.$error.required">A description is required</span>
-							   		<span style="color:red" ng-show="form.dstaddress.$error.minlength">
-						        	Your Address Should Contain Atleast 3 Characters</span>
-						       		<span style="color:red" ng-show="form.dstaddress.$error.maxlength">
-						        	Sorry You are Exceeding the Limit</span>
-							    </div>
-							</div><!-- ./column -->
+							<input class="form-control input-xs ng-pristine ng-invalid" id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address">
 						</div><!-- ./form-group -->
 						{{user_form.dstaddress.errors}}
+					</div>
 
+					<div class="col-md-4 column">
 						<!-- Dropoff Name input-->
 						<div class="form-group">
-							<label class="control-label" for="name"></label>
-							<div class="col-md-4 column">
-								<input id="dstname" name="dstname" type="text" placeholder="Name of the receiver" class="form-control ng-pristine ng-invalid" ng-model="user.dstname" required>
-							</div><!-- ./column -->
+							<input id="dstname" name="dstname" type="text" placeholder="Name of the receiver" class="form-control ng-pristine ng-invalid" ng-model="user.dstname" required>
 						</div><!-- ./form-group -->
 						{{user_form.dstname.errors}}
+					</div>
 
+					<div class="col-md-4 column">
 						<!-- Dropoff Phone input-->
 						<div class="form-group">
-							<label class="control-label" for="name"></label>
-							<div class="col-md-4 column">
-								<input id="dstphone" name="dstphone" type="number" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.dstphone" required>
-							</div><!-- ./column -->
+							<input id="dstphone" name="dstphone" type="number" placeholder="Phone number" class="form-control ng-pristine ng-invalid" >
 						</div><!-- ./form-group -->
 						{{user_form.dstphone.errors}}
+					</div>
 
+					<div class="col-md-4 column">
 						<!-- Dropoff Postal Code input-->
 						<div class="form-group"
-							<label class="control-label" for="name"></label>
-							<div class="col-md-2 column">
-								<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="Postal Code" class="form-control ng-pristine ng-invalid" ng-model="user.dstpostalcode" required>
-							</div><!-- ./column -->
+							<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="Postal Code" class="form-control">
 						</div><!-- ./form-group -->
 						{{user_form.dstpostalcode.errors}}
-				</div><!-- ./column -->
+					</div><!-- ./column -->
+				</div><!-- #/destination -->
 
-				<div class="col-md-2 column">
-					Total Cost
-					<button type="submit" class="btn btn-info" ng-disabled="postForm.$invalid || isUnchanged(user)">Continue</button>
-
-					<iframe
-					  width="450"
-					  height="250"
-					  frameborder="0" style="border:0"
-					  src="https://www.google.com/maps/embed/v1/directions
-					  ?key=API_KEY
-					  &origin=Oslo+Norway
-					  &destination=Telemark+Norway
-					  &avoid=tolls|highways">
-					</iframe>
-				</div><!-- ./column -->
+				<div id="aids"></div>
 			</form>
 		</div><!-- ./column -->
 	</div><!-- ./row -->
+	<div class="row clearfix">
+				<div class="col-md-2 column">
+					<button type="button" class="btn btn-default" id="add-row">+</button>
+					Total Cost
+					<button type="submit" class="btn btn-info">Continue</button>
+				</div><!-- ./column -->
+			</div><!-- ./row -->
 	{% endblock content %}
 </div><!-- ./container-fluid -->
 
 
 {% block scripts %}
 <!-- Custom Javascript -->
- <script type="text/javascript">
- 	
- 		var userTitleInput = element(by.model('user.title'));
- 	
-
- </script>
-
-
+<script>
+$(document).ready(function(){
+  $("#add-row").click(function(){
+    $("#destination").clone().appendTo("#destination");
+  });
+});
+</script>
 {% endblock scripts %}
