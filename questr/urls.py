@@ -6,7 +6,7 @@ import views as mainview
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', mainview.index, name="index"),
-    url(r'^join$', mainview.join, name='join'),
+    # url(r'^joinus$', mainview.join, name='joinus'),
     url(r'^contactus$', mainview.contactus, name='contactus'),
 
     url(r'loadpage/(?P<template>[-_\w/.]+)$', mainview.loadPage, ),    

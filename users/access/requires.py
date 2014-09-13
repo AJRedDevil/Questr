@@ -1,7 +1,7 @@
 
 
 import logging
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from users.models import QuestrUserProfile, QuestrToken
 
 def verified(a_view):
@@ -25,7 +25,7 @@ def verified(a_view):
 				return render(request, 'thankyou.html', locals())
 			except QuestrUserProfile.DoesNotExist:
 				return render(request,'error_pages/something_broke.html', locals())
-		return render(request, 'login.html', locals())
+		return redirect('signin')
 	return _wrapped_function
 
 def is_alive(a_view):

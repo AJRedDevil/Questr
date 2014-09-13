@@ -33,10 +33,6 @@ def news(request):
     pagetitle = "In the news !"
     return render(request, 'news.html', locals())
 
-def join(request):
-    pagetitle = "Join Us"
-    return render(request, 'join.html', locals())
-
 def crowdshipping(request):
     return render(request, 'crowdshipping.html', locals())
 
@@ -86,8 +82,8 @@ def join(request):
                 messageResponse="Please provide us with a valid email address!"
                 return render(request, 'index.html', locals())
     else:
-        messageResponse = "Please enter an email address!"
-        return render(request, 'index.html', locals())
+        pagetitle = "Join Us"
+        return render(request, 'join.html', locals())
 
 def prepContactUsNotification(name, user_email, message):
     """Prepare the details for notification emails for new quests"""
