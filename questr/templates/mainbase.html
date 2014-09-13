@@ -67,7 +67,6 @@
 		      <ul class="nav navbar-nav navbar-right">
 		        <li class="{% navactive request 'index' %}"><a href="{% url 'index' %}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
 		        <li class="{% navactive request 'faq' %}"><a href="{% url 'faq' %}"><span class="glyphicon glyphicon-question-sign"></span> FAQ</a></li>
-		        <li class="{% navactive request 'signin' %}"><a href="{% url 'signin' %}"><span class="glyphicon glyphicon-question-sign"></span> Login</a></li>
 		        <li class="{% navactive request 'signup' %}"><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-question-sign"></span> Signup</a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
@@ -263,29 +262,12 @@
 	</div>
 
 	<footer>
-		<div class="row clearfix grey section">
+		<div class="row clearfix section">
 			<div class="col-md-10 col-md-offset-1 column">
 				
 
 				<div class="col-md-2 column">
-
-				</div><!-- ./column -->
-				<div class="col-md-8 column text-center accent-color">
-					<a href="{% url 'faq' %}">Frequently Asked Questions</a>
-					<i>|</i>
-					<a href="{% url 'contact' %}">Contact Us</a>
-					<i>|</i>
-					<a href="{% url 'terms' %}">Terms of Service</a>
-					<i>|</i>
-					<a href="{% url 'privacy' %}">Privacy Policy</a>
-
-					<div class="col-md-12 column text-center">
-						<i class="copyright">Copyright © 2014 Questr Inc. All rights reserved.</i>
-					</div>
-
-					<div class="col-md-12 column">
-						<br>
-						<ul class="no-margin no-padding">
+					<ul class="no-margin no-padding">
 							<li>
 						<a class="facebook" target="_blank" href="https://www.facebook.com/questrco"><button class="btn-circle"><i class="fa fa-facebook"></i></button></a>
 							</li>
@@ -299,11 +281,32 @@
 						<a class="email" target="_blank" href="mailto:hello@questr.co"><button class="btn-circle"><i class="fa fa-envelope"></i></button></a>
 							</li>
 						</ul>
+				</div><!-- ./column -->
+				<div class="col-md-8 column text-center">
+					<a href="{% url 'faq' %}">Frequently Asked Questions</a>
+					<i>|</i>
+					<a href="{% url 'contact' %}">Contact Us</a>
+					<i>|</i>
+					<a href="{% url 'terms' %}">Terms of Service</a>
+					<i>|</i>
+					<a href="{% url 'privacy' %}">Privacy Policy</a>
+
+					{% comment %}
+					<div class="col-md-12 column text-center">
+						<i class="copyright">Copyright © 2014 Questr Inc. All rights reserved.</i>
+					</div>
+					{% endcomment %}
+
+					<div class="col-md-12 column">
+					
+						
 					</div>
 				</div><!-- ./column -->
 				<div class="col-md-2 column text-center no-padding">
+					{% comment %}
 					<h2 class="no-margin">xxxxxx</h2>
 					<h6>packages delivered</h6>
+					{% endcomment %}
 				</div><!-- ./column -->
 			</div><!-- ./column -->
 

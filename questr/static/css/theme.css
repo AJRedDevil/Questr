@@ -56,17 +56,21 @@ body {
  
 /************ footer ****************/
 footer {
-	background: white;
+	background: #060606;
 	width:100%;
 	font-size: 14px;
 	font-weight: 400;
 	text-align: center;
 	border: none;
-	color: #7f8c8d;
+	color: white;
 }
 
 footer .row {
 	padding: 40px 0 20px 0;
+}
+
+footer a {
+	color: white;
 }
 
 footer ul {
@@ -76,6 +80,7 @@ footer ul {
 footer ul li {
 	list-style: none;
 	display: inline;
+	color: white;
 }
 
 footer ul.social-links {
@@ -102,9 +107,9 @@ footer small.title {
 	border-radius: 50%;
 	background: transparent;
 	border-style: solid;
-	border-width: 2px;
-	border-color: #3498DB;
-	color: #3498DB;
+	border-width: 1px;
+	border-color: white;
+	color: white;
 	margin-right: 1px;
 
 	-moz-transition:all 0.3s ease;
@@ -112,7 +117,6 @@ footer small.title {
 	-ms-transition:all 0.3s ease;
 	-o-transition:all 0.3s ease;
 	transition:all 0.3s ease;
-
 }
 
 
@@ -136,7 +140,6 @@ footer small.title {
 	-ms-transition:all 0.3s ease;
 	-o-transition:all 0.3s ease;
 	transition:all 0.3s ease;
-
 }
 
 
@@ -527,7 +530,7 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 }
 
 .navbar-default .navbar-nav > li > a {
- 	color: #3498DB;
+ 	color: #060606;
  	background: white;
  	font-weight: 400;
 }
@@ -536,17 +539,17 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 .navbar-default .navbar-nav > li > a:focus,
  .navbar-default .navbar-nav > li {
   color: white;
-  background-color: #5abdff;
+  background-color: #060606;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
   color: white;
-  background-color: #5abdff;
+  background-color: #060606;
 }
 
 .navbar .navbar-brand {
-	color: #3498DB; 
+	color: #060606; 
 	font-size: 25px;
 	font-weight: 500;
 }
@@ -672,13 +675,5 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 	padding-top: 18px;
 	padding-bottom: 24px;
 }
-
-
-
-/********* HOME PAGE **********/
-.masthead {
-	position: relative;
-}
-
 
 
