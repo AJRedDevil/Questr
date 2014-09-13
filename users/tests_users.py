@@ -35,5 +35,5 @@ class SignupCase(TestCase):
         response = self.client.post('/user/signup/', data=self.post_data)
         user = QuestrUserProfile.objects.get(email=self.email)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(user.displayname, 'self.username')
+        self.assertEqual(user.displayname, self.username)
     #     # pri nt response.context
