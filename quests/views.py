@@ -4,6 +4,8 @@ from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 
 from libs import email_notifier, geomaps, pricing, stripeutils
+from users.access.requires import verified
+
 
 from .contrib import quest_handler
 from users.contrib.user_handler import isShipper, getShippers, getQuestrDetails
@@ -15,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 import simplejson as json
 
+@verified
 @login_required
 def listallquests(request):
     # pagetype="loggedin"
@@ -24,6 +27,7 @@ def listallquests(request):
     pagetitle="home"
     return redirect("home")
 
+@verified
 @login_required
 def viewquest(request, questname):
     pagetype="loggedin"
@@ -44,6 +48,7 @@ def viewquest(request, questname):
     isShipperForQuest=quest_handler.isShipperForQuest(str(user.id), questname)
     return render(request, 'viewquest.html', locals())
 
+@verified
 @login_required
 def editquest(request, questname):
     pagetype="loggedin"
@@ -120,6 +125,7 @@ def editquest(request, questname):
     raise Http404
     return render(request,'404.html')
 
+@verified
 @login_required
 def confirmeditquest(request, questname):
     pagetype="loggedin"
@@ -212,7 +218,7 @@ def confirmeditquest(request, questname):
     raise Http404
     return render(request,'404.html')
 
-
+@verified
 @login_required
 def newquest(request):
     """creates new quest and sends notification to shippers"""
@@ -262,6 +268,7 @@ def newquest(request):
     pagetitle = "Create your Quest"
     return render(request, 'newquest.html', locals())  
 
+@verified
 @login_required
 def confirmquest(request):
     """creates new quest and sends notification to shippers"""
@@ -339,6 +346,7 @@ def confirmquest(request):
     message="There were some errors creating your quest, please try again !"
     return redirect('home')
 
+@verified
 @login_required
 def applyForQuest(request, questname):
     """Takes in applications for a quest"""
@@ -365,6 +373,7 @@ def applyForQuest(request, questname):
     logger.debug(message)
     return redirect('viewquest', questname=questname)
 
+@verified
 @login_required
 def withdrawFromQuest(request, questname):
     """Takes in applications for a quest"""
@@ -385,6 +394,7 @@ def withdrawFromQuest(request, questname):
     logger.debug(message)
     return redirect('viewquest', questname=questname)
 
+@verified
 @login_required
 def deletequest(request, questname):
     """Deletes the quest
@@ -414,6 +424,7 @@ def deletequest(request, questname):
             return redirect('viewquest', questname=questname)
     return redirect("home")
 
+@verified
 @login_required
 def completequest(request, questname):
     """Verify delivery code and set the quest as completed
@@ -483,6 +494,7 @@ def completequest(request, questname):
             return redirect('viewquest', questname=questname)
     return redirect('viewquest', questname=questname)
 
+@verified
 @login_required
 def getDistanceAndPrice(request):
     if request.method == "POST":
@@ -516,6 +528,8 @@ def getDistanceAndPrice(request):
             resultdict['message'] = "Internal Server Error"
             return HttpResponse(json.dumps(resultdict),content_type="application/json")
 
+@verified
+@login_required
 def setnewpayment(request, questname):
     quest_data = quest_handler.getQuestDetails(questname)
     price = quest_data.reward

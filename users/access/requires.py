@@ -15,8 +15,10 @@ def verified(a_view):
 				user = QuestrUserProfile.objects.get(email=email)
 				if user :
 					if user.email_status:
+						pagetype="emailnotverified"
 						return a_view(request, *args, **kwargs)
 					else:
+						pagetype="emailnotverified"
 						return render(request, 'thankyou.html', locals())
 				success = False
 				message = "User not Found"

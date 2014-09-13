@@ -23,7 +23,7 @@ class SignupCase(TestCase):
         'password1':self.password1,'password2':self.password2,'email':self.email}                        
 
     def test_signup_url(self):
-        response = self.client.post('/user/signup/', data=self.post_data)
+        response = self.client.get('/user/signup/')
         self.assertEqual(response.status_code, 200)
 
     # def test_signup_validated(self):
@@ -34,6 +34,14 @@ class SignupCase(TestCase):
     def test_user_is_created(self):
         response = self.client.post('/user/signup/', data=self.post_data)
         user = QuestrUserProfile.objects.get(email=self.email)
-        self.assertEqual(response.status_code, 200)
+        # Signup should always redirect
+        self.assertEqual(response.url, "http://testserver/user/home/")
+        self.assertEqual(response.status_code, 302)
         self.assertEqual(user.displayname, self.username)
+
+        #Testing after a user signs up and opens the same page when logged in
+        response = self.client.get('/user/signup/')
+        self.assertEqual(response.url, "http://testserver/user/home/")
+        self.assertEqual(response.status_code, 302)
+
     #     # pri nt response.context

@@ -66,7 +66,7 @@ def signup(request):
             logger.debug("What goes in the email is \n %s", email_details)
             email_notifier.send_email_notification(userdata, email_details)
             pagetitle = "Please verify your email !"
-            return render(request, 'thankyou.html', locals())
+            return redirect('home')
 
         if user_form.errors:
             logger.debug("Login Form has errors, %s ", user_form.errors)
