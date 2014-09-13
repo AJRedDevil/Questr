@@ -32,7 +32,7 @@ AWS_S3_SECURE_URLS = False
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_ACCESS_KEY_ID = os.environ['AMAZON_ACCESS_KEY_ID']
 AWS_S3_SECRET_ACCESS_KEY = os.environ['AMAZON_SECRET_ACCESS_KEY']
-# AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
+AWS_HEADERS = { 'Cache-Control' : 'max-age=86400',}
 AWS_MEDIA_BUCKET = os.environ['AWS_MEDIA_BUCKET']
 AWS_STATIC_BUCKET = os.environ['AWS_STATIC_BUCKET']
 
@@ -173,22 +173,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 TEMPLATE_DIRS = (TEMPLATE_PATH)
 
-# All local configurations in local_setting
-try:
-    from local_setting import *
-except ImportError:
-    pass
-
-# Use amazon S3 storage only on production
-if not DEBUG:
-    ##Use Amazon S3 as default storage
-    ##This for media
-    DEFAULT_FILE_STORAGE = 'libs.s3utils.MediaRootS3BotoStorage'
-    ##This for CSS
-    STATICFILES_STORAGE = 'libs.s3utils.StaticRootS3BotoStorage'
-    MEDIA_ROOT = '/%s/' % DEFAULT_FILE_STORAGE
-    MEDIA_URL = '//s3.amazonaws.com/%s/' % AWS_MEDIA_BUCKET
-
 ## Setup Logging ##
 
 LOGGING = {
@@ -204,23 +188,36 @@ LOGGING = {
         },
     },
     'handlers': {
-        'file': {
+        'null': {
             'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'questr.log',
+            'class': 'logging.NullHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
             'formatter': 'verbose'
         },
     },
     'loggers': {
-        'django': {
-            'handlers':['file'],
-            'propagate': True,
-            'level':'DEBUG',
-        },
         'users': {
-            'handlers':['file'],
-            'propagate': True,
+            'handlers':['console'],
             'level':'DEBUG',
         },
     }
 }
+
+# All local configurations in local_setting
+try:
+    from local_setting import *
+except ImportError:
+    pass
+
+# Use amazon S3 storage only on production
+if not DEBUG:
+    ##Use Amazon S3 as default storage
+    ##This for media
+    DEFAULT_FILE_STORAGE = 'libs.s3utils.MediaRootS3BotoStorage'
+    ##This for CSS
+    STATICFILES_STORAGE = 'libs.s3utils.StaticRootS3BotoStorage'
+    MEDIA_ROOT = '/%s/' % DEFAULT_FILE_STORAGE
+    MEDIA_URL = '//s3.amazonaws.com/%s/' % AWS_MEDIA_BUCKET
