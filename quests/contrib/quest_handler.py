@@ -6,6 +6,8 @@ from django.conf import settings
 from quests.models import Quests
 
 import logging
+logger = logging.getLogger(__name__)
+
 # Create your views here.
 def listfeaturedquests(questrs_id):
     """List all the featured quests"""
@@ -67,7 +69,7 @@ def addShipper(shipper_id, questname):
 
     current_shipper = questdetails.shipper
     # for first application
-    logging.warn(current_shipper)
+    logger.debug(current_shipper)
     if current_shipper==None:
         current_shipper = []
     else:
@@ -246,7 +248,7 @@ def prepQuestCompleteNotification(shipper, questr, questdetails, review_link):
                                                 },
                     }
 
-    logging.warn(email_details)
+    logger.debug(email_details)
     return email_details
 
 def get_review_link(quest_id, shipper_id):
@@ -260,16 +262,16 @@ def update_resized_image(quest_id):
     if not questdetails.item_images:
         return ""
     file_path = questdetails.item_images.name
-    logging.warn(file_path)
+    logger.debug(file_path)
     filename_base, filename_ext = os.path.splitext(file_path)
     normal_file_path = "%s_%s_normal.jpg" % (filename_base, questdetails.id)
-    logging.warn(normal_file_path)
+    logger.debug(normal_file_path)
     try:
         Quests.objects.filter(id=quest_id).update(item_images=normal_file_path)
     except Quests.DoesNotExist:
         raise Http404
         return render(request,'404.html')
-    logging.warn(storage.exists(file_path))
+    logger.debug(storage.exists(file_path))
     if storage.exists(file_path):
         storage.delete(file_path)
     return ""

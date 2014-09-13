@@ -3,6 +3,8 @@
 import os
 import stripe
 import logging
+logger = logging.getLogger(__name__)
+
 
 class PayStripe(object):
     """Handles the payment using Stripe"""
@@ -22,7 +24,7 @@ class PayStripe(object):
             responsedict['status'] = "fail"
             responsedict['type'] = error['type']
             responsedict['message'] = error['message']
-            logging.warn(responsedict)
+            logger.debug(responsedict)
             return responsedict
         except stripe.error.InvalidRequestError, e:
             body = e.json_body
@@ -31,7 +33,7 @@ class PayStripe(object):
             responsedict['status'] = "fail"
             responsedict['type'] = error['type']
             responsedict['message'] = error['message']
-            logging.warn(responsedict)
+            logger.debug(responsedict)
             return responsedict
         except stripe.error.StripeError, e:
             responsedict = {}
@@ -39,7 +41,7 @@ class PayStripe(object):
             responsedict['code'] = "Generic_Error"
             responsedict['type'] = "Stripe_Error"
             responsedict['message'] = e
-            logging.warn(responsedict)
+            logger.debug(responsedict)
             return responsedict
         except Exception, e:
             responsedict = {}
@@ -47,7 +49,7 @@ class PayStripe(object):
             responsedict['code'] = "Other_Error"
             responsedict['type'] = "System_Error"
             responsedict['message'] = e
-            logging.warn(responsedict)
+            logger.debug(responsedict)
             return responsedict
 
         responsedict = {}

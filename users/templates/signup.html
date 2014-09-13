@@ -12,12 +12,12 @@
     <div class="row clearfix">
         <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 column">
 	    	<h3 class="lead grey"><span class="glyphicon glyphicon-user"></span> Create your Questr account with</h3>
-	         
+	                       {% comment %}
+
         	<center>
         		<br>
 	    		<a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i> | Facebook</button></a>
 	    		<a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i> | Twitter</button></a>
-	    		{% comment %}
                 ## This is for google plus based authentication ##
                     {% if plus_id %}
                     <form id="google-plus" method="post" action="{% url 'social:complete' 'google-plus' %}">{% csrf_token %}
@@ -35,9 +35,10 @@
                       </div>
                     </form>
                     {% endif %}
-                {% endcomment %}
 	    		<a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i> | Google Plus</button></a>		
         	</center>
+                {% endcomment %}
+
 	        </div><!-- ./col-md-10 -->
 	    </div><!-- ./row -->
 	   
@@ -48,15 +49,17 @@
 	    <form action="{% url 'signup' %}" method="post" name="userForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
 	    <div class="container">	
 	    	<br>
-	    	<div class="row clearfix">
-				<div class="col-md-10 col-md-offset-1 column">
-					<div class="row clearfix">
-						<div class="col-md-12 column">
-							<h6 class="lead">Or the old fashion way</h6>
-						</div>
-					</div>
-				</div>
-	    	</div>
+{% comment %}
+                <div class="row clearfix">
+                <div class="col-md-10 col-md-offset-1 column">
+                    <div class="row clearfix">
+                        <div class="col-md-12 column">
+                            <h6 class="lead">Or the old fashion way</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endcomment %}
 	    
 	        
 	<div class="row clearfix">

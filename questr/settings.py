@@ -74,7 +74,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social.apps.django_app.default',
+    # 'social.apps.django_app.default',
     'endless_pagination',
     'mailchimp',
     'users',
@@ -130,36 +130,36 @@ AUTH_USER_MODEL = 'users.QuestrUserProfile'
 
 # For Social Network Authentication
 # User Model
-LOGIN_URL = '/user/login/'
-# LOGIN_ERROR_URL = '/user/login/'
-LOGIN_REDIRECT_URL = '/user/home/'
-SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
-SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
-SOCIAL_AUTH_USER_MODEL = 'users.QuestrUserProfile'
-SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email','first_name','last_name','displayname', 'username']
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['profile', 'email']
-SOCIAL_AUTH_PIPELINE = (
-        'social.pipeline.social_auth.social_details',
-        'social.pipeline.social_auth.social_uid',
-        'social.pipeline.social_auth.auth_allowed',
-        'social.pipeline.social_auth.social_user',
-        'social.pipeline.user.get_username',
-        'users.pipeline.required_fields',
-        'users.pipeline.create_user',
-        'users.pipeline.save_profile_picture',
-        'social.pipeline.mail.mail_validation',
-        'social.pipeline.social_auth.associate_user',
-        'social.pipeline.social_auth.load_extra_data',
-        'social.pipeline.user.user_details'
-    )
+# LOGIN_URL = '/user/login/'
+# # LOGIN_ERROR_URL = '/user/login/'
+# LOGIN_REDIRECT_URL = '/user/home/'
+# SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
+# SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
+# SOCIAL_AUTH_USER_MODEL = 'users.QuestrUserProfile'
+# SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email','first_name','last_name','displayname', 'username']
+# SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['profile', 'email']
+# SOCIAL_AUTH_PIPELINE = (
+#         'social.pipeline.social_auth.social_details',
+#         'social.pipeline.social_auth.social_uid',
+#         'social.pipeline.social_auth.auth_allowed',
+#         'social.pipeline.social_auth.social_user',
+#         'social.pipeline.user.get_username',
+#         'users.pipeline.required_fields',
+#         'users.pipeline.create_user',
+#         'users.pipeline.save_profile_picture',
+#         'social.pipeline.mail.mail_validation',
+#         'social.pipeline.social_auth.associate_user',
+#         'social.pipeline.social_auth.load_extra_data',
+#         'social.pipeline.user.user_details'
+#     )
 
 # Auth Backend
 AUTHENTICATION_BACKENDS = (
-    'social.backends.facebook.FacebookOAuth2',
-    'social.backends.twitter.TwitterOAuth',
+    # 'social.backends.facebook.FacebookOAuth2',
+    # 'social.backends.twitter.TwitterOAuth',
     # 'social.backends.google.GooglePlusAuth', # commented to disable google plus auth
-    'social.backends.google.GoogleOAuth2',
+    # 'social.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
     )
 
@@ -188,3 +188,34 @@ if not DEBUG:
     STATICFILES_STORAGE = 'libs.s3utils.StaticRootS3BotoStorage'
     MEDIA_ROOT = '/%s/' % DEFAULT_FILE_STORAGE
     MEDIA_URL = '//s3.amazonaws.com/%s/' % AWS_MEDIA_BUCKET
+
+## Setup Logging ##
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'questr.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers':['file'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+    }
+}

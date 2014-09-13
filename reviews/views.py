@@ -12,7 +12,7 @@ from quests.models import Quests
 from users.contrib import user_handler
 from users.models import QuestrUserProfile
 
-
+logger = logging.getLogger(__name__)
 # Create your views here.
 
 
@@ -46,8 +46,8 @@ from users.models import QuestrUserProfile
 @login_required
 def review(request, quest_id, reviewed_id):
     """Reviews a user for a quest, where reviewed_id is the id of the user being reviewed"""
-    logging.warn("User being reviewed is %s", reviewed_id)
-    logging.warn("User who is reviewing is %s", request.user.id)
+    logger.debug("User being reviewed is %s", reviewed_id)
+    logger.debug("User who is reviewing is %s", request.user.id)
     # If the user tries to review himself
     if int(reviewed_id)==int(request.user.id):
         return redirect('home')
@@ -81,7 +81,7 @@ def review(request, quest_id, reviewed_id):
             review.rating_3=float(ratings[2])
             review.rating_4=float(ratings[3])
             review.save()
-            logging.debug("Review done by {0} on quest with id {1} which was complted by shipper {2}".format(request.user, quest_id, reviewed.get_full_name()))
+            logger.debug("Review done by {0} on quest with id {1} which was complted by shipper {2}".format(request.user, quest_id, reviewed.get_full_name()))
             final_rating = Review.objects.filter(reviewed=reviewed.id).aggregate(Avg('final_rating'))
             final_rating = round(final_rating['final_rating__avg'], 1)
             QuestrUserProfile.objects.filter(id=reviewed_id).update(rating=final_rating)
@@ -89,13 +89,13 @@ def review(request, quest_id, reviewed_id):
             # if the guy being reviewed is the questr
             # changing the types to integer for it's an integer comparision, IDs are integers
             if int(questdetails.questrs_id) == int(reviewed_id):
-                logging.warn("shipper is reviewed")
+                logger.debug("shipper is reviewed")
                 Quests.objects.filter(id=quest_id).update(is_questr_reviewed='t')
 
             # if the guy being reviewed is the shipper
             # changing the types to integer for it's an integer comparision, IDs are integers
             if int(questdetails.shipper) == int(reviewed_id):
-                logging.warn("questr is reviewed")
+                logger.debug("questr is reviewed")
                 Quests.objects.filter(id=quest_id).update(is_shipper_reviewed='t')
 
             return redirect('home')
@@ -113,12 +113,12 @@ def review(request, quest_id, reviewed_id):
         return render('404.html', locals())
     try:
         is_reviewed = Review.objects.get(quest=current_quest, reviewed=shipper)
-        logging.warn(is_reviewed)
+        logger.debug(is_reviewed)
     except Review.DoesNotExist:
         is_reviewed=False
         return render(request, 'questrReview.html', locals())
 
-    logging.warn("redirecting to home")    
+    logger.debug("redirecting to home")    
     return redirect('home')
 
 

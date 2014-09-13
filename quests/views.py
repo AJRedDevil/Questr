@@ -11,6 +11,8 @@ from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm, Distanc
 from .models import Quests
 
 import logging
+logger = logging.getLogger(__name__)
+
 import simplejson as json
 
 @login_required
@@ -62,8 +64,8 @@ def editquest(request, questname):
         # if questdetails.questrs.id == request.user.id:
         #     instance=get_object_or_404(Quests, id=questname)
         #     user_form = QuestChangeForm(data=request.POST, instance=instance)
-        #     # logging.warn(user_form.errors)
-        #     # logging.warn(user_form.is_valid())
+        #     # logger.debug(user_form.errors)
+        #     # logger.debug(user_form.is_valid())
         #     if user_form.is_valid():
         #         quest_data = user_form.save(commit=False)
         #         quest_data.save()
@@ -73,9 +75,9 @@ def editquest(request, questname):
         if questdetails.questrs.id == user.id:
             instance=get_object_or_404(Quests, id=questname)
             user_form = QuestChangeForm(data=request.POST, instance=instance)
-            # logging.warn(user_form.errors)
-            # logging.warn(user_form.is_valid())
-            # logging.warn(user_form)
+            # logger.debug(user_form.errors)
+            # logger.debug(user_form.is_valid())
+            # logger.debug(user_form)
             if user_form.is_valid():
                 title = user_form.cleaned_data['title']
                 description = user_form.cleaned_data['description']
@@ -105,7 +107,7 @@ def editquest(request, questname):
                 pagetitle = "Confirm your Quest"
                 return render(request, 'confirmquestedit.html', locals())  
             if user_form.errors:
-                logging.warn("Form has errors, %s ", user_form.errors)
+                logger.debug("Form has errors, %s ", user_form.errors)
 
         pagetitle="Edit - " + questdetails.title
         return render(request, 'editquest.html', locals())  
@@ -133,8 +135,8 @@ def confirmeditquest(request, questname):
         # if questdetails.questrs.id == request.user.id:
         #     instance=get_object_or_404(Quests, id=questname)
         #     user_form = QuestChangeForm(data=request.POST, instance=instance)
-        #     # logging.warn(user_form.errors)
-        #     # logging.warn(user_form.is_valid())
+        #     # logger.debug(user_form.errors)
+        #     # logger.debug(user_form.is_valid())
         #     if user_form.is_valid():
         #         quest_data = user_form.save(commit=False)
         #         quest_data.save()
@@ -185,8 +187,8 @@ def confirmeditquest(request, questname):
                 quest_data = user_form.save(commit=False)
                 ##Submit dict to the field
                 ##Submit dict to the field
-                # logging.warn("Pickup dict %s", pickupdict)
-                # logging.warn("Dropoff dict %s", dropoffdict)
+                # logger.debug("Pickup dict %s", pickupdict)
+                # logger.debug("Dropoff dict %s", dropoffdict)
                 quest_data = user_form.save(commit=False)
                 quest_data.pickup = json.dumps(pickupdict)
                 quest_data.dropoff = json.dumps(dropoffdict)
@@ -198,7 +200,7 @@ def confirmeditquest(request, questname):
                 pagetitle = "Confirm your Quest"
                 return redirect(viewquest, questname=questdetails.id)
             if user_form.errors:
-                logging.warn("Form has errors, %s ", user_form.errors)
+                logger.debug("Form has errors, %s ", user_form.errors)
         pagetitle="Edit - " + questdetails.title
         return redirect('editquest',questname=questdetails.id)
 
@@ -221,11 +223,11 @@ def newquest(request):
     if request.method=="POST":
         now = timezone.now()
         user_form = QuestCreationForm(request.POST)
-        # logging.warn(user_form.errors)
-        # logging.warn(user_form.is_valid())
-        # logging.warn(user_form)
+        # logger.debug(user_form.errors)
+        # logger.debug(user_form.is_valid())
+        # logger.debug(user_form)
         if user_form.is_valid():
-            # logging.warn(user_form.fields)
+            # logger.debug(user_form.fields)
             title = user_form.cleaned_data['title']
             size = user_form.cleaned_data['size']
             description = user_form.cleaned_data['description']
@@ -248,14 +250,14 @@ def newquest(request):
             maps.set_geo_args(dict(origin=origin, destination=destination))
             distance = maps.get_total_distance()
             map_image = maps.fetch_static_map()
-            logging.warn(map_image)
+            logger.debug(map_image)
             # For price
             price = pricing.WebPricing()
             reward = price.get_price(distance)
             pagetitle = "Confirm your Quest"
             return render(request, 'confirmquest.html', locals())  
         if user_form.errors:
-            logging.warn("Form has errors, %s ", user_form.errors)
+            logger.debug("Form has errors, %s ", user_form.errors)
 
     pagetitle = "Create your Quest"
     return render(request, 'newquest.html', locals())  
@@ -323,15 +325,15 @@ def confirmquest(request):
                     email_details = quest_handler.prepNewQuestNotification(shipper, quest_data)
                     email_notifier.send_email_notification(shipper, email_details)
             except Exception, e:
-                logging.warn(e)
+                logger.debug(e)
                 pass
             quest_handler.update_resized_image(quest_data.id)
             message="Your quest has been created!"
-            logging.warn(message)
+            logger.debug(message)
             return redirect('home')
 
         if user_form.errors:
-            logging.warn("Form has errors, %s ", user_form.errors)
+            logger.debug("Form has errors, %s ", user_form.errors)
 
     pagetitle = "Create a Quest"
     message="There were some errors creating your quest, please try again !"
@@ -360,7 +362,7 @@ def applyForQuest(request, questname):
     email_notifier.send_email_notification(questr, email_details)
 
     message="Your application has been sent to the quest owner"
-    logging.warn(message)
+    logger.debug(message)
     return redirect('viewquest', questname=questname)
 
 @login_required
@@ -380,7 +382,7 @@ def withdrawFromQuest(request, questname):
     # remove the shipper from the quest
     quest_handler.delShipper(str(shipper.id), questname)
     message="You have retracted yourself from the quest"
-    logging.warn(message)
+    logger.debug(message)
     return redirect('viewquest', questname=questname)
 
 @login_required
@@ -426,7 +428,7 @@ def completequest(request, questname):
             try:
                 questdetails = Quests.objects.get(id=questname, isaccepted=True)
             except Quests.DoesNotExist:
-                logging.debug("Quest not found")
+                logger.debug("Quest not found")
                 raise Http404
                 return render(request,'404.html')
             # Check if the owner and the user are the same
@@ -441,8 +443,8 @@ def completequest(request, questname):
             if delivery_code:
                 if questdetails.delivery_code != delivery_code:
                     message = "Provided delivery code. Please enter the correct delivery code." 
-                    logging.debug("Provided delivery code \'%s\' doesn't match the one in the quest number %s", delivery_code, questdetails.id)
-                    logging.debug("returned to viewquest page of %s", questname)
+                    logger.debug("Provided delivery code \'%s\' doesn't match the one in the quest number %s", delivery_code, questdetails.id)
+                    logger.debug("returned to viewquest page of %s", questname)
                     return redirect('viewquest', questname=questname) # return with message
                 else:
                     questr = getQuestrDetails(questdetails.questrs_id)
@@ -457,7 +459,7 @@ def completequest(request, questname):
                     try:
                         questdetails = Quests.objects.get(id=questname, isaccepted=True)
                     except Quests.DoesNotExist:
-                        logging.debug("Quest not found")
+                        logger.debug("Quest not found")
                         raise Http404
                         return render(request,'404.html')
                     
@@ -465,19 +467,19 @@ def completequest(request, questname):
                     questr_review_link = quest_handler.get_review_link(questname, questr.id)
                     email_details = quest_handler.prepQuestCompleteNotification(shipper, questr, questdetails, questr_review_link)
                     email_notifier.send_email_notification(shipper, email_details)
-                    logging.warn("Quest completion email has been sent to %s", shipper.email)
+                    logger.debug("Quest completion email has been sent to %s", shipper.email)
                     ## Send notification to questr
                     shipper_review_link = quest_handler.get_review_link(questname, shipper.id)
                     email_details = quest_handler.prepQuestCompleteNotification(questr, questr, questdetails, shipper_review_link)
                     email_notifier.send_email_notification(questr, email_details)
-                    logging.warn("Quest completion email has been sent to %s", questr.email)
+                    logger.debug("Quest completion email has been sent to %s", questr.email)
                     message="Quest completion mail has been sent to the Offerer."
                     return redirect('viewquest', questname=questname) # display message
 
             return redirect('viewquest', questname=questname)
         else:
             message = "Imposter detected" # Correct message required
-            logging.debug(message)
+            logger.debug(message)
             return redirect('viewquest', questname=questname)
     return redirect('viewquest', questname=questname)
 
@@ -509,7 +511,7 @@ def getDistanceAndPrice(request):
             resultdict['price'] = reward
             return HttpResponse(json.dumps(resultdict),content_type="application/json")
         if user_form.errors:
-            logging.warn("Form has errors, %s ", user_form.errors)
+            logger.debug("Form has errors, %s ", user_form.errors)
             resultdict['status'] = 500
             resultdict['message'] = "Internal Server Error"
             return HttpResponse(json.dumps(resultdict),content_type="application/json")

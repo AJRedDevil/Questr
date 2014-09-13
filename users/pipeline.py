@@ -9,6 +9,7 @@ from social.pipeline.partial import partial
 from users.contrib.user_handler import usernameExists, emailExists
 from .models import QuestrUserProfile as User
 
+logger = logging.getLogger(__name__)
 
 @partial
 def required_fields(strategy, details, user=None, is_new=False, *args, **kwargs):
@@ -25,11 +26,11 @@ def required_fields(strategy, details, user=None, is_new=False, *args, **kwargs)
                 details[field] = strategy.session_pop(field)
             # redirect if user exists
             if usernameExists(details['displayname']):
-                logging.warn("usernameExists")
+                logger.debug("usernameExists")
                 return redirect('saveprofile')
             # redirect if email exists
             if emailExists(details['email']):
-                logging.warn("emailExists")
+                logger.debug("emailExists")
                 return redirect('saveprofile')      
 
             return

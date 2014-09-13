@@ -46,13 +46,13 @@
                             <center><button type="submit" class="btn btn-sm btn-embossed btn-info">Sign in</button></center>
                         </div> <!-- ./form-group -->
 				    	</form>
-
+{% comment %}
 				    	<center>
 					    	<h6>Sign in with</h6>
 		                    <a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i></button></a>
 		                    <a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i></button></a>
 			                
-			                {% comment %}
+			                
 			                ## This is for google plus based authentication ##
 			                    {% if plus_id %}
 			                    <form id="google-plus" method="post" action="{% url 'social:complete' 'google-plus' %}">{% csrf_token %}
@@ -70,10 +70,13 @@
 			                      </div>
 			                    </form>
 			                    {% endif %}
-			                {% endcomment %}
+			                
 			                
 			                <a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i></button></a> 
 		            	</center>
+    
+{% endcomment %}
+
 					</div><!-- ./column -->
 			    </div><!-- ./panel-body -->	  
 		    </div><!-- ./panel-default -->

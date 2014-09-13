@@ -23,7 +23,7 @@ from reviews.contrib import review_handler
 
 import simplejson as json
 import logging
-
+logger = logging.getLogger(__name__)
 # Create your views here.
 def logout(request):
     """Logs out user"""
@@ -43,7 +43,7 @@ def signin(request):
             return redirect('home')
 
         if auth_form.errors:
-            logging.warn("Login Form has errors, %s ", auth_form.errors)
+            logger.debug("Login Form has errors, %s ", auth_form.errors)
     pagetitle = "Login"
     return render(request, 'signin.html', locals())
 
@@ -61,15 +61,15 @@ def signup(request):
             userdata.backend='django.contrib.auth.backends.ModelBackend'
             auth_login(request, userdata)
             verf_link = user_handler.get_verification_url(userdata)
-            logging.warn("verification link is %s", verf_link)
+            logger.debug("verification link is %s", verf_link)
             email_details = user_handler.prepWelcomeNotification(userdata, verf_link)
-            logging.warn("What goes in the email is \n %s", email_details)
+            logger.debug("What goes in the email is \n %s", email_details)
             email_notifier.send_email_notification(userdata, email_details)
             pagetitle = "Please verify your email !"
             return render(request, 'thankyou.html', locals())
 
         if user_form.errors:
-            logging.warn("Login Form has errors, %s ", user_form.errors)
+            logger.debug("Login Form has errors, %s ", user_form.errors)
         pagetitle = "Signup"
         return render(request, 'signup.html', locals())
     else:
@@ -88,9 +88,9 @@ def resend_verification_email(request):
             user = QuestrUserProfile.objects.get(email=user_email)
             if user and not user.email_status:
                 verf_link = user_handler.get_verification_url(user)
-                logging.warn("verification link is %s", verf_link)
+                logger.debug("verification link is %s", verf_link)
                 email_details = user_handler.prepWelcomeNotification(user, verf_link)
-                logging.warn("What goes in the email is \n %s", email_details)
+                logger.debug("What goes in the email is \n %s", email_details)
                 email_notifier.send_email_notification(user, email_details)
                 # user_handler.send_verfication_mail(user)
         except QuestrUserProfile.DoesNotExist:
@@ -106,7 +106,7 @@ def home(request):
     secondnav="listquestsecondnav"
     user = request.user
     allquests = Quests.objects.filter(ishidden=False)
-    # logging.warn(allquests)
+    # logger.debug(allquests)
     pagetitle = "Home"
     return render(request,'homepage.html', locals())
 
@@ -189,7 +189,7 @@ def myTrades(request):
         
     #     shipperlist[quest]=shipper_object_list
     
-    # # logging.warn(shipperlist)
+    # # logger.debug(shipperlist)
     # return render(request, 'trades.html', locals())
     return redirect('myposts')
 
@@ -200,7 +200,7 @@ def acceptOffer(request, quest_id, shipper_id):
     user = request.user
     # if the shipper doesn't exist
     if not user_handler.userExists(shipper_id):
-        logging.warn("User ID : %s not found, quest %s not accepted, returning to mytrades page", shipper_id, quest_id)
+        logger.debug("User ID : %s not found, quest %s not accepted, returning to mytrades page", shipper_id, quest_id)
         return redirect('mytrades')    
     
     try:
@@ -237,7 +237,7 @@ def myPosts(request):
         
         shipperlist[quest]=shipper_object_list
     
-    # logging.warn(shipperlist)
+    # logger.debug(shipperlist)
     return render(request, 'myquests.html', locals())
 
 @login_required
@@ -311,12 +311,12 @@ def changePassword(request):
     settingstype="password"
     ##check if the user has password, if they don't they'd be provided with a link to create one for them
     password = user_handler.passwordExists(user)
-    # logging.warn(user)
-    # logging.warn(password)
+    # logger.debug(user)
+    # logger.debug(password)
 
     if request.method == "POST":
         user_form = PasswordChangeForm(user, request.POST)
-        logging.warn(user_form.errors)
+        logger.debug(user_form.errors)
         if user_form.is_valid():
             user_form.save()
             message="Your password has been changed!"
@@ -360,27 +360,28 @@ def notificationsettings(request):
             QuestrUserProfile.objects.filter(id=request.user.id).update(notificationprefs=prefdict)
 
         if user_form.errors:
-            logging.warn("Form has errors, %s ", user_form.errors)
+            logger.debug("Form has errors, %s ", user_form.errors)
 
     user_form = NotifPrefForm()
     pagetitle = "Email Notification Settings"
     return render(request, "emailsettings.html",locals())
 
-def saveUserInfo(request):
-    """This save's additional user info post the social login is successfull"""
-    user_data = request.session.get('details')
-    if request.method == "POST":
-        user_form = QuestrSocialSignupForm(request.POST)
-        if user_form.is_valid():
-            request.session['first_name'] = request.POST['first_name']
-            request.session['last_name'] = request.POST['last_name']
-            request.session['email'] = request.POST['email']
-            request.session['displayname'] = request.POST['displayname']        
-            backend = request.session['partial_pipeline']['backend']
-            return redirect('social:complete', backend=backend)
-        return render(request, "socialsignup.html",locals())
-    else:
-        return render(request, "socialsignup.html",locals())
+# Commented out as we are removing social login for now.
+# def saveUserInfo(request):
+#     """This save's additional user info post the social login is successfull"""
+#     user_data = request.session.get('details')
+#     if request.method == "POST":
+#         user_form = QuestrSocialSignupForm(request.POST)
+#         if user_form.is_valid():
+#             request.session['first_name'] = request.POST['first_name']
+#             request.session['last_name'] = request.POST['last_name']
+#             request.session['email'] = request.POST['email']
+#             request.session['displayname'] = request.POST['displayname']        
+#             backend = request.session['partial_pipeline']['backend']
+#             return redirect('social:complete', backend=backend)
+#         return render(request, "socialsignup.html",locals())
+#     else:
+#         return render(request, "socialsignup.html",locals())
 
 @is_alive
 @login_required
@@ -388,26 +389,26 @@ def verify_email(request, user_code):
     """
         Verifies email of the user and redirect to the home page
     """
-    logging.warn(user_code)
+    logger.debug(user_code)
     if user_code:
         try:
             transcational = UserTransactional.objects.get(user_code__regex=r'^%s' % user_code)
-            logging.debug("transactional")
-            logging.debug(transcational)
+            logger.debug("transactional")
+            logger.debug(transcational)
             if transcational:
-                logging.debug("transctional status")
-                logging.warn(transcational.status)
+                logger.debug("transctional status")
+                logger.debug(transcational.status)
                 if not transcational.status:
                     try:
                         user = QuestrUserProfile.objects.get(email=transcational.email)
-                        logging.warn(user)
+                        logger.debug(user)
                         if user:
                             user.email_status = True
                             user.save()
                             transcational.status = True
                             transcational.save()
                     except QuestrUserProfile.DoesNotExist:
-                        logging.debug('User does not exist')
+                        logger.debug('User does not exist')
                         return redirect('home')
                 else:
                     message = "Please use the latest verification email sent."

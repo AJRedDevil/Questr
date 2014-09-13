@@ -2,11 +2,14 @@
 
 from random import choice
 from django.conf import settings
+from django.shortcuts import render
 from django.http import Http404
 
 import logging
 from users.models import QuestrUserProfile, UserTransactional, QuestrToken
 from quests.models import Quests
+
+logger = logging.getLogger(__name__)
 
 def get_random_password():
 	"""
@@ -35,7 +38,7 @@ def prepPasswordResetNotification(questr, new_password):
                                                 },
                     }
 
-    logging.warn("Password reset email is prepared")
+    logger.debug("Password reset email is prepared")
     return email_details
 
 
@@ -59,7 +62,7 @@ def prepWelcomeNotification(questr, verf_link):
                                                 },
                     }
 
-    logging.warn("Welcome email is prepared")
+    logger.debug("Welcome email is prepared")
     return email_details
 
 def get_verification_url(user=None): 

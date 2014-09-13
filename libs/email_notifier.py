@@ -2,6 +2,7 @@
 
 import logging
 from django.core.mail import EmailMessage
+logger = logging.getLogger(__name__)
 
 def _load_template(user, email_details):
     """
@@ -48,10 +49,10 @@ def send_email_notification(user, email_details):
     try:
         msg = _load_template(user, email_details)
         msg.send()
-        logging.warn("Notification sent to - %s for %s", user.email, email_details['template_name'])
+        logger.debug("Notification sent to - %s for %s", user.email, email_details['template_name'])
     except Exception, e:
-        logging.warn("Error during sending of Email to - %s for %s", user.email, email_details['template_name'])
-        logging.warn("Error message is %s", str(e))
+        logger.debug("Error during sending of Email to - %s for %s", user.email, email_details['template_name'])
+        logger.debug("Error message is %s", str(e))
 
 
 def _load_contact_template(user_email, email_details):
@@ -98,7 +99,7 @@ def send_contactus_notification(user_email, email_details):
     #                 }
     try:
         msg = _load_contact_template(user_email, email_details)
-        logging.warn("Notification sent to - %s for %s", user_email, email_details['template_name'])
+        logger.debug("Notification sent to - %s for %s", user_email, email_details['template_name'])
         msg.send()
     except Exception, e:
         logging.exception(str(e))
