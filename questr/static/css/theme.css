@@ -311,6 +311,7 @@ button.btn-default {
 .panel-default .panel-heading .panel-title {
 	font-size: 20px;
 	display: inline;
+	background: transparent;
 }
 
 .panel-default label.control-label p {
@@ -505,7 +506,7 @@ select option {
 input.form-control, input.form-control, textarea.form-control {
 	border: 2px;
 	border-style: solid;
-	border-color: #ecf0f1;
+	border-color: white;
 	background: white;
 	box-shadow: none;
 	border-radius: 2px;
@@ -619,6 +620,11 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 .grey {
 	color: #f9f9f9;
 }
+
+.grey-bg {
+	background: #f9f9f9;
+}
+
 
 .white {
 	background: white;

@@ -36,18 +36,21 @@ hr {
 }
 
 
-
-
 body { 
-  background: url(../img/shipper.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  background: url(../img/signin.jpg); 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-position: center center;
 }
 
 .panel-default {
-opacity: 0.9;
-margin-top:30px;
+margin-top:80px;
 }
+
+.panel-heading {
+	background: transparent;
+}
+
 .form-group.last { margin-bottom:0px; }

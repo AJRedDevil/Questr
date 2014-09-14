@@ -9,16 +9,18 @@
 {% block content %} 
 
 
-<div class="container">
+<div class="container" ng-app="validationApp" ng-controller="mainController">
+
+			
     <div class="row clearfix">
-        <div class="col-md-4 col-md-offset-7">
-			<div class="container-fluid" ng-app="validationApp" ng-controller="mainController">
-    <div class="row clearfix">
-	    <div class="col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 column">
-	    	<br><br><br>
-		    <div class="panel panel-default">
-			    <div class="panel-heading">
-				    <center><div class="panel-title lead">Sign in</div></center>
+    	<div class="col-md-6 column"></div>
+
+
+
+	    <div class="col-md-6 column">
+		    <div class="panel panel-default col-md-8 column grey-bg">
+			    <div class="panel-heading text-center" style="background:transparent;">
+				    <div class="panel-title lead">Sign in</div>
 		        </div>
 			    
 			    <div class="panel-body">
@@ -84,15 +86,7 @@
 		    </div><!-- ./panel-default -->
 	    </div><!-- ./column -->    
     </div><!-- ./row -->  
-</div><!-- ./container-fluid -->             
-
-
-
-
-
-        </div>
-    </div>
-</div>
+</div><!-- ./container -->  
 
            
 
