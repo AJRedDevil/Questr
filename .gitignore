@@ -22,6 +22,7 @@ Icon
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*.py.old.*
 
 # Local Settings
 local_setting.py

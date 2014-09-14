@@ -4,8 +4,6 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = ['*']
 AUTH_PROFILE_MODULE = 'users.QuestrUserProfile'
-# PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
-# TEMPLATE_DIRS = (PROJECT_PATH + '/localtemplates/',)
 QUESTR_URL='http://localhost:5000'
 MANDRILL_API_KEY = os.environ['MANDRILL_TEST_API_KEY']
 
@@ -71,12 +69,22 @@ LOGGING = {
         'django': {
             'handlers':['file'],
             'propagate': True,
-            'level':'WARN',
+            'level':'DEBUG',
         },
         'users': {
             'handlers':['file'],
             'propagate': True,
-            'level':'WARN',
+            'level':'DEBUG',
+        },
+        'quests': {
+            'handlers':['file'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+        'reviews': {
+            'handlers':['file'],
+            'propagate': True,
+            'level':'DEBUG',
         },
     }
 }
