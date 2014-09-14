@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from users.models import *
@@ -101,7 +100,6 @@ class Quests(models.Model):
 
     def get_item_images_normal_url(self):
         """Returns the url of the aws bucket object"""
-        import os
         from django.core.files.storage import default_storage as storage
         default_file_path = "/static/img/default.png"
         if not self.item_images:
@@ -113,7 +111,7 @@ class Quests(models.Model):
             if storage.exists(normal_file_path):
                 # logger.debug(storage.url(normal_file_path))
                 return storage.url(normal_file_path)
-        except Exception, e:
+        except Exception:
             return default_file_path
 
         return default_file_path
