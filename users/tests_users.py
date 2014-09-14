@@ -44,4 +44,8 @@ class SignupCase(TestCase):
         self.assertEqual(response.url, "http://testserver/user/home/")
         self.assertEqual(response.status_code, 302)
 
-    #     # pri nt response.context
+    def tests_superuser_created(self):
+        # Testing a creation of a super user
+        QuestrUserProfile.objects.create_superuser(self.email, self.password1)
+        user = QuestrUserProfile.objects.get(email=self.email)
+        self.assertEqual(user.is_superuser, True)

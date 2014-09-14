@@ -28,6 +28,23 @@ class QuestrUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+    def create_superuser(self, email, password=None, **extra_fields):
+        u = self._create_user(email, password, **extra_fields)
+        u.is_staff = True
+        u.is_active = True
+        u.is_superuser = True
+        u.email_status = True
+        u.save(using=self._db)
+        return u
+
+    def create_staffuser(self, email, password=None, **extra_fields):
+        u = self._create_user(email, password, **extra_fields)
+        u.is_staff = True
+        u.is_active = True
+        u.email_status = True
+        u.save(using=self._db)
+        return u
+
     def create_user(self, email, password=None, **extra_fields):
         return self._create_user(email, password, **extra_fields)
 
@@ -52,6 +69,8 @@ class QuestrUserProfile(AbstractBaseUser):
     gender = models.CharField(_('gender'), max_length=1)
     notifications = models.BooleanField(_('notifications'), default=False)
     is_shipper = models.BooleanField(_('is_shipper'), default=False)
+    is_staff = models.BooleanField(_('is_staff'), default=False)
+    is_superuser = models.BooleanField(_('is_superuser'), default=False)
     rating = models.DecimalField(_('rating'), default='0', max_digits=5, decimal_places=2)
     notificationprefs = jsonfield.JSONField(_('notificationprefs'), default='{}', max_length=9999)
     is_active = models.BooleanField(default=True)
@@ -68,6 +87,9 @@ class QuestrUserProfile(AbstractBaseUser):
 
     def get_full_name(self):
         return self.first_name + " " + self.last_name
+
+    def get_short_name(self):
+        return self.first_name
 
 # User transactionl model
 class UserTransactional(models.Model):
