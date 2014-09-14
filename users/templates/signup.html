@@ -2,18 +2,16 @@
 {% load staticfiles %}
 {% block localhead %}
   <!-- CSS -->
-  <link href={% static "css/sign.css" %} rel="stylesheet">
   <link href={% static "css/social-buttons.css" %} rel="stylesheet">
   
 {% endblock localhead %}
 {% block content%}
 
-<div class="container" ng-app="validationApp" ng-controller="mainController">
+<div class="container-fluid" ng-app="validationApp" ng-controller="mainController">
     <div class="row clearfix">
         <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 column">
-	    	<h3 class="lead grey"><span class="glyphicon glyphicon-user"></span> Create your Questr account with</h3>
-	                       {% comment %}
-
+	    	<h3 class="lead" style="margin-bottom:0;"><span class="glyphicon glyphicon-user"></span> Create your Questr account with</h3>
+	        {% comment %}
         	<center>
         		<br>
 	    		<a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i> | Facebook</button></a>
@@ -37,132 +35,94 @@
                     {% endif %}
 	    		<a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i> | Google Plus</button></a>		
         	</center>
-                {% endcomment %}
+            {% endcomment %}
+	    </div><!-- ./column -->
+	</div><!-- ./row -->
+   
+	    
 
-	        </div><!-- ./col-md-10 -->
-	    </div><!-- ./row -->
-	   
-    
-    
-	    
-	    
-	    <form action="{% url 'signup' %}" method="post" name="userForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
-	    <div class="container">	
-	    	<br>
-{% comment %}
-                <div class="row clearfix">
-                <div class="col-md-10 col-md-offset-1 column">
-                    <div class="row clearfix">
-                        <div class="col-md-12 column">
-                            <h6 class="lead">Or the old fashion way</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-{% endcomment %}
-	    
-	        
-	<div class="row clearfix">
+
+
+
+	<form action="{% url 'signup' %}" method="post" name="userForm" ng-submit="submitForm()" class="row clearfix" novalidate>{% csrf_token %}
+	  
 		<div class="col-md-10 col-md-offset-1 column">
-			<div class="row clearfix">
+			
+			<div class="col-xs-12 col-lg-4 col-lg-push-8 column">
+				<hr>
+				<p>Already a member?  Sign in <a href="{% url 'signin' %}">here.</a></p>
+			</div><!-- column -->	
 
-				<div class="col-md-8 column">		
-					<hr>
-					
-					<div class="row clearfix">
-						<div class="col-md-6 column">			
-							<div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
-								<label for="inputEmail" class="control-label">Email</label>
-								<input type="email" name="email" class="form-control ng-pristine ng-invalid" ng-model="user.email" required />
-								<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
-							</div>
-                            {{user_form.email.errors}}			              
+			<div class="col-xs-12 col-lg-8 col-lg-pull-4 column">
+				<hr>
+				
+				<div class="row clearfix">
+					<div class="col-xs-10 col-sm-10 col-md-6 col-lg-6 column">			
+						<div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+							<label for="inputEmail" class="control-label">Email</label>
+							<input type="email" name="email" class="form-control ng-pristine ng-invalid" ng-model="user.email" required />
+							<p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
 						</div>
-						<div class="col-md-6 column">
-							
-						</div><!-- ./col-md-6 -->						
-					</div><!-- ./row -->
+	                    {{user_form.email.errors}}			              
+					</div><!-- ./column -->						
+				</div><!-- ./row -->
+					
+				
+				<label for="inputPassword" class="control-label">Password</label>
+				<div class="row clearfix">
+					<div class="col-xs-10 col-sm-10 col-md-6 col-lg-6 column">    
+						<input class="form-control ng-pristine ng-invalid" ng-model="user.password" type="password" name="password1" data-ng-class="{'ng-invalid':myForm.confirmPassword.$error.match}" required />
+						<span class="help-block"><p>Minimum of 6 characters</p></span>
+						<div data-ng-show="myForm.confirmPassword.$error.match">Passwords do not match!</div>
+					</div>
+	                {{user_form.password1.errors}}
+					<div class="col-xs-10 col-sm-10 col-md-6 col-lg-6 column">
 						
-					
-					<label for="inputPassword" class="control-label">Password</label>
-					<div class="row clearfix">
-						<div class="col-md-6 column">    
-							<input class="form-control ng-pristine ng-invalid" ng-model="user.password" type="password" name="password1" data-ng-class="{'ng-invalid':myForm.confirmPassword.$error.match}" required />
-							<span class="help-block"><p>Minimum of 6 characters</p></span>
-							<div data-ng-show="myForm.confirmPassword.$error.match">Passwords do not match!</div>
-						</div>
-                        {{user_form.password1.errors}}
-						<div class="col-md-6 column">
-							
-							<input class="form-control ng-pristine ng-invalid" ng-model="user.passwordConfirm" type="password" data-match="user.password" name="password2" required />
-							
-							<div class="help-block with-errors"></div>
-						</div><!-- ./col-md-6 -->						
-                        {{user_form.password2.errors}}
-					</div><!-- ./row -->
-					
-					
-					
-				</div><!-- ./col-md-8 -->
-				<div class="col-md-4 column">
-					<hr>
-					<p>Already a member?  Sign in <a href="{% url 'signin' %}">here.</a></p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-	    
-	       
-	    
-	    <div class="row clearfix">
-    		<div class="col-md-10 col-md-offset-1 column">
-    		<div class="col-md-4 column">
- 
-                <label for="username" class="control-label">Username</label>
-                <input type="text" class="form-control input-sm" name="displayname" id="username" placeholder="" required>
-                {% if user_form.displayname.errors %}
-                    {{user_form.displayname.errors}}
-                {% endif %}
-                
-                <label for="firstName" class="control-label">First Name</label>
-                <input type="text" class="form-control input-sm" name="first_name" id="first_name" placeholder="" required>   
-                {% if user_form.first_name.errors %}
-                    {{user_form.first_name.errors}}
-                {% endif %}   
-              
-                <label for="username" class="control-label">Last Name</label>
-                <input type="text" class="form-control input-sm" name="last_name" id="last_name" placeholder="" required>
-                {% if user_form.last_name.errors %}
-                    {{user_form.last_name.errors}}
-                {% endif %}
+						<input class="form-control ng-pristine ng-invalid" ng-model="user.passwordConfirm" type="password" data-match="user.password" name="password2" required />
+						
+						<div class="help-block with-errors"></div>
+					</div><!-- ./col-md-6 -->						
+	                {{user_form.password2.errors}}
+				</div><!-- ./row -->	
 
-        	</div><!-- ./col-md-4 -->
-    		<div class="col-md-4 column">
-        		        	
-    		</div>
-    		
-            <div class="col-md-4 column">
-        		        	
-    		</div>
-        	
-        	</div><!-- ./col-md-10 -->
-    </div><!-- ./row -->
-    
-    
-    <div class="row clearfix">
-    		<div class="col-md-10 col-md-offset-1 column">
-	    		<div class="col-md-8 column">	
-	              <hr>
-	              <small class="small lead" id="disclaimer">By continuing, I agree to Questr's <a href="{% url 'terms' %}">Terms of Service</a> and <a href="{% url 'privacy' %}">Privacy Policy</a>.</small>
-	              <button type="submit" class="btn btn-embossed btn-info" id="createAccBtn">Create Account</button>
-	    		</div>
-	    		<div class="col-md-4 column">
-	    		
-	    		</div>
-    		</div><!-- ./col-md-10 -->
-    </div><!-- ./row -->                  
-</form>
+				
+
+
+				<div class="row clearfix">
+				<div class="col-xs-10 col-sm-10 col-md-6 col-lg-6 column">
+
+	            <label for="username" class="control-label">Username</label>
+	            <input type="text" class="form-control input-sm" name="displayname" id="username" placeholder="" required>
+	            {% if user_form.displayname.errors %}
+	                {{user_form.displayname.errors}}
+	            {% endif %}
+	            
+	            <label for="firstName" class="control-label">First Name</label>
+	            <input type="text" class="form-control input-sm" name="first_name" id="first_name" placeholder="" required>   
+	            {% if user_form.first_name.errors %}
+	                {{user_form.first_name.errors}}
+	            {% endif %}   
+	          
+	            <label for="username" class="control-label">Last Name</label>
+	            <input type="text" class="form-control input-sm" name="last_name" id="last_name" placeholder="" required>
+	            {% if user_form.last_name.errors %}
+	                {{user_form.last_name.errors}}
+	            {% endif %}
+
+	    	</div><!-- ./col-md-4 -->
+	    </div><!-- ./column -->
+   
+
+		<div class="col-md-12 column">
+  			<hr>
+			<div class="col-xs-12 col-md-6 column">
+				<small class="small lead" id="disclaimer">By continuing, I agree to Questr's <a href="{% url 'terms' %}">Terms of Service</a> and <a href="{% url 'privacy' %}">Privacy Policy</a>.</small>
+			</div>
+			<div class="col-xs-12 col-md-6 column">
+          		<button type="submit" class="btn btn-embossed btn-info" id="createAccBtn">Create Account</button>
+			</div>
+		</div><!-- ./column -->  
+	</form><!-- ./row -->
 </div><!-- ./container -->
 
 {% endblock %}    

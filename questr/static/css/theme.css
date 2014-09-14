@@ -625,8 +625,11 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 	background: #f9f9f9;
 }
 
-
 .white {
+	color: white;
+}
+
+.white-bg {
 	background: white;
 }
 
