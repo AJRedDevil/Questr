@@ -32,7 +32,6 @@ def logout(request):
     
 def signin(request):
     """Home view, displays login mechanism"""
-    pagetype="public"
     ## if authenticated redirect to user's homepage directly ##
     if request.user.is_authenticated():
         return redirect('home')
@@ -49,7 +48,6 @@ def signin(request):
 
 def signup(request):
     """Signup, if request == POST, creates the user"""
-    pagetype="public"
     ## if authenticated redirect to user's homepage directly ##
     if request.user.is_authenticated():
         return redirect('home')
