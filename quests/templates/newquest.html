@@ -8,24 +8,27 @@
 {% endblock localhead %}
 {% block content %}
 
-<div class="container">
+<div class="container-fluid">
 	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<h3 class="lead light-grey">request a shipment</h3>
-		</div><!-- ./column -->
-		<div class="col-md-12 column">
-			<form class="form-horizontal css-form" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" name="form" ng-submit="submitForm()" novalidate>{% csrf_token %}
-				<div class="row clearfix">
-					<!-- Name input-->
-					<div class="col-md-6 column">
+		<form class="form-horizontal css-form col-md-10 col-md-offset-1 column" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" name="form" ng-submit="submitForm()" novalidate>{% csrf_token %}
+
+			<div class="col-md-8 column">
+				<div class="panel panel-default grey-bg">
+				<div class="panel-heading text-center" style="background:transparent;">
+				    <div class="panel-title lead">Request a Shipment</div>
+				</div>
+				<div class="panel-body">
+					
+					<!-- NAME INPUT -->
+					<div class="col-md-8 column">
 						<div class="form-group">
 							<input class="form-control ng-pristine ng-invalid" name="title" type="text" placeholder="Title">
 						</div><!-- ./form-group -->
 					{{user_form.title.errors}}
-					</div><!-- ./column -->
+					</div><!-- ./NAME INPUT -->
 
-					<!-- Size input-->
-					<div class="col-md-4 column">
+					<!-- SIZE INPUT-->
+					<div class="col-md-8 column">
 						<div class="form-group" id="size">
 								<div class="input-group">
 									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
@@ -37,7 +40,7 @@
 									</div><!-- ./column -->  
 									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
 										<center>
-											<img src={% static 'img/car.png' %} style="width:100%; height:auto;" />
+											<img src={% static 'img/car.png' %} style="width:100%; height:au to;" />
 											<p>Car</p>
 											<input type="radio" name="size" ng-model="user.size" value="car" ng-model="user.car" required>
 										</center>	
@@ -52,11 +55,10 @@
 								</div><!-- /input-group -->
 						</div><!-- ./form-group -->
 						{{user_form.size.errors}}
-					</div><!-- ./column -->
+					</div><!-- ./SIZE INPUT-->
 
-
-					<!-- Message body -->
-					<div class="col-md-6 column">
+					<!-- MESSAGE -->
+					<div class="col-md-8 column">
 						<div class="form-group">			
 							<textarea class="form-control ng-pristine ng-invalid" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5" ng-model="user.description" ng-minlength="3" ng-maxlength="400" required></textarea>
 							<!-- Description Erorrs-->
@@ -68,14 +70,11 @@
 					        	Sorry You are Exceeding the Limit</span>
 						    </div>
 						</div><!-- ./form-group -->
-					</div><!-- ./column -->
-				</div><!-- ./row -->
+					</div><!-- MESSAGE -->
 
+					<p class="col-md-12 column">Pickup from:</p>
 
-				<div class="row clearfix" id="destination">
-
-					<div class="col-md-12 column"><p>Pickup from:</p></div>
-
+					<!-- CITY DROPDOWN -->
 					<div class="col-md-2 column">
 						<!-- Location input-->
 						<div class="form-group">
@@ -89,56 +88,60 @@
 							</select>
 						</div>  <!-- ./form-group -->
 						{{user_form.srccity.errors}}
-					</div>
-
-					<div class="col-md-4 column">
-						<!-- Pickup Address input-->
-						<div class="form-group">
-							
-								<input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" ng-model="user.departure" ng-minlength="3" ng-maxlength="100" required>
-								<!-- Address Erorrs-->
-				
-						</div><!-- ./form-group -->
-						{{user_form.srcaddress.errors}}
-					</div><!-- ./column -->
+					</div><!-- ./CITY DROPDOWN -->
 
 					<div class="clearfix"></div>
 
+					<!-- ADDRESS INPUT -->
+					<div class="col-md-6 column">
+						<!-- Pickup Address input-->
+						<div class="form-group">	
+								<input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" ng-model="user.departure" ng-minlength="3" ng-maxlength="100" required>
+								<!-- Address Erorrs-->
+						</div><!-- ./form-group -->
+						{{user_form.srcaddress.errors}}
+					</div><!-- ./ADDRESS INPUT -->
 
-					<div class="col-md-3 column">
+					<div class="clearfix"></div>
+
+					<!-- NAME INPUT -->
+					<div class="col-md-5 column">
 						<!-- Pickup Name input-->
 						<div class="form-group">
 							<input id="srcname" name="srcname" type="text" placeholder="Name of the sender" class="form-control input-xs" ng-model="user.srcname"  required>
 						</div><!-- ./form-group -->
 						{{user_form.srcname.errors}}
-					</div><!-- ./column -->
+					</div><!-- ./NAME INPUT -->
 
+
+					<div class="clearfix"></div>						
+
+					<!-- PHONE NUMBER -->
 					<div class="col-md-4 column">
-						<!-- Pickup Phone input-->
 						<div class="form-group">
 							<input id="srcphone" name="srcphone" type="text" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.srcphone" required>
 						</div><!-- ./form-group -->
 						{{user_form.srcphone.errors}}
-					</div>
+					</div><!-- PHONE NUMBER -->
 
 
 
+					<div class="clearfix"></div>
+					
+					<!-- POSTAL CODE INPUT -->
 					<div class="col-md-4 column">
-						<!-- Pickup Postal Code input-->
+						
 						<div class="form-group">
 								<input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="Postal Code" class="form-control ng-pristine ng-invalid" ng-model="user.srcpostalcode" required>
 						</div><!-- ./form-group -->
 						{{user_form.srcpostalcode.errors}}
-					</div>
-
-					<div class="clearfix"></div>
-
-					<div class="">
-					<div class="col-md-12 column">
-						<p>Drop off at:</p>
-					</div>
+					</div><!-- ./POSTAL CODE INPUT -->
 
 
+					<p class="col-md-12 column">Drop off at:</p>
+
+
+					<!-- CITY DROPDOWN -->
 					<div class="col-md-4 column">
 						<div class="form-group">
 							<select class="btn-classic" data-size="5" name="dstcity" ng-model="user.city2" required>
@@ -151,63 +154,79 @@
 							</select>
 						</div>  <!-- ./form-group -->  
 						{{user_form.dstcity.errors}}
-					</div>
+					</div><!-- CITY DROPDOWN -->
 
+
+					<div class="clearfix"></div>
+
+					<!-- ADDRESS INPUT -->
 					<div class="col-md-4 column">
-						<!-- Dropoff Address input-->
 						<div class="form-group">
 							<input class="form-control input-xs ng-pristine ng-invalid" id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address">
 						</div><!-- ./form-group -->
 						{{user_form.dstaddress.errors}}
-					</div>
+					</div><!-- ADDRESS INPUT -->
 
+
+					<div class="clearfix"></div>
+
+					<!-- NAME INPUT -->
 					<div class="col-md-4 column">
-						<!-- Dropoff Name input-->
+						
 						<div class="form-group">
 							<input id="dstname" name="dstname" type="text" placeholder="Name of the receiver" class="form-control ng-pristine ng-invalid" ng-model="user.dstname" required>
 						</div><!-- ./form-group -->
 						{{user_form.dstname.errors}}
-					</div>
+					</div><!-- NAME INPUT -->
 
+
+					<div class="clearfix"></div>
+
+					<!-- PHONE NUMBER INPUT-->
 					<div class="col-md-4 column">
-						<!-- Dropoff Phone input-->
+		
 						<div class="form-group">
 							<input id="dstphone" name="dstphone" type="number" placeholder="Phone number" class="form-control ng-pristine ng-invalid" >
 						</div><!-- ./form-group -->
 						{{user_form.dstphone.errors}}
-					</div>
+					</div><!-- PHONE NUMBER INPUT-->
 
+
+					<div class="clearfix"></div>
+
+					<!-- POSTAL CODE INPUT -->
 					<div class="col-md-4 column">
-						<!-- Dropoff Postal Code input-->
 						<div class="form-group"
 							<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="Postal Code" class="form-control">
 						</div><!-- ./form-group -->
 						{{user_form.dstpostalcode.errors}}
-					</div><!-- ./column -->
-				</div><!-- #/destination -->
+					</div><!-- POSTAL CODE INPUT -->
+				</div><!-- ./panel-body -->
+				</div><!-- ./panel -->
+			</div>
 
-				<div id="aids"></div>
-			</form>
-		</div><!-- ./column -->
+
+
+
+		<div class="col-md-4 column">
+			<div class="panel panel-default grey-bg">
+
+			<div class="panel-heading text-center" style="background:transparent;">
+			    <div class="panel-title lead">Total</div>
+			</div>
+			<div class="panel-body">
+				Total Cost
+				<button type="submit" class="btn btn-info">Continue</button>
+			</div><!-- ./panel-body -->	  
+			</div><!-- ./panel-default -->		
+			</div><!-- ./panel -->
+		</div>
+
 	</div><!-- ./row -->
-	<div class="row clearfix">
-		<div class="col-md-2 column">
-			<button type="button" class="btn btn-default" id="add-row">+</button>
-			Total Cost
-			<button type="submit" class="btn btn-info">Continue</button>
-		</div><!-- ./column -->
-	</div><!-- ./row -->
-	{% endblock content %}
-</div><!-- ./container-fluid -->
+</div><!-- ./container -->
 
 
+
+{% endblock content %}
 {% block scripts %}
-<!-- Custom Javascript -->
-<script>
-$(document).ready(function(){
-  $("#add-row").click(function(){
-    $("#destination").clone().appendTo("#destination");
-  });
-});
-</script>
 {% endblock scripts %}
