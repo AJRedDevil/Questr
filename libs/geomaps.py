@@ -62,11 +62,11 @@ class GMaps(object):
 		return center
 
 	def __obtain_static_image_url(self, center, start_location, end_location):
-		browserkey = getattr(settings, 'GOOGLE_MAPS_BROWSER_KEY', None)
+		# browserkey = getattr(settings, 'GOOGLE_MAPS_BROWSER_KEY', None)
 		# zoom=10
 		size="640x640"
 		maptype="roadmap"
-		url="http://maps.googleapis.com/maps/api/staticmap?center={0}&size={1}&maptype={2}&markers=color:blue|{3}&markers=color:purple|{4}&key={5}".format(center, size, maptype, start_location, end_location, browserkey)
+		url="http://maps.googleapis.com/maps/api/staticmap?center={0}&size={1}&maptype={2}&markers=color:blue|{3}&markers=color:purple|{4}".format(center, size, maptype, start_location, end_location)
 		return url
 
 	# def __save_image(self, bounds, start_location, end_location, filename):
