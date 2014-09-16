@@ -355,7 +355,7 @@ button.btn-default {
 }
 
 
-.panel-default .panel-content, .panel-default panel-body {
+.panel-default .panel-content, .panel-default .panel-body {
 	background: white;
 	border: none;
 }
@@ -366,6 +366,18 @@ button.btn-default {
 	border-color: #f4f4f4;
 	background: white;
 }
+
+
+.panel-default .panel-body ul.list-group, .panel-default .panel-body ul.list-group li.list-group-item {
+	margin: 0;
+	border-radius: 0;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom-width: 1px;
+
+}
+
 
 
 /************* Buttons ************/
@@ -504,9 +516,9 @@ select option {
 
 /************* Input Boxes *****************/
 input.form-control, input.form-control, textarea.form-control {
-	border: 2px;
+	border: 1px;
 	border-style: solid;
-	border-color: white;
+	border-color: #e3e3e3;
 	background: white;
 	box-shadow: none;
 	border-radius: 2px;
