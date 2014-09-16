@@ -1,0 +1,68 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google Analytics -->
+    <script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-49179513-1', 'questr.co');
+	  ga('send', 'pageview');
+
+	</script>
+  	
+	<!-- Facebook OpenGraph -->
+    <meta property="og:title" content="Questr" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://www.questr.co" />
+    <meta property="og:image" content={% static "img/logo.png" %} />
+    <meta proptery="og:description" content="Questr, cheapest, fastest, 24/7 delivery within GTA." />
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href={% static "img/favicon.png" %}>
+
+    <title>JavaScript is disabled</title>
+    
+    <link rel={% static "assets/img/questThumbnail.png" %} href="http://beta.questr.co" />
+
+    <link href={% static "css/errorpages.css" %} rel="stylesheet">
+
+    <!-- Fonts from Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+    
+
+  </head>
+
+  <body>
+
+    <div id="js">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1><br><br>Oops. You need to enable JavaScript in your settings.</h1>                 
+                </div><!-- /col-lg-6 -->
+                <div class="js-img"></div>  
+                <div class="col-lg-6">
+                	<br>
+                    <a href="{% url 'index' %}">Click here to go back to home page.</a>                 
+                </div><!-- /col-lg-6 -->  
+                <br><br>            
+            </div><!-- /row -->
+        </div><!-- /container -->
+    </div><!-- /js -->
+    
+  </body>
+</html>
