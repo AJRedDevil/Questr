@@ -494,8 +494,8 @@ def completequest(request, questname):
             return redirect('viewquest', questname=questname)
     return redirect('viewquest', questname=questname)
 
-@verified
-@login_required
+# @verified
+# @login_required
 def getDistanceAndPrice(request):
     if request.method == "POST":
         user_form = DistancePriceForm(request.POST)
