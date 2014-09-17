@@ -1,0 +1,161 @@
+{% extends "mainbase.html" %}
+{% load staticfiles %}
+{% load tz %}
+{% block localhead %}
+<link href={% static "css/feature.css" %} rel="stylesheet">
+<link href={% static "css/star-rating.css" %} media="all" rel="stylesheet" type="text/css"/>
+{% endblock localhead %}
+{% block content %}
+<!-- This is the main container (#scroll-container) -->
+<div class="container-fluid">
+<div class="row clearfix">
+
+{% comment %}
+<div class="col-md-12 column grey section">
+  <div class="col-md-4 column">
+    <form role="form">
+      <div class="form-group">
+        <label for="expiry date">Available till</label>
+        <input class="form-control" placeholder="Expiry Date">
+      </div>
+    </form>
+  </div>
+  <div class="col-md-4 column">
+    <label>Size</label>
+    <div class="form-group" id="size">
+                 <div class="input-group col-md-6 column">  
+                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
+                    <center>
+                              
+                      <p class="grey">Backpack</p>
+                      <input type="radio" name="size" value="backpack"> 
+                    </center> 
+                  </div><!-- ./column -->  
+                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
+                    <center>
+                      
+                      <p class="grey">Car</p>
+                      <input type="radio" name="size" value="car">
+                    </center> 
+                  </div><!-- ./column -->
+                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
+                    <center>
+                    
+                      <p class="grey">Minivan</p>
+                      <input type="radio" name="size" value="minivan">
+                      </center>   
+                  </div><!-- ./column -->
+           </div><!-- /input-group -->
+             </div><!-- ./form-group -->
+  </div><!-- ./column -->
+  <div class="col-md-4 column">
+    <label>Pay</label>
+    <p>slider goes here</p>
+  </div>
+</div><!-- ./grey -->
+{% endcomment %}
+
+
+<div class="col-md-12 column">
+<div class="js-masonry" id="post-container" data-masonry-options='{ "columnWidth": 0, "itemSelector": ".post" }'>
+    
+  {% for quest in  allquests %}
+  <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column post">
+      <div class="white">
+          {% if quest.item_images %}
+          <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
+          {% else %}    
+          <a  href="/quest/{{quest.id}}" title="Title">
+          <div class="no-image item-image">
+              <h1><span class="glyphicon glyphicon-picture"></span></h1>
+              <span class="pay"><h3>${{quest.reward}}</h3></span>
+          </div>
+          </a>
+          {% endif %}
+               
+          <div class="row clearfix">
+              <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column title-desc">
+                  <a  href="/quest/{{quest.id}}" class="image"><h5>{{quest.title | title}}</h5></a>
+                  <p>{{quest.description | truncatewords:10  }}</p>
+              </div><!-- ./column -->
+          </div><!-- ./row -->
+      
+      <hr>              
+              
+          <div class="row clearfix">
+              <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column post-info">  
+                  {% if user.is_shipper == True %}
+                   From: {{quest.pickup.address}}, {{quest.pickup.city}}, Canada<br>
+                   To: {{quest.dropoff.address}}, {{quest.dropoff.city}}, Canada<br>
+                  {% endif %} 
+                  <span class="glyphicon glyphicon-time"></span>{% localtime on%} {{quest.creation_date | timesince }} {% endlocaltime %} ago
+                  </p>   
+                </div><!-- ./column -->
+          </div><!-- ./row -->
+             
+            <hr>
+  
+            <div class="row clearfix userbox">
+              <a href="/user/{{quest.questrs.displayname}}" class="username">
+                <div class="col-xs-4 col-sm-5 col-md-3 col-lg-3 column">
+                  <div class="ratio img-responsive img-circle" style="background-image: url({{quest.questrs.avatar_file_name}});"></div>
+                </div><!-- column -->
+                <div class="col-xs-8 col-sm-7 col-md-9 col-lg-9 column no-margin no-padding">
+                  <p class="no-margin">{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p>
+                  <input id="input-21e" value="{{quest.questrs.rating}}" type="number" class="rating no-margin" min=0 max=5 step=0.5 data-size="xl" data-readonly="true" data-show-clear="false" data-show-caption="true" >
+                </div><!-- column -->
+              </a>
+            </div><!-- ./row -->  
+               
+      </div><!-- ./white -->
+  </div><!-- ./post -->
+       {% endfor %}           
+</div><!-- ./post-container -->
+</div><!-- ./column -->
+
+</div><!-- ./row -->
+</div><!-- ./container -->
+
+{% endblock content %}
+{% comment %}
+<div id="pages">
+    <a href="index.html"></a>
+    <a href="loadpage/page2.html"></a>
+    <a href="loadpage/page3.html"></a>
+    <a href="loadpage/page4.html"></a>
+    <a href="loadpage/page5.html"></a>
+    <a href="loadpage/page6.html"></a>
+</div>
+{% endcomment %}
+
+{% block scripts %}
+  
+  <script src={% static "js/star-rating.js" %} type="text/javascript"></script>
+   <script src={% static 'js/libs/masonry.pkgd.min.js' %}></script>
+   
+   <script>
+     var container = document.querySelector('#post-container');
+    var msnry = new Masonry( post-container, {
+      // options
+      columnWidth: 0,
+      itemSelector: '.post'
+    });
+   </script>
+    
+    
+    
+    {% comment %}
+    ## This is for google plus based authentication ##
+           <script type="text/javascript">
+               (function () {
+                   var po = document.createElement('script');
+                   po.type = 'text/javascript';
+                   po.async = true;
+                   po.src = 'https://plus.google.com/js/client:plusone.js?onload=start';
+                   var s = document.getElementsByTagName('script')[0];
+                   s.parentNode.insertBefore(po, s);
+               })();
+           </script>           
+    {% endcomment %}
+
+{% endblock scripts %}

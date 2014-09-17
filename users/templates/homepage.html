@@ -57,84 +57,63 @@
 
 
 <div class="col-md-12 column">
-<div class="js-masonry" id="post-container" data-masonry-options='{ "columnWidth": 0, "itemSelector": ".post" }'>
-    
-	{% for quest in  allquests %}
-	<div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column post">
-	    <div class="white">
-	        {% if quest.item_images %}
-	        <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
-	        {% else %}    
-	        <a  href="/quest/{{quest.id}}" title="Title">
-	        <div class="no-image item-image">
-	            <h1><span class="glyphicon glyphicon-picture"></span></h1>
-	            <span class="pay"><h3>${{quest.reward}}</h3></span>
-	        </div>
-	        </a>
-	        {% endif %}
-	             
-	        <div class="row clearfix">
-	            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column title-desc">
-	                <a  href="/quest/{{quest.id}}" class="image"><h5>{{quest.title | title}}</h5></a>
-	                <p>{{quest.description | truncatewords:10  }}</p>
-	            </div><!-- ./column -->
-	        </div><!-- ./row -->
-			
-			<hr>	            
-	            
-	        <div class="row clearfix">
-	            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column post-info">	
-	                {% if user.is_shipper == True %}
-	                 From: {{quest.pickup.address}}, {{quest.pickup.city}}, Canada<br>
-	                 To: {{quest.dropoff.address}}, {{quest.dropoff.city}}, Canada<br>
-	                {% endif %} 
-	                <span class="glyphicon glyphicon-time"></span>{% localtime on%} {{quest.creation_date | timesince }} {% endlocaltime %} ago
-	                </p>   
-	              </div><!-- ./column -->
-	        </div><!-- ./row -->
-	           
-            <hr>
-  
-            <div class="row clearfix userbox">
-            	<a href="/user/{{quest.questrs.displayname}}" class="username">
-	            	<div class="col-xs-4 col-sm-5 col-md-3 col-lg-3 column">
-	            		<div class="ratio img-responsive img-circle" style="background-image: url({{quest.questrs.avatar_file_name}});"></div>
-	            	</div><!-- column -->
-	            	<div class="col-xs-8 col-sm-7 col-md-9 col-lg-9 column no-margin no-padding">
-	            		<p class="no-margin">{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p>
-	            		<input id="input-21e" value="{{quest.questrs.rating}}" type="number" class="rating no-margin" min=0 max=5 step=0.5 data-size="xl" data-readonly="true" data-show-clear="false" data-show-caption="true" >
-	            	</div><!-- column -->
-            	</a>
-            </div><!-- ./row -->  
-	             
-	    </div><!-- ./white -->
-	</div><!-- ./post -->
-       {% endfor %}           
+{% comment %}
+	<div class="js-masonry" id="post-container" data-masonry-options='{ "columnWidth": 0, "itemSelector": ".post" }'>
+	    
+		{% for quest in  allquests %}
+		<div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column post">
+		    <div class="white">
+		        {% if quest.item_images %}
+		        <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
+		        {% else %}    
+		        <a  href="/quest/{{quest.id}}" title="Title">
+		        <div class="no-image item-image">
+		            <h1><span class="glyphicon glyphicon-picture"></span></h1>
+		            <span class="pay"><h3>${{quest.reward}}</h3></span>
+		        </div>
+		        </a>
+		        {% endif %}
+		             
+		        <div class="row clearfix">
+		            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column title-desc">
+		                <a  href="/quest/{{quest.id}}" class="image"><h5>{{quest.title | title}}</h5></a>
+		                <p>{{quest.description | truncatewords:10  }}</p>
+		            </div><!-- ./column -->
+		        </div><!-- ./row -->
+				
+				<hr>	            
+		            
+		        <div class="row clearfix">
+		            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column post-info">	
+		                {% if user.is_shipper == True %}
+		                 From: {{quest.pickup.address}}, {{quest.pickup.city}}, Canada<br>
+		                 To: {{quest.dropoff.address}}, {{quest.dropoff.city}}, Canada<br>
+		                {% endif %} 
+		                <span class="glyphicon glyphicon-time"></span>{% localtime on%} {{quest.creation_date | timesince }} {% endlocaltime %} ago
+		                </p>   
+		              </div><!-- ./column -->
+		        </div><!-- ./row -->
+		           
+	            <hr>
+	  
+	            <div class="row clearfix userbox">
+	            	<a href="/user/{{quest.questrs.displayname}}" class="username">
+		            	<div class="col-xs-4 col-sm-5 col-md-3 col-lg-3 column">
+		            		<div class="ratio img-responsive img-circle" style="background-image: url({{quest.questrs.avatar_file_name}});"></div>
+		            	</div><!-- column -->
+		            	<div class="col-xs-8 col-sm-7 col-md-9 col-lg-9 column no-margin no-padding">
+		            		<p class="no-margin">{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p>
+		            		<input id="input-21e" value="{{quest.questrs.rating}}" type="number" class="rating no-margin" min=0 max=5 step=0.5 data-size="xl" data-readonly="true" data-show-clear="false" data-show-caption="true" >
+		            	</div><!-- column -->
+	            	</a>
+	            </div><!-- ./row -->  
+		             
+		    </div><!-- ./white -->
+		</div><!-- ./post -->
+	       {% endfor %}           
+{% endcomment %}
 </div><!-- ./post-container -->
 </div><!-- ./column -->
-
-</div><!-- ./row -->
-</div><!-- ./container -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <div class="container">
 	<div class="row clearfix">
@@ -148,72 +127,33 @@
 
 				<!-- List group -->
 				<ul class="list-group">
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-				 	<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
+				{% for quest in allquests %}
+				<li class="list-group-item">
+					<div class="media">
+					  <a class="pull-left" href="#">
+					    {% if quest.item_images %}
+					    <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
+					    {% else %}    
+					    <a  href="/quest/{{quest.id}}" title="{{quest.title | title}}">
+					    <div class="no-image item-image">
+					        <h1><span class="glyphicon glyphicon-picture"></span></h1>
+					        <span class="pay"><h3>${{quest.reward}}</h3></span>
+					    </div>
+					    </a>
+					    {% endif %}
+					  </a>
+					  <div class="media-body">
+					    <h4 class="media-heading">{{quest.title | title}}</h4>
+					    <p class="list-group-item-text postDesc">{{quest.description}}</p>
+					  </div>
+					  <div class="smallInfo">
+					      <small class="light-grey">
+					      <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}</small>
+					  </div><!-- ./smallInfo -->
+
+					</div><!-- ./media -->
+				</li>
+				{% endfor %}
 				</ul><!-- ./List group -->
 
 			  </div><!-- ./panel-body -->
@@ -223,161 +163,91 @@
 		<div class="col-md-4 column">
 			<div class="panel panel-default">
 			  <div class="panel-heading">
-			    <h3 class="panel-title">Current Transactions</h3>
+			    <h3 class="panel-title">Active Transactions</h3>
 			  </div><!-- ./panel-heading -->
 			  <div class="panel-body">
-			 	<!-- List group -->
+
+				<!-- List group -->
 				<ul class="list-group">
+				{% for quest in activequests %}
 					<li class="list-group-item">
 						<div class="media">
 						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
+						    {% if quest.item_images %}
+						    <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
+						    {% else %}    
+						    <a  href="/quest/{{quest.id}}" title="{{quest.title | title}}">
+						    <div class="no-image item-image">
+						        <h1><span class="glyphicon glyphicon-picture"></span></h1>
+						        <span class="pay"><h3>${{quest.reward}}</h3></span>
+						    </div>
+						    </a>
+						    {% endif %}
 						  </a>
 						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
+						    <h4 class="media-heading">{{quest.title | title}}</h4>
+						    <p class="list-group-item-text postDesc">{{quest.description}}</p>
 						  </div>
+						  <div class="smallInfo">
+						      <small class="light-grey">
+						      <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}</small>
+						  </div><!-- ./smallInfo -->
+
 						</div><!-- ./media -->
 					</li>
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-				 	<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
+				{% endfor %}
 				</ul><!-- ./List group -->
+
 			  </div><!-- ./panel-body -->
 			</div><!-- ./panel -->
 		</div><!-- ./column -->
-
-		<div class="col-md-4 column">
+				<div class="col-md-4 column">
 			<div class="panel panel-default">
 			  <div class="panel-heading">
 			    <h3 class="panel-title">History</h3>
 			  </div><!-- ./panel-heading -->
 			  <div class="panel-body">
-			    <!-- List group -->
+
+				<!-- List group -->
 				<ul class="list-group">
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-				 	<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    <img class="media-object" src="..." alt="...">
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">Media heading</h4>
-						    <p>sadadadx</p>
-						  </div>
-						</div><!-- ./media -->
-					</li>
+				{% for quest in pastquests %}
+				<li class="list-group-item">
+					<div class="media">
+					  <a class="pull-left" href="#">
+					    {% if quest.item_images %}
+					    <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
+					    {% else %}    
+					    <a  href="/quest/{{quest.id}}" title="{{quest.title | title}}">
+					    <div class="no-image item-image">
+					        <h1><span class="glyphicon glyphicon-picture"></span></h1>
+					        <span class="pay"><h3>${{quest.reward}}</h3></span>
+					    </div>
+					    </a>
+					    {% endif %}
+					  </a>
+					  <div class="media-body">
+					    <h4 class="media-heading">{{quest.title | title}}</h4>
+					    <p class="list-group-item-text postDesc">{{quest.description}}</p>
+					  </div>
+					  <div class="smallInfo">
+					      <small class="light-grey">
+					      <span class="glyphicon glyphicon-map-marker"></span> {{quest.dropoff.address}}, {{quest.dropoff.city}}</small>
+					  </div><!-- ./smallInfo -->
+					  {% if quest.delivery_date %}
+					  <div class="smallInfo">
+					      <small class="light-grey">
+					      <span class="glyphicon glyphicon-time"></span> {{quest.delivery_date}}</small>
+					  </div><!-- ./smallInfo -->
+					  {% endif %}
+					</div><!-- ./media -->
+				</li>
+				{% endfor %}
 				</ul><!-- ./List group -->
+
 			  </div><!-- ./panel-body -->
 			</div><!-- ./panel -->
 		</div><!-- ./column -->
-	
+
 	</div><!-- ./row -->
 </div><!-- ./container -->
 

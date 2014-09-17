@@ -36,10 +36,11 @@
                 <div class="panel-heading">
                     <div class="panel-title lead">
                         <ul>
-                            <li class="{% navactive request 'myposts' %}">
-                                <a href="{% url 'myposts' %}"></a>
-                                <a href="{% url 'myposts' %}">My Quests</a>
-                            </li>       
+                            {% if not user.is_shipper %}
+                             <li class="{% navactive request 'myposts' %}">
+                               <a href="{% url 'myposts' %}">My Quests</a>
+                            </li>  
+                            {% endif %}     
                             {% if user.is_shipper %}
                             <li class="{% navactive request 'myshipments' %}">
                                 <a href="{% url 'myshipments' %}"></a>

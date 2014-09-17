@@ -16,20 +16,23 @@
       
 	       <div class="panel panel-default shadows body-borders top-margin">
 		       <!-- Default panel contents -->
-		       <div class="panel-heading">
-			       <div class="panel-title lead">
-				       <ul>
-					       <li class="{% navactive request 'myposts' %}">
-						       <a href="{% url 'myposts' %}">My Quests</a>
-	                      </li>       
+		        <div class="panel-heading">
+              <div class="panel-title lead">
+                <ul>
+
 	                      {% if user.is_shipper %}
 	                      <li class="{% navactive request 'myshipments' %}">
 		                      <a href="{% url 'myshipments' %}">My Shipments</a>
 	                      </li>                                       
 	                      {% endif %} 
-	                  </ul>
-                  </div><!-- ./panel-title -->              
-               </div><!-- ./panel-head -->
+                        {% if not user.is_shipper %}
+                         <li class="{% navactive request 'myposts' %}">
+                           <a href="{% url 'myposts' %}">My Quests</a>
+                        </li>  
+                        {% endif %}
+                </ul>
+              </div><!-- ./panel-title -->              
+           </div><!-- ./panel-head -->
 		       <ul class="list-group">   
 			  {% for quest in myshipments %} 
 			  {% if not quest.is_complete %}

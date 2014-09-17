@@ -108,7 +108,7 @@ def editquest(request, questname):
                 map_image = maps.fetch_static_map()
                 # For price
                 price = pricing.WebPricing()
-                reward = price.get_price(distance)
+                reward = price.get_price(distance, shipment_mode=size)
                 pagetitle = "Confirm your Quest"
                 return render(request, 'confirmquestedit.html', locals())  
             if user_form.errors:
@@ -189,7 +189,7 @@ def confirmeditquest(request, questname):
                 map_image = maps.fetch_static_map()
                 # For price
                 price = pricing.WebPricing()
-                reward = price.get_price(distance)
+                reward = price.get_price(distance, shipment_mode=size)
                 quest_data = user_form.save(commit=False)
                 ##Submit dict to the field
                 ##Submit dict to the field
@@ -259,7 +259,7 @@ def newquest(request):
             logger.debug(map_image)
             # For price
             price = pricing.WebPricing()
-            reward = price.get_price(distance)
+            reward = price.get_price(distance, shipment_mode=size)
             pagetitle = "Confirm your Quest"
             return render(request, 'confirmquest.html', locals())  
         if user_form.errors:
@@ -314,7 +314,7 @@ def confirmquest(request):
             map_image = maps.fetch_static_map()
             # For price
             price = pricing.WebPricing()
-            reward = price.get_price(distance)
+            reward = price.get_price(distance, shipment_mode=size)
             quest_data = user_form.save(commit=False)
             ##Submit dict to the field
             quest_data.pickup = json.dumps(pickupdict)
@@ -325,7 +325,7 @@ def confirmquest(request):
             quest_data.item_images = user_form.cleaned_data['item_images']
             quest_data.map_image = map_image
             quest_data.save()
-            return redirect('pay',questname=quest_data)
+            # return redirect('pay',questname=quest_data)
             try:
                 shippers = getShippers()
                 for shipper in shippers: # send notifcations to all the shippers
@@ -517,7 +517,7 @@ def getDistanceAndPrice(request):
             distance = maps.get_total_distance()
             # For price
             price = pricing.WebPricing()
-            reward = price.get_price(distance)
+            reward = price.get_price(distance, shipment_mode=size)
             resultdict = {}
             resultdict['distance'] = distance
             resultdict['price'] = reward
@@ -528,17 +528,17 @@ def getDistanceAndPrice(request):
             resultdict['message'] = "Internal Server Error"
             return HttpResponse(json.dumps(resultdict),content_type="application/json")
 
-@verified
-@login_required
-def setnewpayment(request, questname):
-    quest_data = quest_handler.getQuestDetails(questname)
-    price = quest_data.reward
-    if request.method == "POST":
-        chargeme = stripeutils.PayStripe()
-        result = chargeme.charge(request.POST['stripeToken'],int(price*100))
-        if result['status'] == "pass":
-            return redirect('home')
-        else:
-            return redirect('pay', questname=quest_data)
+# @verified
+# @login_required
+# def setnewpayment(request, questname):
+#     quest_data = quest_handler.getQuestDetails(questname)
+#     price = quest_data.reward
+#     if request.method == "POST":
+#         chargeme = stripeutils.PayStripe()
+#         result = chargeme.charge(request.POST['stripeToken'],int(price*100))
+#         if result['status'] == "pass":
+#             return redirect('home')
+#         else:
+#             return redirect('pay', questname=quest_data)
     
-    return render(request, 'newpayment.html', locals())
+#     return render(request, 'newpayment.html', locals())

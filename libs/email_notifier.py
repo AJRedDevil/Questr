@@ -1,8 +1,9 @@
 
 
 import logging
-from django.core.mail import EmailMessage
 logger = logging.getLogger(__name__)
+from django.core.mail import EmailMessage
+
 
 def _load_template(user, email_details):
     """

@@ -157,6 +157,10 @@ LOGGING = {
             'handlers':['console'],
             'level':'DEBUG',
         },
+        'libs': {
+            'handlers':['console'],
+            'level':'DEBUG',
+        },
     }
 }
 

@@ -103,10 +103,17 @@ def home(request):
     pagetype="loggedin"
     secondnav="listquestsecondnav"
     user = request.user
-    allquests = Quests.objects.filter(ishidden=False)
-    # logger.debug(allquests)
+    userdetails = user_handler.getQuestrDetails(user.id)
     pagetitle = "Home"
-    return render(request,'homepage.html', locals())
+
+    if userdetails.is_shipper:
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=False)
+        return render(request,'shipperhomepage.html', locals())
+    else:       
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, )
+        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id)
+        pastquests = Quests.objects.filter(is_complete=True, questrs_id=userdetails.id)
+        return render(request,'homepage.html', locals())
 
 @login_required
 def profile(request):
