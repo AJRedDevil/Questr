@@ -72,6 +72,15 @@
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>	
+		{% if alert_message %}
+			      <!-- ALERT -->
+			<div class="col-md-12 column">
+			  <div class="alert alert-{{alert_message.type}} alert-dismissible" role="alert">
+			    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			    <strong>{{alert_message.type | title}}!</strong> {{alert_message.message}}
+			  </div>
+			</div><!-- ./ALERT -->
+		{% endif %}
 	{% endif %}
 
 
@@ -94,7 +103,16 @@
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
-		</nav>	
+		</nav>
+		{% if alert_message %}
+			      <!-- ALERT -->
+			<div class="col-md-12 column">
+			  <div class="alert alert-{{alert_message.type}} alert-dismissible" role="alert">
+			    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			    <strong>{{alert_message.type | title}}!</strong> {{alert_message.message}}
+			  </div>
+			</div><!-- ./ALERT -->
+		{% endif %}
 	{% endif %}
 
 
@@ -188,6 +206,15 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+{% if alert_message %}
+	      <!-- ALERT -->
+	<div class="col-md-12 column">
+	  <div class="alert alert-{{alert_message.type}} alert-dismissible" role="alert">
+	    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	    <strong>{{alert_message.type | title}}!</strong> {{alert_message.message}}
+	  </div>
+	</div><!-- ./ALERT -->
+{% endif %}
 {% endif %}
 
 

@@ -6,7 +6,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from django.db.models import Avg
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import QuestrUserProfile, UserTransactional, QuestrToken
 from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, QuestrSocialSignupForm, SetPasswordForm, PasswordChangeForm, NotifPrefForm
@@ -324,8 +324,8 @@ def changePassword(request):
         logger.debug(user_form.errors)
         if user_form.is_valid():
             user_form.save()
-            message="Your password has been changed!"
-            return redirect('changepassword')
+            alert_message=dict(type='success', message='Your password has been changed!')
+            return redirect('home')
     pagetitle = "Change Your Password"
     return render(request, "passwordsettings.html",locals())
 
