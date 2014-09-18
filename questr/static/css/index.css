@@ -930,14 +930,3 @@ figure.effect-sadie:hover p {
     border-width: 8px 0px 8px 8px;
 }
 
-
-/********* ALERTS **********/
-.page-alerts {
-    margin-bottom: 20px;
-}
-
-.page-alerts .page-alert {
-    border-radius: 0;
-    margin-bottom: 0;
-}
-
