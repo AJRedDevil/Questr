@@ -97,8 +97,11 @@
 		</nav>	
 	{% endif %}
 
-	{% if pagetype == "loggedin" %}
 
+
+
+
+	{% if pagetype == "loggedin" %}
 
 
 	<nav class="navbar navbar-default" role="navigation">
@@ -111,25 +114,28 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Questr</a>
+      <a class="navbar-brand" href="{% url 'home' %}">Questr</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
+
+    <li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a></li>        
+
+
+    {% if user.is_shipper %}
+      <li class="{% navactive request 'myshipments' %}"><a href="{% url 'myshipments' %}">My shipments</a></li>
+      {% endif %}
+      {% if not user.is_shipper %}
+      <li class="{% navactive request 'myposts' %}"><a href="{% url 'myposts' %}">My Quests</a></li>
+      {% endif %}
+    
+
+        
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
+          
         </li>
       </ul>
       <form class="navbar-form navbar-left" role="search">
@@ -139,189 +145,55 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
+
+      	<li class="dropdown">
+	          <a href="#" class="dropdown-toggle no-margin no-padding" data-toggle="dropdown">
+	       		{% comment %}
+	              <span class="no-margin no-padding" style="min-height:30px;max-height:30px;min-width:30px;max-width:30px;display:inline-block;">
+		              <span class="ratio img-responsive img-circle profileImg" style="background-image: url({{user.avatar_file_name}});"></span>
+		          </span>
+		          {% endcomment %}
+		         
+		           {{user.first_name}} {{user.last_name}} <i class="fa fa-caret-down"></i>
+	          </a>
+	       
+
+
+			<ul class="dropdown-menu dropdown-menu-right">
+				<li class="{% navactive request 'profile' %}">
+					<a href="{% url 'profile' %}">
+						
+						My profile
+					</a>
+				</li>
+	            <li>
+	                <a href="{% url 'settings' %}">
+	                	
+	                	Settings
+	                </a>
+	            </li>
+	            </li>
+	            <li>
+	                <a href="{% url 'logout' %}">
+	                	<i class="fa fa-sign-out"></i>
+	                	Logout
+	                </a>
+	            </li>
+	        </ul>
+		</li>
+	        	
+    	<li>
+    		<a href="{% url 'newquest' %}" class="btn btn-default" id="post-shipment">
+        		Post a shipment!
+    		</a>
+    	</li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+{% endif %}
 
 
-
-
-
-
-
-
-
-	
-	<nav class="navbar navbar-default" role="navigation">
-		
-	  <div class="navbar-header">
-		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
-		  <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
-		  <span class="icon-bar">
-		  </span><span class="icon-bar"></span>
-		  </button> 
-		  <a class="navbar-brand" href="{% url 'home' %}">Questr</a>
-	  </div>
-	    
-	<div class="collapse navbar-collapse" id="navbar-collapse-01">
-	
-       
-        	<ul class="nav navbar-nav navbar-left"> 
-                <li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a></li> 
-                
-                {% if user.is_shipper %}
-                	<li class="{% navactive request 'myshipments' %}"><a href="{% url 'myshipments' %}">My shipments</a></li>
-                {% endif %}
-                {% if not user.is_shipper %}
-                	<li class="{% navactive request 'myposts' %}"><a href="{% url 'myposts' %}">My Quests</a></li>
-                {% endif %}
-            	{% comment %}
-                <li><a href="/quest"><span class="glyphicon glyphicon-tree-deciduous"></span>Browse</a></li>                  
-                
-                <li class="dropdown" id="notifications">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="navbar-new">2</span></a>
-                    <ul class="dropdown-menu">
-
-                        <li>
-                            <!-- Notification -->
-                            <a href="#" class="list-group-item">
-                        
-                                <div class="media col-md-3 imgBox">
-                                    <div class="ratio img-responsive" style="background-image: url(http://www.stars-arena.com/wp-content/uploads/2013/08/emma-watson-3.jpg);"></div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="smallInfo">
-                                        <small class="light-grey">Emma Watson left you a comment: Hello World ;)</small>
-                                    </div><!-- ./smallInfo -->
-                            
-                                
-                                </div> 
-                            </a>  <!-- End of notification -->
-                        </li>
-                    </ul>
-                </li>
-                            
-
-            	<div id="navButton">
-                    <div class="input-group">
-                        
-                        <span class="input-group-btn">
-                        
-                        	<a href="{{nav_link_1}}">	
-                        	<button class="btn btn-default" type="button">	
-                       			<div class="ratio img-responsive profileImg" style="background-image: url({{user.avatar_file_name}});"></div> 
-                        	</button>
-                   			</a>
-                        
-                         	<a href="#" class="dropdown-toggle userMenu" data-toggle="dropdown">
-                            	<button class="btn btn-default combo" type="button">
-                                	{{user.first_name}}<strong class="caret"></strong>
-                                </button>
-                         	</a>
-				                                 	
-                        </span>  
-                    </div>
-                </div>    				 
-                </form>			 
-                </li>          
-   				{% endcomment %}	      
-   			</ul>   
-   
-   			{% comment %}
-   			<form class="navbar-form navbar-left" role="search">{% csrf_token %}
-						<div class="form-group no-margin">
-							<input type="text" class="form-control search" />
-							<button type="submit" class="btn btn-default" id="search-btn"><i class="fa fa-search"></i></button>
-						</div>
-					</form>
-					{% endcomment %}
-					
-					
-					
-   	
-	    
-		    <ul class="nav navbar-nav navbar-right">
-		    	{% comment %}
-		    	<li class="dropdown">
-		    		<a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bell"></span><span class="navbar-new">2</span></a>
-		    		<ul class="dropdown-menu">
-			    		<li>
-				    		<a>
-					    		<div class="row clearfix">
-					    			<div class="col-md-4 column">
-						    			<div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
-					    			</div>
-					    			<div class="col-md-8 column">You got a notification!</div>
-					    		</div>
-				    		</a>
-			    		</li>
-	                </ul>
-	            </li>
-	            {% endcomment %}
-	            
-	            
-	            <li class="dropdown">
-		              <a href="#" class="dropdown-toggle no-margin no-padding" data-toggle="dropdown">
-		              	{% comment %}
-			              <span class="no-margin no-padding" style="min-height:30px;max-height:30px;min-width:30px;max-width:30px;display:inline-block;">
-				              <span class="ratio img-responsive img-circle profileImg" style="background-image: url({{user.avatar_file_name}});"></span>
-				          </span>
-				          {% endcomment %}
-				           {{user.first_name}} {{user.last_name}} <i class="fa fa-caret-down"></i>
-		              </a>
-		           
-	       
-
-					<ul class="dropdown-menu dropdown-menu-left">
-						<li class="{% navactive request 'profile' %}">
-							<a href="{% url 'profile' %}">
-								
-								My profile
-							</a>
-						</li>
-	                    <li>
-	                        <a href="{% url 'settings' %}">
-	                        	
-	                        	Settings
-	                        </a>
-	                    </li>
-	                    </li>
-	                    <li>
-	                        <a href="{% url 'logout' %}">
-	                        	<i class="fa fa-sign-out"></i>
-	                        	Logout
-	                        </a>
-	                    </li>
-	                </ul>
-	        	</li>
-	        	
-	        	<li>
-	        		<a href="{% url 'newquest' %}" class="btn btn-default" id="post-shipment">
-		        		Post a shipment!
-	        		</a>
-	        	</li>
-	        	
-		    </ul>
-		    
-		</div><!-- /.navbar-collapse -->
-
-	</nav><!-- /navbar -->
-	{% endif %}
-	 
-	  
-	  
 	  
 	  
 	<div id="loader"></div>

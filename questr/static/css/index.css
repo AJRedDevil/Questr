@@ -115,6 +115,8 @@ a.block:hover {
 	text-align: center;	
 	color: white;
 	top: 40%;
+	background-color: black;
+	padding: 0;
 }
 
 
