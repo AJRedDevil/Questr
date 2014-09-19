@@ -338,26 +338,5 @@
 {% endblock content %}
 {% block scripts %}
 <!--<script src={% static "js/index.js" %}></script> -->
-<script>
-	$(document).ready(function() {
-		
-	    $(window).scroll(function(e) {
-	        var img = $('.img-src'),
-	        	s   = $(window).scrollTop(),
-	        	f   = $(document).scrollTop(),
-	            d   = $(document).height(),
-	            c   = $(window).height(),
-	            opacityVal = (s / 150);
-
-	        //img.css('-webkit-filter', "blur(" + Math.min(s/20,40) + "px)");
-
-		    $(".blurred-image").css("opacity", opacityVal);
-	    });
-	});
-	
-$( document.masthead ).click(function() {
-  $( "div:hidden:first" ).fadeIn( "slow" );
-});
-</script>
     
 {% endblock scripts %}
