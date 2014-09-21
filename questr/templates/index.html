@@ -7,125 +7,81 @@
 
 
 <div class="container-fluid">
-	<div class="row clearfix">
-		<!-- Carousel -->
-    	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-			<!-- Indicators -->
-			<ol class="carousel-indicators">
-			  	<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-			    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-			    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-			</ol>
-			<!-- Wrapper for slides -->
-			<div class="carousel-inner">
-			    <div class="item active">
-			    	<img src={% static "img/Not_Manhattan.jpg" %} alt="First slide" class="blacknwhite">
+    <div class="row clearfix">
+        <!-- Carousel -->
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+{% comment %}
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    </ol>
+{% endcomment %}
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src={% static "img/cross-wide.jpg" %} alt="First slide">
                     <!-- Static Header -->
                     <div class="header-text hidden-xs">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        	<br>
+                        	<br>
                             <h2>
-                            	<span>World's first peer to peer platform.</span>
+                            	<span>DELIVER ANYTHING ANYTIME IN 4 HOURS</span>
                             </h2>
                             <br>
-                            <h3>
-                            	<span>Cheaper, faster, 24/7 shipments in Greater Toronto Area.</span>
-                            </h3>
-                            <br>
                             <div class="">
-                         		<a class="btn btn-theme btn-sm btn-min-block" data-toggle="modal" data-target="#signUp">Sign up</a>
-                         	</div>
+                                <a class="btn btn-theme btn-sm btn-min-block" data-toggle="modal" data-target="#signUp">SHIP NOW</a>
+                            </div>
 
-                         	<!-- Modal -->
-							<div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							  <div class="modal-dialog">
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-							      </div>
-							      <div class="modal-body">
-							    	<form class="form-horizontal" role="form" action="{% url 'join'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" novalidate>{% csrf_token %}
-										<div class="form-group">
-											
-											<div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 column">
-												<input class="form-control input-lg no-margin" name="EMAIL" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required">
-												<span id="result" class="alertMsg"></span>
-											</div><!-- ./column -->
+                            <!-- Modal -->
+                            <div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-body" style="text-align:center;">
+                                  	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                  	<br>
+                                    <form class="form-horizontal" role="form" action="{% url 'join'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" novalidate>{% csrf_token %}
+                                        <div class="form-group" >
+                                            
+                                        <input class="form-control" name="EMAIL" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required" style="width:300px;">
+                                        <span id="result" class="alertMsg"></span>
 
-											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-												<center><button type="submit" class="btn no-margin btn-lg big-button">Notify me</button></center>
-											</div><!-- ./column -->
-										</div><!--./form-group -->		
-									</form>
-							      </div>
-							    </div>
-							  </div>
-							</div>
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+                                                <center><button type="submit" class="btn no-margin btn-lg big-button">Notify me</button></center>
+                                            </div><!-- ./column -->
+                                        </div><!--./form-group -->      
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
 
 
                         </div>
                     </div><!-- /header-text -->
-			    </div>
-			 
-		</div><!-- /carousel -->
-	</div>
+                </div>
+             
+        </div><!-- /carousel -->
+    </div>
 </div><!-- ./container -->
 
 
-{% comment %}
-<div class="container-fluid">
-	<div class="row clearfix">
-			<div class="col-md-12 column no-padding no-margin">
-				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-				  <!-- Indicators -->
-				  <ol class="carousel-indicators">
-				    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-				    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-				    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-				  </ol>
-
-				  <!-- Wrapper for slides -->
-				  <div class="carousel-inner">
-				   
-				    <div class="item active">
-				      <img src="../static/img/Not_Manhattan.jpg" alt="...">
-				      <div class="carousel-caption">
-				      	
-
-
-
-
-
-				      </div>
-				    </div>
-				  </div>
-
-				  <!-- Controls -->
-				  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-				    <span class="glyphicon glyphicon-chevron-left"></span>
-				  </a>
-				  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-				    <span class="glyphicon glyphicon-chevron-right"></span>
-				  </a>
-				</div>
-			</div>
-		</div><!-- ./row -->
-	</div><!-- ./container -->
-	{% endcomment %}
-
 
 
 {% comment %}
-	<div class="row clearfix">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-			<h1>{{messageResponse}}</h1>
-		</div><!--./column -->
-	</div><!--./row -->
+    <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+            <h1>{{messageResponse}}</h1>
+        </div><!--./column -->
+    </div><!--./row -->
 
-	<div class="row clearfix">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column subscribe">
-			
-		</div><!-- ./subscribe -->
-	</div><!-- ./row -->
+    <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column subscribe">
+            
+        </div><!-- ./subscribe -->
+    </div><!-- ./row -->
 
 {% endcomment %}
 
@@ -133,93 +89,93 @@
 
 
 <div class="container-fluid">
-<div class="row clearfix section grey-bg" id="what-is">
-			<div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
-				<div class="section-title">
-					<h2>What is Questr?</h2>
-					<h4>
-						Questr is a crowdshipping platform that provides cheap, fast shipments within GTA.
-						<br>
-						Unlike other courier companies, Questr's shippers deliver packages directly to the destination without the hassle of going to local facilities.
-					</h4>
-				</div><!-- ./section-title -->
-			</div><!-- ./column -->
-			<div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">	
-				<div class="col-md-4 col-lg-4 column">
-					
-					<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column grey-bg">
-						<center>
-						<div class="circle">
-						  <div class="circle__grandparent">
-						    <div class="circle__parent">
-						      <div class="circle__child">
-						  		<i class="glyphicon glyphicon-usd theme-highlights"></i>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-					</center>
-					</div>
+<div class="row clearfix section grey" id="what-is">
+            <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
+                <div class="section-title">
+                    <h2>What is Questr?</h2>
+                    <h4>
+                        Questr is a crowdshipping platform that provides affordable, fast shipments within GTA. 
+                        <br>
+                        Unlike other courier companies, Questr delivers packages directly to the destination without the hassle of going to local facilities.
+                    </h4>
+                </div><!-- ./section-title -->
+            </div><!-- ./column -->
+            <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">    
+                <div class="col-md-4 col-lg-4 column">
+                    
+                    <div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column grey-bg">
+                        <center>
+                        <div class="circle">
+                          <div class="circle__grandparent">
+                            <div class="circle__parent">
+                              <div class="circle__child">
+                                <i class="glyphicon glyphicon-usd theme-highlights"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </center>
+                    </div>
 
-					<div class="clearfix"></div>
+                    <div class="clearfix"></div>
 
-					<div class="thumbnail grey-bg"> 
-						<div class="caption grey-bg">
-							<h3>Affordable</h3>
-							<p>Starting from only $4, Questr offers the cheapest shipping options available in the entire Canada.</p>
-						</div><!-- ./caption -->
-					</div><!--/thumbnail -->
-			
-				</div><!--/.column -->
-				<div class="col-md-4 column">
-					<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column grey-bg">
-					<div class="circle">
-					  <div class="circle__grandparent">
-					    <div class="circle__parent">
-					      <div class="circle__child">
-					  		<i class="glyphicon glyphicon-flash"></i>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
+                    <div class="thumbnail grey-bg"> 
+                        <div class="caption grey-bg">
+                            <h3>Affordable</h3>
+                            <p>Starting from only $4, Questr offers the most affordable shipping option available in entire Canada.</p>
+                        </div><!-- ./caption -->
+                    </div><!--/thumbnail -->
+            
+                </div><!--/.column -->
+                <div class="col-md-4 column">
+                    <div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column grey-bg">
+                    <div class="circle">
+                      <div class="circle__grandparent">
+                        <div class="circle__parent">
+                          <div class="circle__child">
+                            <i class="glyphicon glyphicon-flash"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
 
-				<div class="clearfix"></div>
+                <div class="clearfix"></div>
 
-					<div class="thumbnail grey-bg"> 
-						<div class="caption grey-bg">
-						
-							<h3>Faster</h3>
+                    <div class="thumbnail grey-bg"> 
+                        <div class="caption grey-bg">
+                        
+                            <h3>Faster</h3>
 
-							<p>One hour from Scarborough to Mississauga. Decentralized logistics makes shipping lightning fast.</p>
-						</div><!-- ./caption -->
-					</div><!--/thumbnail -->
-				</div><!--/.column -->
-				<div class="col-md-4 col-lg-4 column">
-					<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column grey-bg">
-					<div class="circle">
-					  <div class="circle__grandparent">
-					    <div class="circle__parent">
-					      <div class="circle__child">
-					  		<i class="glyphicon glyphicon-time"></i>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div><!--/.column -->
+                            <p>Anywhere in GTA within 4 hours. Say goodbye to overnight waits.</p>
+                        </div><!-- ./caption -->
+                    </div><!--/thumbnail -->
+                </div><!--/.column -->
+                <div class="col-md-4 col-lg-4 column">
+                    <div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column grey-bg">
+                    <div class="circle">
+                      <div class="circle__grandparent">
+                        <div class="circle__parent">
+                          <div class="circle__child">
+                            <i class="glyphicon glyphicon-time"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div><!--/.column -->
 
 
-				<div class="clearfix"></div>
+                <div class="clearfix"></div>
 
-					<div class="thumbnail grey-bg"> 
-						<div class="caption grey-bg">
-							<h3>Available 24/7</h3>
-							<p>86,400 seconds a day, 7 days a week, no matter it's rush hour on Friday or midnight on Christmas Eve.</p>
-						</div><!-- ./caption -->
-					</div><!--/thumbnail -->
-				</div><!--/.column -->
-			</div><!--/.column -->
-		</div><!--/row -->
+                    <div class="thumbnail grey-bg"> 
+                        <div class="caption grey-bg">
+                            <h3>24/7</h3>
+                            <p>86,400 seconds a day, 7 days a week, no matter it's rush hour on Friday or midnight on Christmas Eve.</p>
+                        </div><!-- ./caption -->
+                    </div><!--/thumbnail -->
+                </div><!--/.column -->
+            </div><!--/.column -->
+        </div><!--/row -->
 </div><!-- ./container -->
 
 
@@ -228,115 +184,122 @@
 
 
 <div class="container-fluid">
-	<div class="row clearfix section white">
-		<div class="col-md-12 column">
-			<a href="#" class="block">
-				<div class="col-md-4 col small column" id="small-package">
-					<h3>CARRIABLES</h3>
-					<p>$4+$0.80/km</p>
-				</div>
-			</a>
-			<a href="#" class="block">
-				<div class="col-md-4 column small col" id="car">
-					<h3 class="text-black">CAR</h3>
-					<p class="text-black">$6+$1/km</p>
-				</div>
-			</a>
-			<a href="#" class="block">
-				<div class="col-md-4 column small col" id="van">
-					<h3 class="text-black">VAN</h3>
-					<p class="text-black">$10+$2/km</p>
-				</div>
-			</a>
-		</div>
-	</div>
+    <div class="row clearfix section white">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+            <div class="section-title">
+                <h2>Simplistic size options</h2>
+                <h4>“Life is simple. You just have to stop trying to figure it out.” ― Marty Rubin</h4>
+            </div>
+        </div>
+        <div class="col-md-12 column">
+            <a href="#" class="block">
+                <div class="col-md-4 col small column grey-transition" id="small-package">
+                    <h3>CARRIABLES</h3>
+                    <p>$4+$0.80/km</p>
+                </div>
+            </a>
+            <a href="#" class="block">
+                <div class="col-md-4 column small col grey-transition" id="car">
+                    <h3 class="text-black">CAR</h3>
+                    <p class="text-black">$6+$1/km</p>
+                </div>
+            </a>
+            <a href="#" class="block">
+                <div class="col-md-4 column small col grey-transition" id="van">
+                    <h3 class="text-black">VAN</h3>
+                    <p class="text-black">$10+$2/km</p>
+                </div>
+            </a>
+        </div>
+    </div>
 </div>
 
 
+
 <div class="container-fluid">
-	    <!-- ******************** MENTIONS ******************** -->	
-	    <div class="row clearfix section grey-bg">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column"> 
-				<div class="section-title"><h4>We're mentioned in</h4></div><!-- ./section-title -->
-			</div><!-- ./column -->
-			<div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 column">
-					<div class="col-md-2 col-md-offset-5 column"> 
-						<center>
-							<a href="http://skift.com/2014/03/27/daily-travel-startup-watch-opendoor-coexperiences-and-more/">
-								<img src={% static "img/skift.png" %} class="img-responsive grey-transition">
-							</a>
-						</center>	
-					</div><!-- ./column -->
-			</div><!-- ./column -->
-	    </div><!-- ./section -->
+        <!-- ******************** MENTIONS ******************** --> 
+        <div class="row clearfix section grey-bg">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column"> 
+                <div class="section-title"><h4>We're mentioned in</h4></div><!-- ./section-title -->
+            </div><!-- ./column -->
+            <div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 column">
+                    <div class="col-md-2 col-md-offset-5 column"> 
+                        <center>
+                            <a href="http://skift.com/2014/03/27/daily-travel-startup-watch-opendoor-coexperiences-and-more/">
+                                <img src={% static "img/skift.png" %} class="img-responsive grey-transition">
+                            </a>
+                        </center>   
+                    </div><!-- ./column -->
+            </div><!-- ./column -->
+        </div><!-- ./section -->
 </div><!-- ./container -->
 
 
-
+{% comment %}
 <div class="container-fluid">
-	<div class="row clearfix section white">
-		<div class="col-md-12 column">
-			<a href="#" class="block">
-				<div class="col-md-4 column small col" id="shipper">
-					<h3>BECOME A SHIPPER</h3>
-				</div>
-			</a>
-			<a href="#" class="block">
-				<div class="col-md-4 col small column" id="aboutus">
-					<h3>ABOUT US</h3>
-				</div>
-			</a>
-			<a href="#" class="block">
-				<div class="col-md-4 column small col" id="blog">
-					<h3>BLOG</h3>
-					<p>Keep up to date on what Questr has been up to.</p>
-				</div>
-			</a>
-		</div>
-	</div>
+    <div class="row clearfix section white">
+        <div class="col-md-12 column">
+            <a href="#" class="block">
+                <div class="col-md-4 column small col" id="shipper">
+                    <h3>BECOME A SHIPPER</h3>
+                </div>
+            </a>
+            <a href="#" class="block">
+                <div class="col-md-4 col small column" id="aboutus">
+                    <h3>ABOUT US</h3>
+                </div>
+            </a>
+            <a href="#" class="block">
+                <div class="col-md-4 column small col" id="blog">
+                    <h3>BLOG</h3>
+                    <p>Keep up to date on what Questr has been up to.</p>
+                </div>
+            </a>
+        </div>
+    </div>
 </div>
 
 </div><!-- ./container -->
-
+{% endcomment %}
 
 
 <div class="container-fluid">
-	<div class="row clearfix section grey-bg">
-		<div class="col-md-12 column no-padding no-margin">
-			<!-- Button trigger modal -->
-			<center>
-				<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="background:black; border-color:black;">Say Hi</button>
-			</center>
+    <div class="row clearfix section grey-bg">
+        <div class="col-md-12 column no-padding no-margin">
+            <!-- Button trigger modal -->
+            <center>
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="background:black; border-color:black;">Say Hi</button>
+            </center>
 
-			<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			      </div>
-			      <div class="modal-body">
-			    	<form action="{% url 'contactus'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="{% url 'contactus'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
 
 
-						<div class="form-group">
-							<input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Name">
-							<input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-							<textarea name="message" class="form-control" rows="3" placeholder="Message" style="min-height:200px;"></textarea>
-						</div><!-- ./form-group -->
-						<br>
-						<center><button type="submit" class="btn btn-default theme-button">Send</button></center>
-					</form>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-		</div>
-	</div>
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Name">
+                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                            <textarea name="message" class="form-control" rows="3" placeholder="Message" style="min-height:200px;"></textarea>
+                        </div><!-- ./form-group -->
+                        <br>
+                        <center><button type="submit" class="btn btn-default theme-button">Send</button></center>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
 </div>
-				
+                
 {% endblock content %}
 {% block scripts %}
 <!--<script src={% static "js/index.js" %}></script> -->
-    
+    main
 {% endblock scripts %}
