@@ -27,7 +27,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         	<br>
                         	<br>
-                            <h2>
+                            <h2 style="font-size:44pt; text-shadow: 1px 1px 3px gray;">
                             	<span>DELIVER ANYTHING ANYTIME IN 4 HOURS</span>
                             </h2>
                             <br>
@@ -38,19 +38,20 @@
                             <!-- Modal -->
                             <div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                               <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-body" style="text-align:center;">
+                                <div class="modal-content" style="margin-top:48%;">
+                                  <div class="modal-body">
                                   	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                  	<br>
+                                  	<br><br>
                                     <form class="form-horizontal" role="form" action="{% url 'join'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" novalidate>{% csrf_token %}
-                                        <div class="form-group" >
+                                        <div class="form-group" style="margin:0 30px;">
                                             
-                                        <input class="form-control" name="EMAIL" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required" style="width:300px;">
+                                        <input class="form-control" name="EMAIL" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required" style="width:100%;">
                                         <span id="result" class="alertMsg"></span>
 
-                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-                                                <center><button type="submit" class="btn no-margin btn-lg big-button">Notify me</button></center>
-                                            </div><!-- ./column -->
+                                        <br><br>
+
+                                        <center><button type="submit" class="btn no-margin btn-lg big-button">Notify me</button></center>
+
                                         </div><!--./form-group -->      
                                     </form>
                                   </div>
@@ -95,8 +96,6 @@
                     <h2>What is Questr?</h2>
                     <h4>
                         Questr is a crowdshipping platform that provides affordable, fast shipments within GTA. 
-                        <br>
-                        Unlike other courier companies, Questr delivers packages directly to the destination without the hassle of going to local facilities.
                     </h4>
                 </div><!-- ./section-title -->
             </div><!-- ./column -->
@@ -145,9 +144,9 @@
                     <div class="thumbnail grey-bg"> 
                         <div class="caption grey-bg">
                         
-                            <h3>Faster</h3>
+                            <h3>Lightning fast</h3>
 
-                            <p>Anywhere in GTA within 4 hours. Say goodbye to overnight waits.</p>
+                            <p>Anywhere in GTA within 4 hours. <br>Say goodbye to overnight waits.</p>
                         </div><!-- ./caption -->
                     </div><!--/thumbnail -->
                 </div><!--/.column -->
@@ -193,9 +192,9 @@
         </div>
         <div class="col-md-12 column">
             <a href="#" class="block">
-                <div class="col-md-4 col small column grey-transition" id="small-package">
-                    <h3>CARRIABLES</h3>
-                    <p>$4+$0.80/km</p>
+                <div class="col-md-4 column small col grey-transition" id="small-package">
+                    <h3 class="text-black">CARRIABLE</h3>
+                    <p class="text-black">$4+$0.80/km</p>
                 </div>
             </a>
             <a href="#" class="block">
@@ -268,27 +267,28 @@
         <div class="col-md-12 column no-padding no-margin">
             <!-- Button trigger modal -->
             <center>
-                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="background:black; border-color:black;">Say Hi</button>
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="background:black; border-color:black;">Say hi</button>
             </center>
 
             <!-- Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
+                <div class="modal-content" style="margin-top:34%;">
+                  <div class="modal-body"  style="width:100%;">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                  </div>
-                  <div class="modal-body">
+                    <br><br>
                     <form action="{% url 'contactus'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
-
-
-                        <div class="form-group">
+                        <div class="form-group" style="margin: 0 5%; width: 90%;">
                             <input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Name">
+                            <br><br>
                             <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                            <br><br>
                             <textarea name="message" class="form-control" rows="3" placeholder="Message" style="min-height:200px;"></textarea>
-                        </div><!-- ./form-group -->
-                        <br>
+                        
+                        <br><br>
                         <center><button type="submit" class="btn btn-default theme-button">Send</button></center>
+
+                        </div><!-- ./form-group -->
                     </form>
                   </div>
                 </div>
