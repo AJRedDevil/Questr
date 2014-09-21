@@ -1,270 +1,337 @@
+{% load staticfiles %}
 <!DOCTYPE HTML>
-<head>
+<html lang="en">
+	<head>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<link href={% static "css/index_dark.css" %} rel="stylesheet"> 
+	    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false">
+	    </script>
+	    <link href='http://fonts.googleapis.com/css?family=Lato:700,300' rel='stylesheet' type='text/css'>
+	    <script type="text/javascript">
+	      function initialize() {
 
-    <style type="text/css">
-      html, body, #map-canvas { 
-      	height: 100%; margin: 0; padding: 0;
-      	z-index: -1;
-      	font-family: 'Lato', sans-serif;
-      	font-weight: 300;
-      }
-      #slogan {
-      	//background-color: rgba(50,0,0,0.3);
-      	margin: 15% auto;
-      	color: white;
-      	z-index: 30;
-      	position: absolute;
-      	text-align: center;
-      	width: 100%;
-      	text-shadow: 0 1px 1px black;
-      }
-      #footer {
-      	//background-color: rgba(50,0,0,0.3);
-      	margin-left: auto;
-      	margin-right: auto;
-      	bottom: 0;
-      	color: white;
-      	z-index: 32;
-      	position: absolute;
-      	text-align: center;
-      	width: 100%;
-      	text-shadow: 0 1px 1px black;
-      }
-      h1 {
-      	font-weight: 300;
-      	font-size: 72pt;
-      	line-height: 40pt;
-      }
-   	  h4 {
-      	font-weight: 300;
-      	font-size: 24pt;
-      	line-height: 12pt;
-      }
-      p, a, a:hover, a:active, a:visited {
-      	font-weight: 300;
-      	font-size: 18pt;
-      	text-decoration: none;
-      	color: white;
-      }
-
-      a:hover {
-      	color: rgba(150,150,150,1);
-      }
-
-
-      button {
-      	font-family: 'Lato', sans-serif;
-      	font-weight: 700;
-      	font-size: 18pt;
-      	color: rgb(64,64,64);
-      	width: 460px;
-      	height: 60px;
-      	border-radius: 5px;
-      	border-width: 0;
-      	box-shadow: none;
-      	background-color: rgba(255,255,255,1);
-      	-o-transition: background-color 0.1s ease-in, color 0.1s ease-in;
-      	-ms-transition: background-color 0.1s ease-in, color 0.1s ease-in;
-      	-moz-transition: background-color 0.1s ease-in, color 0.1s ease-in;
-      	-webkit-transition: background-color 0.1s ease-in, color 0.1s ease-in;
-      	transition: background-color 0.1s ease-in, color 0.1s ease-in;
-      }
-
-      button:hover {
-      	background-color: rgba(30,30,30, 1);
-      	color: white;
-      	-o-transition: background-color 0.1s ease-in, color 0.1s ease-in;
-      	-ms-transition: background-color 0.1s ease-in, color 0.1s ease-in;
-      	-moz-transition: background-color 0.1s ease-in, color 0.1s ease-in;
-      	-webkit-transition: background-color 0.1s ease-in, color 0.1s ease-in;
-      	transition: background-color 0.1s ease-in, color 0.1s ease-in;
-      }
-
-    button:active {
-     	color: rgb(64,64,64);
-      	background-color: rgba(255,255,255,1);
-      }
-
-    </style>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false">
-    </script>
-    <link href='http://fonts.googleapis.com/css?family=Lato:700,300' rel='stylesheet' type='text/css'>
-    <script type="text/javascript">
-      function initialize() {
-
-		map = new google.maps.Map(document.getElementById('map-canvas'), {
-		zoom: 11,
-		center: {lat: 43.75, lng: -79.47} ,
-		disableDefaultUI: true, 
-		zoomControl: false
-		});
-
-		var styles = [
-			{
-			        "featureType": "landscape",
-			        "stylers": [
-			            {
-			                "saturation": -100
-			            },
-			            {
-			                "lightness": -80
-			            },
-			            {
-			                "visibility": "simplified"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "poi",
-			        "stylers": [
-			            {
-			                "saturation": -100
-			            },
-			            {
-			                "lightness": -75
-			            },
-			            {
-			                "visibility": "off"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "road.highway",
-			        "stylers": [
-			            {
-			                "saturation": -100
-			            },
-			            {
-			                "lightness": -50
-			            },
-			            {
-			                "visibility": "simplified"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "road.arterial",
-			        "stylers": [
-			            {
-			                "saturation": -100
-			            },
-			            {
-			                "lightness": -60
-			            },
-			            {
-			                "visibility": "simplified"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "road.local",
-			        "stylers": [
-			            {
-			                "saturation": -100
-			            },
-			            {
-			                "lightness": -50
-			            },
-			            {
-			                "visibility": "off"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "transit",
-			        "stylers": [
-			            {
-			                "saturation": -100
-			            },
-			            {
-			                "lightness": -50
-			            },
-			            {
-			                "visibility": "off"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "administrative.province",
-			        "stylers": [
-			            {
-			                "visibility": "off"
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "water",
-			        "elementType": "labels",
-			        "stylers": [
-			        	{
-			                "saturation": -100
-			            },
-			            {
-			                "visibility": "off"
-			            },
-			            {
-			                "lightness": -80
-			            },
-			            {
-			                "saturation": -100
-			            }
-			        ]
-			    },
-			    {
-			        "featureType": "water",
-			        "elementType": "geometry",
-			        "stylers": [
-			            {
-			                "hue": "#000000"
-			            },
-			            {
-			                "lightness": -90
-			            },
-			            {
-			                "saturation": -90
-			            }
-			        ]
-			    }
-		];
-
-		map.setOptions({styles: styles});
-
-		map.data.loadGeoJson('./area.json');
-
-		map.data.setStyle(function(feature) {
-			var color = 'rgba(32,122,209,1)';
-			var colorStroke = 'rgba(52,152,219,0.4)';
-			if (feature.getProperty('isColorful')) {
-				color = feature.getProperty('color');
-			}
-			return /** @type {google.maps.Data.StyleOptions} */({
-				fillColor: color,
-				strokeColor: colorStroke,
-				strokeWeight: 2
+			map = new google.maps.Map(document.getElementById('map-canvas'), {
+			zoom: 11,
+			center: {lat: 43.75, lng: -79.47} ,
+			disableDefaultUI: true, 
+			zoomControl: false
 			});
-		});
 
-      }
+			var styles = [
+				{
+				        "featureType": "landscape",
+				        "stylers": [
+				            {
+				                "saturation": -100
+				            },
+				            {
+				                "lightness": -80
+				            },
+				            {
+				                "visibility": "simplified"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "poi",
+				        "stylers": [
+				            {
+				                "saturation": -100
+				            },
+				            {
+				                "lightness": -75
+				            },
+				            {
+				                "visibility": "off"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "road.highway",
+				        "stylers": [
+				            {
+				                "saturation": -100
+				            },
+				            {
+				                "lightness": -50
+				            },
+				            {
+				                "visibility": "simplified"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "road.arterial",
+				        "stylers": [
+				            {
+				                "saturation": -100
+				            },
+				            {
+				                "lightness": -60
+				            },
+				            {
+				                "visibility": "simplified"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "road.local",
+				        "stylers": [
+				            {
+				                "saturation": -100
+				            },
+				            {
+				                "lightness": -50
+				            },
+				            {
+				                "visibility": "off"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "transit",
+				        "stylers": [
+				            {
+				                "saturation": -100
+				            },
+				            {
+				                "lightness": -50
+				            },
+				            {
+				                "visibility": "off"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "administrative.province",
+				        "stylers": [
+				            {
+				                "visibility": "off"
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "water",
+				        "elementType": "labels",
+				        "stylers": [
+				        	{
+				                "saturation": -100
+				            },
+				            {
+				                "visibility": "off"
+				            },
+				            {
+				                "lightness": -80
+				            },
+				            {
+				                "saturation": -100
+				            }
+				        ]
+				    },
+				    {
+				        "featureType": "water",
+				        "elementType": "geometry",
+				        "stylers": [
+				            {
+				                "hue": "#000000"
+				            },
+				            {
+				                "lightness": -90
+				            },
+				            {
+				                "saturation": -90
+				            }
+				        ]
+				    }
+			];
 
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-</head>
-<body>
-	<div id="slogan">
-		<h1>LIGHTNING FAST SHIPPING</h1>
-		<h4>FOR THE PEOPLE, BY THE PEOPLE</h4>
-		<a href="http://www.questr.co"><button type="button">SHIP NOW</button></a>
-		
-	</div>
+			map.setOptions({styles: styles});
+
+			map.data.loadGeoJson('./area.json');
+
+			map.data.setStyle(function(feature) {
+				var color = 'rgba(32,122,209,1)';
+				var colorStroke = 'rgba(52,152,219,0.4)';
+				if (feature.getProperty('isColorful')) {
+					color = feature.getProperty('color');
+				}
+				return /** @type {google.maps.Data.StyleOptions} */({
+					fillColor: color,
+					strokeColor: colorStroke,
+					strokeWeight: 2
+				});
+			});
+
+	      }
+
+	      google.maps.event.addDomListener(window, 'load', initialize);
+	    </script>
+	</head>
+	<body>
+		<div id="slogan">
+			<h1>LIGHTNING FAST SHIPPING</h1>
+			<h4>FOR THE PEOPLE, BY THE PEOPLE</h4>
+			<a data-toggle="modal" data-target="#signUp">
+				<button class="button-shipnow">SHIP NOW</button>
+			</a>
+		</div>
+
+		<!-- SHIP NOW MODAL -->
+		<div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+		  <div class="modal-dialog" style="margin-top: 20%;" >
+		    <div class="modal-content">
+		      <div class="modal-body">
+		      	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		    	<form class="form-horizontal" role="form" action="{% url 'join'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" novalidate style="margin: 0 auto; text-align:center;">{% csrf_token %}
+					<br>
+					<input name="EMAIL" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required">
+					<span id="result" class="alertMsg"></span>
+					<br><br>
+					<center><button type="submit" class="btn btn-default theme-button">Get notified</button></center>
+				</form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<!-- PRICING MODAL -->
+		<div class="modal fade" id="pricing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="margin-top: 20%; width: 50%;">
+		    <div class="modal-content">
+		      <div class="modal-body" style="height:auto; background-color:rgba(245,245,245,1);">
+		      	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<div class="row clearfix section white" >
+					<div class="col-md-12 column" style="text-align:center;" >
+						<br>
+						<div class="col-md-4 col small column grey-transition" id="sizes">
+							<h4>CARRIABLE</h4>
+							<h5>$4+$0.80/km</h5>
+						</div>
+
+						<div class="col-md-4 column small col grey-transition" id="sizes">
+							<h4>CAR</h4>
+							<h5>$6+$1/km</h5>
+						</div>
+
+						<div class="col-md-4 column small col grey-transition" id="sizes">
+							<h4>VAN</h4>
+							<h5>$10+$2/km</h5>
+						</div>
+
+					</div>
+				</div>
+				<div class="row clearfix section white" style="text-align:center;">
+					<h6>* for packages less than 2km far, no $/km is charged.</h6>
+				</div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<!-- FAQ MODAL -->
+		<div class="modal fade" id="faq" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="margin-top: 5%; ">
+		    <div class="modal-content">
+		      <div class="modal-body" style="height:auto; padding-left: 50px; padding-right:50px; background-color:rgba(245,245,245,1);">
+		      	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<div class="row clearfix section white" >
+					<br>
+					<h5>What is Questr?</h5>
+					<h6>Questr is a crowdshipping - or a peer-to-peer shipping - platform. Essentially it is a courier company, but with a different mindset from that of traditional courier companies.</h6>
+
+					<hr>
+
+					<h5>Is Questr safe?</h5>
+					<h6>Safety is Questr's top priority. By utilizing a multitude of security measures, Questr is guaranteed to be not only just as safe, but also even more trackable and traceable.</h6>
+
+					<hr>
+					
+					<h5>How does Questr verify its shippers?</h5>
+					<h6>Questr verifies its shippers in a number of ways, including credit card binding, driver's license binding, cell phone verification, etc.</h6>
+					
+					<hr>
+					
+					<h5>How fast does Questr delivery its packages?</h5>
+					<h6>Once a shipper picks up a package, s/he does not need to go to a local sorting facilities but driving directly from the pickup locaiton to dropoff location. A package from Scarborough Town Centre to Square One Mall may only take fourty-five minutes if the traffic is reasonably good.</h6>
+					
+					<hr>
+					
+					<h5>How much does a Questr shipment cost?</h5>
+					<h6>Questr offers three types of size options: backpack, car, and minivan, and they cost from $4 to $12 plus per-km fees. 
+						<br>At night or during weekends, shipping reates are slightly more expensive.</h6>
+					
+					<hr>
+					
+					<h5>Carriable, Car, Minivan, what's the difference?</h5>
+					<h6>A carriable package can be a pile of documents or a takeout order. Each costs $6 + $1.7/km. 
+						<br>A car package can be 4-6 moving boxes, or anything that can fit in a normal car. Each costs $6 + $2/km. 
+						<br>A minivan package can be requested for moving purposes. Each costs $16 + $3.4/km.</h6>
+					
+					<hr>
+					
+					<h5>Where is Questr currently available?</h5>
+					<h6>Starting from September, 2014, Questr is first available in Greater Toronto Area.</h6>
+					
+					<hr>
+					
+					<h5>How do I become a shipper?</h5>
+					<h6>Email and let us know you are interested. We will get back to you within 8 hours.</h6>
+					
+					<hr>
+					
+					<h5>What kind of vehicle do I need in order to become a shipper?</h5>
+					<h6>A bike, a scooter, a car, anything that can get you around the city quickly.</h6>
+					
+					<br>
+					<br>
+				</div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<!-- SAY HI MODAL -->
+		<div class="modal fade" id="sayhi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" style="margin-top: 15%; ">
+		    <div class="modal-content">
+		      <div class="modal-body" style="height:auto; background-color:rgba(245,245,245,1);">
+		      	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<div class="row clearfix section white" style="text-align:center">
+					<br>
+
+			    	<form action="{% url 'contactus'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
+			    		<br>
+						<input type="text" name="name" id="exampleInputName" placeholder="Name">
+						<br><br>
+						<input type="email" name="email" id="exampleInputEmail1" placeholder="Email">
+						<br><br>
+						<textarea name="message" rows="3" placeholder="Message" style="min-height:200px;"></textarea>
+						<br><br>
+						<center><button type="submit" class="btn btn-default theme-button">Send</button></center>
+					</form>
+
+				</div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
 		<div id="footer">
-		<p><a href="">pricing</a> | <a href="">faq</a> | <a href="">contact us</a> | <a href="">join the revolution</a></p>
-	</div>
-	<div id="map-canvas"></div>
-	
+			<p>
+				<a data-toggle="modal" data-target="#pricing">pricing</a> | 
+				<a data-toggle="modal" data-target="#faq">faq</a> | 
+				<a data-toggle="modal" data-target="#sayhi">say hi</a>
+			</p>
+		</div>
+		
+		<div id="map-canvas"></div>
+		
 
 
-</body>
-
+	</body>
+</html>
 
 
 
