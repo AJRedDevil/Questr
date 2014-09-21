@@ -64,8 +64,7 @@
 
                         </div>
                     </div><!-- /header-text -->
-			    </div>
-			 
+			    </div> 
 		</div><!-- /carousel -->
 	</div>
 </div><!-- ./container -->
@@ -187,24 +186,65 @@
 
 
 <div class="container-fluid">
+	<div class="row">
+  <div class="col-xs-6 col-md-3">
+  	<!-- Carousel -->
+    	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+			    <div class="item active">
+			    	<a href="#">
+			    		<img src={% static "img/cross-lg.jpg" %} alt="First slide" class="grey-transition">
+			   	 	</a>
+                    <!-- Static Header -->
+                    <div class="header-text hidden-xs">
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <h2 style="background-color:red;">
+                            World's first peer to peer platform.
+                            </h2>
+                         
+                            <h3>
+                            	<span>Cheaper, faster, 24/7 shipments in Greater Toronto Area.</span>
+                            </h3>
+                        </div>
+                    </div><!-- /header-text -->
+			    </div> 
+		</div><!-- /carousel -->
+  </div>
+</div>
+
+
+
+
+
+
 	<div class="row clearfix section white">
 		<div class="col-md-12 column">
-			<a href="#" class="block">
+			<a href="#">
 				<div class="col-md-4 col small column grey-transition" id="small-package">
-					<h3>CARRIABLES</h3>
-					<p>$4+$0.80/km</p>
+					<center>
+						<h3>CARRIABLES</h3><br>
+						<p>$4+$0.80/km</p>
+					</center>
 				</div>
 			</a>
-			<a href="#" class="block">
+			<a href="#">
 				<div class="col-md-4 column small col grey-transition" id="car">
-					<h3 class="text-black">CAR</h3>
-					<p class="text-black">$6+$1/km</p>
+					<center>
+						<h3 >CAR</h3><br>
+						<p>$6+$1/km</p>
+					</center>
+					
 				</div>
 			</a>
-			<a href="#" class="block">
+			<a href="#">
 				<div class="col-md-4 column small col grey-transition" id="van">
-					<h3 class="text-black">VAN</h3>
-					<p class="text-black">$10+$2/km</p>
+					<center>
+						<h3>VAN</h3><br>
+						<p>$10+$2/km</p>
+				</center>
+					
+				
 				</div>
 			</a>
 		</div>
@@ -217,10 +257,8 @@
 	    <!-- ******************** MENTIONS ******************** -->	
 	    <div class="row clearfix section grey-bg">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column"> 
-				<div class="section-title"><h4>We're mentioned in</h4></div><!-- ./section-title -->
-			</div><!-- ./column -->
-			<div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 column">
-					<div class="col-md-2 col-md-offset-5 column"> 
+				<div class="section-title text-center"><h4>We're mentioned in</h4></div><!-- ./section-title -->
+				<div class="col-xs-6 col-xs-offset-4 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5 col-lg-2 col-lg-offset-5 column"> 
 						<center>
 							<a href="http://skift.com/2014/03/27/daily-travel-startup-watch-opendoor-coexperiences-and-more/">
 								<img src={% static "img/skift.png" %} class="img-responsive grey-transition">
@@ -228,7 +266,7 @@
 						</center>	
 					</div><!-- ./column -->
 			</div><!-- ./column -->
-	    </div><!-- ./section -->
+	    </div><!-- ./row -->
 </div><!-- ./container -->
 
 
@@ -294,6 +332,7 @@
 		</div>
 	</div>
 </div>
+
 				
 {% endblock content %}
 {% block scripts %}

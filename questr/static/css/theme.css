@@ -656,6 +656,10 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 	color: #3498db;
 }
 
+.theme-bg {
+	background: #3498db;
+}
+
 .top-margin {
 	margin-top: 8px;
 }

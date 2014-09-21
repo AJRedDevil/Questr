@@ -55,9 +55,9 @@ p{font-size: 16px;font-weight: 300;margin: 7px 0;color: #666;}
 
 
 .grey-transition {
-	-moz-filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+	-moz-filter: saturate(100%) grayscale(100%) brightness(100%) contrast(100%);
     -o-filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
-     -webkit-filter: grayscale(100%);
+     -webkit-filter: saturate(100%) grayscale(100%) brightness(100%) contrast(100%);
      filter: gray;
      filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
 
@@ -76,30 +76,13 @@ p{font-size: 16px;font-weight: 300;margin: 7px 0;color: #666;}
 }
 
 .blacknwhite {
-	-webkit-filter: grayscale(100%);
-	-moz-filter: grayscale(100%);
-	filter: grayscale(100%);
+	-webkit-filter: saturate(100%) grayscale(100%) brightness(90%) contrast(100%);
+	-moz-filter: saturate(100%) grayscale(100%) brightness(90%) contrast(100%);
+	filter: saturate(100%) grayscale(100%) brightness(90%) contrast(100%);
 	filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
 }
 
 
-a.block {
-	display: block;
-	-webkit-filter: grayscale(100%);
--moz-filter: grayscale(100%);
-filter: grayscale(100%);
--webkit-transition: 0.1s; /* For Safari 3.1 to 6.0 */
-    transition:  0.1s;
-}
-
-a.block:hover {
-	display: block;
-	-webkit-filter: grayscale(0%);
-	-moz-filter: grayscale(0%);
-	filter: grayscale(0%);
-	-webkit-transition: 0.1s; /* For Safari 3.1 to 6.0 */
-    transition:  0.1s;
-}
 
 .small {
 	-webkit-background-size: cover;
@@ -114,16 +97,29 @@ a.block:hover {
 	border-style: solid;
 	border-width: 5px;
 	border-color: white;
+	padding-top: 120px;
 }
 
-.col h1, .col h2, .col h3, .col p {
+.col h3, .col p {
+	-webkit-filter: grayscale(0%);
+	-moz-filter: grayscale(0%);
+	filter: grayscale(0%);
+	filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\' filterRes=\'800\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
+    
+
+
+	color: white; 
 	position: relative;
 	text-align: center;	
-	color: white;
-	top: 40%;
-	background-color: black;
-	padding: 0;
+	padding: 8px;
+	margin: 0;
+	display: inline-block;
 }
+
+.grey-transition:hover + h2 {
+	background-color: red;
+}
+
 
 
 
@@ -254,28 +250,7 @@ a.block:hover {
 .features {
 	margin:25px 0;
 }
-.thumbnail {
-	border:0;
-	text-align:center;
-}
 
-/*Hover Animation*/
-
-.thumbnail img {
-	-moz-transition:all 0.6s ease;
-	-webkit-transition:all 0.6s ease;
-	-ms-transition:all 0.6s ease;
-	-o-transition:all 0.6s ease;
-	transition:all 0.6s ease;
-}
-.thumbnail:hover img {
-	-moz-transform:scale(1.05);
-	-webkit-transform:scale(1.05);
-	-o-transform:scale(1.05);
-	-ms-transform:scale(1.05);
-	transform:scale(1.05);
-	z-index:2;
-}
 /*========== 5. TESTIMONIALS ==============*/
 
 .testblock {

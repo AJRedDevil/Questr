@@ -1,11 +1,29 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
-  <!-- CSS -->
+  <!-- CSS 
   <link href={% static "css/social-buttons.css" %} rel="stylesheet">
-  
+-->
+<link href={% static "css/sign.css" %} rel="stylesheet">
 {% endblock localhead %}
 {% block content%}
+
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-10 col-md-offset-1 column" style="margin-top:40px;">
+		<div class="col-md-6 column col small" id="customer">
+			
+			<h3>I want to be a user</h3>
+			<button class="btn ">Sign Up</button>
+		</div>
+		<div class="col-md-6 column col small" id="shipper">
+			<h3>I want to be a shipper</h3>
+			<button class="btn ">Sign Up</button>
+		</div>
+	</div>
+	</div>
+</div>
+
 
 <div class="container-fluid" ng-app="validationApp" ng-controller="mainController">
     <div class="row clearfix">
@@ -109,6 +127,11 @@
 	                {{user_form.last_name.errors}}
 	            {% endif %}
 
+	            <label for="username" class="control-label">Address</label>
+	            <input type="text" class="form-control input-sm" name="address" id="address" placeholder="" required>
+
+	            <label for="username" class="control-label">Postal Code</label>
+	            <input type="text" class="form-control input-sm" name="postal-code" id="postal-code" placeholder="" required>
 	    	</div><!-- ./col-md-4 -->
 	    </div><!-- ./column -->
    

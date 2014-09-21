@@ -1,3 +1,36 @@
+/***************** SIGNUP CHOICE ******************/
+#customer {
+	background-image: url('../img/customer.jpg');
+}
+
+#shipper {
+	background-image: url('../img/carriables.jpg');
+}
+
+.small {
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-position: center center;
+}
+
+.col {
+	height: 350px;
+	border-style: solid;
+	border-width: 5px;
+	border-color: white;
+	padding-top: 100px;
+	text-align: center;
+	color: white;
+}
+
+
+
+
+
+
+
 /******************* Signup **********************/
 #createAccBtn {
 	float: right;
@@ -35,7 +68,7 @@ hr {
 	background: #34495E;
 }
 
-
+/**
 body { 
   background: url(../img/signin.jpg); 
 	-webkit-background-size: cover;
@@ -44,6 +77,7 @@ body {
 	background-size: cover;
 	background-position: center center;
 }
+**/
 
 .panel-default {
 margin-top:80px;
