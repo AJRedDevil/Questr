@@ -10,56 +10,54 @@
 	<div class="row clearfix">
 		<!-- Carousel -->
     	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-			<!-- Indicators -->
-			<ol class="carousel-indicators">
-			  	<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-			    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-			    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-			</ol>
-			<!-- Wrapper for slides -->
+{% comment %}
+	<!-- Indicators -->
+	<ol class="carousel-indicators">
+	  	<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+	    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+	    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+	</ol>
+	<!-- Wrapper for slides -->
+{% endcomment %}
 			<div class="carousel-inner">
 			    <div class="item active">
-			    	<img src={% static "img/cross-lg.jpg" %} alt="First slide" class="blacknwhite">
+			    	<img src={% static "img/cross-wide.jpg" %} alt="First slide">
                     <!-- Static Header -->
                     <div class="header-text hidden-xs">
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <h2>
-                            	<span>Get stuff delivered within minutes.</span>
-                            </h2>
-                            <br>
-                            <h3>
-                            	<span>Cheaper, faster, 24/7 shipments in Greater Toronto Area.</span>
-                            </h3>
-                            <br>
+                        	<br>
+                        	<br>
+                        	<h2 style="font-size:44pt; text-shadow: 1px 1px 3px gray;">
+                        	    <span>DELIVER ANYTHING ANYTIME IN 4 HOURS</span>
+                        	</h2>
+                        	<br>
                             <div class="">
-                         		<a class="btn btn-theme btn-sm btn-min-block" data-toggle="modal" data-target="#signUp">Sign up</a>
+                         		<a class="btn btn-theme btn-sm btn-min-block" data-toggle="modal" data-target="#signUp">SHIP NOW</a>
                          	</div>
 
                          	<!-- Modal -->
-							<div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							  <div class="modal-dialog">
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-							      </div>
-							      <div class="modal-body">
-							    	<form class="form-horizontal" role="form" action="{% url 'join'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" novalidate>{% csrf_token %}
-										<div class="form-group">
-											
-											<div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 column">
-												<input class="form-control input-lg no-margin" name="EMAIL" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required">
-												<span id="result" class="alertMsg"></span>
-											</div><!-- ./column -->
+                         	<div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                         	  <div class="modal-dialog">
+                         	    <div class="modal-content" style="margin-top:48%;">
+                         	      <div class="modal-body">
+                         	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                         	        <br><br>
+                         	        <form class="form-horizontal" role="form" action="{% url 'join'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" novalidate>{% csrf_token %}
+                         	            <div class="form-group" style="margin:0 30px;">
+                         	                
+                         	            <input class="form-control" name="EMAIL" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required" style="width:100%;">
+                         	            <span id="result" class="alertMsg"></span>
 
-											<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-												<center><button type="submit" class="btn no-margin btn-lg big-button">Notify me</button></center>
-											</div><!-- ./column -->
-										</div><!--./form-group -->		
-									</form>
-							      </div>
-							    </div>
-							  </div>
-							</div>
+                         	            <br><br>
+
+                         	            <center><button type="submit" class="btn no-margin btn-lg big-button">Notify me</button></center>
+
+                         	            </div><!--./form-group -->      
+                         	        </form>
+                         	      </div>
+                         	    </div>
+                         	  </div>
+                         	</div>
 
 
                         </div>
@@ -147,8 +145,7 @@
 						
 							<h3>Lightning fast</h3>
 
-							<p>Anywhere in GTA within 4 hours. 
-Say goodbye to overnight waits.</p>
+							<p>Anywhere in GTA within 4 hours. <br>Say goodbye to overnight waits.</p>
 						</div><!-- ./caption -->
 					</div><!--/thumbnail -->
 				</div><!--/.column -->
@@ -186,12 +183,20 @@ Say goodbye to overnight waits.</p>
 
 <div class="container-fluid">
 	<div class="row clearfix white-bg section">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+		    <div class="section-title">
+		        <h2>Simplistic size options</h2>
+		        <h4>“Life is simple. You just have to stop trying to figure it out.” ― Marty Rubin</h4>
+		    </div>
+		</div>
 	<div class="col-md-4 column grid">
 		<figure class="effect-sadie">
 					<img src={% static "img/carriables.jpg" %} alt="Carriables" class="img-responsive">
 					<figcaption>
 						<h2><span>Carriables</span></h2>
-						<p>$4+$0.80/km<br>Get that goddamn pizza in no time.</p>
+						<p>$4+$0.80/km<br>A takeout order.
+                    <br>A bouquet for the dear ones.
+                    <br>A pile of documents.</p>
 					</figcaption>			
 				</figure>
 	</div>
@@ -200,7 +205,9 @@ Say goodbye to overnight waits.</p>
 					<img src={% static "img/car.jpg" %} alt="Car" class="img-responsive">
 					<figcaption>
 						<h2><span>Car</span></h2>
-						<p>$6+$1/km<br>Move me like you never moved me before...</p>
+						<p>$6+$1/km<br>A few moving boxes.
+                    <br>A puppy's crate.
+                    <br>A 47" inch LED.</p>
 						
 					</figcaption>			
 				</figure>
@@ -210,7 +217,9 @@ Say goodbye to overnight waits.</p>
 					<img src={% static "img/van.jpg" %} alt="Van" class="img-responsive">
 					<figcaption>
 						<h2><span>VAN</span></h2>
-						<p>$10+$2/km<br>Move me like you never moved me before...</p>
+						<p>$10+$2/km<br>Many moving boxes.
+                    <br>Furniture at IKEA.
+                    <br>Your wolfpack.</p>
 					</figcaption>			
 				</figure>
 	</div>
@@ -284,11 +293,11 @@ Say goodbye to overnight waits.</p>
 			<!-- Modal -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			      </div>
+			    <div class="modal-content" style="margin-top:48%;">
 			      <div class="modal-body">
+			      	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			      	<br><br>
+
 			    	<form action="{% url 'contactus'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
 
 
