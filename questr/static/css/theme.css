@@ -93,7 +93,7 @@ footer small.title {
 	width: 26px;
 	height: 26px;
 	text-align: center;
-	padding: 5px 0;
+	padding: 7px 0;
 	font-size: 12px;
 	line-height: 1.428571429;
 	border-radius: 50%;
@@ -533,7 +533,7 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 .navbar {
 	background: white;
 	margin: 0;
-	border-bottom: 1px solid #E4E6E3; 
+	border-bottom: none;
 	border-radius: 0;
 	padding: 0px 50px;
 	text-align: center;
