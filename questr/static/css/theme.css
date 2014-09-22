@@ -12,10 +12,7 @@ label {
 }
 
 html {
-	margin: 0;
-	padding: 0;
 	background: #f5f5f5;
-	height: 100%;
 }
 
 #wrapper {
@@ -376,6 +373,10 @@ button.btn-default {
 
 
 /************* Buttons ************/
+.button-default {
+	background-color: #3498db;
+}
+
 .btn-classic {
   background-color: #ffffff;
   *background-color: #f6f7f8;
@@ -541,25 +542,35 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 .navbar-default .navbar-nav > li > a {
  	color: rgba(0,0,0,0.8);
  	background: white;
- 	font-weight: 400;
+ 	font-weight: 500;
+ 	padding-left: 0;
+ 	padding-right: 0;
+ 	padding-bottom: 2px;
+ 	margin-left: 20px;
+ 	margin-right: 20px;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
 	background-color: white;
-	border-bottom: 3px solid rgba(0,0,0,0.8);  
+	color: rgba(0,0,0,0.8);
+	border-bottom: solid 2px #3498db;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
 	background-color: white;
-    border-bottom: 3px solid rgba(0,0,0,0.8);  
+	color: rgba(0,0,0,0.8);
+	border-bottom: solid 2px #3498db;
 }
 
 .navbar .navbar-brand {
 	color: rgba(0,0,0,0.8); 
 	font-size: 25px;
 	font-weight: 500;
+}
+.navbar .navbar-brand:hover {
+	color: #3498db;
 }
 
 .navbar-default .dropdown-menu {
