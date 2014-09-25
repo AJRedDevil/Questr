@@ -1,4 +1,12 @@
+/***************** UNIVERSAL ******************/
+body {
+	background-color: white;
+}
+
+
+
 /***************** SIGNUP CHOICE ******************/
+
 #customer {
 	background-image: url('../img/customer.jpg');
 }
@@ -27,10 +35,6 @@
 
 
 
-
-
-
-
 /******************* Signup **********************/
 #createAccBtn {
 	float: right;
@@ -53,34 +57,9 @@ hr {
 }
 
 
-/******************* Signin **********************/
-#signin {
-	background: #99a1a7;
-}
-
-#signin .panel {
-	margin-top: 20px;
-}
-
-
 /******************* reset password **********************/
 #reset-pass {
 	background: #34495E;
-}
-
-/**
-body { 
-  background: url(../img/signin.jpg); 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-	background-position: center center;
-}
-**/
-
-.panel-default {
-margin-top:80px;
 }
 
 .panel-heading {
@@ -88,3 +67,12 @@ margin-top:80px;
 }
 
 .form-group.last { margin-bottom:0px; }
+
+
+/******************* Signin **********************/
+.panel-default {
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
+	border-radius: 0;
+}
