@@ -8,6 +8,7 @@
 {% endblock localhead %}
 {% block content%}
 
+{% comment %}
 <div class="container-fluid" style="background:white;">
 	<div class="row clearfix">
 		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column" style="margin-top:20px;">
@@ -23,6 +24,7 @@
 	</div>
 	</div>
 </div>
+{% endcomment %}
 
 
 <div class="container-fluid" ng-app="validationApp" ng-controller="mainController">
@@ -127,11 +129,30 @@
 	                {{user_form.last_name.errors}}
 	            {% endif %}
 
+	            <!-- CITY DROPDOWN -->
+				<label for="username" class="control-label">City</label>
+				<!-- Location input-->
+				<div class="form-group">
+					<select class="btn-classic" data-size="5" name="srccity">
+						<option>Toronto</option>
+						<option>Brampton</option>
+						<option>Markham</option>
+						<option>Mississauga</option>
+						<option>Richmond Hill</option>
+						<option>Vaughan</option>
+					</select>
+				</div>  <!-- ./form-group -->
+				
+
 	            <label for="username" class="control-label">Address</label>
 	            <input type="text" class="form-control input-sm" name="address" id="address" placeholder="" required>
 
 	            <label for="username" class="control-label">Postal Code</label>
 	            <input type="text" class="form-control input-sm" name="postal-code" id="postal-code" placeholder="" required>
+
+	            <label for="username" class="control-label">Phone Number</label>
+	            <input type="text" class="form-control input-sm" name="phone-num" id="phone-num" placeholder="" required>
+
 	    	</div><!-- ./col-md-4 -->
 	    </div><!-- ./column -->
    

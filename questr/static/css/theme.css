@@ -522,8 +522,8 @@ input.form-control, input.form-control, textarea.form-control {
 
 input.form-control:focus, input.form-control:active, textarea.form-control:focus {
 	box-shadow: none;
-	border-width: 2px;
-	border-color: #3498DB;
+	border-width: 1px;
+	border-color: #3498db;
 }
 
 
