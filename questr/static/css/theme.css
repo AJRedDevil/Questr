@@ -257,16 +257,6 @@ hr {
 }
 
 
-/********************* Angular Stuff *************************/
-.ng-invalid.ng-dirty {
- border-color: red; 
-}
-
-.ng-valid.ng-dirty {
-    border-color: green; 
-}
-
-
 /******************** Buttons ***********************/
 button.btn-default {
 	border-radius: 2px;
