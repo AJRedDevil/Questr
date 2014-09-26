@@ -40,27 +40,27 @@
 				<!-- SIZE INPUT-->
 				<div class="form-group col-md-12 column" id="size">
 					<div class="input-group">
-									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
-										<center>
-											<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />       	 	
-											<p>Backpack</p>
-											<input type="radio" name="size" ng-model="user.size" value="backpack" ng-model="user.backapck" required> 
-										</center>	
-									</div><!-- ./column -->  
-									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
-										<center>
-											<img src={% static 'img/car.png' %} style="width:100%; height:au to;" />
-											<p>Car</p>
-											<input type="radio" name="size" ng-model="user.size" value="car" ng-model="user.car" required>
-										</center>	
-									</div><!-- ./column -->
-									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
-										<center>
-											<img src={% static 'img/minivan.png' %} style="width:100%; height:auto;" />
-											<p>Minivan</p>
-											<input type="radio" name="size" ng-model="user.size" value="minivan" ng-model="user.van" required>
-										</center> 	
-									</div><!-- ./column -->
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
+							<center>
+								<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />       	 	
+								<p>Backpack</p>
+								<input type="radio" name="size" ng-model="user.size" value="backpack" ng-model="user.backapck" required> 
+							</center>	
+						</div><!-- ./column -->  
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
+							<center>
+								<img src={% static 'img/car.png' %} style="width:100%; height:au to;" />
+								<p>Car</p>
+								<input type="radio" name="size" ng-model="user.size" value="car" ng-model="user.car" required>
+							</center>	
+						</div><!-- ./column -->
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
+							<center>
+								<img src={% static 'img/minivan.png' %} style="width:100%; height:auto;" />
+								<p>Minivan</p>
+								<input type="radio" name="size" ng-model="user.size" value="minivan" ng-model="user.van" required>
+							</center> 	
+						</div><!-- ./column -->
 					</div><!-- /input-group -->
 					{{user_form.size.errors}}
 				</div>
@@ -80,20 +80,6 @@
 
 				<br>
 
-
-				<!-- Pickup Name input-->
-				<div class="form-group col-md-12 column">
-					<input id="srcname" name="srcname" type="text" placeholder="Name of the sender" class="form-control input-xs" ng-model="user.srcname"  required>
-					{{user_form.srcname.errors}}
-				</div><!-- ./form-group -->
-
-				<!-- PHONE NUMBER -->
-				<div class="form-group col-md-12 column">
-					<input id="srcphone" name="srcphone" type="text" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.srcphone" required>
-					{{user_form.srcphone.errors}}
-				</div><!-- ./form-group -->
-
-
 				<!-- Location input-->
 				<div class="form-group col-md-12 column">
 					<select class="btn-classic" data-size="5" name="srccity" ng-model="user.city" required>
@@ -111,7 +97,7 @@
 
 				<!-- Pickup Address input-->
 				<div class="form-group col-md-12 column">	
-						<input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" placeholder="Pickup Address" ng-model="user.departure" ng-minlength="3" ng-maxlength="100" required>
+						<input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" placeholder="Pickup Address">
 						{{user_form.srcaddress.errors}}
 				</div><!-- ./form-group -->	
 				
@@ -125,6 +111,18 @@
 				</div><!-- ./form-group -->
 
 
+				<!-- Pickup Name input-->
+				<div class="form-group col-md-12 column">
+					<input id="srcname" name="srcname" type="text" placeholder="Name of the sender" class="form-control input-xs" ng-model="user.srcname"  required>
+					{{user_form.srcname.errors}}
+				</div><!-- ./form-group -->
+
+				<!-- PHONE NUMBER -->
+				<div class="form-group col-md-12 column">
+					<input id="srcphone" name="srcphone" type="text" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.srcphone" required>
+					{{user_form.srcphone.errors}}
+				</div><!-- ./form-group -->
+
 			</div>
 		</div>
 
@@ -133,26 +131,9 @@
 
 			<div class="col-md-12 column">
 
-
-				<!-- NAME INPUT -->
-				<div class="form-group col-md-12 column">
-					<input id="dstname" name="dstname" type="text" placeholder="Name of the receiver" class="form-control ng-pristine ng-invalid" ng-model="user.dstname" required>
-					{{user_form.dstname.errors}}
-				</div><!-- ./form-group -->
-
-
-
-				<!-- PHONE NUMBER -->
-				<div class="form-group col-md-12 column">
-					<input id="srcphone" name="srcphone" type="text" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.srcphone" required>
-					{{user_form.srcphone.errors}}
-				</div><!-- ./form-group -->
-
-
-
 				<!-- Location input-->
 				<div class="form-group col-md-12 column">
-					<select class="btn-classic" data-size="5" name="srccity" ng-model="user.city" required>
+					<select class="btn-classic" data-size="5" name="dstcity" ng-model="user.city" required>
 						<option>Toronto</option>
 						<option>Brampton</option>
 						<option>Markham</option>
@@ -160,7 +141,7 @@
 						<option>Richmond Hill</option>
 						<option>Vaughan</option>
 					</select>
-					{{user_form.srccity.errors}}
+					{{user_form.dstcity.errors}}
 				</div>  <!-- ./form-group -->
 
 
@@ -178,6 +159,22 @@
 					<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="Postal Code" class="form-control ng-pristine ng-invalid">
 					{{user_form.dstpostalcode.errors}}
 				</div><!-- ./form-group -->
+
+
+				<!-- NAME INPUT -->
+				<div class="form-group col-md-12 column">
+					<input id="dstname" name="dstname" type="text" placeholder="Name of the receiver" class="form-control ng-pristine ng-invalid" ng-model="user.dstname" required>
+					{{user_form.dstname.errors}}
+				</div><!-- ./form-group -->
+
+
+
+				<!-- PHONE NUMBER -->
+				<div class="form-group col-md-12 column">
+					<input id="dstphone" name="dstphone" type="text" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.dstphone" required>
+					{{user_form.dstphone.errors}}
+				</div><!-- ./form-group -->
+
 			</div>
 		</div><!-- column -->
 
