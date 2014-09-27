@@ -22,7 +22,7 @@
 			    	<form action="{%url 'signin'%}" method="post" novalidate class="css-form">{% csrf_token %}
                     <!-- Login with Username and Password --> 
                     <div class="form-group">
-                        <input type="email" name="username" class="form-control" ng-model="user.email" placeholder="Email Address" required>
+                        <input id="username" type="email" name="username" class="form-control" ng-model="user.email" placeholder="Email Address" required>
                         <p> 
                         {% if auth_form.username.errors %}
                         	{{ auth_form.username.errors }}
@@ -30,7 +30,7 @@
                         </p>
             
                         <div class="help-block with-errors"></div>
-                        <input type="password" class="form-control input-sm" name="password" id="exampleInputPassword1" placeholder="Password" ng-model="user.password" required>
+                        <input id="password" type="password" class="form-control input-sm" name="password" id="exampleInputPassword1" placeholder="Password" ng-model="user.password" required>
                         <p> 
         	            {% if auth_form.password.errors %}
         	            {{ auth_form.password.errors }}

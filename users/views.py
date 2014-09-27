@@ -9,7 +9,7 @@ from django.db.models import Avg
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import QuestrUserProfile, UserTransactional, QuestrToken
-from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, QuestrSocialSignupForm, SetPasswordForm, PasswordChangeForm, NotifPrefForm
+from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, SetPasswordForm, PasswordChangeForm, NotifPrefForm
 
 from libs import email_notifier
 
@@ -54,7 +54,12 @@ def signup(request):
     if request.method == "POST":
         user_form = QuestrUserCreationForm(request.POST)
         if user_form.is_valid():
-            userdata = user_form.save()
+            useraddress = dict(city=user_form.cleaned_data['city'], streetaddress=user_form.cleaned_data['streetaddress'],\
+                postalcode=user_form.cleaned_data['postalcode'])
+            logging.warn(useraddress)
+            userdata = user_form.save(commit=False)
+            userdata.address = json.dumps(useraddress)
+            userdata.save()
             authenticate(username=userdata.email, password=userdata.password)
             userdata.backend='django.contrib.auth.backends.ModelBackend'
             auth_login(request, userdata)

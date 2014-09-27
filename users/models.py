@@ -74,6 +74,8 @@ class QuestrUserProfile(AbstractBaseUser):
     rating = models.DecimalField(_('rating'), default='0', max_digits=5, decimal_places=2)
     notificationprefs = jsonfield.JSONField(_('notificationprefs'), default='{}', max_length=9999)
     is_active = models.BooleanField(default=True)
+    is_available = models.BooleanField(_('is_available'), default=True)
+    address = jsonfield.JSONField(_('address'), default='{}', max_length=9999)
 
 
     USERNAME_FIELD = 'email'
