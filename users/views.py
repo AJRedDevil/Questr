@@ -99,6 +99,7 @@ def resend_verification_email(request):
         except QuestrUserProfile.DoesNotExist:
             raise Http404
             return render(request,'404.html')
+    request.session['alert_message'] = dict(type="success",message="The verification link has been sent to your email")
     return redirect('home')
 
 @login_required
@@ -110,7 +111,7 @@ def home(request):
     user = request.user
     userdetails = user_handler.getQuestrDetails(user.id)
     pagetitle = "Home"
-
+    alert_message = request.session.get('alert_message')
     if userdetails.is_shipper:
         allquests = Quests.objects.filter(ishidden=False, isaccepted=False)
         return render(request,'shipperhomepage.html', locals())
@@ -421,8 +422,8 @@ def verify_email(request, user_code):
                         logger.debug('User does not exist')
                         return redirect('home')
                 else:
-                    message = "Please use the latest verification email sent."
-                    return redirect('home', locals())
+                    request.session['alert_message'] = dict(type="warning",message="Please use the latest verification email sent, or click below to send a new email.")
+                    return redirect('home')
         except UserTransactional.DoesNotExist:
             return redirect('home')
     return redirect('home')

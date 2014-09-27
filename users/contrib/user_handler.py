@@ -1,11 +1,16 @@
 
 
 from random import choice
+from collections import OrderedDict 
 from django.conf import settings
 from django.shortcuts import render
 from django.http import Http404
 
 import logging
+
+from quests.contrib import quest_handler
+from libs import email_notifier, geomaps
+
 from users.models import QuestrUserProfile, UserTransactional, QuestrToken
 from quests.models import Quests
 
@@ -165,3 +170,172 @@ def emailExists(email):
         return False
     if user:
         return True
+
+def updateCourierAvailability(questr, status):
+    """Takes a Questr User Profile object and a status ( 0 | 1 ) and updates the availability status as per the same"""
+    status = int(status)
+    if userExists(questr.id):
+        if status == 0:
+            QuestrUserProfile.objects.filter(id=questr.id).update(is_available=False)
+            return dict(status='success')
+        elif status == 1:
+            QuestrUserProfile.objects.filter(id=questr.id).update(is_available=True)
+            return dict(status='success')
+        else :
+            raise ValueError('Status %d not acceptable, use 0 or 1' % (status))
+    return dict(status='fail')
+
+
+class CourierManager(object):
+    """This is the manager that processes and assigns couriers automatically"""
+    
+    def __init__(self):
+        pass
+
+    def getActiveCouriers(self):
+        """Returns a list of couriers"""
+        try:
+            courierlist = QuestrUserProfile.objects.filter(is_shipper=True, is_superuser=False, is_available=True)
+        except Exception, e:
+            raise e
+
+        return courierlist
+
+    def getCourierAvailability(self, courier):
+        """Returns if a courier is available"""
+        courier_details = getQuestrDetails(courier)
+        return courier_details.is_available
+
+    def setCourierAvailability(self, courier, status):
+        """Sets the availability status of a courier"""
+        if status==1:
+            stat=True
+        else:
+            stat=False
+        try:
+            QuestrUserProfile.objects.filter(id=courier.id).update(is_available=stat)
+        except Exception, e:
+            raise e
+
+        return stat
+
+    def getSuperAdmins(self):
+        """Returns a list of superadmins"""
+        try:
+            courierlist = QuestrUserProfile.objects.filter(is_superuser=True)
+        except Exception, e:
+            raise e
+
+        return courierlist
+
+    def informSuperAdmins(self, quest):
+        """Takes in a questobject and informs the superadmins of the same"""
+        superadmins = self.getSuperAdmins()
+        if len(superadmins) == 0:
+            return "fail"
+        else:
+            for admin in superadmins: # send notifcations to all the shippers
+                email_details = quest_handler.prepNewQuestNotification(admin, quest)
+                email_notifier.send_email_notification(admin, email_details)
+            return "success"
+
+    def informCourier(self, courier, quest):
+        """Takes in a questobject and informs the superadmins of the same"""
+        accept_url = quest_handler.get_accept_url(quest, courier)
+        reject_url = quest_handler.get_reject_url(quest, courier)
+        logging.warn(accept_url)
+        logging.warn(reject_url)
+        email_details = quest_handler.prepNewQuestNotification(courier, quest, accept_url, reject_url)
+        email_notifier.send_email_notification(courier, email_details)
+        return "success"
+
+    def checkProximity(self, address_1, address_2):
+        proximity = settings.QUESTR_PROXIMITY
+        maps = geomaps.GMaps()
+        maps.set_geo_args(dict(origin=address_1, destination=address_2))
+        distance = maps.get_total_distance()
+        if int(distance) <= proximity:
+            proximity = True
+            return dict(in_proximity=proximity, distance=distance)
+        else:
+            proximity = False
+            return dict(in_proximity=proximity, distance=distance)
+
+    def getAvailableCouriersWithProximity(self, activecouriers, quest):
+        """From the list of active couriers and respective quest, it returns a dict of couriers  with \
+        their proximity details to that particular quest"""
+        ## Dict of all the couriers
+        couriers_dict_with_details = {}
+        for courier in activecouriers:
+            ## Dict of courier with their detail
+            courier_dict_with_detail = {}
+            ## Address of the courier
+            origin = courier.address['postalcode']+", "+courier.address['city']
+            ## Address of the questr
+            destination = str(quest.pickup['postalcode'])+", "+str(quest.pickup['city'])
+            ## Proximity details
+            proximity_details = self.checkProximity(origin, destination)
+            courier_dict_with_detail['in_proximity'] = proximity_details['in_proximity']
+            courier_dict_with_detail['distance'] = proximity_details['distance']
+            courier_dict_with_detail['is_available'] = self.getCourierAvailability(courier.id)
+            courier_dict_with_detail['address'] = courier.address
+            # logging.warn(courier_dict_with_detail)
+            couriers_dict_with_details[courier.id] = courier_dict_with_detail
+        return couriers_dict_with_details
+
+    def getCouriersInProximity(self, quest):
+        """Returns couriers in proximity sorted as per their distance"""
+        couriers_in_proximity = {}
+        for courier in quest.available_couriers:
+            if quest.available_couriers[courier]['in_proximity'] == True:
+                couriers_in_proximity[courier] = quest.available_couriers[courier]
+
+        couriers_in_proximity = OrderedDict(sorted(couriers_in_proximity.iteritems(), key=lambda x: x[1]['distance']))
+
+        return couriers_in_proximity.items()
+
+
+    def getCouriersNotInProximity(self, quest):
+        """Returns couriers in proximity sorted as per their distance"""
+        couriers_not_in_proximity = {}
+        for courier in quest.available_couriers:
+            if quest.available_couriers[courier]['in_proximity'] == False:
+                couriers_not_in_proximity[courier] = quest.available_couriers[courier]
+        
+        couriers_not_in_proximity = OrderedDict(sorted(couriers_not_in_proximity.iteritems(), key=lambda x: x[1]['distance']))
+
+        return couriers_not_in_proximity.items()
+
+    def informShippers(self, quest):
+        """Takes a quest object and informs the relative shippers"""
+        # Update available shippers for a quest only if it's blank
+        if len(quest.available_couriers) == 0:
+            activecouriers = self.getActiveCouriers()
+            if len(activecouriers) == 0:
+                ##* inform the master couriers
+                dothis = self.informSuperAdmins(quest)
+                if dothis == "success":
+                    logger.warn("Master Couriers have been informed as no shippers were available for quest %d" % (quest.id))
+                    return "fail"
+                else:
+                    # Man we have a problem return 500 NO SHIPPERS AVAILABLE NOW, ASK THE USER TO HIT "process quest"
+                    # "process quest" will have to be put somewhere in his dashboard of quest which are not honored
+                    logger.warn("Some serious problem")        
+            available_couriers = self.getAvailableCouriersWithProximity(activecouriers, quest)
+            ## Updating the respecitve quest with courier details
+            quest_handler.updateQuestWithAvailableCourierDetails(quest, available_couriers)
+        quest = quest_handler.getQuestDetails(quest.id)
+        couriers_list = self.getCouriersInProximity(quest)
+        if len(couriers_list) == 0:
+            couriers_list = self.getCouriersNotInProximity(quest)
+
+        designated_courier = getQuestrDetails(couriers_list[0][0])
+        self.informCourier(designated_courier, quest)
+        self.setCourierAvailability(designated_courier, 0)
+    
+    def updateCouriersForQuset(self, quest, courier):
+        """Removes a courier from the set of available shippers for a quest"""
+        quest = quest_handler.getQuestDetails(quest.id)
+        courier = getQuestrDetails(courier.id)
+        available_couriers = quest.available_couriers
+        available_couriers.pop(courier.id)

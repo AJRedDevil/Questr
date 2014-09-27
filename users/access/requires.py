@@ -19,6 +19,7 @@ def verified(a_view):
 						return a_view(request, *args, **kwargs)
 					else:
 						pagetype="emailnotverified"
+						alert_message = request.session.get('alert_message')
 						return render(request, 'thankyou.html', locals())
 				success = False
 				message = "User not Found"

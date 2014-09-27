@@ -3,7 +3,9 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
 
-from quests.models import Quests
+from quests.models import Quests, QuestTransactional
+from users.models import QuestrToken
+from users.access.requires import is_alive
 
 import logging
 logger = logging.getLogger(__name__)
@@ -117,7 +119,7 @@ def delShipper(shipper_id, questname):
         raise Http404
         return render(request,'404.html')
 
-def prepNewQuestNotification(user, questdetails):
+def prepNewQuestNotification(user, questdetails, accept_url, reject_url):
     """Prepare the details for notification emails for new quests"""
     template_name="New_Quest_Notification"
     subject="New Quest Notification"
@@ -145,6 +147,8 @@ def prepNewQuestNotification(user, questdetails):
                                                 'questr_unsubscription_link' : questr_unsubscription_link,
                                                 'quest_application_link' : settings.QUESTR_URL+'/quest/'+str(questdetails.id)+'/apply/',
                                                 'company'           : "Questr Co",
+                                                'quest_accept_url'           : accept_url,
+                                                'quest_reject_url'           : reject_url,
 
                                                 },
                     }
@@ -278,3 +282,55 @@ def update_resized_image(quest_id):
     if storage.exists(file_path):
         storage.delete(file_path)
     return ""
+
+def updateQuestWithAvailableCourierDetails(quest, available_shippers):
+    """Updates the available_shippers field in the given quest with the available couriers and their details"""
+    update = Quests.objects.filter(id=quest.id).update(available_couriers=available_shippers)
+    if not update:
+        logging.warn("Could not update quest : %s Update status %s" % (quest.id, update))
+        return "fail"
+
+def get_accept_url(quest=None, shipper=None): 
+    """
+        Returns the verification url.
+    """
+    accept_link = ""
+    if quest and shipper:
+        try:
+            prev_transactional = QuestTransactional.objects.get(quest = quest, shipper=shipper, transaction_type=1, status = False)
+            if prev_transactional:
+                prev_transactional.status = True
+                prev_transactional.save()
+        except QuestTransactional.DoesNotExist:
+            pass
+        count = QuestTransactional.objects.count()
+        transcational = QuestTransactional(id=count+1, quest=quest, shipper=shipper, transaction_type=1)
+        transcational.save()
+        token_id = transcational.get_token_id()
+        questr_token = QuestrToken(token_id=token_id)
+        questr_token.save()
+        accept_link = "{0}/quest/{3}/accept/{1}?questr_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_quest_code(), token_id, quest.id)
+    return accept_link
+
+def get_reject_url(quest=None, shipper=None): 
+    """
+        Returns the verification url.
+    """
+    reject_link = ""
+    if quest and shipper:
+        try:
+            prev_transactional = QuestTransactional.objects.get(quest = quest, shipper=shipper, transaction_type=0, status = False)
+            if prev_transactional:
+                prev_transactional.status = True
+                prev_transactional.save()
+        except QuestTransactional.DoesNotExist:
+            pass
+        count = QuestTransactional.objects.count()
+        transcational = QuestTransactional(id=count+1, quest=quest, shipper=shipper, transaction_type=0)
+        transcational.save()
+        token_id = transcational.get_token_id()
+        questr_token = QuestrToken(token_id=token_id)
+        questr_token.save()
+        reject_link = "{0}/quest/{3}/reject/{1}?questr_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_quest_code(), token_id, quest.id)
+    return reject_link
+

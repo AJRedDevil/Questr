@@ -106,6 +106,9 @@ ALLOWED_HOSTS = ['*']
 # QUESTR HOMEPAGE URL
 QUESTR_URL = os.environ['QUESTR_URL'] 
 
+# QUESTR PROXIMITY
+QUESTR_PROXIMITY = 11
+
 # Static asset configuration
 STATIC_URL = 'http://s3.amazonaws.com/%s/' % AWS_STATIC_BUCKET
 STATICFILES_DIRS = (

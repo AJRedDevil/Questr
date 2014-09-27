@@ -9,6 +9,7 @@ from users.access.requires import verified
 
 from .contrib import quest_handler
 from users.contrib.user_handler import isShipper, getShippers, getQuestrDetails
+from users.contrib import user_handler
 from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm, DistancePriceForm
 from .models import Quests
 
@@ -327,11 +328,14 @@ def confirmquest(request):
             quest_data.save()
             # return redirect('pay',questname=quest_data)
             try:
-                shippers = getShippers()
-                for shipper in shippers: # send notifcations to all the shippers
-                    email_details = quest_handler.prepNewQuestNotification(shipper, quest_data)
-                    email_notifier.send_email_notification(shipper, email_details)
+                # shippers = getShippers()
+                # for shipper in shippers: # send notifcations to all the shippers
+                #     email_details = quest_handler.prepNewQuestNotification(shipper, quest_data)
+                #     email_notifier.send_email_notification(shipper, email_details)
+                couriermanager = user_handler.CourierManager()
+                couriermanager.informShippers(quest_data)
             except Exception, e:
+                ##Inform admin of an error
                 logger.debug(e)
                 pass
             quest_handler.update_resized_image(quest_data.id)
