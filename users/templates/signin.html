@@ -22,11 +22,7 @@
 			    	<form action="{%url 'signin'%}" method="post" class="css-form" novalidate>{% csrf_token %}
                     <!-- Login with Username and Password --> 
                     <div class="form-group">
-<<<<<<< HEAD
-                        <input type="email" name="username" class="form-control" ng-model="user.email" placeholder="Email Address" style="background:transparent;" required>
-=======
                         <input id="username" type="email" name="username" class="form-control" ng-model="user.email" placeholder="Email Address" required>
->>>>>>> e16cf62091ad677d0f0ddf7ea775278a958e4143
                         <p> 
                         {% if auth_form.username.errors %}
                         	{{ auth_form.username.errors }}
