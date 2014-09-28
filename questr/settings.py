@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'south',
     'reviews',
     'storages',
+    'endless_pagination',
 )
 
 # MIDDLERWARE DEFINITIONS
