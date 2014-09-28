@@ -43,38 +43,38 @@ class QuestrUserChangeForm(UserChangeForm):
             },
         }
 
+"""Commented out because we don't have the social signup feature now"""
+# class QuestrSocialSignupForm(forms.ModelForm):
+#     """
+#     This is for when the user signs up with a social account
+#     """
+#     def __init__(self, *args, **kwargs):
+#         super(forms.ModelForm, self).__init__(*args, **kwargs)
 
-class QuestrSocialSignupForm(forms.ModelForm):
-    """
-    This is for when the user signs up with a social account
-    """
-    def __init__(self, *args, **kwargs):
-        super(forms.ModelForm, self).__init__(*args, **kwargs)
-
-    class Meta:
-        model = QuestrUserProfile
-        fields = ['first_name','last_name','displayname','email']
-        exclude = ('username.help_text',)
-        widgets = {
-            'first_name' : forms.TextInput(attrs={'placeholder':'First Name'}),
-            'last_name' : forms.TextInput(attrs={'placeholder':'Last Name'}),
-            'displayname' : forms.TextInput(attrs={'placeholder':'Your Username'}),
-            'email' : forms.TextInput(attrs={'placeholder':'you@example.com'}),
-        }
-        error_messages = {
-            'first_name' : {
-                'required' : 'Your first name is required!',
-            },
-            'last_name' : {
-                'required' : 'Your last name is required!',
-            },
-            'email' : {
-                'required' : 'Please provide with a valid email address!',
-            },
-            'displayname' : {
-                'required' : 'You need a username, don\'t you ?',
-            },
-        }
+#     class Meta:
+#         model = QuestrUserProfile
+#         fields = ['first_name','last_name','displayname','email']
+#         exclude = ('username.help_text',)
+#         widgets = {
+#             'first_name' : forms.TextInput(attrs={'placeholder':'First Name'}),
+#             'last_name' : forms.TextInput(attrs={'placeholder':'Last Name'}),
+#             'displayname' : forms.TextInput(attrs={'placeholder':'Your Username'}),
+#             'email' : forms.TextInput(attrs={'placeholder':'you@example.com'}),
+#         }
+#         error_messages = {
+#             'first_name' : {
+#                 'required' : 'Your first name is required!',
+#             },
+#             'last_name' : {
+#                 'required' : 'Your last name is required!',
+#             },
+#             'email' : {
+#                 'required' : 'Please provide with a valid email address!',
+#             },
+#             'displayname' : {
+#                 'required' : 'You need a username, don\'t you ?',
+#             },
+#         }
 
 
 
@@ -101,13 +101,30 @@ class QuestrUserCreationForm(forms.ModelForm):
                         'min_length' : 'The password has to be more than 6 characters !',
                         })
 
+    CITY_SELECTION = (('Toronto','Toronto'),('Brampton','Brampton'),('Markham','Markham'),
+                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'))
+    city = forms.ChoiceField(
+        choices=CITY_SELECTION,
+        error_messages={
+                        'required' : 'Name of the city is required !',
+                        'invalid_choice' : 'Please select one of the options available !'
+                        }
+        )
+    streetaddress = forms.CharField(
+        error_messages={'required' : 'Street/Apt. Address where the shipment is to be picked up from is required !',}
+        )
+    postalcode = forms.CharField(
+        error_messages={'required' : 'Your postcode is required !',}
+        )
+
+
     error_messages = {
         'password_mismatch': _("The two password fields didn't match. Please re-verify your passwords !"),
         }
 
     class Meta:
         model = QuestrUserProfile
-        fields = ['first_name','last_name','displayname','email',]
+        fields = ['first_name','last_name','displayname','email','city','postalcode','phone']
         widget = {
             'first_name' : forms.TextInput(attrs = { 'placeholder': 'First Name'}),
             'last_name' : forms.TextInput(attrs = { 'placeholder': 'Last Name'}),
@@ -115,6 +132,10 @@ class QuestrUserCreationForm(forms.ModelForm):
             'displayname' : forms.TextInput(attrs = { 'placeholder': 'displayname: Can contain .,+,- OR _'}),
             'password1' : forms.PasswordInput(attrs = { 'placeholder': 'Password'}),
             'password2' : forms.PasswordInput(attrs = { 'placeholder': 'Confirm Password'}),
+            'city' : forms.PasswordInput(attrs = { 'placeholder': 'Your City'}),
+            'streetaddress' : forms.PasswordInput(attrs = { 'placeholder': 'Your Streeet Address'}),
+            'postalcode' : forms.PasswordInput(attrs = { 'placeholder': 'Your Postal Code'}),
+            'phone' : forms.PasswordInput(attrs = { 'placeholder': 'Your Phone Number'}),
         }
 
         error_messages = {
@@ -129,6 +150,15 @@ class QuestrUserCreationForm(forms.ModelForm):
             },
             'displayname' : {
                 'required' : 'You need a username, don\'t you ?',
+            },
+            'streetaddress' : {
+                'required' : 'Your street address is required',
+            },
+            'postalcode' : {
+                'required' : 'Your postal-code is required',
+            },
+            'phone' : {
+                'required' : 'Your Phone Number is required',
             },
         }
 

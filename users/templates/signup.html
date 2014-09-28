@@ -73,6 +73,7 @@
 			<div class="col-xs-12 col-lg-8 col-lg-pull-4 column">
 				<hr>
 				
+<<<<<<< HEAD
 				<div class="row clearfix form-group">
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
 						<input class="form-control input-sm" type="email" ng-model="user.email" placeholder="Email" required />
@@ -121,6 +122,54 @@
 			            {% endif %}
 			        </div><!-- ./column -->
 		   	 	</div><!-- ./row -->
+=======
+				<div class="row clearfix">
+					<div class="col-xs-10 col-sm-10 col-md-6 col-lg-6 column">			
+						<div class="form-group">
+							<label for="inputEmail" class="control-label">Email</label>
+							<input id="email" name="email" class="form-control" type="email" ng-model="user.email" required />
+						</div>
+	                    {{user_form.email.errors}}			              
+					</div><!-- ./column -->						
+				</div><!-- ./row -->
+					
+				
+				<label for="inputPassword" class="control-label">Password</label>
+				<div class="row clearfix">
+					<div class="col-xs-10 col-sm-10 col-md-6 col-lg-6 column">    
+						<input id="password1" class="form-control input-sm" ng-model="user.password" type="password" name="password1" data-ng-class="{'ng-invalid':myForm.password2.$error.match}" />
+						<span class="help-block"><p>Minimum of 6 characters</p></span>
+					</div>
+	                {{user_form.password1.errors}}
+					<div class="col-xs-10 col-sm-10 col-md-6 col-lg-6 column">
+						<input id="password2" class="form-control input-sm" ng-model="user.passwordConfirm" type="password" data-match="user.password" name="password2" />
+					</div><!-- ./column -->	
+					<div data-ng-show="myForm.password2.$error.match">Passwords do not match!</div>					
+	                {{user_form.password2.errors}}
+				</div><!-- ./row -->	
+
+				
+				<div class="row clearfix">
+				<div class="col-xs-10 col-sm-10 col-md-6 col-lg-6 column">
+
+	            <label for="displayname" class="control-label">displayname</label>
+	            <input id="displayname" type="text" class="form-control input-sm" name="displayname" id="displayname" placeholder="johnappleseed" ng-model="user.displayname" required>
+	            {% if user_form.displayname.errors %}
+	                {{user_form.displayname.errors}}
+	            {% endif %}
+	            
+	            <label for="firstName" class="control-label">First Name</label>
+	            <input id="first_name" type="text" class="form-control input-sm" name="first_name" id="first_name" placeholder="John" ng-model="user.firstname" required>   
+	            {% if user_form.first_name.errors %}
+	                {{user_form.first_name.errors}}
+	            {% endif %}   
+	          
+	            <label for="lastName" class="control-label">Last Name</label>
+	            <input id="last_name" type="text" class="form-control input-sm" name="last_name" id="last_name" placeholder="Appleseed" ng-model="user.lastname" required>
+	            {% if user_form.last_name.errors %}
+	                {{user_form.last_name.errors}}
+	            {% endif %}
+>>>>>>> e16cf62091ad677d0f0ddf7ea775278a958e4143
 
 
 
@@ -129,10 +178,10 @@
 	            <div class="row clearfix form-group">
 			    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
 	            <!-- CITY DROPDOWN -->
-				<label for="username" class="control-label">City</label>
+				<label for="City" class="control-label">City</label>
 				<!-- Location input-->
 				<div class="form-group">
-					<select class="btn-classic" data-size="5" name="srccity">
+					<select id="city" class="btn-classic" data-size="5" name="city">
 						<option>Toronto</option>
 						<option>Brampton</option>
 						<option>Markham</option>
@@ -144,6 +193,7 @@
 			</div>
 		</div>
 
+<<<<<<< HEAD
 
 		<!-- ADDRESS AND POSTAL CODE -->
 	            <div class="row clearfix form-group">
@@ -155,6 +205,16 @@
 			</div>
 		</div>
 
+=======
+	            <label for="streetaddress" class="control-label">Street Address</label>
+	            <input id="streetaddress" type="text" class="form-control input-sm" name="streetaddress" id="streetaddress" placeholder="16 Brookers Lane" ng-model="user.streetaddress" required>
+
+	            <label for="postalcode" class="control-label">Postal Code</label>
+	            <input id="postalcode" type="text" class="form-control input-sm" name="postalcode" id="postalcode" placeholder="MK8 LX3" required>
+
+	            <label for="phone" class="control-label">Phone Number</label>
+	            <input type="text" class="form-control input-sm" name="phone" id="phone" placeholder="+1234567890" required>
+>>>>>>> e16cf62091ad677d0f0ddf7ea775278a958e4143
 
 		<!-- PHONE NUMBER -->
 	            <div class="row clearfix form-group">

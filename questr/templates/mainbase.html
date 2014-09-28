@@ -172,12 +172,14 @@
 
 
 			<ul class="dropdown-menu dropdown-menu-right">
+{% comment %}
 				<li class="{% navactive request 'profile' %}">
 					<a href="{% url 'profile' %}">
 						
 						My profile
 					</a>
 				</li>
+{% endcomment %}
 	            <li>
 	                <a href="{% url 'settings' %}">
 	                	

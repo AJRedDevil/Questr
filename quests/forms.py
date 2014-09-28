@@ -46,8 +46,8 @@ class QuestCreationForm(forms.ModelForm):
         )
     class Meta:
         model = Quests
-        exclude = ['questrs','status','creation_date','is_accepted', 'shipper', 'delivery_code', 'reward', \
-            'item_images', 'distance', 'pickup', 'dropoff', 'delivery_date', 'map_image']
+        exclude = ['questrs','status','creation_date','isaccepted', 'shipper', 'delivery_code', 'reward', \
+            'item_images', 'distance', 'pickup', 'dropoff', 'delivery_date', 'map_image','available_couriers']
         widget = {
             'description' : forms.TextInput(attrs = { 'placeholder': "Description"}),
             'title' : forms.TextInput(attrs = { 'placeholder': 'Title'}),
@@ -114,8 +114,8 @@ class QuestConfirmForm(forms.ModelForm):
         )
     class Meta:
         model = Quests
-        exclude = ['questrs','status','creation_date','is_accepted', 'shipper', 'delivery_code', 'pickup', \
-            'dropoff', 'delivery_date', 'map_image']
+        exclude = ['questrs','status','creation_date','isaccepted', 'shipper', 'delivery_code', 'pickup', \
+            'dropoff', 'delivery_date', 'map_image','available_couriers']
         widget = {
             'description' : forms.TextInput(attrs = { 'placeholder': "Description"}),
             'title' : forms.TextInput(attrs = { 'placeholder': 'Title'}),
@@ -188,8 +188,8 @@ class QuestChangeForm(forms.ModelForm):
         )
     class Meta:
         model = Quests
-        exclude = ['questrs','reward','status','creation_date','is_accepted', 'shipper', 'distance', 'delivery_code',  \
-            'item_images', 'pickup', 'dropoff', 'delivery_date', 'map_image']
+        exclude = ['questrs','reward','status','creation_date','isaccepted', 'shipper', 'distance', 'delivery_code',  \
+            'item_images', 'pickup', 'dropoff', 'delivery_date', 'map_image','available_couriers']
 
         widget = {
             'description' : forms.TextInput(attrs = { 'placeholder': "Description"}),

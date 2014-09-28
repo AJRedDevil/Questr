@@ -19,8 +19,20 @@ class SignupCase(TestCase):
         self.password1 = "123456"
         self.password2 = "123456"
         self.email = "gaurav.ghimire@gmail.com"
+        self.city = "Toronto"
+        self.streetaddress = "16 Brookers Lane"
+        self.postalcode = "M8V0A5"
+        self.phonenum = "+1234567890"
+        self.useraddress = dict(city=self.city,streetaddress=self.streetaddress,postalcode=self.postalcode)
+
+        # useraddress = {}
+        # useraddress['city'] = user_form.cleaned_data['city']
+        # useraddress['address']=user_form.cleaned_data['address']
+        # useraddress['postalcode']=user_form.cleaned_data['postalcode']
+
         self.post_data={'first_name':self.first_name,'last_name':self.last_name,'displayname':self.username,\
-        'password1':self.password1,'password2':self.password2,'email':self.email}                        
+        'password1':self.password1,'password2':self.password2,'email':self.email, 'city':self.city, 'streetaddress':self.streetaddress,\
+        'postalcode':self.postalcode, 'phonenum':self.phonenum}                        
 
     def test_signup_url(self):
         response = self.client.get('/user/signup/')
