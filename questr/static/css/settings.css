@@ -17,7 +17,8 @@
 }
 
 .nav-sidebar a {
-    color: #979797;
+    color: #666;
+    background-color: white;
     text-align: center;
     font-size: small;
     -webkit-transition: all 0.08s linear;
@@ -27,12 +28,12 @@
 }
 .nav-sidebar li.active a { 
     cursor: default;
-    background-color: #5f97d8; 
+    background-color: #3498db; 
     color: #fff; 
     height: auto;
 }
 .nav-sidebar li a:hover, .nav-sidebar .active a:hover {
-    background-color: #5f97d8; 
+    background-color: #3498db; 
     color: white;  
 }
 .nav-sidebar .text-overflow a,
@@ -42,30 +43,3 @@
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis; 
 }
-
-img.visa {
-	width: auto;
-	height: 25px;
-}
-
-img.mastercard {
-	width: auto;
-	height: 35px;
-}
-
-img.paypal {
-	width: auto;
-	height: 20px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
