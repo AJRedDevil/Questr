@@ -10,7 +10,8 @@ class QuestCreationForm(forms.ModelForm):
     A form that creates a post, from the given data
     """
     CITY_SELECTION = (('Toronto','Toronto'),('Brampton','Brampton'),('Markham','Markham'),
-                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'))
+                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'),
+                        ('Oakville','Oakville'))
     srccity = forms.ChoiceField(
         choices=CITY_SELECTION,
         error_messages={
@@ -78,7 +79,8 @@ class QuestConfirmForm(forms.ModelForm):
     A form that creates a post, from the given data
     """
     CITY_SELECTION = (('Toronto','Toronto'),('Brampton','Brampton'),('Markham','Markham'),
-                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'))
+                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'),
+                        ('Oakville','Oakville'))
     srccity = forms.ChoiceField(
         choices=CITY_SELECTION,
         error_messages={
@@ -152,7 +154,8 @@ class QuestChangeForm(forms.ModelForm):
     A form to edit a quest that has been created already
     """
     CITY_SELECTION = (('Toronto','Toronto'),('Brampton','Brampton'),('Markham','Markham'),
-                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'))
+                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'),
+                        ('Oakville','Oakville'))
     srccity = forms.ChoiceField(
         choices=CITY_SELECTION,
         error_messages={
@@ -224,7 +227,8 @@ class DistancePriceForm(forms.Form):
         super(DistancePriceForm, self).__init__(*args, **kwargs)
 
     CITY_SELECTION = (('Toronto','Toronto'),('Brampton','Brampton'),('Markham','Markham'),
-                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'))
+                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'),
+                        ('Oakville','Oakville'))
     PACKAGE_SELECTION = (('car','Car'),('backpack','Backpack'),('minivan','Minivan'))
 
     srccity = forms.ChoiceField(

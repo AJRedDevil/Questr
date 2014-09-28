@@ -102,7 +102,8 @@ class QuestrUserCreationForm(forms.ModelForm):
                         })
 
     CITY_SELECTION = (('Toronto','Toronto'),('Brampton','Brampton'),('Markham','Markham'),
-                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'))
+                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'),
+                        ('Oakville','Oakville'))
     city = forms.ChoiceField(
         choices=CITY_SELECTION,
         error_messages={
