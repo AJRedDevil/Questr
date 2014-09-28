@@ -115,23 +115,25 @@
 
 
 
-                                <!-- offers -->
-                            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 column no-margin">
-                                <ul class="list-group no-margin">
-                                    {% for shipper in shippers %}
-                                    <!-- begin for loop here -->
-                                    <li class="list-group-item" style="background:transparent;">
-                                        <div class="col-xs-7 col-sm-7 col-md-8 col-lg-8 column">
-                                            <p><a href="{% url 'getUserInfo' displayname=shipper.0.displayname%}">{{ shipper.0.first_name }}</a> wants to accept your quest!</p>
-                                        </div>
-                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column">
-                                            <a href="{% url 'acceptOffer' quest_id=quest.id shipper_id=shipper.0.id %}" class="acceptUrl"><button class="btn btn-xs btn-info inline" style="float:left;">accept</button></a>
-                                        </div>
-                                    </li>
-                                    {% endfor %}
-                                    <!-- ./end for loop here -->
-                                </ul>
-                            </div><!-- ./column -->
+{% comment %}
+                                    <!-- offers -->
+                                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 column no-margin">
+                                    <ul class="list-group no-margin">
+                                        {% for shipper in shippers %}
+                                        <!-- begin for loop here -->
+                                        <li class="list-group-item" style="background:transparent;">
+                                            <div class="col-xs-7 col-sm-7 col-md-8 col-lg-8 column">
+                                                <p><a href="{% url 'getUserInfo' displayname=shipper.0.displayname%}">{{ shipper.0.first_name }}</a> wants to accept your quest!</p>
+                                            </div>
+                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column">
+                                                <a href="{% url 'acceptOffer' quest_id=quest.id shipper_id=shipper.0.id %}" class="acceptUrl"><button class="btn btn-xs btn-info inline" style="float:left;">accept</button></a>
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+                                        <!-- ./end for loop here -->
+                                    </ul>
+                                </div><!-- ./column -->
+{% endcomment %}            
                 {% endif %}
                 {% if quest.isaccepted and not quest.is_complete and not quest.is_shipper_reviewed %}
                     {% for shipper in shippers %}
