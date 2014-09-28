@@ -250,8 +250,9 @@ footer small.title {
 
 
 /******************** Buttons ***********************/
-button.btn-default {
+.btn-default {
 	border-radius: 2px;
+	background-color: #3498db;
 }
 
 
@@ -350,8 +351,16 @@ button.btn-default {
 
 
 /************* Buttons ************/
-.button-default {
+.btn-default {
 	background-color: #3498db;
+	border: none;
+	color: white;
+}
+
+.btn-default:hover {
+	background-color: #3498db;
+	border: none;
+	color: white;
 }
 
 .btn-classic {
