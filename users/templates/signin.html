@@ -19,10 +19,10 @@
 	        </div>
     
 		    <div class="panel-body" ng-controller="Validation">
-			    	<form action="{%url 'signin'%}" method="post" novalidate class="css-form">{% csrf_token %}
+			    	<form action="{%url 'signin'%}" method="post" class="css-form" novalidate>{% csrf_token %}
                     <!-- Login with Username and Password --> 
                     <div class="form-group">
-                        <input type="email" name="username" class="form-control" ng-model="user.email" placeholder="Email Address" required>
+                        <input type="email" name="username" class="form-control" ng-model="user.email" placeholder="Email Address" style="background:transparent;" required>
                         <p> 
                         {% if auth_form.username.errors %}
                         	{{ auth_form.username.errors }}
@@ -54,11 +54,13 @@
 
 <style type="text/css">
   .css-form input.ng-invalid.ng-dirty {
-    background-color: rgba(232,77,60,0.50);
+    border-color: rgba(232,77,60,1.00);
+    background-color: transparent;
   }
 
   .css-form input.ng-valid.ng-dirty {
-    background-color: rgba(47,204,112,0.50);
+    border-color: rgba(47,204,112,1.00);
+     background-color: transparent;
   }
 </style>
 

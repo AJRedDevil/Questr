@@ -2,8 +2,6 @@
 {% load staticfiles %}
 {% load tz %}
 {% block localhead %}
-    <!-- Bootstrap core CSS -->
-    <link href={% static "css/thankyou-bootstrap.css" %} rel="stylesheet">
 
     <!-- Custom styles for this template -->
     
@@ -16,20 +14,19 @@
 
 {% endblock localhead %}
 {% block content %}
-    <div id="headerwrap">
+
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h1>Thanks for joining us.<br>Please check your mailbox and verify your email address.</b></h1>
-                    <h1>Click <u><a class="rol-lg-6" href="/user/verifymail">here</a></u> to resend the verification email!</b></h1>   
+            <div class="row clearfix">
+                <div class="col-lg-6 col-lg-6 col-lg-6">
+                    <h1>Thanks for joining us.<br>Please check your mailbox and verify your email address.</h1>
+                    <h1>Click <u><a href="/user/verifymail">here</a></u> to resend the verification email!</h1>   
                 </div><!-- /col-lg-6 -->
                 <div class="col-lg-6">
-                    <img class="img-responsive" src={% static "img/check.png" %} alt="">
+                   <div class="circle"><span class="glyphicon glyphicon-ok" style="line-height:inherit;"></span></div>
                 </div><!-- /col-lg-6 -->
                 
             </div><!-- /row -->
         </div><!-- /container -->
-    </div><!-- /headerwrap -->
 {% endblock content %}
 {% block scripts %}
 {% endblock scripts %}

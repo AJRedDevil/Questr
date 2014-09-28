@@ -3,6 +3,7 @@ a {
 	color: #3498DB;
 }
 
+
 .lead {
 	font-weight: 200;
 }
@@ -18,7 +19,7 @@ label {
 }
  
 body {
-	background: white;
+	background: #edefed;
 	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
 	line-height: 1.43;
 	font-size: 14px;
@@ -216,12 +217,6 @@ footer small.title {
 	padding-top: 10px;
 }
 
-
-
-hr {
-	display: block;
-	height: 1px;
-}
 
 .inline  {
 	display: inline;	
@@ -496,18 +491,25 @@ select option {
 input.form-control, input.form-control, textarea.form-control {
 	border: 1px;
 	border-style: solid;
-	border-color: #e3e3e3;
+	border-color: rgba(0,0,0,0.2);
 	background: white;
 	box-shadow: none;
-	border-radius: 2px;
+	border-radius: 0px;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	background-color: transparent;		
+	-webkit-box-shadow: 0 0 0px 1000px white inset;
+
 }
 
 input.form-control:focus, input.form-control:active, textarea.form-control:focus {
 	box-shadow: none;
 	border-width: 1px;
 	border-color: #3498db;
+	background-color: transparent;
+	-webkit-box-shadow: 0 0 0px 1000px white inset;
 }
-
 
 
 
@@ -602,11 +604,11 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 
  /********* Generic Theme classes **********/
 .grey {
-	color: #f9f9f9;
+	color: rgba(0,0,0,0.8);
 }
 
 .grey-bg {
-	background: #f9f9f9;
+	background: rgba(210,210,210,1);
 }
 
 .white {
@@ -616,6 +618,12 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 .white-bg {
 	background: white;
 }
+
+
+
+
+
+
 
 .light-grey {
 	color: #6a7480;
@@ -671,5 +679,26 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 	margin: 0;
 	padding-top: 18px;
 	padding-bottom: 24px;
+}
+
+
+
+
+
+
+
+
+.circle
+{
+width:500px;
+height:500px;
+border-radius:50%;
+border:1px solid black;
+font-size:200px;
+font-weight: 100;
+color:black;
+line-height:500px;
+text-align:center;
+background:transparent;
 }
 
