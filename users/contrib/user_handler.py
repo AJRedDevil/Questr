@@ -324,8 +324,12 @@ class CourierManager(object):
                 logger.warn("No active couriers in the system now")
                 ##* inform the master couriers
                 dothis = self.informSuperAdmins(quest)
+                questdetails = Quests.objects.get(id=int(quest.id))
                 if dothis == "success":
                     logger.warn("Master Couriers have been informed as no shippers were available for quest %d" % (quest.id))
+                    questdetails.isaccepted = True
+                    questdetails.shipper = 0
+                    questdetails.save()
                     return "fail"
                 else:
                     # Man we have a problem return 500 NO SHIPPERS AVAILABLE NOW, ASK THE USER TO HIT "process quest"

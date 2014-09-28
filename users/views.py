@@ -115,7 +115,13 @@ def home(request):
         alert_message = request.session.get('alert_message')
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        allquests = Quests.objects.filter(ishidden=False, isaccepted=False, shipper=user.id)
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=user.id)
+        return render(request,'shipperhomepage.html', locals())
+    elif userdetails.is_superuser:
+        alert_message = request.session.get('alert_message')
+        if request.session.has_key('alert_message'):
+            del request.session['alert_message']
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=0)
         return render(request,'shipperhomepage.html', locals())
     else:
         alert_message = request.session.get('alert_message')
