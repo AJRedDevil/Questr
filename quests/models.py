@@ -20,7 +20,7 @@ class Quests(models.Model):
     questrs = models.ForeignKey(QuestrUserProfile)
     # pretty_url = models.CharField(_('pretty_url'), 
     #     max_length=1000, blank=True)
-    description = models.TextField(_('description'))
+    description = models.TextField(_('description'), blank=True)
     title = models.CharField(_('title'), max_length=100, 
         blank=False)
     reward = models.DecimalField(_('reward'), decimal_places=2, 
