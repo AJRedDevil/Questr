@@ -235,7 +235,9 @@ class CourierManager(object):
             return "fail"
         else:
             for admin in superadmins: # send notifcations to all the shippers
-                email_details = quest_handler.prepNewQuestNotification(admin, quest)
+                accept_url = ""
+                reject_url = ""
+                email_details = quest_handler.prepNewQuestNotification(admin, quest, accept_url, reject_url)
                 email_notifier.send_email_notification(admin, email_details)
             return "success"
 
@@ -246,6 +248,12 @@ class CourierManager(object):
         logging.warn(accept_url)
         logging.warn(reject_url)
         email_details = quest_handler.prepNewQuestNotification(courier, quest, accept_url, reject_url)
+        email_notifier.send_email_notification(courier, email_details)
+        return "success"
+
+    def informCourierAfterAcceptance(self, courier, quest):
+        """Takes in a questobject and informs the superadmins of the same"""
+        email_details = quest_handler.prepOfferAcceptedNotification(courier, quest)
         email_notifier.send_email_notification(courier, email_details)
         return "success"
 
@@ -310,8 +318,10 @@ class CourierManager(object):
         """Takes a quest object and informs the relative shippers"""
         # Update available shippers for a quest only if it's blank
         if len(quest.available_couriers) == 0:
+            logger.warn("No available couriers for this quest")
             activecouriers = self.getActiveCouriers()
             if len(activecouriers) == 0:
+                logger.warn("No active couriers in the system now")
                 ##* inform the master couriers
                 dothis = self.informSuperAdmins(quest)
                 if dothis == "success":

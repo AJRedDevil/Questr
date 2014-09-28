@@ -3,6 +3,7 @@
 import logging
 from django.shortcuts import render, redirect
 from users.models import QuestrUserProfile, QuestrToken
+from quests.models import QuestToken
 
 def verified(a_view):
 	""" 
@@ -19,7 +20,8 @@ def verified(a_view):
 						return a_view(request, *args, **kwargs)
 					else:
 						pagetype="emailnotverified"
-						alert_message = request.session.get('alert_message')
+						request.session['alert_message'] = dict(type="warning",message="Please check your inbox and verify your email !")
+						alert_message = request.session['alert_message']
 						return render(request, 'thankyou.html', locals())
 				success = False
 				message = "User not Found"
@@ -44,12 +46,41 @@ def is_alive(a_view):
 						return a_view(request, *args, **kwargs)
 					else:
 						success = False
-						message = "Your token has expired."
+						request.session['alert_message'] = dict(type="warning",message="The link has expired please click below to request again!")
+						alert_message = request.session['alert_message']
 						return render(request, 'verification.html', locals())
 			except QuestrToken.DoesNotExist:
 				success = False
-				message = "Sorry Imposter"
+				request.session['alert_message'] = dict(type="danger",message="Invalid Request !")
+				alert_message = request.session['alert_message']
 				return render(request, 'verification.html', locals())
+		else:
+			return render(request,'error_pages/something_broke.html', locals())
+	return _wrapped_function
+
+def is_quest_alive(a_view):
+	"""
+	checks whether the token is alive or dead
+	"""
+	def _wrapped_function(request, *args, **kwargs):
+		quest_token = request.GET['quest_token']
+		if quest_token:
+			try:
+				token = QuestToken.objects.get(token_id = quest_token)
+				# check whether the token is alive and take dedcision
+				if token:
+					if token.is_alive():
+						return a_view(request, *args, **kwargs)
+					else:
+						success = False
+						request.session['alert_message'] = dict(type="warning",message="The link has expired, and perhaps some other courier has been selected!")
+						alert_message = request.session['alert_message']
+						return redirect('home')
+			except QuestToken.DoesNotExist:
+				success = False
+				request.session['alert_message'] = dict(type="danger",message="Invalid Request !")
+				alert_message = request.session['alert_message']
+				return render(request, 'thankyou.html', locals())
 		else:
 			return render(request,'error_pages/something_broke.html', locals())
 	return _wrapped_function

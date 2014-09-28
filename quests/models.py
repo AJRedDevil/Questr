@@ -155,7 +155,7 @@ class QuestTransactional(models.Model):
     REQUIRED_FIELDS = ['quest_code', 'id', 'quest', 'shipper' ,'transaction_type']
 
     def __unicode__(self):
-        return "{0}:{1} {2}".format(self.quest_code, self.id, self.email)
+        return "{0}:{1} {2}".format(self.quest_code, self.quest, self.shipper)
 
     #Overriding
     def save(self, *args, **kwargs):
@@ -164,3 +164,23 @@ class QuestTransactional(models.Model):
             self.quest_code = self.generate_hash()
         # self.my_stuff = 'something I want to save in that field'
         super(QuestTransactional, self).save(*args, **kwargs)
+
+# Questr Token
+class QuestToken(models.Model):
+    token_id = models.CharField(_('id'), max_length=20, primary_key=True)
+    timeframe = models.DateTimeField(_('create_date'), default=timezone.now)
+
+    def is_alive(self):
+        timedelta = timezone.now() - self.timeframe
+        minutes = 30
+        allowable_time = float(minutes * 60)
+        return timedelta.total_seconds() < allowable_time
+
+    def __unicode__(self):
+        return "Token verifying ..."
+
+    # Overriding
+    def save(self, *args, **kwargs):
+        if not self.timeframe:
+            self.timeframe = timezone.now()
+        super(QuestToken, self).save(*args, **kwargs)

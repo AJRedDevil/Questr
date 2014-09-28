@@ -4,14 +4,14 @@ from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 
 from libs import email_notifier, geomaps, pricing, stripeutils
-from users.access.requires import verified
-
+from users.access.requires import verified, is_quest_alive
 
 from .contrib import quest_handler
 from users.contrib.user_handler import isShipper, getShippers, getQuestrDetails
 from users.contrib import user_handler
 from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm, DistancePriceForm
-from .models import Quests
+from .models import Quests, QuestTransactional
+from users.models import QuestrUserProfile
 
 import logging
 logger = logging.getLogger(__name__)
@@ -350,53 +350,54 @@ def confirmquest(request):
     message="There were some errors creating your quest, please try again !"
     return redirect('home')
 
-@verified
-@login_required
-def applyForQuest(request, questname):
-    """Takes in applications for a quest"""
-    pagetype="loggedin"
-    shipper = request.user # the guy logged in is the shipper
-    questname = questname
-    try:
-        questdetails = Quests.objects.get(id=questname, isaccepted=False)
-    except Quests.DoesNotExist:
-        raise Http404
-        return render(request,'404.html')
-    # Check if the owner and the user are the same
-    if questdetails.questrs.id == request.user.id:
-        return redirect('home')
+##Removed because we are going into automated shipper selection
+# @verified
+# @login_required
+# def applyForQuest(request, questname):
+#     """Takes in applications for a quest"""
+#     pagetype="loggedin"
+#     shipper = request.user # the guy logged in is the shipper
+#     questname = questname
+#     try:
+#         questdetails = Quests.objects.get(id=questname, isaccepted=False)
+#     except Quests.DoesNotExist:
+#         raise Http404
+#         return render(request,'404.html')
+#     # Check if the owner and the user are the same
+#     if questdetails.questrs.id == request.user.id:
+#         return redirect('home')
 
-    # get questr information
-    questr = getQuestrDetails(questdetails.questrs_id)
-    # add a shipper to the quest
-    quest_handler.addShipper(str(shipper.id), questname)
-    email_details = quest_handler.prepQuestAppliedNotification(shipper, questr, questdetails)
-    email_notifier.send_email_notification(questr, email_details)
+#     # get questr information
+#     questr = getQuestrDetails(questdetails.questrs_id)
+#     # add a shipper to the quest
+#     quest_handler.addShipper(str(shipper.id), questname)
+#     email_details = quest_handler.prepQuestAppliedNotification(shipper, questr, questdetails)
+#     email_notifier.send_email_notification(questr, email_details)
 
-    message="Your application has been sent to the quest owner"
-    logger.debug(message)
-    return redirect('viewquest', questname=questname)
+#     message="Your application has been sent to the quest owner"
+#     logger.debug(message)
+#     return redirect('viewquest', questname=questname)
 
-@verified
-@login_required
-def withdrawFromQuest(request, questname):
-    """Takes in applications for a quest"""
-    pagetype="loggedin"
-    shipper = request.user # the guy logged in is the shipper
-    questname = questname
-    try:
-        questdetails = Quests.objects.get(id=questname, isaccepted=False)
-    except Quests.DoesNotExist:
-        raise Http404
-        return render(request,'404.html')
-    # Check if the owner and the user are the same
-    if questdetails.questrs.id == request.user.id:
-        return redirect('home')
-    # remove the shipper from the quest
-    quest_handler.delShipper(str(shipper.id), questname)
-    message="You have retracted yourself from the quest"
-    logger.debug(message)
-    return redirect('viewquest', questname=questname)
+# @verified
+# @login_required
+# def withdrawFromQuest(request, questname):
+#     """Takes in applications for a quest"""
+#     pagetype="loggedin"
+#     shipper = request.user # the guy logged in is the shipper
+#     questname = questname
+#     try:
+#         questdetails = Quests.objects.get(id=questname, isaccepted=False)
+#     except Quests.DoesNotExist:
+#         raise Http404
+#         return render(request,'404.html')
+#     # Check if the owner and the user are the same
+#     if questdetails.questrs.id == request.user.id:
+#         return redirect('home')
+#     # remove the shipper from the quest
+#     quest_handler.delShipper(str(shipper.id), questname)
+#     message="You have retracted yourself from the quest"
+#     logger.debug(message)
+#     return redirect('viewquest', questname=questname)
 
 @verified
 @login_required
@@ -532,6 +533,7 @@ def getDistanceAndPrice(request):
             resultdict['message'] = "Internal Server Error"
             return HttpResponse(json.dumps(resultdict),content_type="application/json")
 
+## Removed payment module for now, as we are using square readers.
 # @verified
 # @login_required
 # def setnewpayment(request, questname):
@@ -546,3 +548,103 @@ def getDistanceAndPrice(request):
 #             return redirect('pay', questname=quest_data)
     
 #     return render(request, 'newpayment.html', locals())
+
+@is_quest_alive
+@login_required
+def accept_quest(request, quest_code):
+    """
+        Verifies email of the user and redirect to the home page
+    """
+    logger.debug(quest_code)
+    if quest_code:
+        try:
+            transcational = QuestTransactional.objects.get(quest_code__regex=r'^%s' % quest_code)
+            opptransaction = QuestTransactional.objects.get(quest_id=transcational.quest_id, shipper_id=transcational.shipper_id, transaction_type=0)
+            logger.debug("quest transactional")
+            logger.debug(transcational)
+            if transcational:
+                logger.debug("transctional status")
+                logger.debug(transcational.status)
+                if not transcational.status:
+                    try:
+                        quest = Quests.objects.get(id=int(transcational.quest_id))
+                        courier = QuestrUserProfile.objects.get(id=int(transcational.shipper_id))
+                        logger.debug("%s is the requesting user, where %s is the courier for %s quest" % (request.user, courier, quest))
+                        if quest and courier and request.user == courier:
+                            ##Set status to true so it won't be used again
+                            transcational.status = True
+                            ##Set rejection status to true so it won't be used again
+                            opptransaction.status = True
+                            ##Set Courier status to unavailable
+                            courier.is_available = False
+                            ##Set quest's courier to respective courier
+                            quest.shipper = courier.id
+                            ##Save all the details
+                            transcational.save()
+                            courier.save()
+                            opptransaction.save()
+                            quest.save()
+                            couriermanager = user_handler.CourierManager()
+                            couriermanager.informCourier(courier, quest)
+                    except QuestrUserProfile.DoesNotExist:
+                        logger.debug('User does not exist')
+                        return redirect('home')
+                else:
+                    request.session['alert_message'] = dict(type="warning",message="Please use the latest verification email sent, or click below to send a new email.")
+                    return redirect('home')
+        except QuestTransactional.DoesNotExist:
+            return redirect('home')
+    return redirect('home')
+
+@is_quest_alive
+@login_required
+def reject_quest(request, quest_code):
+    """
+        Verifies email of the user and redirect to the home page
+    """
+    logger.debug(quest_code)
+    if quest_code:
+        try:
+            transcational = QuestTransactional.objects.get(quest_code__regex=r'^%s' % quest_code)
+            opptransaction = QuestTransactional.objects.get(quest_id=transcational.quest_id, shipper_id=transcational.shipper_id, transaction_type=1)
+            logger.debug("quest transactional")
+            logger.debug(transcational)
+            if transcational:
+                logger.debug("transctional status")
+                logger.debug(transcational.status)
+                if not transcational.status:
+                    try:
+                        quest = Quests.objects.get(id=int(transcational.quest_id))
+                        courier = QuestrUserProfile.objects.get(id=int(transcational.shipper_id))
+                        logger.debug("%s is the requesting user, where %s is the courier for %s quest" % (request.user, courier, quest))
+                        if quest and courier and request.user == courier:
+                            ##Set status to true so it won't be used again
+                            transcational.status = True
+                            ##Set rejection status to true so it won't be used again
+                            opptransaction.status = True
+                            ##Set courier status to true so he can be used for other quests    
+                            # We will have to figure out another way to do this, perhaps a this courier rejected these quest type of flags
+                            courier.is_available = False
+                            ##Remove this courier from the current quest's list of available shippers
+                            available_couriers = quest.available_couriers
+                            logging.warn(available_couriers)
+                            available_couriers.pop(str(courier.id), None)
+                            quest.available_couriers = available_couriers
+                            ##Save all the details
+                            quest.save()
+                            transcational.save()
+                            courier.save()
+                            opptransaction.save()
+                            couriermanager = user_handler.CourierManager()
+                            ##Re-run the shipper selection algorithm
+                            quest = Quests.objects.get(id=int(transcational.quest_id))
+                            couriermanager.informShippers(quest)
+                    except QuestrUserProfile.DoesNotExist:
+                        logger.debug('User does not exist')
+                        return redirect('home')
+                else:
+                    request.session['alert_message'] = dict(type="warning",message="Please use the latest verification email sent, or click below to send a new email.")
+                    return redirect('home')
+        except QuestTransactional.DoesNotExist:
+            return redirect('home')
+    return redirect('home')

@@ -168,82 +168,17 @@ class ManagerCase(TestCase):
         quest = Quests.objects.get(id=1)
         ## Check if quest is created fine
         self.assertEqual(questdetails.title, self.title)
-
+        self.assertEqual(quest.available_couriers, {})
 
         from users.contrib import user_handler
         from quests.contrib import quest_handler
+
+        # Instantiate the courier manager instance
         couriermanager = user_handler.CourierManager()
         # ##* Get the list of available shippers
         couriermanager.informShippers(quest)
-        # courierlist = couriermanager.getActiveCouriers()
-#         available = couriermanager.getAvailableCouriersWithProximity(courierlist, quest)
-#         # logging.warn(courierlist)
-#         # logging.warn("List of available shippers")
-#         # self.assertIsInstance(couriermanager,user_handler.CourierManager)
-#         ##* is list empty
-#         if len(courierlist) == 0:
-#             ##* inform Don and Frank
-#             dothis = couriermanager.informSuperAdmins(quest)
-#             self.assertEqual(dothis, 'success')
-#             if dothis == "success":
-#                 #its good
-#                 pass
-#             else:
-#                 # Man we have a problem return 500 NO SHIPPERS AVAILABLE NOW, ASK THE USER TO HIT "process quest"
-#                 # "process quest" will have to be put somewhere in his dashboard of quest which are not honored
-#                 pass
 
-#         ##* get_courier_dict
-#         couriers_dict = couriermanager.getAvailableCouriersWithProximity(courierlist, quest)
-#         # logging.warn("list of shippers with proximity details")
-#         # logging.warn(couriers_dict)
-# # Returns a KVP with keys as below userid, address, distance, is_available, in_proximity
-#         # couriers_dict = {}
-#         # for courier in courierlist:
-#         #     courierdict = {}
-#         #     origin = courier.address['postalcode']+", "+courier.address['city']
-#         #     destination = str(quest.pickup['postalcode'])+", "+str(quest.pickup['city'])
-#         #     # Check if user is in proximity
-#         #     courierdict['proximity'] = couriermanager.checkProximity(origin, destination)
-#         #     courierdict['is_available'] = True
-#         #     courierdict['address'] = courier.address
-#         #     # logging.warn(courierdict)
-#         #     couriers_dict[courier.id] = courierdict
-#         quest_handler.updateQuestWithAvailableCourierDetails(quest, couriers_dict)
-#         quest = Quests.objects.get(id=1)
-#         # Quests.objects.filter(id=1).update(available_couriers=couriers_dict)
-#         # logging.warn(quest.available_couriers)
-#         ##* if courier in proximity or not check
-#         couriers_list = couriermanager.getCouriersInProximity(quest)
-#         if len(couriers_list) == 0:
-#             couriers_list = couriermanager.getCouriersNotInProximity(quest)
-
-#         # logging.warn("couriers with distance filtered")
-#         # logging.warn(couriers_list)
-#         # accept_url = quest_handler.get_accept_url(quest, user_handler.getQuestrDetails(couriers_list[0][0]))
-#         # reject_url = quest_handler.get_reject_url(quest, user_handler.getQuestrDetails(couriers_list[0][0]))
-#         # logging.warn(accept_url)
-#         # logging.warn(reject_url)
-#         # couriermanager.informCourier(couriers_list[0][0], quest)
-
-#         # logging.warn(couriers_in_proximity.iteritems())
-#         # logging.warn(couriers_in_proximity[0][0][1])
-#         # sorted(couriers_in_proximity.iteritems(), key=lambda x: (x[1]))
-#         # logging.warn(couriers_list[0])
-#         # couriers_not_in_proximity = quest_handler.getCouriersInProximity(quest.available_couriers)
-#         # for courier in quest.available_couriers:
-#         #     if quest.available_couriers[courier]['proximity']['in_proximity'] == True:
-#         #         logging.warn("Courier is in proximity")
-#         #     else:
-#         #         logging.warn("He is not")
-#             # logging.warn(courier.email_status)
-
-#         # ## Check if the shipper count is true, there are 3 shippers created above
-#         # self.assertEqual(len(courierlist), 3)
-
-#         # # Update availability of second shipper 
-#         # user_handler.updateCourierAvailability(courierlist[1], 0)
-
-#         # courierlist = couriermanager.getActiveCouriers()
-#         # # 2 shippers are available 
-#         # self.assertEqual(len(courierlist), 3)
+        #Retrieve quest details after the list is updated 
+        quest = Quests.objects.get(id=1)
+        self.assertNotEqual(quest.available_couriers, {})
+        

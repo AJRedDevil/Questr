@@ -91,7 +91,7 @@
 		                            </ul>
 								</div>
 								{% endif %}
-							
+							{% comment %}
 								{# Only allowing shippers to apply for quests #}
 								{% if user.is_shipper and not isShipperForQuest and not questdetails.isaccepted and not isOwner %}
 								<a href="apply"><button type="button" class="btn btn-xs btn-success btn-embossed offerBtn">Apply</button></a>
@@ -99,12 +99,15 @@
 								{% if user.is_shipper and isShipperForQuest and not questdetails.isaccepted and not isOwner %}
 								<a href="withdraw"><button type="button" class="btn btn-xs btn-default offerBtn">Withdraw</button></a>
 								{% endif %}
-								
+							{% endcomment %}
+							{% comment %}
 								{% if isOwner %}
 								<button type="button" class="btn btn-xs btn-success btn-embossed popover-right offerBtn" data-container="body" data-toggle="popover" data-placement="right" data-content="{{questdetails.delivery_code}}">
 								Show Delivery Code
 								</button>           		              
-								{% endif %}
+								{% endif %}									
+							{% endcomment %}
+
 							</div>
 						</div>
 					

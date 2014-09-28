@@ -2,10 +2,9 @@
 
 from django.shortcuts import render, redirect
 from django.conf import settings
+from django.http import Http404, HttpResponse
 
-from quests.models import Quests, QuestTransactional
-from users.models import QuestrToken
-from users.access.requires import is_alive
+from quests.models import Quests, QuestTransactional, QuestToken
 
 import logging
 logger = logging.getLogger(__name__)
@@ -117,7 +116,6 @@ def delShipper(shipper_id, questname):
         Quests.objects.filter(id=questname).update(shipper=current_shipper)
     except Quests.DoesNotExist:
         raise Http404
-        return render(request,'404.html')
 
 def prepNewQuestNotification(user, questdetails, accept_url, reject_url):
     """Prepare the details for notification emails for new quests"""
@@ -277,7 +275,6 @@ def update_resized_image(quest_id):
         Quests.objects.filter(id=quest_id).update(item_images=normal_file_path)
     except Quests.DoesNotExist:
         raise Http404
-        return render(request,'404.html')
     logger.debug(storage.exists(file_path))
     if storage.exists(file_path):
         storage.delete(file_path)
@@ -307,9 +304,9 @@ def get_accept_url(quest=None, shipper=None):
         transcational = QuestTransactional(id=count+1, quest=quest, shipper=shipper, transaction_type=1)
         transcational.save()
         token_id = transcational.get_token_id()
-        questr_token = QuestrToken(token_id=token_id)
+        questr_token = QuestToken(token_id=token_id)
         questr_token.save()
-        accept_link = "{0}/quest/{3}/accept/{1}?questr_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_quest_code(), token_id, quest.id)
+        accept_link = "{0}/quest/accept/{1}?quest_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_quest_code(), token_id)
     return accept_link
 
 def get_reject_url(quest=None, shipper=None): 
@@ -329,8 +326,8 @@ def get_reject_url(quest=None, shipper=None):
         transcational = QuestTransactional(id=count+1, quest=quest, shipper=shipper, transaction_type=0)
         transcational.save()
         token_id = transcational.get_token_id()
-        questr_token = QuestrToken(token_id=token_id)
+        questr_token = QuestToken(token_id=token_id)
         questr_token.save()
-        reject_link = "{0}/quest/{3}/reject/{1}?questr_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_quest_code(), token_id, quest.id)
+        reject_link = "{0}/quest/reject/{1}?quest_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_quest_code(), token_id)
     return reject_link
 

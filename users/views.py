@@ -111,11 +111,16 @@ def home(request):
     user = request.user
     userdetails = user_handler.getQuestrDetails(user.id)
     pagetitle = "Home"
-    alert_message = request.session.get('alert_message')
     if userdetails.is_shipper:
-        allquests = Quests.objects.filter(ishidden=False, isaccepted=False)
+        alert_message = request.session.get('alert_message')
+        if request.session.has_key('alert_message'):
+            del request.session['alert_message']
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=False, shipper=user.id)
         return render(request,'shipperhomepage.html', locals())
-    else:       
+    else:
+        alert_message = request.session.get('alert_message')
+        if request.session.has_key('alert_message'):
+            del request.session['alert_message']
         allquests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, )
         activequests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id)
         pastquests = Quests.objects.filter(is_complete=True, questrs_id=userdetails.id)
