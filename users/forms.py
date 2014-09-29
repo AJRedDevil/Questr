@@ -19,6 +19,23 @@ class QuestrUserChangeForm(UserChangeForm):
             del self.fields['password']
             del self.fields['username']
 
+    CITY_SELECTION = (('Toronto','Toronto'),('Brampton','Brampton'),('Markham','Markham'),
+                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'),
+                        ('Oakville','Oakville'))
+    city = forms.ChoiceField(
+        choices=CITY_SELECTION,
+        error_messages={
+                        'required' : 'Name of the city is required !',
+                        'invalid_choice' : 'Please select one of the options available !'
+                        }
+        )
+    streetaddress = forms.CharField(
+        error_messages={'required' : 'Street/Apt. Address where the shipment is to be picked up from is required !',}
+        )
+    postalcode = forms.CharField(
+        error_messages={'required' : 'Your postcode is required !',}
+        )
+
     class Meta:
         model = QuestrUserProfile
         fields = ['first_name','last_name','displayname','email']

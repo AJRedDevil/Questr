@@ -139,10 +139,9 @@
     <li class="{% navactive request 'home' %}"><a href="{% url 'home' %}">Home</a></li>        
 
 
-    {% if user.is_shipper %}
+    {% if user.is_shipper or user.is_superuser %}
       <li class="{% navactive request 'myshipments' %}"><a href="{% url 'myshipments' %}">My shipments</a></li>
-      {% endif %}
-      {% if not user.is_shipper %}
+      {% else %}
       <li class="{% navactive request 'myposts' %}"><a href="{% url 'myposts' %}">My Quests</a></li>
       {% endif %}
     

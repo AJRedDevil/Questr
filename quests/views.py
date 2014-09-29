@@ -576,7 +576,7 @@ def accept_quest(request, quest_code):
                             ##Set rejection status to true so it won't be used again
                             opptransaction.status = True
                             ##Set Courier status to unavailable
-                            courier.is_available = False
+                            courier.is_available = True # This should be false, only put True for today
                             ##Set quest's courier to respective courier
                             quest.shipper = courier.id
                             ##Save all the details
@@ -624,7 +624,7 @@ def reject_quest(request, quest_code):
                             opptransaction.status = True
                             ##Set courier status to true so he can be used for other quests    
                             # We will have to figure out another way to do this, perhaps a this courier rejected these quest type of flags
-                            courier.is_available = False
+                            courier.is_available = True # This should be False, only put false for today
                             ##Remove this courier from the current quest's list of available shippers
                             available_couriers = quest.available_couriers
                             logging.warn(available_couriers)

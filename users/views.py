@@ -115,21 +115,21 @@ def home(request):
         alert_message = request.session.get('alert_message')
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=user.id)
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=user.id).order_by('-creation_date')
         return render(request,'shipperhomepage.html', locals())
     elif userdetails.is_superuser:
         alert_message = request.session.get('alert_message')
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=0)
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=0).order_by('-creation_date')
         return render(request,'shipperhomepage.html', locals())
     else:
         alert_message = request.session.get('alert_message')
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        allquests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, )
-        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id)
-        pastquests = Quests.objects.filter(is_complete=True, questrs_id=userdetails.id)
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, ).order_by('-creation_date')
+        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id).order_by('-creation_date')
+        pastquests = Quests.objects.filter(is_complete=True, questrs_id=userdetails.id).order_by('-creation_date')
         return render(request,'homepage.html', locals())
 
 @login_required
@@ -187,7 +187,12 @@ def userSettings(request):
             raise Http404
             return render(request,'404.html', locals())        
         if user_form.is_valid():
-            user_form.save()
+            useraddress = dict(city=user_form.cleaned_data['city'], streetaddress=user_form.cleaned_data['streetaddress'],\
+                postalcode=user_form.cleaned_data['postalcode'])
+            logging.warn(useraddress)
+            userdata = user_form.save(commit=False)
+            userdata.address = json.dumps(useraddress)
+            userdata.save()
             message="Your profile has been updated!"
             return redirect('settings')
     pagetitle = "My Settings"
