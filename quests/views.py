@@ -579,6 +579,8 @@ def accept_quest(request, quest_code):
                             courier.is_available = True # This should be false, only put True for today
                             ##Set quest's courier to respective courier
                             quest.shipper = courier.id
+                            ##Set quest as accepted 
+                            quest.isaccepted = True
                             ##Save all the details
                             transcational.save()
                             courier.save()

@@ -2,8 +2,7 @@
 
 import logging as log
 import pytz
-import math
-
+from decimal import Decimal
 from datetime import datetime, time
 
 from django.utils import timezone
@@ -87,7 +86,7 @@ class PricingTestCase(TestCase):
         expected_value = 5.0
         self.__distance = (float(data['distance']) - 2) if float(data['distance']) > 2 else 0
         self.__shipment_mode = data['mode']
-        price = math.ceil(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode))
+        price = float(Decimal(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode)).quantize(Decimal('0.01')))
         self.assertEqual(price, expected_value)
 
 
@@ -98,7 +97,7 @@ class PricingTestCase(TestCase):
         data = self.data
         self.__distance = (float(data['distance']) - 2) if float(data['distance']) > 2 else 0
         self.__shipment_mode = data['mode']
-        price = math.ceil(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode))
+        price = float(Decimal(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode)).quantize(Decimal('0.01')))
         self.assertEqual(price, expected_value)
 
     def tests_is_price_for_weekday(self):
@@ -109,7 +108,7 @@ class PricingTestCase(TestCase):
         data = self.data
         self.__distance = (float(data['distance']) - 2) if float(data['distance']) > 2 else 0
         self.__shipment_mode = data['mode']
-        price = math.ceil(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode))
+        price = float(Decimal(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode)).quantize(Decimal('0.01')))
         self.assertEqual(price, expected_value)
 
     def tests_is_price_for_peak_hours(self):
@@ -119,7 +118,7 @@ class PricingTestCase(TestCase):
         data = self.data
         self.__distance = (float(data['distance']) - 2) if float(data['distance']) > 2 else 0
         self.__shipment_mode = data['mode']
-        price = math.ceil(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode))
+        price = float(Decimal(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode)).quantize(Decimal('0.01')))
         self.assertEqual(price, expected_value)    
 
     def get_price(self, data):
@@ -128,9 +127,9 @@ class PricingTestCase(TestCase):
         self.__shipment_mode = data['mode']
 
         if self.is_weekend or self.peak_hours:
-            return round(math.ceil(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode)))
+            return float(Decimal(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode))).quantize(Decimal('0.01'))
         else:
-            return round(math.ceil(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode)))
+            return float(Decimal(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode))).quantize(Decimal('0.01'))
 
     def tests_if_hour_in_peak_hours(self):
         self.assertEqual(self.peak_hours, True)

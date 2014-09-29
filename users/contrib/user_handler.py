@@ -345,7 +345,7 @@ class CourierManager(object):
 
         designated_courier = getQuestrDetails(couriers_list[0][0])
         self.informCourier(designated_courier, quest)
-        self.setCourierAvailability(designated_courier, 0)
+        self.setCourierAvailability(designated_courier, 1) #This is supposed to be set to False, set to True as a patch work
     
     def updateCouriersForQuset(self, quest, courier):
         """Removes a courier from the set of available shippers for a quest"""
