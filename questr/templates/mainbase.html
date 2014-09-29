@@ -43,7 +43,7 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="#">Questr</a>
+		      <a class="navbar-brand" href="{% url 'index' %}">Questr</a>
 		    </div>
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -96,7 +96,7 @@
 		    </div>
 
 		      <ul class="nav navbar-nav navbar-right">
-		        <li class="{% navactive request 'logout' %}"><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-question-sign"></span> Logout</a></li>
+		        <li class="{% navactive request 'logout' %}"><a href="{% url 'logout' %}">Logout</a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
@@ -188,7 +188,7 @@
 	            </li>
 	            <li>
 	                <a href="{% url 'logout' %}">
-	                	<i class="fa fa-sign-out"></i>
+	                	
 	                	Logout
 	                </a>
 	            </li>

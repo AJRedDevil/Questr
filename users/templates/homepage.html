@@ -6,9 +6,161 @@
 <link href={% static "css/star-rating.css" %} media="all" rel="stylesheet" type="text/css"/>
 {% endblock localhead %}
 {% block content %}
+
+
+<div class="container">
+	<div class="row clearfix panel-group" id="accordion">
+	
+
+		<div class="col-md-4 column panel panel-default" id="panel1" style="border-radius:0px;">
+			
+			<a data-toggle="collapse" data-target="#collapseOne" href="#collapseOne">
+				<div class="panel-heading">
+					<h3 class="panel-title">Current Transactions</h3>
+				</div><!-- ./panel-heading -->
+			</a>
+			  <div class="panel-body panel-collapse collapse in" id="collapseOne">
+				<!-- List group -->
+				<ul class="list-group">
+				{% for quest in allquests %}
+
+				<li class="list-group-item">
+
+					<div class="media">
+					  <a class="pull-left" href="#">
+					    {% if quest.item_images %}
+					    <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
+					    {% else %}    
+					    <a  href="/quest/{{quest.id}}" title="{{quest.title | title}}">
+					    <div class="no-image item-image">
+					        <h1><span class="glyphicon glyphicon-picture"></span></h1>
+					        <span class="pay"><h3>${{quest.reward}}</h3></span>
+					    </div>
+					    </a>
+					    {% endif %}
+					  </a>
+					  <div class="media-body">
+					    <h4 class="media-heading">{{quest.title | title}}</h4>
+					    <p class="list-group-item-text postDesc">{{quest.description}}</p>
+					  </div>
+					  <div class="smallInfo">
+					      <small>
+					      <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}</small>
+					  </div><!-- ./smallInfo -->
+
+					</div><!-- ./media -->
+				</li>
+				{% endfor %}
+				</ul><!-- ./List group -->
+			  </div><!-- ./panel-body -->
+
+		</div><!-- ./column -->
+
+		<div class="col-md-4 column panel panel-default" id="panel2" style="border-radius:0px;">
+			
+				<a data-toggle="collapse" data-target="#collapseTwo" href="#collapseTwo" class="collapsed">
+			 		<div class="panel-heading">
+			  	
+			    		<h3 class="panel-title">Active Transactions</h3>
+			  		</div><!-- ./panel-heading -->
+				</a>
+
+			  <div class="panel-body panel-collapse collapse" id="collapseTwo">
+
+				<!-- List group -->
+				<ul class="list-group">
+				{% for quest in activequests %}
+					<li class="list-group-item">
+						<div class="media">
+						  <a class="pull-left" href="#">
+						    {% if quest.item_images %}
+						    <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
+						    {% else %}    
+						    <a  href="/quest/{{quest.id}}" title="{{quest.title | title}}">
+						    <div class="no-image item-image">
+						        <h1><span class="glyphicon glyphicon-picture"></span></h1>
+						        <span class="pay"><h3>${{quest.reward}}</h3></span>
+						    </div>
+						    </a>
+						    {% endif %}
+						  </a>
+						  <div class="media-body">
+						    <h4 class="media-heading">{{quest.title | title}}</h4>
+						    <p class="list-group-item-text postDesc">{{quest.description}}</p>
+						  </div>
+						  <div class="smallInfo">
+						      <small>
+						      <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}</small>
+						  </div><!-- ./smallInfo -->
+
+						</div><!-- ./media -->
+					</li>
+				{% endfor %}
+				</ul><!-- ./List group -->
+
+			  </div><!-- ./panel-body -->
+		</div><!-- ./column -->
+
+
+		<div class="col-md-4 column panel panel-default" id="panel3" style="border-radius:0px;">
+	
+			<a data-toggle="collapse" data-target="#collapseThree" href="#collapseThree" class="collapsed">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">History</h3>
+			  </div><!-- ./panel-heading -->
+			</a>
+
+			<div class="panel-body panel-collapse collapse" id="collapseThree">
+				<!-- List group -->
+				<ul class="list-group">
+				{% for quest in pastquests %}
+				<li class="list-group-item">
+					<div class="media">
+					  <a class="pull-left" href="#">
+					    {% if quest.item_images %}
+					    <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
+					    {% else %}    
+					    <a  href="/quest/{{quest.id}}" title="{{quest.title | title}}">
+					    <div class="no-image item-image">
+					        <h1><span class="glyphicon glyphicon-picture"></span></h1>
+					        <span class="pay"><h3>${{quest.reward}}</h3></span>
+					    </div>
+					    </a>
+					    {% endif %}
+					  </a>
+					  <div class="media-body">
+					    <h4 class="media-heading">{{quest.title | title}}</h4>
+					    <p class="list-group-item-text postDesc">{{quest.description}}</p>
+					  </div>
+					  <div class="smallInfo">
+					      <small>
+					      <span class="glyphicon glyphicon-map-marker"></span> {{quest.dropoff.address}}, {{quest.dropoff.city}}</small>
+					  </div><!-- ./smallInfo -->
+					  {% if quest.delivery_date %}
+					  <div class="smallInfo">
+					      <small>
+					      <span class="glyphicon glyphicon-time"></span> {{quest.delivery_date}}</small>
+					  </div><!-- ./smallInfo -->
+					  {% endif %}
+					</div><!-- ./media -->
+				</li>
+				{% endfor %}
+				</ul><!-- ./List group -->
+
+			  </div><!-- ./panel-body -->
+		</div><!-- ./column -->
+
+	</div><!-- ./row -->
+</div><!-- ./container -->
+
+
+
+
+
 <!-- This is the main container (#scroll-container) -->
 <div class="container-fluid">
 <div class="row clearfix">
+
 
 {% comment %}
 <div class="col-md-12 column section">
@@ -117,141 +269,7 @@
 </div><!-- ./post-container -->
 </div><!-- ./column -->
 
-<div class="container">
-	<div class="row clearfix">
-	
-		<div class="col-md-4 column">
-			<div class="panel panel-default">
-			  <div class="panel-heading">
-			    <h3 class="panel-title">Current Transactions</h3>
-			  </div><!-- ./panel-heading -->
-			  <div class="panel-body">
 
-				<!-- List group -->
-				<ul class="list-group">
-				{% for quest in allquests %}
-				<li class="list-group-item">
-					<div class="media">
-					  <a class="pull-left" href="#">
-					    {% if quest.item_images %}
-					    <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
-					    {% else %}    
-					    <a  href="/quest/{{quest.id}}" title="{{quest.title | title}}">
-					    <div class="no-image item-image">
-					        <h1><span class="glyphicon glyphicon-picture"></span></h1>
-					        <span class="pay"><h3>${{quest.reward}}</h3></span>
-					    </div>
-					    </a>
-					    {% endif %}
-					  </a>
-					  <div class="media-body">
-					    <h4 class="media-heading">{{quest.title | title}}</h4>
-					    <p class="list-group-item-text postDesc">{{quest.description}}</p>
-					  </div>
-					  <div class="smallInfo">
-					      <small>
-					      <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}</small>
-					  </div><!-- ./smallInfo -->
-
-					</div><!-- ./media -->
-				</li>
-				{% endfor %}
-				</ul><!-- ./List group -->
-
-			  </div><!-- ./panel-body -->
-			</div><!-- ./panel -->
-		</div><!-- ./column -->
-
-		<div class="col-md-4 column">
-			<div class="panel panel-default">
-			  <div class="panel-heading">
-			    <h3 class="panel-title">Active Transactions</h3>
-			  </div><!-- ./panel-heading -->
-			  <div class="panel-body">
-
-				<!-- List group -->
-				<ul class="list-group">
-				{% for quest in activequests %}
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    {% if quest.item_images %}
-						    <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
-						    {% else %}    
-						    <a  href="/quest/{{quest.id}}" title="{{quest.title | title}}">
-						    <div class="no-image item-image">
-						        <h1><span class="glyphicon glyphicon-picture"></span></h1>
-						        <span class="pay"><h3>${{quest.reward}}</h3></span>
-						    </div>
-						    </a>
-						    {% endif %}
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">{{quest.title | title}}</h4>
-						    <p class="list-group-item-text postDesc">{{quest.description}}</p>
-						  </div>
-						  <div class="smallInfo">
-						      <small>
-						      <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}</small>
-						  </div><!-- ./smallInfo -->
-
-						</div><!-- ./media -->
-					</li>
-				{% endfor %}
-				</ul><!-- ./List group -->
-
-			  </div><!-- ./panel-body -->
-			</div><!-- ./panel -->
-		</div><!-- ./column -->
-				<div class="col-md-4 column">
-			<div class="panel panel-default">
-			  <div class="panel-heading">
-			    <h3 class="panel-title">History</h3>
-			  </div><!-- ./panel-heading -->
-			  <div class="panel-body">
-
-				<!-- List group -->
-				<ul class="list-group">
-				{% for quest in pastquests %}
-				<li class="list-group-item">
-					<div class="media">
-					  <a class="pull-left" href="#">
-					    {% if quest.item_images %}
-					    <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
-					    {% else %}    
-					    <a  href="/quest/{{quest.id}}" title="{{quest.title | title}}">
-					    <div class="no-image item-image">
-					        <h1><span class="glyphicon glyphicon-picture"></span></h1>
-					        <span class="pay"><h3>${{quest.reward}}</h3></span>
-					    </div>
-					    </a>
-					    {% endif %}
-					  </a>
-					  <div class="media-body">
-					    <h4 class="media-heading">{{quest.title | title}}</h4>
-					    <p class="list-group-item-text postDesc">{{quest.description}}</p>
-					  </div>
-					  <div class="smallInfo">
-					      <small>
-					      <span class="glyphicon glyphicon-map-marker"></span> {{quest.dropoff.address}}, {{quest.dropoff.city}}</small>
-					  </div><!-- ./smallInfo -->
-					  {% if quest.delivery_date %}
-					  <div class="smallInfo">
-					      <small>
-					      <span class="glyphicon glyphicon-time"></span> {{quest.delivery_date}}</small>
-					  </div><!-- ./smallInfo -->
-					  {% endif %}
-					</div><!-- ./media -->
-				</li>
-				{% endfor %}
-				</ul><!-- ./List group -->
-
-			  </div><!-- ./panel-body -->
-			</div><!-- ./panel -->
-		</div><!-- ./column -->
-
-	</div><!-- ./row -->
-</div><!-- ./container -->
 
 
 {% endblock content %}
