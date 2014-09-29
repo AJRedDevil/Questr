@@ -40,13 +40,13 @@ body {
 
 /************ footer ****************/
 footer {
-	background: rgba(0,0,0,0.8);
+	background: white;
 	width:100%;
 	font-size: 14px;
 	font-weight: 400;
 	text-align: center;
-	border: none;
-	color: white;
+	border-top: 1px solid #E4E6E3;
+	color: #565a5c;
 }
 
 footer .row {
@@ -54,7 +54,7 @@ footer .row {
 }
 
 footer a {
-	color: white;
+	color: rgba(0,0,0,0.8);
 }
 
 footer ul {
@@ -64,7 +64,7 @@ footer ul {
 footer ul li {
 	list-style: none;
 	display: inline;
-	color: white;
+	color: #565a5c;
 }
 
 footer ul.social-links {
@@ -92,8 +92,8 @@ footer small.title {
 	background: transparent;
 	border-style: solid;
 	border-width: 1px;
-	border-color: white;
-	color: white;
+	border-color: #565a5c;
+	color: rgba(0,0,0,0.8);
 	margin-right: 1px;
 
 	-moz-transition:all 0.3s ease;
@@ -257,13 +257,6 @@ footer small.title {
 
 
 
-
-
-
-
-
-
-
  
  /*************** Panels ***************/
 .panel-default {
@@ -362,6 +355,7 @@ footer small.title {
 	border: none;
 	color: white;
 }
+
 
 .btn-classic {
   background-color: #ffffff;
@@ -525,16 +519,17 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 .navbar {
 	background: white;
 	margin: 0;
-	border-bottom: none;
+	border-bottom: 1px solid #E4E6E3;
 	border-radius: 0;
 	padding: 0px 50px;
 	text-align: center;
+	margin-bottom: 5px;
 }
 
 .navbar-default .navbar-nav > li > a {
- 	color: rgba(0,0,0,0.8);
+ 	color: #565a5c;
  	background: white;
- 	font-weight: 400;
+ 	font-weight: 500;
  	padding-left: 0;
  	padding-right: 0;
  	padding-bottom: 2px;
@@ -545,7 +540,7 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
 	background-color: white;
-	color: rgba(0,0,0,0.8);
+	color: #565a5c;
 	border-bottom: solid 2px #3498db;
 }
 .navbar-default .navbar-nav > .active > a,
@@ -556,13 +551,16 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 	border-bottom: solid 2px #3498db;
 }
 
+.navbar-default .navbar-nav > li > a.post-quest {
+	background-color: #2c3e50;
+	color: gray;
+	margin-top: 5px;
+}
+
 .navbar .navbar-brand {
-	color: rgba(0,0,0,0.8); 
+	color:  #3498db; 
 	font-size: 25px;
 	font-weight: 500;
-}
-.navbar .navbar-brand:hover {
-	color: #3498db;
 }
 
 .navbar-default .dropdown-menu {
@@ -687,20 +685,5 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 	margin: 0;
 	padding-top: 18px;
 	padding-bottom: 24px;
-}
-
-
-.circle
-{
-width:500px;
-height:500px;
-border-radius:50%;
-border:1px solid black;
-font-size:200px;
-font-weight: 100;
-color:black;
-line-height:500px;
-text-align:center;
-background:transparent;
 }
 
