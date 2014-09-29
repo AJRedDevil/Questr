@@ -10,7 +10,8 @@ class QuestCreationForm(forms.ModelForm):
     A form that creates a post, from the given data
     """
     CITY_SELECTION = (('Toronto','Toronto'),('Brampton','Brampton'),('Markham','Markham'),
-                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'))
+                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'),
+                        ('Oakville','Oakville'))
     srccity = forms.ChoiceField(
         choices=CITY_SELECTION,
         error_messages={
@@ -46,8 +47,8 @@ class QuestCreationForm(forms.ModelForm):
         )
     class Meta:
         model = Quests
-        exclude = ['questrs','status','creation_date','is_accepted', 'shipper', 'delivery_code', 'reward', \
-            'item_images', 'distance', 'pickup', 'dropoff', 'delivery_date', 'map_image']
+        exclude = ['questrs','status','creation_date','isaccepted', 'shipper', 'delivery_code', 'reward', \
+            'item_images', 'distance', 'pickup', 'dropoff', 'delivery_date', 'map_image','available_couriers']
         widget = {
             'description' : forms.TextInput(attrs = { 'placeholder': "Description"}),
             'title' : forms.TextInput(attrs = { 'placeholder': 'Title'}),
@@ -78,7 +79,8 @@ class QuestConfirmForm(forms.ModelForm):
     A form that creates a post, from the given data
     """
     CITY_SELECTION = (('Toronto','Toronto'),('Brampton','Brampton'),('Markham','Markham'),
-                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'))
+                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'),
+                        ('Oakville','Oakville'))
     srccity = forms.ChoiceField(
         choices=CITY_SELECTION,
         error_messages={
@@ -114,8 +116,8 @@ class QuestConfirmForm(forms.ModelForm):
         )
     class Meta:
         model = Quests
-        exclude = ['questrs','status','creation_date','is_accepted', 'shipper', 'delivery_code', 'pickup', \
-            'dropoff', 'delivery_date', 'map_image']
+        exclude = ['questrs','status','creation_date','isaccepted', 'shipper', 'delivery_code', 'pickup', \
+            'dropoff', 'delivery_date', 'map_image','available_couriers']
         widget = {
             'description' : forms.TextInput(attrs = { 'placeholder': "Description"}),
             'title' : forms.TextInput(attrs = { 'placeholder': 'Title'}),
@@ -152,7 +154,8 @@ class QuestChangeForm(forms.ModelForm):
     A form to edit a quest that has been created already
     """
     CITY_SELECTION = (('Toronto','Toronto'),('Brampton','Brampton'),('Markham','Markham'),
-                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'))
+                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'),
+                        ('Oakville','Oakville'))
     srccity = forms.ChoiceField(
         choices=CITY_SELECTION,
         error_messages={
@@ -188,8 +191,8 @@ class QuestChangeForm(forms.ModelForm):
         )
     class Meta:
         model = Quests
-        exclude = ['questrs','reward','status','creation_date','is_accepted', 'shipper', 'distance', 'delivery_code',  \
-            'item_images', 'pickup', 'dropoff', 'delivery_date', 'map_image']
+        exclude = ['questrs','reward','status','creation_date','isaccepted', 'shipper', 'distance', 'delivery_code',  \
+            'item_images', 'pickup', 'dropoff', 'delivery_date', 'map_image','available_couriers']
 
         widget = {
             'description' : forms.TextInput(attrs = { 'placeholder': "Description"}),
@@ -224,7 +227,8 @@ class DistancePriceForm(forms.Form):
         super(DistancePriceForm, self).__init__(*args, **kwargs)
 
     CITY_SELECTION = (('Toronto','Toronto'),('Brampton','Brampton'),('Markham','Markham'),
-                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'))
+                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'),
+                        ('Oakville','Oakville'))
     PACKAGE_SELECTION = (('car','Car'),('backpack','Backpack'),('minivan','Minivan'))
 
     srccity = forms.ChoiceField(

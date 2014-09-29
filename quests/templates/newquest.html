@@ -8,223 +8,190 @@
 {% endblock localhead %}
 {% block content %}
 
-<div class="container-fluid">
-	<div class="row clearfix">
-		<form class="form-horizontal css-form col-md-10 col-md-offset-1 column" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" name="form" ng-submit="submitForm()" novalidate>{% csrf_token %}
 
-			<div class="col-md-8 column">
-				<div class="panel panel-default grey-bg">
-				<div class="panel-heading text-center" style="background:transparent;">
-				    <div class="panel-title lead">Request a Shipment</div>
-				</div>
-				<div class="panel-body">
-					
-					<!-- NAME INPUT -->
-					<div class="col-md-8 column">
-						<div class="form-group">
-							<input class="form-control ng-pristine ng-invalid" name="title" type="text" placeholder="Title">
-						</div><!-- ./form-group -->
+
+<div class="container">
+	{% comment %}
+    <div class="row clearfix">
+    	<div class="col-md-10 col-md-offset-1 column">
+	        <div class="col-xs-12 col-lg-8 column">
+		    	<h3 class="lead" style="margin-bottom:0;"><span class="glyphicon glyphicon-user"></span> Request a shipment</h3>
+		    </div><!-- ./column -->
+		</div>
+	</div><!-- ./row -->
+	{% endcomment %}
+   
+	    
+	
+	<form class="form-horizontal row clearfix" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" name="form" ng-submit="submitForm()" novalidate>{% csrf_token %}		
+		<div class="col-lg-4 column">
+			<hr>
+			<div class="col-md-12 column">
+
+				<br>
+
+				<div class="form-group col-md-12 column">
+					<input class="form-control input-sm ng-pristine ng-invalid" name="title" type="text" placeholder="Title">
 					{{user_form.title.errors}}
-					</div><!-- ./NAME INPUT -->
+				</div><!-- ./form-group -->
 
-					<!-- SIZE INPUT-->
-					<div class="col-md-8 column">
-						<div class="form-group" id="size">
-								<div class="input-group">
-									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
-										<center>
-											<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />       	 	
-											<p>Backpack</p>
-											<input type="radio" name="size" ng-model="user.size" value="backpack" ng-model="user.backapck" required> 
-										</center>	
-									</div><!-- ./column -->  
-									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
-										<center>
-											<img src={% static 'img/car.png' %} style="width:100%; height:au to;" />
-											<p>Car</p>
-											<input type="radio" name="size" ng-model="user.size" value="car" ng-model="user.car" required>
-										</center>	
-									</div><!-- ./column -->
-									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
-										<center>
-											<img src={% static 'img/minivan.png' %} style="width:100%; height:auto;" />
-											<p>Minivan</p>
-											<input type="radio" name="size" ng-model="user.size" value="minivan" ng-model="user.van" required>
-										</center> 	
-									</div><!-- ./column -->
-								</div><!-- /input-group -->
-						</div><!-- ./form-group -->
-						{{user_form.size.errors}}
-					</div><!-- ./SIZE INPUT-->
+				<div class="clearfix"></div>
 
-					<!-- MESSAGE -->
-					<div class="col-md-8 column">
-						<div class="form-group">			
-							<textarea class="form-control ng-pristine ng-invalid" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5" ng-model="user.description" ng-minlength="3" ng-maxlength="400" required></textarea>
-							<!-- Description Erorrs-->
-							<div ng-show="form.description.$dirty && form.description.$invalid">Invalid:
-						   		<span ng-show="form.description.$error.required">A description is required</span>
-						   		<span style="color:red" ng-show="form.description.$error.minlength">
-					        	Your Title Should Contain Atleast 3 Characters</span>
-					       		<span style="color:red" ng-show="form.description.$error.maxlength">
-					        	Sorry You are Exceeding the Limit</span>
-						    </div>
-						</div><!-- ./form-group -->
-					</div><!-- MESSAGE -->
-
-					<p class="col-md-12 column">Pickup from:</p>
-
-					<!-- CITY DROPDOWN -->
-					<div class="col-md-2 column">
-						<!-- Location input-->
-						<div class="form-group">
-							<select class="btn-classic" data-size="5" name="srccity" ng-model="user.city" required>
-								<option>Toronto</option>
-								<option>Brampton</option>
-								<option>Markham</option>
-								<option>Mississauga</option>
-								<option>Richmond Hill</option>
-								<option>Vaughan</option>
-							</select>
-						</div>  <!-- ./form-group -->
-						{{user_form.srccity.errors}}
-					</div><!-- ./CITY DROPDOWN -->
-
-					<div class="clearfix"></div>
-
-					<!-- ADDRESS INPUT -->
-					<div class="col-md-6 column">
-						<!-- Pickup Address input-->
-						<div class="form-group">	
-								<input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" ng-model="user.departure" ng-minlength="3" ng-maxlength="100" required>
-								<!-- Address Erorrs-->
-						</div><!-- ./form-group -->
-						{{user_form.srcaddress.errors}}
-					</div><!-- ./ADDRESS INPUT -->
-
-					<div class="clearfix"></div>
-
-					<!-- NAME INPUT -->
-					<div class="col-md-5 column">
-						<!-- Pickup Name input-->
-						<div class="form-group">
-							<input id="srcname" name="srcname" type="text" placeholder="Name of the sender" class="form-control input-xs" ng-model="user.srcname"  required>
-						</div><!-- ./form-group -->
-						{{user_form.srcname.errors}}
-					</div><!-- ./NAME INPUT -->
+				<!-- SIZE INPUT-->
+				<div class="form-group col-md-12 column" id="size">
+					<div class="input-group">
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
+							<center>
+								<img src={% static 'img/backpack.png' %} style="width:100%; height:auto;" />       	 	
+								<p>Backpack</p>
+								<input type="radio" name="size" ng-model="user.size" value="backpack" ng-model="user.backapck" required> 
+							</center>	
+						</div><!-- ./column -->  
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
+							<center>
+								<img src={% static 'img/car.png' %} style="width:100%; height:au to;" />
+								<p>Car</p>
+								<input type="radio" name="size" ng-model="user.size" value="car" ng-model="user.car" required>
+							</center>	
+						</div><!-- ./column -->
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
+							<center>
+								<img src={% static 'img/minivan.png' %} style="width:100%; height:auto;" />
+								<p>Minivan</p>
+								<input type="radio" name="size" ng-model="user.size" value="minivan" ng-model="user.van" required>
+							</center> 	
+						</div><!-- ./column -->
+					</div><!-- /input-group -->
+					{{user_form.size.errors}}
+				</div>
 
 
-					<div class="clearfix"></div>						
-
-					<!-- PHONE NUMBER -->
-					<div class="col-md-4 column">
-						<div class="form-group">
-							<input id="srcphone" name="srcphone" type="text" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.srcphone" required>
-						</div><!-- ./form-group -->
-						{{user_form.srcphone.errors}}
-					</div><!-- PHONE NUMBER -->
-
-
-
-					<div class="clearfix"></div>
-					
-					<!-- POSTAL CODE INPUT -->
-					<div class="col-md-4 column">
-						
-						<div class="form-group">
-								<input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="Postal Code" class="form-control ng-pristine ng-invalid" ng-model="user.srcpostalcode" required>
-						</div><!-- ./form-group -->
-						{{user_form.srcpostalcode.errors}}
-					</div><!-- ./POSTAL CODE INPUT -->
-
-
-					<p class="col-md-12 column">Drop off at:</p>
-
-
-					<!-- CITY DROPDOWN -->
-					<div class="col-md-4 column">
-						<div class="form-group">
-							<select class="btn-classic" data-size="5" name="dstcity" ng-model="user.city2" required>
-								<option>Toronto</option>
-								<option>Brampton</option>
-								<option>Markham</option>
-								<option>Mississauga</option>
-								<option>Richmond Hill</option>
-								<option>Vaughan</option>
-							</select>
-						</div>  <!-- ./form-group -->  
-						{{user_form.dstcity.errors}}
-					</div><!-- CITY DROPDOWN -->
-
-
-					<div class="clearfix"></div>
-
-					<!-- ADDRESS INPUT -->
-					<div class="col-md-4 column">
-						<div class="form-group">
-							<input class="form-control input-xs ng-pristine ng-invalid" id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address">
-						</div><!-- ./form-group -->
-						{{user_form.dstaddress.errors}}
-					</div><!-- ADDRESS INPUT -->
-
-
-					<div class="clearfix"></div>
-
-					<!-- NAME INPUT -->
-					<div class="col-md-4 column">
-						
-						<div class="form-group">
-							<input id="dstname" name="dstname" type="text" placeholder="Name of the receiver" class="form-control ng-pristine ng-invalid" ng-model="user.dstname" required>
-						</div><!-- ./form-group -->
-						{{user_form.dstname.errors}}
-					</div><!-- NAME INPUT -->
-
-
-					<div class="clearfix"></div>
-
-					<!-- PHONE NUMBER INPUT-->
-					<div class="col-md-4 column">
-		
-						<div class="form-group">
-							<input id="dstphone" name="dstphone" type="number" placeholder="Phone number" class="form-control ng-pristine ng-invalid" >
-						</div><!-- ./form-group -->
-						{{user_form.dstphone.errors}}
-					</div><!-- PHONE NUMBER INPUT-->
-
-
-					<div class="clearfix"></div>
-
-					<!-- POSTAL CODE INPUT -->
-					<div class="col-md-4 column">
-						<div class="form-group">
-							<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="Postal Code" class="form-control ng-pristine ng-invalid">
-						</div><!-- ./form-group -->
-						{{user_form.dstpostalcode.errors}}
-					</div><!-- POSTAL CODE INPUT -->
-					
-				</div><!-- ./panel-body -->
-				</div><!-- ./panel -->
+				<!-- MESSAGE -->
+				<div class="form-group col-md-12 column">			
+					<textarea class="form-control ng-pristine ng-invalid" id="description" name="description" placeholder="Brief description of the delivery or anything the shipper should be aware of" rows="5" ng-model="user.description" ng-minlength="3" ng-maxlength="400" required></textarea>
+				</div><!-- ./form-group -->
 			</div>
-
-
-
-
-		<div class="col-md-4 column">
-			<div class="panel panel-default grey-bg">
-
-			<div class="panel-heading text-center" style="background:transparent;">
-			    <div class="panel-title lead">Total</div>
-			</div>
-			<div class="panel-body">
-				Total Cost
-				<button type="submit" class="btn btn-info">Continue</button>
-			</div><!-- ./panel-body -->	  
-			</div><!-- ./panel-default -->		
-			</div><!-- ./panel -->
 		</div>
 
-	</div><!-- ./row -->
+		<div class="col-lg-3 column">
+			<hr>
+
+			<div class="col-md-12 column">
+
+				<br>
+
+				<!-- Location input-->
+				<div class="form-group col-md-12 column">
+					<select class="btn-classic" data-size="5" name="srccity" ng-model="user.city" required>
+						<option>Toronto</option>
+						<option>Brampton</option>
+						<option>Markham</option>
+						<option>Mississauga</option>
+						<option>Richmond Hill</option>
+						<option>Vaughan</option>
+						<option>Oakville</option>
+					</select>
+					{{user_form.srccity.errors}}
+				</div>  <!-- ./form-group -->
+
+
+
+				<!-- Pickup Address input-->
+				<div class="form-group col-md-12 column">	
+						<input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" placeholder="Pickup Address">
+						{{user_form.srcaddress.errors}}
+				</div><!-- ./form-group -->	
+				
+
+
+
+				<!-- POSTAL CODE INPUT -->
+				<div class="form-group col-md-12 column">
+						<input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="Postal Code" class="form-control ng-pristine ng-invalid" ng-model="user.srcpostalcode" required>
+						{{user_form.srcpostalcode.errors}}
+				</div><!-- ./form-group -->
+
+
+				<!-- Pickup Name input-->
+				<div class="form-group col-md-12 column">
+					<input id="srcname" name="srcname" type="text" placeholder="Name of the sender" class="form-control input-xs" ng-model="user.srcname"  required>
+					{{user_form.srcname.errors}}
+				</div><!-- ./form-group -->
+
+				<!-- PHONE NUMBER -->
+				<div class="form-group col-md-12 column">
+					<input id="srcphone" name="srcphone" type="text" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.srcphone" required>
+					{{user_form.srcphone.errors}}
+				</div><!-- ./form-group -->
+
+			</div>
+		</div>
+
+		<div class="col-lg-3 column">
+			<hr><br>
+
+			<div class="col-md-12 column">
+
+				<!-- Location input-->
+				<div class="form-group col-md-12 column">
+					<select class="btn-classic" data-size="5" name="dstcity" ng-model="user.city" required>
+						<option>Toronto</option>
+						<option>Brampton</option>
+						<option>Markham</option>
+						<option>Mississauga</option>
+						<option>Richmond Hill</option>
+						<option>Vaughan</option>
+						<option>Oakville</option>
+					</select>
+					{{user_form.dstcity.errors}}
+				</div>  <!-- ./form-group -->
+
+
+
+				<!-- ADDRESS INPUT -->
+				<div class="form-group col-md-12 column">
+					<input class="form-control input-xs ng-pristine ng-invalid" id="dstaddress" name="dstaddress" type="text" placeholder="Dropoff Address">
+					{{user_form.dstaddress.errors}}
+				</div><!-- ./form-group -->
+
+
+
+				<!-- POSTAL CODE INPUT -->
+				<div class="form-group col-md-12 column">
+					<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="Postal Code" class="form-control ng-pristine ng-invalid">
+					{{user_form.dstpostalcode.errors}}
+				</div><!-- ./form-group -->
+
+
+				<!-- NAME INPUT -->
+				<div class="form-group col-md-12 column">
+					<input id="dstname" name="dstname" type="text" placeholder="Name of the receiver" class="form-control ng-pristine ng-invalid" ng-model="user.dstname" required>
+					{{user_form.dstname.errors}}
+				</div><!-- ./form-group -->
+
+
+
+				<!-- PHONE NUMBER -->
+				<div class="form-group col-md-12 column">
+					<input id="dstphone" name="dstphone" type="text" placeholder="Phone number" class="form-control ng-pristine ng-invalid" ng-model="user.dstphone" required>
+					{{user_form.dstphone.errors}}
+				</div><!-- ./form-group -->
+
+			</div>
+		</div><!-- column -->
+
+		<div class="col-lg-2 column">
+			<hr>
+			<div class="col-md-12 column">
+				<h3>TOTAL</h3>
+				<p>Total Cost</p>
+				<button type="submit" class="btn btn-default">Continue</button>
+			</div>
+		</div><!-- column -->	
+	</form><!-- ./row -->
 </div><!-- ./container -->
+
+
 
 
 

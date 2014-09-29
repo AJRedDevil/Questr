@@ -20,7 +20,7 @@ class Quests(models.Model):
     questrs = models.ForeignKey(QuestrUserProfile)
     # pretty_url = models.CharField(_('pretty_url'), 
     #     max_length=1000, blank=True)
-    description = models.TextField(_('description'))
+    description = models.TextField(_('description'), blank=True)
     title = models.CharField(_('title'), max_length=100, 
         blank=False)
     reward = models.DecimalField(_('reward'), decimal_places=2, 
@@ -46,6 +46,7 @@ class Quests(models.Model):
         max_digits=1000, default=0)
     delivery_date = models.DateTimeField(_('delivery_date'), 
         blank=True, null=True)
+    available_couriers = jsonfield.JSONField(_('pickup'), default={})
 
     def __unicode__(self):
         return str(self.id )
@@ -132,3 +133,54 @@ class QuestComments(models.Model):
 
     def __unicode__(self):
         return self.id
+
+# Quest transactionl model
+class QuestTransactional(models.Model):
+    id = models.IntegerField(_('id'), primary_key=True)
+    quest_code = models.CharField(_('quest_code'), max_length=64, unique=True)
+    quest = models.ForeignKey(Quests)
+    shipper = models.ForeignKey(QuestrUserProfile)
+    transaction_type = models.IntegerField(_('transaction_type'), default=1)
+    status = models.BooleanField(_('status'), default=False)
+
+    def generate_hash(self):
+        return hashlib.sha256(str(timezone.now()) + str(self.shipper.email)).hexdigest()
+
+    def get_truncated_quest_code(self):
+        return self.quest_code[:7]
+
+    def get_token_id(self):
+        return self.quest_code[-6:]
+
+    REQUIRED_FIELDS = ['quest_code', 'id', 'quest', 'shipper' ,'transaction_type']
+
+    def __unicode__(self):
+        return "{0}:{1} {2}".format(self.quest_code, self.quest, self.shipper)
+
+    #Overriding
+    def save(self, *args, **kwargs):
+        #check if the row with this hash already exists.
+        if not self.quest_code:
+            self.quest_code = self.generate_hash()
+        # self.my_stuff = 'something I want to save in that field'
+        super(QuestTransactional, self).save(*args, **kwargs)
+
+# Questr Token
+class QuestToken(models.Model):
+    token_id = models.CharField(_('id'), max_length=20, primary_key=True)
+    timeframe = models.DateTimeField(_('create_date'), default=timezone.now)
+
+    def is_alive(self):
+        timedelta = timezone.now() - self.timeframe
+        minutes = 30
+        allowable_time = float(minutes * 60)
+        return timedelta.total_seconds() < allowable_time
+
+    def __unicode__(self):
+        return "Token verifying ..."
+
+    # Overriding
+    def save(self, *args, **kwargs):
+        if not self.timeframe:
+            self.timeframe = timezone.now()
+        super(QuestToken, self).save(*args, **kwargs)

@@ -2,56 +2,86 @@
 {% load staticfiles %}
 {% block localhead %}
     <!-- CSS -->
-    <link href={% static "css/social-buttons.css" %} rel="stylesheet">
     <link href={% static "css/sign.css" %} rel="stylesheet">
+    <script src={% static "js/angular.min.js" %}></script>
 
 {% endblock localhead %}
 {% block content %} 
 
 
-<div class="container-fluid" ng-app="validationApp" ng-controller="mainController">
-
-			
+<div class="container-fluid" ng-app="validation">		
     <div class="row clearfix">
-    	<div class="col-md-6 column"></div>
-
-
-
-	    <div class="col-md-6 column">
-		    <div class="panel panel-default col-md-8 column grey-bg">
-			    <div class="panel-heading text-center" style="background:transparent;">
-				    <div class="panel-title lead">Sign in</div>
-		        </div>
+    	<div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 column">
+		<div class="panel panel-default">
 			    
-			    <div class="panel-body">
-			    	<div class="col-md-12 column">
-				   
-				    	<form action="{%url 'signin'%}" method="post" name="userForm" ng-submit="submitForm()" novalidate>{% csrf_token %}
-                        <!-- Login with Username and Password --> 
-                        <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
-                            <input type="email" name="username" class="form-control" ng-model="user.email" placeholder="Email Address">
-                            <p> 
-                            {% if auth_form.username.errors %}
-                            	{{ auth_form.username.errors }}
-                            {% endif %}
-                            </p>
-                
-                            <div class="help-block with-errors"></div>
-                            <input type="password" class="form-control input-sm" name="password" id="exampleInputPassword1" placeholder="Password">
-                            <p> 
-            	            {% if auth_form.password.errors %}
-            	            {{ auth_form.password.errors }}
-            	            {% endif %}
-            	            {% if auth_form.errors %}
-            	                {{ auth_form.non_field_errors }}
-            	            {% endif %}
-                            </p>
-                            
-                            <a href="{% url 'reset_password' %}"><small>Forgot password?</small></a>
+			<div class="panel-heading text-center">
+			    <div class="panel-title lead">Sign in</div>
+	        </div>
+    
+		    <div class="panel-body" ng-controller="Validation">
+			    	<form action="{%url 'signin'%}" method="post" class="css-form" novalidate>{% csrf_token %}
+                    <!-- Login with Username and Password --> 
+                    <div class="form-group">
+                        <input id="username" type="email" name="username" class="form-control" ng-model="user.email" placeholder="Email Address" required>
+                        <p> 
+                        {% if auth_form.username.errors %}
+                        	{{ auth_form.username.errors }}
+                        {% endif %}
+                        </p>
+            
+                        <div class="help-block with-errors"></div>
+                        <input id="password" type="password" class="form-control input-sm" name="password" id="exampleInputPassword1" placeholder="Password" ng-model="user.password" required>
+                        <p> 
+        	            {% if auth_form.password.errors %}
+        	            {{ auth_form.password.errors }}
+        	            {% endif %}
+        	            {% if auth_form.errors %}
+        	                {{ auth_form.non_field_errors }}
+        	            {% endif %}
+                        </p>
                         
-                            <center><button type="submit" class="btn btn-sm btn-embossed btn-info">Sign in</button></center>
-                        </div> <!-- ./form-group -->
-				    	</form>
+                        <a href="{% url 'reset_password' %}"><small>Forgot password?</small></a>
+                    
+                        <center><button type="submit" class="btn btn-sm btn-embossed btn-info">Sign in</button></center>
+                    </div> <!-- ./form-group -->
+			    	</form>
+			</div><!-- ./panel-body -->
+		</div><!-- ./panel -->
+	</div>
+
+    </div><!-- ./row -->  
+</div><!-- ./container -->  
+
+<style type="text/css">
+  .css-form input.ng-invalid.ng-dirty {
+    border-color: rgba(232,77,60,1.00);
+    background-color: transparent;
+  }
+
+  .css-form input.ng-valid.ng-dirty {
+    border-color: rgba(47,204,112,1.00);
+     background-color: transparent;
+  }
+</style>
+
+<script>
+  angular.module('validation', [])
+    .controller('Validation', ['$scope', function($scope) {
+      $scope.master = {};
+
+      $scope.update = function(user) {
+        $scope.master = angular.copy(user);
+      };
+
+      $scope.reset = function() {
+        $scope.user = angular.copy($scope.master);
+      };
+
+      $scope.reset();
+    }]);
+</script>
+
+       
 {% comment %}
 				    	<center>
 					    	<h6>Sign in with</h6>
@@ -81,15 +111,6 @@
 			                <a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i></button></a> 
 		            	</center>
 {% endcomment %}
-					</div><!-- ./column -->
-			    </div><!-- ./panel-body -->	  
-		    </div><!-- ./panel-default -->
-	    </div><!-- ./column -->    
-    </div><!-- ./row -->  
-</div><!-- ./container -->  
-
-           
-
 
 {% endblock %}
 {% block scripts %}
