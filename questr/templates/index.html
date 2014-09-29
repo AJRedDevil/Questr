@@ -6,90 +6,48 @@
 {% block content %}
 
 
-<div class="container-fluid">
+<div class="container">
 	<div class="row clearfix">
-		<!-- Carousel -->
-    	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-{% comment %}
-	<!-- Indicators -->
-	<ol class="carousel-indicators">
-	  	<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-	    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-	    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-	</ol>
-	<!-- Wrapper for slides -->
-{% endcomment %}
-			<div class="carousel-inner">
-			    <div class="item active">
-			    	<img src={% static "img/cross-wide.jpg" %} alt="First slide">
-                    <!-- Static Header -->
-                    <div class="header-text hidden-xs">
-                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        	<br>
-                        	<br>
-                        	<h2 style="font-size:44pt; text-shadow: 1px 1px 3px gray;">
-                        	    <span>DELIVER ANYTHING ANYTIME IN 4 HOURS</span>
-                        	</h2>
-                        	<br>
-                            <div class="">
-                         		<a class="btn btn-theme btn-sm btn-min-block" data-toggle="modal" data-target="#signUp">SHIP NOW</a>
-                         	</div>
+	<div class="col-md-12 column bg text-center">
+		<div class="col-md-8 col-md-offset-2 column content">
+			<h2>DELIVER ANYTHING ANYTIME IN <br>4 HOURS</h2>
+			<a class="btn btn-theme btn-sm btn-min-block" data-toggle="modal" data-target="#signUp">SHIP NOW</a>
+		</div>
+		<!-- Modal -->
+     	<div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     	  <div class="modal-dialog">
+     	    <div class="modal-content" style="margin-top:48%;">
+     	      <div class="modal-body">
+     	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+     	        <br><br>
+     	        <form class="form-horizontal" role="form" action="{% url 'join'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" novalidate>{% csrf_token %}
+     	            <div class="form-group" style="margin:0 30px;">
+     	                
+     	            <input class="form-control" name="EMAIL" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required" style="width:100%;">
+     	            <span id="result" class="alertMsg"></span>
 
-                         	<!-- Modal -->
-                         	<div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                         	  <div class="modal-dialog">
-                         	    <div class="modal-content" style="margin-top:48%;">
-                         	      <div class="modal-body">
-                         	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                         	        <br><br>
-                         	        <form class="form-horizontal" role="form" action="{% url 'join'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" novalidate>{% csrf_token %}
-                         	            <div class="form-group" style="margin:0 30px;">
-                         	                
-                         	            <input class="form-control" name="EMAIL" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required" style="width:100%;">
-                         	            <span id="result" class="alertMsg"></span>
+     	            <br><br>
 
-                         	            <br><br>
+     	            <center><button type="submit" class="btn no-margin btn-lg big-button">Notify me</button></center>
 
-                         	            <center><button type="submit" class="btn no-margin btn-lg big-button">Notify me</button></center>
-
-                         	            </div><!--./form-group -->      
-                         	        </form>
-                         	      </div>
-                         	    </div>
-                         	  </div>
-                         	</div>
-
-
-                        </div>
-                    </div><!-- /header-text -->
-			    </div> 
-		</div><!-- /carousel -->
-	</div>
-</div><!-- ./container -->
+     	            </div><!--./form-group -->      
+     	        </form>
+     	      </div>
+     	    </div>
+     	  </div>
+     	</div>
+     </div>
+ 	</div>
+</div>
 
 
 
-
-{% comment %}
-	<div class="row clearfix">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-			<h1>{{messageResponse}}</h1>
-		</div><!--./column -->
-	</div><!--./row -->
-
-	<div class="row clearfix">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column subscribe">
-			
-		</div><!-- ./subscribe -->
-	</div><!-- ./row -->
-
-{% endcomment %}
 
 
 
 
 <div class="container-fluid">
-<div class="row clearfix section grey-bg" id="what-is">
+<div class="row clearfix section" id="what-is">
 			<div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
 				<div class="section-title">
 					<h2>What is Questr?</h2>
@@ -101,13 +59,13 @@
 			<div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">	
 				<div class="col-md-4 col-lg-4 column">
 					
-					<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column grey-bg">
+					<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column">
 						<center>
-						<div class="circle" style="border-width:3px;">
+						<div class="circle">
 						  <div class="circle__grandparent">
 						    <div class="circle__parent">
 						      <div class="circle__child">
-						  		<i class="glyphicon glyphicon-usd" style="color:#3498db;"></i>
+						  		<i class="glyphicon glyphicon-usd" style="color:#7EC7EA;"></i>
 						      </div>
 						    </div>
 						  </div>
@@ -117,21 +75,21 @@
 
 					<div class="clearfix"></div>
 
-					<div class="grey-bg"> 
+				
 						<div class="caption text-center">
 							<h3>Affordable</h3>
 							<p>Starting from only $5, Questr offers the most affordable shipping option available in entire Canada.</p>
 						</div><!-- ./caption -->
-					</div><!--/thumbnail -->
+					
 			
 				</div><!--/.column -->
 				<div class="col-md-4 column">
-					<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column grey-bg">
-					<div class="circle" style="border-width:3px;">
+					<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column">
+					<div class="circle">
 					  <div class="circle__grandparent">
 					    <div class="circle__parent">
 					      <div class="circle__child">
-					  		<i class="glyphicon glyphicon-flash" style="color:#3498db;"></i>
+					  		<i class="glyphicon glyphicon-flash" style="color:#7EC7EA;"></i>
 					      </div>
 					    </div>
 					  </div>
@@ -140,22 +98,22 @@
 
 				<div class="clearfix"></div>
 
-					<div class="grey-bg"> 
+					
 						<div class="caption text-center">
 						
 							<h3>Lightning fast</h3>
 
 							<p>Anywhere in GTA within 4 hours. <br>Say goodbye to overnight waits.</p>
 						</div><!-- ./caption -->
-					</div><!--/thumbnail -->
+					
 				</div><!--/.column -->
 				<div class="col-md-4 col-lg-4 column">
-					<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column grey-bg">
-					<div class="circle" style="border-width:3px;">
+					<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column">
+					<div class="circle">
 					  <div class="circle__grandparent">
 					    <div class="circle__parent">
 					      <div class="circle__child">
-					  		<i class="glyphicon glyphicon-time" style="color:#3498db;"></i>
+					  		<i class="glyphicon glyphicon-time" style="color:#7EC7EA;"></i>
 					      </div>
 					    </div>
 					  </div>
@@ -165,12 +123,12 @@
 
 				<div class="clearfix"></div>
 
-					<div class="grey-bg"> 
+			
 						<div class="caption text-center">
 							<h3>24/7</h3>
 							<p>86,400 seconds a day, 7 days a week, no matter it's rush hour on Friday or midnight on Christmas Eve.</p>
 						</div><!-- ./caption -->
-					</div><!--/thumbnail -->
+				
 				</div><!--/.column -->
 			</div><!--/.column -->
 		</div><!--/row -->
@@ -230,7 +188,7 @@
 
 <div class="container-fluid">
 	    <!-- ******************** MENTIONS ******************** -->	
-	    <div class="row clearfix section grey-bg">
+	    <div class="row clearfix section" style="background:#edefed;">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column"> 
 				<div class="section-title text-center"><h4>We're mentioned in</h4></div><!-- ./section-title -->
 			</div><!-- ./column -->
@@ -287,7 +245,7 @@
 		<div class="col-md-12 column no-padding no-margin">
 			<!-- Button trigger modal -->
 			<center>
-				<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="background:black; border-color:black;">Say Hi</button>
+				<button class="btn" id="emboss" data-toggle="modal" data-target="#myModal">Say Hi</button>
 			</center>
 
 			<!-- Modal -->

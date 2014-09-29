@@ -45,7 +45,7 @@ footer {
 	font-size: 14px;
 	font-weight: 400;
 	text-align: center;
-	border-top: 1px solid #E4E6E3;
+	border-top: none;
 	color: #565a5c;
 }
 
@@ -519,11 +519,10 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 .navbar {
 	background: white;
 	margin: 0;
-	border-bottom: 1px solid #E4E6E3;
+	border-bottom: none;
 	border-radius: 0;
 	padding: 0px 50px;
 	text-align: center;
-	margin-bottom: 5px;
 }
 
 .navbar-default .navbar-nav > li > a {
