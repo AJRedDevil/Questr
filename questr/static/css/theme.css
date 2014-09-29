@@ -521,7 +521,6 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 }
 
 
-
 /*************** Primary Navbar ***************/
 .navbar {
 	background: white;
@@ -535,7 +534,7 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 .navbar-default .navbar-nav > li > a {
  	color: rgba(0,0,0,0.8);
  	background: white;
- 	font-weight: 500;
+ 	font-weight: 400;
  	padding-left: 0;
  	padding-right: 0;
  	padding-bottom: 2px;
@@ -689,12 +688,6 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 	padding-top: 18px;
 	padding-bottom: 24px;
 }
-
-
-
-
-
-
 
 
 .circle
