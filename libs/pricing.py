@@ -62,7 +62,9 @@ class WebPricing(object):
 	def __init__(self):
 		# self.__total_time = total_time # total_time
 		self.__current_datetime = timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE))
-		self.is_weekend = True if self.__current_datetime.weekday() <=5 else False
+		self.is_weekend = False if self.__current_datetime.weekday() in range(1,6) else True
+		# log.warn("is it weekend?")
+		# log.warn(self.is_weekend)
 		self.clock_hour = self.__current_datetime.hour
 		self.clock_minute = self.__current_datetime.minute
 		self.__rate_meter_drop_weekend = dict(backpack=6, car=8, minivan=10, truck=90)
@@ -73,7 +75,8 @@ class WebPricing(object):
 		self.__hourlist = dict(off_peak_hours={'start_hr': 8, 'start_min':00, 'end_hr':21,'end_min':59})
 		# self.peak_hours = True if self.clock_hour in self.__hourlist['peak_hours'] else False
 		self.peak_hours = self.__is_peak_hour()
-
+		# log.warn("is it peakhour?")
+		# log.warn(self.peak_hours)
 		# self.__future_datetime = self.__get_future_datetime()
 		# self.__tomorrow = self.__get_tomorrow_datetime()
 	

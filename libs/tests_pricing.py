@@ -21,7 +21,9 @@ class PricingTestCase(TestCase):
         ## Getting the time as per the local timezone
         self.__current_datetime = timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE))
         ## Check if it's the weekend
-        self.is_weekend = True if self.__current_datetime.weekday() <=5 else False
+        self.is_weekend = False if self.__current_datetime.weekday() in range(1,6) else True
+        log.warn("is it weekend?")
+        log.warn(self.is_weekend)
         # self.is_weekend = True
         # 
         self.__rate_meter_drop_weekend = dict(backpack=6, car=8, minivan=10, truck=90)
@@ -39,6 +41,8 @@ class PricingTestCase(TestCase):
         }
 
         self.peak_hours = self.is_peak_hour()
+        log.warn("is it peak_hours?")
+        log.warn(self.peak_hours)
 
     def is_peak_hour(self):
         cur_time = time(self.data['time_hr'], self.data['time_min'])
