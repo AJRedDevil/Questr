@@ -235,9 +235,7 @@ class CourierManager(object):
             return "fail"
         else:
             for admin in superadmins: # send notifcations to all the shippers
-                accept_url = ""
-                reject_url = ""
-                email_details = quest_handler.prepNewQuestNotification(admin, quest, accept_url, reject_url)
+                email_details = quest_handler.prepNewQuestAdminNotification(admin, quest)
                 email_notifier.send_email_notification(admin, email_details)
             return "success"
 
@@ -252,7 +250,7 @@ class CourierManager(object):
         return "success"
 
     def informCourierAfterAcceptance(self, courier, quest):
-        """Takes in a questobject and informs the superadmins of the same"""
+        """Takes in a questobject and a courier object and informs the courier of the accepted quest"""
         email_details = quest_handler.prepOfferAcceptedNotification(courier, quest)
         email_notifier.send_email_notification(courier, email_details)
         return "success"

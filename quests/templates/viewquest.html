@@ -135,6 +135,13 @@
 							    {# Only allowing shippers to view addresses #}
 								{% if user.is_shipper or isOwner %}
 								<p class="lighter-grey inline">
+									Delivery Code: 
+								</p>
+								<p class="light-grey inline">
+									{{questdetails.delivery_code}}
+								</p>
+								<br>
+								<p class="lighter-grey inline">
 									Departure Address: 
 								</p>
 								<p class="light-grey inline">

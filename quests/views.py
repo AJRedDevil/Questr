@@ -40,14 +40,15 @@ def viewquest(request, questname):
     except Quests.DoesNotExist:
         raise Http404
         return render(request,'404.html')
-
-    # Check if the owner and the user are the same
-    if questdetails.questrs.id == request.user.id:
-        isOwner = True
-
-    pagetitle=questdetails.title
-    isShipperForQuest=quest_handler.isShipperForQuest(str(user.id), questname)
-    return render(request, 'viewquest.html', locals())
+    if questdetails.shipper == str(user.id) or user.is_superuser == True or questdetails.questrs_id == user.id:
+        # Check if the owner and the user are the same
+        if questdetails.questrs.id == request.user.id:
+            isOwner = True
+        pagetitle=questdetails.title
+        isShipperForQuest=quest_handler.isShipperForQuest(str(user.id), questname)
+        return render(request, 'viewquest.html', locals())
+    else:
+        return redirect('home')   
 
 @verified
 @login_required
@@ -340,6 +341,7 @@ def confirmquest(request):
                 pass
             quest_handler.update_resized_image(quest_data.id)
             message="Your quest has been created!"
+            request.session['alert_message'] = dict(type="Success",message="Your quest has been created!")
             logger.debug(message)
             return redirect('home')
 
@@ -449,9 +451,11 @@ def completequest(request, questname):
                 return render(request,'404.html')
             # Check if the owner and the user are the same
             if questdetails.questrs.id == request.user.id:
+                logger.warn("Attempted complete by the owner himself")
                 return redirect('home')
 
             if questdetails.status != 'Accepted':
+                logger.warn("Attempted complete when quest is not complete")
                 return redirect('home')
             
             delivery_code = request.POST['delivery_code']
@@ -479,16 +483,17 @@ def completequest(request, questname):
                         raise Http404
                         return render(request,'404.html')
                     
-                    ## Send notification to shipper
-                    questr_review_link = quest_handler.get_review_link(questname, questr.id)
-                    email_details = quest_handler.prepQuestCompleteNotification(shipper, questr, questdetails, questr_review_link)
-                    email_notifier.send_email_notification(shipper, email_details)
-                    logger.debug("Quest completion email has been sent to %s", shipper.email)
-                    ## Send notification to questr
-                    shipper_review_link = quest_handler.get_review_link(questname, shipper.id)
-                    email_details = quest_handler.prepQuestCompleteNotification(questr, questr, questdetails, shipper_review_link)
-                    email_notifier.send_email_notification(questr, email_details)
-                    logger.debug("Quest completion email has been sent to %s", questr.email)
+                    # ## Send notification to shipper
+                    # questr_review_link = quest_handler.get_review_link(questname, questr.id)
+                    # email_details = quest_handler.prepQuestCompleteNotification(shipper, questr, questdetails, questr_review_link)
+                    # email_notifier.send_email_notification(shipper, email_details)
+                    # logger.debug("Quest completion email has been sent to %s", shipper.email)
+                    # ## Send notification to questr
+                    # shipper_review_link = quest_handler.get_review_link(questname, shipper.id)
+                    # email_details = quest_handler.prepQuestCompleteNotification(questr, questr, questdetails, shipper_review_link)
+                    # email_notifier.send_email_notification(questr, email_details)
+                    # logger.debug("Quest completion email has been sent to %s", questr.email)
+                    logger.debug("Quest %s has been successfully completed", questdetails.id)
                     message="Quest completion mail has been sent to the Offerer."
                     return redirect('viewquest', questname=questname) # display message
 
@@ -559,11 +564,12 @@ def accept_quest(request, quest_code):
     if quest_code:
         try:
             transcational = QuestTransactional.objects.get(quest_code__regex=r'^%s' % quest_code)
-            opptransaction = QuestTransactional.objects.get(quest_id=transcational.quest_id, shipper_id=transcational.shipper_id, transaction_type=0)
+            opptransaction = QuestTransactional.objects.get(quest_id=transcational.quest_id, \
+                shipper_id=transcational.shipper_id, transaction_type=0, status=False)
             logger.debug("quest transactional")
             logger.debug(transcational)
             if transcational:
-                logger.debug("transctional status")
+                logger.debug("transactional status")
                 logger.debug(transcational.status)
                 if not transcational.status:
                     try:
@@ -581,13 +587,16 @@ def accept_quest(request, quest_code):
                             quest.shipper = courier.id
                             ##Set quest as accepted 
                             quest.isaccepted = True
+                            quest.status = "Accepted"
                             ##Save all the details
                             transcational.save()
                             courier.save()
                             opptransaction.save()
                             quest.save()
                             couriermanager = user_handler.CourierManager()
-                            couriermanager.informCourier(courier, quest)
+                            couriermanager.informCourierAfterAcceptance(courier, quest)
+                            request.session['alert_message'] = dict(type="success",message="Congratulations! You have accepted the quest!")
+                            return redirect('home')
                     except QuestrUserProfile.DoesNotExist:
                         logger.debug('User does not exist')
                         return redirect('home')
@@ -608,7 +617,8 @@ def reject_quest(request, quest_code):
     if quest_code:
         try:
             transcational = QuestTransactional.objects.get(quest_code__regex=r'^%s' % quest_code)
-            opptransaction = QuestTransactional.objects.get(quest_id=transcational.quest_id, shipper_id=transcational.shipper_id, transaction_type=1)
+            opptransaction = QuestTransactional.objects.get(quest_id=transcational.quest_id, \
+                shipper_id=transcational.shipper_id, transaction_type=1, status=False)
             logger.debug("quest transactional")
             logger.debug(transcational)
             if transcational:
@@ -641,6 +651,7 @@ def reject_quest(request, quest_code):
                             ##Re-run the shipper selection algorithm
                             quest = Quests.objects.get(id=int(transcational.quest_id))
                             couriermanager.informShippers(quest)
+                            return redirect('home')
                     except QuestrUserProfile.DoesNotExist:
                         logger.debug('User does not exist')
                         return redirect('home')

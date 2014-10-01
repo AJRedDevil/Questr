@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^quest/', include('quests.urls') ),
     # url(r'^questrreview/', mainview.questrReview, name='questReview' ),
     # url(r'^questreview/', mainview.questReview ),
-    url(r'^review/', include('reviews.urls')),
+    # url(r'^review/', include('reviews.urls')),
 
     url(r'^contact/', mainview.contact, name='contact' ),
     url(r'^news/', mainview.news, name='news' ),

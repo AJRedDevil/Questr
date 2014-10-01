@@ -52,8 +52,10 @@ def send_email_notification(user, email_details):
         msg.send()
         logger.debug("Notification sent to - %s for %s", user.email, email_details['template_name'])
     except Exception, e:
-        logger.debug("Error during sending of Email to - %s for %s", user.email, email_details['template_name'])
-        logger.debug("Error message is %s", str(e))
+        logger.warn("Error during sending of Email to - %s for %s", user.email, email_details['template_name'])
+        logger.warn("Error message is %s", str(e))
+        
+
 
 
 def _load_contact_template(user_email, email_details):

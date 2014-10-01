@@ -172,8 +172,8 @@ class QuestToken(models.Model):
 
     def is_alive(self):
         timedelta = timezone.now() - self.timeframe
-        minutes = 30
-        allowable_time = float(minutes * 60)
+        hours = 24
+        allowable_time = float(hours * 60 * 60)
         return timedelta.total_seconds() < allowable_time
 
     def __unicode__(self):
