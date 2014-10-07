@@ -256,6 +256,12 @@ class CourierManager(object):
         email_notifier.send_email_notification(courier, email_details)
         return "success"
 
+    def informQuestrAfterAcceptance(self, courier, questr, quest):
+        """Takes in a questobject, a questr object and a courier object and informs the questr of the accepted quest"""
+        email_details = quest_handler.prepQuestAppliedNotification(courier, questr, quest)
+        email_notifier.send_email_notification(questr, email_details)
+        return "success"
+
     def checkProximity(self, address_1, address_2):
         proximity = settings.QUESTR_PROXIMITY
         maps = geomaps.GMaps()

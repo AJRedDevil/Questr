@@ -219,8 +219,8 @@ def prepOfferAcceptedNotification(user, questdetails):
 
 def prepQuestAppliedNotification(shipper, questr, questdetails):
     """Prepare the details for notification emails for new quests"""
-    template_name="Quest_Applied_Notification"
-    subject="Questr - Application Received"
+    template_name="Quest_Accepted_Notification_Questr"
+    subject="Questr - Your shipment has been processed"
     # quest_browse_link=settings.QUESTR_URL+"/quest"
     quest_support_email="support@questr.co"
     questr_unsubscription_link="http://questr.co/unsub"
@@ -235,10 +235,22 @@ def prepQuestAppliedNotification(shipper, questr, questdetails):
                                                 'shipper_first_name': shipper.first_name,                                                
                                                 'shipper_last_name': shipper.last_name,                                                
                                                 'shipper_user_name': shipper.displayname,                                                
+                                                'shipper_phone': shipper.phone,                                                
                                                 'shipper_profile_link'  : settings.QUESTR_URL+'/user/'+shipper.displayname,                                                
                                                 'email_unsub_link'  : questr_unsubscription_link,
                                                 'quest_title'       : questdetails.title,
                                                 'quest_size'      : questdetails.size,
+                                                'quest_pickup_name' : questdetails.pickup['name'],
+                                                'quest_pickup_phone' : questdetails.pickup['phone'],
+                                                'quest_pickup_address' : questdetails.pickup['address'],
+                                                'quest_pickup_city' : questdetails.pickup['city'],
+                                                'quest_pickup_postalcode' : questdetails.pickup['postalcode'],
+                                                'quest_pickup_name' : questdetails.pickup['name'],
+                                                'quest_dropoff_name' : questdetails.dropoff['name'],
+                                                'quest_dropoff_phone' : questdetails.dropoff['phone'],
+                                                'quest_dropoff_address' : questdetails.dropoff['address'],
+                                                'quest_dropoff_city' : questdetails.dropoff['city'],
+                                                'quest_dropoff_postalcode' : questdetails.dropoff['postalcode'],
                                                 'quest_reward'      : str(questdetails.reward),
                                                 'quest_distance'      : str(questdetails.distance),
                                                 'quest_creation_date'      : questdetails.creation_date.strftime('%m-%d-%Y'),

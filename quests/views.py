@@ -198,7 +198,6 @@ def confirmeditquest(request, questname):
                 ##Submit dict to the field
                 # logger.debug("Pickup dict %s", pickupdict)
                 # logger.debug("Dropoff dict %s", dropoffdict)
-                quest_data = user_form.save(commit=False)
                 quest_data.pickup = json.dumps(pickupdict)
                 quest_data.dropoff = json.dumps(dropoffdict)
                 quest_data.map_image = map_image
@@ -575,6 +574,7 @@ def accept_quest(request, quest_code):
                 if not transcational.status:
                     try:
                         quest = Quests.objects.get(id=int(transcational.quest_id))
+                        questr = user_handler.getQuestrDetails(quest.questrs_id)
                         courier = QuestrUserProfile.objects.get(id=int(transcational.shipper_id))
                         logger.debug("%s is the requesting user, where %s is the courier for %s quest" % (request.user, courier, quest))
                         if quest and courier and request.user == courier:
@@ -583,7 +583,7 @@ def accept_quest(request, quest_code):
                             ##Set rejection status to true so it won't be used again
                             opptransaction.status = True
                             ##Set Courier status to unavailable
-                            courier.is_available = True # This should be false, only put True for today
+                            courier.is_available = False # This should be false, only put True for today
                             ##Set quest's courier to respective courier
                             quest.shipper = courier.id
                             ##Set quest as accepted 
@@ -596,6 +596,7 @@ def accept_quest(request, quest_code):
                             quest.save()
                             couriermanager = user_handler.CourierManager()
                             couriermanager.informCourierAfterAcceptance(courier, quest)
+                            couriermanager.informQuestrAfterAcceptance(courier, questr, quest)
                             request.session['alert_message'] = dict(type="success",message="Congratulations! You have accepted the quest!")
                             return redirect('home')
                     except QuestrUserProfile.DoesNotExist:
@@ -637,7 +638,10 @@ def reject_quest(request, quest_code):
                             opptransaction.status = True
                             ##Set courier status to true so he can be used for other quests    
                             # We will have to figure out another way to do this, perhaps a this courier rejected these quest type of flags
-                            courier.is_available = True # This should be False, only put false for today
+                            courier.is_available = False # This should be False, only put false for today
+                            from users.tasks import activate_shipper
+                            ## Any courier who rejects a quest will be put on hold for 5 minutes
+                            activate_shipper.apply_async((courier.id,), countdown=300)
                             ##Remove this courier from the current quest's list of available shippers
                             available_couriers = quest.available_couriers
                             logging.warn(available_couriers)
