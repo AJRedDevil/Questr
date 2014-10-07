@@ -346,7 +346,7 @@ class CourierManager(object):
         self.informCourier(designated_courier, quest)
         self.setCourierAvailability(designated_courier, 0) #Set this to False to disable courier checks.
         ## Run the job to inform shippers in queue
-        inform_shipper_task.apply_async((quest.id, designated_courier.id), countdown=60)       
+        inform_shipper_task.apply_async((quest.id, designated_courier.id), countdown=1800)       
     
     def updateCouriersForQuset(self, quest, courier):
         """Removes a courier from the set of available shippers for a quest"""
