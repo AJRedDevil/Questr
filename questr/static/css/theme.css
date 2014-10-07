@@ -3,30 +3,102 @@ a {
 	color: #3498DB;
 }
 
-
-.lead {
-	font-weight: 200;
-}
-
 label {
+	font-family: inherit;
 	font-weight: 400;
+	color: #565a5c;
 }
 
+hr {
+margin-top: 15px;
+margin-bottom: 15px;
+border: 1px;
+border-top: 1px solid #dce0e0;
+
+display: block;
+-webkit-margin-before: 0.5em;
+-webkit-margin-after: 0.5em;
+-webkit-margin-start: auto;
+-webkit-margin-end: auto;
+}
  
 body {
-	background: #edefed;
+	background-color: #f5f5f5;
 	font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
-	line-height: 1.43;
 	font-size: 14px;
 	color: #565a5c;
-	font-weight: 400;
-	-webkit-font-smoothing: antialiased;
+	font-weight: normal;
 	
-	text-align: left;
-	direction: ltr;
-	unicode-bidi: embed;
+	text-rendering: optimizelegibility;
+
+	-webkit-font-smoothing: antialiased;
  }
- 
+
+/************ WELL ****************/
+.well {
+	background-color: white;
+	box-shadow: none;
+	border-radius: 2px;
+}
+
+/************* Input Boxes *****************/
+input.form-control, textarea.form-control {
+	border: 1px solid #dce0e0;
+	background-color: #fff;
+	border-radius: 2px;
+	font-family: inherit;
+	color: #565a5c;
+	font-weight: normal;
+
+	outline: 0;
+	box-shadow: none;
+  -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+          transition: border .25s linear, color .25s linear, background-color .25s linear;
+}
+
+input.form-control::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #565a5c;
+}
+input.form-control:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #565a5c;
+   opacity:  1;
+}
+input.form-control::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #565a5c;
+   opacity:  1;
+}
+input.form-control:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color:    #565a5c;
+}
+
+input.form-control:focus, input.form-control:active, textarea.form-control:focus {
+	border: 1px solid #3498db;
+	outline: 0;
+	box-shadow: none;
+  -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+          transition: border .25s linear, color .25s linear, background-color .25s linear;
+}
+
+textarea.form-control {
+	border: 1px solid gba(0,0,0,0.2);
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /************ Theme ****************/
 .accent-color, .accent-color:hover {
 	color: #5abdff;
@@ -40,8 +112,8 @@ footer {
 	font-size: 14px;
 	font-weight: 400;
 	text-align: center;
-	border-top: none;
 	color: #565a5c;
+	border-top: 1px solid #E4E6E3;
 }
 
 footer .row {
@@ -244,15 +316,50 @@ footer small.title {
 }
 
 
-/******************** Buttons ***********************/
-.btn-default {
+
+/************* Buttons ************/
+.btn {
+	border: 1px solid;
 	border-radius: 2px;
-	background-color: #3498db;
+	background-color: #fff;
+}
+
+.btn-default {
+	border-color: #dce0e0;
+	background-color: #fff;
+	color: gray;
+}
+
+.btn-circleinfo {
+	border-radius: 50%;
+	max-width: 15px;
+	max-height: 15px;
 }
 
 
-
+select {
+	padding-top: 8px;
+padding-bottom: 8px;
+padding-right: 2em;
+-webkit-appearance: none;
+display: block;
+padding: 8px 10px;
+width: 100%;
+transition: border-color 0.2s;
+color: #565a5c;
+font-family: inherit;
+font-size: inherit;
+font: -webkit-small-control;
+letter-spacing: normal;
+word-spacing: normal;
+text-indent: 0px;
+text-shadow: none;
+text-align: start;
+}
  
+
+
+
  /*************** Panels ***************/
 .panel-default {
   -webkit-box-shadow: none;
@@ -307,8 +414,6 @@ footer small.title {
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff2dede', endColorstr='#ffebcccc', GradientType=0);
 }
-
-
 
 .panel-default .panel-heading .panel-title {
 	font-size: 20px;
@@ -370,106 +475,6 @@ footer small.title {
 
 
 
-
-
-
-/************* Buttons ************/
-.btn-default {
-	background-color: #3498db;
-	border: none;
-	color: white;
-}
-
-.btn-default:hover {
-	background-color: #3498db;
-	border: none;
-	color: white;
-}
-
-
-.btn-classic {
-  background-color: #ffffff;
-  *background-color: #f6f7f8;
-  background-image: -moz-linear-gradient(top, #ffffff 0%, #f6f7f8 100%);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f6f7f8));
-  background-image: -webkit-linear-gradient(top, #ffffff, #f6f7f8);
-  background-image: -o-linear-gradient(top, #ffffff, #f6f7f8);
-  background-image: linear-gradient(to bottom, #ffffff, #f6f7f8);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffafafa', endColorstr='#ffe6e6e6', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-  
-  
-border: 1px solid;
--webkit-border-radius: 2px;
--webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
--webkit-box-sizing: content-box;
-font-family: 'Helvetica Neue', Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif;
--webkit-font-smoothing: antialiased;
-font-weight: bold;
-text-align: center;
-vertical-align: middle;
-
-border-color: #cdced0 #c5c6c8 #b6b7b9;
-color: #4e5665;
-text-shadow: 0 1px 0 #fff;
-}
-
-select {
-	-webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    text-indent: 0.01px;
-    text-overflow: ”;
-    
-    padding-bottom: 8px;
-    padding-top: 8px;
-    padding-left: 12px;
-    padding-right: 15px;
-}
-
-select option {
-
-}
-
-.btn-classic:hover,
-.btn-classic:focus,
-.btn-classic:active,
-.btn-classic.active,
-.btn-classic.disabled,
-.btn-classic[disabled] {
-	color: #4e5665;
-}
-
-
-
-
-.dropdown button.btn:hover,
-.dropdown button.btn:focus,
-.dropdown button.btn:active,
-.dropdown button.btn.active,
-.dropdown button.btn.disabled,
-.dropdown button.btn[disabled],
-.btn-grad:hover,
-.btn-grad:focus,
-.btn-grad:active,
-.btn-grad:active,
-.btn-grad:disabled,
-.btn-grad[disabled] {
-  color: #000000;
-  background-color: #e6e6e6;
-  *background-color: #d9d9d9;
-}
-
-.dropdown button.btn:active,
-.dropdown button.btn.active,
-.btn-grad.active,
-.btn-grad.active {
-  background-color: #cdcdcd \9;
-}
-
-
-
 /******** Pagination ************/
 .pagination li a {
 	color: #777777;
@@ -520,36 +525,16 @@ select option {
     width: 10px;
 }
 
-/************* Input Boxes *****************/
-input.form-control, input.form-control, textarea.form-control {
-	border: 1px;
-	border-style: solid;
-	border-color: rgba(0,0,0,0.2);
-	background: white;
-	box-shadow: none;
-	border-radius: 0px;
-	border-left: none;
-	border-right: none;
-	border-top: none;
-	background-color: transparent;		
-	-webkit-box-shadow: 0 0 0px 1000px white inset;
-
-}
-
-input.form-control:focus, input.form-control:active, textarea.form-control:focus {
-	box-shadow: none;
-	border-width: 1px;
-	border-color: #3498db;
-	background-color: transparent;
-	-webkit-box-shadow: 0 0 0px 1000px white inset;
-}
 
 
 /*************** Primary Navbar ***************/
 .navbar {
 	background: white;
-	margin: 0;
-	border-bottom: none;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 0;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #E4E6E3;
 	border-radius: 0;
 	padding: 0px 50px;
 	text-align: center;
@@ -558,7 +543,7 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 .navbar-default .navbar-nav > li > a {
  	color: #565a5c;
  	background: white;
- 	font-weight: 500;
+ 	font-weight: 400;
  	padding-left: 0;
  	padding-right: 0;
  	padding-bottom: 2px;
@@ -657,9 +642,6 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 
 
 
-
-
-
 .light-grey {
 	color: #6a7480;
 }
@@ -679,11 +661,6 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 .theme-bg {
 	background: #3498db;
 }
-
-.top-margin {
-	margin-top: 8px;
-}
-
 
 
  /********* no image post **********/
@@ -716,3 +693,43 @@ input.form-control:focus, input.form-control:active, textarea.form-control:focus
 	padding-bottom: 24px;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+/* RADIOS & CHECKBOXES STYLES */
+ 
+/* base styles */
+input[type="radio"], 
+input[type="checkbox"] {
+    height: 1.2em;
+    width: 1.2em;
+    vertical-align: middle;
+    margin: 0 0.4em 0.4em 0;
+    border: 1px solid #dce0e0;
+ 	background-color: white;
+     box-shadow:inset none;
+}
+
+/* border radius for radio*/
+input[type="radio"] {
+    -webkit-border-radius:100%;
+    border-radius:100%;
+}
+
+/* border radius for checkbox */
+input[type="checkbox"] {
+    -webkit-border-radius:2px;
+    border-radius:2px;
+}
+
+
+
+ 
