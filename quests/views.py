@@ -11,6 +11,7 @@ from users.contrib.user_handler import isShipper, getShippers, getQuestrDetails
 from users.contrib import user_handler
 from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm, DistancePriceForm
 from .models import Quests, QuestTransactional
+from .tasks import inform_shipper_task
 from users.models import QuestrUserProfile
 
 import logging

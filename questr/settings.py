@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'reviews',
     'storages',
     'endless_pagination',
+    'djcelery',
 )
 
 # MIDDLERWARE DEFINITIONS
@@ -168,6 +169,16 @@ LOGGING = {
     }
 }
 
+# CELERY DEFINITIONS
+BROKER_URL = os.environ['CLOUDAMQP_URL']
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'America/Toronto'
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+CELERY_BEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+BROKER_POOL_LIMIT = 3
+
 # LOCAL CONFIG IMPORT, IMPORTS ALL CONFIG FROM local_setting.py, required only for a dev env
 try:
     from local_setting import *
@@ -180,5 +191,5 @@ if not DEBUG:
     DEFAULT_FILE_STORAGE = 'libs.s3utils.MediaRootS3BotoStorage'
     ##This for CSS,
     STATICFILES_STORAGE = 'libs.s3utils.StaticRootS3BotoStorage'
-    MEDIA_ROOT = '/%s/' % DEFAULT_FILE_STORAGE
-    MEDIA_URL = '//s3.amazonaws.com/%s/' % AWS_MEDIA_BUCKET
+    # MEDIA_ROOT = '/%s/' % DEFAULT_FILE_STORAGE
+    # MEDIA_URL = '//s3.amazonaws.com/%s/' % AWS_MEDIA_BUCKET

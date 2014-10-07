@@ -13,6 +13,7 @@ from libs import email_notifier, geomaps
 
 from users.models import QuestrUserProfile, UserTransactional, QuestrToken
 from quests.models import Quests
+from quests.tasks import inform_shipper_task
 
 logger = logging.getLogger(__name__)
 
@@ -343,7 +344,9 @@ class CourierManager(object):
 
         designated_courier = getQuestrDetails(couriers_list[0][0])
         self.informCourier(designated_courier, quest)
-        self.setCourierAvailability(designated_courier, 1) #This is supposed to be set to False, set to True as a patch work
+        self.setCourierAvailability(designated_courier, 0) #Set this to False to disable courier checks.
+        ## Run the job to inform shippers in queue
+        inform_shipper_task.apply_async((quest.id, designated_courier.id), countdown=60)       
     
     def updateCouriersForQuset(self, quest, courier):
         """Removes a courier from the set of available shippers for a quest"""

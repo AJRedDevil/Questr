@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from django.conf import settings
+# from django.conf import settings
 
 import views as mainview
 
@@ -29,8 +29,8 @@ urlpatterns = patterns('',
     url(r'^help/trust/', mainview.trust, name='trust' ),
 )
 
-if settings.DEBUG:
-    # static files (images, css, javascript, etc.)
-    urlpatterns += patterns('',
-        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
-        'document_root': settings.MEDIA_ROOT}))
+# if settings.DEBUG:
+#     # static files (images, css, javascript, etc.)
+#     urlpatterns += patterns('',
+#         (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+#         'document_root': settings.MEDIA_ROOT}))
