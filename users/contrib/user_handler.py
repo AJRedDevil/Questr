@@ -96,7 +96,7 @@ def get_verification_url(user=None):
 def getShipper(shipper_id):
     """List shipper information"""
     try:
-        shipper = QuestrUserProfile.objects.filter(id=shipper_id)
+        shipper = QuestrUserProfile.objects.filter(id=shipper_id, is_active=True)
     except QuestrUserProfile.DoesNotExist:
         raise Http404
         return render('404.html', locals())
@@ -105,7 +105,7 @@ def getShipper(shipper_id):
 def getQuestrDetails(questr_id):
     """List shipper information"""
     try:
-        questr = QuestrUserProfile.objects.get(id=questr_id)
+        questr = QuestrUserProfile.objects.get(id=questr_id, is_active=True)
     except QuestrUserProfile.DoesNotExist:
         raise Http404
         return render('404.html', locals())
@@ -113,7 +113,7 @@ def getQuestrDetails(questr_id):
 
 def getShippers():
     """List all the shippers"""
-    shippers = QuestrUserProfile.objects.filter(is_shipper='t')
+    shippers = QuestrUserProfile.objects.filter(is_shipper=True, is_active=True)
     return shippers
 
 def getShippersOfQuest(questname):
@@ -177,10 +177,10 @@ def updateCourierAvailability(questr, status):
     status = int(status)
     if userExists(questr.id):
         if status == 0:
-            QuestrUserProfile.objects.filter(id=questr.id).update(is_available=False)
+            QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=False)
             return dict(status='success')
         elif status == 1:
-            QuestrUserProfile.objects.filter(id=questr.id).update(is_available=True)
+            QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=True)
             return dict(status='success')
         else :
             raise ValueError('Status %d not acceptable, use 0 or 1' % (status))
@@ -196,7 +196,7 @@ class CourierManager(object):
     def getActiveCouriers(self):
         """Returns a list of couriers"""
         try:
-            courierlist = QuestrUserProfile.objects.filter(is_shipper=True, is_superuser=False, is_available=True)
+            courierlist = QuestrUserProfile.objects.filter(is_shipper=True, is_superuser=False, is_available=True, is_active=True)
         except Exception, e:
             raise e
 
@@ -214,7 +214,7 @@ class CourierManager(object):
         else:
             stat=False
         try:
-            QuestrUserProfile.objects.filter(id=courier.id).update(is_available=stat)
+            QuestrUserProfile.objects.filter(id=courier.id, is_active=True).update(is_available=stat)
         except Exception, e:
             raise e
 
@@ -223,7 +223,7 @@ class CourierManager(object):
     def getSuperAdmins(self):
         """Returns a list of superadmins"""
         try:
-            courierlist = QuestrUserProfile.objects.filter(is_superuser=True)
+            courierlist = QuestrUserProfile.objects.filter(is_superuser=True, is_active=True)
         except Exception, e:
             raise e
 
