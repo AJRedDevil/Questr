@@ -64,8 +64,7 @@ def editquest(request, questname):
         return render(request,'404.html')
 
     if questdetails.shipper:
-        # This has to return a message [ The quest has already been applied for, can't be edited now ]
-        # Later on any edits by any Questr should notify the shippers.
+        request.session['alert_message'] = dict(type="Danger",message="The quest has already been assigned to a courier, it cannot be edited now!")
         return redirect('home')
 
     if request.method=="POST":
@@ -227,6 +226,9 @@ def newquest(request):
     from users.contrib.user_handler import getShipper
     pagetype="loggedin"
     user = request.user
+    userdetails = user_handler.getQuestrDetails(user.id)
+    if userdetails.is_shipper:
+        return redirect('home')
 
     if request.method=="POST":
         now = timezone.now()
@@ -277,6 +279,9 @@ def confirmquest(request):
     from users.contrib.user_handler import getShipper
     pagetype="loggedin"
     user = request.user
+    userdetails = user_handler.getQuestrDetails(user.id)
+    if userdetails.is_shipper:
+        return redirect('home')
 
     if request.method=="POST":
         now = timezone.now()
