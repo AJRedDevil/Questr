@@ -49,8 +49,8 @@ class Quests(models.Model):
     delivery_date = models.DateTimeField(_('delivery_date'), 
         blank=True, null=True)
     available_couriers = jsonfield.JSONField(_('pickup'), default={})
-    delivery_code = models.TextField(_('delivery_code'), default=calc_delivery_code)
-    tracking_number = models.TextField(_('tracking_number'), default=calc_tracking_number)
+    delivery_code = models.TextField(_('delivery_code'), blank=True)
+    tracking_number = models.TextField(_('tracking_number'), blank=True)
 
     def __unicode__(self):
         return str(self.id )
@@ -121,9 +121,23 @@ class Quests(models.Model):
 
     #     return default_file_path
 
+    def get_delivery_code(self):
+        hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
+        return hashstring[:3]+hashstring[-2:]
+
+    def get_tracking_number(self): 
+        hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
+        return hashstring[10:15]+hashstring[-15:-10]
+
 
         #Overriding
     def save(self, *args, **kwargs):
+        if not self.delivery_code:
+            self.delivery_code = self.get_delivery_code()
+
+        if not self.tracking_number:
+            self.tracking_number = self.get_tracking_number()
+
         super(Quests, self).save(*args, **kwargs)
         # self.create_item_images_normal()
 

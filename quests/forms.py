@@ -263,3 +263,13 @@ class DistancePriceForm(forms.Form):
         error_messages={'required' : 'Your postcode is required !',}
         )
 
+class TrackingNumberSearchForm(forms.Form):
+    """A form to get details of the shipment from the tracking number"""
+    def __init__(self, *args, **kwargs):
+        super(TrackingNumberSearchForm, self).__init__(*args, **kwargs)
+
+    tracking_number = forms.CharField(
+        error_messages = {'required':'Please provide with a tracking number'}
+        )
+
+

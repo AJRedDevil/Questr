@@ -9,7 +9,7 @@ from users.access.requires import verified, is_quest_alive
 from .contrib import quest_handler
 from users.contrib.user_handler import isShipper, getShippers, getQuestrDetails
 from users.contrib import user_handler
-from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm, DistancePriceForm
+from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm, DistancePriceForm, TrackingNumberSearchForm
 from .models import Quests, QuestTransactional
 from .tasks import inform_shipper_task
 from users.models import QuestrUserProfile
@@ -671,3 +671,19 @@ def reject_quest(request, quest_code):
         except QuestTransactional.DoesNotExist:
             return redirect('home')
     return redirect('home')
+
+def tracking_number_search(request, tracking_number):
+    """Searches for the tracking number"""
+    logging.warn(tracking_number)
+    if request.method == "GET":
+        logging.warn("form is valid")
+        user_form = TrackingNumberSearchForm(request.GET)
+        if user_form.is_valid():
+            logging.warn("form is valid")
+            tracking_number = user_form.cleaned_data['tracking_number']
+            questdetails = quest_handler.getQuestDetailsByTrackingNumber(tracking_number)
+            return render(request, 'viewquest.html', locals())
+        else:
+            return redirect('home')            
+    else:
+        return redirect('home')

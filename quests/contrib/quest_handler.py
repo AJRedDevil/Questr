@@ -32,6 +32,14 @@ def getQuestDetails(quest_id):
         return render(request,'404.html')
     return questdetails
 
+def getQuestDetailsByTrackingNumber(tracking_number):
+    try:
+        questdetails = Quests.objects.get(tracking_number=tracking_number)
+    except Quests.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
+    return questdetails
+
 def getMyShipmnets(shipper_id):
     myshipments = Quests.objects.filter(shipper=shipper_id)
     return myshipments

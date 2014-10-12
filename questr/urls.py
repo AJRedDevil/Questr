@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 # from django.conf import settings
 
 import views as mainview
+import quests.views as questviews
 
 urlpatterns = patterns('',
     # Examples:
@@ -12,6 +13,8 @@ urlpatterns = patterns('',
     url(r'loadpage/(?P<template>[-_\w/.]+)$', mainview.loadPage, ),    
     url(r'^user/', include('users.urls')),
     url(r'^quest/', include('quests.urls') ),
+    url(r'^track/(?P<tracking_number>\w{0,11})$', questviews.tracking_number_search, name='trackquest'),
+
     # url(r'^questrreview/', mainview.questrReview, name='questReview' ),
     # url(r'^questreview/', mainview.questReview ),
     # url(r'^review/', include('reviews.urls')),
