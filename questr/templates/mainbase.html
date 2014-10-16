@@ -17,7 +17,8 @@
 	    <!--[if lt IE 9]>
 	      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	    <![endif]-->
-
+	    
+	    <link href={% static "css/bootstrap-datetimepicker.min.css" %} rel="stylesheet">
 	    <link href={% static "bootstrap/css/bootstrap.min.css" %} rel="stylesheet">
 	    <link href={% static "css/theme.css" %} rel="stylesheet">
 	    <link href={% static "css/normalize.css" %} rel="stylesheet"> 
@@ -43,7 +44,7 @@
 		      </button>
 		      <a class="navbar-brand" href="{% url 'index' %}">Questr</a>
 		    </div>
-
+		    
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
@@ -273,6 +274,7 @@
 		</div><!-- ./row -->
 	</footer>
 
+
 	<!-- Google Analytics -->
     <script>
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -284,11 +286,22 @@
 		ga('send', 'pageview');
 	</script>
 
+
+
+		<script src={% static "js/bootstrap-datetimepicker.min.js" %}></script>
+		<script src={% static "js/en-ca.js" %}></script>
+
+
+
 		<script type='text/javascript' src={% static "js/jquery.min.js" %}></script> 
 		<script src={% static "bootstrap/js/bootstrap.min.js" %}></script>
 	    <script src={% static "bootstrap/js/tooltip.js" %}></script>
 	    <script src={% static "js/modernizr.js" %}></script>
 	{% block scripts %}
+
+
+
+
 	{% endblock scripts %}
 	</body>	    
 </html>
