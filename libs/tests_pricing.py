@@ -2,12 +2,12 @@
 
 import logging as log
 import pytz
+
 from decimal import Decimal
-from datetime import datetime, time
+from datetime import time
 
 from django.utils import timezone
 from django.conf import settings
-from django.test.client import Client
 
 from django.test import TestCase
 
@@ -54,6 +54,7 @@ class PricingTestCase(TestCase):
             return True
 
     def tests_get_rate_meter_drop(self, expected_value=6):
+        """Tests if the meter drop is as expected per the weeeknd/peak hour"""
         mode = self.data['mode']
         if self.is_weekend or self.peak_hours:
             expected_value=6
@@ -77,6 +78,7 @@ class PricingTestCase(TestCase):
             return self.__rate_per_km_weekday[mode]
 
     def tests_starting_price(self):
+        """Tests the starting price / bare minimal price for the courier services"""
         ## Test Data ##
         self.data = {
                 'distance' : '2',
@@ -134,7 +136,4 @@ class PricingTestCase(TestCase):
             return float(Decimal(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode))).quantize(Decimal('0.01'))
         else:
             return float(Decimal(self.__get_meter_drop(self.__shipment_mode) + self.__distance * self.__get_rate_per_km(self.__shipment_mode))).quantize(Decimal('0.01'))
-
-    def tests_if_hour_in_peak_hours(self):
-        self.assertEqual(self.peak_hours, True)
 

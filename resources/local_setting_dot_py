@@ -1,11 +1,13 @@
 #Local Settings
 import os
+
 DEBUG = True
 TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = ['*']
 AUTH_PROFILE_MODULE = 'users.QuestrUserProfile'
 QUESTR_URL='http://localhost:5000'
 MANDRILL_API_KEY = os.environ['MANDRILL_TEST_API_KEY']
+os.environ['DJANGO_LIVE_TEST_SERVER_ADDRESS'] = 'localhost:8082'
 
 # To check with heroku's DB
 # DATABASES = {
@@ -39,8 +41,8 @@ PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
-MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
+# MEDIA_URL = '/media/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_PATH, 'static'),
 )
@@ -66,11 +68,11 @@ LOGGING = {
         },
     },
     'loggers': {
-        'django': {
-            'handlers':['file'],
-            'propagate': True,
-            'level':'DEBUG',
-        },
+        # 'django': {
+        #     'handlers':['file'],
+        #     'propagate': True,
+        #     'level':'DEBUG',
+        # },
         'users': {
             'handlers':['file'],
             'propagate': True,
@@ -82,6 +84,11 @@ LOGGING = {
             'level':'DEBUG',
         },
         'reviews': {
+            'handlers':['file'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+        'libs': {
             'handlers':['file'],
             'propagate': True,
             'level':'DEBUG',

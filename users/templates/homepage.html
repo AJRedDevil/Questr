@@ -11,10 +11,10 @@
 <div class="container">
 	<div class="row clearfix panel-group" id="accordion">
 	
-
 		<div class="col-md-4 column panel panel-default" id="panel1">
 			
-			
+		{% if not user.is_shipper %}
+		<div class="col-md-4 column panel panel-default" id="panel1>			
 				<div class="panel-heading">
 					<h3 class="panel-title">Pending Transactions</h3>
 					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
@@ -55,7 +55,9 @@
 				</ul><!-- ./List group -->
 			  </div><!-- ./panel-body -->
 
-		</div><!-- ./column -->
+		</div><!-- ./column -->	
+		{% endif %}
+
 
 		<div class="col-md-4 column panel panel-default" id="panel2">
 			 		<div class="panel-heading">

@@ -115,8 +115,10 @@ def home(request):
         alert_message = request.session.get('alert_message')
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=user.id).order_by('-creation_date')
-        return render(request,'shipperhomepage.html', locals())
+        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=userdetails.id, is_complete=False).order_by('-creation_date')
+        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, isaccepted=True, shipper=userdetails.id).order_by('-creation_date')
+
+        return render(request,'homepage.html', locals())
     elif userdetails.is_superuser:
         alert_message = request.session.get('alert_message')
         if request.session.has_key('alert_message'):
@@ -124,12 +126,12 @@ def home(request):
         allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=0).order_by('-creation_date')
         return render(request,'shipperhomepage.html', locals())
     else:
-        alert_message = request.session.get('alert_message')
+        alert_message = request.session.get('alert_message')        
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
         allquests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, ).order_by('-creation_date')
         activequests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id).order_by('-creation_date')
-        pastquests = Quests.objects.filter(is_complete=True, questrs_id=userdetails.id).order_by('-creation_date')
+        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, questrs_id=userdetails.id).order_by('-creation_date')
         return render(request,'homepage.html', locals())
 
 @login_required
@@ -346,7 +348,7 @@ def changePassword(request):
         logger.debug(user_form.errors)
         if user_form.is_valid():
             user_form.save()
-            alert_message=dict(type='success', message='Your password has been changed!')
+            request.session['alert_message'] = dict(type="success",message="Your password has been changed successfully!")
             return redirect('home')
     pagetitle = "Change Your Password"
     return render(request, "passwordsettings.html",locals())

@@ -171,7 +171,6 @@ class ManagerCase(TestCase):
         self.assertEqual(quest.available_couriers, {})
 
         from users.contrib import user_handler
-        from quests.contrib import quest_handler
 
         # Instantiate the courier manager instance
         couriermanager = user_handler.CourierManager()

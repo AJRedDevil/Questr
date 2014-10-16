@@ -6,6 +6,7 @@ from users.models import *
 import logging
 import jsonfield
 import hashlib
+import uuid
 logger = logging.getLogger(__name__)
 
 
@@ -14,8 +15,9 @@ class Quests(models.Model):
     STATUS_SELECTION = (('new','New'),('accepted','Accepted'),('completed','Completed'))
 
     ## Calculating delivery code before hand and inserting it as default so that it won't be tampered with.
-    hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now())).hexdigest()
+    hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
     calc_delivery_code = hashstring[:3]+hashstring[-2:]
+    calc_tracking_number = hashstring[10:15]+hashstring[-15:-10]
 
     questrs = models.ForeignKey(QuestrUserProfile)
     # pretty_url = models.CharField(_('pretty_url'), 
@@ -29,7 +31,7 @@ class Quests(models.Model):
     map_image = models.URLField(_('map_image'), max_length=9999, default='')
     status = models.TextField(_('status'), choices=STATUS_SELECTION, default='new')
     creation_date = models.DateTimeField(_('creation_date'), 
-        blank=False)
+        default=timezone.now)
     size = models.TextField(_('size'), choices=PACKAGE_SELECTION, default="backpack")
     shipper = models.TextField(_('shipper'), blank=True, null=True) 
     # qr_code = models.URLField(_('qr_code'), blank=True)
@@ -47,81 +49,101 @@ class Quests(models.Model):
     delivery_date = models.DateTimeField(_('delivery_date'), 
         blank=True, null=True)
     available_couriers = jsonfield.JSONField(_('pickup'), default={})
+    delivery_code = models.TextField(_('delivery_code'), blank=True)
+    tracking_number = models.TextField(_('tracking_number'), blank=True)
+    pickup_time = models.DateTimeField(_('pickup_time'), blank=True, default=timezone.now())
 
     def __unicode__(self):
         return str(self.id )
 
-    def create_item_images_normal(self):
-        import os
-        from PIL import Image
-        from django.core.files.storage import default_storage as storage
-        if not self.item_images:
-            logger.debug("No item image")
-            return ""
-        file_path = self.item_images.name
-        logger.debug(file_path)
-        filename_base, filename_ext = os.path.splitext(file_path)
-        normal_file_path = "%s_%s_normal.jpg" % (filename_base, self.id)
-        logger.debug(normal_file_path)
-        if storage.exists(normal_file_path):
-            logger.debug("File exists already")
-            return "exists"
-        try:
-            # resize the original image and return url path of the normalnail
-            f = storage.open(file_path, 'r')
-            image = Image.open(f)
-            logger.debug(image)
-            width, height = image.size
-            logger.debug(image.size)
-            if width > height:
-                delta = width - height
-                left = int(delta/2)
-                upper = 0
-                right = height + left
-                lower = height
-            else:
-                delta = height - width
-                left = 0
-                upper = int(delta/2)
-                right = width
-                lower = width + upper
+    # def create_item_images_normal(self):
+    #     import os
+    #     from PIL import Image
+    #     from django.core.files.storage import default_storage as storage
+    #     if not self.item_images:
+    #         logger.debug("No item image")
+    #         return ""
+    #     file_path = self.item_images.name
+    #     logger.debug(file_path)
+    #     filename_base, filename_ext = os.path.splitext(file_path)
+    #     normal_file_path = "%s_%s_normal.jpg" % (filename_base, self.id)
+    #     logger.debug(normal_file_path)
+    #     if storage.exists(normal_file_path):
+    #         logger.debug("File exists already")
+    #         return "exists"
+    #     try:
+    #         # resize the original image and return url path of the normalnail
+    #         f = storage.open(file_path, 'r')
+    #         image = Image.open(f)
+    #         logger.debug(image)
+    #         width, height = image.size
+    #         logger.debug(image.size)
+    #         if width > height:
+    #             delta = width - height
+    #             left = int(delta/2)
+    #             upper = 0
+    #             right = height + left
+    #             lower = height
+    #         else:
+    #             delta = height - width
+    #             left = 0
+    #             upper = int(delta/2)
+    #             right = width
+    #             lower = width + upper
 
-            image = image.crop((left, upper, right, lower))
-            image = image.resize((500, 500), Image.ANTIALIAS)
+    #         image = image.crop((left, upper, right, lower))
+    #         image = image.resize((500, 500), Image.ANTIALIAS)
 
-            f_normal = storage.open(normal_file_path, "w")
-            image.save(f_normal, "JPEG")
-            f_normal.close()
-            logger.debug("everything went fine")
-            return "success"
-        except Exception, e:
-            logger.debug("error")
-            logger.debug(e)
-            return "error"
+    #         f_normal = storage.open(normal_file_path, "w")
+    #         image.save(f_normal, "JPEG")
+    #         f_normal.close()
+    #         logger.debug("everything went fine")
+    #         return "success"
+    #     except Exception, e:
+    #         logger.debug("error")
+    #         logger.debug(e)
+    #         return "error"
 
-    def get_item_images_normal_url(self):
-        """Returns the url of the aws bucket object"""
-        from django.core.files.storage import default_storage as storage
-        default_file_path = "/static/img/default.png"
-        if not self.item_images:
-            return default_file_path
-        normal_file_path = self.item_images.name
+    # def get_item_images_normal_url(self):
+    #     """Returns the url of the aws bucket object"""
+    #     from django.core.files.storage import default_storage as storage
+    #     default_file_path = "/static/img/default.png"
+    #     if not self.item_images:
+    #         return default_file_path
+    #     normal_file_path = self.item_images.name
 
-        ##See if the AWS connection exists or works if doesn't return default file path
-        try:
-            if storage.exists(normal_file_path):
-                # logger.debug(storage.url(normal_file_path))
-                return storage.url(normal_file_path)
-        except Exception:
-            return default_file_path
+    #     ##See if the AWS connection exists or works if doesn't return default file path
+    #     try:
+    #         if storage.exists(normal_file_path):
+    #             # logger.debug(storage.url(normal_file_path))
+    #             return storage.url(normal_file_path)
+    #     except Exception:
+    #         return default_file_path
 
-        return default_file_path
+    #     return default_file_path
+
+    def get_delivery_code(self):
+        hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
+        return hashstring[:3]+hashstring[-2:]
+
+    def get_tracking_number(self): 
+        hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
+        return hashstring[10:15]+hashstring[-15:-10]
 
 
         #Overriding
     def save(self, *args, **kwargs):
+        if not self.delivery_code:
+            self.delivery_code = self.get_delivery_code()
+
+        if not self.tracking_number:
+            self.tracking_number = self.get_tracking_number()
+
+        if not self.pickup_time:
+            self.pickup_time = self.creation_date
+
         super(Quests, self).save(*args, **kwargs)
-        self.create_item_images_normal()
+        # self.create_item_images_normal()
 
 
 
@@ -172,7 +194,7 @@ class QuestToken(models.Model):
 
     def is_alive(self):
         timedelta = timezone.now() - self.timeframe
-        hours = 24
+        hours = 2
         allowable_time = float(hours * 60 * 60)
         return timedelta.total_seconds() < allowable_time
 

@@ -18,33 +18,40 @@ def index(request):
     pagetitle = "Affordable, faster, 24/7 shipments in GTA"
     return render(request, 'index.html', locals())
 
-def loadPage(request, template):
-    return render(request, template, locals())
+# def loadPage(request, template):
+#     return render(request, template, locals())
 
 def contact(request):
+    """Returns the contactus page"""
     pagetitle = "Contact US"
     return render(request, 'contact.html', locals())
 
 def about(request):
+    """Returns the about us page"""
     pagetitle = "About Us"
     return render(request, 'about.html', locals())
 
 def news(request):
+    """Returns the news page"""
     pagetitle = "In the news !"
     return render(request, 'news.html', locals())
 
 def crowdshipping(request):
+    """Returns the about crowdshipping page"""
     return render(request, 'crowdshipping.html', locals())
 
 def trust(request):
+    """Returns the HOW questr is safe page"""
     pagetitle = "Trust"
     return render(request, 'trust.html', locals())
 
 def terms(request):
+    """Returns the TOS"""
     pagetitle = "Terms of Service"
     return render(request, 'terms.html', locals())
 
 def privacy(request):
+    """Returns the Privacy Policy"""
     pagetitle = "Privacy Policy"
     return render(request, 'privacy.html', locals())
 
@@ -60,6 +67,7 @@ def thankyou(request):
 # function to join the invitee's subscription list
 
 def join(request):
+    """Subscribe to the mailing list"""
     if request.method=="POST":
         email = request.POST['EMAIL']
         if email:
@@ -86,7 +94,7 @@ def join(request):
         return render(request, 'join.html', locals())
 
 def prepContactUsNotification(name, user_email, message):
-    """Prepare the details for notification emails for new quests"""
+    """Prepare the details for contact us notifications"""
     template_name="Contact_Us_Notification"
     subject=user_email+' '+"says hello!"
 
@@ -106,6 +114,7 @@ def prepContactUsNotification(name, user_email, message):
 
 
 def contactus(request):
+    """Contact Us for visitors"""
     user_email = request.POST['email']
     name = request.POST['name']
     message = request.POST['message']
