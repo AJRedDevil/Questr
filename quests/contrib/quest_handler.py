@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 def listfeaturedquests(questrs_id):
-    """List all the featured quests"""
+    """List all the quests"""
     allquests = Quests.objects.filter(ishidden=False)
     return allquests
 

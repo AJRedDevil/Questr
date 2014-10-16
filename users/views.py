@@ -126,7 +126,7 @@ def home(request):
         allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=0).order_by('-creation_date')
         return render(request,'shipperhomepage.html', locals())
     else:
-        alert_message = request.session.get('alert_message')
+        alert_message = request.session.get('alert_message')        
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
         allquests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, ).order_by('-creation_date')

@@ -6,6 +6,8 @@ from questr.celery import app
 from quests.models import QuestTransactional
 from quests.contrib import quest_handler
 
+from django.conf import settings
+
 import logging
 
 logger = get_task_logger(__name__)
@@ -23,7 +25,7 @@ def inform_shipper_task(quest_id, courier_id):
         reject_transaction.status = True
         accept_transaction.status = True
         # For the shipper didn't respond we put him on hold for 1 hour
-        activate_shipper.apply_async((courier_id,), countdown=3600)
+        activate_shipper.apply_async((courier_id,), countdown=settings.COURIER_ACTIVATION_INTERVAL)
         available_couriers = quest.available_couriers
         if len(available_couriers) > 0:
             logging.warn(available_couriers)

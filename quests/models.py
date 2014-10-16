@@ -31,7 +31,7 @@ class Quests(models.Model):
     map_image = models.URLField(_('map_image'), max_length=9999, default='')
     status = models.TextField(_('status'), choices=STATUS_SELECTION, default='new')
     creation_date = models.DateTimeField(_('creation_date'), 
-        blank=False)
+        default=timezone.now)
     size = models.TextField(_('size'), choices=PACKAGE_SELECTION, default="backpack")
     shipper = models.TextField(_('shipper'), blank=True, null=True) 
     # qr_code = models.URLField(_('qr_code'), blank=True)
@@ -51,6 +51,7 @@ class Quests(models.Model):
     available_couriers = jsonfield.JSONField(_('pickup'), default={})
     delivery_code = models.TextField(_('delivery_code'), blank=True)
     tracking_number = models.TextField(_('tracking_number'), blank=True)
+    pickup_time = models.DateTimeField(_('pickup_time'), blank=True, default=timezone.now())
 
     def __unicode__(self):
         return str(self.id )
@@ -137,6 +138,9 @@ class Quests(models.Model):
 
         if not self.tracking_number:
             self.tracking_number = self.get_tracking_number()
+
+        if not self.pickup_time:
+            self.pickup_time = self.creation_date
 
         super(Quests, self).save(*args, **kwargs)
         # self.create_item_images_normal()

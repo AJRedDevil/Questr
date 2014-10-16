@@ -179,6 +179,11 @@ CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 CELERY_BEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 BROKER_POOL_LIMIT = 3
 
+# QUESTR NOTIFICAITON INTERVALS
+COURIER_ACTIVATION_INTERVAL = 3600
+COURIER_SELECTION_DELAY = 1800
+REJECTED_COURIER_HOLD_TIMER = 300
+
 # LOCAL CONFIG IMPORT, IMPORTS ALL CONFIG FROM local_setting.py, required only for a dev env
 try:
     from local_setting import *

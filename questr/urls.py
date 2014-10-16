@@ -7,10 +7,9 @@ import quests.views as questviews
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', mainview.index, name="index"),
-    # url(r'^joinus$', mainview.join, name='joinus'),
     url(r'^contactus$', mainview.contactus, name='contactus'),
 
-    url(r'loadpage/(?P<template>[-_\w/.]+)$', mainview.loadPage, ),    
+    # url(r'loadpage/(?P<template>[-_\w/.]+)$', mainview.loadPage, ),    
     url(r'^user/', include('users.urls')),
     url(r'^quest/', include('quests.urls') ),
     url(r'^track/(?P<tracking_number>\w{0,11})$', questviews.tracking_number_search, name='trackquest'),

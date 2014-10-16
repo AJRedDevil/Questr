@@ -62,7 +62,9 @@ class WebPricing(object):
 	def __init__(self):
 		# self.__total_time = total_time # total_time
 		self.__current_datetime = timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE))
-		self.is_weekend = False if self.__current_datetime.weekday() in range(1,6) else True
+		#self.is_weekend = False if self.__current_datetime.weekday() in range(1,6) else True
+		# Removed weekend meter drop
+		self.is_weekend = False
 		# log.warn("is it weekend?")
 		# log.warn(self.is_weekend)
 		self.clock_hour = self.__current_datetime.hour
@@ -98,13 +100,15 @@ class WebPricing(object):
 		return rate_per_km
 
 	def __is_peak_hour(self):
-		cur_time = time(self.clock_hour, self.clock_minute)
-		start_time = time(self.__hourlist['off_peak_hours']['start_hr'],self.__hourlist['off_peak_hours']['start_min'])
-		end_time = time(self.__hourlist['off_peak_hours']['end_hr'],self.__hourlist['off_peak_hours']['end_min'])
-		if cur_time >= start_time and cur_time <= end_time:
-			return False
-		else:
-			return True
+		# cur_time = time(self.clock_hour, self.clock_minute)
+		# start_time = time(self.__hourlist['off_peak_hours']['start_hr'],self.__hourlist['off_peak_hours']['start_min'])
+		# end_time = time(self.__hourlist['off_peak_hours']['end_hr'],self.__hourlist['off_peak_hours']['end_min'])
+		# if cur_time >= start_time and cur_time <= end_time:
+		# 	return False
+		# else:
+		# 	return True
+		# Removed peak_hour selection for now
+		return False
 		
 	# def set_factors(self, distance, mode='backpack'):
 	# 	self.__size_meter_drop = self.__get_size_meter_drop()[mode]
