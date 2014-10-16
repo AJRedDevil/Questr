@@ -393,6 +393,18 @@ text-align: start;
 }
  
 
+/*************** LISTS ***************/
+.list-group .list-group-item {
+	border: none;
+	margin-bottom: 4px;
+	border-radius: 0;
+}
+
+/*************** MEDIA LIST ***************/
+.media {
+	background-color: white;
+}
+
 
 
  /*************** Panels ***************/
