@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     # url(r'loadpage/(?P<template>[-_\w/.]+)$', mainview.loadPage, ),    
     url(r'^user/', include('users.urls')),
     url(r'^quest/', include('quests.urls') ),
-    url(r'^track/(?P<tracking_number>\w{0,11})$', questviews.tracking_number_search, name='trackquest'),
+    url(r'^track/', questviews.tracking_number_search, name='trackquest'),
 
     # url(r'^questrreview/', mainview.questrReview, name='questReview' ),
     # url(r'^questreview/', mainview.questReview ),

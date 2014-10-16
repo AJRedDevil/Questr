@@ -627,15 +627,12 @@ def reject_quest(request, quest_code):
             return redirect('home')
     return redirect('home')
 
-def tracking_number_search(request, tracking_number):
+def tracking_number_search(request):
     """Searches for the tracking number"""
-    if request.method == "GET":
-        user_form = TrackingNumberSearchForm(request.GET)
-        if user_form.is_valid():
-            tracking_number = user_form.cleaned_data['tracking_number']
+    if request.GET.has_key('tracking_number'):
+            tracking_number = request.GET['tracking_number']
             questdetails = quest_handler.getQuestDetailsByTrackingNumber(tracking_number)
-            return render(request, 'viewquest.html', locals())
-        else:
-            return redirect('home')            
+            return render(request, 'trackingdisplay.html', locals())
     else:
-        return redirect('home')
+        user_form = TrackingNumberSearchForm()
+        return render(request, 'trackingsearchform.html', locals())
