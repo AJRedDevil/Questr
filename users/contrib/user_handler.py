@@ -177,11 +177,15 @@ def updateCourierAvailability(questr, status):
     status = int(status)
     if userExists(questr.id):
         if status == 0:
-            QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=False)
-            return dict(status='success')
+            statusupdate = QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=False)
+            if statusupdate == 1:
+                return dict(status='success')
+            return dict(status="fail")
         elif status == 1:
-            QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=True)
-            return dict(status='success')
+            statusupdate = QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=True)
+            if statusupdate == 1:
+                return dict(status='success')
+            return dict(status="fail")
         else :
             raise ValueError('Status %d not acceptable, use 0 or 1' % (status))
     return dict(status='fail')
@@ -207,18 +211,23 @@ class CourierManager(object):
         courier_details = getQuestrDetails(courier)
         return courier_details.is_available
 
-    def setCourierAvailability(self, courier, status):
-        """Sets the availability status of a courier"""
-        if status==1:
-            stat=True
-        else:
-            stat=False
-        try:
-            QuestrUserProfile.objects.filter(id=courier.id, is_active=True).update(is_available=stat)
-        except Exception, e:
-            raise e
-
-        return stat
+    def updateCourierAvailability(questr, status):
+        """Takes a Questr User Profile object and a status ( 0 | 1 ) and updates the availability status as per the same"""
+        status = int(status)
+        if userExists(questr.id):
+            if status == 0:
+                statusupdate = QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=False)
+                if statusupdate == 1:
+                    return dict(status='success')
+                return dict(status="fail")
+            elif status == 1:
+                statusupdate = QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=True)
+                if statusupdate == 1:
+                    return dict(status='success')
+                return dict(status="fail")
+            else :
+                raise ValueError('Status %d not acceptable, use 0 or 1' % (status))
+        return dict(status='fail')
 
     def getSuperAdmins(self):
         """Returns a list of superadmins"""
@@ -350,7 +359,8 @@ class CourierManager(object):
 
         designated_courier = getQuestrDetails(couriers_list[0][0])
         self.informCourier(designated_courier, quest)
-        self.setCourierAvailability(designated_courier, 0) #Set this to False to disable courier checks.
+        # Set courier as unavailable
+        self.updateCourierAvailability(designated_courier, 0) 
         ## Run the job to inform shippers in queue
         inform_shipper_task.apply_async((quest.id, designated_courier.id), countdown=settings.COURIER_SELECTION_DELAY)       
     

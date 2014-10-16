@@ -39,6 +39,10 @@ def signin(request):
         auth_form = QuestrLocalAuthenticationForm(data=request.POST)
         if auth_form.is_valid():
             auth_login(request, auth_form.get_user())
+            #Notify the user of his status if he's unavailable
+            if request.user.is_authenticated() and request.user.is_shipper and request.user.is_available == False:
+                    request.session['alert_message'] = dict(type="warning",message="Your status is set to unavailable, you might want to set it to available!")
+                    return redirect('home')
             return redirect('home')
 
         if auth_form.errors:
@@ -115,23 +119,23 @@ def home(request):
         alert_message = request.session.get('alert_message')
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=userdetails.id, is_complete=False).order_by('-creation_date')
-        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, isaccepted=True, shipper=userdetails.id).order_by('-creation_date')
+        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=userdetails.id, is_complete=False).order_by('-creation_date')[:3]
+        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, isaccepted=True, shipper=userdetails.id).order_by('-creation_date')[:3]
 
         return render(request,'homepage.html', locals())
     elif userdetails.is_superuser:
         alert_message = request.session.get('alert_message')
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=0).order_by('-creation_date')
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=0).order_by('-creation_date')[:3]
         return render(request,'shipperhomepage.html', locals())
     else:
         alert_message = request.session.get('alert_message')        
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        allquests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, ).order_by('-creation_date')
-        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id).order_by('-creation_date')
-        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, questrs_id=userdetails.id).order_by('-creation_date')
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, ).order_by('-creation_date')[:3]
+        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id).order_by('-creation_date')[:3]
+        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, questrs_id=userdetails.id).order_by('-creation_date')[:3]
         return render(request,'homepage.html', locals())
 
 @login_required
@@ -468,3 +472,25 @@ def resetpassword(request):
     pagetitle = "Reset Your Password"
     pagetype  = "public"
     return render(request,"resetpassword.html", locals())
+
+def changestatus(request):
+    """Changes the courier's availability from the one that he is currently on"""
+    user = request.user
+    if user.is_shipper:
+        availability = user.is_available
+        if availability:
+            # If the user is available, change his status to unavailable
+            result = user_handler.updateCourierAvailability(user, 0)
+        else:
+            # vice versa
+            result = user_handler.updateCourierAvailability(user, 1)
+    else:
+        return redirect('home')
+
+    if result['status'] == "success":
+        request.session['alert_message'] = dict(type="Success",message="Your status has been updated!")
+        return redirect("home")
+    elif result['status'] == "fail":
+        request.session['alert_message'] = dict(type="Danger",message="Your status cannot be updated!")
+        return redirect("home")
+

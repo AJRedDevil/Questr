@@ -13,5 +13,5 @@ def activate_shipper(courier_id):
     """Activates Shipper, this should only be used after a shipper doesn't ack a request"""
     courier = user_handler.getQuestrDetails(int(courier_id))
     couriermanager = user_handler.CourierManager()
-    couriermanager.setCourierAvailability(courier, 1)
+    couriermanager.updateCourierAvailability(courier, 1)
     logger.warn("Courier availability set to True")
