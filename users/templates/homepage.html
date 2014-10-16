@@ -8,13 +8,14 @@
 {% block content %}
 
 
-<div class="container">
+<div class="container-fluid">
 	<div class="row clearfix panel-group" id="accordion">
 	
-		<div class="col-md-4 column panel panel-default" id="panel1">
+	
 			
 		{% if not user.is_shipper %}
-		<div class="col-md-4 column panel panel-default" id="panel1">			
+		<div class="col-md-4 column">
+		<div class="panel panel-default" id="panel1">
 				<div class="panel-heading">
 					<h3 class="panel-title">Pending Transactions</h3>
 					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
@@ -52,14 +53,30 @@
 					</div><!-- ./media -->
 				</li>
 				{% endfor %}
+
+				<!-- GAURAV -->
+				<li class="list-group-item">
+						<div class="media">
+						  <div class="pull-left">
+						   <i class="fa fa-check-square-o" style="font-size:40px;"></i>
+						  </div>
+						  <div class="media-body">
+						    <h4 class="media-heading">You have no active transactions.</h4>
+						  </div>
+						</div><!-- ./media -->
+					</li>
+					<!-- GAURAV -->
+
+
+
 				</ul><!-- ./List group -->
 			  </div><!-- ./panel-body -->
-
+			</div>
 		</div><!-- ./column -->	
 		{% endif %}
 
-
-		<div class="col-md-4 column panel panel-default" id="panel2">
+		<div class="col-md-4 column">
+		<div class="panel panel-default" id="panel2">
 			 		<div class="panel-heading">
 			  			
 			    		<h3 class="panel-title">Active Transactions</h3>
@@ -97,14 +114,31 @@
 
 						</div><!-- ./media -->
 					</li>
-				{% endfor %}
-				</ul><!-- ./List group -->
 
+				{% endfor %}
+
+
+				<!-- GAURAV -->
+				<li class="list-group-item">
+						<div class="media">
+						  <div class="pull-left">
+						   <i class="fa fa-fire" style="font-size:40px;"></i>
+						  </div>
+						  <div class="media-body">
+						    <h4 class="media-heading">You have no active transactions.</h4>
+						  </div>
+						</div><!-- ./media -->
+					</li>
+					<!-- GAURAV -->
+
+
+				</ul><!-- ./List group -->
 			  </div><!-- ./panel-body -->
+			</div>
 		</div><!-- ./column -->
 
-
-		<div class="col-md-4 column panel panel-default">		
+		<div class="col-md-4 column">
+		<div class="panel panel-default">		
 			  <div class="panel-heading">
 			    <h3 class="panel-title">History</h3>
 			    <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
@@ -145,9 +179,30 @@
 					</div><!-- ./media -->
 				</li>
 				{% endfor %}
+
+
+
+				<!-- GAURAV -->
+				<li class="list-group-item">
+						<div class="media">
+						  <div class="pull-left">
+						   <i class="fa fa-calendar" style="font-size:40px;"></i>
+						  </div>
+						  <div class="media-body">
+						    <h4 class="media-heading">You have no past transactions.</h4>
+						  </div>
+						</div><!-- ./media -->
+					</li>
+					<!-- GAURAV -->
+
+
+
+
+
 				</ul><!-- ./List group -->
 
 			  </div><!-- ./panel-body -->
+			</div>
 		</div><!-- ./column -->
 
 	</div><!-- ./row -->
