@@ -145,7 +145,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 
-    <li class="{% navactive request 'home' %}"><a href="{% url 'home' %}">Home</a></li>        
+    <li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><i class="fa fa-home" style="font-size:18px;"></i> Home</a></li>        
 
 
     {% if user.is_shipper or user.is_superuser %}
@@ -286,11 +286,30 @@
 
 	<footer>
 		<div class="row clearfix section">
-			<div class="col-md-10 col-md-offset-1 column">
+			<div class="col-md-12 column"><br></div>
+			<div class="col-md-12 column">
 				
 
-				<div class="col-md-2 column">
-					<ul class="no-margin no-padding">
+				<div class="col-md-8 col-md-offset-2 column text-center">
+					<a href="{% url 'faq' %}">Frequently Asked Questions</a>
+					<i>|</i>
+					<a href="{% url 'contact' %}">Contact Us</a>
+					<i>|</i>
+					<a href="{% url 'terms' %}">Terms of Service</a>
+					<i>|</i>
+					<a href="{% url 'privacy' %}">Privacy Policy</a>
+
+					{% comment %}
+					<div class="col-md-12 column text-center">
+						<i class="copyright">Copyright © 2014 Questr Inc. All rights reserved.</i>
+					</div>
+					{% endcomment %}
+					<br><hr>
+				</div><!-- ./column -->
+
+				<div class="col-md-4 col-md-offset-4 column text-center">
+					<h4>Contact us</h4>	
+					<ul>
 							<li>
 						<a class="facebook" target="_blank" href="https://www.facebook.com/questrco"><button class="btn-circle"><i class="fa fa-facebook"></i></button></a>
 							</li>
@@ -305,26 +324,8 @@
 							</li>
 						</ul>
 				</div><!-- ./column -->
-				<div class="col-md-8 column text-center">
-					<a href="{% url 'faq' %}">Frequently Asked Questions</a>
-					<i>|</i>
-					<a href="{% url 'contact' %}">Contact Us</a>
-					<i>|</i>
-					<a href="{% url 'terms' %}">Terms of Service</a>
-					<i>|</i>
-					<a href="{% url 'privacy' %}">Privacy Policy</a>
 
-					{% comment %}
-					<div class="col-md-12 column text-center">
-						<i class="copyright">Copyright © 2014 Questr Inc. All rights reserved.</i>
-					</div>
-					{% endcomment %}
 
-					<div class="col-md-12 column">
-					
-						
-					</div>
-				</div><!-- ./column -->
 				<div class="col-md-2 column text-center no-padding">
 					{% comment %}
 					<h2 class="no-margin">xxxxxx</h2>

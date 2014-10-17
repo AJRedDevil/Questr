@@ -2,6 +2,9 @@
 {% load staticfiles %}
 {% load active %}
 {% block localhead %}
+<link href={% static "css/bootstrap-datetimepicker.min.css" %} rel="stylesheet">
+
+
 <style type="text/css">
 img {
     vertical-align: middle;
@@ -298,6 +301,8 @@ img {
 
 
 
+
+
 <div class="container-fluid">
 	{% comment %}
     <div class="row clearfix">
@@ -424,7 +429,21 @@ img {
 				<div class="form-group col-xs-12 col-sm-12 col-md-5 col-lg-5 column">
 					<label for="exampleInputEmail1">Choose a later time</label>
 					<label class="radio">
-					  <input type="radio" name="inlineRadioOptions" id="customTime" value="option2">
+                      <input type="radio" name="inlineRadioOptions" id="customTime" value="option2">
+
+                         <select class="btn" data-size="2">
+                                <option>Today</option>
+                                <option>Tomorrow</option>
+                            </select>
+
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker4'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+
+                        </div>
 					</label>
 					
 				</div><!-- ./form-group -->
@@ -589,9 +608,18 @@ img {
 {% endblock content %}
 {% block scripts %}
 
+<script src={% static "js/moment.js" %}></script>
+<script src={% static "js/bootstrap-datetimepicker.js" %}></script>
+
+
+
+<script src={% static "js/jquery.timepicker.js" %}></script>
+
 <script type="text/javascript">
             $(function () {
-                $('#datetimepicker1').datetimepicker();
+                $('#datetimepicker4').datetimepicker({
+                    pickDate: false
+                });
             });
         </script>
 

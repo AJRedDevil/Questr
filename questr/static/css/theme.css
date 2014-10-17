@@ -5,7 +5,7 @@ a {
 
 label {
 	font-family: inherit;
-	font-weight: 400;
+	font-weight: 500;
 	color: #565a5c;
 }
 
@@ -44,7 +44,8 @@ body {
 
 /************* Input Boxes *****************/
 input.form-control, textarea.form-control {
-	border: 1px solid #dce0e0;
+	border: none;
+	box-shadow: 0px 1px 0px #C6CACA;
 	background-color: #fff;
 	border-radius: 14px;
 	font-family: inherit;
@@ -52,7 +53,6 @@ input.form-control, textarea.form-control {
 	font-weight: normal;
 
 	outline: 0;
-	box-shadow: none;
   -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
           transition: border .25s linear, color .25s linear, background-color .25s linear;
 }
@@ -108,25 +108,25 @@ textarea.form-control {
 
 /************ footer ****************/
 footer {
-	background: #E6E5E6;
-	width:100%;
+	background: #2b2d2e;
 	font-size: 14px;
 	font-weight: 400;
 	text-align: center;
-	color: #565a5c;
+	color: white;
 	border-top: none;
 }
 
-footer .row {
-	padding: 40px 0 20px 0;
+footer hr {
+	border-color: rgba(255,255,255,0.2);
 }
 
+
 footer a {
-	color: rgba(0,0,0,0.8);
+	color: inherit;
 }
 
 footer ul {
-	
+	padding-left: 0px;
 }
 
 footer ul li {
@@ -135,34 +135,21 @@ footer ul li {
 	color: #565a5c;
 }
 
-footer ul.social-links {
-	padding: 0;	
-	margin-top: 5px;
-}
-
-footer ul.social-links li {
-	display: inline;
-}
-
-footer small.title {
-	font-weight: bold;
-}
 
 
 .btn-circle {
-	width: 26px;
-	height: 26px;
+	width: 32px;
+	height: 32px;
 	text-align: center;
-	padding: 7px 0px;
+	padding: 9px;
 	font-size: 12px;
-	line-height: 1.428571429;
 	border-radius: 50%;
 	background: transparent;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #565a5c;
-	color: rgba(0,0,0,0.8);
-	margin-right: 1px;
+	border-color: rgba(255,255,255,0.2);
+	color: white;
+	margin: auto 10px;
 
 	-moz-transition:all 0.3s ease;
 	-webkit-transition:all 0.3s ease;
@@ -387,6 +374,7 @@ text-shadow: none;
 text-align: start;
 }
 
+
 .dropdown ul.dropdown-menu:after {
     content: "";
     border-bottom: 12px solid white;
@@ -397,7 +385,6 @@ text-align: start;
     right: 14px;
     z-index: 9;
 }
- 
 
 /*************** LISTS ***************/
 .list-group .list-group-item {
@@ -567,39 +554,35 @@ text-align: start;
 /*************** Primary Navbar ***************/
 .navbar {
 	background: white;
-	margin-left: 0;
-	margin-right: 0;
-	margin-top: 0;
 	margin-bottom: 4px;
 	border-bottom: none;
 	border-radius: 0;
-	padding: 0px 50px;
 	text-align: center;
 }
 
+.navbar-default .navbar-nav > li {
+
+}
+
 .navbar-default .navbar-nav > li > a {
- 	color: #565a5c;
+ 	color: inherit;
  	background: white;
- 	font-weight: 400;
- 	padding-left: 0;
- 	padding-right: 0;
- 	padding-bottom: 2px;
- 	margin-left: 20px;
- 	margin-right: 20px;
+ 	font-weight: 500;
+ 	border-radius: 8px;
+ 	margin-top: 3px;
+ 	margin-bottom: 3px;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-	background-color: white;
-	border-bottom: solid 2px #3498db;
-}
+.navbar-default .navbar-nav > li > a:focus,
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-	background-color: white;
-	color: rgba(0,0,0,0.8);
-	border-bottom: solid 2px #3498db;
+	background-color: #565a5c;
+	color: white;
 }
+
+
 
 .navbar-default .navbar-nav > li > a.post-quest {
 	background-color: rgba(52,73,95,0.84);
@@ -612,17 +595,10 @@ box-shadow:         0px 2px 0px 0px #2c3e50;
 }
 
 .navbar .navbar-brand {
-	color:  #3498db; 
-	font-size: 25px;
-	font-weight: 400;
-}
-
-.navbar-default .dropdown-menu {
-	background: white;
-	text-align: center;
-	box-shadow: 0px 0px 0px black;
-	border: none;
-	color: inherit;
+	color:  white; 
+	font-size: 18px;
+	font-weight: 500;
+	background-color: #3498db;
 }
 
 
