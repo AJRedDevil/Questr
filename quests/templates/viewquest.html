@@ -18,26 +18,18 @@
   <div class="container">
 		<div class="row clearfix">
 	
-					<div class="col-sm-3 col-md-3 column">
-						<div class="well body-prop border-colours">
-		
-							<div class="row clearfix">
-								<div class="col-sm-12 col-md-12 column">
-									
-									{% if not questdetails.item_images %}
-						            <div class="no-image item-image">
-							            <h1><span class="glyphicon glyphicon-picture"></span></h1>
-						            </div>
-									{% else %}
-					            
-						            <a data-target="#lightbox" data-toggle="modal" href="#">
-							            <img alt="itemImage" class="itemImage img-rounded" src="{{questdetails.get_item_images_normal_url}}">
-						            </a>
-						            {% endif %}
+					<div class="col-sm-3 col-md-3 column text-center">
+						<div class="well">					
+							{% if not questdetails.item_images %}
+					        <h1 style="font-size:50px;"><i class="fa fa-picture-o"></i></h1>
+							{% else %}
+			            
+				            <a data-target="#lightbox" data-toggle="modal" href="#">
+					            <img alt="itemImage" class="itemImage img-rounded" src="{{questdetails.get_item_images_normal_url}}">
+				            </a>
+				            {% endif %}
 							
-								</div><!-- ./column -->
-							</div><!-- ./row -->
-							  
+
 							 
 							 <div class="row clearfix"  id="imageSelector">
 								<div class="col-xs-4 col-sm-4 col-md-4 column"> 
@@ -52,9 +44,7 @@
 							    
 								</div><!-- ./row -->
 	
-	
-	
-	
+
 							<div class="modal fade" id="lightbox" tabindex="-1">
 								<div class="modal-dialog">
 									<button class="close hidden" data-dismiss="modal" type="button">×</button>
@@ -64,24 +54,19 @@
 									</div><!-- ./modal-content -->
 								</div><!-- ./modal-dialog -->
 							</div><!-- ./modal -->						
-							
 			
 						</div><!-- ./well -->
 					</div>	<!-- End of column -->
 					
-					
-					
 
-					<div class="col-sm-6 col-md-6 col-lg-6 column">
-					
-						<div class="panel panel-default body-prop border-colours">
-							<div class="panel-body">
-								<h5 class="grey no-margin inline">{% if isOwner %}
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 column">
+						<div class="well">
+							<h5>{% if isOwner %}
 									<span class="label label-info no-margin">{{questdetails.status}} </span>
 								{% endif %}
 								</h5>
-								<h5 class="grey no-margin inline"> {{questdetails.title}}</h5>
-								
+								<h4> {{questdetails.title}}</h4>
+								<hr>
 								{% if isOwner %}
 								<div class="dropdown" style="float:right;">								
 									<a href="#" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"><i class="fa fa-chevron-down lighter-grey"></i></a>
@@ -110,87 +95,57 @@
 								{% endif %}									
 							{% endcomment %}
 
-							</div>
-						</div>
-					
-						<div class="panel panel-default body-prop border-colours">
-							<div class="panel-heading">
-								<p class="lighter-grey inline">
-									<span class="glyphicon glyphicon-time"></span> Posted:  
-								</p>
-								<p class="light-grey inline">
-									{{questdetails.creation_date}}
-								</p>
-								{% comment %}
-									<p class="lighter-grey inline">
-									<br>
-										<span class="glyphicon glyphicon-time"></span> Expires: 
-									</p>
-									<p class="light-grey inline">
-										
-									</p>
-								{% endcomment %}
-						    </div>
-						    <div class="panel-body">
-							    {# Only allowing shippers to view addresses #}
-								{% if user.is_shipper or isOwner %}
-								<p class="lighter-grey inline">
-									Delivery Code: 
-								</p>
-								<p class="light-grey inline">
-									{{questdetails.delivery_code}}
-								</p>
-								<br>
-								<p class="lighter-grey inline">
-									Departure Address: 
-								</p>
-								<p class="light-grey inline">
-									{{questdetails.pickup.address}}, {{questdetails.pickup.city}}
-								</p>
+				
+							<label><i class="fa fa-clock-o"></i> Posted:</label>
+							<p class="inline">{{questdetails.creation_date}}</p>
+							{% comment %}
 								<p class="lighter-grey inline">
 								<br>
-									Destination Address: 
+									<span class="glyphicon glyphicon-time"></span> Expires: 
 								</p>
 								<p class="light-grey inline">
-									{{questdetails.dropoff.address}}, {{questdetails.dropoff.city}}
+									
 								</p>
-								{% endif %}
-								<br><br>
-								{# <a href="#"><small class="light-grey" id="btn-map">view map <i class="fa fa-caret-down"></i></small></a> #}
-								<img alt="itemImage" class="itemImage img-rounded" src="{{questdetails.map_image}}">
-						    </div>
-						    <div class="panel-footer">
-						    	<p class="lighter-grey inline">
-									Size: 
-								</p>
-								<p class="light-grey inline">
-									{{questdetails.size}}
-								</p>
-								<p class="lighter-grey inline">
-								<br>
-									Pays:
-								</p>
-								<p class="light-grey inline">
-									${{questdetails.reward}}
-								</p>
-						    </div>
-						</div>
+							{% endcomment %}
+					   
+					   
+						    {# Only allowing shippers to view addresses #}
+							{% if user.is_shipper or isOwner %}
+							<div class="clearfix"></div>
+							<label>Delivery Code: </label>
+							<p class="inline">{{questdetails.delivery_code}}</p>
 						
-						<div class="panel panel-default body-prop border-colours">
-							<div class="panel-body">
-								<p class="lighter-grey">Description:</p>
-								<div class="col-md-10 col-md-offset-1 column">
-									<p>{{questdetails.description}}</p>
-								</div>
-							</div>
-						</div>
-						
-						
-					</div>	<!-- ./column -->
+							<div class="clearfix"></div>
+							<label>Departure Address: </label>
+							<p class="inline">{{questdetails.pickup.address}}, {{questdetails.pickup.city}}</p>
+							
+							<div class="clearfix"></div>
+							<label>Destination Address: </label>
+							<p class="inline">{{questdetails.dropoff.address}}, {{questdetails.dropoff.city}}</p>
+							{% endif %}
+
+							<div class="clearfix"></div>
+							<label>Size: </label>
+							<p class="inline">{{questdetails.size}}</p>
+
+							<div class="clearfix"></div> 
+							<label>Pays:</label>
+							<p class="inline">${{questdetails.reward}}</p>
+
+							<hr>
+							<div class="clearfix"></div> 
+							<label>Description:</label>
+							<p>{{questdetails.description}}</p>
+
+
+							{# <a href="#"><small class="light-grey" id="btn-map">view map <i class="fa fa-caret-down"></i></small></a> #}
+							<img alt="itemImage" class="itemImage img-rounded" src="{{questdetails.map_image}}">
+						</div><!-- ./well -->
+					</div><!-- ./column -->
 				
 				
 				
-{% comment %}
+
 	<div class="col-sm-3 col-md-3 col-lg-3 column" id="side-profile">
 		<div class="well body-prop border-colours">
 			<div class="row clearfix">
@@ -215,7 +170,7 @@
 		</div><!-- ./well -->
 	</div>	<!-- ./column -->
 	
-{% endcomment %}
+
 					
 		</div><!-- ./row -->
 	</div><!-- ./container -->
