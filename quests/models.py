@@ -18,6 +18,7 @@ class Quests(models.Model):
     hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
     calc_delivery_code = hashstring[:3]+hashstring[-2:]
     calc_tracking_number = hashstring[10:15]+hashstring[-15:-10]
+    current_time = timezone.now
 
     questrs = models.ForeignKey(QuestrUserProfile)
     # pretty_url = models.CharField(_('pretty_url'), 
@@ -31,7 +32,7 @@ class Quests(models.Model):
     map_image = models.URLField(_('map_image'), max_length=9999, default='')
     status = models.TextField(_('status'), choices=STATUS_SELECTION, default='new')
     creation_date = models.DateTimeField(_('creation_date'), 
-        default=timezone.now)
+        default=current_time)
     size = models.TextField(_('size'), choices=PACKAGE_SELECTION, default="backpack")
     shipper = models.TextField(_('shipper'), blank=True, null=True) 
     # qr_code = models.URLField(_('qr_code'), blank=True)
@@ -42,7 +43,6 @@ class Quests(models.Model):
     is_questr_reviewed = models.BooleanField(_('is_questr_reviewed'), default=False)
     is_shipper_reviewed = models.BooleanField(_('is_shipper_reviewed'), default=False)
     is_complete = models.BooleanField(_('is_complete'), default=False)
-    delivery_code = models.TextField(_('delivery_code'), default=calc_delivery_code)
     ishidden = models.BooleanField(_('ishidden'), default=False)
     distance = models.DecimalField(_('distance'), decimal_places=2,
         max_digits=1000, default=0)
@@ -51,7 +51,7 @@ class Quests(models.Model):
     available_couriers = jsonfield.JSONField(_('pickup'), default={})
     delivery_code = models.TextField(_('delivery_code'), blank=True)
     tracking_number = models.TextField(_('tracking_number'), blank=True)
-    pickup_time = models.DateTimeField(_('pickup_time'), blank=True, default=timezone.now())
+    pickup_time = models.DateTimeField(_('pickup_time'), blank=True)
 
     def __unicode__(self):
         return str(self.id )
@@ -130,7 +130,6 @@ class Quests(models.Model):
         hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
         return hashstring[10:15]+hashstring[-15:-10]
 
-
         #Overriding
     def save(self, *args, **kwargs):
         if not self.delivery_code:
@@ -140,6 +139,7 @@ class Quests(models.Model):
             self.tracking_number = self.get_tracking_number()
 
         if not self.pickup_time:
+            logging.warn("no pickup time")
             self.pickup_time = self.creation_date
 
         super(Quests, self).save(*args, **kwargs)

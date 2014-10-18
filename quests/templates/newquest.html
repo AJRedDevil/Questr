@@ -34,7 +34,9 @@
 
 			<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
 				<label for="exampleInputEmail1">Title</label>
+
 				<input class="form-control ng-pristine ng-invalid" name="title" type="text" placeholder="">
+
 				{{user_form.title.errors}}
 			</div><!-- ./form-group -->
 
@@ -82,7 +84,7 @@
 				<!-- Location input-->
 				<div class="form-group col-xs-6 col-sm-6 col-md-4 col-lg-4 column">
 					<label for="exampleInputEmail1">City</label>
-					<select class="" data-size="5" name="srccity" id="srccity" ng-model="user.city" required>
+					<select class="" data-size="5" name="srccity" id="srccity" ng-model="user.srccity" required>
 						<option>Toronto</option>
 						<option>Brampton</option>
 						<option>Markham</option>
@@ -121,7 +123,7 @@
 
                     <div class="radio">       
 					<label>
-					  <input class="radio-inline" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+					  <input class="radio-inline" type="radio" name="pickup_time" id="inlineRadio1" value="now" checked>
                       Now
 					</label>
                 </div>
@@ -131,16 +133,16 @@
 				<div class="form-group col-xs-12 col-sm-12 col-md-5 col-lg-5 column">
                     <div class="radio">
 			         <label>
-                        <input class="radio-inline" type="radio" name="inlineRadioOptions" id="customTime" value="option2">
+                        <input class="radio-inline" type="radio" name="pickup_time" id="customTime" value="not_now">
                         Choose another time
-                        <select data-size="2">
+                        <select name="pickup_when" data-size="2">
                                 <option name="">Today</option>
                                 <option name="">Tomorrow</option>
                         </select>
                         <br>
                         <div class="form-group">
                             <div class='input-group date' id='datetimepicker4'>
-                                <input type='text' class="form-control" name="" />
+                                <input type='text' name="not_now_pickup_time" class="form-control" name="" />
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
                                 </span>
                             </div>
@@ -161,7 +163,7 @@
 				<!-- Location input-->
     			<div class="form-group col-xs-6 col-sm-6 col-md-4 col-lg-4 column">
     				<label for="exampleInputEmail1">City</label>
-    				<select class="btn-classic" data-size="5" name="dstcity" ng-model="user.city" required>
+    				<select class="btn-classic" data-size="5" name="dstcity" ng-model="user.dstcity" required>
     					<option>Toronto</option>
     					<option>Brampton</option>
     					<option>Markham</option>
@@ -356,7 +358,9 @@
 <script type="text/javascript">
             $(function () {
                 $('#datetimepicker4').datetimepicker({
-                    pickDate: false
+                    pickDate: false,
+                    use24hours: true,
+                    format: 'HH:mm'
                 });
             });
         </script>
@@ -366,10 +370,10 @@
     {
         if(clicked_id == "autofill")
         {
-            document.getElementById('srcaddress').value = ;
-            document.getElementById('srcpostalcode').value = "L4Y 2X2";
-            document.getElementById('srcphone').value = "416 575 9982";
-            document.getElementById('srcname').value = "bobs burgers";
+            document.getElementById('srcaddress').value = "{{userdetails.address.streetaddress}}";
+            document.getElementById('srcpostalcode').value = "{{userdetails.address.postalcode}}";
+            document.getElementById('srcphone').value = "{{userdetails.phone}}";
+            document.getElementById('srcname').value = "{{userdetails.get_full_name}}";
         }
     }    
 </script>

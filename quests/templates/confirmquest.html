@@ -2,206 +2,631 @@
 {% load staticfiles %}
 {% load active %}
 {% block localhead %}
-  <!-- Custom CSS -->
- 
+<link href={% static "css/bootstrap-datetimepicker.min.css" %} rel="stylesheet">
+
+
+<style type="text/css">
+img {
+    vertical-align: middle;
+}
+
+.img-responsive {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+.img-rounded {
+    border-radius: 3px;
+}
+
+.img-thumbnail {
+    background-color: #fff;
+    border: 1px solid #ededf0;
+    border-radius: 3px;
+    display: inline-block;
+    height: auto;
+    line-height: 1.428571429;
+    max-width: 100%;
+    moz-transition: all .2s ease-in-out;
+    o-transition: all .2s ease-in-out;
+    padding: 2px;
+    transition: all .2s ease-in-out;
+    webkit-transition: all .2s ease-in-out;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+.timeline-centered {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+    .timeline-centered:before, .timeline-centered:after {
+        content: " ";
+        display: table;
+    }
+
+    .timeline-centered:after {
+        clear: both;
+    }
+
+    .timeline-centered:before, .timeline-centered:after {
+        content: " ";
+        display: table;
+    }
+
+    .timeline-centered:after {
+        clear: both;
+    }
+
+    .timeline-centered:before {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 4px;
+        background: #f5f5f6;
+        /*left: 50%;*/
+        top: 20px;
+        bottom: 20px;
+        margin-left: 30px;
+    }
+
+    .timeline-centered .timeline-entry {
+        position: relative;
+        /*width: 50%;
+        float: right;*/
+        margin-top: 5px;
+        margin-left: 30px;
+        margin-bottom: 10px;
+        clear: both;
+    }
+
+        .timeline-centered .timeline-entry:before, .timeline-centered .timeline-entry:after {
+            content: " ";
+            display: table;
+        }
+
+        .timeline-centered .timeline-entry:after {
+            clear: both;
+        }
+
+        .timeline-centered .timeline-entry:before, .timeline-centered .timeline-entry:after {
+            content: " ";
+            display: table;
+        }
+
+        .timeline-centered .timeline-entry:after {
+            clear: both;
+        }
+
+        .timeline-centered .timeline-entry.begin {
+            margin-bottom: 0;
+        }
+
+        .timeline-centered .timeline-entry.left-aligned {
+            float: left;
+        }
+
+            .timeline-centered .timeline-entry.left-aligned .timeline-entry-inner {
+                margin-left: 0;
+                margin-right: -18px;
+            }
+
+                .timeline-centered .timeline-entry.left-aligned .timeline-entry-inner .timeline-time {
+                    left: auto;
+                    right: -100px;
+                    text-align: left;
+                }
+
+                .timeline-centered .timeline-entry.left-aligned .timeline-entry-inner .timeline-icon {
+                    float: right;
+                }
+
+                .timeline-centered .timeline-entry.left-aligned .timeline-entry-inner .timeline-label {
+                    margin-left: 0;
+                    margin-right: 70px;
+                }
+
+                    .timeline-centered .timeline-entry.left-aligned .timeline-entry-inner .timeline-label:after {
+                        left: auto;
+                        right: 0;
+                        margin-left: 0;
+                        margin-right: -9px;
+                        -moz-transform: rotate(180deg);
+                        -o-transform: rotate(180deg);
+                        -webkit-transform: rotate(180deg);
+                        -ms-transform: rotate(180deg);
+                        transform: rotate(180deg);
+                    }
+
+        .timeline-centered .timeline-entry .timeline-entry-inner {
+            position: relative;
+            margin-left: -20px;
+        }
+
+            .timeline-centered .timeline-entry .timeline-entry-inner:before, .timeline-centered .timeline-entry .timeline-entry-inner:after {
+                content: " ";
+                display: table;
+            }
+
+            .timeline-centered .timeline-entry .timeline-entry-inner:after {
+                clear: both;
+            }
+
+            .timeline-centered .timeline-entry .timeline-entry-inner:before, .timeline-centered .timeline-entry .timeline-entry-inner:after {
+                content: " ";
+                display: table;
+            }
+
+            .timeline-centered .timeline-entry .timeline-entry-inner:after {
+                clear: both;
+            }
+
+            .timeline-centered .timeline-entry .timeline-entry-inner .timeline-time {
+                position: absolute;
+                left: -100px;
+                text-align: right;
+                padding: 10px;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+                .timeline-centered .timeline-entry .timeline-entry-inner .timeline-time > span {
+                    display: block;
+                }
+
+                    .timeline-centered .timeline-entry .timeline-entry-inner .timeline-time > span:first-child {
+                        font-size: 15px;
+                        font-weight: bold;
+                    }
+
+                    .timeline-centered .timeline-entry .timeline-entry-inner .timeline-time > span:last-child {
+                        font-size: 12px;
+                    }
+
+            .timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon {
+                background: #fff;
+                color: #737881;
+                display: block;
+                width: 40px;
+                height: 40px;
+                -webkit-background-clip: padding-box;
+                -moz-background-clip: padding;
+                background-clip: padding-box;
+                -webkit-border-radius: 20px;
+                -moz-border-radius: 20px;
+                border-radius: 20px;
+                text-align: center;
+                -moz-box-shadow: 0 0 0 5px #f5f5f6;
+                -webkit-box-shadow: 0 0 0 5px #f5f5f6;
+                box-shadow: 0 0 0 5px #f5f5f6;
+                line-height: 40px;
+                font-size: 15px;
+                float: left;
+            }
+
+                .timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.bg-primary {
+                    background-color: #303641;
+                    color: #fff;
+                }
+
+                .timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.bg-secondary {
+                    background-color: #ee4749;
+                    color: #fff;
+                }
+
+                .timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.bg-success {
+                    background-color: #00a651;
+                    color: #fff;
+                }
+
+                .timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.bg-info {
+                    background-color: #21a9e1;
+                    color: #fff;
+                }
+
+                .timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.bg-warning {
+                    background-color: #fad839;
+                    color: #fff;
+                }
+
+                .timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.bg-danger {
+                    background-color: #cc2424;
+                    color: #fff;
+                }
+
+            .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label {
+                position: relative;
+                background: #f5f5f6;
+                padding: 1em;
+                margin-left: 60px;
+                -webkit-background-clip: padding-box;
+                -moz-background-clip: padding;
+                background-clip: padding-box;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                border-radius: 3px;
+            }
+
+                .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label:after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 9px 9px 9px 0;
+                    border-color: transparent #f5f5f6 transparent transparent;
+                    left: 0;
+                    top: 10px;
+                    margin-left: -9px;
+                }
+
+                .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2, .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label p {
+                    color: #737881;
+                    font-family: "Noto Sans",sans-serif;
+                    font-size: 12px;
+                    margin: 0;
+                    line-height: 1.428571429;
+                }
+
+                    .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label p + p {
+                        margin-top: 15px;
+                    }
+
+                .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2 {
+                    font-size: 16px;
+                    margin-bottom: 10px;
+                }
+
+                    .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2 a {
+                        color: #303641;
+                    }
+
+                    .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2 span {
+                        -webkit-opacity: .6;
+                        -moz-opacity: .6;
+                        opacity: .6;
+                        -ms-filter: alpha(opacity=60);
+                        filter: alpha(opacity=60);
+                    }
+</style>
+
 {% endblock localhead %}
 {% block content %}
-<div class="container">
-  <div class="row">
-      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 column">
-        
-        
-        <div class="panel panel-default shadows body-borders">
-         <div class="panel-heading">
-             <div class="panel-title lead">Request a delivery</div>
-         </div>
-          <div class="panel-body">
-          <form class="form-horizontal" action="{% url 'confirmquest' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-            
-            <!-- Name input-->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p>Title</p></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <input id="title" name="title" type="text" class="form-control input-xs" value="{{title}}" readonly="yes">
-              </div><!-- ./column -->
-            </div><!-- ./form-group -->
- 
-    
-            <!-- Offer input-->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p>Shipping fee</p></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <input id="reward" name="reward" type="text" class="form-control input-xs" value="{{reward}}" readonly="yes">
-              </div>
-            </div><!-- ./form-group -->
 
-            <!-- Distance input-->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"><p>Distance</p></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <input id="distance" name="distance" type="text" class="form-control input-xs" value="{{distance}}" readonly="yes">
-              </div>
-            </div><!-- ./form-group -->          
- 
-            <!-- Location input-->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p>Pick up from</p></label>
-              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"> 
-                  <select class="selectpicker show-menu-arrow show-tick" data-size="5" name="srccity" value="{{srccity}}" readonly="yes">
-                      <option>{{srccity}}</option>
-                    </select>
-              </div>
-              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column"></div>
-                
-            </div>  <!-- End of Form group -->
 
-                    
-            <!-- Pickup Address input-->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <input id="srcaddress" name="srcaddress" type="text" placeholder="Departure Address" class="form-control input-xs" value="{{srcaddress}}" readonly="Yes">
-              </div>
-            </div>
 
-            <!-- Pickup Name input-->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <input id="srcname" name="srcname" type="text" placeholder="Departure Address" class="form-control input-xs" value="{{srcname}}" readonly="Yes">
-              </div>
-            </div>
-
-            <!-- Pickup Phone input-->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <input id="srcphone" name="srcphone" type="text" placeholder="Departure Address" class="form-control input-xs" value="{{srcphone}}" readonly="Yes">
-              </div>
-            </div>
-                    
-            <!-- Pickup Postal input-->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="Departure Address" class="form-control input-xs" value="{{srcpostalcode}}" readonly="Yes">
-              </div>
-            </div>
-                   
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label"><p>Drop off at</p></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column"> 
-              
-                <select class="selectpicker show-menu-arrow show-tick" data-size="5" name="dstcity" value="{{dstcity}}" readonly="yes">
-                      <option>{{dstcity}}</option>
-                    </select>
-              </div>
-            </div>  <!-- ./form-group -->  
-         
-         
-         
-            <!-- Dropoff Address input-->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <input id="dstaddress" name="dstaddress" type="text" placeholder="Destination Address" class="form-control input-xs" value="{{dstaddress}}" readonly="yes">
-              </div>
-            </div>
-                  
-            <!-- Dropoff Name input-->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <input id="dstname" name="dstname" type="text" placeholder="Destination Address" class="form-control input-xs" value="{{dstname}}" readonly="yes">
-              </div>
-            </div>
-
-            <!-- Dropoff Phone input-->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <input id="dstphone" name="dstphone" type="text" placeholder="Destination Address" class="form-control input-xs" value="{{dstphone}}" readonly="yes">
-              </div>
-            </div>                                   
-
-            <!-- Dropoff Postal input-->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name"></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="Departure Address" class="form-control input-xs" value="{{dstpostalcode}}" readonly="Yes">
-              </div>
-            </div>
-
-            <div class="form-group" id="size">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p>Package Size</p></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                 <div class="input-group col-sm-12 col-md-12 col-lg-12 column"> 
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
-                        <center>
-                            <img src={% static '' %}img/{{size}}.png %} style="width:100%; height:auto;" />            
-                            <p>{{size | title}}</p>
-                            <input type="radio" name="size" value="{{size}}" checked="checked"> 
-                        </center>   
-                    </div>   
-                 </div><!-- /input-group -->
-              </div>
-             </div>
-            
-            <!-- Message body -->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p>Your Message</p></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <textarea class="form-control" id="description" name="description" rows="5" readonly="yes">{{description}}</textarea>
-              </div>
-            </div>
-
-                           <!-- Image Uploader -->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p>Please upload an image relative to your quest before you confirm!</p></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                    <span class="input-group-btn">
-                    <div class="btn btn-xs btn-info image-preview-input">
-                        <span class="glyphicon glyphicon-folder-open"></span>
-                        <span class="image-preview-input-title">Upload</span>
-                        <input type="file" accept="image/png, image/jpeg, image/gif" name="item_images"/> <!-- rename it -->
-                    </div>
-                </span>
-              </div>
-            </div>
-            <!-- Message body -->
-            <div class="form-group">
-              <label class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="message"><p>Map Link</p></label>
-              <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 column">
-                <a data-target="#lightbox" data-toggle="modal" href="#">
-                  <img class="img-responsive" alt="map-image" src="{{map_image}}" />
-                </a>
-              </div>
-            </div>              
-
-              <br>
-
-              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">
-                <button type="submit" class="btn btn-info">Confirm</button>
-              </div><!-- ./column -->
-               </form>
-    
-          </div><!-- ./panel-body -->
-       </div><!-- ./panel -->   
-      </div><!-- ./column -->
+<div class="container-fluid">
+  <button class="btn btn-default inline" id="autofill" onclick="reply_click(this.id)">Autofill information</button>
+   
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
+          <div class="col-xs-12 col-lg-8 column">
+          <h3 class="lead" style="margin-bottom:0;"><span class="glyphicon glyphicon-user"></span> Request a shipment</h3>
+          
+        </div><!-- ./column -->
+    </div>
   </div><!-- ./row -->
-  {% endblock content %}
+  
+
+  <div class="row clearfix">
+  <form role="form" action="{% url 'confirmquest' %}" method="post" enctype="multipart/form-data" name="form" ng-submit="submitForm()" novalidate>{% csrf_token %}
+    <div class="col-xs-12 col-sm-12 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
+      
+          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column"><h3>Your Quest</h3><br></div>
+
+      <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+        <label for="exampleInputEmail1">Title</label>
+        <input class="form-control input-xs ng-pristine ng-invalid" name="title" type="text" value="{{title}}" readonly='yes'>
+      </div><!-- ./form-group -->
+
+        <!-- SIZE INPUT-->
+        <div class="form-group col-md-5 column" id="size">
+          <label for="exampleInputEmail1">Size</label>    
+          
+            <div class="input-group form-inline">
+            <label class="radio-inline">
+              <input type="radio" id="inlineCheckbox1" name="size" ng-model="user.size" value="{{size}}" ng-model="user.backapck" checked readonly='yes'> {{size}}
+            </label>
+          </div><!-- /input-group -->
+        </div><!-- SIZE INPUT-->
+        
+        <!-- MESSAGE -->
+        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 column"> 
+          <label for="exampleInputEmail1">Message</label>   
+          <textarea class="form-control ng-pristine ng-invalid" id="description" name="description" placeholder="" rows="5" ng-model="user.description" ng-minlength="3" ng-maxlength="400" readonly="yes">{{description}}</textarea>
+        </div><!-- MESSAGE -->
+      
+      <!-- POSTAL CODE INPUT -->
+      <div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
+        <label for="exampleInputEmail1">Distance</label>
+        <input id="distance" name="distance" type="text" placeholder="" class="form-control input-xs ng-pristine ng-invalid" value="{{distance}}" readonly="yes">
+      </div><!-- POSTAL CODE INPUT -->
+
+      <!-- POSTAL CODE INPUT -->
+      <div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
+        <label for="exampleInputEmail1">Price</label>
+        <input id="reward" name="reward" type="text" placeholder="" class="form-control input-xs ng-pristine ng-invalid" value="{{reward}}" readonly="yes">
+      </div><!-- POSTAL CODE INPUT -->
+      
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column"><hr><h3 class="inline">Pickup Location</h3>
+                </div>
+                <!-- Pickup Address input-->
+        <div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
+
+          <label for="exampleInputEmail1">Pickup Address</label>
+            <input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" value="{{srcaddress}}" readonly="yes">
+        </div><!-- Pickup Address input-->
+
+        <!-- Location input-->
+        <div class="form-group col-xs-6 col-sm-6 col-md-4 col-lg-4 column">
+          <label for="exampleInputEmail1">City</label>
+          <select class="" data-size="5" name="srccity" id="srccity" ng-model="user.srccity" 
+           readonly="yes">
+            <option>{{srccity}}</option>
+          </select>
+        </div><!-- Location input-->
+        
+        <!-- POSTAL CODE INPUT -->
+        <div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
+          <label for="exampleInputEmail1">Postal Code</label>
+            <input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="" class="form-control ng-pristine ng-invalid" ng-model="user.srcpostalcode" value="{{srcpostalcode}}" readonly="yes" required>
+        </div><!-- POSTAL CODE INPUT -->    
+
+        <!-- PHONE NUMBER -->
+        <div class="form-group col-xs-12 col-sm-12 col-md-5 col-lg-5 column">
+          <label for="exampleInputEmail1">Phone</label>
+          <input id="srcphone" name="srcphone" type="text" placeholder="" class="form-control input-xs ng-pristine ng-invalid" ng-model="user.srcphone" value="{{srcphone}}" readonly="yes">
+        </div><!-- PHONE NUMBER -->
+
+        <!-- Pickup Name input-->
+        <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
+          <label for="exampleInputEmail1">Name of Sender</label>
+          <input id="srcname" name="srcname" type="text" placeholder="" class="form-control input-xs" ng-model="user.srcname"  value="{{srcname}}" readonly="yes">
+        </div><!-- ./form-group --> 
+
+        <!-- POSTAL CODE INPUT -->
+        <div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
+
+
+                    <div class="radio">       
+          <label>
+            <input class="radio-inline" type="radio" name="pickup_time" id="inlineRadio1" value="now" checked>
+                      Now
+          </label>
+                </div>
+        </div><!-- POSTAL CODE INPUT -->  
+
+        <!-- PHONE NUMBER -->
+        <div class="form-group col-xs-12 col-sm-12 col-md-5 col-lg-5 column">
+                    <div class="radio">
+               <label>
+                        <input class="radio-inline" type="radio" name="pickup_time" id="customTime" value="not_now">
+                        Choose another time
+                        <select name="pickup_when" data-size="2">
+                                <option name="">Today</option>
+                                <option name="">Tomorrow</option>
+                        </select>
+                        <br>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker4'>
+                                <input type='text' name="not_now_pickup_time" class="form-control" name="" />
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div>
+          </label>
+                    </div><!-- radio -->        
+        </div><!-- PHONE NUMBER -->
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column"><hr><h3>Destination <span class="badge">?</span></h3><br></div>
+
+        <!-- ADDRESS INPUT -->
+          <div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
+            <label for="exampleInputEmail1">Dropoff Address</label>
+            <input class="form-control input-xs ng-pristine ng-invalid" id="dstaddress" name="dstaddress" type="text" value="{{dstaddress}}" readonly="yes">
+            
+          </div><!-- ADDRESS INPUT -->
+
+        <!-- Location input-->
+          <div class="form-group col-xs-6 col-sm-6 col-md-4 col-lg-4 column">
+            <label for="exampleInputEmail1">City</label>
+            <select class="btn-classic" data-size="5" name="dstcity" ng-model="user.dstcity" readonly="yes">
+              <option>{{dstcity}}</option>
+            </select>
+          </div><!-- Location input-->
+
+          <!-- POSTAL CODE INPUT -->
+          <div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
+            <label for="exampleInputEmail1">Postal Code</label>
+            <input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="" class="form-control input-xs ng-pristine ng-invalid" value="{{dstpostalcode}}" readonly="yes">
+          </div><!-- POSTAL CODE INPUT -->
+
+          <!-- PHONE NUMBER -->
+          <div class="form-group col-xs-12 col-sm-12 col-md-5 col-md-5 column">
+            <label for="exampleInputEmail1">Phone</label> 
+            <input id="dstphone" name="dstphone" type="text" placeholder="" class="form-control input-xs  ng-pristine ng-invalid" ng-model="user.dstphone" value="{{dstphone}}" readonly="yes">
+          </div><!-- PHONE NUMBER -->
+
+          <!-- NAME INPUT -->
+          <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
+            <label for="exampleInputEmail1">Name of Reciever</label>
+            <input id="dstname" name="dstname" type="text" placeholder="" class="form-control input-xs ng-pristine ng-invalid" ng-model="user.dstname" value="{{dstname}}" readonly="yes">
+          </div><!-- NAME INPUT -->
+
+          </div><!-- column -->
+      <div class="well col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
+      
+            <div class="no-image item-image text-center">
+                <span style="width:30px;height:30px;display:block;position:absolute;right:20px;margin:7px;"><a><i class="fa fa-paint-brush"></a></i></span>
+                <h1><i class="fa fa-picture-o"></i></h1>  
+                
+            </div>
+
+
+      <h4>Title will go here</h4>
+
+      {% comment %}
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          <div class="item active">
+            <img src="..." alt="...">
+            <div class="carousel-caption">
+              ...
+            </div>
+          </div>
+          <div class="item">
+            <img src="..." alt="...">
+            <div class="carousel-caption">
+              ...
+            </div>
+          </div>
+          ...
+        </div>
+        {% endcomment %}
+
+      <p><strong>Date</strong>  dd/mm/yyyy hh:mm</p>
+      <hr>
+      <label><strong>Delivery</strong> <br></label>
+      <!-- FROM/TO -->
+      <div class="row clearfix">
+        <div class="col-md-12 column">
+          <p><strong>From </strong>Pickup address<strong> To </strong>Dropoff address</p>
+        </div>
+      </div>
+      <!-- SIZE -->
+      <div class="row clearfix">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
+          <p><strong>Size </strong></p>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
+          <p>Car</p>
+        </div>
+      </div>
+      <hr>
+      <!-- DELIVERY FEE -->
+      <div class="row clearfix">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
+          <p><strong>Delivery Fee</strong></p>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
+          <p>$12.00</p>
+        </div>
+      </div>
+      <!-- SERVICE FEE -->
+      <div class="row clearfix">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
+          <p><strong>Service Fee</strong></p>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
+          <p>$3.00</p>
+        </div>
+      </div>
+      <!-- PROMO CODE -->
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+
+
+
+
+
+
+
+
+
+
+            <div class="panel panel-default" id="panel1">
+                <div class="panel-heading">
+                    <a>Coupon Code</a>
+                </div><!-- ./panel-heading --> 
+                  <div class="panel-body panel-collapse collapse in" id="collapseOne">
+                    <div class="form-inline"> 
+                        <input id="promocode" name="promocode" type="text" placeholder="" class="form-control input-xs">
+                        <button class="btn btn-default">Apply</button>
+                    </div>
+                  </div><!-- ./panel-body -->
+                </div>
+
+
+
+
+        </div>
+      </div>
+      <hr>
+      <!-- PROMO CODE -->
+      <div class="row clearfix">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
+          <h3>TOTAL</h3>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
+          <h3>$15.00</h3>
+        </div>
+      </div>
+      <br><br><br>
+      <center><button type="submit" class="btn btn-lg btn-filled">Continue</button></center>
+      </div><!-- ./well -->
+     </div>
+  </form>
+</div><!-- ./row -->
+    {% endblock content %}
 </div><!-- ./container -->
 
 
-
 {% block scripts %}
-<script>
-    $("select").selectpicker({style: 'btn-sm btn-grad btn-info', menuStyle: 'dropdown-menu'});
 
-// style: select toggle class name (which is .btn)
-// menuStyle: dropdown class name
+<script src={% static "js/moment.js" %}></script>
+<script src={% static "js/bootstrap-datetimepicker.js" %}></script>
+<script src={% static "js/jquery.timepicker.js" %}></script>
 
-// You can always select by any other attribute, not just tag name.
-// Also you can leave selectpicker arguments blank to apply defaults.
+<script type="text/javascript">
+        $(document).on('click', '.panel-heading', function(e){
+            var $this = $(this);
+            if(!$this.hasClass('panel-collapsed')) {
+                $this.parents('.panel').find('.panel-body').slideUp();
+                $this.addClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-right');
+            } else {
+                $this.parents('.panel').find('.panel-body').slideDown();
+                $this.removeClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
+            }
+        })
+    </script>
+
+<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker4').datetimepicker({
+                    pickDate: false,
+                    use24hours: true,
+                    format: 'HH:mm'
+                });
+            });
+        </script>
+
+<script type="text/javascript">
+    function reply_click(clicked_id)
+    {
+        if(clicked_id == "autofill")
+        {
+            document.getElementById('srcaddress').value = "{{userdetails.address.streetaddress}}";
+            document.getElementById('srcpostalcode').value = "{{userdetails.address.postalcode}}";
+            document.getElementById('srcphone').value = "{{userdetails.phone}}";
+            document.getElementById('srcname').value = "{{userdetails.get_full_name}}";
+        }
+    }    
 </script>
 {% endblock scripts %}
