@@ -143,16 +143,15 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav">        
 
-    <li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><i class="fa fa-home" style="font-size:18px;"></i> Home</a></li>        
-
-
+     {% comment %}
     {% if user.is_shipper or user.is_superuser %}
       <li class="{% navactive request 'myshipments' %}"><a href="{% url 'myshipments' %}">My shipments</a></li>
       {% else %}
       <li class="{% navactive request 'myposts' %}"><a href="{% url 'myposts' %}">My Quests</a></li>
       {% endif %}
+       {% endcomment %}
     
         
       </ul>
@@ -166,10 +165,12 @@
       {% endcomment %}
       <ul class="nav navbar-nav navbar-right">
 
+      	<li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><i class="fa fa-home" style="font-size:18px;"></i> Home</a></li> 
+      	
       	<li class="dropdown">
 	          <a href="#" class="dropdown-toggle no-margin no-padding" data-toggle="dropdown">
 	       		{% comment %}
-	       		
+
 	              <span class="no-margin no-padding" style="min-height:30px;max-height:30px;min-width:30px;max-width:30px;display:inline-block;">
 		              <span class="ratio img-responsive img-circle profileImg" style="background-image: url({{user.avatar_file_name}});"></span>
 		          </span>
