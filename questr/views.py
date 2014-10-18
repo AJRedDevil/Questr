@@ -18,8 +18,8 @@ def index(request):
     pagetitle = "Affordable, faster, 24/7 shipments in GTA"
     return render(request, 'index.html', locals())
 
-# def loadPage(request, template):
-#     return render(request, template, locals())
+def loadPage(request, template):
+    return render(request, template, locals())
 
 def contact(request):
     """Returns the contactus page"""
