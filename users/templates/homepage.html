@@ -22,65 +22,56 @@
 				</div><!-- ./panel-heading -->
 				
 			  <div class="panel-body panel-collapse collapse in" id="collapseOne">
-				<!-- List group -->
-				<ul class="list-group">
-				{% if allquests %}
+					<!-- List group -->
+					{% if allquests %}
 					{% for quest in allquests %}
-
-					<li class="list-group-item">
-
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    {% if quest.item_images %}
-						    <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
-						    {% else %}    
-						    <a  href="/quest/{{quest.id}}" title="{{quest.title | title}}">
-						    <div class="no-image item-image">
-						        <h1><span class="glyphicon glyphicon-picture"></span></h1>
-						        <span class="pay"><h3>${{quest.reward}}</h3></span>
-						    </div>
-						    </a>
-						    {% endif %}
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">{{quest.title | title}}</h4>
-						    <p class="list-group-item-text postDesc">{{quest.description}}</p>
-						  </div>
-						  <div class="smallInfo">
-						      <small>
-						      <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}</small>
-						  </div><!-- ./smallInfo -->
-
-						</div><!-- ./media -->
-					</li>
+					<a class="no-colour" href="/quest/{{quest.id}}" title="{{quest.title | title}}">
+					<div class="row clearfix">
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
+						{% if quest.item_images %}
+					 	<img src={{quest.get_item_images_normal_url}} class="img-responsive">              
+					    {% else %}    	
+				 		<h1><i class="fa fa-picture-o"></i></h1>
+				        {% comment %}
+				        <span class="pay"><h3>${{quest.reward}}</h3></span>
+				        {% endcomment %}
+					   
+					    {% endif %}
+					  </div>
+					  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
+					 	<h5 class="media-heading">{{quest.title | title}}</h5>
+				    	<p class="list-group-item-text postDesc">{{quest.description}}</p>
+				    	
+				    	<div class="smallInfo">
+					      <small>
+					      <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}</small>
+					  </div><!-- ./smallInfo -->
+					</div>
+					</div>
+					</a>
+				
 					{% endfor %}
 					{% if allquests.count == 3 %}
-					<!-- GAURAV -->
-						  <div class="media-body text-center">
-						    <h5 class="media-heading">MORE</h5>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-					<!-- GAURAV -->						
+					<div class="row clearfix">
+						<div class="col-md-12 column text-center">
+						    <h5>MORE</h5>
+						</div>
+					</div>			
 					{% endif %}
 				{% else %}
 
-				<!-- GAURAV -->
-				<li class="list-group-item">
-					<div class="media">
-						  <div class="pull-left">
-						   <i class="fa fa-check-square-o" style="font-size:40px;"></i>
-						  </div>
-						  <div class="media-body">
-						    <h4 class="media-heading">You have no actives transactions.</h4>
-						  </div>
-					</div><!-- ./media -->
-				</li>
-				<!-- GAURAV -->
+		
+				<div class="row clearfix">
+				  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
+					<i class="fa fa-check-square-o" style="font-size:35px;"></i>
+				  </div>
+				  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
+				    <h5>You have no actives transactions.</h5>
+				  </div>
+				</div><!-- ./row -->
+			
 				{% endif %}
 
-
-				</ul><!-- ./List group -->
 			  </div><!-- ./panel-body -->
 		</div>
 		</div><!-- ./column -->	
@@ -97,8 +88,6 @@
 
 			  <div class="panel-body panel-collapse collapse in" id="collapseTwo">
 
-				<!-- List group -->
-				<ul class="list-group">
 				{% if activequests %}
 				{% for quest in activequests %}
 					<li class="list-group-item">
@@ -110,7 +99,6 @@
 						    <a  href="/quest/{{quest.id}}" title="{{quest.title | title}}">
 						    <div class="no-image item-image">
 						        <h1><span class="glyphicon glyphicon-picture"></span></h1>
-						        <span class="pay"><h3>${{quest.reward}}</h3></span>
 						    </div>
 						    </a>
 						    {% endif %}
@@ -126,29 +114,22 @@
 
 				{% endfor %}
 				{% if activequests.count == 3 %}
-				<!-- GAURAV -->
-					  <div class="media-body text-center">
-					    <h5 class="media-heading">MORE</h5>
-					  </div>
-					</div><!-- ./media -->
-				</li>
-				<!-- GAURAV -->						
+				<div class="row clearfix">
+					<div class="col-md-12 column text-center">
+					    <h5>MORE</h5>
+					</div>
+				</div>				
 				{% endif %}
 				{% else %}
-				<!-- GAURAV -->
-				<li class="list-group-item">
-						<div class="media">
-						  <div class="pull-left">
-						   <i class="fa fa-fire" style="font-size:40px;"></i>
-						  </div>
-						  <div class="media-body">
-						    <h4 class="media-heading">You have no active transactions.</h4>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-					<!-- GAURAV -->
+				<div class="row clearfix">
+				  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
+				  	<h1><i class="fa fa-fire"></i></h1>
+				  </div>
+				  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
+				    <h5>You have no active transactions.</h5>
+				  </div>
+				</div><!-- ./row -->
 				{% endif %}
-				</ul><!-- ./List group -->
 			  </div><!-- ./panel-body -->
 			</div>
 		</div><!-- ./column -->
@@ -195,28 +176,21 @@
 						  {% endif %}
 					{% endfor %}
 					{% if pastquests.count == 3 %}
-					<!-- GAURAV -->
-						  <div class="media-body text-center">
-						    <h5 class="media-heading">MORE</h5>
-						  </div>
-						</div><!-- ./media -->
-						</li>
-					<!-- GAURAV -->						
+					<div class="row clearfix">
+						<div class="col-md-12 column text-center">
+						    <h5>MORE</h5>
+						</div>
+					</div>					
 					{% endif %}
 				{% else %}
-				<!-- GAURAV -->
-				<li class="list-group-item">
-						<div class="media">
-						  <div class="pull-left">
-						   <i class="fa fa-calendar" style="font-size:40px;"></i>
-						  </div>
-						  <div class="media-body">
-						    <h4 class="media-heading">You have no past transactions.</h4>
-						  </div>
-						</div><!-- ./media -->
-					</li>
-					<!-- GAURAV -->
-
+				<div class="row clearfix">
+				  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
+				  	<h1><i class="fa fa-calendar"></i></h1>
+				  </div>
+				  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
+				    <h5>You have no past transactions.</h5>
+				  </div>
+				</div><!-- ./row -->
 				{% endif %}
 				</ul><!-- ./List group -->
 
