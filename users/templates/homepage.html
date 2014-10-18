@@ -82,7 +82,7 @@
 
 				</ul><!-- ./List group -->
 			  </div><!-- ./panel-body -->
-			</div>
+		</div>
 		</div><!-- ./column -->	
 		{% endif %}
 
@@ -225,18 +225,19 @@
 		</div><!-- ./column -->
 
 	</div><!-- ./row -->
+	{% endblock content %}
 </div><!-- ./container -->
 
 
 
 
 
+{% comment %}
 <!-- This is the main container (#scroll-container) -->
 <div class="container-fluid">
 <div class="row clearfix">
 
 
-{% comment %}
 <div class="col-md-12 column section">
 	<div class="col-md-4 column">
 	
@@ -281,12 +282,12 @@
 		<p>slider goes here</p>
 	</div>
 </div><!-- ./grey -->
-{% endcomment %}
+
 
 
 
 <div class="col-md-12 column">
-{% comment %}
+
 	<div class="js-masonry" id="post-container" data-masonry-options='{ "columnWidth": 0, "itemSelector": ".post" }'>
 	    
 		{% for quest in  allquests %}
@@ -339,11 +340,11 @@
 		            
 		</div><!-- ./post -->
 	       {% endfor %}           
-{% endcomment %}
+
 </div><!-- ./post-container -->
 </div><!-- ./column -->
-{% endblock content %}
-{% comment %}
+
+
 <div id="pages">
     <a href="index.html"></a>
     <a href="loadpage/page2.html"></a>
@@ -353,6 +354,8 @@
     <a href="loadpage/page6.html"></a>
 </div>
 {% endcomment %}
+
+
 
 {% block scripts %}
 <script type="text/javascript">

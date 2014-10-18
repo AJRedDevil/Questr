@@ -28,10 +28,12 @@ body {
 	font-size: 14px;
 	color: #565a5c;
 	font-weight: normal;
-	
 	text-rendering: optimizelegibility;
-
 	-webkit-font-smoothing: antialiased;
+ }
+
+ .container-fluid, .container {
+ 	min-height: 100%;
  }
 
 /************ WELL ****************/
@@ -42,9 +44,11 @@ body {
 	border: none;
 }
 
-/************* Input Boxes *****************/
+/************* INPUT *****************/
 input.form-control, textarea.form-control {
-	border: none;
+	border: 1px solid #f5f5f5;
+	border-bottom: none;
+
 	box-shadow: 0px 1px 0px #C6CACA;
 	background-color: #fff;
 	border-radius: 14px;
@@ -84,16 +88,9 @@ textarea.form-control {
 	border: 1px solid gba(0,0,0,0.2);
 } 
 
-
-
-
-
-
-
-
-
-
-
+.radio label, label.radio-inline {
+	font-weight: 500;
+}
 
 
 
@@ -362,7 +359,6 @@ padding-right: 2em;
 display: block;
 padding: 8px 10px;
 width: 100%;
-transition: border-color 0.2s;
 color: #565a5c;
 font-family: inherit;
 font-size: inherit;
@@ -372,6 +368,11 @@ word-spacing: normal;
 text-indent: 0px;
 text-shadow: none;
 text-align: start;
+
+background-color: white;
+border: 1px solid #f5f5f5;
+border-bottom: none;
+box-shadow: 0px 1px 0px #C6CACA;
 }
 
 
@@ -412,7 +413,6 @@ text-align: start;
   border: none;
 }
 
-
 .panel-heading a:after {
     font-family: 'Glyphicons Halflings';
     content: "\e114";
@@ -422,9 +422,6 @@ text-align: start;
 .panel-heading a.collapsed:after {
     content: "\e080";
 }	
-
-
-
 
 
 .panel-default > .panel-heading {
@@ -443,7 +440,6 @@ text-align: start;
 }
 
 .panel-default .panel-heading .panel-title {
-	font-size: 20px;
 	display: inline;
 	background: transparent;
 	color: inherit;
@@ -684,11 +680,16 @@ box-shadow:         0px 2px 0px 0px #2c3e50;
 
  /********* no image post **********/
 .no-image {
- 	background: #3498db;
- 	color: white;
+ 	background: #f5f5f5;
+ 	color: rgba(0,0,0,0.55);
 	 max-width: 100%;
-	 padding: 0;
+	 font-size: 30px;
  }
+
+.no-image h1 {
+	padding: 50px;
+}
+
 
 .no-image span.pay {
 	width: auto;
@@ -705,49 +706,7 @@ box-shadow:         0px 2px 0px 0px #2c3e50;
 	padding: 4px 10px;
 }
  
-.no-image h1 {
-	text-align: center;
-	margin: 0;
-	padding-top: 18px;
-	padding-bottom: 24px;
-}
 
-
-
-
-
-
-
-
-
-
-
-
-/* RADIOS & CHECKBOXES STYLES */
- 
-/* base styles */
-input[type="radio"], 
-input[type="checkbox"] {
-    height: 1.2em;
-    width: 1.2em;
-    vertical-align: middle;
-    margin: 0 0.4em 0.4em 0;
-    border: 1px solid #dce0e0;
- 	background-color: white;
-     box-shadow:inset none;
-}
-
-/* border radius for radio*/
-input[type="radio"] {
-    -webkit-border-radius:100%;
-    border-radius:100%;
-}
-
-/* border radius for checkbox */
-input[type="checkbox"] {
-    -webkit-border-radius:2px;
-    border-radius:2px;
-}
 
 
 

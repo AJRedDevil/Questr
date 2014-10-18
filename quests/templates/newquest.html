@@ -301,27 +301,24 @@ img {
 
 
 
-
-
 <div class="container-fluid">
-	{% comment %}
+	<button class="btn btn-default inline" id="autofill" onclick="reply_click(this.id)">Autofill information</button>
+   
     <div class="row clearfix">
     	<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
 	        <div class="col-xs-12 col-lg-8 column">
 		    	<h3 class="lead" style="margin-bottom:0;"><span class="glyphicon glyphicon-user"></span> Request a shipment</h3>
-		    	<button class="btn btn-default" id="autofill" onclick="reply_click(this.id)">dadas</button>
+		    	
 		    </div><!-- ./column -->
 		</div>
 	</div><!-- ./row -->
-	{% endcomment %}
-
-
 	
-	<form class="row clearfix" role="form" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" name="form" ng-submit="submitForm()" novalidate>{% csrf_token %}	
+
+	<div class="row clearfix">
+	<form role="form" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" name="form" ng-submit="submitForm()" novalidate>{% csrf_token %}
 		<div class="col-xs-12 col-sm-12 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
-
-
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
+		  
+          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column"><h3>Your Quest</h3><br></div>
 
 			<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
@@ -330,43 +327,46 @@ img {
 				{{user_form.title.errors}}
 			</div><!-- ./form-group -->
 
-
 				<!-- SIZE INPUT-->
 				<div class="form-group col-md-5 column" id="size">
 					<label for="exampleInputEmail1">Size</label>		
-					<div class="input-group form-inline">
+					
+                    <div class="input-group form-inline">
 						<label class="radio-inline">
 						  <input type="radio" id="inlineCheckbox1" name="size" ng-model="user.size" value="backpack" ng-model="user.backapck" checked required> Carriables
 						</label>
+
 						<label class="radio-inline">
 						  <input type="radio" id="inlineCheckbox2" name="size" ng-model="user.size" value="car" ng-model="user.car" required> Car
 						</label>
+
 						<label class="radio-inline">
 						  <input type="radio" id="inlineCheckbox3" name="size" ng-model="user.size" value="minivan" ng-model="user.van" required> Van
 						</label>
-
 					</div><!-- /input-group -->
 					{{user_form.size.errors}}
-				</div>
-
-
+				</div><!-- SIZE INPUT-->
 				
-
 				<!-- MESSAGE -->
 				<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 column">	
 					<label for="exampleInputEmail1">Message</label>		
 					<textarea class="form-control ng-pristine ng-invalid" id="description" name="description" placeholder="" rows="5" ng-model="user.description" ng-minlength="3" ng-maxlength="400" required></textarea>
-				</div><!-- ./form-group -->
+				</div><!-- MESSAGE -->
 			
 			
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column"><hr><h3>Pickup Location</h3><br></div>
-				<!-- Pickup Address input-->
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column"><hr><h3 class="inline">Pickup Location</h3>
+                    
+
+                </div>
+
+				
+                <!-- Pickup Address input-->
 				<div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
+
 					<label for="exampleInputEmail1">Pickup Address</label>
 						<input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" placeholder="">
 						{{user_form.srcaddress.errors}}
-				</div><!-- ./form-group -->
-
+				</div><!-- Pickup Address input-->
 
 				<!-- Location input-->
 				<div class="form-group col-xs-6 col-sm-6 col-md-4 col-lg-4 column">
@@ -381,26 +381,21 @@ img {
 						<option>Oakville</option>
 					</select>
 					{{user_form.srccity.errors}}
-				</div>  <!-- ./form-group -->
-
-			
-			
+				</div><!-- Location input-->
+				
 				<!-- POSTAL CODE INPUT -->
 				<div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
 					<label for="exampleInputEmail1">Postal Code</label>
 						<input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="" class="form-control ng-pristine ng-invalid" ng-model="user.srcpostalcode" required>
 						{{user_form.srcpostalcode.errors}}
-				</div><!-- ./form-group -->
-
-			
+				</div><!-- POSTAL CODE INPUT -->		
 
 				<!-- PHONE NUMBER -->
 				<div class="form-group col-xs-12 col-sm-12 col-md-5 col-lg-5 column">
 					<label for="exampleInputEmail1">Phone</label>
 					<input id="srcphone" name="srcphone" type="text" placeholder="" class="form-control input-xs ng-pristine ng-invalid" ng-model="user.srcphone" required>
 					{{user_form.srcphone.errors}}
-				</div><!-- ./form-group -->
-
+				</div><!-- PHONE NUMBER -->
 
 				<!-- Pickup Name input-->
 				<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
@@ -409,109 +404,108 @@ img {
 					{{user_form.srcname.errors}}
 				</div><!-- ./form-group -->	
 
-
-
-
-
-
-
 				<!-- POSTAL CODE INPUT -->
 				<div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
-					<label for="exampleInputEmail1">Now</label>
-					<label class="radio">
-					  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
-					</label>
-				</div><!-- ./form-group -->
 
-			
+
+                    <div class="radio">       
+					<label>
+					  <input class="radio-inline" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+                      Now
+					</label>
+                </div>
+				</div><!-- POSTAL CODE INPUT -->	
 
 				<!-- PHONE NUMBER -->
 				<div class="form-group col-xs-12 col-sm-12 col-md-5 col-lg-5 column">
-					<label for="exampleInputEmail1">Choose a later time</label>
-					<label class="radio">
-                      <input type="radio" name="inlineRadioOptions" id="customTime" value="option2">
-
-                         <select class="btn" data-size="2">
+                    <div class="radio">
+			         <label>
+                        <input class="radio-inline" type="radio" name="inlineRadioOptions" id="customTime" value="option2">
+                        Choose another time
+                        <select data-size="2">
                                 <option name="">Today</option>
                                 <option name="">Tomorrow</option>
-                            </select>
-
+                        </select>
+                        <br>
                         <div class="form-group">
                             <div class='input-group date' id='datetimepicker4'>
                                 <input type='text' class="form-control" name="" />
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
                                 </span>
                             </div>
-
                         </div>
 					</label>
-					
-				</div><!-- ./form-group -->
-
-
-
-
+                    </div><!-- radio -->				
+				</div><!-- PHONE NUMBER -->
 
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column"><hr><h3>Destination <span class="badge">?</span></h3><br></div>
 
 				<!-- ADDRESS INPUT -->
-			<div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
-				<label for="exampleInputEmail1">Dropoff Address</label>
-				<input class="form-control input-xs ng-pristine ng-invalid" id="dstaddress" name="dstaddress" type="text" placeholder="">
-				{{user_form.dstaddress.errors}}
-			</div><!-- ./form-group -->
-
+    			<div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
+    				<label for="exampleInputEmail1">Dropoff Address</label>
+    				<input class="form-control input-xs ng-pristine ng-invalid" id="dstaddress" name="dstaddress" type="text" placeholder="">
+    				{{user_form.dstaddress.errors}}
+    			</div><!-- ADDRESS INPUT -->
 
 				<!-- Location input-->
-			<div class="form-group col-xs-6 col-sm-6 col-md-4 col-lg-4 column">
-				<label for="exampleInputEmail1">City</label>
-				<select class="btn-classic" data-size="5" name="dstcity" ng-model="user.city" required>
-					<option>Toronto</option>
-					<option>Brampton</option>
-					<option>Markham</option>
-					<option>Mississauga</option>
-					<option>Richmond Hill</option>
-					<option>Vaughan</option>
-					<option>Oakville</option>
-				</select>
-				{{user_form.dstcity.errors}}
-			</div>  <!-- ./form-group -->
+    			<div class="form-group col-xs-6 col-sm-6 col-md-4 col-lg-4 column">
+    				<label for="exampleInputEmail1">City</label>
+    				<select class="btn-classic" data-size="5" name="dstcity" ng-model="user.city" required>
+    					<option>Toronto</option>
+    					<option>Brampton</option>
+    					<option>Markham</option>
+    					<option>Mississauga</option>
+    					<option>Richmond Hill</option>
+    					<option>Vaughan</option>
+    					<option>Oakville</option>
+    				</select>
+    				{{user_form.dstcity.errors}}
+    			</div><!-- Location input-->
 
+    			<!-- POSTAL CODE INPUT -->
+    			<div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
+    				<label for="exampleInputEmail1">Postal Code</label>
+    				<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="" class="form-control input-xs ng-pristine ng-invalid">
+    				{{user_form.dstpostalcode.errors}}
+    			</div><!-- POSTAL CODE INPUT -->
 
-			<!-- POSTAL CODE INPUT -->
-			<div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
-				<label for="exampleInputEmail1">Postal Code</label>
-				<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="" class="form-control input-xs ng-pristine ng-invalid">
-				{{user_form.dstpostalcode.errors}}
-			</div><!-- ./form-group -->
+    			<!-- PHONE NUMBER -->
+    			<div class="form-group col-xs-12 col-sm-12 col-md-5 col-md-5 column">
+    				<label for="exampleInputEmail1">Phone</label> 
+    				<input id="dstphone" name="dstphone" type="text" placeholder="" class="form-control input-xs  ng-pristine ng-invalid" ng-model="user.dstphone" required>
+    				{{user_form.dstphone.errors}}
+    			</div><!-- PHONE NUMBER -->
 
-			
+    			<!-- NAME INPUT -->
+    			<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
+    				<label for="exampleInputEmail1">Name of Reciever</label>
+    				<input id="dstname" name="dstname" type="text" placeholder="" class="form-control input-xs ng-pristine ng-invalid" ng-model="user.dstname" required>
+    				{{user_form.dstname.errors}}
+    			</div><!-- NAME INPUT -->
 
-			<!-- PHONE NUMBER -->
-			<div class="form-group col-xs-12 col-sm-12 col-md-5 col-md-5 column">
-				<label for="exampleInputEmail1">Phone</label> 
-				<input id="dstphone" name="dstphone" type="text" placeholder="" class="form-control input-xs  ng-pristine ng-invalid" ng-model="user.dstphone" required>
-				{{user_form.dstphone.errors}}
-			</div><!-- ./form-group -->
-
-			
-
-			<!-- NAME INPUT -->
-			<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
-				<label for="exampleInputEmail1">Name of Reciever</label>
-				<input id="dstname" name="dstname" type="text" placeholder="" class="form-control input-xs ng-pristine ng-invalid" ng-model="user.dstname" required>
-				{{user_form.dstname.errors}}
-			</div><!-- ./form-group -->	
-
+            <!-- Add another recviever -->
 			<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
 				<button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> | Add another reciever</button>
-			</div><!-- ./form-group -->	
-		</div>
+			</div><!-- Add another recviever -->
+
+          </div><!-- column -->
 
 
 
-		<div class="well col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
-			<img src="http://blog.pentagram.com/Popeyes_Crest_Sm.jpg" class="img-responsive">
+
+
+
+
+
+		  <div class="well col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
+			
+            <div class="no-image item-image text-center">
+                <span style="width:30px;height:30px;display:block;position:absolute;right:20px;margin:7px;"><a><i class="fa fa-paint-brush"></a></i></span>
+                <h1><i class="fa fa-picture-o"></i></h1>  
+                
+            </div>
+
+
 			<h4>Title will go here</h4>
 
 			{% comment %}
@@ -581,11 +575,31 @@ img {
 			<!-- PROMO CODE -->
 			<div class="row clearfix">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-					<a href="#" id="promo">Promo Code</a>
-					<div id="promo-input" class="form-inline"> 
-						<input id="promocode" name="promocode" type="text" placeholder="" class="form-control input-xs">
-						<button class="btn btn-default">Apply</button>
-					</div>
+
+
+
+
+
+
+
+
+
+
+            <div class="panel panel-default" id="panel1">
+                <div class="panel-heading">
+                    <a>Coupon Code</a>
+                </div><!-- ./panel-heading --> 
+                  <div class="panel-body panel-collapse collapse in" id="collapseOne">
+                    <div class="form-inline"> 
+                        <input id="promocode" name="promocode" type="text" placeholder="" class="form-control input-xs">
+                        <button class="btn btn-default">Apply</button>
+                    </div>
+                  </div><!-- ./panel-body -->
+                </div>
+
+
+
+
 				</div>
 			</div>
 			<hr>
@@ -600,20 +614,34 @@ img {
 			</div>
 			<br><br><br>
 			<center><button type="submit" class="btn btn-lg btn-filled">Continue</button></center>
-		</div>
-	</div>
-	</form><!-- ./row -->
+		  </div><!-- ./well -->
+	   </div>
+	</form>
+</div><!-- ./row -->
+    {% endblock content %}
 </div><!-- ./container -->
 
-{% endblock content %}
+
 {% block scripts %}
 
 <script src={% static "js/moment.js" %}></script>
 <script src={% static "js/bootstrap-datetimepicker.js" %}></script>
-
-
-
 <script src={% static "js/jquery.timepicker.js" %}></script>
+
+<script type="text/javascript">
+        $(document).on('click', '.panel-heading', function(e){
+            var $this = $(this);
+            if(!$this.hasClass('panel-collapsed')) {
+                $this.parents('.panel').find('.panel-body').slideUp();
+                $this.addClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-right');
+            } else {
+                $this.parents('.panel').find('.panel-body').slideDown();
+                $this.removeClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
+            }
+        })
+    </script>
 
 <script type="text/javascript">
             $(function () {
@@ -624,19 +652,14 @@ img {
         </script>
 
 <script type="text/javascript">
-	$( "#promo-input" ).hide();
-	$( "#promo" ).click(function() {
-  	$( "#promo-input" ).toggle( "fast" );
-});
-</script>
-
-<script type="text/javascript">
-    
     function reply_click(clicked_id)
     {
         if(clicked_id == "autofill")
         {
-            document.getElementById('srcaddress').value = {{userdetails.pickup.address}};
+            document.getElementById('srcaddress').value = "{{userdetails.pickup.address}}";
+            document.getElementById('srcpostalcode').value = "L4Y 2X2";
+            document.getElementById('srcphone').value = "416 575 9982";
+            document.getElementById('srcname').value = "bobs burgers";
         }
     }    
 </script>

@@ -33,7 +33,7 @@
 
 	    {% if not pagetype %}
 		<nav class="navbar navbar-default" role="navigation">
-		  <div class="container-fluid">
+		  <div class="">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
 		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -118,7 +118,7 @@
 	{% if pagetype == "loggedin" %}
 
 	<nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
+  <div class="">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
 	{% comment %}
@@ -169,6 +169,7 @@
       	<li class="dropdown">
 	          <a href="#" class="dropdown-toggle no-margin no-padding" data-toggle="dropdown">
 	       		{% comment %}
+	       		
 	              <span class="no-margin no-padding" style="min-height:30px;max-height:30px;min-width:30px;max-width:30px;display:inline-block;">
 		              <span class="ratio img-responsive img-circle profileImg" style="background-image: url({{user.avatar_file_name}});"></span>
 		          </span>
@@ -273,6 +274,11 @@
 	  </div>
 	</div>
 {% endif %}
+
+
+
+
+
 
 
 	  
