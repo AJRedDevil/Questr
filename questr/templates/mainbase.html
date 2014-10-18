@@ -23,6 +23,8 @@
 	    <link href={% static "css/theme.css" %} rel="stylesheet">
 	    <link href={% static "css/normalize.css" %} rel="stylesheet"> 
 	    <link href={% static "css/font-awesome-4.2.0/css/font-awesome.min.css" %} rel="stylesheet">
+	    <!-- Fonts from Google Fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
 	    {% block localhead %}
 	    {% endblock localhead %}
 	</head>
@@ -138,7 +140,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{% url 'home' %}">Questr</a>
+      <a class="navbar-brand" href="{% url 'home' %}">QUESTR</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -166,7 +168,15 @@
       <ul class="nav navbar-nav navbar-right">
 
       	<li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><i class="fa fa-home" style="font-size:18px;"></i> Home</a></li> 
-      	
+
+      	{% if not user.is_shipper %}
+		<li class="{% navactive request 'newquest' %}">
+			<a href="{% url 'newquest' %}">
+	    		<i class="fa fa-compass" style="font-size:18px;"></i> Post a shipment<sup> <span class="label label-info">NEW</span></sup>
+			</a>
+		</li>
+		{% endif %}
+
       	<li class="dropdown">
 	          <a href="#" class="dropdown-toggle no-margin no-padding" data-toggle="dropdown">
 	       		{% comment %}
@@ -228,13 +238,7 @@
 	        </ul>
 		</li>
 	        	
-{% if not user.is_shipper %}
-		<li class="{% navactive request 'newquest' %}">
-			<a href="{% url 'newquest' %}" class="btn post-quest">
-	    		Post a shipment!
-			</a>
-		</li>
-{% endif %}
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -299,11 +303,11 @@
 
 				<div class="col-md-8 col-md-offset-2 column text-center">
 					<a href="{% url 'faq' %}">Frequently Asked Questions</a>
-					<i>|</i>
+					<i class="supressed-white">|</i>
 					<a href="{% url 'contact' %}">Contact Us</a>
-					<i>|</i>
+					<i class="supressed-white">|</i>
 					<a href="{% url 'terms' %}">Terms of Service</a>
-					<i>|</i>
+					<i class="supressed-white">|</i>
 					<a href="{% url 'privacy' %}">Privacy Policy</a>
 
 					{% comment %}
