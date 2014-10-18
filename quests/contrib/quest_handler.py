@@ -3,9 +3,12 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http import Http404, HttpResponse
+from django.utils import timezone
+from datetime import datetime, timedelta
 
 from quests.models import Quests, QuestTransactional, QuestToken
 
+import pytz
 import logging
 logger = logging.getLogger(__name__)
 
@@ -386,3 +389,29 @@ def get_reject_url(quest=None, shipper=None):
         reject_link = "{0}/quest/reject/{1}?quest_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_quest_code(), token_id)
     return reject_link
 
+def get_pickup_time(nowornotnow=None, whatdate=None, whattime=None):
+    # If nothing is given, it returns current time plus 5 minutes
+    if not nowornotnow and not whattime and not whatdate:
+        return timezone.now()+timedelta(hours=1)
+
+    # If time is not right now but later today or tomrrow
+    if nowornotnow=='not_now' and whatdate and whattime:
+        # If day is today
+        if whatdate == 'Today':
+            now = datetime.now().strftime('%m/%d/%Y')
+            Today = datetime.strptime(now, '%m/%d/%Y')
+            diffhour = whattime.split(' ')[0].split(':')[0]
+            diffminute = whattime.split(' ')[0].split(':')[1]
+            pickup_time = Today+timedelta(hours=int(diffhour), minutes=int(diffminute))
+            return pytz.timezone(settings.TIME_ZONE).localize(pickup_time)
+
+        # If day is tomorrow
+        if whatdate == 'Tomorrow':
+            now = datetime.now().strftime('%m/%d/%Y')
+            Tomorrow = datetime.strptime(now, '%m/%d/%Y')
+            diffhour = 24 + int(whattime.split(' ')[0].split(':')[0])
+            diffminute = whattime.split(' ')[0].split(':')[1]
+            pickup_time = Tomorrow+timedelta(hours=int(diffhour), minutes=int(diffminute))
+            return pytz.timezone(settings.TIME_ZONE).localize(pickup_time)
+
+    return timezone.now()+timedelta(minutes=5)

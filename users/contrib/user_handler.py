@@ -360,9 +360,9 @@ class CourierManager(object):
         designated_courier = getQuestrDetails(couriers_list[0][0])
         self.informCourier(designated_courier, quest)
         # Set courier as unavailable
-        self.updateCourierAvailability(designated_courier, 0) 
+        updateCourierAvailability(designated_courier, 0) 
         ## Run the job to inform shippers in queue
-        inform_shipper_task.apply_async((quest.id, designated_courier.id), countdown=settings.COURIER_SELECTION_DELAY)       
+        inform_shipper_task.apply_async((quest.id, designated_courier.id), countdown=int(settings.COURIER_SELECTION_DELAY))       
     
     def updateCouriersForQuset(self, quest, courier):
         """Removes a courier from the set of available shippers for a quest"""

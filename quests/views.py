@@ -11,14 +11,17 @@ from users.access.requires import verified, is_quest_alive
 
 from .contrib import quest_handler
 from users.contrib import user_handler
-from .forms import QuestCreationForm, QuestChangeForm, QuestConfirmForm, DistancePriceForm, TrackingNumberSearchForm
+from .forms import QuestCreationForm, QuestConfirmForm, DistancePriceForm, TrackingNumberSearchForm
 from .models import Quests, QuestTransactional
 from users.models import QuestrUserProfile
+from quests.tasks import init_courier_selection
 
 import logging
 logger = logging.getLogger(__name__)
 
 import simplejson as json
+from datetime import datetime, timedelta
+import pytz
 
 @verified
 @login_required
@@ -201,6 +204,7 @@ def newquest(request):
         return redirect('home')
 
     if request.method=="POST":
+        logging.warn(request.POST)
         user_form = QuestCreationForm(request.POST)
         # logger.debug(user_form.errors)
         # logger.debug(user_form.is_valid())
@@ -278,6 +282,8 @@ def confirmquest(request):
             dropoffdict['postalcode'] = dstpostalcode
             dropoffdict['name'] = dstname
             dropoffdict['phone'] = dstphone
+            # Pickup Time
+            pickup_time = user_form.cleaned_data['pickup_time'].lower()
             # Recalculate distance and price to prevent any arbitrary false attempt.
             # For distance
             maps = geomaps.GMaps()
@@ -297,6 +303,36 @@ def confirmquest(request):
             quest_data.reward=reward
             quest_data.item_images = user_form.cleaned_data['item_images']
             quest_data.map_image = map_image
+            pickup_time = user_form.cleaned_data['pickup_time']
+            if pickup_time == 'now':
+                pickup_time = quest_handler.get_pickup_time()
+            elif pickup_time == 'not_now':
+                pickup_when = user_form.cleaned_data['pickup_when']
+                time = user_form.cleaned_data['not_now_pickup_time']
+                pickup_time = quest_handler.get_pickup_time(pickup_time, pickup_when, time)
+                if (pickup_time - timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE))).total_seconds() < 0:
+                    request.session['alert_message'] = dict(type="warning",message="Pickup time cannot be before current time!")
+                    return redirect('home')
+                # If the p
+                if (pickup_time - timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE))).total_seconds() < 3600:
+                    pickup_time = quest_handler.get_pickup_time()
+            else:
+                pickup_time = quest_handler.get_pickup_time()
+            # if pickup_time == "59 minutes":
+            #     quest_data.pickup_time = quest_handler.get_pickup_time()
+            # else:
+            #     try:
+            #         pickup_time == datetime.strptime(pickup_time, '%Y-%m-%d %H:%M:%S')
+            #         pytz.timezone(settings.TIME_ZONE).localize(pickup_time)
+            #     except Exception, e:
+            #         request.session['alert_message'] = dict(type="Danger",message="Invalid pickup time!")
+            #         return redirect('home')
+            # logging.warn("this is the pickup time")
+            # logging.warn(quest_data.pickup_time)
+            # logging.warn(pickup_time)
+            # elif pickup_time = "not_now":
+            #     quest_data.pickup_time = strf
+            quest_data.pickup_time = pickup_time
             quest_data.save()
             # return redirect('pay',questname=quest_data)
             try:
@@ -304,8 +340,10 @@ def confirmquest(request):
                 # for shipper in shippers: # send notifcations to all the shippers
                 #     email_details = quest_handler.prepNewQuestNotification(shipper, quest_data)
                 #     email_notifier.send_email_notification(shipper, email_details)
-                couriermanager = user_handler.CourierManager()
-                couriermanager.informShippers(quest_data)
+                # couriermanager = user_handler.CourierManager()
+                # couriermanager.informShippers(quest_data)
+                informtime = pickup_time - timedelta(minutes=59)
+                init_courier_selection.apply_async((quest_data.id,), eta=informtime)
             except Exception, e:
                 ##Inform admin of an error
                 logger.debug(e)
@@ -601,7 +639,7 @@ def reject_quest(request, quest_code):
                             courier.is_available = False # This should be False, only put false for today
                             from users.tasks import activate_shipper
                             ## Any courier who rejects a quest will be put on hold for 5 minutes
-                            activate_shipper.apply_async((courier.id,), countdown=settings.REJECTED_COURIER_HOLD_TIMER)
+                            activate_shipper.apply_async((courier.id,), countdown=int(settings.REJECTED_COURIER_HOLD_TIMER))
                             ##Remove this courier from the current quest's list of available shippers
                             available_couriers = quest.available_couriers
                             logging.warn(available_couriers)

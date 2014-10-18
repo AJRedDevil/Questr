@@ -12,7 +12,6 @@ import logging
 
 logger = get_task_logger(__name__)
 
-# A periodic task that will run every minute (the symbol "*" means every)
 @app.task
 def inform_shipper_task(quest_id, courier_id):
     from users.contrib import user_handler
@@ -25,7 +24,7 @@ def inform_shipper_task(quest_id, courier_id):
         reject_transaction.status = True
         accept_transaction.status = True
         # For the shipper didn't respond we put him on hold for 1 hour
-        activate_shipper.apply_async((courier_id,), countdown=settings.COURIER_ACTIVATION_INTERVAL)
+        activate_shipper.apply_async((courier_id,), countdown=int(settings.COURIER_ACTIVATION_INTERVAL))
         available_couriers = quest.available_couriers
         if len(available_couriers) > 0:
             logging.warn(available_couriers)
@@ -39,3 +38,11 @@ def inform_shipper_task(quest_id, courier_id):
             ##Re-run the shipper selection algorithm
             quest = quest_handler.getQuestDetails(int(quest_id))
             couriermanager.informShippers(quest)
+
+@app.task
+def init_courier_selection(quest_id):
+    from users.contrib import user_handler
+    from quests.contrib import quest_handler
+    couriermanager = user_handler.CourierManager()
+    questdata = quest_handler.getQuestDetails(quest_id)
+    couriermanager.informShippers(questdata)
