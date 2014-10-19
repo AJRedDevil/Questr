@@ -30,7 +30,7 @@ class Quests(models.Model):
         max_digits=1000)
     item_images = models.ImageField(_('item_images'), max_length=9999, upload_to='quest-item-cdn', blank=True)
     map_image = models.URLField(_('map_image'), max_length=9999, default='')
-    status = models.TextField(_('status'), choices=STATUS_SELECTION, default='new')
+    status = models.TextField(_('status'), choices=STATUS_SELECTION, default='New')
     creation_date = models.DateTimeField(_('creation_date'), 
         default=current_time)
     size = models.TextField(_('size'), choices=PACKAGE_SELECTION, default="backpack")

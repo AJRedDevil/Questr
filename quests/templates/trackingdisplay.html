@@ -305,30 +305,11 @@ img {
             </div>
         </div>
         <div class="col-md-6 column">
-            <h4>PACKAGE TRACKING</h4>
+            <h4>Details of your shipment "{{questdetails.title|title}} are below</h4>
 
             <div class="timeline-centered well">
 
-        
-                {% comment %}
-        <article class="timeline-entry">
-
-            <div class="timeline-entry-inner">
-
-                <div class="timeline-icon bg-secondary">
-                    <i class="entypo-suitcase"></i>
-                </div>
-
-                <div class="timeline-label">
-                    <h2><a href="#">SHIPPER</a> is late to arrive at <a href="#">LOCATION</a></h2>
-                    
-                </div>
-            </div>
-
-        </article>
-         {% endcomment %}
-
-         <!-- GAUVAV -->
+        {% if questdetails.status == "Accepted" %}
         <article class="timeline-entry">
 
             <div class="timeline-entry-inner">
@@ -338,7 +319,28 @@ img {
                 </div>
 
                 <div class="timeline-label">
-                    <h2>GAURAV OVER HERE</h2>
+                    <h2>A courier would be arriving soon!</h2>
+                    {% comment %}
+                    <blockquote></blockquote>
+                    {% endcomment %}
+
+                </div>
+            </div>
+        </article>
+            
+        {% endif %}
+
+        {% if questdetails.status == "New" %}
+        <article class="timeline-entry">
+
+            <div class="timeline-entry-inner">
+
+                <div class="timeline-icon bg-info">
+                    <i class="entypo-location"></i>
+                </div>
+
+                <div class="timeline-label">
+                    <h2>The shipment is being processed!</h2>
 
                     {% comment %}
                     <blockquote></blockquote>
@@ -347,25 +349,45 @@ img {
                 </div>
             </div>
         </article>
-        <!-- GAUVAV -->
-
         {% comment %}
-        <article class="timeline-entry">
+            <article class="timeline-entry">
 
-            <div class="timeline-entry-inner">
+                <div class="timeline-entry-inner">
 
-                <div class="timeline-icon bg-success">
-                    <i class="entypo-feather"></i>
+                    <div class="timeline-icon bg-secondary">
+                        <i class="entypo-suitcase"></i>
+                    </div>
+
+                    <div class="timeline-label">
+
+                                <h2><a href="#">SHIPPER</a> is late to arrive at <a href="#">LOCATION</a></h2>
+
+                        <h2>The shipment is being processed!</h2>
+                                
+                    </div>
                 </div>
 
-                <div class="timeline-label">
-                    <h2>Quest complete</h2>
-                    <p>Thanks for using Questr!</p>
-                </div>
-            </div>
-        </article>
+            </article>
         {% endcomment %}
-      
+        {% endif %}
+         <!-- GAUVAV -->
+
+        {% if questdetails.status == "Completed" %}
+            <article class="timeline-entry">
+
+                <div class="timeline-entry-inner">
+
+                    <div class="timeline-icon bg-success">
+                        <i class="entypo-feather"></i>
+                    </div>
+
+                    <div class="timeline-label">
+                        <h2>The package has been delivered</h2>
+                    </div>
+                </div>
+            </article>
+        {% endif %}
+          
     </div>
 
 
