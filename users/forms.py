@@ -38,6 +38,8 @@ class QuestrUserChangeForm(UserChangeForm):
     postalcode = forms.CharField(
         error_messages={'required' : 'Your postcode is required !',}
         )
+    phone = forms.CharField(required=False)
+
 
     class Meta:
         model = QuestrUserProfile
@@ -140,6 +142,7 @@ class QuestrUserCreationForm(forms.ModelForm):
     postalcode = forms.CharField(
         error_messages={'required' : 'Your postcode is required !',}
         )
+    phone = forms.CharField(required=False)
 
 
     error_messages = {

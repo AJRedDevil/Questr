@@ -235,13 +235,16 @@ def userSettings(request):
             return render(request,'404.html', locals())        
         if user_form.is_valid():
             useraddress = dict(city=user_form.cleaned_data['city'], streetaddress=user_form.cleaned_data['streetaddress'],\
-                postalcode=user_form.cleaned_data['postalcode'])
+                streetaddress_2=user_form.cleaned_data['streetaddress_2'], postalcode=user_form.cleaned_data['postalcode'])
             logging.warn(useraddress)
             userdata = user_form.save(commit=False)
             userdata.address = json.dumps(useraddress)
+            userdata.phone = user_form.cleaned_data['phone']
             userdata.save()
             message="Your profile has been updated!"
             return redirect('settings')
+        if user_form.errors:
+            logger.debug("Form has errors, %s ", user_form.errors)
     pagetitle = "My Settings"
     return render(request, "generalsettings.html",locals())
 
@@ -267,31 +270,32 @@ def myTrades(request):
     # return render(request, 'trades.html', locals())
     return redirect('myposts')
 
-@login_required
-def acceptOffer(request, quest_id, shipper_id):
-    """Accepts a bid on a quest from a user"""
-    pagetype="loggedin"
-    user = request.user
-    # if the shipper doesn't exist
-    if not user_handler.userExists(shipper_id):
-        logger.debug("User ID : %s not found, quest %s not accepted, returning to mytrades page", shipper_id, quest_id)
-        return redirect('mytrades')    
+# @login_required
+# def acceptOffer(request, quest_id, shipper_id):
+#     """Accepts a bid on a quest from a user"""
+#     pagetype="loggedin"
+#     user = request.user
+#     # if the shipper doesn't exist
+#     if not user_handler.userExists(shipper_id):
+#         logger.debug("User ID : %s not found, quest %s not accepted, returning to mytrades page", shipper_id, quest_id)
+#         return redirect('mytrades')    
     
-    try:
-        Quests.objects.filter(id=quest_id).update(shipper=shipper_id, isaccepted='t')
-        Quests.objects.filter(id=quest_id).update(status='Accepted')
-        questdetails = quest_handler.getQuestDetails(quest_id)
-        shipper = user_handler.getQuestrDetails(shipper_id)
-        email_details = quest_handler.prepOfferAcceptedNotification(shipper, questdetails)
-        email_notifier.send_email_notification(shipper, email_details)
-    except Quests.DoesNotExist:
-        raise Http404
-        return render('404.html', locals())
-    #To display the information of shipper on the trades page
-    shipper = user_handler.getShipper(shipper_id)    
+#     try:
+#         Quests.objects.filter(id=quest_id).update(shipper=shipper_id, isaccepted='t')
+#         Quests.objects.filter(id=quest_id).update(status='Accepted')
+#         questdetails = quest_handler.getQuestDetails(quest_id)
+#         shipper = user_handler.getQuestrDetails(shipper_id)
+#         email_details = quest_handler.prepOfferAcceptedNotification(shipper, questdetails)
+#         email_notifier.send_email_notification(shipper, email_details)
+#     except Quests.DoesNotExist:
+#         raise Http404
+#         return render('404.html', locals())
+#     #To display the information of shipper on the trades page
+#     shipper = user_handler.getShipper(shipper_id)    
     
-    return redirect('mytrades')
+#     return redirect('mytrades')
 
+@verified
 @login_required
 def myPosts(request):
     pagetype="loggedin"
@@ -314,6 +318,7 @@ def myPosts(request):
     # logger.debug(shipperlist)
     return render(request, 'myquests.html', locals())
 
+@verified
 @login_required
 def myShipments(request):
     pagetype="loggedin"
@@ -377,6 +382,7 @@ def getUserInfo(request, displayname):
 #     pagetitle = "Create Your Password"
 #     return render(request, "createpassword.html", locals())
 
+@verified
 @login_required
 def changePassword(request):
     """Change's user's personal settings"""
@@ -398,6 +404,7 @@ def changePassword(request):
     pagetitle = "Change Your Password"
     return render(request, "passwordsettings.html",locals())
 
+@verified
 @login_required
 def cardSettings(request):
     """Change's user's personal settings"""
@@ -418,6 +425,8 @@ def emailSettings(request):
     user_form = NotifPrefForm()
     return render(request, "emailsettings.html",locals())
 
+@verified
+@login_required
 def notificationsettings(request):
     """Change's user's personal settings"""
     pagetype="loggedin"
@@ -514,6 +523,8 @@ def resetpassword(request):
     pagetype  = "public"
     return render(request,"resetpassword.html", locals())
 
+@verified
+@login_required
 def changestatus(request):
     """Changes the courier's availability from the one that he is currently on"""
     user = request.user
