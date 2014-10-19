@@ -680,7 +680,9 @@ def tracking_number_search(request):
     if request.GET.has_key('tracking_number'):
             tracking_number = request.GET['tracking_number']
             questdetails = quest_handler.getQuestDetailsByTrackingNumber(tracking_number)
+            pagetitle = "Tracking your shipment"
             return render(request, 'trackingdisplay.html', locals())
     else:
         user_form = TrackingNumberSearchForm()
+        pagetitle = "Enter your tracking number"
         return render(request, 'trackingsearchform.html', locals())
