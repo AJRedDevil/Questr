@@ -673,6 +673,10 @@ def reject_quest(request, quest_code):
 
 def tracking_number_search(request):
     """Searches for the tracking number"""
+    if request.user.is_authenticated():
+        user = request.user
+        pagetype="loggedin"
+
     if request.GET.has_key('tracking_number'):
             tracking_number = request.GET['tracking_number']
             questdetails = quest_handler.getQuestDetailsByTrackingNumber(tracking_number)

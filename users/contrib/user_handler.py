@@ -71,6 +71,28 @@ def prepWelcomeNotification(questr, verf_link):
     logger.debug("Welcome email is prepared")
     return email_details
 
+def prepWelcomeCourierNotification(questr, password):
+    """Prepare the details for notification emails after new user registers"""
+    template_name="Welcome_Courier_Email"
+    subject="Questr - Welcome aboard !"
+    quest_support_email="support@questr.co"
+
+    email_details = {
+                        'subject' : subject,
+                        'template_name' : template_name,
+                        'global_merge_vars': {
+                                                'questr_first_name'   : questr.first_name,
+                                                'questr_last_name'   : questr.last_name,
+                                                'questr_email'   : questr.email,
+                                                'quest_support_mail': quest_support_email,
+                                                'company'           : "Questr Co",
+                                                'password'         : password,
+                                                },
+                    }
+
+    logger.debug("Welcome email is prepared")
+    return email_details
+
 def get_verification_url(user=None): 
     """
         Returns the verification url.

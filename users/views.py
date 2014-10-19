@@ -6,10 +6,12 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from django.db.models import Avg
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404
 from django.shortcuts import render, redirect
-from .models import QuestrUserProfile, UserTransactional, QuestrToken
-from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, SetPasswordForm, PasswordChangeForm, NotifPrefForm
+from django.utils import timezone
+
+from .models import QuestrUserProfile, UserTransactional
+from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, PasswordChangeForm, NotifPrefForm
 
 from libs import email_notifier
 
@@ -86,9 +88,13 @@ def signup(request):
 
 @login_required
 @is_superuser
-def createshipper(request):
+def createcourier(request):
     """Signup, if request == POST, creates the user"""
     ## if authenticated redirect to user's homepage directly ##
+    if request.user.is_authenticated():
+        user = request.user
+        pagetype="loggedin"
+
     if request.method == "POST":
         user_form = QuestrUserCreationForm(request.POST)
         if user_form.is_valid():
@@ -98,10 +104,13 @@ def createshipper(request):
             userdata.address = json.dumps(useraddress)
             userdata.email_status = True
             userdata.is_shipper = True
+            import hashlib
+            import uuid
+            hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
+            password = hashstring[:4]+hashstring[-2:]
+            userdata.set_password(password)
             userdata.save()
-            verf_link="NO LINK"
-            logger.debug("verification link is %s", verf_link)
-            email_details = user_handler.prepWelcomeNotification(userdata, verf_link)
+            email_details = user_handler.prepWelcomeCourierNotification(userdata, password)
             logger.debug("What goes in the email is \n %s", email_details)
             email_notifier.send_email_notification(userdata, email_details)
             request.session['alert_message'] = dict(type="success",message="Shipper has been created!")
@@ -110,11 +119,11 @@ def createshipper(request):
         if user_form.errors:
             logger.debug("Login Form has errors, %s ", user_form.errors)
         pagetitle = "Signup"
-        return render(request, 'createshipper.html', locals())
+        return render(request, 'createcourier.html', locals())
     else:
         user_form = QuestrUserCreationForm()
         pagetitle = "Signup"
-        return render(request, 'createshipper.html', locals())
+        return render(request, 'createcourier.html', locals())
 
 @login_required
 def resend_verification_email(request):
