@@ -7,7 +7,7 @@
 {% block content%}
 
 {% comment %}
-<div class="container-fluid" style="background:white;">
+<div class="container-fluid">
 	<div class="row clearfix">
 		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column" style="margin-top:20px;">
 		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column col small" id="customer">
@@ -171,12 +171,17 @@
 				<small class="small lead" id="disclaimer">By continuing, I agree to Questr's <a data-toggle="modal" data-target="#terms">Terms of Service</a> and <a data-toggle="modal" data-target="#privacy">Privacy Policy</a>.</small>
 			</div>
 			<div class="col-xs-12 col-md-6 column">
-          		<button type="submit" class="btn btn-embossed btn-info" id="createAccBtn">Create Account</button>
+          		<button type="submit" class="btn btn-lg btn-fatty" id="createAccBtn">CREATE ACCOUNT</button>
 			</div>
 		</div><!-- ./column -->  
 	</form>
 	</div><!-- ./row -->
+
 </div><!-- ./container -->
+{% endblock %}  
+
+
+
 
 
 <!-- Terms of Service -->
@@ -436,6 +441,8 @@
     </div>
   </div>
 </div>
+
+
 
 <!-- Privacy Policy -->
 <div class="modal fade" id="privacy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -727,8 +734,6 @@
     });
 </script>
 
-
-
-{% endblock %}    
+  
 {% block scripts %}
 {% endblock scripts %}

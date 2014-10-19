@@ -51,7 +51,7 @@
                         {% endcomment %}
 
 						<label class="radio-inline">
-						  <input type="radio" id="inlineCheckbox2" name="size" ng-model="user.size" value="car" ng-model="user.car" required>CAR
+						  <input type="radio" id="inlineCheckbox2" name="size" ng-model="user.size" value="car" ng-model="user.car" required checked>CAR
 						</label>
 
 						<label class="radio-inline">
@@ -111,7 +111,7 @@
 				<!-- POSTAL CODE INPUT -->
 				<div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
 					<h6>POSTAL CODE</h6>
-						<input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="" class="form-control ng-pristine ng-invalid" ng-model="user.srcpostalcode" required>
+						<input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="lnl nln" class="form-control ng-pristine ng-invalid" ng-model="user.srcpostalcode" required>
 						{{user_form.srcpostalcode.errors}}
 				</div><!-- POSTAL CODE INPUT -->		
 
@@ -129,19 +129,7 @@
 					{{user_form.srcname.errors}}
 				</div><!-- ./form-group -->	
             </div>
-
-            <div class="row clearfix">
-				<!-- POSTAL CODE INPUT -->
-				<div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
-                    <div class="radio">       
-					<label>
-					  <input class="radio-inline" type="radio" name="pickup_time" id="inlineRadio1" value="now" checked>
-                      NOW
-					</label>
-                </div>
-				</div><!-- POSTAL CODE INPUT -->	
-
-            </div>
+            
 
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column"><hr><h3>Destination</h3></div>
 
@@ -199,14 +187,14 @@
     			<!-- POSTAL CODE INPUT -->
     			<div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
     				<h6>POSTAL CODE</h6>
-    				<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="LNL NLN" class="form-control input-xs ng-pristine ng-invalid">
+    				<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="lnl nln" class="form-control input-xs ng-pristine ng-invalid">
     				{{user_form.dstpostalcode.errors}}
     			</div><!-- POSTAL CODE INPUT -->
 
     			<!-- PHONE NUMBER -->
     			<div class="form-group col-xs-12 col-sm-12 col-md-5 col-md-5 column">
     				<h6>PHONE</h6> 
-    				<input id="dstphone" name="dstphone" type="text" placeholder="" class="form-control input-xs  ng-pristine ng-invalid" ng-model="user.dstphone" required>
+    				<input id="dstphone" name="dstphone" type="text" placeholder="xxx-xxx-xxxx" class="form-control input-xs  ng-pristine ng-invalid" ng-model="user.dstphone" required>
     				{{user_form.dstphone.errors}}
     			</div><!-- PHONE NUMBER -->
 

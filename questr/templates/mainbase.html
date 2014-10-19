@@ -63,8 +63,8 @@
 		      </form>
 		      {% endcomment %}
 		      <ul class="nav navbar-nav navbar-right">
-		        <li class="{% navactive request 'index' %}"><a href="{% url 'index' %}">Home</a></li>
-		        <li class="{% navactive request 'faq' %}"><a href="{% url 'faq' %}">FAQ</a></li>
+		        <li class="{% navactive request 'index' %}"><a href="{% url 'index' %}"><i class="fa fa-home" style="font-size:18px;"></i> Home</a></li>
+		        <li class="{% navactive request 'faq' %}"><a href="{% url 'faq' %}"><i class="fa fa-info-circle" style="font-size:18px;"></i> FAQ</a></li>
 		        <li class="{% navactive request 'signup' %}"><a href="{% url 'signup' %}">Sign up</a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
@@ -195,7 +195,7 @@
 		          	 <span class="glyphicon glyphicon-record"></span> 
 		          	{% endif %}
 		          {% endif %}
-		          {{user.first_name}} {{user.last_name}} 
+		          <i class="fa fa-user" style="font-size:18px;"></i> {{user.first_name}} {{user.last_name}} 
 		          <i class="fa fa-caret-down"></i>
 	          </a>
 	       

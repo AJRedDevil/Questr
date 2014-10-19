@@ -352,6 +352,16 @@ footer ul li {
 	font-size: 12px;
 }
 
+.btn-fatty {
+	border-radius: 50px;
+	border: 2px solid #3498db;
+	background-color: #3498db;
+	color: white;
+	font-family: inherit;
+	font-weight: 600;
+	font-size: 12px;
+}
+
 .btn-filled {
 	background-color: #3498db;
 	color: white;
@@ -421,6 +431,9 @@ box-shadow: 0px 1px 0px #C6CACA;
 	background-color: white;	
 	border: none;
 }
+
+
+
 
 
 /*************** LISTS ***************/
