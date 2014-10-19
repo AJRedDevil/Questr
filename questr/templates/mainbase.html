@@ -44,7 +44,7 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="{% url 'index' %}">Questr</a>
+		      <a class="navbar-brand" href="{% url 'index' %}">QUESTR</a>
 		    </div>
 		    
 		    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -176,6 +176,8 @@
 			</a>
 		</li>
 		{% endif %}
+
+		<li class="{% navactive request 'trackquest' %}"><a href="{% url 'trackquest' %}"><i class="fa fa-home" style="font-size:18px;"></i> Track a package</a></li> 
 
       	<li class="dropdown">
 	          <a href="#" class="dropdown-toggle no-margin no-padding" data-toggle="dropdown">

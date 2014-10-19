@@ -33,7 +33,7 @@
 					    {% else %}    	
 				 		<h1><i class="fa fa-picture-o"></i></h1>
 				        {% comment %}
-				        <span class="pay"><h3>${{quest.reward}}</h3></span>
+				        
 				        {% endcomment %}
 					   
 					    {% endif %}
@@ -43,8 +43,11 @@
 				    	<p class="list-group-item-text postDesc">{{quest.description}}</p>
 				    	
 				    	<div class="smallInfo">
-					      <small>
-					      <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}</small>
+					    	<small>
+					      		<span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}
+					  		</small>
+					  		<div class="clearfix"></div>
+					      <small>${{quest.reward}}</small>
 					  </div><!-- ./smallInfo -->
 					</div>
 					</div>

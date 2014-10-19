@@ -7,6 +7,10 @@ a.no-colour {
 	color: inherit;
 }
 
+small {
+	font-weight: 500;
+}
+
 label {
 	font-family: inherit;
 	font-weight: 500;
@@ -336,11 +340,12 @@ footer ul li {
 
 .btn-rounded {
 	border-radius: 50px;
-	border: 2px solid #cacaca;
-background-color: transparent;
-color: #0079c1;
-border-color: #0079c1;
-padding: 0 30px;
+	border: 2px solid #0079c1;
+	background-color: transparent;
+	color: #0079c1;
+	font-family: inherit;
+	font-weight: 600;
+	font-size: 12px;
 }
 
 .btn-filled {
@@ -408,6 +413,10 @@ box-shadow: 0px 1px 0px #C6CACA;
 	font-size: 12px;
 }
 
+.input-group-addon {
+	background-color: white;	
+	border: none;
+}
 
 
 /*************** LISTS ***************/
