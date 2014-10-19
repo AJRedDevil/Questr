@@ -76,7 +76,7 @@
 				<div class="row clearfix">
                 <!-- Pickup Address input-->
 				<div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
-					<h6>PICKUP ADDRESS</h6>
+					<h6>ADDRESS LINE 1</h6>
 						<input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" placeholder="">
 						{{user_form.srcaddress.errors}}
 				</div><!-- Pickup Address input-->
@@ -101,25 +101,10 @@
             <div class="row clearfix">
                 <!-- Pickup Address input-->
                 <div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
-                    <h6>PICKUP ADDRESS 2</h6>
+                    <h6>ADDRESS LINE 2</h6>
                         <input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress_2" name="srcaddress_2" type="text" placeholder="">
-                        {{user_form.srcaddress.errors}}
+                        {{user_form.srcaddress_2.errors}}
                 </div><!-- Pickup Address input-->
-
-                <!-- Location input-->
-                <div class="form-group col-xs-6 col-sm-6 col-md-4 col-lg-4 column">
-                    <h6>CITY</h6>
-                    <select class="" data-size="5" name="srccity_2" id="srccity_2" ng-model="user.srccity_2" required>
-                        <option>Toronto</option>
-                        <option>Brampton</option>
-                        <option>Markham</option>
-                        <option>Mississauga</option>
-                        <option>Richmond Hill</option>
-                        <option>Vaughan</option>
-                        <option>Oakville</option>
-                    </select>
-                    {{user_form.srccity.errors}}
-                </div><!-- Location input-->
             </div>
 				
                 <div class="row clearfix">
@@ -133,14 +118,14 @@
 				<!-- PHONE NUMBER -->
 				<div class="form-group col-xs-12 col-sm-12 col-md-5 col-lg-5 column">
 					<h6>PHONE</h6>
-					<input id="srcphone" name="srcphone" type="text" placeholder="" class="form-control input-xs ng-pristine ng-invalid" ng-model="user.srcphone" required>
+					<input id="srcphone" name="srcphone" type="text" placeholder="xxx-xxx-xxxx" class="form-control input-xs ng-pristine ng-invalid" ng-model="user.srcphone" required>
 					{{user_form.srcphone.errors}}
 				</div><!-- PHONE NUMBER -->
 
 				<!-- Pickup Name input-->
 				<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
 					<h6>NAME OF SENDER</h6>
-					<input id="srcname" name="srcname" type="text" placeholder="" class="form-control input-xs" ng-model="user.srcname"  required>
+					<input id="srcname" name="srcname" type="text" placeholder="Gaurav Gaumire" class="form-control input-xs" ng-model="user.srcname"  required>
 					{{user_form.srcname.errors}}
 				</div><!-- ./form-group -->	
             </div>
@@ -184,7 +169,7 @@
                 <div class="row clearfix">
 				<!-- ADDRESS INPUT -->
     			<div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
-    				<h6>DROPOFF ADDRESS</h6>
+    				<h6>ADDRESS LINE 1</h6>
     				<input class="form-control input-xs ng-pristine ng-invalid" id="dstaddress" name="dstaddress" type="text" placeholder="">
     				{{user_form.dstaddress.errors}}
     			</div><!-- ADDRESS INPUT -->
@@ -209,8 +194,8 @@
             <div class="row clearfix">
                 <!-- ADDRESS INPUT -->
                 <div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
-                    <h6>DROPOFF ADDRESS 2</h6>
-                    <input class="form-control input-xs ng-pristine ng-invalid" id="dstaddress_2" name="dstaddress_2" type="text" placeholder="">
+                    <h6>ADDRESS LINE 2</h6>
+                    <input class="form-control input-xs ng-pristine ng-invalid" id="dstaddress_2" name="dstaddress_2" type="text" placeholder="Apt, Buzzer, etc">
                     {{user_form.dstaddress.errors}}
                 </div><!-- ADDRESS INPUT -->
 
@@ -235,7 +220,7 @@
     			<!-- POSTAL CODE INPUT -->
     			<div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
     				<h6>POSTAL CODE</h6>
-    				<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="" class="form-control input-xs ng-pristine ng-invalid">
+    				<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="LNL NLN" class="form-control input-xs ng-pristine ng-invalid">
     				{{user_form.dstpostalcode.errors}}
     			</div><!-- POSTAL CODE INPUT -->
 
@@ -249,7 +234,7 @@
     			<!-- NAME INPUT -->
     			<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
     				<h6>NAME OF RECIEVER</h6>
-    				<input id="dstname" name="dstname" type="text" placeholder="" class="form-control input-xs ng-pristine ng-invalid" ng-model="user.dstname" required>
+    				<input id="dstname" name="dstname" type="text" placeholder="Gaurav Gaumire" class="form-control input-xs ng-pristine ng-invalid" ng-model="user.dstname" required>
     				{{user_form.dstname.errors}}
     			</div><!-- NAME INPUT -->
 
@@ -270,12 +255,15 @@
 		  <div class="well col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
 			
             <div class="no-image item-image text-center">
+                {% comment %}
                 <span style="width:30px;height:30px;display:block;position:absolute;right:20px;margin:7px;"><a><i class="fa fa-paint-brush"></a></i></span>
-                <h1><i class="fa fa-picture-o"></i></h1>   
+                {% endcomment %}
+                <h1 style="font-size:50px;"><i class="fa fa-picture-o"></i></h1>   
             </div>
 
-
+            {% comment %}
 			<h4>Title will go here</h4>
+            {% endcomment %}
 
 			{% comment %}
 			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -303,8 +291,10 @@
 			    ...
 			  </div>
 			  {% endcomment %}
-
+              {% comment %}
 			<p><strong>Date</strong>  dd/mm/yyyy hh:mm</p>
+            {% endcomment %}
+            {% comment %}
 			<hr>
 			<label><strong>Delivery</strong> <br></label>
 			<!-- FROM/TO -->
@@ -329,7 +319,7 @@
 					<p><strong>Delivery Fee</strong></p>
 				</div>
 				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
-					<p>$12.00</p>
+					<p></p>
 				</div>
 			</div>
 			<!-- SERVICE FEE -->
@@ -364,13 +354,14 @@
 				</div>
 			</div>
 			<hr>
+            {% endcomment %}
 			<!-- PROMO CODE -->
 			<div class="row clearfix">
 				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
 					<h3>TOTAL</h3>
 				</div>
 				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
-					<h3>$15.00</h3>
+					<h3></h3>
 				</div>
 			</div>
 			<br><br><br>

@@ -76,18 +76,22 @@ input.form-control, textarea.form-control {
 }
 
 input.form-control::-webkit-input-placeholder { /* WebKit browsers */
-    color:    #565a5c;
+    color: #DCDCDC;
+    font-size: 12px;
 }
 input.form-control:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #565a5c;
+   color:    #DCDCDC;
    opacity:  1;
+   font-size: 12px;
 }
 input.form-control::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #565a5c;
+   color:    #DCDCDC;
    opacity:  1;
+   font-size: 12px;
 }
 input.form-control:-ms-input-placeholder { /* Internet Explorer 10+ */
-   color:    #565a5c;
+   color:   #DCDCDC;
+   font-size: 12px;
 }
 
 input.form-control:focus, input.form-control:active, textarea.form-control:focus {
