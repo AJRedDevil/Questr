@@ -13,7 +13,6 @@
 
 
 <div class="container-fluid">
-	<button class="btn btn-default inline" id="autofill" onclick="reply_click(this.id)">Autofill information</button>
    
     <div class="row clearfix">
     	<div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
@@ -37,7 +36,7 @@
 
 				<input class="form-control ng-pristine ng-invalid" name="title" type="text" placeholder="">
 
-				{{user_form.title.errors}}
+				<span class="error">{{user_form.title.errors}}</span>
 			</div><!-- ./form-group -->
 
 				<!-- SIZE INPUT-->
@@ -67,15 +66,14 @@
 				</div><!-- MESSAGE -->
 			
 			
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column"><hr><h3 class="inline">Pickup Location</h3>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column"><hr><h3 class="inline">Pickup Location <a class="btn btn-hollow inline" id="autofill" onclick="reply_click(this.id)">Autofill information</a></h3>
                     
-
+                    <br><br>
                 </div>
 
-				
+				<div class="row clearfix">
                 <!-- Pickup Address input-->
 				<div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
-
 					<label for="exampleInputEmail1">Pickup Address</label>
 						<input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress" name="srcaddress" type="text" placeholder="">
 						{{user_form.srcaddress.errors}}
@@ -95,7 +93,9 @@
 					</select>
 					{{user_form.srccity.errors}}
 				</div><!-- Location input-->
+            </div>
 				
+                <div class="row clearfix">
 				<!-- POSTAL CODE INPUT -->
 				<div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
 					<label for="exampleInputEmail1">Postal Code</label>
@@ -116,11 +116,11 @@
 					<input id="srcname" name="srcname" type="text" placeholder="" class="form-control input-xs" ng-model="user.srcname"  required>
 					{{user_form.srcname.errors}}
 				</div><!-- ./form-group -->	
+            </div>
 
+            <div class="row clearfix">
 				<!-- POSTAL CODE INPUT -->
 				<div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
-
-
                     <div class="radio">       
 					<label>
 					  <input class="radio-inline" type="radio" name="pickup_time" id="inlineRadio1" value="now" checked>
@@ -150,9 +150,11 @@
 					</label>
                     </div><!-- radio -->				
 				</div><!-- PHONE NUMBER -->
+            </div>
 
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column"><hr><h3>Destination <span class="badge">?</span></h3><br></div>
 
+                <div class="row clearfix">
 				<!-- ADDRESS INPUT -->
     			<div class="form-group col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
     				<label for="exampleInputEmail1">Dropoff Address</label>
@@ -174,7 +176,10 @@
     				</select>
     				{{user_form.dstcity.errors}}
     			</div><!-- Location input-->
+            </div>
 
+
+            <div class="row clearfix">
     			<!-- POSTAL CODE INPUT -->
     			<div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
     				<label for="exampleInputEmail1">Postal Code</label>
@@ -196,16 +201,16 @@
     				{{user_form.dstname.errors}}
     			</div><!-- NAME INPUT -->
 
+            </div>
+
+            {% comment %}
             <!-- Add another recviever -->
 			<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
 				<button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> | Add another reciever</button>
 			</div><!-- Add another recviever -->
-
+              {% endcomment %}
           </div><!-- column -->
-
-
-
-
+        
 
 
 
@@ -289,14 +294,6 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
 
 
-
-
-
-
-
-
-
-
             <div class="panel panel-default" id="panel1">
                 <div class="panel-heading">
                     <a>Coupon Code</a>
@@ -327,6 +324,8 @@
 			<br><br><br>
 			<center><button type="submit" class="btn btn-lg btn-filled">Continue</button></center>
 		  </div><!-- ./well -->
+
+
 	   </div>
 	</form>
 </div><!-- ./row -->
