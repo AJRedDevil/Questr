@@ -24,6 +24,29 @@
 
   <div class="row clearfix">
   <form role="form" action="{% url 'confirmquest' %}" method="post" enctype="multipart/form-data" name="form" ng-submit="submitForm()" novalidate>{% csrf_token %}
+    <input type="hidden" name="title" value="{{title}}">
+    <input type="hidden" name="description" value="{{description}}">
+    <input type="hidden" name="reward" value="{{reward}}">
+    <input type="hidden" name="size" value="{{size}}">
+    <input type="hidden" name="distance" value="{{distance}}">
+    <input type="hidden" name="srcaddress" value="{{srcaddress}}">
+    <input type="hidden" name="srcaddress_2" value="{{srcaddress_2}}">
+    <input type="hidden" name="srccity" value="{{srccity}}">
+    <input type="hidden" name="srcpostalcode" value="{{srcpostalcode}}">
+    <input type="hidden" name="srcname" value="{{srcname}}">
+    {% if srcphone %}
+    <input type="hidden" name="srcphone" value="{{srcphone}}">      
+    {% endif %}
+    <input type="hidden" name="dstaddress" value="{{dstaddress}}">
+    <input type="hidden" name="dstaddress_2" value="{{dstaddress_2}}">
+    <input type="hidden" name="dstcity" value="{{dstcity}}">
+    <input type="hidden" name="dstpostalcode" value="{{dstpostalcode}}">
+    <input type="hidden" name="dstname" value="{{dstname}}">
+    {% if dstphone %}
+    <input type="hidden" name="dstaddress" value="{{dstaddress}}">      
+    {% endif %}
+
+
     <div class="col-xs-12 col-sm-12 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
       
           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
@@ -105,7 +128,7 @@
               {% endcomment %}
            
 
-            <h4>{{title}}</h4>
+            <h4>{{title|title}}</h4>
              <p>{{description}}</p>
         
             <hr>
@@ -116,7 +139,13 @@
             <!-- FROM/TO -->
             <div class="row clearfix">
                 <div class="col-md-12 column">
-                    <p><strong>From </strong> {{srcname}} {{srcphone}}<br>{{srcaddress_2}} {{srcaddress}}, {{srccity}}, {{srcpostalcode}}<br><br><strong>To</strong> {{dstname}} {{dstphone}}<br>{{dstaddress_2}} {{dstaddress}}, {{dstcity}}, {{dstpostalcode}}</p>
+                    <p><strong>From </strong>{{srcname}} {% if srcphone %} ({{srcphone}})
+                    {% endif %}<br>{% if srcaddress_2 %}
+                      {{srcaddress_2}}
+                    {% endif %} {{srcaddress}}, {{srccity}}, {{srcpostalcode}}<br><br><strong>To</strong> {{dstname}} {% if dstphone %} ({{dstphone}})
+                    {% endif %}<br>{% if dstaddress_2 %}
+                      {{dstaddress_2}}
+                    {% endif %} {{dstaddress}}, {{dstcity}}, {{dstpostalcode}}</p>
                 </div>
             </div>
             <hr>

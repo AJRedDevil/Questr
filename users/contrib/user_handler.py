@@ -380,9 +380,25 @@ class CourierManager(object):
             couriers_list = self.getCouriersNotInProximity(quest)
 
         designated_courier = getQuestrDetails(couriers_list[0][0])
-        self.informCourier(designated_courier, quest)
+        if designated_courier.is_available:
+            logger.warn("courier %s is available for quest %s, and is informed" % (designated_courier.displayname, quest))
+            updateCourierAvailability(designated_courier, 0) 
+            # designated_courier.is_available = False
+            # designated_courier.save()
+            self.informCourier(designated_courier, quest)
+        else:
+            available_couriers = quest.available_couriers
+            if len(available_couriers) > 0:
+                logging.warn(available_couriers)
+                available_couriers.pop(str(designated_courier.id), None)
+                quest.available_couriers = available_couriers
+                ##Save all the details
+                quest.save()
+                quest = quest_handler.getQuestDetails(quest.id)
+                logger.warn("courier %s is unavailable for quest %s, and is uninformed" % (designated_courier.displayname, quest))
+                #Recursion trigger to get rid of couriers who are on the available_couriers list but are not actually!!
+                self.informShippers(quest)
         # Set courier as unavailable
-        updateCourierAvailability(designated_courier, 0) 
         ## Run the job to inform shippers in queue
         inform_shipper_task.apply_async((quest.id, designated_courier.id), countdown=int(settings.COURIER_SELECTION_DELAY))       
     
