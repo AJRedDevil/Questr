@@ -2,6 +2,8 @@
 
 import logging
 from django.shortcuts import render, redirect
+from django.core.exceptions import PermissionDenied
+
 from users.models import QuestrUserProfile, QuestrToken
 from quests.models import QuestToken
 
@@ -83,4 +85,27 @@ def is_quest_alive(a_view):
 				return render(request, 'thankyou.html', locals())
 		else:
 			return render(request,'error_pages/something_broke.html', locals())
+	return _wrapped_function
+
+def is_superuser(a_view):
+	""" 
+	Checks if a user is super user
+	"""
+	def _wrapped_function(request, *args, **kwargs):
+		if request.user.is_authenticated():
+			email = request.user
+			try:
+				user = QuestrUserProfile.objects.get(email=email)
+				if user :
+					if user.is_superuser:
+						logging.warn("is superuser")
+						return a_view(request, *args, **kwargs)
+					else:
+						logging.warn("is not superuser")
+						return redirect('home')
+				success = False
+				return redirect('home')
+			except QuestrUserProfile.DoesNotExist:
+				return render(request,'error_pages/something_broke.html', locals())
+		return redirect('signin')
 	return _wrapped_function

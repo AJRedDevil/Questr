@@ -211,23 +211,23 @@ class CourierManager(object):
         courier_details = getQuestrDetails(courier)
         return courier_details.is_available
 
-    def updateCourierAvailability(questr, status):
-        """Takes a Questr User Profile object and a status ( 0 | 1 ) and updates the availability status as per the same"""
-        status = int(status)
-        if userExists(questr.id):
-            if status == 0:
-                statusupdate = QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=False)
-                if statusupdate == 1:
-                    return dict(status='success')
-                return dict(status="fail")
-            elif status == 1:
-                statusupdate = QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=True)
-                if statusupdate == 1:
-                    return dict(status='success')
-                return dict(status="fail")
-            else :
-                raise ValueError('Status %d not acceptable, use 0 or 1' % (status))
-        return dict(status='fail')
+    # def updateCourierAvailability(questr, status):
+    #     """Takes a Questr User Profile object and a status ( 0 | 1 ) and updates the availability status as per the same"""
+    #     status = int(status)
+    #     if userExists(questr.id):
+    #         if status == 0:
+    #             statusupdate = QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=False)
+    #             if statusupdate == 1:
+    #                 return dict(status='success')
+    #             return dict(status="fail")
+    #         elif status == 1:
+    #             statusupdate = QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=True)
+    #             if statusupdate == 1:
+    #                 return dict(status='success')
+    #             return dict(status="fail")
+    #         else :
+    #             raise ValueError('Status %d not acceptable, use 0 or 1' % (status))
+    #     return dict(status='fail')
 
     def getSuperAdmins(self):
         """Returns a list of superadmins"""

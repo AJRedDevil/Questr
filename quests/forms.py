@@ -22,6 +22,7 @@ class QuestCreationForm(forms.ModelForm):
     srcaddress = forms.CharField(
         error_messages={'required' : 'Street/Apt. Address where the shipment is to be picked up from is required !',}
         )
+    srcaddress_2 = forms.CharField(required=False)
     srcname = forms.CharField(
         error_messages={'required' : 'Name of the sender is required!',}
         )
@@ -38,6 +39,7 @@ class QuestCreationForm(forms.ModelForm):
     dstaddress = forms.CharField(
         error_messages={'required' : 'Street/Apt. Address where the shipment is to be picked up from is required !',}
         )
+    dstaddress_2 = forms.CharField(required=False)
     dstname = forms.CharField(
         error_messages={'required' : 'Name of the sender is required!',}
         )
@@ -57,11 +59,13 @@ class QuestCreationForm(forms.ModelForm):
             'size' : forms.RadioSelect(attrs = { 'default': "backpack"}),
             'srccity' : forms.Select(attrs = { 'placeholder': "toronto"}),
             'srcaddress' : forms.TextInput(attrs = { 'placeholder': "Departure Address"}),
+            'srcaddress_2' : forms.TextInput(attrs = { 'placeholder': "Departure Address"}),
             'srcname' : forms.TextInput(attrs = { 'placeholder': "John Doe"}),
             'srcphone' : forms.TextInput(attrs = { 'placeholder': "+111-222-333"}),
             'srcpostal' : forms.TextInput(attrs = { 'placeholder': "+111-222-333"}),
             'dstcity' : forms.Select(attrs = { 'placeholder': "toronto"}),
             'dstaddress' : forms.TextInput(attrs = { 'placeholder': "Delivery Address"}),
+            'dstaddress_2' : forms.TextInput(attrs = { 'placeholder': "Delivery Address"}),
             'dstname' : forms.TextInput(attrs = { 'placeholder': "John Doe"}),
             'dstphone' : forms.TextInput(attrs = { 'placeholder': "+111-222-333"}),
             'dstpostalcode' : forms.TextInput(attrs = { 'placeholder': "+111-222-333"}),
@@ -93,6 +97,7 @@ class QuestConfirmForm(forms.ModelForm):
     srcaddress = forms.CharField(
         error_messages={'required' : 'Street/Apt. Address where the shipment is to be picked up from is required !',}
         )
+    srcaddress_2 = forms.CharField(required=False)
     srcname = forms.CharField(
         error_messages={'required' : 'Name of the sender is required!',}
         )
@@ -109,6 +114,7 @@ class QuestConfirmForm(forms.ModelForm):
     dstaddress = forms.CharField(
         error_messages={'required' : 'Street/Apt. Address where the shipment is to be picked up from is required !',}
         )
+    dstaddress_2 = forms.CharField(required=False)
     dstname = forms.CharField(
         error_messages={'required' : 'Name of the sender is required!',}
         )
@@ -139,11 +145,13 @@ class QuestConfirmForm(forms.ModelForm):
             'size' : forms.RadioSelect(attrs = { 'default': "backpack"}),
             'srccity' : forms.Select(attrs = { 'placeholder': "toronto"}),
             'srcaddress' : forms.TextInput(attrs = { 'placeholder': "Departure Address"}),
+            'srcaddress_2' : forms.TextInput(attrs = { 'placeholder': "Departure Address"}),
             'srcname' : forms.TextInput(attrs = { 'placeholder': "John Doe"}),
             'srcphone' : forms.TextInput(attrs = { 'placeholder': "+111-222-333"}),
             'srcpostal' : forms.TextInput(attrs = { 'placeholder': "+111-222-333"}),
             'dstcity' : forms.Select(attrs = { 'placeholder': "toronto"}),
             'dstaddress' : forms.TextInput(attrs = { 'placeholder': "Delivery Address"}),
+            'dstaddress_2' : forms.TextInput(attrs = { 'placeholder': "Delivery Address"}),
             'dstname' : forms.TextInput(attrs = { 'placeholder': "John Doe"}),
             'dstphone' : forms.TextInput(attrs = { 'placeholder': "+111-222-333"}),
             'dstpostalcode' : forms.TextInput(attrs = { 'placeholder': "+111-222-333"}),

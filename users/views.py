@@ -13,7 +13,7 @@ from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuth
 
 from libs import email_notifier
 
-from access.requires import verified, is_alive
+from access.requires import verified, is_alive, is_superuser
 from contrib import user_handler
 
 from quests.contrib import quest_handler
@@ -83,6 +83,38 @@ def signup(request):
         user_form = QuestrUserCreationForm()
         pagetitle = "Signup"
         return render(request, 'signup.html', locals())
+
+@login_required
+@is_superuser
+def createshipper(request):
+    """Signup, if request == POST, creates the user"""
+    ## if authenticated redirect to user's homepage directly ##
+    if request.method == "POST":
+        user_form = QuestrUserCreationForm(request.POST)
+        if user_form.is_valid():
+            useraddress = dict(city=user_form.cleaned_data['city'], streetaddress=user_form.cleaned_data['streetaddress'],\
+                streetaddress_2=user_form.cleaned_data['streetaddress_2'], postalcode=user_form.cleaned_data['postalcode'])
+            userdata = user_form.save(commit=False)
+            userdata.address = json.dumps(useraddress)
+            userdata.email_status = True
+            userdata.is_shipper = True
+            userdata.save()
+            verf_link="NO LINK"
+            logger.debug("verification link is %s", verf_link)
+            email_details = user_handler.prepWelcomeNotification(userdata, verf_link)
+            logger.debug("What goes in the email is \n %s", email_details)
+            email_notifier.send_email_notification(userdata, email_details)
+            request.session['alert_message'] = dict(type="success",message="Shipper has been created!")
+            return redirect('home')
+
+        if user_form.errors:
+            logger.debug("Login Form has errors, %s ", user_form.errors)
+        pagetitle = "Signup"
+        return render(request, 'createshipper.html', locals())
+    else:
+        user_form = QuestrUserCreationForm()
+        pagetitle = "Signup"
+        return render(request, 'createshipper.html', locals())
 
 @login_required
 def resend_verification_email(request):
@@ -317,24 +349,24 @@ def getUserInfo(request, displayname):
     pagetitle = publicuser.first_name+' '+publicuser.last_name
     return render(request,'publicprofile.html', locals())
 
-@login_required
-def createPassword(request):
-    """Create a password for socially logged in user"""
-    pagetype="loggedin"
-    user = request.user
-    settingstype="password"
+# @login_required
+# def createPassword(request):
+#     """Create a password for socially logged in user"""
+#     pagetype="loggedin"
+#     user = request.user
+#     settingstype="password"
 
-    if user_handler.passwordExists(request.user):
-        return redirect('home')
+#     if user_handler.passwordExists(request.user):
+#         return redirect('home')
     
-    if request.method == "POST":
-        user_form = SetPasswordForm(user, request.POST)
-        if user_form.is_valid():
-            user_form.save()
-            message="Your password has been created!"
-            return redirect('home')
-    pagetitle = "Create Your Password"
-    return render(request, "createpassword.html", locals())
+#     if request.method == "POST":
+#         user_form = SetPasswordForm(user, request.POST)
+#         if user_form.is_valid():
+#             user_form.save()
+#             message="Your password has been created!"
+#             return redirect('home')
+#     pagetitle = "Create Your Password"
+#     return render(request, "createpassword.html", locals())
 
 @login_required
 def changePassword(request):

@@ -153,6 +153,9 @@ def prepNewQuestNotification(user, questdetails, accept_url, reject_url):
                                                 'company'           : "Questr Co",
                                                 'quest_accept_url'           : accept_url,
                                                 'quest_reject_url'           : reject_url,
+                                                'quest_pickup_address' : questdetails.pickup['address'],
+                                                'quest_pickup_city' : questdetails.pickup['city'],
+                                                'quest_pickup_postalcode' : questdetails.pickup['postalcode'],
 
                                                 },
                     }
