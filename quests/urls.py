@@ -1,6 +1,6 @@
-# from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, include, url
 
-# import views as questviews
+import views as questviews
 
 urlpatterns = patterns('',
     url(r'^$', questviews.listallquests, name='listallquests'),

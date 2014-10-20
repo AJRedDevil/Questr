@@ -1,6 +1,6 @@
-# from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, include, url
 
-# import views as userviews
+import views as userviews
 
 urlpatterns = patterns('',
     # url(r'', include('social.apps.django_app.urls', namespace='social')),
