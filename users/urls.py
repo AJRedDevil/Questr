@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     # url(r'^profile/$', userviews.profile, name='profile'),
     # url(r'^profile/save/.*', userviews.saveUserInfo, name='saveprofile'), # commented for later use
     url(r'^createcourier/$', userviews.createcourier, name='createcourier'),
+    url(r'^createuser/$', userviews.createuser, name='createuser'),
     # url(r'^createpassword/$', userviews.createPassword, name='createpassword'),
     url(r'^settings/$', userviews.userSettings, name='settings'),
     url(r'^settings/password$', userviews.changePassword, name='changepassword'),

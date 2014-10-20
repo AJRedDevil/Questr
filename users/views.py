@@ -65,6 +65,7 @@ def signup(request):
             logging.warn(useraddress)
             userdata = user_form.save(commit=False)
             userdata.address = json.dumps(useraddress)
+            userdata.phone = user_form.cleaned_data['phone']
             userdata.save()
             authenticate(username=userdata.email, password=userdata.password)
             userdata.backend='django.contrib.auth.backends.ModelBackend'
@@ -104,6 +105,7 @@ def createcourier(request):
             userdata.address = json.dumps(useraddress)
             userdata.email_status = True
             userdata.is_shipper = True
+            userdata.phone = user_form.cleaned_data['phone']
             import hashlib
             import uuid
             hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
@@ -124,6 +126,45 @@ def createcourier(request):
         user_form = QuestrUserCreationForm()
         pagetitle = "Signup"
         return render(request, 'createcourier.html', locals())
+
+@login_required
+@is_superuser
+def createuser(request):
+    """Signup, if request == POST, creates the user"""
+    ## if authenticated redirect to user's homepage directly ##
+    if request.user.is_authenticated():
+        user = request.user
+        pagetype="loggedin"
+
+    if request.method == "POST":
+        user_form = QuestrUserCreationForm(request.POST)
+        if user_form.is_valid():
+            useraddress = dict(city=user_form.cleaned_data['city'], streetaddress=user_form.cleaned_data['streetaddress'],\
+                streetaddress_2=user_form.cleaned_data['streetaddress_2'], postalcode=user_form.cleaned_data['postalcode'])
+            userdata = user_form.save(commit=False)
+            userdata.address = json.dumps(useraddress)
+            userdata.email_status = True
+            userdata.phone = user_form.cleaned_data['phone']
+            import hashlib
+            import uuid
+            hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
+            password = hashstring[:4]+hashstring[-2:]
+            userdata.set_password(password)
+            userdata.save()
+            email_details = user_handler.prepWelcomeCourierNotification(userdata, password)
+            logger.debug("What goes in the email is \n %s", email_details)
+            email_notifier.send_email_notification(userdata, email_details)
+            request.session['alert_message'] = dict(type="success",message="User has been created!")
+            return redirect('home')
+
+        if user_form.errors:
+            logger.debug("Login Form has errors, %s ", user_form.errors)
+        pagetitle = "Signup"
+        return render(request, 'createuser.html', locals())
+    else:
+        user_form = QuestrUserCreationForm()
+        pagetitle = "Signup"
+        return render(request, 'createuser.html', locals())
 
 @login_required
 def resend_verification_email(request):
@@ -241,10 +282,13 @@ def userSettings(request):
             userdata.address = json.dumps(useraddress)
             userdata.phone = user_form.cleaned_data['phone']
             userdata.save()
-            message="Your profile has been updated!"
+            request.session['alert_message'] = dict(type="Success",message="Your profile has been updated!")
             return redirect('settings')
         if user_form.errors:
             logger.debug("Form has errors, %s ", user_form.errors)
+    alert_message = request.session.get('alert_message')
+    if request.session.has_key('alert_message'):
+        del request.session['alert_message']
     pagetitle = "My Settings"
     return render(request, "generalsettings.html",locals())
 
