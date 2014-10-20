@@ -120,11 +120,11 @@ def createcourier(request):
 
         if user_form.errors:
             logger.debug("Login Form has errors, %s ", user_form.errors)
-        pagetitle = "Signup"
+        pagetitle = "Create a Courier"
         return render(request, 'createcourier.html', locals())
     else:
         user_form = QuestrUserCreationForm()
-        pagetitle = "Signup"
+        pagetitle = "Create a Courier"
         return render(request, 'createcourier.html', locals())
 
 @login_required
@@ -159,11 +159,11 @@ def createuser(request):
 
         if user_form.errors:
             logger.debug("Login Form has errors, %s ", user_form.errors)
-        pagetitle = "Signup"
+        pagetitle = "Create a User"
         return render(request, 'createuser.html', locals())
     else:
         user_form = QuestrUserCreationForm()
-        pagetitle = "Signup"
+        pagetitle = "Create a User"
         return render(request, 'createuser.html', locals())
 
 @login_required
