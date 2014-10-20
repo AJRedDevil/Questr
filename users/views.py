@@ -160,23 +160,23 @@ def home(request):
         alert_message = request.session.get('alert_message')
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=userdetails.id, is_complete=False).order_by('-creation_date')[:3]
-        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, isaccepted=True, shipper=userdetails.id).order_by('-creation_date')[:3]
+        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=userdetails.id, is_complete=False).order_by('-creation_date')[:10]
+        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, isaccepted=True, shipper=userdetails.id).order_by('-creation_date')[:10]
 
         return render(request,'homepage.html', locals())
     elif userdetails.is_superuser:
         alert_message = request.session.get('alert_message')
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=0).order_by('-creation_date')[:3]
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=0).order_by('-creation_date')[:10]
         return render(request,'shipperhomepage.html', locals())
     else:
         alert_message = request.session.get('alert_message')        
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        allquests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, ).order_by('-creation_date')[:3]
-        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id).order_by('-creation_date')[:3]
-        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, questrs_id=userdetails.id).order_by('-creation_date')[:3]
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, ).order_by('-creation_date')[:10]
+        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id).order_by('-creation_date')[:10]
+        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, questrs_id=userdetails.id).order_by('-creation_date')[:10]
         return render(request,'homepage.html', locals())
 
 @login_required

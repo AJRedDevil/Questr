@@ -686,3 +686,40 @@ def tracking_number_search(request):
         user_form = TrackingNumberSearchForm()
         pagetitle = "Enter your tracking number"
         return render(request, 'trackingsearchform.html', locals())
+
+
+def viewallquests(request):
+    """Shows all the active quests so far"""
+    pagetype="loggedin"
+    user =  request.user
+    userdetails = user_handler.getQuestrDetails(user.id)
+    pagetitle = "Active Quests"
+    if userdetails.is_shipper:
+        return redirect('home')
+    else:
+        quests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, ).order_by('-creation_date')
+    return render(request,'allquestsviews.html', locals())
+
+def viewallactivequests(request):
+    """Shows all the active quests so far"""
+    pagetype="loggedin"
+    user =  request.user
+    userdetails = user_handler.getQuestrDetails(user.id)
+    pagetitle = "Active Quests"
+    if userdetails.is_shipper:
+        quests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=userdetails.id, is_complete=False).order_by('-creation_date')
+    else:
+        quests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id).order_by('-creation_date')
+    return render(request,'allquestsviews.html', locals())
+
+def viewallpastquests(request):
+    """Shows all the active quests so far"""
+    pagetype="loggedin"
+    user =  request.user
+    userdetails = user_handler.getQuestrDetails(user.id)
+    pagetitle = "Active Quests"
+    if userdetails.is_shipper:
+        quests = Quests.objects.filter(ishidden=False, is_complete=True, isaccepted=True, shipper=userdetails.id).order_by('-creation_date')
+    else:
+        quests = Quests.objects.filter(ishidden=False, is_complete=True, questrs_id=userdetails.id).order_by('-creation_date')
+    return render(request,'allquestsviews.html', locals())
