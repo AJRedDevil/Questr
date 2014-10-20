@@ -6,14 +6,16 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from django.db.models import Avg
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404
 from django.shortcuts import render, redirect
-from .models import QuestrUserProfile, UserTransactional, QuestrToken
-from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, SetPasswordForm, PasswordChangeForm, NotifPrefForm
+from django.utils import timezone
+
+from .models import QuestrUserProfile, UserTransactional
+from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, PasswordChangeForm, NotifPrefForm
 
 from libs import email_notifier
 
-from access.requires import verified, is_alive
+from access.requires import verified, is_alive, is_superuser
 from contrib import user_handler
 
 from quests.contrib import quest_handler
@@ -39,6 +41,10 @@ def signin(request):
         auth_form = QuestrLocalAuthenticationForm(data=request.POST)
         if auth_form.is_valid():
             auth_login(request, auth_form.get_user())
+            #Notify the user of his status if he's unavailable
+            if request.user.is_authenticated() and request.user.is_shipper and request.user.is_available == False:
+                    request.session['alert_message'] = dict(type="warning",message="Your status is set to unavailable, you might want to set it to available!")
+                    return redirect('home')
             return redirect('home')
 
         if auth_form.errors:
@@ -81,6 +87,45 @@ def signup(request):
         return render(request, 'signup.html', locals())
 
 @login_required
+@is_superuser
+def createcourier(request):
+    """Signup, if request == POST, creates the user"""
+    ## if authenticated redirect to user's homepage directly ##
+    if request.user.is_authenticated():
+        user = request.user
+        pagetype="loggedin"
+
+    if request.method == "POST":
+        user_form = QuestrUserCreationForm(request.POST)
+        if user_form.is_valid():
+            useraddress = dict(city=user_form.cleaned_data['city'], streetaddress=user_form.cleaned_data['streetaddress'],\
+                streetaddress_2=user_form.cleaned_data['streetaddress_2'], postalcode=user_form.cleaned_data['postalcode'])
+            userdata = user_form.save(commit=False)
+            userdata.address = json.dumps(useraddress)
+            userdata.email_status = True
+            userdata.is_shipper = True
+            import hashlib
+            import uuid
+            hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
+            password = hashstring[:4]+hashstring[-2:]
+            userdata.set_password(password)
+            userdata.save()
+            email_details = user_handler.prepWelcomeCourierNotification(userdata, password)
+            logger.debug("What goes in the email is \n %s", email_details)
+            email_notifier.send_email_notification(userdata, email_details)
+            request.session['alert_message'] = dict(type="success",message="Shipper has been created!")
+            return redirect('home')
+
+        if user_form.errors:
+            logger.debug("Login Form has errors, %s ", user_form.errors)
+        pagetitle = "Signup"
+        return render(request, 'createcourier.html', locals())
+    else:
+        user_form = QuestrUserCreationForm()
+        pagetitle = "Signup"
+        return render(request, 'createcourier.html', locals())
+
+@login_required
 def resend_verification_email(request):
     """
         Sends a email verification link to the corresponding email address
@@ -115,21 +160,23 @@ def home(request):
         alert_message = request.session.get('alert_message')
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=user.id)
-        return render(request,'shipperhomepage.html', locals())
+        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=userdetails.id, is_complete=False).order_by('-creation_date')[:10]
+        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, isaccepted=True, shipper=userdetails.id).order_by('-creation_date')[:10]
+
+        return render(request,'homepage.html', locals())
     elif userdetails.is_superuser:
         alert_message = request.session.get('alert_message')
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=0)
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=0).order_by('-creation_date')[:10]
         return render(request,'shipperhomepage.html', locals())
     else:
-        alert_message = request.session.get('alert_message')
+        alert_message = request.session.get('alert_message')        
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        allquests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, )
-        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id)
-        pastquests = Quests.objects.filter(is_complete=True, questrs_id=userdetails.id)
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, ).order_by('-creation_date')[:10]
+        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id).order_by('-creation_date')[:10]
+        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, questrs_id=userdetails.id).order_by('-creation_date')[:10]
         return render(request,'homepage.html', locals())
 
 @login_required
@@ -187,9 +234,17 @@ def userSettings(request):
             raise Http404
             return render(request,'404.html', locals())        
         if user_form.is_valid():
-            user_form.save()
+            useraddress = dict(city=user_form.cleaned_data['city'], streetaddress=user_form.cleaned_data['streetaddress'],\
+                streetaddress_2=user_form.cleaned_data['streetaddress_2'], postalcode=user_form.cleaned_data['postalcode'])
+            logging.warn(useraddress)
+            userdata = user_form.save(commit=False)
+            userdata.address = json.dumps(useraddress)
+            userdata.phone = user_form.cleaned_data['phone']
+            userdata.save()
             message="Your profile has been updated!"
             return redirect('settings')
+        if user_form.errors:
+            logger.debug("Form has errors, %s ", user_form.errors)
     pagetitle = "My Settings"
     return render(request, "generalsettings.html",locals())
 
@@ -215,31 +270,32 @@ def myTrades(request):
     # return render(request, 'trades.html', locals())
     return redirect('myposts')
 
-@login_required
-def acceptOffer(request, quest_id, shipper_id):
-    """Accepts a bid on a quest from a user"""
-    pagetype="loggedin"
-    user = request.user
-    # if the shipper doesn't exist
-    if not user_handler.userExists(shipper_id):
-        logger.debug("User ID : %s not found, quest %s not accepted, returning to mytrades page", shipper_id, quest_id)
-        return redirect('mytrades')    
+# @login_required
+# def acceptOffer(request, quest_id, shipper_id):
+#     """Accepts a bid on a quest from a user"""
+#     pagetype="loggedin"
+#     user = request.user
+#     # if the shipper doesn't exist
+#     if not user_handler.userExists(shipper_id):
+#         logger.debug("User ID : %s not found, quest %s not accepted, returning to mytrades page", shipper_id, quest_id)
+#         return redirect('mytrades')    
     
-    try:
-        Quests.objects.filter(id=quest_id).update(shipper=shipper_id, isaccepted='t')
-        Quests.objects.filter(id=quest_id).update(status='Accepted')
-        questdetails = quest_handler.getQuestDetails(quest_id)
-        shipper = user_handler.getQuestrDetails(shipper_id)
-        email_details = quest_handler.prepOfferAcceptedNotification(shipper, questdetails)
-        email_notifier.send_email_notification(shipper, email_details)
-    except Quests.DoesNotExist:
-        raise Http404
-        return render('404.html', locals())
-    #To display the information of shipper on the trades page
-    shipper = user_handler.getShipper(shipper_id)    
+#     try:
+#         Quests.objects.filter(id=quest_id).update(shipper=shipper_id, isaccepted='t')
+#         Quests.objects.filter(id=quest_id).update(status='Accepted')
+#         questdetails = quest_handler.getQuestDetails(quest_id)
+#         shipper = user_handler.getQuestrDetails(shipper_id)
+#         email_details = quest_handler.prepOfferAcceptedNotification(shipper, questdetails)
+#         email_notifier.send_email_notification(shipper, email_details)
+#     except Quests.DoesNotExist:
+#         raise Http404
+#         return render('404.html', locals())
+#     #To display the information of shipper on the trades page
+#     shipper = user_handler.getShipper(shipper_id)    
     
-    return redirect('mytrades')
+#     return redirect('mytrades')
 
+@verified
 @login_required
 def myPosts(request):
     pagetype="loggedin"
@@ -262,6 +318,7 @@ def myPosts(request):
     # logger.debug(shipperlist)
     return render(request, 'myquests.html', locals())
 
+@verified
 @login_required
 def myShipments(request):
     pagetype="loggedin"
@@ -306,25 +363,26 @@ def getUserInfo(request, displayname):
     pagetitle = publicuser.first_name+' '+publicuser.last_name
     return render(request,'publicprofile.html', locals())
 
-@login_required
-def createPassword(request):
-    """Create a password for socially logged in user"""
-    pagetype="loggedin"
-    user = request.user
-    settingstype="password"
+# @login_required
+# def createPassword(request):
+#     """Create a password for socially logged in user"""
+#     pagetype="loggedin"
+#     user = request.user
+#     settingstype="password"
 
-    if user_handler.passwordExists(request.user):
-        return redirect('home')
+#     if user_handler.passwordExists(request.user):
+#         return redirect('home')
     
-    if request.method == "POST":
-        user_form = SetPasswordForm(user, request.POST)
-        if user_form.is_valid():
-            user_form.save()
-            message="Your password has been created!"
-            return redirect('home')
-    pagetitle = "Create Your Password"
-    return render(request, "createpassword.html", locals())
+#     if request.method == "POST":
+#         user_form = SetPasswordForm(user, request.POST)
+#         if user_form.is_valid():
+#             user_form.save()
+#             message="Your password has been created!"
+#             return redirect('home')
+#     pagetitle = "Create Your Password"
+#     return render(request, "createpassword.html", locals())
 
+@verified
 @login_required
 def changePassword(request):
     """Change's user's personal settings"""
@@ -341,11 +399,12 @@ def changePassword(request):
         logger.debug(user_form.errors)
         if user_form.is_valid():
             user_form.save()
-            alert_message=dict(type='success', message='Your password has been changed!')
+            request.session['alert_message'] = dict(type="success",message="Your password has been changed successfully!")
             return redirect('home')
     pagetitle = "Change Your Password"
     return render(request, "passwordsettings.html",locals())
 
+@verified
 @login_required
 def cardSettings(request):
     """Change's user's personal settings"""
@@ -366,6 +425,8 @@ def emailSettings(request):
     user_form = NotifPrefForm()
     return render(request, "emailsettings.html",locals())
 
+@verified
+@login_required
 def notificationsettings(request):
     """Change's user's personal settings"""
     pagetype="loggedin"
@@ -461,3 +522,27 @@ def resetpassword(request):
     pagetitle = "Reset Your Password"
     pagetype  = "public"
     return render(request,"resetpassword.html", locals())
+
+@verified
+@login_required
+def changestatus(request):
+    """Changes the courier's availability from the one that he is currently on"""
+    user = request.user
+    if user.is_shipper:
+        availability = user.is_available
+        if availability:
+            # If the user is available, change his status to unavailable
+            result = user_handler.updateCourierAvailability(user, 0)
+        else:
+            # vice versa
+            result = user_handler.updateCourierAvailability(user, 1)
+    else:
+        return redirect('home')
+
+    if result['status'] == "success":
+        request.session['alert_message'] = dict(type="Success",message="Your status has been updated!")
+        return redirect("home")
+    elif result['status'] == "fail":
+        request.session['alert_message'] = dict(type="Danger",message="Your status cannot be updated!")
+        return redirect("home")
+

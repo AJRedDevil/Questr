@@ -6,9 +6,13 @@ import logging
 from django.test import TestCase
 from django.test.client import Client
 from django.utils import timezone
+from django.conf import settings
 
-from quests.models import Quests
+from datetime import timedelta
+import pytz
+
 logger = logging.getLogger(__name__)
+from quests.models import Quests
 
 class QuestTests(TestCase):
     """Tests For Quests"""
@@ -35,11 +39,12 @@ class QuestTests(TestCase):
         self.dstphone = "1987654320"
         self.reward = "89"
         self.distance = "19"
+        self.tracking_number = "jkalsken2n"
         self.dropoff = dict(city=self.dstcity,address=self.dstaddress,postalcode=self.dstpostalcode,
             name=self.dstname,phone=self.dstphone
             )
         self.data = dict(questrs_id=self.questrs,title=self.title,size=self.size,description=self.description,pickup=self.pickup,
-            dropoff=self.dropoff)
+            dropoff=self.dropoff, tracking_number=self.tracking_number)
 
     def tests_post_new_quest(self):
         questdetails = Quests(questrs_id=self.questrs,title=self.title,size=self.size,description=self.description,pickup=self.pickup,
@@ -49,5 +54,22 @@ class QuestTests(TestCase):
         self.assertEqual(questdetails.title, "New Quest")
 
 
+    def tests_tracking_number_search(self):
+        questdetails = Quests(questrs_id=self.questrs,title=self.title,size=self.size,description=self.description,pickup=self.pickup,
+            dropoff=self.dropoff, reward=self.reward, creation_date = self.creation_date, tracking_number=self.tracking_number)
+        Quests.save(questdetails)
+        questdetails = Quests.objects.get(title=self.title)
+        tracking_number = questdetails.tracking_number
+        self.assertEqual(tracking_number, self.tracking_number)
+        response = self.client.get('/track/?tracking_number=%s' % tracking_number)
+        self.assertEqual(response.status_code, 200)
 
-
+    def tests_pickup_time(self):
+        ##pickup time is after 1 hour##
+        self.current_time = timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE))
+        self.pickup_time = self.current_time+timedelta(hours=1)
+        questdetails = Quests(questrs_id=self.questrs,title=self.title,size=self.size,description=self.description,pickup=self.pickup,
+            dropoff=self.dropoff, reward=self.reward, creation_date = self.creation_date, tracking_number=self.tracking_number, pickup_time=self.pickup_time)
+        Quests.save(questdetails)
+        questdetails = Quests.objects.get(title=self.title)
+        self.assertEqual(questdetails.pickup_time.hour, 12)

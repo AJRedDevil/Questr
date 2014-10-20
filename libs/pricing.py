@@ -1,7 +1,7 @@
 
 
 import pytz
-import math
+from decimal import Decimal
 import logging as log
 
 from datetime import time
@@ -12,17 +12,17 @@ from django.conf import settings
 """
 First revision
 This revision is intended to serve Questr only when there is no mobile app to determine the available-online shipper ratio.
-ceil( rate_meter_drop + (distance - 2) * $/km ) 
+float( rate_meter_drop + (distance - 2) * $/km ) 
 
 Weekdays
 Off-peak hours        
-ceil( RATE_METER_DROP_WEEKDAY + (DISTANCE_IN_KM - 2) * RATE_PER_METER_WEEKDAY)
+float( RATE_METER_DROP_WEEKDAY + (DISTANCE_IN_KM - 2) * RATE_PER_METER_WEEKDAY)
 Peak hours            
-ceil( RATE_METER_DROP_WEEKDAY + (DISTANCE_IN_KM - 2) * RATE_PER_METER_WEEKEND)    
+float( RATE_METER_DROP_WEEKDAY + (DISTANCE_IN_KM - 2) * RATE_PER_METER_WEEKEND)    
 
 Weekend
 Normal, Peak hours    
-ceil( RATE_METER_DROP_WEEKEND + (DISTANCE_IN_KM - 2) * RATE_PER_METER_WEEKEND)
+float( RATE_METER_DROP_WEEKEND + (DISTANCE_IN_KM - 2) * RATE_PER_METER_WEEKEND)
 
 RATE_METER_DROP_WEEKDAY
 Backpack   			4
@@ -62,7 +62,11 @@ class WebPricing(object):
 	def __init__(self):
 		# self.__total_time = total_time # total_time
 		self.__current_datetime = timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE))
-		self.is_weekend = True if self.__current_datetime.weekday() <=5 else False
+		#self.is_weekend = False if self.__current_datetime.weekday() in range(1,6) else True
+		# Removed weekend meter drop
+		self.is_weekend = False
+		# log.warn("is it weekend?")
+		# log.warn(self.is_weekend)
 		self.clock_hour = self.__current_datetime.hour
 		self.clock_minute = self.__current_datetime.minute
 		self.__rate_meter_drop_weekend = dict(backpack=6, car=8, minivan=10, truck=90)
@@ -73,7 +77,8 @@ class WebPricing(object):
 		self.__hourlist = dict(off_peak_hours={'start_hr': 8, 'start_min':00, 'end_hr':21,'end_min':59})
 		# self.peak_hours = True if self.clock_hour in self.__hourlist['peak_hours'] else False
 		self.peak_hours = self.__is_peak_hour()
-
+		# log.warn("is it peakhour?")
+		# log.warn(self.peak_hours)
 		# self.__future_datetime = self.__get_future_datetime()
 		# self.__tomorrow = self.__get_tomorrow_datetime()
 	
@@ -95,13 +100,15 @@ class WebPricing(object):
 		return rate_per_km
 
 	def __is_peak_hour(self):
-		cur_time = time(self.clock_hour, self.clock_minute)
-		start_time = time(self.__hourlist['off_peak_hours']['start_hr'],self.__hourlist['off_peak_hours']['start_min'])
-		end_time = time(self.__hourlist['off_peak_hours']['end_hr'],self.__hourlist['off_peak_hours']['end_min'])
-		if cur_time >= start_time and cur_time <= end_time:
-			return False
-		else:
-			return True
+		# cur_time = time(self.clock_hour, self.clock_minute)
+		# start_time = time(self.__hourlist['off_peak_hours']['start_hr'],self.__hourlist['off_peak_hours']['start_min'])
+		# end_time = time(self.__hourlist['off_peak_hours']['end_hr'],self.__hourlist['off_peak_hours']['end_min'])
+		# if cur_time >= start_time and cur_time <= end_time:
+		# 	return False
+		# else:
+		# 	return True
+		# Removed peak_hour selection for now
+		return False
 		
 	# def set_factors(self, distance, mode='backpack'):
 	# 	self.__size_meter_drop = self.__get_size_meter_drop()[mode]
@@ -118,29 +125,29 @@ class WebPricing(object):
 
 	# def __get_off_peak_price(self, is_weekend=False):
 	# 	if is_weekend:
-	# 		return math.ceil( 6 + self.__size_meter_drop + self.__distance * 2.5 * self.__size_modifier)
+	# 		return Decimal( 6 + self.__size_meter_drop + self.__distance * 2.5 * self.__size_modifier).quantize(Decimal('0.01')))
 	# 	else:
-	# 		return math.ceil( 4 + self.__size_meter_drop + self.__distance * 1.7 * self.__size_modifier)
+	# 		return Decimal( 4 + self.__size_meter_drop + self.__distance * 1.7 * self.__size_modifier).quantize(Decimal('0.01')))
 
 	# def __get_peak_hours_price(self, is_weekend=False):
 	# 	if is_weekend:
-	# 		return math.ceil( 6 + self.__size_meter_drop + self.__distance * 2.5 * self.__size_modifier)
+	# 		return Decimal( 6 + self.__size_meter_drop + self.__distance * 2.5 * self.__size_modifier).quantize(Decimal('0.01')))
 	# 	else:
-	# 		return math.ceil( 4 + self.__size_meter_drop + self.__distance * 2.0 * self.__size_modifier)
+	# 		return Decimal( 4 + self.__size_meter_drop + self.__distance * 2.0 * self.__size_modifier).quantize(Decimal('0.01')))
 
 	# def __get_low_hours_price(self, is_weekend=False):
 	# 	if is_weekend:
-	# 		return math.ceil( 10 + self.__size_meter_drop + self.__distance * 3.0 * self.__size_modifier)
+	# 		return Decimal( 10 + self.__size_meter_drop + self.__distance * 3.0 * self.__size_modifier).quantize(Decimal('0.01')))
 	# 	else:
-	# 		return math.ceil(  6 + self.__size_meter_drop + self.__distance * 2.5 * self.__size_modifier)
+	# 		return Decimal(  6 + self.__size_meter_drop + self.__distance * 2.5 * self.__size_modifier).quantize(Decimal('0.01')))
 
 	def __get_weekend_price(self, distance, shipment_mode):
 		log.warn(self.__get_rate_per_km(shipment_mode))
-		return round(math.ceil(self.__get_meter_drop_rate(shipment_mode) + distance * self.__get_rate_per_km(shipment_mode)))
+		return float(Decimal(self.__get_meter_drop_rate(shipment_mode) + distance * self.__get_rate_per_km(shipment_mode)).quantize(Decimal('0.01')))
 
 	def __get_weekday_price(self, distance, shipment_mode):
 		log.warn(self.__get_rate_per_km(shipment_mode))
-		return round(math.ceil(self.__get_meter_drop_rate(shipment_mode) + distance * self.__get_rate_per_km(shipment_mode)))
+		return float(Decimal(self.__get_meter_drop_rate(shipment_mode) + distance * self.__get_rate_per_km(shipment_mode)).quantize(Decimal('0.01')))
 
 	# def get_price(self):
 	# 	starting_hour = self.__current_datetime.hours

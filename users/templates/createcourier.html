@@ -1,0 +1,183 @@
+{% extends "mainbase.html" %}
+{% load staticfiles %}
+{% block localhead %}
+<link href={% static "css/sign.css" %} rel="stylesheet">
+<script src={% static "js/angular.min.js" %}></script>
+{% endblock localhead %}
+{% block content%}
+
+{% comment %}
+<div class="container-fluid" style="background:white;">
+    <div class="row clearfix">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column" style="margin-top:20px;">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column col small" id="customer">
+            
+            <h3>I want to be a user</h3>
+            <button class="btn ">Sign Up</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-sm-6 col-md-6 col-lg-6 column col small" id="shipper">
+            <h3>I want to be a shipper</h3>
+            <button class="btn ">Sign Up</button>
+        </div>
+    </div>
+    </div>
+</div>
+{% endcomment %}
+
+
+
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 column">
+            <h3 class="lead" style="margin-bottom:0;"><span class="glyphicon glyphicon-user"></span> Create a new Courier here!</h3>
+        </div><!-- ./column -->
+    </div><!-- ./row -->
+   
+        
+    <div class="row clearfix" data-ng-app="myApp">
+    <form name="myForm" class="css-form" form action="{% url 'createcourier' %}" method="post">{% csrf_token %}
+      
+        <div class="col-md-10 col-md-offset-1 column">
+            
+            <div class="col-xs-12 col-lg-8 col-lg-pull-4 column">
+                <hr>
+            
+                <div class="row clearfix form-group">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+                        <input id="email" name="email" class="form-control input-sm" type="email" ng-model="user.email" placeholder="Email" required />
+                    </div>
+                    {{user_form.email.errors}}                        
+                </div><!-- ./row -->
+                    
+                <!-- PASSWORDS -->          
+                <div class="row clearfix form-group">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">    
+                        <input id="password1" class="form-control input-sm" placeholder="Password" ng-model="user.password" type="password" name="password1" data-ng-class="{'ng-invalid':myForm.password2.$error.match}" />
+                        <span class="help-block"><small><strong>Minimum of 6 characters</strong></small></span>
+                    </div>
+                    
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+                        <input id="password2" class="form-control input-sm" ng-model="user.passwordConfirm" type="password" data-match="user.password" name="password2" />
+                    </div><!-- ./column --> 
+                    <div data-ng-show="myForm.password2.$error.match">Passwords do not match!</div> 
+                    {{user_form.password1.errors}}              
+                    {{user_form.password2.errors}}
+                </div><!-- ./row -->    
+
+                <!-- USERNAME -->
+                <div class="row clearfix form-group">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+                        <input type="text" class="form-control input-sm" placeholder="Username" name="displayname" id="displayname" ng-model="user.displayname" required>
+                        {% if user_form.displayname.errors %}
+                            {{user_form.displayname.errors}}
+                        {% endif %}
+                    </div><!-- ./column -->
+                </div><!-- ./row -->
+                
+                <!-- FIRST AND LAST -->
+                <div class="row clearfix form-group">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+                        <input type="text" class="form-control input-sm" name="first_name" id="first_name" placeholder="First Name" ng-model="user.firstname" required>   
+                        {% if user_form.first_name.errors %}
+                            {{user_form.first_name.errors}}
+                        {% endif %}   
+                    </div><!-- ./column -->
+
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+                        <input type="text" class="form-control input-sm" name="last_name" id="last_name" placeholder="Last Name" ng-model="user.lastname" required>
+                        {% if user_form.last_name.errors %}
+                            {{user_form.last_name.errors}}
+                        {% endif %}
+                    </div><!-- ./column -->
+                </div><!-- ./row -->
+
+                <!-- CITY -->
+                <div class="row clearfix form-group">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+                <!-- CITY DROPDOWN -->
+                <label for="City" class="control-label">City</label>
+                <!-- Location input-->
+                <div class="form-group">
+                    <select id="city" class="btn-classic" data-size="5" name="city">
+                        <option>Toronto</option>
+                        <option>Brampton</option>
+                        <option>Markham</option>
+                        <option>Mississauga</option>
+                        <option>Richmond Hill</option>
+                        <option>Vaughan</option>
+                        <option>Oakville</option>
+                    </select>
+                </div>  <!-- ./form-group -->
+            </div>
+        </div>
+
+
+        <!-- ADDRESS AND POSTAL CODE -->
+                <div class="row clearfix form-group">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+                     <input type="text" class="form-control input-sm" name="streetaddress" id="streetaddress" placeholder="Address" ng-model="user.streetaddress" required>
+            </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+                     <input type="text" class="form-control input-sm" name="streetaddress_2" id="streetaddress_2" placeholder="Address" ng-model="user.streetaddress_2" required>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+                    <input type="text" class="form-control input-sm" name="postalcode" id="postalcode" placeholder="Postal Code" required>
+            </div>
+        </div>
+
+        <!-- PHONE NUMBER -->
+                <div class="row clearfix form-group">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+                      <input type="text" class="form-control input-sm" name="phonenum" id="phonenum" placeholder="Phone Number" required>
+            </div>
+        </div>
+              
+
+
+        <div class="col-md-12 column">
+            <hr>
+            <div class="col-xs-12 col-md-6 column">
+                <button type="submit" class="btn btn-embossed btn-info" id="createAccBtn">Create Account</button>
+            </div>
+        </div><!-- ./column -->  
+    </form>
+    </div><!-- ./row -->
+</div><!-- ./container -->
+
+
+<style type="text/css">
+  .css-form input.ng-invalid.ng-dirty {
+    border-color: rgba(232,77,60,1.00);
+  }
+
+  .css-form input.ng-valid.ng-dirty {
+    border-color: rgba(47,204,112,1.00);
+  }
+</style>
+
+<script type="text/javascript">
+     var app = angular.module('myApp', []);
+    app.directive('match', function () {
+        return {
+            require: 'ngModel',
+            restrict: 'A',
+            scope: {
+                match: '='
+            },
+            link: function(scope, elem, attrs, ctrl) {
+                scope.$watch(function() {
+                    var modelValue = ctrl.$modelValue || ctrl.$$invalidModelValue;
+                    return (ctrl.$pristine && angular.isUndefined(modelValue)) || scope.match === modelValue;
+                }, function(currentValue) {
+                    ctrl.$setValidity('match', currentValue);
+                });
+            }
+        };
+    });
+</script>
+
+
+
+{% endblock %}    
+{% block scripts %}
+{% endblock scripts %}

@@ -13,6 +13,7 @@ from libs import email_notifier, geomaps
 
 from users.models import QuestrUserProfile, UserTransactional, QuestrToken
 from quests.models import Quests
+from quests.tasks import inform_shipper_task
 
 logger = logging.getLogger(__name__)
 
@@ -70,6 +71,28 @@ def prepWelcomeNotification(questr, verf_link):
     logger.debug("Welcome email is prepared")
     return email_details
 
+def prepWelcomeCourierNotification(questr, password):
+    """Prepare the details for notification emails after new user registers"""
+    template_name="Welcome_Courier_Email"
+    subject="Questr - Welcome aboard !"
+    quest_support_email="support@questr.co"
+
+    email_details = {
+                        'subject' : subject,
+                        'template_name' : template_name,
+                        'global_merge_vars': {
+                                                'questr_first_name'   : questr.first_name,
+                                                'questr_last_name'   : questr.last_name,
+                                                'questr_email'   : questr.email,
+                                                'quest_support_mail': quest_support_email,
+                                                'company'           : "Questr Co",
+                                                'password'         : password,
+                                                },
+                    }
+
+    logger.debug("Welcome email is prepared")
+    return email_details
+
 def get_verification_url(user=None): 
     """
         Returns the verification url.
@@ -95,7 +118,7 @@ def get_verification_url(user=None):
 def getShipper(shipper_id):
     """List shipper information"""
     try:
-        shipper = QuestrUserProfile.objects.filter(id=shipper_id)
+        shipper = QuestrUserProfile.objects.filter(id=shipper_id, is_active=True)
     except QuestrUserProfile.DoesNotExist:
         raise Http404
         return render('404.html', locals())
@@ -104,7 +127,7 @@ def getShipper(shipper_id):
 def getQuestrDetails(questr_id):
     """List shipper information"""
     try:
-        questr = QuestrUserProfile.objects.get(id=questr_id)
+        questr = QuestrUserProfile.objects.get(id=questr_id, is_active=True)
     except QuestrUserProfile.DoesNotExist:
         raise Http404
         return render('404.html', locals())
@@ -112,7 +135,7 @@ def getQuestrDetails(questr_id):
 
 def getShippers():
     """List all the shippers"""
-    shippers = QuestrUserProfile.objects.filter(is_shipper='t')
+    shippers = QuestrUserProfile.objects.filter(is_shipper=True, is_active=True)
     return shippers
 
 def getShippersOfQuest(questname):
@@ -176,11 +199,15 @@ def updateCourierAvailability(questr, status):
     status = int(status)
     if userExists(questr.id):
         if status == 0:
-            QuestrUserProfile.objects.filter(id=questr.id).update(is_available=False)
-            return dict(status='success')
+            statusupdate = QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=False)
+            if statusupdate == 1:
+                return dict(status='success')
+            return dict(status="fail")
         elif status == 1:
-            QuestrUserProfile.objects.filter(id=questr.id).update(is_available=True)
-            return dict(status='success')
+            statusupdate = QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=True)
+            if statusupdate == 1:
+                return dict(status='success')
+            return dict(status="fail")
         else :
             raise ValueError('Status %d not acceptable, use 0 or 1' % (status))
     return dict(status='fail')
@@ -195,7 +222,7 @@ class CourierManager(object):
     def getActiveCouriers(self):
         """Returns a list of couriers"""
         try:
-            courierlist = QuestrUserProfile.objects.filter(is_shipper=True, is_superuser=False, is_available=True)
+            courierlist = QuestrUserProfile.objects.filter(is_shipper=True, is_superuser=False, is_available=True, is_active=True)
         except Exception, e:
             raise e
 
@@ -206,23 +233,28 @@ class CourierManager(object):
         courier_details = getQuestrDetails(courier)
         return courier_details.is_available
 
-    def setCourierAvailability(self, courier, status):
-        """Sets the availability status of a courier"""
-        if status==1:
-            stat=True
-        else:
-            stat=False
-        try:
-            QuestrUserProfile.objects.filter(id=courier.id).update(is_available=stat)
-        except Exception, e:
-            raise e
-
-        return stat
+    # def updateCourierAvailability(questr, status):
+    #     """Takes a Questr User Profile object and a status ( 0 | 1 ) and updates the availability status as per the same"""
+    #     status = int(status)
+    #     if userExists(questr.id):
+    #         if status == 0:
+    #             statusupdate = QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=False)
+    #             if statusupdate == 1:
+    #                 return dict(status='success')
+    #             return dict(status="fail")
+    #         elif status == 1:
+    #             statusupdate = QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=True)
+    #             if statusupdate == 1:
+    #                 return dict(status='success')
+    #             return dict(status="fail")
+    #         else :
+    #             raise ValueError('Status %d not acceptable, use 0 or 1' % (status))
+    #     return dict(status='fail')
 
     def getSuperAdmins(self):
         """Returns a list of superadmins"""
         try:
-            courierlist = QuestrUserProfile.objects.filter(is_superuser=True)
+            courierlist = QuestrUserProfile.objects.filter(is_superuser=True, is_active=True)
         except Exception, e:
             raise e
 
@@ -235,9 +267,7 @@ class CourierManager(object):
             return "fail"
         else:
             for admin in superadmins: # send notifcations to all the shippers
-                accept_url = ""
-                reject_url = ""
-                email_details = quest_handler.prepNewQuestNotification(admin, quest, accept_url, reject_url)
+                email_details = quest_handler.prepNewQuestAdminNotification(admin, quest)
                 email_notifier.send_email_notification(admin, email_details)
             return "success"
 
@@ -252,9 +282,15 @@ class CourierManager(object):
         return "success"
 
     def informCourierAfterAcceptance(self, courier, quest):
-        """Takes in a questobject and informs the superadmins of the same"""
+        """Takes in a questobject and a courier object and informs the courier of the accepted quest"""
         email_details = quest_handler.prepOfferAcceptedNotification(courier, quest)
         email_notifier.send_email_notification(courier, email_details)
+        return "success"
+
+    def informQuestrAfterAcceptance(self, courier, questr, quest):
+        """Takes in a questobject, a questr object and a courier object and informs the questr of the accepted quest"""
+        email_details = quest_handler.prepQuestAppliedNotification(courier, questr, quest)
+        email_notifier.send_email_notification(questr, email_details)
         return "success"
 
     def checkProximity(self, address_1, address_2):
@@ -344,8 +380,27 @@ class CourierManager(object):
             couriers_list = self.getCouriersNotInProximity(quest)
 
         designated_courier = getQuestrDetails(couriers_list[0][0])
-        self.informCourier(designated_courier, quest)
-        self.setCourierAvailability(designated_courier, 0)
+        if designated_courier.is_available:
+            logger.warn("courier %s is available for quest %s, and is informed" % (designated_courier.displayname, quest))
+            updateCourierAvailability(designated_courier, 0) 
+            # designated_courier.is_available = False
+            # designated_courier.save()
+            self.informCourier(designated_courier, quest)
+        else:
+            available_couriers = quest.available_couriers
+            if len(available_couriers) > 0:
+                logging.warn(available_couriers)
+                available_couriers.pop(str(designated_courier.id), None)
+                quest.available_couriers = available_couriers
+                ##Save all the details
+                quest.save()
+                quest = quest_handler.getQuestDetails(quest.id)
+                logger.warn("courier %s is unavailable for quest %s, and is uninformed" % (designated_courier.displayname, quest))
+                #Recursion trigger to get rid of couriers who are on the available_couriers list but are not actually!!
+                self.informShippers(quest)
+        # Set courier as unavailable
+        ## Run the job to inform shippers in queue
+        inform_shipper_task.apply_async((quest.id, designated_courier.id), countdown=int(settings.COURIER_SELECTION_DELAY))       
     
     def updateCouriersForQuset(self, quest, courier):
         """Removes a courier from the set of available shippers for a quest"""

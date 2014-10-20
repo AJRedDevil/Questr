@@ -22,7 +22,8 @@
 			    	<form action="{%url 'signin'%}" method="post" class="css-form" novalidate>{% csrf_token %}
                     <!-- Login with Username and Password --> 
                     <div class="form-group">
-                        <input id="username" type="email" name="username" class="form-control" ng-model="user.email" placeholder="Email Address" required>
+                        <input class="form-control input-xs" id="username" type="email" name="username" ng-model="user.email" placeholder="Email Address" required>
+                      
                         <p> 
                         {% if auth_form.username.errors %}
                         	{{ auth_form.username.errors }}
@@ -30,7 +31,7 @@
                         </p>
             
                         <div class="help-block with-errors"></div>
-                        <input id="password" type="password" class="form-control input-sm" name="password" id="exampleInputPassword1" placeholder="Password" ng-model="user.password" required>
+                        <input id="password" type="password" class="form-control input-xs" name="password" id="exampleInputPassword1" placeholder="Password" ng-model="user.password" required>
                         <p> 
         	            {% if auth_form.password.errors %}
         	            {{ auth_form.password.errors }}
@@ -42,7 +43,7 @@
                         
                         <a href="{% url 'reset_password' %}"><small>Forgot password?</small></a>
                     
-                        <center><button type="submit" class="btn btn-sm btn-embossed btn-info">Sign in</button></center>
+                        <center><button type="submit" class="btn btn-default">Sign in</button></center>
                     </div> <!-- ./form-group -->
 			    	</form>
 			</div><!-- ./panel-body -->

@@ -2,12 +2,13 @@
 
 import logging
 logger = logging.getLogger(__name__)
+
 from django.core.mail import EmailMessage
 
 
 def _load_template(user, email_details):
     """
-    Returns the template for email verification.
+    Loads the email contents and returns the template for email
     """
     ##Email Template Init###
     email_template = EmailMessage(
@@ -27,38 +28,20 @@ def _load_template(user, email_details):
 
 def send_email_notification(user, email_details):
     """
-    Send a verification email to the user.
+    Send a notification email to the user.
     """
-    ##Mailchimp Template Name##
-    # email_details = {
-    #                     'subject' : subject,
-    #                     'template_name' : template_name,
-    #                     'global_merge_vars': {
-    #                                             'quest_public_link' : quest.public_link,
-    #                                             'quest_description' : quest.description,
-    #                                             'user_first_name'   : user.first_name,
-    #                                             'email_unsub_link'  : questr_unsubscription_link,
-    #                                             'quest_title'       : quest.title,
-    #                                             'quest_reward'      : quest.reward,
-    #                                             'quest_browse_link' : quest_browse_link,
-    #                                             'quest_support_mail': quest.support_email,
-    #                                             'recipient_id'      : user.id,
-    #                                             'company'           : "Questr Co"
-
-    #                                             },
-    #                 }
     try:
         msg = _load_template(user, email_details)
         msg.send()
         logger.debug("Notification sent to - %s for %s", user.email, email_details['template_name'])
     except Exception, e:
-        logger.debug("Error during sending of Email to - %s for %s", user.email, email_details['template_name'])
-        logger.debug("Error message is %s", str(e))
-
+        logger.warn("Error during sending of Email to - %s for %s", user.email, email_details['template_name'])
+        logger.warn("Error message is %s", str(e))
+        
 
 def _load_contact_template(user_email, email_details):
     """
-    Returns the template for email verification.
+    Loads the email contents and returns the template for contact us
     """
     ##Email Template Init###
     email_template = EmailMessage(
@@ -78,29 +61,12 @@ def _load_contact_template(user_email, email_details):
 
 def send_contactus_notification(user_email, email_details):
     """
-    Send a verification email to the user.
+    Send a contact us notification 
     """
-    ##Mailchimp Template Name##
-    # email_details = {
-    #                     'subject' : subject,
-    #                     'template_name' : template_name,
-    #                     'global_merge_vars': {
-    #                                             'quest_public_link' : quest.public_link,
-    #                                             'quest_description' : quest.description,
-    #                                             'user_first_name'   : user.first_name,
-    #                                             'email_unsub_link'  : questr_unsubscription_link,
-    #                                             'quest_title'       : quest.title,
-    #                                             'quest_reward'      : quest.reward,
-    #                                             'quest_browse_link' : quest_browse_link,
-    #                                             'quest_support_mail': quest.support_email,
-    #                                             'recipient_id'      : user.id,
-    #                                             'company'           : "Questr Co"
-
-    #                                             },
-    #                 }
     try:
         msg = _load_contact_template(user_email, email_details)
         logger.debug("Notification sent to - %s for %s", user_email, email_details['template_name'])
         msg.send()
     except Exception, e:
-        logging.exception(str(e))
+        logger.warn("Error during sending of Email to - %s for %s", user_email, email_details['template_name'])
+        logger.warn("Error message is %s", str(e))

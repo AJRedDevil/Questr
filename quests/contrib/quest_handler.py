@@ -3,15 +3,18 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http import Http404, HttpResponse
+from django.utils import timezone
+from datetime import datetime, timedelta
 
 from quests.models import Quests, QuestTransactional, QuestToken
 
+import pytz
 import logging
 logger = logging.getLogger(__name__)
 
 # Create your views here.
 def listfeaturedquests(questrs_id):
-    """List all the featured quests"""
+    """List all the quests"""
     allquests = Quests.objects.filter(ishidden=False)
     return allquests
 
@@ -27,6 +30,14 @@ def getQuestsByUser(questrs_id):
 def getQuestDetails(quest_id):
     try:
         questdetails = Quests.objects.get(id=quest_id)
+    except Quests.DoesNotExist:
+        raise Http404
+        return render(request,'404.html')
+    return questdetails
+
+def getQuestDetailsByTrackingNumber(tracking_number):
+    try:
+        questdetails = Quests.objects.get(tracking_number=tracking_number)
     except Quests.DoesNotExist:
         raise Http404
         return render(request,'404.html')
@@ -132,60 +143,98 @@ def prepNewQuestNotification(user, questdetails, accept_url, reject_url):
                                                 'quest_public_link' : settings.QUESTR_URL+'/quest/'+str(questdetails.id),
                                                 'quest_description' : questdetails.description,
                                                 'user_first_name'   : user.first_name,
-                                                'email_unsub_link'  : questr_unsubscription_link,
                                                 'quest_title'       : questdetails.title,
                                                 'quest_size'      : questdetails.size,
-                                                'quest_pickup_address' : questdetails.pickup['address'],
-                                                'quest_pickup_city' : questdetails.pickup['city'],
-                                                'quest_pickup_postalcode' : questdetails.pickup['postalcode'],
                                                 'quest_reward'      : str(questdetails.reward),
                                                 'quest_distance'      : str(questdetails.distance),
                                                 'quest_creation_date'      : questdetails.creation_date.strftime('%m-%d-%Y'),
                                                 'quest_support_mail': quest_support_email,
                                                 'questr_unsubscription_link' : questr_unsubscription_link,
-                                                'quest_application_link' : settings.QUESTR_URL+'/quest/'+str(questdetails.id)+'/apply/',
                                                 'company'           : "Questr Co",
                                                 'quest_accept_url'           : accept_url,
                                                 'quest_reject_url'           : reject_url,
+                                                'quest_pickup_address' : questdetails.pickup['address'],
+                                                'quest_pickup_city' : questdetails.pickup['city'],
+                                                'quest_pickup_postalcode' : questdetails.pickup['postalcode'],
 
                                                 },
                     }
     return email_details
 
-def prepOfferAcceptedNotification(user, questdetails):
-    """Prepare the details for notification emails for new quests"""
-    template_name="Offer_Accepted_Notification"
-    subject="Questr - Offer Accepted"
+def prepNewQuestAdminNotification(user, questdetails):
+    """Prepare the details for notification emails for new quests to admins"""
+    template_name="New_Quest_Admin_Notification"
+    subject="New Quest Notification"
     # quest_browse_link=settings.QUESTR_URL+"/quest"
     quest_support_email="support@questr.co"
-    questr_unsubscription_link="http://questr.co/unsub"
 
     email_details = {
                         'subject' : subject,
                         'template_name' : template_name,
                         'global_merge_vars': {
-                                                'quest_public_link' : settings.QUESTR_URL+'/quest/'+str(questdetails.id),
                                                 'quest_description' : questdetails.description,
-                                                'user_first_name'   : user.first_name,
-                                                'email_unsub_link'  : questr_unsubscription_link,
                                                 'quest_title'       : questdetails.title,
                                                 'quest_size'      : questdetails.size,
+                                                'quest_pickup_name' : questdetails.pickup['name'],
+                                                'quest_pickup_phone' : questdetails.pickup['phone'],
+                                                'quest_pickup_address' : questdetails.pickup['address'],
+                                                'quest_pickup_city' : questdetails.pickup['city'],
+                                                'quest_pickup_postalcode' : questdetails.pickup['postalcode'],
+                                                'quest_pickup_name' : questdetails.pickup['name'],
+                                                'quest_dropoff_name' : questdetails.dropoff['name'],
+                                                'quest_dropoff_phone' : questdetails.dropoff['phone'],
+                                                'quest_dropoff_address' : questdetails.dropoff['address'],
+                                                'quest_dropoff_city' : questdetails.dropoff['city'],
+                                                'quest_dropoff_postalcode' : questdetails.dropoff['postalcode'],
                                                 'quest_reward'      : str(questdetails.reward),
                                                 'quest_distance'      : str(questdetails.distance),
                                                 'quest_creation_date'      : questdetails.creation_date.strftime('%m-%d-%Y'),
                                                 'quest_support_mail': quest_support_email,
-                                                'questr_unsubscription_link' : questr_unsubscription_link,
-                                                'quest_shipment_link' : settings.QUESTR_URL+'/user/trades/',
-                                                'company'           : "Questr Co"
+                                                'quest_application_link' : settings.QUESTR_URL+'/quest/'+str(questdetails.id)+'/apply/',
+                                                'company'           : "Questr Co",
+                                                },
+                    }
+    return email_details
 
+def prepOfferAcceptedNotification(user, questdetails):
+    """Prepare the details for notification emails for new quests to admins"""
+    template_name="Offer_Accepted_Notification"
+    subject="Questr - Offer Accepted"
+    # quest_browse_link=settings.QUESTR_URL+"/quest"
+    quest_support_email="support@questr.co"
+
+    email_details = {
+                        'subject' : subject,
+                        'template_name' : template_name,
+                        'global_merge_vars': {
+                                                'quest_description' : questdetails.description,
+                                                'quest_title'       : questdetails.title,
+                                                'quest_size'      : questdetails.size,
+                                                'quest_pickup_name' : questdetails.pickup['name'],
+                                                'quest_pickup_phone' : questdetails.pickup['phone'],
+                                                'quest_pickup_address' : questdetails.pickup['address'],
+                                                'quest_pickup_city' : questdetails.pickup['city'],
+                                                'quest_pickup_postalcode' : questdetails.pickup['postalcode'],
+                                                'quest_pickup_name' : questdetails.pickup['name'],
+                                                'quest_dropoff_name' : questdetails.dropoff['name'],
+                                                'quest_dropoff_phone' : questdetails.dropoff['phone'],
+                                                'quest_dropoff_address' : questdetails.dropoff['address'],
+                                                'quest_dropoff_city' : questdetails.dropoff['city'],
+                                                'quest_dropoff_postalcode' : questdetails.dropoff['postalcode'],
+                                                'quest_reward'      : str(questdetails.reward),
+                                                'quest_distance'      : str(questdetails.distance),
+                                                'quest_creation_date'      : questdetails.creation_date.strftime('%m-%d-%Y'),
+                                                'quest_support_mail': quest_support_email,
+                                                'quest_application_link' : settings.QUESTR_URL+'/quest/'+str(questdetails.id)+'/apply/',
+                                                'company'           : "Questr Co",
                                                 },
                     }
     return email_details
 
 def prepQuestAppliedNotification(shipper, questr, questdetails):
     """Prepare the details for notification emails for new quests"""
-    template_name="Quest_Applied_Notification"
-    subject="Questr - Application Received"
+    template_name="Quest_Accepted_Notification_Questr"
+    subject="Questr - Your shipment has been processed"
     # quest_browse_link=settings.QUESTR_URL+"/quest"
     quest_support_email="support@questr.co"
     questr_unsubscription_link="http://questr.co/unsub"
@@ -200,10 +249,22 @@ def prepQuestAppliedNotification(shipper, questr, questdetails):
                                                 'shipper_first_name': shipper.first_name,                                                
                                                 'shipper_last_name': shipper.last_name,                                                
                                                 'shipper_user_name': shipper.displayname,                                                
+                                                'shipper_phone': shipper.phone,                                                
                                                 'shipper_profile_link'  : settings.QUESTR_URL+'/user/'+shipper.displayname,                                                
                                                 'email_unsub_link'  : questr_unsubscription_link,
                                                 'quest_title'       : questdetails.title,
                                                 'quest_size'      : questdetails.size,
+                                                'quest_pickup_name' : questdetails.pickup['name'],
+                                                'quest_pickup_phone' : questdetails.pickup['phone'],
+                                                'quest_pickup_address' : questdetails.pickup['address'],
+                                                'quest_pickup_city' : questdetails.pickup['city'],
+                                                'quest_pickup_postalcode' : questdetails.pickup['postalcode'],
+                                                'quest_pickup_name' : questdetails.pickup['name'],
+                                                'quest_dropoff_name' : questdetails.dropoff['name'],
+                                                'quest_dropoff_phone' : questdetails.dropoff['phone'],
+                                                'quest_dropoff_address' : questdetails.dropoff['address'],
+                                                'quest_dropoff_city' : questdetails.dropoff['city'],
+                                                'quest_dropoff_postalcode' : questdetails.dropoff['postalcode'],
                                                 'quest_reward'      : str(questdetails.reward),
                                                 'quest_distance'      : str(questdetails.distance),
                                                 'quest_creation_date'      : questdetails.creation_date.strftime('%m-%d-%Y'),
@@ -331,3 +392,29 @@ def get_reject_url(quest=None, shipper=None):
         reject_link = "{0}/quest/reject/{1}?quest_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_quest_code(), token_id)
     return reject_link
 
+def get_pickup_time(nowornotnow=None, whatdate=None, whattime=None):
+    # If nothing is given, it returns current time plus 5 minutes
+    if not nowornotnow and not whattime and not whatdate:
+        return timezone.now()+timedelta(hours=1)
+
+    # If time is not right now but later today or tomrrow
+    if nowornotnow=='not_now' and whatdate and whattime:
+        # If day is today
+        if whatdate == 'Today':
+            now = datetime.now().strftime('%m/%d/%Y')
+            Today = datetime.strptime(now, '%m/%d/%Y')
+            diffhour = whattime.split(' ')[0].split(':')[0]
+            diffminute = whattime.split(' ')[0].split(':')[1]
+            pickup_time = Today+timedelta(hours=int(diffhour), minutes=int(diffminute))
+            return pytz.timezone(settings.TIME_ZONE).localize(pickup_time)
+
+        # If day is tomorrow
+        if whatdate == 'Tomorrow':
+            now = datetime.now().strftime('%m/%d/%Y')
+            Tomorrow = datetime.strptime(now, '%m/%d/%Y')
+            diffhour = 24 + int(whattime.split(' ')[0].split(':')[0])
+            diffminute = whattime.split(' ')[0].split(':')[1]
+            pickup_time = Tomorrow+timedelta(hours=int(diffhour), minutes=int(diffminute))
+            return pytz.timezone(settings.TIME_ZONE).localize(pickup_time)
+
+    return timezone.now()+timedelta(minutes=5)

@@ -6,14 +6,11 @@ html {
 
 body{
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	background:#FFF;
+	background:#f9f9f9;
 	font-weight:300;
 	color:rgba(0,0,0,0.8);
 	}
 	
-strong,b{
-	font-weight:600;
-	}
 
 	a:hover {
 		text-decoration: none;
@@ -22,7 +19,7 @@ strong,b{
 h1{font-size:50px;line-height:60px;margin:25px 0;font-weight: 100;}
 h2{font-size:40px;margin:15px 0;font-weight: 200;}
 h3{font-size:20px;margin:10px 0;font-weight:200;}
-h4{font-size:20px;margin:10px 0;font-weight:400;color: #656565;}
+h4{font-size:20px;margin:10px 0;font-weight:400;color: white;}
 h5{font-size:28px;font-weight:400;margin:15px 0;color:#384047;}
 h6{font-size:16px;font-weight:400;margin:10px 0;color:#384047;}
 p{font-size: 16px;font-weight: 300;margin: 7px 0;color: #666;}
@@ -55,25 +52,12 @@ p{font-size: 16px;font-weight: 300;margin: 7px 0;color: #666;}
 
 
 .grey-transition {
-	-moz-filter: saturate(100%) grayscale(100%) brightness(100%) contrast(100%);
-    -o-filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
-     -webkit-filter: saturate(100%) grayscale(100%) brightness(100%) contrast(100%);
-     filter: gray;
-     filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
-
-    -webkit-transition: 0.1s; /* For Safari 3.1 to 6.0 */
-    transition:  0.1s;
+	-webkit-filter: grayscale(100%);
+-moz-filter: grayscale(100%);
+filter: grayscale(100%);
+opacity: 0.4;
 }
 
-.grey-transition:hover {
-	-webkit-filter: grayscale(0%);
-	-moz-filter: grayscale(0%);
-	filter: grayscale(0%);
-	filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\' filterRes=\'800\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
-    
-    -webkit-transition: 0.1s; /* For Safari 3.1 to 6.0 */
-    transition:  0.1s;
-}
 
 .blacknwhite {
 	-webkit-filter: saturate(100%) grayscale(100%) brightness(80%) contrast(100%);
@@ -119,38 +103,7 @@ p{font-size: 16px;font-weight: 300;margin: 7px 0;color: #666;}
 }
 
 
-
-
-
-/********* Carousel Styles ************/
-
-.carousel-inner img {
-    width: 100%;
-    max-height: 600px;
-}
-
-
-/* Carousel Header Styles */
-.header-text {
-    position: absolute;
-    top: 20%;
-    left: 1.8%;
-    right: auto;
-    width: 96.66666666666666%;
-    color: #fff;
-}
-
-.header-text h2 {
-    font-size: 40px;
-}
-
-.header-text h2 span {
-	padding: 10px;
-}
-
-.header-text h3 span {
-	padding: 15px;
-}
+/*********************/
 
 .btn-min-block {
     min-width: 170px;
@@ -170,10 +123,6 @@ p{font-size: 16px;font-weight: 300;margin: 7px 0;color: #666;}
     background-color: #fff;
     border-color: #fff;
 }
-
-
-
-
 
 
 
@@ -201,29 +150,6 @@ p{font-size: 16px;font-weight: 300;margin: 7px 0;color: #666;}
 	background: #f9f9f9;
 }
 	
-	
-/*========== 1.   ==============*/	
-
-
-.logo {
-	padding: 45px 0;
-	text-align:center;
-}
-.subscribe {
-	padding: 45px 0;
-}
-.alertMsg {
-	float: left;
-	font-size: 14px;
-	display: block;
-	padding: 5px 17px;
-}
-
-.big-button {
-	background: #5abdff;
-}
-
-
 
 
 /*========== 3. HERO IMAGE ==============*/
@@ -431,11 +357,7 @@ p{font-size: 16px;font-weight: 300;margin: 7px 0;color: #666;}
   -moz-border-radius: 100%;
   -webkit-border-radius: 100%;
   border-radius: 100%;
-  background-color: transparent;
-  border: solid rgba(0,0,0,0.8);
-  color: rgba(0,0,0,0.8);
-  
-  border-color: #3498db;
+  border: 2px solid #7EC7EA;
   margin-bottom: 5px;
 }
 
@@ -586,7 +508,7 @@ figure.effect-sadie h2 {
 	top: 50%;
 	left: 0;
 	width: 100%;
-	color: #3498db;
+	color: white;
 	-webkit-transition: -webkit-transform 0.35s, color 0.35s;
 	transition: transform 0.35s, color 0.35s;
 	-webkit-transform: translate3d(0,-50%,0);
@@ -623,3 +545,65 @@ figure.effect-sadie:hover p {
 	-webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
 }
+
+
+.bg {
+  transition:background-position 500ms ease-in-out;
+  background: url('../img/niceworkfrank.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
+}
+
+.bg div.content {
+	color: white;
+	padding-top: 200px;
+}
+
+
+
+
+
+button{outline: 0;}
+
+
+            #emboss{
+            	width: 217px;
+            	height: 45px;
+            	font-family: HelveticaNeue-Medium;
+                border: 1px solid #74C4EB;
+                font-size: 15px;
+                font-weight: normal;
+                border-radius: 3px;
+                cursor: pointer;
+                padding: 10px 15px;
+                -webkit-font-smoothing: subpixel-antialiased;
+                -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+                transition: border .25s linear, color .25s linear, background-color .25s linear;
+                
+                background-color: #7EC7EA;
+                color: #EDF7FB;                 
+                            
+                /*embossed*/
+                -webkit-box-shadow: inset 0 -1px 0 #67AFD2;
+                box-shadow: inset 0 -1px 0 #67AFD2;
+            }
+            #emboss:hover, #emboss:active,#emboss.active{
+                -webkit-box-shadow: inset 0 1px 0 #67AFD2;
+                box-shadow: inset 0 1px 0 #67AFD2;
+            }
+            
+            button#emboss span.button-name {
+	            margin: auto 30px;
+            }
+           
+
+
+.navbar {
+	margin: 0;
+}
+

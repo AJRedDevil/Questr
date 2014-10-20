@@ -1,17 +1,14 @@
 
 
-
-# import Image
 import logging as log
 import simplejson
 import urllib
-# from cStringIO import StringIO
-from django.conf import settings
-# from pprint import pprint
 
+from django.conf import settings
 
 class GMaps(object):
-	"""Google Maps Distance API.
+	"""
+	Google Maps Distance API.
 	"""
 	def __init__(self):
 		self.__BASE_URL = "https://maps.googleapis.com/maps/api/directions/json"
@@ -69,17 +66,6 @@ class GMaps(object):
 		url="http://maps.googleapis.com/maps/api/staticmap?center={0}&size={1}&maptype={2}&markers=color:blue|{3}&markers=color:purple|{4}".format(center, size, maptype, start_location, end_location)
 		return url
 
-	# def __save_image(self, bounds, start_location, end_location, filename):
-	# 	"""Save the image
-	# 	"""
-	# 	url = self.__obtain_static_image_url(self.__obtain_center_location(bounds), start_location, end_location)
-	# 	with open(filename, 'wb') as f:
-	# 		buffer = StringIO(urllib.urlopen(url).read())
-	# 		# f.write(urllib.urlopen(url).read())
-	# 		image = Image.open(buffer)
-	# 		image.save(f, "png")
-	# 		# image.show()
-
 
 	def fetch_static_map(self):
 		if self.__status:
@@ -92,8 +78,6 @@ class GMaps(object):
 					end_location = "{0},{1}".format(end_location['lat'], end_location['lng'])
 					map_url = self.__obtain_static_image_url(self.__obtain_center_location(bounds), start_location, end_location)
 					return map_url
-					# self.__save_image(bounds, start_location, end_location, filename)
-
 
 if __name__ == "__main__":
 	gmaps = GMaps()
