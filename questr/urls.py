@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     url(r'^$', mainview.index, name="index"),
     url(r'^contactus$', mainview.contactus, name='contactus'),
 
-    url(r'loadpage/(?P<template>[-_\w/.]+)$', mainview.loadPage, ),    
+    # url(r'loadpage/(?P<template>[-_\w/.]+)$', mainview.loadPage, ),    
     url(r'^user/', include('users.urls')),
     url(r'^quest/', include('quests.urls') ),
     url(r'^track/', questviews.tracking_number_search, name='trackquest'),

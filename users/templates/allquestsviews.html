@@ -8,26 +8,42 @@
 <div class="container-fluid">
 <div class="row clearfix">
 <div class="col-md-6 col-md-offset-3 column">
-<h3 class="text-center">Everything</h3>
+<h3 class="text-center">{{templatetitle |title }}</h3>
 <hr>
-<div class="media">
-  <a class="col-md-3 column" href="#">
-    <img class="media-object img-responsive" src="http://photos-e.ak.instagram.com/hphotos-ak-xaf1/10725115_326310127548220_576450812_n.jpg" alt="...">
-  </a>
-  <div class="media-body col-md-9 column" style="display:inline;">
-    <h4 class="media-heading">Media heading</h4>
-    ...
-  </div>
-</div>
-<div class="media">
-  <a class="col-md-3 column" href="#">
-    <img class="media-object img-responsive" src="http://photos-e.ak.instagram.com/hphotos-ak-xaf1/10725115_326310127548220_576450812_n.jpg" alt="...">
-  </a>
-  <div class="media-body col-md-9 column" style="display:inline;">
-    <h4 class="media-heading">Media heading</h4>
-    ...
-  </div>
-</div>
+
+{% for quest in quests %}
+  <div class="media">
+<a class="no-colour" href="/quest/{{quest.id}}" title="{{quest.title | title}}">
+                    <div class="row clearfix">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
+                        {% if quest.item_images %}
+                        <img src={{quest.get_item_images_normal_url}} class="img-responsive">              
+                        {% else %}      
+                        <h1><i class="fa fa-picture-o"></i></h1>
+                        {% comment %}
+                        
+                        {% endcomment %}
+                       
+                        {% endif %}
+                      </div>
+                      <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
+                        <h5 class="media-heading">{{quest.title | title}}</h5>
+                        <p class="list-group-item-text postDesc">{{quest.description}}</p>
+                        
+                        <div class="smallInfo">
+                            <small>
+                                <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}
+                            </small>
+                            <div class="clearfix"></div>
+                          <small>${{quest.reward}}</small>
+                      </div><!-- ./smallInfo -->
+                    </div>
+                    </div>
+                    </a>  </div>
+
+
+{% endfor %}
+
 </div>
 </div>
 </div>  

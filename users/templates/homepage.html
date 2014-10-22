@@ -9,200 +9,209 @@
 
 
 <div class="container-fluid">
-	<div class="row clearfix panel-group" id="accordion">
-	
-	
-			
-		{% if not user.is_shipper %}
-		<div class="col-md-4 column">
-		<div class="panel panel-default" id="panel1">
-				<div class="panel-heading">
-					<h3 class="panel-title">Pending Transactions</h3>
-					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
-				</div><!-- ./panel-heading -->
-				
-			  <div class="panel-body panel-collapse collapse in" id="collapseOne">
-					<!-- List group -->
-					{% if allquests %}
-					{% for quest in allquests %}
-					<a class="no-colour" href="/quest/{{quest.id}}" title="{{quest.title | title}}">
-					<div class="row clearfix">
-					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
-						{% if quest.item_images %}
-					 	<img src={{quest.get_item_images_normal_url}} class="img-responsive">              
-					    {% else %}    	
-				 		<h1><i class="fa fa-picture-o"></i></h1>
-				        {% comment %}
-				        
-				        {% endcomment %}
-					   
-					    {% endif %}
-					  </div>
-					  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
-					 	<h5 class="media-heading">{{quest.title | title}}</h5>
-				    	<p class="list-group-item-text postDesc">{{quest.description}}</p>
-				    	
-				    	<div class="smallInfo">
-					    	<small>
-					      		<span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}
-					  		</small>
-					  		<div class="clearfix"></div>
-					      <small>${{quest.reward}}</small>
-					  </div><!-- ./smallInfo -->
-					</div>
-					</div>
-					</a>
-				
-					{% endfor %}
-					{% if allquests.count == 3 %}
-					<div class="row clearfix">
-						<div class="col-md-12 column text-center">
-						    <h5>MORE</h5>
-						</div>
-					</div>			
-					{% endif %}
-				{% else %}
+    <div class="row clearfix panel-group" id="accordion">
+    
+    
+            
+        {% if not user.is_shipper %}
+        <div class="col-md-4 column">
+        <div class="panel panel-default" id="panel1">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Active Transactions</h3>
+                    <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                </div><!-- ./panel-heading -->
+                
+              <div class="panel-body panel-collapse collapse in" id="collapseOne">
+                    <!-- List group -->
+                    {% if allquests %}
+                    {% for quest in allquests %}
+                    <a class="no-colour" href="/quest/{{quest.id}}" title="{{quest.title | title}}">
+                    <div class="row clearfix">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
+                        {% if quest.item_images %}
+                        <img src={{quest.get_item_images_normal_url}} class="img-responsive">              
+                        {% else %}      
+                        <h1><i class="fa fa-picture-o"></i></h1>
+                        {% comment %}
+                        
+                        {% endcomment %}
+                       
+                        {% endif %}
+                      </div>
+                      <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
+                        <h5 class="media-heading">{{quest.title | title}}</h5>
+                        <p class="list-group-item-text postDesc">{{quest.description}}</p>
+                        
+                        <div class="smallInfo">
+                            <small>
+                                <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}
+                            </small>
+                            <div class="clearfix"></div>
+                          <small>${{quest.reward}}</small>
+                      </div><!-- ./smallInfo -->
+                    </div>
+                    </div>
+                    </a>
+                
+                    {% endfor %}
+                    {% if allquests.count == 10 %}
+                    <div class="row clearfix">
+                        <div class="col-md-12 column text-center">
+                            <a href="{% url 'allquests' %}"><h5>MORE</h5></a>
+                        </div>
+                    </div>          
+                    {% endif %}
+                {% else %}
 
-		
-				<div class="row clearfix">
-				  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
-					<i class="fa fa-check-square-o" style="font-size:35px;"></i>
-				  </div>
-				  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
-				    <h5>You have no actives transactions.</h5>
-				  </div>
-				</div><!-- ./row -->
-			
-				{% endif %}
+        
+                <div class="row clearfix">
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
+                    <i class="fa fa-check-square-o" style="font-size:35px;"></i>
+                  </div>
+                  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
+                    <h5>You have no actives transactions.</h5>
+                  </div>
+                </div><!-- ./row -->
+            
+                {% endif %}
 
-			  </div><!-- ./panel-body -->
-		</div>
-		</div><!-- ./column -->	
-		{% endif %}
+              </div><!-- ./panel-body -->
+        </div>
+        </div><!-- ./column --> 
+        {% endif %}
 
-		<div class="col-md-4 column">
-		<div class="panel panel-default" id="panel2">
-			 		<div class="panel-heading">
-			  			
-			    		<h3 class="panel-title">Active Transactions</h3>
-			    		<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
-			  		</div><!-- ./panel-heading -->
-		
+        <div class="col-md-4 column">
+        <div class="panel panel-default" id="panel1">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Pending Transactions</h3>
+                    <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                </div><!-- ./panel-heading -->
+                
+              <div class="panel-body panel-collapse collapse in" id="collapseOne">
+                    <!-- List group -->
+                    {% if activequests %}
+                    {% for quest in activequests %}
+                    <a class="no-colour" href="/quest/{{quest.id}}" title="{{quest.title | title}}">
+                    <div class="row clearfix">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
+                        {% if quest.item_images %}
+                        <img src={{quest.get_item_images_normal_url}} class="img-responsive">              
+                        {% else %}      
+                        <h1><i class="fa fa-picture-o"></i></h1>
+                        {% comment %}
+                        
+                        {% endcomment %}
+                       
+                        {% endif %}
+                      </div>
+                      <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
+                        <h5 class="media-heading">{{quest.title | title}}</h5>
+                        <p class="list-group-item-text postDesc">{{quest.description}}</p>
+                        
+                        <div class="smallInfo">
+                            <small>
+                                <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}
+                            </small>
+                            <div class="clearfix"></div>
+                          <small>${{quest.reward}}</small>
+                      </div><!-- ./smallInfo -->
+                    </div>
+                    </div>
+                    </a>
+                
+                    {% endfor %}
+                    {% if allquests.count == 10 %}
+                    <div class="row clearfix">
+                        <div class="col-md-12 column text-center">
+                            <a href="{% url 'activequests' %}"><h5>MORE</h5></a>
+                        </div>
+                    </div>          
+                    {% endif %}
+                {% else %}
 
-			  <div class="panel-body panel-collapse collapse in" id="collapseTwo">
+        
+                <div class="row clearfix">
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
+                    <i class="fa fa-check-square-o" style="font-size:35px;"></i>
+                  </div>
+                  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
+                    <h5>You have no actives transactions.</h5>
+                  </div>
+                </div><!-- ./row -->
+            
+                {% endif %}
 
-				{% if activequests %}
-				{% for quest in activequests %}
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    {% if quest.item_images %}
-						    <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
-						    {% else %}    
-						    <a  href="/quest/{{quest.id}}" title="{{quest.title | title}}">
-						    <div class="no-image item-image">
-						        <h1><span class="glyphicon glyphicon-picture"></span></h1>
-						    </div>
-						    </a>
-						    {% endif %}
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">{{quest.title | title}}</h4>
-						    <p class="list-group-item-text postDesc">{{quest.description}}</p>
-						  </div>
-						  <div class="smallInfo">
-						      <small>
-						      <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}</small>
-						  </div><!-- ./smallInfo -->
+              </div><!-- ./panel-body -->
+        </div>
+        </div><!-- ./column -->
 
-				{% endfor %}
-				{% if activequests.count == 3 %}
-				<div class="row clearfix">
-					<div class="col-md-12 column text-center">
-					    <h5>MORE</h5>
-					</div>
-				</div>				
-				{% endif %}
-				{% else %}
-				<div class="row clearfix">
-				  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
-				  	<h1><i class="fa fa-fire"></i></h1>
-				  </div>
-				  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
-				    <h5>You have no active transactions.</h5>
-				  </div>
-				</div><!-- ./row -->
-				{% endif %}
-			  </div><!-- ./panel-body -->
-			</div>
-		</div><!-- ./column -->
+       <div class="col-md-4 column">
+        <div class="panel panel-default" id="panel1">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Pending Transactions</h3>
+                    <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                </div><!-- ./panel-heading -->
+                
+              <div class="panel-body panel-collapse collapse in" id="collapseOne">
+                    <!-- List group -->
+                    {% if pastquests %}
+                    {% for quest in pastquests %}
+                    <a class="no-colour" href="/quest/{{quest.id}}" title="{{quest.title | title}}">
+                    <div class="row clearfix">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
+                        {% if quest.item_images %}
+                        <img src={{quest.get_item_images_normal_url}} class="img-responsive">              
+                        {% else %}      
+                        <h1><i class="fa fa-picture-o"></i></h1>
+                        {% comment %}
+                        
+                        {% endcomment %}
+                       
+                        {% endif %}
+                      </div>
+                      <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
+                        <h5 class="media-heading">{{quest.title | title}}</h5>
+                        <p class="list-group-item-text postDesc">{{quest.description}}</p>
+                        
+                        <div class="smallInfo">
+                            <small>
+                                <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}
+                            </small>
+                            <div class="clearfix"></div>
+                          <small>${{quest.reward}}</small>
+                      </div><!-- ./smallInfo -->
+                    </div>
+                    </div>
+                    </a>
+                
+                    {% endfor %}
+                    {% if allquests.count == 10 %}
+                    <div class="row clearfix">
+                        <div class="col-md-12 column text-center">
+                            <a href="{% url 'pastquests' %}"><h5>MORE</h5></a>
+                        </div>
+                    </div>          
+                    {% endif %}
+                {% else %}
 
-		<div class="col-md-4 column">
-		<div class="panel panel-default">		
-			  <div class="panel-heading">
-			    <h3 class="panel-title">History</h3>
-			    <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
-			  </div><!-- ./panel-heading -->
-		
-			<div class="panel-body">
-				<!-- List group -->
-				<ul class="list-group">
-				{% if pastquests %}
-					{% for quest in pastquests %}
-					<li class="list-group-item">
-						<div class="media">
-						  <a class="pull-left" href="#">
-						    {% if quest.item_images %}
-						    <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
-						    {% else %}    
-						    <a  href="/quest/{{quest.id}}" title="{{quest.title | title}}">
-						    <div class="no-image item-image">
-						        <h1><span class="glyphicon glyphicon-picture"></span></h1>
-						        <span class="pay"><h3>${{quest.reward}}</h3></span>
-						    </div>
-						    </a>
-						    {% endif %}
-						  </a>
-						  <div class="media-body">
-						    <h4 class="media-heading">{{quest.title | title}}</h4>
-						    <p class="list-group-item-text postDesc">{{quest.description}}</p>
-						  </div>
-						  <div class="smallInfo">
-						      <small>
-						      <span class="glyphicon glyphicon-map-marker"></span> {{quest.dropoff.address}}, {{quest.dropoff.city}}</small>
-						  </div><!-- ./smallInfo -->
-						  {% if quest.delivery_date %}
-						  <div class="smallInfo">
-						      <small>
-						      <span class="glyphicon glyphicon-time"></span> {{quest.delivery_date}}</small>
-						  </div><!-- ./smallInfo -->
-						  {% endif %}
-					{% endfor %}
-					{% if pastquests.count == 3 %}
-					<div class="row clearfix">
-						<div class="col-md-12 column text-center">
-						    <h5>MORE</h5>
-						</div>
-					</div>					
-					{% endif %}
-				{% else %}
-				<div class="row clearfix">
-				  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
-				  	<h1><i class="fa fa-calendar"></i></h1>
-				  </div>
-				  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
-				    <h5>You have no past transactions.</h5>
-				  </div>
-				</div><!-- ./row -->
-				{% endif %}
-				</ul><!-- ./List group -->
+        
+                <div class="row clearfix">
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
+                    <i class="fa fa-check-square-o" style="font-size:35px;"></i>
+                  </div>
+                  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
+                    <h5>You have no actives transactions.</h5>
+                  </div>
+                </div><!-- ./row -->
+            
+                {% endif %}
 
-			  </div><!-- ./panel-body -->
-			</div>
-		</div><!-- ./column -->
+              </div><!-- ./panel-body -->
+        </div>
+        </div><!-- ./column -->
 
-	</div><!-- ./row -->
-	{% endblock content %}
+    </div><!-- ./row -->
+    {% endblock content %}
 </div><!-- ./container -->
 
 
@@ -216,48 +225,48 @@
 
 
 <div class="col-md-12 column section">
-	<div class="col-md-4 column">
-	
-		<form role="form">
-		  <div class="form-group">
-		  	<label for="expiry date">Available till</label>
-		    <input class="form-control" placeholder="Expiry Date">
-		  </div>
-		</form>
+    <div class="col-md-4 column">
+    
+        <form role="form">
+          <div class="form-group">
+            <label for="expiry date">Available till</label>
+            <input class="form-control" placeholder="Expiry Date">
+          </div>
+        </form>
 
-	</div><!-- ./column -->
-	<div class="col-md-4 column">
-		<label>Size</label>
-		<div class="form-group" id="size">
-              	 <div class="input-group col-md-6 column">	
-              	 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
-              	 		<center>
-              	 			     	 	
-              	 			<p>Backpack</p>
-              	 			<input type="radio" name="size" value="backpack"> 
-              	 		</center>	
-              	 	</div><!-- ./column -->  
-              	 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
-	              		<center>
-	              			
-	              			<p>Car</p>
-	              			<input type="radio" name="size" value="car">
-	              		</center>	
-              	 	</div><!-- ./column -->
-              	 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
-	              		<center>
-	              		
-	              			<p>Minivan</p>
-	              			<input type="radio" name="size" value="minivan">
-	              			</center> 	
-              	 	</div><!-- ./column -->
-			     </div><!-- /input-group -->
-						 </div><!-- ./form-group -->
-	</div><!-- ./column -->
-	<div class="col-md-4 column">
-		<label>Pay</label>
-		<p>slider goes here</p>
-	</div>
+    </div><!-- ./column -->
+    <div class="col-md-4 column">
+        <label>Size</label>
+        <div class="form-group" id="size">
+                 <div class="input-group col-md-6 column">  
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
+                        <center>
+                                        
+                            <p>Backpack</p>
+                            <input type="radio" name="size" value="backpack"> 
+                        </center>   
+                    </div><!-- ./column -->  
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
+                        <center>
+                            
+                            <p>Car</p>
+                            <input type="radio" name="size" value="car">
+                        </center>   
+                    </div><!-- ./column -->
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
+                        <center>
+                        
+                            <p>Minivan</p>
+                            <input type="radio" name="size" value="minivan">
+                            </center>   
+                    </div><!-- ./column -->
+                 </div><!-- /input-group -->
+                         </div><!-- ./form-group -->
+    </div><!-- ./column -->
+    <div class="col-md-4 column">
+        <label>Pay</label>
+        <p>slider goes here</p>
+    </div>
 </div><!-- ./grey -->
 
 
@@ -265,58 +274,58 @@
 
 <div class="col-md-12 column">
 
-	<div class="js-masonry" id="post-container" data-masonry-options='{ "columnWidth": 0, "itemSelector": ".post" }'>
-	    
-		{% for quest in  allquests %}
-		<div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column post">
-		   
-		        {% if quest.item_images %}
-		        <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
-		        {% else %}    
-		        <a  href="/quest/{{quest.id}}" title="Title">
-		        <div class="no-image item-image">
-		            <h1><span class="glyphicon glyphicon-picture"></span></h1>
-		            <span class="pay"><h3>${{quest.reward}}</h3></span>
-		        </div>
-		        </a>
-		        {% endif %}
-		             
-		        <div class="row clearfix">
-		            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column title-desc">
-		                <a  href="/quest/{{quest.id}}" class="image"><h5>{{quest.title | title}}</h5></a>
-		                <p>{{quest.description | truncatewords:10  }}</p>
-		            </div><!-- ./column -->
-		        </div><!-- ./row -->
-				
-				<hr>	            
-		            
-		        <div class="row clearfix">
-		            <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column post-info">	
-		                {% if user.is_shipper == True %}
-		                 From: {{quest.pickup.address}}, {{quest.pickup.city}}, Canada<br>
-		                 To: {{quest.dropoff.address}}, {{quest.dropoff.city}}, Canada<br>
-		                {% endif %} 
-		                <span class="glyphicon glyphicon-time"></span>{% localtime on%} {{quest.creation_date | timesince }} {% endlocaltime %} ago
-		                </p>   
-		              </div><!-- ./column -->
-		        </div><!-- ./row -->
-		           
-	            <hr>
-	  
-	            <div class="row clearfix userbox">
-	            	<a href="/user/{{quest.questrs.displayname}}" class="username">
-		            	<div class="col-xs-4 col-sm-5 col-md-3 col-lg-3 column">
-		            		<div class="ratio img-responsive img-circle" style="background-image: url({{quest.questrs.avatar_file_name}});"></div>
-		            	</div><!-- column -->
-		            	<div class="col-xs-8 col-sm-7 col-md-9 col-lg-9 column no-margin no-padding">
-		            		<p class="no-margin">{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p>
-		            		<input id="input-21e" value="{{quest.questrs.rating}}" type="number" class="rating no-margin" min=0 max=5 step=0.5 data-size="xl" data-readonly="true" data-show-clear="false" data-show-caption="true" >
-		            	</div><!-- column -->
-	            	</a>
-	            </div><!-- ./row -->  
-		            
-		</div><!-- ./post -->
-	       {% endfor %}           
+    <div class="js-masonry" id="post-container" data-masonry-options='{ "columnWidth": 0, "itemSelector": ".post" }'>
+        
+        {% for quest in  allquests %}
+        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column post">
+           
+                {% if quest.item_images %}
+                <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
+                {% else %}    
+                <a  href="/quest/{{quest.id}}" title="Title">
+                <div class="no-image item-image">
+                    <h1><span class="glyphicon glyphicon-picture"></span></h1>
+                    <span class="pay"><h3>${{quest.reward}}</h3></span>
+                </div>
+                </a>
+                {% endif %}
+                     
+                <div class="row clearfix">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column title-desc">
+                        <a  href="/quest/{{quest.id}}" class="image"><h5>{{quest.title | title}}</h5></a>
+                        <p>{{quest.description | truncatewords:10  }}</p>
+                    </div><!-- ./column -->
+                </div><!-- ./row -->
+                
+                <hr>                
+                    
+                <div class="row clearfix">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column post-info">  
+                        {% if user.is_shipper == True %}
+                         From: {{quest.pickup.address}}, {{quest.pickup.city}}, Canada<br>
+                         To: {{quest.dropoff.address}}, {{quest.dropoff.city}}, Canada<br>
+                        {% endif %} 
+                        <span class="glyphicon glyphicon-time"></span>{% localtime on%} {{quest.creation_date | timesince }} {% endlocaltime %} ago
+                        </p>   
+                      </div><!-- ./column -->
+                </div><!-- ./row -->
+                   
+                <hr>
+      
+                <div class="row clearfix userbox">
+                    <a href="/user/{{quest.questrs.displayname}}" class="username">
+                        <div class="col-xs-4 col-sm-5 col-md-3 col-lg-3 column">
+                            <div class="ratio img-responsive img-circle" style="background-image: url({{quest.questrs.avatar_file_name}});"></div>
+                        </div><!-- column -->
+                        <div class="col-xs-8 col-sm-7 col-md-9 col-lg-9 column no-margin no-padding">
+                            <p class="no-margin">{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p>
+                            <input id="input-21e" value="{{quest.questrs.rating}}" type="number" class="rating no-margin" min=0 max=5 step=0.5 data-size="xl" data-readonly="true" data-show-clear="false" data-show-caption="true" >
+                        </div><!-- column -->
+                    </a>
+                </div><!-- ./row -->  
+                    
+        </div><!-- ./post -->
+           {% endfor %}           
 
 </div><!-- ./post-container -->
 </div><!-- ./column -->
@@ -336,21 +345,21 @@
 
 {% block scripts %}
 <script type="text/javascript">
-		$(document).on('click', '.panel-heading', function(e){
-		    var $this = $(this);
-			if(!$this.hasClass('panel-collapsed')) {
-				$this.parents('.panel').find('.panel-body').slideUp();
-				$this.addClass('panel-collapsed');
-				$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-right');
-			} else {
-				$this.parents('.panel').find('.panel-body').slideDown();
-				$this.removeClass('panel-collapsed');
-				$this.find('i').removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
-			}
-		})
-	</script>
+        $(document).on('click', '.panel-heading', function(e){
+            var $this = $(this);
+            if(!$this.hasClass('panel-collapsed')) {
+                $this.parents('.panel').find('.panel-body').slideUp();
+                $this.addClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-right');
+            } else {
+                $this.parents('.panel').find('.panel-body').slideDown();
+                $this.removeClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
+            }
+        })
+    </script>
   
-	<script src={% static "js/star-rating.js" %} type="text/javascript"></script>
+    <script src={% static "js/star-rating.js" %} type="text/javascript"></script>
     
     {% comment %}
     ## This is for google plus based authentication ##

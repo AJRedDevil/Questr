@@ -104,18 +104,19 @@
                         <input class="form-control input-xs ng-pristine ng-invalid" id="srcaddress_2" name="srcaddress_2" type="text" placeholder="Apartment, suite, unit, building, floor, etc.">
                         {{user_form.srcaddress_2.errors}}
                 </div><!-- Pickup Address input-->
+
+                <!-- POSTAL CODE INPUT -->
+                <div class="form-group col-xs-6 col-sm-6 col-md-4 col-lg-4 column">
+                    <h6>POSTAL CODE</h6>
+                        <input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="M8V 0A5" class="form-control ng-pristine ng-invalid" ng-model="user.srcpostalcode" required>
+                        {{user_form.srcpostalcode.errors}}
+                </div><!-- POSTAL CODE INPUT -->
             </div>
 				
                 <div class="row clearfix">
-				<!-- POSTAL CODE INPUT -->
-				<div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
-					<h6>POSTAL CODE</h6>
-						<input id="srcpostalcode" name="srcpostalcode" type="text" placeholder="M8V 0A5" class="form-control ng-pristine ng-invalid" ng-model="user.srcpostalcode" required>
-						{{user_form.srcpostalcode.errors}}
-				</div><!-- POSTAL CODE INPUT -->		
 
 				<!-- PHONE NUMBER -->
-				<div class="form-group col-xs-12 col-sm-12 col-md-5 col-lg-5 column">
+				<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
 					<h6>PHONE</h6>
 					<input id="srcphone" name="srcphone" type="text" placeholder="xxx-xxx-xxxx" class="form-control input-xs ng-pristine ng-invalid" ng-model="user.srcphone" required>
 					{{user_form.srcphone.errors}}
@@ -165,19 +166,21 @@
                     {{user_form.dstaddress.errors}}
                 </div><!-- ADDRESS INPUT -->
 
+                    <!-- POSTAL CODE INPUT -->
+                <div class="form-group col-xs-6 col-sm-6 col-md-4 col-lg-4 column">
+                    <h6>POSTAL CODE</h6>
+                    <input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="M8V 0A5" class="form-control input-xs ng-pristine ng-invalid">
+                    {{user_form.dstpostalcode.errors}}
+                </div><!-- POSTAL CODE INPUT -->
+
             </div>
 
 
             <div class="row clearfix">
-    			<!-- POSTAL CODE INPUT -->
-    			<div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
-    				<h6>POSTAL CODE</h6>
-    				<input id="dstpostalcode" name="dstpostalcode" type="text" placeholder="M8V 0A5" class="form-control input-xs ng-pristine ng-invalid">
-    				{{user_form.dstpostalcode.errors}}
-    			</div><!-- POSTAL CODE INPUT -->
+    		
 
     			<!-- PHONE NUMBER -->
-    			<div class="form-group col-xs-12 col-sm-12 col-md-5 col-md-5 column">
+    			<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
     				<h6>PHONE</h6> 
     				<input id="dstphone" name="dstphone" type="text" placeholder="xxx-xxx-xxxx" class="form-control input-xs  ng-pristine ng-invalid" ng-model="user.dstphone" required>
     				{{user_form.dstphone.errors}}
@@ -348,6 +351,8 @@
             }
         })
     </script>
+
+    <script type="text/javascript"></script>
 
 <script type="text/javascript">
             $(function () {

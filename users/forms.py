@@ -32,9 +32,7 @@ class QuestrUserChangeForm(UserChangeForm):
     streetaddress = forms.CharField(
         error_messages={'required' : 'Street/Apt. Address where the shipment is to be picked up from is required !',}
         )
-    streetaddress_2 = forms.CharField(
-        error_messages={'required' : 'Street/Apt. Address where the shipment is to be picked up from is required !',}
-        )
+    streetaddress_2 = forms.CharField(required=False)
     postalcode = forms.CharField(
         error_messages={'required' : 'Your postcode is required !',}
         )
@@ -136,9 +134,7 @@ class QuestrUserCreationForm(forms.ModelForm):
     streetaddress = forms.CharField(
         error_messages={'required' : 'Street/Apt. Address where the shipment is to be picked up from is required !',}
         )
-    streetaddress_2 = forms.CharField(
-        error_messages={'required' : 'Street/Apt. Address where the shipment is to be picked up from is required !',}
-        )
+    streetaddress_2 = forms.CharField(required=False)
     postalcode = forms.CharField(
         error_messages={'required' : 'Your postcode is required !',}
         )

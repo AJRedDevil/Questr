@@ -65,6 +65,7 @@ def signup(request):
             logging.warn(useraddress)
             userdata = user_form.save(commit=False)
             userdata.address = json.dumps(useraddress)
+            userdata.phone = user_form.cleaned_data['phone']
             userdata.save()
             authenticate(username=userdata.email, password=userdata.password)
             userdata.backend='django.contrib.auth.backends.ModelBackend'
@@ -104,6 +105,7 @@ def createcourier(request):
             userdata.address = json.dumps(useraddress)
             userdata.email_status = True
             userdata.is_shipper = True
+            userdata.phone = user_form.cleaned_data['phone']
             import hashlib
             import uuid
             hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
@@ -118,12 +120,51 @@ def createcourier(request):
 
         if user_form.errors:
             logger.debug("Login Form has errors, %s ", user_form.errors)
-        pagetitle = "Signup"
+        pagetitle = "Create a Courier"
         return render(request, 'createcourier.html', locals())
     else:
         user_form = QuestrUserCreationForm()
-        pagetitle = "Signup"
+        pagetitle = "Create a Courier"
         return render(request, 'createcourier.html', locals())
+
+@login_required
+@is_superuser
+def createuser(request):
+    """Signup, if request == POST, creates the user"""
+    ## if authenticated redirect to user's homepage directly ##
+    if request.user.is_authenticated():
+        user = request.user
+        pagetype="loggedin"
+
+    if request.method == "POST":
+        user_form = QuestrUserCreationForm(request.POST)
+        if user_form.is_valid():
+            useraddress = dict(city=user_form.cleaned_data['city'], streetaddress=user_form.cleaned_data['streetaddress'],\
+                streetaddress_2=user_form.cleaned_data['streetaddress_2'], postalcode=user_form.cleaned_data['postalcode'])
+            userdata = user_form.save(commit=False)
+            userdata.address = json.dumps(useraddress)
+            userdata.email_status = True
+            userdata.phone = user_form.cleaned_data['phone']
+            import hashlib
+            import uuid
+            hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
+            password = hashstring[:4]+hashstring[-2:]
+            userdata.set_password(password)
+            userdata.save()
+            email_details = user_handler.prepWelcomeCourierNotification(userdata, password)
+            logger.debug("What goes in the email is \n %s", email_details)
+            email_notifier.send_email_notification(userdata, email_details)
+            request.session['alert_message'] = dict(type="success",message="User has been created!")
+            return redirect('home')
+
+        if user_form.errors:
+            logger.debug("Login Form has errors, %s ", user_form.errors)
+        pagetitle = "Create a User"
+        return render(request, 'createuser.html', locals())
+    else:
+        user_form = QuestrUserCreationForm()
+        pagetitle = "Create a User"
+        return render(request, 'createuser.html', locals())
 
 @login_required
 def resend_verification_email(request):
@@ -160,23 +201,23 @@ def home(request):
         alert_message = request.session.get('alert_message')
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=userdetails.id, is_complete=False).order_by('-creation_date')[:3]
-        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, isaccepted=True, shipper=userdetails.id).order_by('-creation_date')[:3]
+        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=userdetails.id, is_complete=False).order_by('-creation_date')[:10]
+        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, isaccepted=True, shipper=userdetails.id).order_by('-creation_date')[:10]
 
         return render(request,'homepage.html', locals())
     elif userdetails.is_superuser:
         alert_message = request.session.get('alert_message')
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=0).order_by('-creation_date')[:3]
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=0).order_by('-creation_date')[:10]
         return render(request,'shipperhomepage.html', locals())
     else:
         alert_message = request.session.get('alert_message')        
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
-        allquests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, ).order_by('-creation_date')[:3]
-        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id).order_by('-creation_date')[:3]
-        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, questrs_id=userdetails.id).order_by('-creation_date')[:3]
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, ).order_by('-creation_date')[:10]
+        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id).order_by('-creation_date')[:10]
+        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, questrs_id=userdetails.id).order_by('-creation_date')[:10]
         return render(request,'homepage.html', locals())
 
 @login_required
@@ -241,10 +282,13 @@ def userSettings(request):
             userdata.address = json.dumps(useraddress)
             userdata.phone = user_form.cleaned_data['phone']
             userdata.save()
-            message="Your profile has been updated!"
+            request.session['alert_message'] = dict(type="Success",message="Your profile has been updated!")
             return redirect('settings')
         if user_form.errors:
             logger.debug("Form has errors, %s ", user_form.errors)
+    alert_message = request.session.get('alert_message')
+    if request.session.has_key('alert_message'):
+        del request.session['alert_message']
     pagetitle = "My Settings"
     return render(request, "generalsettings.html",locals())
 

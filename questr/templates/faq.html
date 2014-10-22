@@ -12,7 +12,7 @@
 	<div class="container-fluid">
 		<div class="img-src"></div>
 		<div class="blurred-image"></div>
-		<div class="container masthead fadeIn fadeIn-1s">
+		<div class="container fadeIn fadeIn-1s">
 			<br><br><br>
 			<div class="row clearfix">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
@@ -20,7 +20,7 @@
 				</div><!--./column -->
 			</div><!--./row -->
 
-			<div class="row section grey">
+			<div class="row section">
 			<div class="col-md-8 col-md-offset-2 column">
 		    	<div class="panel-group" id="accordion">
 					
@@ -225,10 +225,6 @@ $(document).ready(function() {
 
 	    $(".blurred-image").css("opacity", opacityVal);
     });
-});
-	
-$( document.masthead ).click(function() {
-  $( "div:hidden:first" ).fadeIn( "slow" );
 });
 
   $(".popover-right").popover({
