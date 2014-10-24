@@ -178,7 +178,7 @@ CELERY_TIMEZONE = 'America/Toronto'
 CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 CELERY_BEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 ##BROKER POOL LIMIT CALC FMLA = BROKER_POOL_LIMIT * (gunicorn-workers * web dynos + worker dynos)
-BROKER_POOL_LIMIT = os.environ['BROKER_POOL_LIMIT']
+BROKER_POOL_LIMIT = int(os.environ['BROKER_POOL_LIMIT'])
 
 # QUESTR NOTIFICAITON INTERVALS
 COURIER_ACTIVATION_INTERVAL = os.environ['COURIER_ACTIVATION_INTERVAL']
