@@ -361,8 +361,7 @@ def get_accept_url(quest=None, shipper=None):
                 prev_transactional.save()
         except QuestTransactional.DoesNotExist:
             pass
-        count = QuestTransactional.objects.count()
-        transcational = QuestTransactional(id=count+1, quest=quest, shipper=shipper, transaction_type=1)
+        transcational = QuestTransactional(quest=quest, shipper=shipper, transaction_type=1)
         transcational.save()
         token_id = transcational.get_token_id()
         questr_token = QuestToken(token_id=token_id)
@@ -383,8 +382,7 @@ def get_reject_url(quest=None, shipper=None):
                 prev_transactional.save()
         except QuestTransactional.DoesNotExist:
             pass
-        count = QuestTransactional.objects.count()
-        transcational = QuestTransactional(id=count+1, quest=quest, shipper=shipper, transaction_type=0)
+        transcational = QuestTransactional(quest=quest, shipper=shipper, transaction_type=0)
         transcational.save()
         token_id = transcational.get_token_id()
         questr_token = QuestToken(token_id=token_id)

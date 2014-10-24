@@ -95,7 +95,6 @@ class QuestrUserProfile(AbstractBaseUser):
 
 # User transactionl model
 class UserTransactional(models.Model):
-    id = models.IntegerField(_('id'), primary_key=True)
     user_code = models.CharField(_('user_code'), max_length=64, unique=True)
     email = models.EmailField(_('email'), max_length=100)
     status = models.BooleanField(_('status'), default=False)

@@ -106,8 +106,7 @@ def get_verification_url(user=None):
                 prev_transactional.save()
         except UserTransactional.DoesNotExist:
             pass
-        count = UserTransactional.objects.count()
-        transcational = UserTransactional(id=count+1,email=user.email)
+        transcational = UserTransactional(email=user.email)
         transcational.save()
         token_id = transcational.get_token_id()
         questr_token = QuestrToken(token_id=token_id)

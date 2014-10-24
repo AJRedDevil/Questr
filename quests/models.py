@@ -158,7 +158,6 @@ class QuestComments(models.Model):
 
 # Quest transactionl model
 class QuestTransactional(models.Model):
-    id = models.IntegerField(_('id'), primary_key=True)
     quest_code = models.CharField(_('quest_code'), max_length=64, unique=True)
     quest = models.ForeignKey(Quests)
     shipper = models.ForeignKey(QuestrUserProfile)
