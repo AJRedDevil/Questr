@@ -10,12 +10,19 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
 
         # Changing field 'UserTransactional.id'
-        db.alter_column(u'users_usertransactional', u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True))
+        # db.alter_column(u'users_usertransactional', u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True))
+        db.execute("CREATE SEQUENCE users_usertransactional_id_seq")
+        db.execute("SELECT setval('users_usertransactional_id_seq', (SELECT MAX(id) FROM users_usertransactional))")
+        db.execute("ALTER TABLE users_usertransactional ALTER COLUMN id SET DEFAULT nextval('users_usertransactional_id_seq'::regclass)")
+
 
     def backwards(self, orm):
 
         # Changing field 'UserTransactional.id'
-        db.alter_column(u'users_usertransactional', 'id', self.gf('django.db.models.fields.IntegerField')(primary_key=True))
+        # db.alter_column(u'users_usertransactional', 'id', self.gf('django.db.models.fields.IntegerField')(primary_key=True))
+        db.execute("ALTER TABLE users_usertransactional ALTER COLUMN id DROP DEFAULT")
+        db.execute("DROP SEQUENCE users_usertransactional_id_seq")
+
 
     models = {
         u'users.questrtoken': {

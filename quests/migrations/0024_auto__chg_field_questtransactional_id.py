@@ -10,12 +10,17 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
 
         # Changing field 'QuestTransactional.id'
-        db.alter_column(u'quests_questtransactional', u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True))
+        # db.alter_column(u'quests_questtransactional', u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True))
+        db.execute("CREATE SEQUENCE quests_questtransactional_id_seq")
+        db.execute("SELECT setval('quests_questtransactional_id_seq', (SELECT MAX(id) FROM quests_questtransactional))")
+        db.execute("ALTER TABLE quests_questtransactional ALTER COLUMN id SET DEFAULT nextval('quests_questtransactional_id_seq'::regclass)")
 
     def backwards(self, orm):
 
         # Changing field 'QuestTransactional.id'
-        db.alter_column(u'quests_questtransactional', 'id', self.gf('django.db.models.fields.IntegerField')(primary_key=True))
+        # db.alter_column(u'quests_questtransactional', 'id', self.gf('django.db.models.fields.IntegerField')(primary_key=True))
+        db.execute("ALTER TABLE quests_questtransactional ALTER COLUMN id DROP DEFAULT")
+        db.execute("DROP SEQUENCE quests_questtransactional_id_seq")
 
     models = {
         u'quests.questcomments': {
