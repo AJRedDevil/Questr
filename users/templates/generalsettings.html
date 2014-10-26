@@ -12,27 +12,19 @@
           
           <div class="panel-body">
             <div class="col-md-4 col-md-offset-4 column text-center">
-              <div class="circle"><i class="fa fa-user"></i></div>
 
-              <form action="javascript:;">
-                <div class="input-file">
-                  <label for="file">Photo upload</label>
-                  <input type="file" name="file" id="file">
-                </div>
-              </form>
-
-              <div class="img-circle" style="background: url(http://codropspz.tympanus.netdna-cdn.com/codrops/wp-content/uploads/2012/08/CircleHoverEffects.jpg) no-repeat;"></div>
-              
+          <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+              <div class="img-circle" style="background: url({{user.get_profile_pic}});"></div>
+              <div class="input-file">
+                <label for="file">Photo upload</label>
+                <input type="file" name="avatar" id="file"/>
+              </div>
             </div>
-
-
 
             <br><br><br><br><br><br><br>
             <br><br><br><br><br><br><br><br><br>
             <br><br>
 
-
-          <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
             <!-- Name input-->
             <div class="form-group">
               <h6 class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column control-label" for="name">FIRST NAME</h6>

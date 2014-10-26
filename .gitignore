@@ -80,5 +80,6 @@ docs/_build/
 ##### Questr ####
 localtemplates/
 media/
+questr/media/
 
 beta/static/assets/img/aid.jpg

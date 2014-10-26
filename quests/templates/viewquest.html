@@ -171,7 +171,7 @@
 					<a href="/user/{{questdetails.questrs.displayname}}"></a>	
 				{% endcomment %}
 				<div class="col-xs-2 col-sm-3 col-md-3 col-lg-3 column">
-					<div class="ratio img-responsive img-circle" style="background-image: url({{user.avatar_file_name}});"></div>
+					<div class="ratio img-responsive img-circle" style="background-image: url({{user.get_profile_pic}});"></div>
 				</div>
 				
 				<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9 column">
@@ -185,7 +185,7 @@
 					<hr>
 					<h6 class="inline"><i class="fa fa-clock-o"></i> {{questdetails.creation_date}}</h6>
 					<h6><span class="glyphicon glyphicon-map-marker"></span> {{questdetails.location}}, Canada</h6> 
-					<h6>PHONE NUMBER GOES HERE!</h6>
+					<h6>{{questdetails.questrs.phone}}</h6>
 				</div><!-- column -->
 
 

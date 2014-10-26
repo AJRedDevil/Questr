@@ -7,7 +7,14 @@ from django.conf import settings
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import authenticate, get_user_model
 from django.utils.translation import ugettext_lazy as _
+from django.template.defaultfilters import filesizeformat
+
 from .models import QuestrUserProfile
+from .contrib import user_handler
+
+import os
+import logging
+logger = logging.getLogger(__name__)
 
 class QuestrUserChangeForm(UserChangeForm):
     """
@@ -37,6 +44,7 @@ class QuestrUserChangeForm(UserChangeForm):
         error_messages={'required' : 'Your postcode is required !',}
         )
     phone = forms.CharField(required=False)
+    avatar = forms.FileField(required=False)
 
 
     class Meta:
@@ -63,7 +71,31 @@ class QuestrUserChangeForm(UserChangeForm):
             },
         }
 
-"""Commented out because we don't have the social signup feature now"""
+    def clean_avatar(self):
+        avatar = self.cleaned_data['avatar']
+        if avatar != None:
+            if settings.AVATAR_ALLOWED_FILE_EXTS:
+                root, ext = os.path.splitext(avatar.name.lower())
+                if ext not in settings.AVATAR_ALLOWED_FILE_EXTS:
+                    valid_exts = ", ".join(settings.AVATAR_ALLOWED_FILE_EXTS)
+                    error = _("%(ext)s is an invalid file extension. "
+                              "Authorized extensions are : %(valid_exts_list)s")
+                    raise forms.ValidationError(error %
+                                                {'ext': ext,
+                                                 'valid_exts_list': valid_exts})
+            if avatar.size > settings.AVATAR_MAX_SIZE:
+                error = _("Your file is too big (%(size)s), "
+                          "the maximum allowed size is %(max_valid_size)s")
+                raise forms.ValidationError(error % {
+                    'size': filesizeformat(avatar.size),
+                    'max_valid_size': filesizeformat(settings.AVATAR_MAX_SIZE)
+                })
+            return avatar
+
+    def save(self, commit=True):
+        user = super(QuestrUserChangeForm, self).save(commit=False)
+        return user
+##Commented out because we don't have the social signup feature now
 # class QuestrSocialSignupForm(forms.ModelForm):
 #     """
 #     This is for when the user signs up with a social account
@@ -211,7 +243,7 @@ class QuestrUserCreationForm(forms.ModelForm):
     def save(self, commit=True):
         user = super(QuestrUserCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
-        user.avatar_file_name=settings.STATIC_URL+'img/default.png'
+        # user.avatar_file_name=settings.STATIC_URL+'img/default.png'
         if commit:
             user.save()
         return user

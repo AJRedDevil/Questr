@@ -184,7 +184,6 @@ BROKER_POOL_LIMIT = int(os.environ['BROKER_POOL_LIMIT'])
 COURIER_ACTIVATION_INTERVAL = os.environ['COURIER_ACTIVATION_INTERVAL']
 COURIER_SELECTION_DELAY = os.environ['COURIER_SELECTION_DELAY']
 REJECTED_COURIER_HOLD_TIMER = os.environ['REJECTED_COURIER_HOLD_TIMER']
-
 # LOCAL CONFIG IMPORT, IMPORTS ALL CONFIG FROM local_setting.py, required only for a dev env
 try:
     from local_setting import *
@@ -197,5 +196,13 @@ if not DEBUG:
     DEFAULT_FILE_STORAGE = 'libs.s3utils.MediaRootS3BotoStorage'
     ##This for CSS,
     STATICFILES_STORAGE = 'libs.s3utils.StaticRootS3BotoStorage'
-    # MEDIA_ROOT = '/%s/' % DEFAULT_FILE_STORAGE
-    # MEDIA_URL = '//s3.amazonaws.com/%s/' % AWS_MEDIA_BUCKET
+    MEDIA_ROOT = '/%s/' % DEFAULT_FILE_STORAGE
+    MEDIA_URL = '//s3.amazonaws.com/%s/' % AWS_MEDIA_BUCKET
+
+
+##DJANGO AVATAR SETTINGS
+AVATAR_STORAGE_DIR = '/%s/media/' % DEFAULT_FILE_STORAGE
+AVATAR_ALLOWED_FILE_EXTS = ('.jpg','.jpeg','.png')
+AVATAR_MAX_SIZE = 125000000
+AVATAR_THUMB_QUALITY = 85
+AVATAR_THUMB_FORMAT = 'JPEG'

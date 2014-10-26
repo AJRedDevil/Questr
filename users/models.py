@@ -4,9 +4,16 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from django.core.files import File
+from django.core.files.base import ContentFile
+from django.conf import settings
+from django.utils import six
 
 import jsonfield
 import hashlib
+
+import logging
+logger = logging.getLogger(__name__)
 
 # Create your models here.
 class QuestrUserManager(BaseUserManager):
@@ -51,6 +58,11 @@ class QuestrUserManager(BaseUserManager):
 
 
 class QuestrUserProfile(AbstractBaseUser):
+    def upload_pp_path(self, name):
+        # name = 'pp'
+        folder = self.id
+        return str(folder) + '/' + str(name)
+
     id = models.AutoField(_('id'), primary_key=True)
     displayname = models.CharField(_('displayname'), max_length=30, unique=True, 
         error_messages={'unique' : 'The username provided is already taken !'})
@@ -62,7 +74,7 @@ class QuestrUserProfile(AbstractBaseUser):
     email_status = models.BooleanField(_('email_status'), default=False)
     phone = models.CharField(_('phone'), max_length=15, blank=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-    avatar_file_name = models.ImageField(max_length=9999, upload_to='ppsize')
+    avatar = models.ImageField(max_length=1024, upload_to=upload_pp_path, blank=True, default='')
     biography = models.TextField(_('biography'),max_length=9999, blank=True)
     account_status = models.IntegerField(_('account_status'), max_length=1, blank=True, default=1)
     privacy = models.BooleanField(_('privacy'), default=False)
@@ -92,6 +104,88 @@ class QuestrUserProfile(AbstractBaseUser):
 
     def get_short_name(self):
         return self.first_name
+
+    def thumbnail_exists(self, size):
+        from django.core.files.storage import default_storage as storage
+        return storage.exists(self.avatar.name)
+
+    def __generate_hash(self):
+        return hashlib.sha256(str(self.date_joined) + str(self.email)).hexdigest()
+
+    def create_thumbnail(self, size, quality=None):
+        # invalidate the cache of the thumbnail with the given size first        
+        import os
+        from PIL import Image
+        from django.core.files.storage import default_storage as storage
+        if not self.avatar:
+            logger.debug("No item image available")
+            return
+        file_path = self.avatar.name
+        filename_base, filename_ext = os.path.splitext(file_path)
+        # try:
+        #     os.makedirs(os.path.join(settings.MEDIA_ROOT, str(self.id)+'/ppsize'))
+        # except OSError as e:
+        #     if e.errno == 17:
+        #         # Dir already exists. No biggie.
+        #         pass
+        avatar_file_path = ('%s'+'_'+self.__generate_hash()[:10]+'.jpg') % (filename_base)
+        try:    
+            orig = storage.open(file_path, 'rb')            
+            image = Image.open(orig)
+            quality = quality or settings.AVATAR_THUMB_QUALITY
+            w, h = image.size
+            if w > h:
+                diff = int((w - h) / 2)
+                image = image.crop((diff, 0, w - diff, h))
+            else:
+                diff = int((h - w) / 2)
+                image = image.crop((0, diff, w, h - diff))
+            if image.mode != "RGB":
+                image = image.convert("RGB")
+            image = image.resize((size, size), Image.ANTIALIAS)
+            # logger.warn(thumb)
+            avatar_image = storage.open(avatar_file_path, "w")
+            image.save(avatar_image, settings.AVATAR_THUMB_FORMAT, quality=quality)
+            avatar_image.close()
+            return avatar_file_path
+        except IOError, e:
+            logger.warn(e)
+            return
+
+    def get_profile_pic(self):
+        """Returns the url of the aws bucket object"""
+        import os
+        from django.core.files.storage import default_storage as storage
+        default_file_path = settings.STATIC_URL+"img/default.png"
+        if not self.avatar:
+            return default_file_path
+        file_path = self.avatar.name
+        logger.warn("file path is %s" % file_path)
+        filename_base, filename_ext = os.path.splitext(file_path)
+        normal_file_path = ('%s'+'_'+self.__generate_hash()[:10]+'.jpg') % (filename_base)
+
+        ##See if the AWS connection exists or works if doesn't return default file path
+        try:
+            if storage.exists(normal_file_path):
+                # logger.debug(storage.url(normal_file_path))
+                return storage.url(normal_file_path)
+        except Exception:
+            return default_file_path
+
+        return default_file_path
+
+    def save(self, *args, **kwargs):
+        super(QuestrUserProfile, self).save(*args, **kwargs)
+        logger.warn(self.avatar)
+        if self.avatar:
+            logger.warn("avatar is not None")
+            logger.warn("avatar is %s", self.avatar)
+            # if not self.thumbnail_exists(500):
+            #     logger.warn("thumbnail doesn't exist")
+            self.create_thumbnail(500)
+            # super(QuestrUserProfile, self).save(*args, **kwargs)
+        logger.warn("user is saved")
+
 
 # User transactionl model
 class UserTransactional(models.Model):

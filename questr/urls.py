@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-# from django.conf import settings
+from django.conf import settings
 
 import views as mainview
 import quests.views as questviews
@@ -29,10 +29,5 @@ urlpatterns = patterns('',
     url(r'^help/faq/', mainview.faq, name='faq' ),
     url(r'^help/crowdshipping/', mainview.crowdshipping, name='crowdshipping' ),
     url(r'^help/trust/', mainview.trust, name='trust' ),
+    (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
-
-# if settings.DEBUG:
-#     # static files (images, css, javascript, etc.)
-#     urlpatterns += patterns('',
-#         (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
-#         'document_root': settings.MEDIA_ROOT}))

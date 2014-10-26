@@ -262,6 +262,7 @@ def userSettings(request):
     user = request.user
     settingstype="general"
     password = user_handler.passwordExists(user)
+    userdetails = user_handler.getQuestrDetails(user.id)
     try:
         user = QuestrUserProfile.objects.get(email=request.user)
     except QuestrUserProfile.DoesNotExist:
@@ -270,17 +271,21 @@ def userSettings(request):
 
     if request.method == "POST":
         try:
-            user_form = QuestrUserChangeForm(request.POST, instance=request.user)
+            user_form = QuestrUserChangeForm(request.POST,request.FILES, instance=request.user)
         except QuestrUserProfile.DoesNotExist:
             raise Http404
-            return render(request,'404.html', locals())        
+            return render(request,'404.html', locals())  
         if user_form.is_valid():
             useraddress = dict(city=user_form.cleaned_data['city'], streetaddress=user_form.cleaned_data['streetaddress'],\
                 streetaddress_2=user_form.cleaned_data['streetaddress_2'], postalcode=user_form.cleaned_data['postalcode'])
-            logging.warn(useraddress)
             userdata = user_form.save(commit=False)
             userdata.address = json.dumps(useraddress)
             userdata.phone = user_form.cleaned_data['phone']
+            if user_form.cleaned_data['avatar'] is not None:
+                userdata.avatar = user_form.cleaned_data['avatar']
+            else:
+                userdata.avatar = userdetails.avatar
+            logger.warn("file is %s" % userdata.avatar)
             userdata.save()
             request.session['alert_message'] = dict(type="Success",message="Your profile has been updated!")
             return redirect('settings')
