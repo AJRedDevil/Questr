@@ -1,12 +1,20 @@
+
+
+#All Django Imports
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+
+#All local imports (libs, contribs, models)
 from users.models import *
 
-import logging
-import jsonfield
+#All external imports (libs, packages)
 import hashlib
+import jsonfield
+import logging
 import uuid
+
+# Init Logger
 logger = logging.getLogger(__name__)
 
 
@@ -205,3 +213,19 @@ class QuestToken(models.Model):
         if not self.timeframe:
             self.timeframe = timezone.now()
         super(QuestToken, self).save(*args, **kwargs)
+
+class QuestEvents(models.Model):
+    """Models for QuestEvents"""
+    current_time = timezone.now
+
+    quest = models.ForeignKey(Quests)
+    event = models.IntegerField(_('event'), max_length=2, default=1)
+    updated_on = models.DateTimeField(_('updated_on'), 
+        default=current_time)
+    extrainfo = jsonfield.JSONField(_('extrainfo'), default='{}', max_length=9999)
+
+    def save(self, *args, **kwargs):
+        if not self.updated_on:
+            self.updated_on = current_time
+        super(QuestEvents, self).save(*args, **kwargs)
+

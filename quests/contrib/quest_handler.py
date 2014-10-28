@@ -1,15 +1,20 @@
 
 
-from django.shortcuts import render, redirect
+#All Django Imports
 from django.conf import settings
-from django.http import Http404, HttpResponse
+from django.http import Http404
+from django.shortcuts import redirect
 from django.utils import timezone
 from datetime import datetime, timedelta
 
-from quests.models import Quests, QuestTransactional, QuestToken
+#All local imports (libs, contribs, models)
+from quests.models import Quests, QuestTransactional, QuestToken, QuestEvents
 
-import pytz
+#All external imports (libs, packages)
 import logging
+import pytz
+
+# Init Logger
 logger = logging.getLogger(__name__)
 
 # Create your views here.
@@ -24,7 +29,6 @@ def getQuestsByUser(questrs_id):
         questsbysuer = Quests.objects.filter(questrs_id=questrs_id, ishidden=False, shipper=None)
     except Quests.DoesNotExist:
         raise Http404
-        return render(request,'404.html')
     return questsbysuer
 
 def getQuestDetails(quest_id):
@@ -32,7 +36,6 @@ def getQuestDetails(quest_id):
         questdetails = Quests.objects.get(id=quest_id)
     except Quests.DoesNotExist:
         raise Http404
-        return render(request,'404.html')
     return questdetails
 
 def getQuestDetailsByTrackingNumber(tracking_number):
@@ -40,7 +43,6 @@ def getQuestDetailsByTrackingNumber(tracking_number):
         questdetails = Quests.objects.get(tracking_number=tracking_number)
     except Quests.DoesNotExist:
         raise Http404
-        return render(request,'404.html')
     return questdetails
 
 def getMyShipmnets(shipper_id):
@@ -53,7 +55,6 @@ def getQuestsWithOffer(questrs_id):
         questsWithOffer = Quests.objects.filter(questrs_id=questrs_id, ishidden=False).exclude(shipper=None)
     except Quests.DoesNotExist:
         raise Http404
-        return render(request,'404.html')
     return questsWithOffer
 
 def isShipperForQuest(shipper_id, questname):
@@ -62,7 +63,6 @@ def isShipperForQuest(shipper_id, questname):
         questdetails = Quests.objects.get(id=questname)
     except Quests.DoesNotExist:
         raise Http404
-        return render(request,'404.html')
 
     current_shipper = questdetails.shipper
     if current_shipper != None:
@@ -77,7 +77,6 @@ def addShipper(shipper_id, questname):
         questdetails = Quests.objects.get(id=questname)
     except Quests.DoesNotExist:
         raise Http404
-        return render(request,'404.html')
 
     current_shipper = questdetails.shipper
     # for first application
@@ -97,7 +96,6 @@ def addShipper(shipper_id, questname):
         Quests.objects.filter(id=questname).update(shipper=current_shipper)
     except Quests.DoesNotExist:
         raise Http404
-        return render(request,'404.html')
 
 def delShipper(shipper_id, questname):
     """adds a shipper to a posted quest"""
@@ -105,7 +103,6 @@ def delShipper(shipper_id, questname):
         questdetails = Quests.objects.get(id=questname)
     except Quests.DoesNotExist:
         raise Http404
-        return render(request,'404.html')
 
     current_shipper = questdetails.shipper
     if current_shipper==None:
@@ -287,8 +284,8 @@ def prepQuestCompleteNotification(shipper, questr, questdetails, review_link):
     # Calculating the delivery time for the quest
     quest_creation_date = questdetails.creation_date
     quest_delivery_date = questdetails.delivery_date
-    timedelta = quest_delivery_date - quest_creation_date
-    timedelta_arr = str(timedelta).split(':')
+    timediff = quest_delivery_date - quest_creation_date
+    timedelta_arr = str(timediff).split(':')
     hours = timedelta_arr[0]
     minutes = timedelta_arr[1]
     delivery_time = str(hours)+' hours and '+str(minutes)+' minutes'
@@ -416,3 +413,27 @@ def get_pickup_time(nowornotnow=None, whatdate=None, whattime=None):
             return pytz.timezone(settings.TIME_ZONE).localize(pickup_time)
 
     return timezone.now()+timedelta(minutes=5)
+
+
+class QuestEventManager(object):
+    """docstring for QuestEventManager"""
+    
+    def __init__(self):
+        pass
+
+    def getallevents(self, quest):
+        """Returns all the events of a quest"""
+        allevents = QuestEvents.objects.filter(questr=quest.id)
+        return allevents
+
+    def getlatestevent(self, quest):
+        """Returns the latest event of the quest"""
+        event = QuestEvents.objects.filter(questr=quest.id).order_by('-updated_on')[:1]
+        return event
+
+    def setevent(self, quest, eventtype):
+        """Sets the event for the quest with the type given"""
+        eventtype = int(eventtype)
+        event = QuestEvents(questr=quest, event=eventtype, updated_on=timezone.now())
+        QuestEvents.save(event)
+        return "success"

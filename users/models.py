@@ -1,18 +1,21 @@
 
 
+#All Django Imports
+from django.conf import settings
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.core.files import File
+from django.core.files.base import ContentFile
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
-from django.core.files import File
-from django.core.files.base import ContentFile
-from django.conf import settings
 from django.utils import six
 
-import jsonfield
+#All external imports (libs, packages)
 import hashlib
-
+import jsonfield
 import logging
+
+# Init Logger
 logger = logging.getLogger(__name__)
 
 # Create your models here.
@@ -176,7 +179,6 @@ class QuestrUserProfile(AbstractBaseUser):
 
     def save(self, *args, **kwargs):
         super(QuestrUserProfile, self).save(*args, **kwargs)
-        logger.warn(self.avatar)
         if self.avatar:
             logger.warn("avatar is not None")
             logger.warn("avatar is %s", self.avatar)
@@ -184,8 +186,7 @@ class QuestrUserProfile(AbstractBaseUser):
             #     logger.warn("thumbnail doesn't exist")
             self.create_thumbnail(500)
             # super(QuestrUserProfile, self).save(*args, **kwargs)
-        logger.warn("user is saved")
-
+            
 
 # User transactionl model
 class UserTransactional(models.Model):
@@ -234,3 +235,19 @@ class QuestrToken(models.Model):
         if not self.timeframe:
             self.timeframe = timezone.now()
         super(QuestrToken, self).save(*args, **kwargs)
+
+class UserEvents(models.Model):
+    """Models for Users UserEvents"""
+    current_time = timezone.now
+
+    questr = models.ForeignKey(QuestrUserProfile)
+    event = models.IntegerField(_('event'), max_length=2, default=1)
+    updated_on = models.DateTimeField(_('updated_on'), 
+        default=current_time)
+    extrainfo = jsonfield.JSONField(_('extrainfo'), default='{}', max_length=9999)
+
+    
+    def save(self, *args, **kwargs):
+        if not self.updated_on:
+            self.updated_on = timezone.now
+        super(UserEvents, self).save(*args, **kwargs)

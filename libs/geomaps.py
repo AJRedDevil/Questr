@@ -1,10 +1,13 @@
 
 
+#All Django Imports
+from django.conf import settings
+
+#All external imports (libs, packages)
 import logging as log
 import simplejson
 import urllib
 
-from django.conf import settings
 
 class GMaps(object):
 	"""

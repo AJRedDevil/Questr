@@ -1,20 +1,24 @@
 
 
-from random import choice
-from collections import OrderedDict 
+#All Django Imports
 from django.conf import settings
-from django.shortcuts import render
 from django.http import Http404
+# from django.shortcuts import render
+from django.utils import timezone
 
-import logging
-
-from quests.contrib import quest_handler
+#All local imports (libs, contribs, models)
 from libs import email_notifier, geomaps
-
-from users.models import QuestrUserProfile, UserTransactional, QuestrToken
+from quests.contrib import quest_handler
 from quests.models import Quests
 from quests.tasks import inform_shipper_task
+from users.models import QuestrUserProfile, UserTransactional, QuestrToken, UserEvents
 
+#All external imports (libs, packages)
+from collections import OrderedDict 
+import logging
+from random import choice
+
+# Init Logger
 logger = logging.getLogger(__name__)
 
 def get_random_password():
@@ -120,7 +124,6 @@ def getShipper(shipper_id):
         shipper = QuestrUserProfile.objects.filter(id=shipper_id, is_active=True)
     except QuestrUserProfile.DoesNotExist:
         raise Http404
-        return render('404.html', locals())
     return shipper
 
 def getQuestrDetails(questr_id):
@@ -129,7 +132,6 @@ def getQuestrDetails(questr_id):
         questr = QuestrUserProfile.objects.get(id=questr_id, is_active=True)
     except QuestrUserProfile.DoesNotExist:
         raise Http404
-        return render('404.html', locals())
     return questr
 
 def getShippers():
@@ -407,3 +409,27 @@ class CourierManager(object):
         courier = getQuestrDetails(courier.id)
         available_couriers = quest.available_couriers
         available_couriers.pop(courier.id)
+
+
+class UserEventManager(object):
+    """docstring for UserEventManager"""
+    
+    def __init__(self):
+        pass
+
+    def getallevents(self, user):
+        """Returns all the events of a user"""
+        allevents = UserEvents.objects.filter(questr=user.id)
+        return allevents
+
+    def getlatestevent(self, user):
+        """Returns the latest event of the user"""
+        event = UserEvents.objects.filter(questr=user.id).order_by('-updated_on')[:1]
+        return event
+
+    def setevent(self, user, eventtype, extrainfo=None):
+        """Sets the event for the user with the type given"""
+        eventtype = int(eventtype)
+        event = UserEvents(questr=user, event=eventtype, extrainfo=extrainfo, updated_on=timezone.now())
+        UserEvents.save(event)
+        return "success"

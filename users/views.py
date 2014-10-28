@@ -1,6 +1,7 @@
 
 
-from django.conf import settings
+#All Djang Imports
+# from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login as auth_login
@@ -10,37 +11,51 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from django.utils import timezone
 
+#All local imports (libs, contribs, models)
+from access.requires import verified, is_alive, is_superuser
+from contrib import user_handler
+from libs import email_notifier
+from quests.contrib import quest_handler
+from quests.models import Quests
+from reviews.contrib import review_handler
+from reviews.models import Review
 from .models import QuestrUserProfile, UserTransactional
 from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, PasswordChangeForm, NotifPrefForm
 
-from libs import email_notifier
-
-from access.requires import verified, is_alive, is_superuser
-from contrib import user_handler
-
-from quests.contrib import quest_handler
-from quests.models import Quests
-from reviews.models import Review
-from reviews.contrib import review_handler
-
+#All external imports (libs, packages)
+from ipware.ip import get_real_ip, get_ip
 import simplejson as json
 import logging
+
+
+# Init Logger
 logger = logging.getLogger(__name__)
+
+
 # Create your views here.
 def logout(request):
     """Logs out user"""
+    user = user_handler.getQuestrDetails(request.user.id)
     auth_logout(request)
+    eventhandler = user_handler.UserEventManager()
+    extrainfo = dict()
+    eventhandler.setevent(user, 0, extrainfo)
     return redirect('index')
     
 def signin(request):
     """Home view, displays login mechanism"""
     ## if authenticated redirect to user's homepage directly ##
+    client_internal_ip = get_real_ip(request)
+    client_public_ip = get_ip(request)
     if request.user.is_authenticated():
         return redirect('home')
     if request.method == "POST":   
         auth_form = QuestrLocalAuthenticationForm(data=request.POST)
         if auth_form.is_valid():
             auth_login(request, auth_form.get_user())
+            eventhandler = user_handler.UserEventManager()
+            extrainfo = dict(client_public_ip=client_public_ip, client_internal_ip=client_internal_ip)
+            eventhandler.setevent(request.user, 1, extrainfo)
             #Notify the user of his status if he's unavailable
             if request.user.is_authenticated() and request.user.is_shipper and request.user.is_available == False:
                     request.session['alert_message'] = dict(type="warning",message="Your status is set to unavailable, you might want to set it to available!")
