@@ -1,27 +1,31 @@
 
 
+#All Django Imports
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from django.http import Http404, HttpResponse
-from django.contrib.auth.decorators import login_required
-from django.conf import settings
 
-from libs import geomaps, pricing, stripeutils
-from users.access.requires import verified, is_quest_alive
-
+#All local imports (libs, contribs, models)
 from .contrib import quest_handler
-from users.contrib import user_handler
 from .forms import QuestCreationForm, QuestConfirmForm, DistancePriceForm, TrackingNumberSearchForm
 from .models import Quests, QuestTransactional
+from libs import geomaps, pricing, stripeutils
+from users.access.requires import verified, is_quest_alive
+from users.contrib import user_handler
 from users.models import QuestrUserProfile
-from quests.tasks import init_courier_selection
+from quests.tasks import init_courier_selection, checkstatus
 
+#All external imports (libs, packages)
 import logging
+from datetime import datetime, timedelta
+import simplejson as json
+import pytz
+
+# Init Logger
 logger = logging.getLogger(__name__)
 
-import simplejson as json
-from datetime import datetime, timedelta
-import pytz
 
 @verified
 @login_required
@@ -339,7 +343,6 @@ def confirmquest(request):
             # elif pickup_time = "not_now":
             #     quest_data.pickup_time = strf
             quest_data.pickup_time = pickup_time
-            quest_data.save()
             # return redirect('pay',questname=quest_data)
             try:
                 # shippers = getShippers()
@@ -349,13 +352,18 @@ def confirmquest(request):
                 # couriermanager = user_handler.CourierManager()
                 # couriermanager.informShippers(quest_data)
                 informtime = pickup_time - timedelta(minutes=59)
+                checkstatus.delay()
+                quest_data.save()
                 init_courier_selection.apply_async((quest_data.id,), eta=informtime)
             except Exception, e:
                 ##Inform admin of an error
-                logger.debug(e)
-                pass
-            quest_handler.update_resized_image(quest_data.id)
-            message="Your quest has been created!"
+                request.session['alert_message'] = dict(type="Danger",message="An error occured while creating your shipment, please try again in a while!")
+                message="Error occured while creating quest"
+                warnlog = dict(message=message, exception=e)
+                logger.warn(warnlog)
+                return redirect('home')
+            # quest_handler.update_resized_image(quest_data.id)
+            message="Quest {0} has been created by user {1}".format(quest_data.id, userdetails)
             request.session['alert_message'] = dict(type="Success",message="Your quest has been created!")
             logger.debug(message)
             return redirect('home')
@@ -363,8 +371,7 @@ def confirmquest(request):
         if user_form.errors:
             logger.debug("Form has errors, %s ", user_form.errors)
 
-    pagetitle = "Create a Quest"
-    message="There were some errors creating your quest, please try again !"
+    pagetitle = "Confirm your quest details"
     return redirect('home')
 
 ##Removed because we are going into automated shipper selection

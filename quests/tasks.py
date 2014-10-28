@@ -63,8 +63,16 @@ def inform_shipper_task(quest_id, courier_id):
 
 @app.task
 def init_courier_selection(quest_id):
+    message = "Inititating selection for quest {0}".format(quest_id)
+    logger.debug(message)
     from users.contrib import user_handler
     from quests.contrib import quest_handler
     couriermanager = user_handler.CourierManager()
     questdata = quest_handler.getQuestDetails(quest_id)
     couriermanager.informShippers(questdata)
+
+@app.task
+def checkstatus():
+    message = "Checking status"
+    logger.debug(message)
+    return True
