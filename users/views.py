@@ -14,9 +14,9 @@ from django.utils import timezone
 #All local imports (libs, contribs, models)
 from access.requires import verified, is_alive, is_superuser
 from contrib import user_handler
-from libs import email_notifier
+from libs import email_notifier, pricing
 from quests.contrib import quest_handler
-from quests.models import Quests
+from quests.models import Quests, QuestPricing
 from reviews.contrib import review_handler
 from reviews.models import Review
 from .models import QuestrUserProfile, UserTransactional
@@ -166,6 +166,17 @@ def createuser(request):
             password = hashstring[:4]+hashstring[-2:]
             userdata.set_password(password)
             userdata.save()
+            default_pricing = { 'rate_meter_drop_weekend' : {'car': 8, 'backpack': 6, 'truck': 90, 'minivan': 10} ,
+                                'rate_per_km_weekend' : {'car': 1.2, 'backpack': 1.0, 'truck': 90, 'minivan': 2.2},
+                                'rate_meter_drop_weekday' : {'car': 6, 'backpack': 5, 'truck': 90, 'minivan': 10}, 
+                                'rate_per_km_weekday' : {'car': 1.0, 'backpack': 0.8, 'truck': 75, 'minivan': 2.0},
+                                'hourlist' : {'off_peak_hours': {'start_min': 0, 'start_hr': 8, 'end_hr': 21, 'end_min': 59}},
+                                'chargefreekm' : 2
+                                }
+            pricingmodel = pricing.WebPricing(userdata)
+            # pricingmodel = QuestPricing(pricing=default_pricing, questrs=userdata)
+            # pricingmodel.save()
+
             email_details = user_handler.prepWelcomeCourierNotification(userdata, password)
             logger.debug("What goes in the email is \n %s", email_details)
             email_notifier.send_email_notification(userdata, email_details)

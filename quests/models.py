@@ -56,7 +56,7 @@ class Quests(models.Model):
         max_digits=1000, default=0)
     delivery_date = models.DateTimeField(_('delivery_date'), 
         blank=True, null=True)
-    available_couriers = jsonfield.JSONField(_('pickup'), default={})
+    available_couriers = jsonfield.JSONField(_('available_couriers'), default={})
     delivery_code = models.TextField(_('delivery_code'), blank=True)
     tracking_number = models.TextField(_('tracking_number'), blank=True)
     pickup_time = models.DateTimeField(_('pickup_time'), blank=True)
@@ -229,3 +229,16 @@ class QuestEvents(models.Model):
             self.updated_on = current_time
         super(QuestEvents, self).save(*args, **kwargs)
 
+class QuestPricing(models.Model):
+    """Pricing model for quests"""
+    current_time = timezone.now
+
+    pricing = jsonfield.JSONField(_('pricing'), default={})
+    questrs = models.ForeignKey(QuestrUserProfile, unique=True)
+    updated_on = models.DateTimeField(_('updated_on'), 
+        default=current_time)
+
+    def save(self, *args, **kwargs):
+        if not self.updated_on:
+            self.updated_on = current_time
+        super(QuestPricing, self).save(*args, **kwargs)
