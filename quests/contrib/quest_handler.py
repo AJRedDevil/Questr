@@ -431,9 +431,9 @@ class QuestEventManager(object):
         event = QuestEvents.objects.filter(questr=quest.id).order_by('-updated_on')[:1]
         return event
 
-    def setevent(self, quest, eventtype):
+    def setevent(self, quest, eventtype, extrainfo=None):
         """Sets the event for the quest with the type given"""
         eventtype = int(eventtype)
-        event = QuestEvents(questr=quest, event=eventtype, updated_on=timezone.now())
+        event = QuestEvents(quest=quest, event=eventtype, extrainfo=extrainfo, updated_on=timezone.now())
         QuestEvents.save(event)
         return "success"

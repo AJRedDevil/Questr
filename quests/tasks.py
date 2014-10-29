@@ -36,6 +36,9 @@ def inform_shipper_task(quest_id, courier_id):
         accept_transaction.status = True
         # For the shipper didn't respond we put him on hold for 1 hour
         activate_shipper.apply_async((courier_id,), countdown=int(settings.COURIER_ACTIVATION_INTERVAL))
+        eventmanager = quest_handler.QuestEventManager()
+        extrainfo = dict(detail="No response from courier", selected_courier=courier_id)
+        eventmanager.setevent(quest, 6, extrainfo)
         available_couriers = quest.available_couriers
         if len(available_couriers) > 0:
             logging.warn(available_couriers)
@@ -69,6 +72,9 @@ def init_courier_selection(quest_id):
     from quests.contrib import quest_handler
     couriermanager = user_handler.CourierManager()
     questdata = quest_handler.getQuestDetails(quest_id)
+    extrainfo = dict(detail="Courier selection started")
+    eventmanager = quest_handler.QuestEventManager()
+    eventmanager.setevent(questdata, 2, extrainfo)
     couriermanager.informShippers(questdata)
 
 @app.task

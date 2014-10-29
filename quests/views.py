@@ -241,7 +241,7 @@ def newquest(request):
             map_image = maps.fetch_static_map()
             logger.debug(map_image)
             # For price
-            price = pricing.WebPricing()
+            price = pricing.WebPricing(user)
             reward = price.get_price(distance, shipment_mode=size)
             pagetitle = "Confirm your Quest"
             return render(request, 'confirmquest.html', locals())  
@@ -303,7 +303,7 @@ def confirmquest(request):
             distance = maps.get_total_distance()
             map_image = maps.fetch_static_map()
             # For price
-            price = pricing.WebPricing()
+            price = pricing.WebPricing(user)
             reward = price.get_price(distance, shipment_mode=size)
             quest_data = user_form.save(commit=False)
             ##Submit dict to the field
@@ -363,6 +363,9 @@ def confirmquest(request):
                 logger.warn(warnlog)
                 return redirect('home')
             # quest_handler.update_resized_image(quest_data.id)
+            eventmanager = quest_handler.QuestEventManager()
+            extrainfo = dict(detail="quest created")
+            eventmanager.setevent(quest_data, 1, extrainfo)
             message="Quest {0} has been created by user {1}".format(quest_data.id, userdetails)
             request.session['alert_message'] = dict(type="Success",message="Your quest has been created!")
             logger.debug(message)
@@ -506,6 +509,9 @@ def completequest(request, questname):
                         # email_notifier.send_email_notification(questr, email_details)
                         # logger.debug("Quest completion email has been sent to %s", questr.email)
                         logger.debug("Quest %s has been successfully completed", questdetails.id)
+                        eventmanager = quest_handler.QuestEventManager()
+                        extrainfo = dict(detail="quest complete")
+                        eventmanager.setevent(questdetails, 8, extrainfo)
                         request.session['alert_message'] = dict(type="Success",message="The Questr has been notified!")
                         return redirect('viewquest', questname=questname) # display message
             return redirect('viewquest', questname=questname)
@@ -608,6 +614,9 @@ def accept_quest(request, quest_code):
                             couriermanager = user_handler.CourierManager()
                             couriermanager.informCourierAfterAcceptance(courier, quest)
                             couriermanager.informQuestrAfterAcceptance(courier, questr, quest)
+                            eventmanager = quest_handler.QuestEventManager()
+                            extrainfo = dict(designated_courier=courier.id, detail="quest accepted by courier")
+                            eventmanager.setevent(quest, 4, extrainfo)
                             request.session['alert_message'] = dict(type="success",message="Congratulations! You have accepted the quest!")
                             return redirect('home')
                     except QuestrUserProfile.DoesNotExist:
@@ -667,6 +676,9 @@ def reject_quest(request, quest_code):
                             ##Re-run the shipper selection algorithm
                             quest = Quests.objects.get(id=int(transcational.quest_id))
                             couriermanager.informShippers(quest)
+                            eventmanager = quest_handler.QuestEventManager()
+                            extrainfo = dict(selected_courier=courier.id, detail="quest rejected by courier")
+                            eventmanager.setevent(quest, 5, extrainfo)
                             return redirect('home')
                     except QuestrUserProfile.DoesNotExist:
                         logger.debug('User does not exist')

@@ -9,7 +9,7 @@ from django.utils import timezone
 #All local imports (libs, contribs, models)
 from libs import email_notifier, geomaps
 from quests.contrib import quest_handler
-from quests.models import Quests
+from quests.models import Quests, QuestTransactional
 from quests.tasks import inform_shipper_task
 from users.models import QuestrUserProfile, UserTransactional, QuestrToken, UserEvents
 
@@ -367,6 +367,11 @@ class CourierManager(object):
                     questdetails.isaccepted = True
                     questdetails.shipper = 0
                     questdetails.save()
+                    # Setting all questtransactions for this quest as completed because MC are selected
+                    transaction_update = QuestTransactional.objects.filter(quest=questdetails.id).update(status=True)
+                    eventmanager = quest_handler.QuestEventManager()
+                    extrainfo = dict(detail="master courier selected")
+                    eventmanager.setevent(quest, 7, extrainfo)
                     return "fail"
                 else:
                     # Man we have a problem return 500 NO SHIPPERS AVAILABLE NOW, ASK THE USER TO HIT "process quest"
@@ -386,6 +391,9 @@ class CourierManager(object):
             updateCourierAvailability(designated_courier, 0) 
             # designated_courier.is_available = False
             # designated_courier.save()
+            eventmanager = quest_handler.QuestEventManager()
+            extrainfo = dict(selected_courier=designated_courier.id, courier_availability=True, detail="courier selected and available")
+            eventmanager.setevent(quest, 3, extrainfo)
             self.informCourier(designated_courier, quest)
         else:
             available_couriers = quest.available_couriers
@@ -397,6 +405,9 @@ class CourierManager(object):
                 quest.save()
                 quest = quest_handler.getQuestDetails(quest.id)
                 logger.warn("courier %s is unavailable for quest %s, and is uninformed" % (designated_courier.displayname, quest))
+                eventmanager = quest_handler.QuestEventManager()
+                extrainfo = dict(selected_courier=designated_courier.id, courier_availability=False, detail="courier selected but unavailable")
+                eventmanager.setevent(quest, 3, extrainfo)
                 #Recursion trigger to get rid of couriers who are on the available_couriers list but are not actually!!
                 self.informShippers(quest)
         # Set courier as unavailable
