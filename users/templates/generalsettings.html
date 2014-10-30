@@ -8,29 +8,24 @@
       
 	        
 		         <h5 class="text-center">GENERAL SETTINGS</h5>
-	      
-          
-          
-            <!-- GAURAV -->
-             <div class="row clearfix">
-            <div class="col-md-4 col-md-offset-4 column text-center">
-             
+
 
           <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+           
+            <div class="row clearfix">
+            <div class="col-md-4 col-md-offset-4 column text-center">
               <div class="ratio img-responsive img-circle" style="background-image: url({{user.get_profile_pic}});"></div>
               <div class="input-file">
-                <label for="file">Photo upload</label>
                 <input type="file" name="avatar" id="file"/>
-              </div>
-            </form>
-             <!-- ./GAURAV -->
-           </div> <!-- ./column -->
-         </div><!-- ./row -->
-      
+              </div><!-- ./input-file -->
+            </div><!-- ./column -->
+          </div><!-- ./row -->
+          
+            <br>
 
             <!-- Name input-->
             <div class="row clearfix">
-              <div class="col-md-4 column text-center">
+              <div class="col-md-4 column text-right">
                 <h6>FIRST NAME</h6>
               </div>
               <div class="col-md-8 column">
@@ -43,7 +38,7 @@
 
             <!-- Last Name input-->
             <div class="row clearfix">
-              <div class="col-md-4 column text-center">
+              <div class="col-md-4 column text-right">
                 <h6>LAST NAME</h6>
               </div>
               <div class="col-md-8 column">
@@ -56,7 +51,7 @@
 
             <!-- Username input-->
             <div class="row clearfix">
-              <div class="col-md-4 column text-center">
+              <div class="col-md-4 column text-right">
                 <h6>USERNAME</h6>
               </div>
               <div class="col-md-8 column">
@@ -69,7 +64,7 @@
 
             <!-- Email input-->
             <div class="row clearfix">
-              <div class="col-md-4 column text-center">
+              <div class="col-md-4 column text-right">
                 <h6>EMAIL</h6>
               </div>
               <div class="col-md-8 column">
@@ -82,7 +77,7 @@
 
             <!-- LOCATION input-->
             <div class="row clearfix">
-              <div class="col-md-4 column text-center">
+              <div class="col-md-4 column text-right">
                 <h6>LOCATION</h6>
               </div>
               <div class="col-md-8 column">
@@ -104,7 +99,7 @@
 
             <!-- ADDRESS input-->
             <div class="row clearfix">
-              <div class="col-md-4 column text-center">
+              <div class="col-md-4 column text-right">
                 <h6>ADDRESS 1</h6>
               </div>
               <div class="col-md-8 column">
@@ -117,7 +112,7 @@
 
             <!-- ADDRESS input-->
             <div class="row clearfix">
-              <div class="col-md-4 column text-center">
+              <div class="col-md-4 column text-right">
                 <h6>ADDRESS 2</h6>
               </div>
               <div class="col-md-8 column">
@@ -129,7 +124,7 @@
 
             <!-- POSTAL CODE input-->
             <div class="row clearfix">
-              <div class="col-md-4 column text-center">
+              <div class="col-md-4 column text-right">
                 <h6>POSTAL CODE</h6>
               </div>
               <div class="col-md-8 column">
@@ -141,7 +136,7 @@
 
             <!-- PHONE NUMBER input-->
             <div class="row clearfix">
-              <div class="col-md-4 column text-center">
+              <div class="col-md-4 column text-right">
                 <h6>PHONE NUMBER</h6>
               </div>
               <div class="col-md-8 column">
@@ -155,24 +150,15 @@
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">
                 <button type="submit" class="btn btn-fatty btn-lg">SAVE</button>
               </div><!-- ./column -->
-            </div>
+            </div><!-- ./row -->
             <br><br>
           </form>     
-         
-     
         
-
-
       </div>
     </div>
 </div>
 </div>  <!-- End of tab-pane -->    
 {% endblock tabcontent %}
-
-
-
-
-
 
 
 
