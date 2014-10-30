@@ -11,13 +11,13 @@
 {% endblock localhead %}
 {% block content %}
 {% block nav-sidebar %}
-    <div class="container">
+    <div class="container-fluid">
     <div class="row clearfix">
   <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 column">
         <nav class="nav-sidebar well">
             <ul class="nav tabs">
-              <li class="{% navactive request 'settings' %}"><a href="{% url 'settings' %}">Account<span class="glyphicon glyphicon-chevron-right"></span></a></li>
-              <li class="{% navactive request 'changepassword' %}"><a href="{% url 'changepassword' %}">Password<span class="glyphicon glyphicon-chevron-right"></span></a></li>
+              <li class="{% navactive request 'settings' %}"><a href="{% url 'settings' %}"><strong>ACCOUNT</strong><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+              <li class="{% navactive request 'changepassword' %}"><a href="{% url 'changepassword' %}"><strong>PASSWORD</strong><span class="glyphicon glyphicon-chevron-right"></span></a></li>
               {# <li class="{% navactive request 'emailsettings' %}"><a href="{% url 'emailsettings' %}">Email Notifications<span class="glyphicon glyphicon-chevron-right"></span></a></li> #}
             </ul>
         </nav>

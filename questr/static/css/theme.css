@@ -75,7 +75,6 @@ body {
 input.form-control, textarea.form-control {
 	border: 1px solid #f5f5f5;
 	border-bottom: none;
-
 	box-shadow: 0px 1px 0px #C6CACA;
 	background-color: #fff;
 	border-radius: 14px;
