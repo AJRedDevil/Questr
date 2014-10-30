@@ -60,6 +60,7 @@ class Quests(models.Model):
     delivery_code = models.TextField(_('delivery_code'), blank=True)
     tracking_number = models.TextField(_('tracking_number'), blank=True)
     pickup_time = models.DateTimeField(_('pickup_time'), blank=True)
+    considered_couriers = models.TextField(_('considered_couriers'), default=[])
 
     def __unicode__(self):
         return str(self.id )

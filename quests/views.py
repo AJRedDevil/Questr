@@ -599,8 +599,8 @@ def accept_quest(request, quest_code):
                             transcational.status = True
                             ##Set rejection status to true so it won't be used again
                             opptransaction.status = True
-                            ##Set Courier status to unavailable
-                            courier.is_available = False # This should be false, only put True for today
+                            ##Set Courier status to available so he can accept multiple quests if he wants to.
+                            courier.is_available = True # change this to False if you want to keep a courier as occupied
                             ##Set quest's courier to respective courier
                             quest.shipper = courier.id
                             ##Set quest as accepted 
@@ -611,6 +611,13 @@ def accept_quest(request, quest_code):
                             courier.save()
                             opptransaction.save()
                             quest.save()
+                            # Setting status of all considered couriers to True
+                            considered_couriers = json.loads(quest.considered_couriers.strip(','))
+                            for courier in considered_couriers:
+                                courier = user_handler.getQuestrDetails(courier)
+                                courier.is_available = True
+                                courier.save()
+
                             couriermanager = user_handler.CourierManager()
                             couriermanager.informCourierAfterAcceptance(courier, quest)
                             couriermanager.informQuestrAfterAcceptance(courier, questr, quest)

@@ -9,7 +9,6 @@ from datetime import datetime, timedelta
 
 #All local imports (libs, contribs, models)
 from quests.models import Quests, QuestTransactional, QuestToken, QuestEvents
-
 #All external imports (libs, packages)
 import logging
 import pytz
@@ -340,10 +339,11 @@ def update_resized_image(quest_id):
 
 def updateQuestWithAvailableCourierDetails(quest, available_shippers):
     """Updates the available_shippers field in the given quest with the available couriers and their details"""
-    update = Quests.objects.filter(id=quest.id).update(available_couriers=available_shippers)
-    if not update:
-        logging.warn("Could not update quest : %s Update status %s" % (quest.id, update))
-        return "fail"
+    logger.debug("trying to update available couriers")
+    Quests.objects.filter(id=quest.id).update(available_couriers=available_shippers)
+    if quest.considered_couriers == '[]':
+        considered_couriers = [int(x) for x in available_shippers]
+        Quests.objects.filter(id=quest.id).update(considered_couriers=considered_couriers)
 
 def get_accept_url(quest=None, shipper=None): 
     """

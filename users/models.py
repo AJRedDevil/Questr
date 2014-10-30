@@ -132,27 +132,31 @@ class QuestrUserProfile(AbstractBaseUser):
         #         # Dir already exists. No biggie.
         #         pass
         avatar_file_path = ('%s'+'_'+self.__generate_hash()[:10]+'.jpg') % (filename_base)
-        try:    
-            orig = storage.open(file_path, 'rb')            
-            image = Image.open(orig)
-            quality = quality or settings.AVATAR_THUMB_QUALITY
-            w, h = image.size
-            if w > h:
-                diff = int((w - h) / 2)
-                image = image.crop((diff, 0, w - diff, h))
-            else:
-                diff = int((h - w) / 2)
-                image = image.crop((0, diff, w, h - diff))
-            if image.mode != "RGB":
-                image = image.convert("RGB")
-            image = image.resize((size, size), Image.ANTIALIAS)
-            # logger.warn(thumb)
-            avatar_image = storage.open(avatar_file_path, "w")
-            image.save(avatar_image, settings.AVATAR_THUMB_FORMAT, quality=quality)
-            avatar_image.close()
-            return avatar_file_path
-        except IOError, e:
-            logger.warn(e)
+        try:
+            if not storage.exists(avatar_file_path):
+                try:    
+                    orig = storage.open(file_path, 'rb')            
+                    image = Image.open(orig)
+                    quality = quality or settings.AVATAR_THUMB_QUALITY
+                    w, h = image.size
+                    if w > h:
+                        diff = int((w - h) / 2)
+                        image = image.crop((diff, 0, w - diff, h))
+                    else:
+                        diff = int((h - w) / 2)
+                        image = image.crop((0, diff, w, h - diff))
+                    if image.mode != "RGB":
+                        image = image.convert("RGB")
+                    image = image.resize((size, size), Image.ANTIALIAS)
+                    # logger.warn(thumb)
+                    avatar_image = storage.open(avatar_file_path, "w")
+                    image.save(avatar_image, settings.AVATAR_THUMB_FORMAT, quality=quality)
+                    avatar_image.close()
+                    return avatar_file_path
+                except IOError, e:
+                    logger.warn(e)
+                    return
+        except Exception, e:
             return
 
     def get_profile_pic(self):
@@ -180,8 +184,8 @@ class QuestrUserProfile(AbstractBaseUser):
     def save(self, *args, **kwargs):
         super(QuestrUserProfile, self).save(*args, **kwargs)
         if self.avatar:
-            logger.warn("avatar is not None")
-            logger.warn("avatar is %s", self.avatar)
+            # logger.warn("avatar is not None")
+            # logger.warn("avatar is %s", self.avatar)
             # if not self.thumbnail_exists(500):
             #     logger.warn("thumbnail doesn't exist")
             self.create_thumbnail(500)
