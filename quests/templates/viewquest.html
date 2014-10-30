@@ -137,13 +137,14 @@
 							<p class="inline">{{questdetails.dropoff.address}}, {{questdetails.dropoff.city}}</p>
 
 
-							<div class="panel-group" id="accordion">
+							<div class="panel-group col-md-12 column" id="accordion">
 								<div class="panel panel-default" id="panel1">
-									<div class="panel-heading">
-										<p class="panel-title" style="font-size:10px;"><a data-toggle="collapse" href="#collapseOne" data-parent="#accordion">map</a></p>
+									<div class="panel-heading col-md-2 column" style="border:none;">
+										<strong class="panel-title" style="font-size:10px;"><a data-toggle="collapse" href="#collapseOne" data-parent="#accordion">map</a></strong>
 									</div><!-- ./panel-heading -->
-									<div id="collapseOne" class="panel-collapse collapse collapse">
-										<div class="panel-body">
+									
+									<div id="collapseOne" class="panel-collapse collapse col-md-12 column">
+										<div class="panel-body" style="border:none;">
 											<div id="map-collapse">
 												{# <a href="#"><small class="light-grey" id="btn-map">view map <i class="fa fa-caret-down"></i></small></a> #}
 												<img alt="itemImage" class="itemImage img-rounded" src="{{questdetails.map_image}}">

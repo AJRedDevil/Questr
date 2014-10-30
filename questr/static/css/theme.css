@@ -474,9 +474,9 @@ box-shadow: 0px 1px 0px #C6CACA;
 
 .panel-heading a:after {
     font-family: 'Glyphicons Halflings';
-    content: "\e114";
-    float: right; 
+    content: "\e114"; 
     color: inherit; 
+    font-size: inherit;
 }
 .panel-heading a.collapsed:after {
     content: "\e080";
@@ -832,9 +832,6 @@ box-shadow:         0px 2px 0px 0px #2c3e50;
         max-width: 180px;
     }
 }
-
-
-
 
 
 
