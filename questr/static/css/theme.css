@@ -20,9 +20,9 @@ label {
 .img-circle {
 	width: 140px;
 	height: 140px;
-	border-radius: 70px;
-	-webkit-border-radius: 70px;
-	-moz-border-radius: 70px;
+	border-radius: 100%;
+	-webkit-border-radius: 100%;
+	-moz-border-radius: 100%;
 }
 
 hr {
@@ -570,6 +570,11 @@ box-shadow: 0px 1px 0px #C6CACA;
 
 
 /************* Alert *****************/
+.alert {
+	border-radius: 0px;
+	margin: 0;
+}
+
 .alert-purple { border-color: #694D9F;background: #694D9F;color: #fff; }
 .alert-info-alt { border-color: #B4E1E4;background: #81c7e1;color: #fff; }
 .alert-danger-alt { border-color: #B63E5A;background: #E26868;color: #fff; }
@@ -608,7 +613,6 @@ box-shadow: 0px 1px 0px #C6CACA;
 /*************** Primary Navbar ***************/
 .navbar {
 	background: white;
-	margin-bottom: 4px;
 	border-bottom: none;
 	border-radius: 0;
 	text-align: center;

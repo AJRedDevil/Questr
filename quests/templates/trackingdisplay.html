@@ -305,7 +305,7 @@ img {
             </div>
         </div>
         <div class="col-md-6 column">
-            <h4>"{{questdetails.title|title}}" by {{questdetails.questrs.first_name}} {{questdetails.questrs.last_name}}</h4>
+            <h4>{{questdetails.title|title}}</h4>
 
             <div class="timeline-centered well">
 
@@ -370,7 +370,7 @@ img {
             </article>
         {% endcomment %}
         {% endif %}
-         <!-- GAUVAV -->
+         <!-- GAUrAV -->
 
         {% if questdetails.status == "Completed" %}
             <article class="timeline-entry">
@@ -389,24 +389,14 @@ img {
         {% endif %}
           
     </div>
+</div>
 
 
-
-
-
-
-
-        </div>
-{% comment %}
     <div class="col-md-3 column">
-        <div class="well">
-            <h1 class="text-center" style="font-size:50px;"><i class="fa fa-user"></i></h1>
-            <h6 class="inline">NAME:</h6><p class="inline">  name goes here</p>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-{% endcomment %}
-    </div>
+        
+    </div><!-- ./column -->
+
+    </div><!-- ./row -->
 </div>
     
 {% endblock content %}
