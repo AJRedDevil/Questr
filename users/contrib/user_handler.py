@@ -16,6 +16,7 @@ from users.models import QuestrUserProfile, UserTransactional, QuestrToken, User
 #All external imports (libs, packages)
 from collections import OrderedDict 
 import logging
+import simplejson as json
 from random import choice
 
 # Init Logger
@@ -361,7 +362,7 @@ class CourierManager(object):
                 logger.warn("No active couriers in the system now")
                 ##* inform the master couriers
                 dothis = self.informSuperAdmins(quest)
-                questdetails = Quests.objects.get(id=int(quest.id))
+                questdetails = quest_handler.getQuestDetails(int(quest.id))
                 if dothis == "success":
                     logger.warn("Master Couriers have been informed as no shippers were available for quest %d" % (quest.id))
                     questdetails.isaccepted = True
@@ -369,6 +370,13 @@ class CourierManager(object):
                     questdetails.save()
                     # Setting all questtransactions for this quest as completed because MC are selected
                     transaction_update = QuestTransactional.objects.filter(quest=questdetails.id).update(status=True)
+                    # Setting status of all considered couriers to True
+                    considered_couriers = json.loads(questdetails.considered_couriers.strip(','))
+                    for courier in considered_couriers:
+                        courier = getQuestrDetails(courier)
+                        courier.is_available = True
+                        courier.save()
+
                     eventmanager = quest_handler.QuestEventManager()
                     extrainfo = dict(detail="master courier selected")
                     eventmanager.setevent(quest, 7, extrainfo)
@@ -378,7 +386,7 @@ class CourierManager(object):
                     # "process quest" will have to be put somewhere in his dashboard of quest which are not honored
                     logger.warn("Some serious problem")        
             available_couriers = self.getAvailableCouriersWithProximity(activecouriers, quest)
-            ## Updating the respecitve quest with courier details
+            ## Updating the respecitve quest with available courier details and considered couriers
             quest_handler.updateQuestWithAvailableCourierDetails(quest, available_couriers)
         quest = quest_handler.getQuestDetails(quest.id)
         couriers_list = self.getCouriersInProximity(quest)
