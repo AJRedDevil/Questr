@@ -625,13 +625,14 @@ def accept_quest(request, quest_code):
                             extrainfo = dict(designated_courier=courier.id, detail="quest accepted by courier")
                             eventmanager.setevent(quest, 4, extrainfo)
                             request.session['alert_message'] = dict(type="success",message="Congratulations! You have accepted the quest!")
-                            return redirect('home')
+                            return render(request, 'questaccepted.html',locals())
+                            # return redirect('home')
                     except QuestrUserProfile.DoesNotExist:
                         logger.debug('User does not exist')
                         return redirect('home')
                 else:
-                    request.session['alert_message'] = dict(type="warning",message="Please use the latest verification email sent, or click below to send a new email.")
-                    return redirect('home')
+                    request.session['alert_message'] = dict(type="warning",message="The link has expired, perhaps you were too late to respond.")
+                    return render(request, 'questtimeout.html',locals())
         except QuestTransactional.DoesNotExist:
             return redirect('home')
     return redirect('home')
@@ -686,13 +687,13 @@ def reject_quest(request, quest_code):
                             eventmanager = quest_handler.QuestEventManager()
                             extrainfo = dict(selected_courier=courier.id, detail="quest rejected by courier")
                             eventmanager.setevent(quest, 5, extrainfo)
-                            return redirect('home')
+                            return render(request, 'questrejected.html',locals())
                     except QuestrUserProfile.DoesNotExist:
                         logger.debug('User does not exist')
                         return redirect('home')
                 else:
-                    request.session['alert_message'] = dict(type="warning",message="Please use the latest verification email sent, or click below to send a new email.")
-                    return redirect('home')
+                    # request.session['alert_message'] = dict(type="warning",message="Please use the latest verification email sent, or click below to send a new email.")
+                    return render(request, 'questrejected.html',locals())
         except QuestTransactional.DoesNotExist:
             return redirect('home')
     return redirect('home')
