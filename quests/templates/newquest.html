@@ -30,14 +30,15 @@
 		  
           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
 			
+            <div class="row clearfix">
+    			<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+    				<h6>TITLE</h6>
 
-			<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-				<h6>TITLE</h6>
+    				<input class="form-control ng-pristine ng-invalid" name="title" type="text" placeholder="">
 
-				<input class="form-control ng-pristine ng-invalid" name="title" type="text" placeholder="">
-
-				<span class="error">{{user_form.title.errors}}</span>
-			</div><!-- ./form-group -->
+    				<span class="error">{{user_form.title.errors}}</span>
+    			</div><!-- ./form-group -->
+            </div>
 
 				<!-- SIZE INPUT-->
 				<div class="form-group col-md-5 column" id="size">
@@ -373,6 +374,7 @@
             document.getElementById('srcpostalcode').value = "{{userdetails.address.postalcode}}";
             document.getElementById('srcphone').value = "{{userdetails.phone}}";
             document.getElementById('srcname').value = "{{userdetails.get_full_name}}";
+            document.getElementById('srccity').value = "";
         }
     }    
 </script>
