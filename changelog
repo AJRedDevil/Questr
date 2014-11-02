@@ -1,0 +1,17 @@
+v0.1b
+# moved rabbitmq broker settings to env_var
+# hardcoded id field in questtransaction removed
+# id field in questransaction used as autofield
+# image to be displayed when PP is available and when it's not added
+# south migration users[009], quests[0023] edited manually
+# system would deny creation of quest when rabbitmq server is unreachable
+# event backend added for users and quests module
+# pricing backend restructured
+# pricing now supports custom pricing for each business/customer
+# redirection templates added for accept/decline of quests
+# resetpassword form is fixed
+# settings page design is changed
+# courier auto activation feature added, so a courier selected for a certain round would be enabled after that round of selection
+# bugfix: dropoff phone number added
+# bugfix: autofill now updates city
+# bugfix: user was able to reject quest even after timeout
