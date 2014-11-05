@@ -133,16 +133,16 @@ textarea.form-control {
 
 /************ footer ****************/
 footer {
-	background: #2b2d2e;
+	background: white;
 	font-size: 13px;
 	font-weight: 500;
 	text-align: center;
-	color: white;
+	color: inherit;
 	border-top: none;
 }
 
 footer hr, footer i {
-	border-color: rgba(255,255,255,0.2);
+	border-color: #565a5c;
 }
 
 .supressed-white {
@@ -161,7 +161,7 @@ footer ul {
 footer ul li {
 	list-style: none;
 	display: inline;
-	color: #565a5c;
+	color: inherit;
 }
 
 
@@ -175,8 +175,8 @@ footer ul li {
 	background: transparent;
 	border-style: solid;
 	border-width: 1px;
-	border-color: rgba(255,255,255,0.2);
-	color: white;
+	border-color: #565a5c;
+	color: inherit;
 	margin: auto 10px;
 
 	-moz-transition:all 0.3s ease;
