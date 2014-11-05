@@ -418,16 +418,6 @@ box-shadow: 0px 1px 0px #C6CACA;
 }
 
 
-.dropdown ul.dropdown-menu:after {
-    content: "";
-    border-bottom: 12px solid white;
-    border-right: 12px solid transparent;
-    border-left: 12px solid transparent;
-    position: absolute;
-    top: -12px;
-    right: 14px;
-    z-index: 9;
-}
 
 
 .btn-hollow {
