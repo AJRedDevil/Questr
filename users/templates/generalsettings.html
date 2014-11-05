@@ -1,7 +1,7 @@
 {% extends "settings.html" %}
 {% block tabcontent %}
 <div class="tab-pane active text-style" id="tab1">
-    <div class="container-fluid">
+    <div class="container">
     <div class="row clearfix">
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
       	
@@ -13,7 +13,7 @@
           <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
            
             
-            <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 column text-center">
+            <div class="col-xs-4 col-xs-offset-4 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 column text-center">
               <div class="ratio img-responsive img-circle" style="background-image: url({{user.get_profile_pic}});"></div>
               <div class="input-file">
                 <input type="file" name="avatar" id="file"/>
@@ -24,20 +24,19 @@
           
             <br>
 
+            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 column">
+             
               <!-- Name input-->
-              <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 column">
-
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
                 <h6>FIRST NAME</h6>
                 <div class="form-group">
                 <input id="first_name" name="first_name" type="text" placeholder="" value={{user.first_name}} class="form-control input-xs">
               </div><!-- ./form-group -->
               {{ user_form.first_name.errors }}
               </div><!-- ./column -->
-
-              <div class="col-md-2 col-lg-2 column hidden-xs hidden-sm"></div>
           
             <!-- Last Name input-->
-              <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 column">
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 column">
                 <h6>LAST NAME</h6>
                 <div class="form-group">
                 <input id="last_name" name="last_name" type="text" placeholder="" value={{user.last_name}} class="form-control input-xs">
@@ -46,7 +45,7 @@
               </div><!-- ./column -->
 
             <!-- Username input-->
-              <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 column">
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
                 <h6>USERNAME</h6>
                 <div class="form-group">
                 <input id="displayname" name="displayname" type="text" placeholder="" class="form-control input-xs" value={{user.displayname}}>
@@ -54,10 +53,10 @@
                 {{ user_form.displayname.errors }}
               </div><!-- ./column -->
 
-              <div class="col-md-2 col-lg-2 column"></div>
+             
 
             <!-- Email input-->
-              <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 column">
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
                 <h6>EMAIL</h6>
                 <div class="form-group">
                 <input id="email" name="email" type="text" placeholder="" class="form-control input-xs" value={{user.email}}>
@@ -74,17 +73,25 @@
               </div><!-- ./column -->
             
             <!-- ADDRESS input-->
-              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 column">
+              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
                 <h6>ADDRESS 2</h6>
                 <div class="form-group">
                   <input placeholder="Apartment, suite, unit, building, floor, etc." class="form-control input-xs" name="streetaddress_2" value="{{user.address.streetaddress_2}}">
               </div><!-- ./form-group -->
               </div><!-- ./column -->
 
-              <div class="col-md-2 col-lg-2 column"></div>
+            
+              <!-- POSTAL CODE input-->
+              <div class="col-xs-5 col-sm-3 col-md-3 col-lg-3 column">
+                <h6>POSTAL CODE</h6>
+                <div class="form-group">
+                  <input placeholder="M8V 0A5" class="form-control input-xs" name="postalcode" value="{{user.address.postalcode}}">
+              </div><!-- ./form-group -->
+              </div><!-- ./column -->
+
 
               <!-- LOCATION input-->
-              <div class="col-xs-5 col-sm-5 col-md-4 col-lg-4 column">
+              <div class="col-xs-7 col-sm-3 col-md-3 col-lg-3 column">
                 <h6>CITY</h6>
                 <div class="form-group">
                 <select class="btn-classic" data-size="5" name="city">
@@ -102,23 +109,18 @@
 
 
 
-            <!-- POSTAL CODE input-->
-              <div class="col-xs-5 col-sm-5 col-md-3 col-lg-3 column">
-                <h6>POSTAL CODE</h6>
-                <div class="form-group">
-                  <input placeholder="M8V 0A5" class="form-control input-xs" name="postalcode" value="{{user.address.postalcode}}">
-              </div><!-- ./form-group -->
-              </div><!-- ./column -->
-           
-              <div class="clearfix"></div>
-
             <!-- PHONE NUMBER input-->
-              <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 column">
+              <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 column">
                 <h6>PHONE NUMBER</h6>
                 <div class="form-group">
                   <input placeholder="xxx-xxx-xxxx" class="form-control input-xs" name="phone" value="{{user.phone}}">
               </div><!-- ./form-group -->
               </div><!-- ./column -->
+
+            </div>
+
+
+
 
               <div class="row clearfix">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">
