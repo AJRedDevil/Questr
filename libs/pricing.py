@@ -222,8 +222,8 @@ class WebPricing(object):
 		user = self.user
 		if pricing == None:
 			pricing = { 'rate_meter_drop_weekend' : {'car': 8, 'backpack': 6, 'truck': 90, 'minivan': 10} ,
-                                'rate_per_km_weekend' : {'car': 1.2, 'backpack': 1.0, 'truck': 90, 'minivan': 2.2},
-                                'rate_meter_drop_weekday' : {'car': 6, 'backpack': 5, 'truck': 90, 'minivan': 10}, 
+                                'rate_per_km_weekend' : {'car': 1.0, 'backpack': 1.0, 'truck': 90, 'minivan': 2.2},
+                                'rate_meter_drop_weekday' : {'car': 5, 'backpack': 5, 'truck': 90, 'minivan': 10}, 
                                 'rate_per_km_weekday' : {'car': 1.0, 'backpack': 0.8, 'truck': 75, 'minivan': 2.0},
                                 'hourlist' : {'off_peak_hours': {'start_min': 0, 'start_hr': 8, 'end_hr': 21, 'end_min': 59}},
                                 'chargefreekm' : 2 
@@ -239,8 +239,8 @@ class WebPricing(object):
 			raise Http404
 		if pricing == 'default':
 			pricing = { 'rate_meter_drop_weekend' : {'car': 8, 'backpack': 6, 'truck': 90, 'minivan': 10} ,
-	                            'rate_per_km_weekend' : {'car': 1.2, 'backpack': 1.0, 'truck': 90, 'minivan': 2.2},
-	                            'rate_meter_drop_weekday' : {'car': 6, 'backpack': 5, 'truck': 90, 'minivan': 10}, 
+	                            'rate_per_km_weekend' : {'car': 1.0, 'backpack': 1.0, 'truck': 90, 'minivan': 2.2},
+	                            'rate_meter_drop_weekday' : {'car': 5, 'backpack': 5, 'truck': 90, 'minivan': 10}, 
 	                            'rate_per_km_weekday' : {'car': 1.0, 'backpack': 0.8, 'truck': 75, 'minivan': 2.0},
 	                            'hourlist' : {'off_peak_hours': {'start_min': 0, 'start_hr': 8, 'end_hr': 21, 'end_min': 59}},
 	                            'chargefreekm' : 2 

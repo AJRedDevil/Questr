@@ -617,7 +617,11 @@ def accept_quest(request, quest_code):
                                 courier = user_handler.getQuestrDetails(courier)
                                 courier.is_available = True
                                 courier.save()
-
+                            from libs.twilio_handler import twclient
+                            tw = twclient()
+                            alert_message = tw.load_acceptquest_notif(quest)
+                            logger.warn(alert_message)
+                            tw.sendmessage(courier.phone, alert_message)
                             couriermanager = user_handler.CourierManager()
                             couriermanager.informCourierAfterAcceptance(courier, quest)
                             couriermanager.informQuestrAfterAcceptance(courier, questr, quest)

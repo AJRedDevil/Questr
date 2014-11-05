@@ -33,7 +33,7 @@
 	    <!-- This is the overlay DIV that is displayed while loading a new page -->
 
 
-	    {% if not pagetype %}
+	    {% if not user.is_authenticated %}
 		<nav class="navbar navbar-default" role="navigation">
 		  <div class="">
 		    <!-- Brand and toggle get grouped for better mobile display -->
@@ -117,7 +117,7 @@
 
 
 
-	{% if pagetype == "loggedin" %}
+	{% if user.is_authenticated %}
 
 	<nav class="navbar navbar-default" role="navigation">
   <div class="">
