@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 
 import views as questviews
 
@@ -19,6 +19,10 @@ urlpatterns = patterns('',
     url(r'^reject/(?P<quest_code>[\w\d]+)', questviews.reject_quest, name='reject_quest'),
     url(r'^(?P<questname>[\w\d]+)/$', questviews.viewquest, name='viewquest'),
     # url(r'(?P<questname>[\w\d]+)/delete$', questviews.deletequest, name='deletequest'),
-    url(r'(?P<questname>[\w\d]+)/complete$', questviews.completequest, name='completequest'),
+    ## OLD COMPLETEQUEST
+    # url(r'(?P<questname>[\w\d]+)/complete$', questviews.completequest, name='completequest'),
+    ## NEW COMPLETQUEST FOR TWILIO
+    url(r'(?P<questname>[\w\d]+)/complete/(?P<deliverycode>[\w\d]+)', questviews.completequest, name='completequest'),
+
 
 )

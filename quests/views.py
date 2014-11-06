@@ -15,7 +15,7 @@ from libs import geomaps, pricing, stripeutils
 from users.access.requires import verified, is_quest_alive
 from users.contrib import user_handler
 from users.models import QuestrUserProfile
-from quests.tasks import init_courier_selection, checkstatus
+from quests.tasks import init_courier_selection, checkstatus, send_complete_quest_link
 
 #All external imports (libs, packages)
 import logging
@@ -208,13 +208,9 @@ def newquest(request):
         return redirect('home')
 
     if request.method=="POST":
-        logging.warn(request.POST)
+        # logging.warn(request.POST)
         user_form = QuestCreationForm(request.POST)
-        # logger.debug(user_form.errors)
-        # logger.debug(user_form.is_valid())
-        # logger.debug(user_form)
         if user_form.is_valid():
-            # logger.debug(user_form.fields)
             title = user_form.cleaned_data['title']
             size = user_form.cleaned_data['size']
             description = user_form.cleaned_data['description']
@@ -231,8 +227,6 @@ def newquest(request):
             dstname = user_form.cleaned_data['dstname']
             dstphone = user_form.cleaned_data['dstphone']
             # For distance
-            #the distance and price hsa to be set up into a temp database, also the 
-            #image file needs to be on a temp folder for processign to reduce API calls
             maps = geomaps.GMaps()
             origin = srcaddress+', '+srccity+', '+srcpostalcode
             destination = dstaddress+', '+dstcity+', '+dstpostalcode
@@ -456,70 +450,126 @@ def confirmquest(request):
 #             return redirect('viewquest', questname=questname)
 #     return redirect("home")
 
+##ONLY FOR TWILIO
 @verified
 @login_required
-def completequest(request, questname):
+def completequest(request, questname, deliverycode):
     """Verify delivery code and set the quest as completed
     Send the notification to the offerer and also the review link
     """
     #if already completed ignore
-    pagetype="loggedin"
-    if request.method == "POST":
-        shipper = request.user
-        questname = questname
-        if quest_handler.isShipperForQuest(str(shipper.id), questname):            
-            questdetails = quest_handler.getQuestDetails(questname)
-            if questdetails.isaccepted:
-                # Check if the owner and the user are the same
-                if questdetails.questrs.id == request.user.id:
-                    logger.warn("Attempted complete by the owner himself")
-                    return redirect('home')
+    shipper = request.user
+    questname = questname
+    if quest_handler.isShipperForQuest(str(shipper.id), questname):            
+        questdetails = quest_handler.getQuestDetails(questname)
+        if questdetails.isaccepted:
+            # Check if the owner and the user are the same
+            if questdetails.questrs.id == request.user.id:
+                logger.warn("Attempted complete by the owner himself!")
+                return redirect('home')
 
-                if questdetails.status != 'Accepted':
-                    logger.warn("Attempted complete when quest is not complete")
-                    return redirect('home')
+            if questdetails.status != 'Accepted':
+                logger.warn("Attempted complete on a unaccepted quest!")
+                return redirect('home')
+            
+            delivery_code = deliverycode
+            # verify delivery code
+            if delivery_code:
+                if questdetails.delivery_code != delivery_code:
+                    logger.warn("Provided delivery code \'%s\' doesn't match the one in the quest number %s", delivery_code, questdetails.id)
+                    logger.debug("returned to viewquest page of %s", questname)
+                    request.session['alert_message'] = dict(type="Danger",message="Provided delivery code is not correct!")
+                    return redirect('viewquest', questname=questname) # return with message
+                else:
+                    Quests.objects.filter(id=questname).update(status='Completed')
+                    Quests.objects.filter(id=questname).update(is_complete=True)
+                    ## Update the delivered date
+                    now = timezone.now()
+                    Quests.objects.filter(id=questname).update(delivery_date=now)
+                    ## Reload questdetails to get in the delivery date from quest
+                    questdetails = quest_handler.getQuestDetails(questname)
+                    logger.debug("Quest %s has been successfully completed", questdetails.id)
+                    eventmanager = quest_handler.QuestEventManager()
+                    extrainfo = dict(detail="quest complete")
+                    eventmanager.setevent(questdetails, 8, extrainfo)
+                    from libs.twilio_handler import twclient
+                    tw = twclient()
+                    alert_message="The delivery for {0},{1},{2} is complete.".format(questdetails.dropoff['address'], questdetails.dropoff['city'], questdetails.dropoff['postalcode'])
+                    logger.warn(alert_message)
+                    tw.sendmessage(questdetails.questrs.phone, alert_message)
+                    request.session['alert_message'] = dict(type="Success",message="The Questr has been notified!")
+                    return redirect('viewquest', questname=questname) # display message
+        return redirect('viewquest', questname=questname)
+    else:
+        message = "Imposter detected" # Correct message required
+        logger.debug(message)
+        return redirect('viewquest', questname=questname)
+
+##OLD WAY
+# @verified
+# @login_required
+# def completequest(request, questname):
+#     """Verify delivery code and set the quest as completed
+#     Send the notification to the offerer and also the review link
+#     """
+#     #if already completed ignore
+#     pagetype="loggedin"
+#     if request.method == "POST":
+#         shipper = request.user
+#         questname = questname
+#         if quest_handler.isShipperForQuest(str(shipper.id), questname):            
+#             questdetails = quest_handler.getQuestDetails(questname)
+#             if questdetails.isaccepted:
+#                 # Check if the owner and the user are the same
+#                 if questdetails.questrs.id == request.user.id:
+#                     logger.warn("Attempted complete by the owner himself")
+#                     return redirect('home')
+
+#                 if questdetails.status != 'Accepted':
+#                     logger.warn("Attempted complete when quest is not complete")
+#                     return redirect('home')
                 
-                delivery_code = request.POST['delivery_code']
-                # verify delivery code
-                if delivery_code:
-                    if questdetails.delivery_code != delivery_code:
-                        logger.debug("Provided delivery code \'%s\' doesn't match the one in the quest number %s", delivery_code, questdetails.id)
-                        logger.debug("returned to viewquest page of %s", questname)
-                        request.session['alert_message'] = dict(type="Danger",message="Provided delivery code isn't correct!")
-                        return redirect('viewquest', questname=questname) # return with message
-                    else:
-                        Quests.objects.filter(id=questname).update(status='Completed')
-                        Quests.objects.filter(id=questname).update(is_complete=True)
-                        ## Update the delivered date
-                        now = timezone.now()
-                        Quests.objects.filter(id=questname).update(delivery_date=now)
+#                 delivery_code = request.POST['delivery_code']
+#                 # verify delivery code
+#                 if delivery_code:
+#                     if questdetails.delivery_code != delivery_code:
+#                         logger.debug("Provided delivery code \'%s\' doesn't match the one in the quest number %s", delivery_code, questdetails.id)
+#                         logger.debug("returned to viewquest page of %s", questname)
+#                         request.session['alert_message'] = dict(type="Danger",message="Provided delivery code isn't correct!")
+#                         return redirect('viewquest', questname=questname) # return with message
+#                     else:
+#                         Quests.objects.filter(id=questname).update(status='Completed')
+#                         Quests.objects.filter(id=questname).update(is_complete=True)
+#                         ## Update the delivered date
+#                         now = timezone.now()
+#                         Quests.objects.filter(id=questname).update(delivery_date=now)
 
-                        ## Reload questdetails to get in the delivery date from quest
-                        questdetails = quest_handler.getQuestDetails(questname)
+#                         ## Reload questdetails to get in the delivery date from quest
+#                         questdetails = quest_handler.getQuestDetails(questname)
 
-                        ## Review option disabled for now
-                        # ## Send notification to shipper
-                        # questr_review_link = quest_handler.get_review_link(questname, questr.id)
-                        # email_details = quest_handler.prepQuestCompleteNotification(shipper, questr, questdetails, questr_review_link)
-                        # email_notifier.send_email_notification(shipper, email_details)
-                        # logger.debug("Quest completion email has been sent to %s", shipper.email)
-                        # ## Send notification to questr
-                        # shipper_review_link = quest_handler.get_review_link(questname, shipper.id)
-                        # email_details = quest_handler.prepQuestCompleteNotification(questr, questr, questdetails, shipper_review_link)
-                        # email_notifier.send_email_notification(questr, email_details)
-                        # logger.debug("Quest completion email has been sent to %s", questr.email)
-                        logger.debug("Quest %s has been successfully completed", questdetails.id)
-                        eventmanager = quest_handler.QuestEventManager()
-                        extrainfo = dict(detail="quest complete")
-                        eventmanager.setevent(questdetails, 8, extrainfo)
-                        request.session['alert_message'] = dict(type="Success",message="The Questr has been notified!")
-                        return redirect('viewquest', questname=questname) # display message
-            return redirect('viewquest', questname=questname)
-        else:
-            message = "Imposter detected" # Correct message required
-            logger.debug(message)
-            return redirect('viewquest', questname=questname)
-    return redirect('viewquest', questname=questname)
+#                         ## Review option disabled for now
+#                         # ## Send notification to shipper
+#                         # questr_review_link = quest_handler.get_review_link(questname, questr.id)
+#                         # email_details = quest_handler.prepQuestCompleteNotification(shipper, questr, questdetails, questr_review_link)
+#                         # email_notifier.send_email_notification(shipper, email_details)
+#                         # logger.debug("Quest completion email has been sent to %s", shipper.email)
+#                         # ## Send notification to questr
+#                         # shipper_review_link = quest_handler.get_review_link(questname, shipper.id)
+#                         # email_details = quest_handler.prepQuestCompleteNotification(questr, questr, questdetails, shipper_review_link)
+#                         # email_notifier.send_email_notification(questr, email_details)
+#                         # logger.debug("Quest completion email has been sent to %s", questr.email)
+#                         logger.debug("Quest %s has been successfully completed", questdetails.id)
+#                         eventmanager = quest_handler.QuestEventManager()
+#                         extrainfo = dict(detail="quest complete")
+#                         eventmanager.setevent(questdetails, 8, extrainfo)
+#                         request.session['alert_message'] = dict(type="Success",message="The Questr has been notified!")
+#                         return redirect('viewquest', questname=questname) # display message
+#             return redirect('viewquest', questname=questname)
+#         else:
+#             message = "Imposter detected" # Correct message required
+#             logger.debug(message)
+#             return redirect('viewquest', questname=questname)
+#     return redirect('viewquest', questname=questname)
 
 # @verified
 # @login_required
@@ -577,6 +627,7 @@ def accept_quest(request, quest_code):
     """
         Verifies email of the user and redirect to the home page
     """
+    user = request.user
     logger.debug(quest_code)
     if quest_code:
         try:
@@ -622,6 +673,9 @@ def accept_quest(request, quest_code):
                             alert_message = tw.load_acceptquest_notif(quest)
                             logger.warn(alert_message)
                             tw.sendmessage(courier.phone, alert_message)
+                            tw.sendmessage(questr.phone, 'A courier has accepted your request and is en route now. -Questr')
+                            # After 30 minutes send the guy a message asking if the quest is complete
+                            send_complete_quest_link.apply_async((courier.id, quest.id), countdown=1800)
                             couriermanager = user_handler.CourierManager()
                             couriermanager.informCourierAfterAcceptance(courier, quest)
                             couriermanager.informQuestrAfterAcceptance(courier, questr, quest)
@@ -647,6 +701,7 @@ def reject_quest(request, quest_code):
     """
         Verifies email of the user and redirect to the home page
     """
+    user = request.user
     logger.debug(quest_code)
     if quest_code:
         try:
@@ -676,7 +731,10 @@ def reject_quest(request, quest_code):
                             activate_shipper.apply_async((courier.id,), countdown=int(settings.REJECTED_COURIER_HOLD_TIMER))
                             ##Remove this courier from the current quest's list of available shippers
                             available_couriers = quest.available_couriers
-                            logging.warn(available_couriers)
+                            # logging.warn(available_couriers)
+                            from libs.twilio_handler import twclient
+                            tw = twclient()
+                            tw.sendmessage(courier.phone, "You rejected the package. - Questr")
                             available_couriers.pop(str(courier.id), None)
                             quest.available_couriers = available_couriers
                             ##Save all the details

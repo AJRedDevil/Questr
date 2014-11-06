@@ -120,10 +120,7 @@ class WebPricing(object):
 		return self.__chargefreekm
 
 	def __get_rate_per_km(self, mode='backpack'):
-		logger.warn(self.is_weekend)
-		logger.warn(self.peak_hours)
 		if self.is_weekend or self.peak_hours:
-			logger.warn("hello")
 			rate_per_km = self.__rate_per_km_weekend[mode]
 		else:
 			rate_per_km = self.__rate_per_km_weekday[mode]
@@ -172,11 +169,9 @@ class WebPricing(object):
 	# 		return Decimal(  6 + self.__size_meter_drop + self.__distance * 2.5 * self.__size_modifier).quantize(Decimal('0.01')))
 
 	def __get_weekend_price(self, distance, shipment_mode):
-		logger.warn(self.__get_rate_per_km(shipment_mode))
 		return float(Decimal(self.__get_meter_drop_rate(shipment_mode) + distance * self.__get_rate_per_km(shipment_mode)).quantize(Decimal('0.01')))
 
 	def __get_weekday_price(self, distance, shipment_mode):
-		logger.warn(self.__get_rate_per_km(shipment_mode))
 		return float(Decimal(self.__get_meter_drop_rate(shipment_mode) + distance * self.__get_rate_per_km(shipment_mode)).quantize(Decimal('0.01')))
 
 	# def get_price(self):
@@ -198,7 +193,6 @@ class WebPricing(object):
 		chargefreekm = self.__get_charge_free_km()
 		self.__distance = (float(distance) - chargefreekm) if float(distance) > chargefreekm else 0
 		self.__shipment_mode = shipment_mode
-		logger.warn(self.peak_hours)
 		if self.is_weekend or self.peak_hours:
 			# logger.warn("Travelling %s km on %s at %s00 hrs, a charge of $%s is incurred" % self.__distance, self.__shipment_mode, self.clock_hour, self.__get_weekend_price(self.__distance, self.__shipment_mode))
 			logger.warn("Shipping {0} km(s) on {1} at {2}{3} hrs, a charge of {4} is incurred".format(self.__distance, self.__shipment_mode, self.clock_hour, self.clock_minute, self.__get_weekend_price(self.__distance, self.__shipment_mode)))

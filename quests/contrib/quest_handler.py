@@ -368,7 +368,7 @@ def get_accept_url(quest=None, shipper=None):
     from libs.url_shortener import UrlShortener
     shortener = UrlShortener()
     short_url = shortener.get_short_url(dict(longUrl=accept_link))
-    logger.warn("short url is {0}".format(short_url))
+    logger.warn("short url for accepting the quest {0} for courier {1} is {2}".format(quest, shipper, short_url))
     if short_url==None:
         return accept_link
     else:
@@ -397,7 +397,7 @@ def get_reject_url(quest=None, shipper=None):
     from libs.url_shortener import UrlShortener
     shortener = UrlShortener()
     short_url = shortener.get_short_url(dict(longUrl=reject_link))
-    logger.warn("short url is {0}".format(short_url))
+    logger.warn("short url for rejecting the quest {0} for courier {1} is {2}".format(quest, shipper, short_url))
     if short_url==None:
         return reject_link
     else:

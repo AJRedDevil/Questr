@@ -120,7 +120,7 @@
                     </a>
                 
                     {% endfor %}
-                    {% if allquests.count == 10 %}
+                    {% if activequests.count == 10 %}
                     <div class="row clearfix">
                         <div class="col-md-12 column text-center">
                             <a href="{% url 'activequests' %}"><h5>MORE</h5></a>
@@ -185,7 +185,7 @@
                     </a>
                 
                     {% endfor %}
-                    {% if allquests.count == 10 %}
+                    {% if pastquests.count == 10 %}
                     <div class="row clearfix">
                         <div class="col-md-12 column text-center">
                             <a href="{% url 'pastquests' %}"><h5>MORE</h5></a>
