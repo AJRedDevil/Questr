@@ -9,14 +9,18 @@ class twclient(object):
     def __init__(self):
         self.__twclient = TwilioRestClient(settings.TWILIO_ACCOUNT_SID, settings.TWILO_AUTH_TOKEN)
 
-    def load_newquest_notif(self, accept_url, reject_url):
-        msg = ("Accept - {0} ... Reject - {1} --Questr").format(accept_url, reject_url)
+    def load_newquest_notif(self, quest, accept_url, reject_url):
+        msg = ("Pkg {0} nearby, ${1} for {2}km(s). Please respond within 3 minutes, Accept: {3} \
+            Decline: {4}" )\
+        .format(quest.id, quest.reward,\
+            quest.distance, accept_url, reject_url)
         return msg
 
     def load_acceptquest_notif(self, quest):
-        msg = ("Pickup: {0}({1}), {2},{3},{4} ... Dropoff: {5}({6}), {7},{8},{9}" ).format(quest.pickup['name'], quest.pickup['phone'],\
-            quest.pickup['address'], quest.pickup['postalcode'], quest.pickup['city'], quest.dropoff['name'], quest.dropoff['phone'],\
-            quest.dropoff['address'], quest.dropoff['postalcode'], quest.dropoff['city'])
+        msg = ("You got pkg {0}! Pickup: {1},{2},{3}. {4},{5}   Dropoff: {6},{7},{8}. {9},{10}" )\
+        .format(quest.id, quest.pickup['address'], quest.pickup['city'],\
+            quest.pickup['postalcode'], quest.pickup['name'], quest.pickup['phone'], quest.dropoff['address'], quest.dropoff['city'],\
+            quest.dropoff['postalcode'], quest.dropoff['name'], quest.dropoff['phone'])
         return msg
 
     def sendmessage(self, receiver, message):

@@ -281,8 +281,8 @@ class CourierManager(object):
         logging.warn(reject_url)
         from libs.twilio_handler import twclient
         tw = twclient()
-        alert_message = tw.load_newquest_notif(accept_url, reject_url)
-        logging.warn(alert_message)
+        alert_message = tw.load_newquest_notif(quest, accept_url, reject_url)
+        logger.warn(alert_message)
         tw.sendmessage(courier.phone, alert_message)
         email_details = quest_handler.prepNewQuestNotification(courier, quest, accept_url, reject_url)
         email_notifier.send_email_notification(courier, email_details)
