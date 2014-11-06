@@ -181,12 +181,7 @@
 
       	<li class="dropdown">
 	          <a href="#" class="dropdown-toggle no-margin no-padding" data-toggle="dropdown">
-	       		{% comment %}
 
-	              <span class="no-margin no-padding" style="min-height:30px;max-height:30px;min-width:30px;max-width:30px;display:inline-block;">
-		              <span class="ratio img-responsive img-circle profileImg" style="background-image: url({{user.avatar_file_name}});"></span>
-		          </span>
-		          {% endcomment %}
 		          {% if user.is_shipper %}
 		          	{% if user.is_available %}
 		          	<span class="glyphicon glyphicon-record" style="color:rgba(47,204,112,1.00);"></span>		         	
@@ -195,8 +190,17 @@
 		          	 <span class="glyphicon glyphicon-record"></span> 
 		          	{% endif %}
 		          {% endif %}
-		          <i class="fa fa-user" style="font-size:18px;"></i> {{user.first_name}} {{user.last_name}} 
+		          <i class="fa fa-user" style="font-size:18px;"></i>
+
+		      	<!-- PROFILE IMAGE -->
+		   		<div class="" style="width:28px;height:28px;display:inline-block;margin-top:-100px;margin-down:-100px;padding:0;padding-top:8px;">
+		          <span class="ratio img-responsive img-circle" style="background-image: url({{user.get_profile_pic}});margin:0;"></span>
+		      	</div>
+		      	<!-- PROFILE IMAGE -->
+
+		      	{{user.first_name}} {{user.last_name}} 
 		          <i class="fa fa-caret-down"></i>
+		          
 	          </a>
 	       
 
