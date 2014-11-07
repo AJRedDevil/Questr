@@ -5,6 +5,7 @@
     <!-- Custom CSS -->
     <link href={% static "css/settings.css" %} rel="stylesheet">
     <link href={% static "css/social-buttons.css" %} rel="stylesheet">
+    <link href={% static "css/bootstrap-formhelpers.min.css" %} rel="stylesheet">
 
     <!-- Custom Javascript -->
     <script src={% static "js/angular.min.js" %}></script>
@@ -35,6 +36,7 @@
 
 
 {% block scripts %}
+<script src={% static "js/bootstrap-formhelpers.min.js" %}></script>
 <script>
 	$("select").selectpicker({style: 'btn-sm btn-grad btn-info', menuStyle: 'dropdown-menu'});
 

@@ -3,7 +3,7 @@
 {% load active %}
 {% block localhead %}
 <link href={% static "css/bootstrap-datetimepicker.min.css" %} rel="stylesheet">
-
+<link href={% static "css/bootstrap-formhelpers.min.css" %} rel="stylesheet">
 
 
 {% endblock localhead %}
@@ -118,7 +118,7 @@
 				<!-- PHONE NUMBER -->
 				<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
 					<h6>PHONE</h6>
-					<input id="srcphone" name="srcphone" type="text" placeholder="xxx-xxx-xxxx" class="form-control input-xs bfh-phone ng-pristine ng-invalid" ng-model="user.srcphone" data-country="US" required>
+					<input id="srcphone" name="srcphone" type="text" placeholder="xxx-xxx-xxxx" class="form-control input-xs bfh-phone ng-pristine ng-invalid" ng-model="user.srcphone" data-format="+1 (ddd) ddd-dddd" required>
 					{{user_form.srcphone.errors}}
 				</div><!-- PHONE NUMBER -->
 
@@ -336,6 +336,8 @@
 <script src={% static "js/moment.js" %}></script>
 <script src={% static "js/bootstrap-datetimepicker.js" %}></script>
 <script src={% static "js/jquery.timepicker.js" %}></script>
+<script src={% static "js/bootstrap-formhelpers.min.js" %}></script>
+
 
 <script type="text/javascript">
         $(document).on('click', '.panel-heading', function(e){
@@ -351,8 +353,6 @@
             }
         })
     </script>
-
-    <script type="text/javascript"></script>
 
 <script type="text/javascript">
             $(function () {
