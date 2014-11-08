@@ -7,7 +7,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import authenticate
 from django.db.models import Avg
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.utils import timezone
 
@@ -47,8 +47,12 @@ def signin(request):
     ## if authenticated redirect to user's homepage directly ##
     client_internal_ip = get_real_ip(request)
     client_public_ip = get_ip(request)
+    if request.GET:  
+        next = request.GET['next']
+
     if request.user.is_authenticated():
         return redirect('home')
+
     if request.method == "POST":   
         auth_form = QuestrLocalAuthenticationForm(data=request.POST)
         if auth_form.is_valid():
@@ -59,6 +63,8 @@ def signin(request):
             #Notify the user of his status if he's unavailable
             if request.user.is_authenticated() and request.user.is_shipper and request.user.is_available == False:
                     request.session['alert_message'] = dict(type="warning",message="Your status is set to unavailable, you might want to set it to available!")
+                    if request.POST.get('next'):
+                        return HttpResponseRedirect(request.POST.get('next'))
                     return redirect('home')
             return redirect('home')
 
