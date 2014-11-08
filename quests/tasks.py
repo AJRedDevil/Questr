@@ -10,7 +10,8 @@ from django.conf import settings
 
 import logging
 
-logger = get_task_logger(__name__)
+# Init Logger
+logger = logging.getLogger(__name__)
 
 @app.task
 def inform_shipper_task(quest_id, courier_id):
@@ -108,7 +109,7 @@ def send_complete_quest_link(courier_id, quest_id):
     #Sending the link over SMS to the courier
     from libs.twilio_handler import twclient
     tw = twclient()
-    alert_message="Finished the delivery? If yes, please click on this link: {0}.".format(complete_url)
+    alert_message="Did you finish the delivery {0}? If so, please click on this link: {1}.".format(quest, complete_url)
     logger.warn(alert_message)
     tw.sendmessage(courier.phone, alert_message)
 
