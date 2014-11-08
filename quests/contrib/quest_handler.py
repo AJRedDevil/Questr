@@ -364,7 +364,15 @@ def get_accept_url(quest=None, shipper=None):
         questr_token = QuestToken(token_id=token_id)
         questr_token.save()
         accept_link = "{0}/quest/accept/{1}?quest_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_quest_code(), token_id)
-    return accept_link
+    
+    from libs.url_shortener import UrlShortener
+    shortener = UrlShortener()
+    short_url = shortener.get_short_url(dict(longUrl=accept_link))
+    logger.warn("short url for accepting the quest {0} for courier {1} is {2}".format(quest, shipper, short_url))
+    if short_url==None:
+        return accept_link
+    else:
+        return short_url        
 
 def get_reject_url(quest=None, shipper=None): 
     """
@@ -385,7 +393,15 @@ def get_reject_url(quest=None, shipper=None):
         questr_token = QuestToken(token_id=token_id)
         questr_token.save()
         reject_link = "{0}/quest/reject/{1}?quest_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_quest_code(), token_id)
-    return reject_link
+
+    from libs.url_shortener import UrlShortener
+    shortener = UrlShortener()
+    short_url = shortener.get_short_url(dict(longUrl=reject_link))
+    logger.warn("short url for rejecting the quest {0} for courier {1} is {2}".format(quest, shipper, short_url))
+    if short_url==None:
+        return reject_link
+    else:
+        return short_url 
 
 def get_pickup_time(nowornotnow=None, whatdate=None, whattime=None):
     # If nothing is given, it returns current time plus 5 minutes

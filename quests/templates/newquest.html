@@ -6,7 +6,6 @@
 
 
 
-
 {% endblock localhead %}
 {% block content %}
 
@@ -119,7 +118,7 @@
 				<!-- PHONE NUMBER -->
 				<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
 					<h6>PHONE</h6>
-					<input id="srcphone" name="srcphone" type="text" placeholder="xxx-xxx-xxxx" class="form-control input-xs ng-pristine ng-invalid" ng-model="user.srcphone" required>
+					<input id="srcphone" name="srcphone" type="text" placeholder="xxx-xxx-xxxx" class="form-control input-xs bfh-phone ng-pristine ng-invalid" ng-model="user.srcphone" data-country="US" required>
 					{{user_form.srcphone.errors}}
 				</div><!-- PHONE NUMBER -->
 
@@ -183,7 +182,7 @@
     			<!-- PHONE NUMBER -->
     			<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
     				<h6>PHONE</h6> 
-    				<input id="dstphone" name="dstphone" type="text" placeholder="xxx-xxx-xxxx" class="form-control input-xs  ng-pristine ng-invalid" ng-model="user.dstphone" required>
+    				<input id="dstphone" name="dstphone" type="text" placeholder="xxx-xxx-xxxx" class="form-control input-xs bfh-phone ng-pristine ng-invalid" data-format="+1 (ddd) ddd-dddd" ng-model="user.dstphone" required>
     				{{user_form.dstphone.errors}}
     			</div><!-- PHONE NUMBER -->
 

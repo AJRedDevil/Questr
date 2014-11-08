@@ -33,7 +33,7 @@
 	    <!-- This is the overlay DIV that is displayed while loading a new page -->
 
 
-	    {% if not pagetype %}
+	    {% if not user.is_authenticated %}
 		<nav class="navbar navbar-default" role="navigation">
 		  <div class="">
 		    <!-- Brand and toggle get grouped for better mobile display -->
@@ -117,7 +117,7 @@
 
 
 
-	{% if pagetype == "loggedin" %}
+	{% if user.is_authenticated %}
 
 	<nav class="navbar navbar-default" role="navigation">
   <div class="">
@@ -181,12 +181,7 @@
 
       	<li class="dropdown">
 	          <a href="#" class="dropdown-toggle no-margin no-padding" data-toggle="dropdown">
-	       		{% comment %}
 
-	              <span class="no-margin no-padding" style="min-height:30px;max-height:30px;min-width:30px;max-width:30px;display:inline-block;">
-		              <span class="ratio img-responsive img-circle profileImg" style="background-image: url({{user.avatar_file_name}});"></span>
-		          </span>
-		          {% endcomment %}
 		          {% if user.is_shipper %}
 		          	{% if user.is_available %}
 		          	<span class="glyphicon glyphicon-record" style="color:rgba(47,204,112,1.00);"></span>		         	
@@ -195,8 +190,17 @@
 		          	 <span class="glyphicon glyphicon-record"></span> 
 		          	{% endif %}
 		          {% endif %}
-		          <i class="fa fa-user" style="font-size:18px;"></i> {{user.first_name}} {{user.last_name}} 
+		          <i class="fa fa-user" style="font-size:18px;"></i>
+
+		      	<!-- PROFILE IMAGE -->
+		   		<div class="" style="width:28px;height:28px;display:inline-block;margin-top:-100px;margin-down:-100px;padding:0;padding-top:8px;">
+		          <span class="ratio img-responsive img-circle" style="background-image: url({{user.get_profile_pic}});margin:0;"></span>
+		      	</div>
+		      	<!-- PROFILE IMAGE -->
+
+		      	{{user.first_name}} {{user.last_name}} 
 		          <i class="fa fa-caret-down"></i>
+		          
 	          </a>
 	       
 
@@ -303,7 +307,7 @@
 			<div class="col-md-12 column">
 				
 
-				<div class="col-md-8 col-md-offset-2 column text-center">
+				<div class="col-md-6 col-md-offset-3 column text-center">
 					<a href="{% url 'faq' %}">Frequently Asked Questions</a>
 					<i class="supressed-white">|</i>
 					<a href="{% url 'contact' %}">Contact Us</a>
@@ -317,11 +321,11 @@
 						<i class="copyright">Copyright © 2014 Questr Inc. All rights reserved.</i>
 					</div>
 					{% endcomment %}
-					<br><hr>
+					
 				</div><!-- ./column -->
 
 				<div class="col-md-4 col-md-offset-4 column text-center">
-					<h4>Contact us</h4>	
+					<h4></h4>	
 					<ul>
 							<li>
 						<a class="facebook" target="_blank" href="https://www.facebook.com/questrco"><button class="btn-circle"><i class="fa fa-facebook"></i></button></a>
