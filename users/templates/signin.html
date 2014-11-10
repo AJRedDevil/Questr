@@ -30,33 +30,64 @@
        
         <h4 class="text-center">SIGN IN</h4>
 
+        {% if next %}
+        <form action="/user/signin/?next={{next}}" method="post" class="css-form" novalidate>{% csrf_token %}
+                    <!-- Login with Username and Password --> 
+                    <div class="form-group">
+                        <input type="hidden" name="next" value="{{next}}">
+                        <input class="form-control input-xs" id="username" type="email" name="username" ng-model="user.email" placeholder="Email Address" required>
+                      
+                        <p> 
+                        {% if auth_form.username.errors %}
+                          {{ auth_form.username.errors }}
+                        {% endif %}
+                        </p>
+            
+                        <div class="help-block with-errors"></div>
+                        <input id="password" type="password" class="form-control input-xs" name="password" id="exampleInputPassword1" placeholder="Password" ng-model="user.password" required>
+                        <p> 
+                      {% if auth_form.password.errors %}
+                      {{ auth_form.password.errors }}
+                      {% endif %}
+                      {% if auth_form.errors %}
+                          {{ auth_form.non_field_errors }}
+                      {% endif %}
+                        </p>
+                        
+                        <a href="{% url 'reset_password' %}"><small>Forgot password?</small></a>
+                    
+                        <center><button type="submit" class="btn btn-lg btn-fatty">SIGN IN</button></center>
+                    </div> <!-- ./form-group -->
+            </form>
+        {% else %}
         <form action="{%url 'signin'%}" method="post" class="css-form" novalidate>{% csrf_token %}
-          <!-- Login with Username and Password --> 
-          <div class="form-group">
-              <input class="form-control input-xs" id="username" type="email" name="username" ng-model="user.email" placeholder="Email Address" required>
-              <p>{{user.email}}</p>
-              <p> 
-              {% if auth_form.username.errors %}
-                {{ auth_form.username.errors }}
-              {% endif %}
-              </p>
-  
-              <div class="help-block with-errors"></div>
-              <input id="password" type="password" class="form-control input-xs" name="password" id="exampleInputPassword1" placeholder="Password" ng-model="user.password" required>
-              <p> 
-            {% if auth_form.password.errors %}
-            {{ auth_form.password.errors }}
-            {% endif %}
-            {% if auth_form.errors %}
-                {{ auth_form.non_field_errors }}
-            {% endif %}
-              </p>
-              
-              <a href="{% url 'reset_password' %}"><small>Forgot password?</small></a>
-          
-              <center><button type="submit" class="btn btn-lg btn-fatty">SIGN IN</button></center>
-          </div> <!-- ./form-group -->
-      </form>
+                    <!-- Login with Username and Password --> 
+                    <div class="form-group">
+                        <input class="form-control input-xs" id="username" type="email" name="username" ng-model="user.email" placeholder="Email Address" required>
+                      
+                        <p> 
+                        {% if auth_form.username.errors %}
+                          {{ auth_form.username.errors }}
+                        {% endif %}
+                        </p>
+            
+                        <div class="help-block with-errors"></div>
+                        <input id="password" type="password" class="form-control input-xs" name="password" id="exampleInputPassword1" placeholder="Password" ng-model="user.password" required>
+                        <p> 
+                      {% if auth_form.password.errors %}
+                      {{ auth_form.password.errors }}
+                      {% endif %}
+                      {% if auth_form.errors %}
+                          {{ auth_form.non_field_errors }}
+                      {% endif %}
+                        </p>
+                        
+                        <a href="{% url 'reset_password' %}"><small>Forgot password?</small></a>
+                    
+                        <center><button type="submit" class="btn btn-lg btn-fatty">SIGN IN</button></center>
+                    </div> <!-- ./form-group -->
+            </form>
+        {% endif %}
 	</div><!-- ./column -->  
     </div><!-- ./row -->  
 </div><!-- ./container -->  
@@ -64,12 +95,12 @@
 <style type="text/css">
   .css-form input.ng-invalid.ng-dirty {
     border-color: rgba(232,77,60,1.00);
-    background-color: transparent;
+    
   }
 
   .css-form input.ng-valid.ng-dirty {
     border-color: rgba(47,204,112,1.00);
-     background-color: transparent;
+     
   }
 </style>
 

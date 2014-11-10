@@ -19,43 +19,52 @@ def index(request):
     return render(request, 'index.html', locals())
 
 def loadPage(request, template):
+    user = request.user
     return render(request, template, locals())
 
 def contact(request):
     """Returns the contactus page"""
+    user = request.user
     pagetitle = "Contact US"
     return render(request, 'contact.html', locals())
 
 def about(request):
     """Returns the about us page"""
+    user = request.user
     pagetitle = "About Us"
     return render(request, 'about.html', locals())
 
 def news(request):
     """Returns the news page"""
+    user = request.user
     pagetitle = "In the news !"
     return render(request, 'news.html', locals())
 
 def crowdshipping(request):
+    user = request.user
     """Returns the about crowdshipping page"""
     return render(request, 'crowdshipping.html', locals())
 
 def trust(request):
     """Returns the HOW questr is safe page"""
+    user = request.user
     pagetitle = "Trust"
     return render(request, 'trust.html', locals())
 
 def terms(request):
     """Returns the TOS"""
+    user = request.user
     pagetitle = "Terms of Service"
     return render(request, 'terms.html', locals())
 
 def privacy(request):
     """Returns the Privacy Policy"""
+    user = request.user
     pagetitle = "Privacy Policy"
     return render(request, 'privacy.html', locals())
 
 def faq(request):
+    user = request.user
     pagetitle = "Frequently Asked Questions"
     return render(request, 'faq.html', locals())
 

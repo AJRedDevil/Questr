@@ -15,7 +15,7 @@ class GMaps(object):
 	"""
 	def __init__(self):
 		self.__BASE_URL = "https://maps.googleapis.com/maps/api/directions/json"
-		serverkey = getattr(settings, 'GOOGLE_MAPS_SERVER_KEY', None)
+		serverkey = getattr(settings, 'GOOGLE_SERVER_API_KEY', None)
 		self.__geo_args = {'key':serverkey, 'mode':'driving'}
 		self.__result = {}
 		self.__status = False
@@ -33,7 +33,11 @@ class GMaps(object):
 	def __get_directions(self):
 		url = self.__BASE_URL + '?' + urllib.urlencode(self.__geo_args)
 		log.warn(url)
-		self.__result = simplejson.load(urllib.urlopen(url))
+		try:
+			self.__result = simplejson.load(urllib.urlopen(url))
+		except Exception, e:
+			log.warn(e)
+			print 'Error'
 		if self.__result:
 			self.__status = True if self.__result['status'] == 'OK' else False
 			# if self.__status:
@@ -62,7 +66,7 @@ class GMaps(object):
 		return center
 
 	def __obtain_static_image_url(self, center, start_location, end_location):
-		# browserkey = getattr(settings, 'GOOGLE_MAPS_BROWSER_KEY', None)
+		# browserkey = getattr(settings, 'GOOGLE_BROWSER_API_KEY', None)
 		# zoom=10
 		size="640x640"
 		maptype="roadmap"
