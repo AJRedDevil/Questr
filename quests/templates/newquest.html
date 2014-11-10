@@ -3,7 +3,6 @@
 {% load active %}
 {% block localhead %}
 <link href={% static "css/bootstrap-datetimepicker.min.css" %} rel="stylesheet">
-<link href={% static "css/bootstrap-formhelpers.min.css" %} rel="stylesheet">
 <link href={% static "css/intlTelInput.css" %} rel="stylesheet">
 
 
@@ -346,7 +345,7 @@
 
 <script>
   $("#srcphone").intlTelInput({
-        //autoFormat: false,
+        autoFormat: true,
         //autoHideDialCode: false,
         defaultCountry: "ca",
         //nationalMode: true,
@@ -358,7 +357,7 @@
       });
 
   $("#dstphone").intlTelInput({
-        //autoFormat: false,
+        autoFormat: true,
         //autoHideDialCode: false,
         defaultCountry: "ca",
         //nationalMode: true,
