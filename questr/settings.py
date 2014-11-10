@@ -62,6 +62,7 @@ INSTALLED_APPS = (
     'storages',
     'endless_pagination',
     'djcelery',
+    'rest_framework'
 )
 
 # MIDDLERWARE DEFINITIONS
