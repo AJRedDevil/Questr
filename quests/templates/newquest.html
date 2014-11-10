@@ -4,12 +4,12 @@
 {% block localhead %}
 <link href={% static "css/bootstrap-datetimepicker.min.css" %} rel="stylesheet">
 <link href={% static "css/bootstrap-formhelpers.min.css" %} rel="stylesheet">
+<link href={% static "css/intlTelInput.css" %} rel="stylesheet">
+
 
 
 {% endblock localhead %}
 {% block content %}
-
-
 
 <div class="container-fluid">
    
@@ -24,13 +24,14 @@
 	
 
 	<div class="row clearfix">
-	<form role="form" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" name="form" ng-submit="submitForm()" novalidate>{% csrf_token %}
+	<form role="form" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" novalidate>{% csrf_token %}
 		<div class="col-xs-12 col-sm-12 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
 		  
           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
 			
             <div class="row clearfix">
     			<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+        
     				<h6>TITLE</h6>
 
     				<input class="form-control ng-pristine ng-invalid" name="title" type="text" placeholder="">
@@ -117,8 +118,10 @@
 
 				<!-- PHONE NUMBER -->
 				<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
+
 					<h6>PHONE</h6>
-					<input id="srcphone" name="srcphone" type="text" placeholder="xxx-xxx-xxxx" class="form-control input-xs bfh-phone ng-pristine ng-invalid" ng-model="user.srcphone" data-format="+1 (ddd) ddd-dddd" required>
+				    <input id="srcphone" name="srcphone" type="tel" placeholder="xxx-xxx-xxxx" class="form-control input-xs ng-pristine ng-invalid" required>
+
 					{{user_form.srcphone.errors}}
 				</div><!-- PHONE NUMBER -->
 
@@ -182,7 +185,7 @@
     			<!-- PHONE NUMBER -->
     			<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
     				<h6>PHONE</h6> 
-    				<input id="dstphone" name="dstphone" type="text" placeholder="xxx-xxx-xxxx" class="form-control input-xs bfh-phone ng-pristine ng-invalid" data-format="+1 (ddd) ddd-dddd" ng-model="user.dstphone" required>
+    				<input id="dstphone" name="dstphone" type="tel" placeholder="xxx-xxx-xxxx" class="form-control input-xs ng-pristine ng-invalid" required>
     				{{user_form.dstphone.errors}}
     			</div><!-- PHONE NUMBER -->
 
@@ -320,7 +323,7 @@
 				</div>
 			</div>
 			<br><br><br>
-			<center><button type="submit" class="btn btn-lg btn-rounded">CONTINUE</button></center>
+			<center><button type="submit" class="btn btn-lg btn-rounded" id="continue">CONTINUE</button></center>
 		  </div><!-- ./well -->
 
 
@@ -336,11 +339,40 @@
 <script src={% static "js/moment.js" %}></script>
 <script src={% static "js/bootstrap-datetimepicker.js" %}></script>
 <script src={% static "js/jquery.timepicker.js" %}></script>
-<script src={% static "js/bootstrap-formhelpers.min.js" %}></script>
+<script src={% static "js/intlTelInput.min.js" %}></script>
+<script src={% static "js/angular.min.js" %}></script>
+<script src={% static "js/libphonenumber/build/utils.js" %}></script>
+
+
+<script>
+  $("#srcphone").intlTelInput({
+        //autoFormat: false,
+        //autoHideDialCode: false,
+        defaultCountry: "ca",
+        //nationalMode: true,
+        numberType: "MOBILE",
+        //onlyCountries: ['ca', 'us', 'ch', 'do'],
+        preferredCountries: ['ca', 'us'],
+        responsiveDropdown: true,
+         
+      });
+
+  $("#dstphone").intlTelInput({
+        //autoFormat: false,
+        //autoHideDialCode: false,
+        defaultCountry: "ca",
+        //nationalMode: true,
+        numberType: "MOBILE",
+        //onlyCountries: ['ca', 'us', 'ch', 'do'],
+        preferredCountries: ['ca', 'us'],
+        responsiveDropdown: true,
+        utilsScript: "libphonenumber/build/utils.js" 
+      });
+</script>
 
 
 <script type="text/javascript">
-        $(document).on('click', '.panel-heading', function(e){
+        $(document).on('click', '#continue', function(e){
             var $this = $(this);
             if(!$this.hasClass('panel-collapsed')) {
                 $this.parents('.panel').find('.panel-body').slideUp();
@@ -352,6 +384,14 @@
                 $this.find('i').removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
             }
         })
+
+        $(document).on('click', '#continue', function(e){
+            var cleanNumber1 = $("#srcphone").intlTelInput("getCleanNumber");
+            var cleanNumber2 = $("#dstphone").intlTelInput("getCleanNumber");  
+
+            cleanNumber1 = parseInt('cleanNumber1');
+            cleanNumber2 = parseInt('cleanNumber2');
+         })
     </script>
 
 <script type="text/javascript">
