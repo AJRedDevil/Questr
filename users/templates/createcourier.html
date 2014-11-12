@@ -27,10 +27,9 @@
 
 <div class="container-fluid">
    
-
     <div class="row clearfix">
-        <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 column">
-            <h3 class="lead"><span class="glyphicon glyphicon-user"></span> Create a new Courier here!</h3>
+        <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
+            <h3><i class="fa fa-briefcase"></i> Signup to be a courier here</h3>
         </div><!-- ./column -->
     </div><!-- ./row -->
         
@@ -38,11 +37,11 @@
     <form name="myForm" class="css-form col-md-10 col-md-offset-1 column" form action="{% url 'createcourier' %}" method="post">{% csrf_token %}
       
         
-            <div class="col-xs-12 col-lg-4 col-lg-push-8 column">
-            <p>Already a member?  Sign in <a href="{% url 'signin' %}">here.</a></p>
+            <div class="col-xs-12 col-lg-3 col-lg-push-9 column">
+            <small><strong>Already a member?  Sign in <a href="{% url 'signin' %}">here.</a></strong></small>
             </div><!-- column -->   
 
-            <div class="col-xs-12 col-lg-8 col-lg-pull-4 column">
+            <div class="col-xs-12 col-lg-9 col-lg-pull-3 column">
                 <div class="row clearfix">
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column form-group">
                         <h6>EMAIL</h6> 
@@ -103,17 +102,17 @@
 
                     <!-- PHONE NUMBER -->
                  <div class="row clearfix">
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column form-group">
+                    <div class="col-xs-8 col-sm-4 col-md-4 col-lg-4 column form-group">
                         <h6>PHONE</h6> 
                         <input type="tel" placeholder="xxx-xxx-xxxx" class="form-control input-xs" name="phone" id="phone" required>
                     </div><!-- ./column --> 
 
                     <!-- LOCATION input-->
-                      <div class="col-xs-4 col-sm-3 col-md-4 col-lg-4 column form-group">
+                      <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 column form-group">
                         <h6>CAR TYPE</h6>
                         <div class="form-group"> 
                         <select class="btn-classic btn-md" data-size="2" name="city">
-                        <option>no item selected</option>
+                        <option>none</option>
                         <option>Sedan</option>
                         <option>Van</option>
                         </select>
@@ -123,7 +122,7 @@
 
              <!-- CITY -->
             <div class="row clearfix">
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 column form-group">
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 column form-group">
                 <!-- Location input-->
                     <h6>CITY</h6> 
                     <select id="city" class="btn-classic" data-size="5" name="city">
@@ -145,13 +144,13 @@
                 <h6>ADDRESS LINE 1</h6>
                 <input type="text" class="form-control input-xs" name="streetaddress" id="streetaddress" placeholder="Street Address, P.O box, company name, etc" ng-model="user.streetaddress" required>
             </div><!-- ./column -->
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column form-group">
+            <div class="col-xs-8 col-sm-4 col-md-4 col-lg-4 column form-group">
                 <h6>ADDRESS LINE 2</h6>
                 <input type="text" class="form-control input-xs" name="streetaddress_2" id="streetaddress_2" placeholder="Apartment, suite, unit, building, floor, etc." ng-model="user.streetaddress_2" required>
             </div><!-- ./column -->
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 column form-group">
+            <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 column form-group">
                 <h6>POSTAL CODE</h6>
-                <input type="text" class="form-control input-xs" name="postalcode" id="postalcode" placeholder="Postal Code" required>
+                <input type="text" class="form-control input-xs" name="postalcode" id="postalcode" placeholder="N6A 8G3" required>
             </div><!-- ./column -->
         </div><!-- ./row -->
 
