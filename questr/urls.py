@@ -3,7 +3,7 @@ from django.conf import settings
 
 import views as mainview
 import quests.views as questviews
-from quests.api import QuestsList,QuestsDetail
+from .api import QuestsList, QuestsDetail, PriceCalculator
 
 from rest_framework.urlpatterns import format_suffix_patterns
 
@@ -34,7 +34,9 @@ urlpatterns = patterns('',
     url(r'^help/trust/', mainview.trust, name='trust' ),
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     url(r'^api/quests/$', QuestsList.as_view()),
-    url(r'^api/quest/(?P<pk>[\w\d]+)/$', QuestsDetail.as_view()),
+    url(r'^api/quests/(?P<pk>[0-9]+)/$', QuestsDetail.as_view()),
+    url(r'^api/getprice/$', PriceCalculator.as_view()),
+
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)

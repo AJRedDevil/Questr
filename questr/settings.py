@@ -214,3 +214,11 @@ AVATAR_THUMB_FORMAT = 'JPEG'
 TWILIO_ACCOUNT_SID=os.environ['TWILIO_ACCOUNT_SID']
 TWILO_AUTH_TOKEN=os.environ['TWILO_AUTH_TOKEN']
 TWILIO_NUM_1 = os.environ['TWILIO_NUM_1']
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ]
+}

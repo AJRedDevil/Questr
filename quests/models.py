@@ -1,6 +1,7 @@
 
 
 #All Django Imports
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
@@ -12,15 +13,25 @@ from users.models import *
 import hashlib
 import jsonfield
 import logging
+import pytz
 import uuid
 
 # Init Logger
 logger = logging.getLogger(__name__)
 
+PACKAGE_SELECTION = (('car','Car'),('backpack','Backpack'),('minivan','Minivan'))
+STATUS_SELECTION = (('new','New'),('accepted','Accepted'),('completed','Completed'))
+CITY_SELECTION = (('Toronto','Toronto'),('Brampton','Brampton'),('Markham','Markham'),
+                        ('Mississauga','Mississauga'),('Richmond Hill','Richmond Hill'),('Vaughan','Vaughan'),
+                        ('Oakville','Oakville'))
+
+
+
+def validate_pickuptime(pickup_time):
+    if (pickup_time - timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE))).total_seconds() < 0:
+        raise ValidationError('Pickup time cannot be before current time!')
 
 class Quests(models.Model):
-    PACKAGE_SELECTION = (('car','Car'),('backpack','Backpack'),('minivan','Minivan'))
-    STATUS_SELECTION = (('new','New'),('accepted','Accepted'),('completed','Completed'))
 
     ## Calculating delivery code before hand and inserting it as default so that it won't be tampered with.
     hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
@@ -28,7 +39,7 @@ class Quests(models.Model):
     calc_tracking_number = hashstring[10:15]+hashstring[-15:-10]
     current_time = timezone.now
 
-    questrs = models.ForeignKey(QuestrUserProfile)
+    questrs = models.ForeignKey(QuestrUserProfile, related_name='quests')
     # pretty_url = models.CharField(_('pretty_url'), 
     #     max_length=1000, blank=True)
     description = models.TextField(_('description'), blank=True)
@@ -45,7 +56,7 @@ class Quests(models.Model):
     shipper = models.TextField(_('shipper'), blank=True, null=True) 
     # qr_code = models.URLField(_('qr_code'), blank=True)
     pickup = jsonfield.JSONField(_('pickup'), default={})
-    dropoff = jsonfield.JSONField(_('pickup'), default={})
+    dropoff = jsonfield.JSONField(_('dropoff'), default={})
     isaccepted = models.BooleanField(_('isaccepted'), default=False)
     isnotified = models.BooleanField(_('isnotified'), default=False)
     is_questr_reviewed = models.BooleanField(_('is_questr_reviewed'), default=False)
@@ -59,7 +70,7 @@ class Quests(models.Model):
     available_couriers = jsonfield.JSONField(_('available_couriers'), default={})
     delivery_code = models.TextField(_('delivery_code'), blank=True)
     tracking_number = models.TextField(_('tracking_number'), blank=True)
-    pickup_time = models.DateTimeField(_('pickup_time'), blank=True)
+    pickup_time = models.DateTimeField(_('pickup_time'), blank=True,validators=[validate_pickuptime])
     considered_couriers = models.TextField(_('considered_couriers'), default=[])
 
     def __unicode__(self):
