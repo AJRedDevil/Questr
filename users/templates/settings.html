@@ -55,10 +55,13 @@
         defaultCountry: "ca",
         //nationalMode: true,
         numberType: "MOBILE",
-        //onlyCountries: ['ca', 'us', 'ch', 'do'],
-        preferredCountries: ['ca', 'us'],
-        responsiveDropdown: true,
-        
+        onlyCountries: ['ca'],
+        //preferredCountries: ['ca'],
+        responsiveDropdown: true
       });
+
+  $(document).on('click', '#continue', function(e){
+            var cleanNumber1 = $("#phoneNum").intlTelInput("getCleanNumber");
+         })
 </script>
 {% endblock scripts %}
