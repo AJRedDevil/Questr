@@ -2,24 +2,17 @@
 {% load staticfiles %}
 {% block localhead %}
   <!-- CSS -->
-  <link href={% static "css/sign.css" %} rel="stylesheet">
+  <style type="text/css">
+  .css-form input.ng-invalid.ng-dirty {
+    border-color: rgba(232,77,60,1.00);
+  }
+
+  .css-form input.ng-valid.ng-dirty {
+    border-color: rgba(47,204,112,1.00);
+  }
+</style>
   <script src={% static "js/angular.min.js" %}></script>
 
-  <script>
-  angular.module('validation', [])
-    .controller('Validation', ['$scope', function($scope) {
-      $scope.master = {};
-
-      $scope.update = function(user) {
-        $scope.master = angular.copy(user);
-      };
-
-      $scope.reset = function() {
-        $scope.user = angular.copy($scope.master);
-      };
-      $scope.reset();
-    }]);
-</script>
 
 {% endblock localhead %}
 {% block content %} 
@@ -31,11 +24,11 @@
         <h4 class="text-center">SIGN IN</h4>
 
         {% if next %}
-        <form action="/user/signin/?next={{next}}" method="post" class="css-form" novalidate>{% csrf_token %}
+        <form name="form" action="/user/signin/?next={{next}}" method="post" class="css-form" novalidate>{% csrf_token %}
                     <!-- Login with Username and Password --> 
                     <div class="form-group">
                         <input type="hidden" name="next" value="{{next}}">
-                        <input class="form-control input-xs" id="username" type="email" name="username" ng-model="user.email" placeholder="Email Address" required>
+                        <input class="form-control input-xs" id="username" type="email" name="username" ng-model="user.email" placeholder="Email Address" required />
                       
                         <p> 
                         {% if auth_form.username.errors %}
@@ -44,7 +37,7 @@
                         </p>
             
                         <div class="help-block with-errors"></div>
-                        <input id="password" type="password" class="form-control input-xs" name="password" id="exampleInputPassword1" placeholder="Password" ng-model="user.password" required>
+                        <input id="password" type="password" class="form-control input-xs" name="password" id="exampleInputPassword1" ng-minlength="6" ng-maxlength="20" placeholder="Password" ng-model="user.password" required />
                         <p> 
                       {% if auth_form.password.errors %}
                       {{ auth_form.password.errors }}
@@ -56,23 +49,25 @@
                         
                         <a href="{% url 'reset_password' %}"><small>Forgot password?</small></a>
                     
-                        <center><button type="submit" class="btn btn-lg btn-fatty">SIGN IN</button></center>
+                        <center><button type="submit" class="btn btn-lg btn-fatty text-center" ng-disabled="form.$invalid">SIGN IN</button></center>
                     </div> <!-- ./form-group -->
             </form>
         {% else %}
-        <form action="{%url 'signin'%}" method="post" class="css-form" novalidate>{% csrf_token %}
+        <form action="{%url 'signin'%}" method="post" class="css-form" name="form" novalidate>{% csrf_token %}
                     <!-- Login with Username and Password --> 
-                    <div class="form-group">
-                        <input class="form-control input-xs" id="username" type="email" name="username" ng-model="user.email" placeholder="Email Address" required>
+                    <div class="form-group" ng-controller="Validation">
+                        <input class="form-control input-xs" id="username" type="email" name="username" ng-model="user.email" placeholder="Email Address" required />
                       
                         <p> 
                         {% if auth_form.username.errors %}
                           {{ auth_form.username.errors }}
                         {% endif %}
                         </p>
-            
                         <div class="help-block with-errors"></div>
-                        <input id="password" type="password" class="form-control input-xs" name="password" id="exampleInputPassword1" placeholder="Password" ng-model="user.password" required>
+         
+            
+                       
+                        <input id="password" type="password" class="form-control input-xs" name="password" id="exampleInputPassword1" placeholder="Password" ng-model="user.password" ng-minlength="6" ng-maxlength="20" required />
                         <p> 
                       {% if auth_form.password.errors %}
                       {{ auth_form.password.errors }}
@@ -81,10 +76,11 @@
                           {{ auth_form.non_field_errors }}
                       {% endif %}
                         </p>
+
                         
                         <a href="{% url 'reset_password' %}"><small>Forgot password?</small></a>
                     
-                        <center><button type="submit" class="btn btn-lg btn-fatty">SIGN IN</button></center>
+                        <center><button type="submit" class="btn btn-lg btn-fatty" ng-disabled="form.$invalid || isUnchanged(user)">SIGN IN</button></center>
                     </div> <!-- ./form-group -->
             </form>
         {% endif %}
@@ -92,17 +88,7 @@
     </div><!-- ./row -->  
 </div><!-- ./container -->  
 
-<style type="text/css">
-  .css-form input.ng-invalid.ng-dirty {
-    border-color: rgba(232,77,60,1.00);
-  }
-
-  .css-form input.ng-valid.ng-dirty {
-    border-color: rgba(47,204,112,1.00);
-  }
-</style>
-
-       
+   
 {% comment %}
   	<center>
     	<h6>Sign in with</h6>
@@ -135,4 +121,24 @@
 
 {% endblock %}
 {% block scripts %}
+  <script>
+  angular.module('validation', [])
+    .controller('Validation', ['$scope', function($scope) {
+      $scope.master = {};
+
+      $scope.update = function(user) {
+        $scope.master = angular.copy(user);
+      };
+
+      $scope.reset = function() {
+        $scope.user = angular.copy($scope.master);
+      };
+
+      $scope.isUnchanged = function(user) {
+      return angular.equals(user, $scope.master);
+    };
+
+      $scope.reset();
+    }]);
+</script>
 {% endblock scripts %}
