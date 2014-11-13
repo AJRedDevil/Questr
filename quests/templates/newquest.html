@@ -3,7 +3,7 @@
 {% load active %}
 {% block localhead %}
 <link href={% static "css/bootstrap-datetimepicker.min.css" %} rel="stylesheet">
-<link href={% static "css/intlTelInput.css" %} rel="stylesheet">
+<!-- link href={% static "css/intlTelInput.css" %} rel="stylesheet" -->
   <script src={% static "js/angular.min.js" %}></script>
 
 
@@ -350,26 +350,12 @@
 <script src={% static "js/moment.js" %}></script>
 <script src={% static "js/bootstrap-datetimepicker.js" %}></script>
 <script src={% static "js/jquery.timepicker.js" %}></script>
-<script src={% static "js/intlTelInput.min.js" %}></script>
 <script src={% static "js/angular.min.js" %}></script>
-<script src={% static "js/libphonenumber/build/utils.js" %}></script>
+<!--script src={% static "js/intlTelInput.min.js" %}></script-->
+<!--script src={% static "js/libphonenumber/build/utils.js" %}></script-->
 
-<script>
-  angular.module('validation', [])
-    .controller('Validation', ['$scope', function($scope) {
-      $scope.master = {};
 
-      $scope.update = function(user) {
-        $scope.master = angular.copy(user);
-      };
-
-      $scope.reset = function() {
-        $scope.user = angular.copy($scope.master);
-      };
-      $scope.reset();
-    }]);
-</script>
-
+<!-- 
 <script>
   $("#srcphone").intlTelInput({
         autoFormat: true,
@@ -394,6 +380,7 @@
         responsiveDropdown: true
       });
 </script>
+-->
 
 
 <script type="text/javascript">
