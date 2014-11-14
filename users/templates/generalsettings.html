@@ -63,7 +63,7 @@
               </div><!-- ./column -->
            
             <!-- ADDRESS input-->
-              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 column">
                 <h6>ADDRESS 1</h6>
                 <div class="form-group">
                   <input placeholder="Street Address, P.O box, company name, etc" class="form-control input-xs" name="streetaddress" value="{{user.address.streetaddress}}">
@@ -112,7 +112,7 @@
               <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 column">
                 <h6>PHONE NUMBER</h6>
                 <div class="form-group">
-                  <input placeholder="xxx-xxx-xxxx" type="tel" id="phone" class="form-control input-xs ng-pristine ng-invalid" name="phone" value="{{user.phone}}" disabled>
+                  <input placeholder="xxx-xxx-xxxx" type="text" class="form-control input-xs ng-pristine ng-invalid" name="phone" value="{{user.phone}}" >
               </div><!-- ./form-group -->
               </div><!-- ./column -->
 
@@ -133,11 +133,10 @@
 
               <div class="row clearfix">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column text-center">
-                <button type="submit" class="btn btn-rounded btn-lg">SAVE</button>
+                <button type="submit" id="save" class="btn btn-rounded btn-lg">SAVE</button>
 
               </div><!-- ./column -->
             </div><!-- ./row -->
-            <br><br>
           </form>     
         
       </div>

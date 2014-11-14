@@ -422,10 +422,12 @@
         if(clicked_id == "autofill")
         {
             document.getElementById('srcaddress').value = "{{userdetails.address.streetaddress}}";
+            document.getElementById('srcaddress_2').value = "{{userdetails.address.streetaddress_2}}";
             document.getElementById('srcpostalcode').value = "{{userdetails.address.postalcode}}";
             document.getElementById('srcphone').value = "{{userdetails.phone}}";
             document.getElementById('srcname').value = "{{userdetails.get_full_name}}";
             document.getElementById('srccity').value = "{{userdetails.address.city}}";
+
         }
     }    
 </script>

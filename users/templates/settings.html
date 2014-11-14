@@ -51,11 +51,14 @@
         responsiveDropdown: true
       });
 
-
     $( "#phone" ).focusout(function() {
     var cleanNumber1 = $("#phone").intlTelInput("getCleanNumber");
     $("#phone").val(cleanNumber1);
+    
     //document.getElementById('phone').value = cleanNumber1;
 });
+    $( "#save" ).click(function() {
+      $('#phone').attr('id','phone_processed');
+    });
 </script>
 {% endblock scripts %}
