@@ -560,8 +560,8 @@ box-shadow: 0px 1px 0px #C6CACA;
 }
 
 .pagination li.active a, .pagination li.active a:hover {
-	background: grey;
-	border-color: grey;
+	background: gray;
+	border-color: gray;
 }
 
 

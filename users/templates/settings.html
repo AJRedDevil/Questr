@@ -38,7 +38,6 @@
 <script src={% static "js/intlTelInput.min.js" %}></script>
 <script src={% static "js/libphonenumber/build/utils.js" %}></script>
 
-
 <script>
   $("#phone").intlTelInput({
         //autoFormat: false,
@@ -52,10 +51,8 @@
       });
 
     $( "#phone" ).focusout(function() {
-    var cleanNumber1 = $("#phone").intlTelInput("getCleanNumber");
-    $("#phone").val(cleanNumber1);
-    
-    //document.getElementById('phone').value = cleanNumber1;
+    var cleanNumber = $("#phone").intlTelInput("getCleanNumber");
+    document.getElementById('phone').value = cleanNumber;
 });
     $( "#save" ).click(function() {
       $('#phone').attr('id','phone_processed');
