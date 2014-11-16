@@ -35,9 +35,10 @@ class twclient(object):
         num = settings.TWILIO_NUM_1
         try:
             conn = self.__twclient.messages.create(from_=num,body=message,to=receiver)
+            return conn.sid
         except Exception, e:
-            raise e
-        return conn.sid
+            logger.warn(e)
+            logger.warn("Error sending SMS to {0}".format(receiver))
 
     def getclient(self):
         return self.__twclient
