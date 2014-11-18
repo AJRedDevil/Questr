@@ -3,8 +3,7 @@
 {% load active %}
 {% block localhead %}
 <link href={% static "css/bootstrap-datetimepicker.min.css" %} rel="stylesheet">
-<!-- link href={% static "css/intlTelInput.css" %} rel="stylesheet" -->
-  <script src={% static "js/angular.min.js" %}></script>
+<link href={% static "css/intlTelInput.css" %} rel="stylesheet">
 
 
 
@@ -120,8 +119,8 @@
 				<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
 
 					<h6>PHONE</h6>
-				    <input id="srcphone" name="srcphone" type="tel" placeholder="xxx-xxx-xxxx" class="form-control input-xs" required>
-
+				    <input id="srcphone" type="tel" class="form-control input-xs" required>
+                    <input type="hidden" class="form-control input-xs" id="phone1" name="srcphone" value={{user.phone}}>
 					{{user_form.srcphone.errors}}
 				</div><!-- PHONE NUMBER -->
 
@@ -184,7 +183,8 @@
     			<!-- PHONE NUMBER -->
     			<div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
     				<h6>PHONE</h6> 
-    				<input id="dstphone" name="dstphone" type="tel" placeholder="xxx-xxx-xxxx" class="form-control input-xs ng-pristine ng-invalid" required>
+    				<input id="dstphone"  type="tel" class="form-control input-xs ng-pristine ng-invalid" required>
+                    <input type="hidden" class="form-control input-xs" id="phone2" name="dstphone">
     				{{user_form.dstphone.errors}}
     			</div><!-- PHONE NUMBER -->
 
@@ -347,40 +347,50 @@
   }
 </style>
 
+
 <script src={% static "js/moment.js" %}></script>
 <script src={% static "js/bootstrap-datetimepicker.js" %}></script>
 <script src={% static "js/jquery.timepicker.js" %}></script>
 <script src={% static "js/angular.min.js" %}></script>
-<!--script src={% static "js/intlTelInput.min.js" %}></script-->
-<!--script src={% static "js/libphonenumber/build/utils.js" %}></script-->
+<script src={% static "js/intlTelInput.min.js" %}></script>
+<script src={% static "js/libphonenumber/build/utils.js" %}></script>
 
 
-<!-- 
 <script>
   $("#srcphone").intlTelInput({
         autoFormat: true,
         //autoHideDialCode: false,
         defaultCountry: "ca",
-        //nationalMode: true,
-        numberType: "MOBILE",
-        //onlyCountries: ['ca', 'us', 'ch', 'do'],
-        preferredCountries: ['ca', 'us'],
+        nationalMode: true,
+        //numberType: "MOBILE",
+        onlyCountries: ['ca'],
+        //preferredCountries: ['ca'],
         responsiveDropdown: true
-         
       });
 
   $("#dstphone").intlTelInput({
         autoFormat: true,
         //autoHideDialCode: false,
         defaultCountry: "ca",
-        //nationalMode: true,
-        numberType: "MOBILE",
-        //onlyCountries: ['ca', 'us', 'ch', 'do'],
-        preferredCountries: ['ca', 'us'],
+        nationalMode: true,
+        //numberType: "MOBILE",
+        onlyCountries: ['ca'],
+        //preferredCountries: ['ca'],
         responsiveDropdown: true
       });
+
+  $( "#srcphone" ).focusout(function() {
+            var cleanNumber = $("#srcphone").intlTelInput("getCleanNumber");
+            document.getElementById('srcphone').value = cleanNumber;
+            document.getElementById('phone1').value = cleanNumber;
+        });
+
+        $( "#dstphone" ).focusout(function() {
+            var cleanNumber = $("#dstphone").intlTelInput("getCleanNumber");
+            document.getElementById('dstphone').value = cleanNumber;
+            document.getElementById('phone2').value = cleanNumber;
+        });
 </script>
--->
 
 
 <script type="text/javascript">
@@ -396,14 +406,6 @@
                 $this.find('i').removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
             }
         })
-
-        $(document).on('click', '#continue', function(e){
-            var cleanNumber1 = $("#srcphone").intlTelInput("getCleanNumber");
-            var cleanNumber2 = $("#dstphone").intlTelInput("getCleanNumber");  
-
-            cleanNumber1 = parseInt('cleanNumber1');
-            cleanNumber2 = parseInt('cleanNumber2');
-         })
     </script>
 
 <script type="text/javascript">

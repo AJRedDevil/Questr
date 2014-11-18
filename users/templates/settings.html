@@ -40,10 +40,10 @@
 
 <script>
   $("#mobile-number").intlTelInput({
-        //autoFormat: false,
-        autoHideDialCode: false,
+        autoFormat: true,
+        //autoHideDialCode: false,
         defaultCountry: "ca",
-        //nationalMode: true,
+        nationalMode: true,
         //numberType: "MOBILE",
         onlyCountries: ['ca'],
         //preferredCountries: ['ca'],
@@ -55,6 +55,5 @@
     document.getElementById('mobile-number').value = cleanNumber;
     document.getElementById('phone').value = cleanNumber;
 });
-
 </script>
 {% endblock scripts %}
