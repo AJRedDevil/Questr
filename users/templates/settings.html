@@ -39,9 +39,9 @@
 <script src={% static "js/libphonenumber/build/utils.js" %}></script>
 
 <script>
-  $("#phone").intlTelInput({
+  $("#mobile-number").intlTelInput({
         //autoFormat: false,
-        //autoHideDialCode: false,
+        autoHideDialCode: false,
         defaultCountry: "ca",
         //nationalMode: true,
         //numberType: "MOBILE",
@@ -50,12 +50,11 @@
         responsiveDropdown: true
       });
 
-    $( "#phone" ).focusout(function() {
-    var cleanNumber = $("#phone").intlTelInput("getCleanNumber");
+    $( "#mobile-number" ).focusout(function() {
+    var cleanNumber = $("#mobile-number").intlTelInput("getCleanNumber");
+    document.getElementById('mobile-number').value = cleanNumber;
     document.getElementById('phone').value = cleanNumber;
 });
-    $( "#save" ).click(function() {
-      $('#phone').attr('id','phone_processed');
-    });
+
 </script>
 {% endblock scripts %}
