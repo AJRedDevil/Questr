@@ -74,6 +74,7 @@
 			
 				<div class="row clearfix form-group">
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+						<h6>EMAIL</h6>
 						<input id="email" name="email" class="form-control input-sm" type="email" ng-model="user.email" placeholder="Email" required />
 					</div>
                     {{user_form.email.errors}}			              
@@ -82,11 +83,13 @@
 				<!-- PASSWORDS -->			
 				<div class="row clearfix form-group">
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">    
+						<h6>PASSWORD</h6>
 						<input id="password1" class="form-control input-sm" placeholder="Password" ng-model="user.password" type="password" name="password1" data-ng-class="{'ng-invalid':myForm.password2.$error.match}" />
 						<span class="help-block"><small><strong>Minimum of 6 characters</strong></small></span>
 					</div><!-- ./column -->
 	                
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+						 <h6>RETYPE PASSWORD</h6>
 						<input id="password2" class="form-control input-sm" ng-model="user.passwordConfirm" type="password" data-match="user.password" name="password2" />
 					</div><!-- ./column -->	
 					<div data-ng-show="myForm.password2.$error.match">Passwords do not match!</div>	
@@ -97,6 +100,7 @@
 				<!-- USERNAME -->
 				<div class="row clearfix form-group">
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+						<h6>USERNAME</h6>
 			            <input type="text" class="form-control input-sm" placeholder="Username" name="displayname" id="displayname" ng-model="user.displayname" required>
 			            {% if user_form.displayname.errors %}
 			                {{user_form.displayname.errors}}
@@ -107,14 +111,16 @@
 	            <!-- FIRST AND LAST -->
 	            <div class="row clearfix form-group">
 			        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
-			            <input type="text" class="form-control input-sm" name="first_name" id="first_name" placeholder="First Name" ng-model="user.firstname" required>   
+			        	<h6>FIRST NAME</h6>
+			            <input type="text" class="form-control input-sm" name="first_name" id="first_name" placeholder="Bob" ng-model="user.firstname" required>   
 			            {% if user_form.first_name.errors %}
 			                {{user_form.first_name.errors}}
 			            {% endif %}   
 			    	</div><!-- ./column -->
 
 		           	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
-			            <input type="text" class="form-control input-sm" name="last_name" id="last_name" placeholder="Last Name" ng-model="user.lastname" required>
+		           		<h6>LAST NAME</h6>
+			            <input type="text" class="form-control input-sm" name="last_name" id="last_name" placeholder="Smith" ng-model="user.lastname" required>
 			            {% if user_form.last_name.errors %}
 			                {{user_form.last_name.errors}}
 			            {% endif %}
@@ -123,10 +129,9 @@
 
     			<!-- CITY -->
 	            <div class="row clearfix form-group">
-			    
-			    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+			    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column">
 		            <!-- CITY DROPDOWN -->
-					<label for="City" class="control-label">City</label>
+					<h6>CITY</h6>
 					<!-- Location input-->
 					<div class="form-group">
 						<select id="city" class="btn-classic" data-size="5" name="city">
@@ -140,28 +145,42 @@
 						</select>
 					</div>  <!-- ./form-group -->
 				</div><!-- ./column -->
-			</div><!-- ./column -->
+				<div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column">
+					<h6>POSTAL CODE</h6>
+	          		<input type="text" class="form-control input-sm" name="postalcode" id="postalcode" placeholder="L4E 2X6" required>
+				</div><!-- ./column -->
+			</div><!-- ./row -->
 
 
 		<!-- ADDRESS AND POSTAL CODE -->
 	    	<div class="row clearfix form-group">
 			    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+			    	<h6>ADDRESS</h6>
 	          		<input type="text" class="form-control input-sm" name="streetaddress" id="streetaddress" placeholder="Address" ng-model="user.streetaddress" required>
 				</div><!-- ./column -->
 			    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+			    	<h6>ADDRESS 2</h6>
 	          		<input type="text" class="form-control input-sm" name="streetaddress_2" id="streetaddress_2" placeholder="Address" ng-model="user.streetaddress_2" required>
-				</div><!-- ./column -->
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
-	          		<input type="text" class="form-control input-sm" name="postalcode" id="postalcode" placeholder="Postal Code" required>
 				</div><!-- ./column -->
 		</div><!-- ./row -->
 
 		<!-- PHONE NUMBER -->
 	  		<div class="row clearfix form-group">
-			    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+			    <div class="col-xs-8 col-sm-6 col-md-6 col-lg-6 column">
+			    	<h6>PHONE</h6>
 	          		<input type="tel" class="form-control input-xs" id="phone" required>
                        <input type="hidden" class="form-control input-xs" id="phoneHidden" name="phone">
 			</div>
+			<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3 column form-group">
+                        <h6>VEHICLE TYPE</h6>
+                        <div class="form-group"> 
+                        <select class="btn-classic btn-md" data-size="2" name="city">
+                        <option>none</option>
+                        <option>Sedan</option>
+                        <option>Van</option>
+                        </select>
+                        </div>
+                      </div><!-- ./column -->
 		</div>
 
 	          
@@ -174,6 +193,7 @@
 			<div class="col-xs-12 col-md-6 column">
           		<button type="submit" class="btn btn-lg btn-fatty" id="createAccBtn">CREATE ACCOUNT</button>
 			</div><!-- ./column -->
+
 		</div><!-- ./row -->  
 	</form>
 	</div><!-- ./row -->
@@ -699,6 +719,8 @@
   </div>
 </div><!-- ./modal -->
 
+
+{% block scripts %}
 <style type="text/css">
   .css-form input.ng-invalid.ng-dirty {
     border-color: rgba(232,77,60,1.00);
@@ -750,5 +772,4 @@ $("#phone").intlTelInput({
             }
         };
     });
-{% block scripts %}
 {% endblock scripts %}

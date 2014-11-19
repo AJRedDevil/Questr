@@ -5,7 +5,7 @@ import views as mainview
 import quests.views as questviews
 
 urlpatterns = patterns('',
-    # Examples:
+    #Examples:
     url(r'^$', mainview.index, name="index"),
     url(r'^contactus$', mainview.contactus, name='contactus'),
 
