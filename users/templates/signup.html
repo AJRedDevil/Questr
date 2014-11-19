@@ -75,7 +75,7 @@
 				<div class="row clearfix form-group">
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
 						<h6>EMAIL</h6>
-						<input id="email" name="email" class="form-control input-sm" type="email" ng-model="user.email" placeholder="Email" required />
+						<input id="email" name="email" class="form-control input-sm" type="email" ng-model="user.email" placeholder="youremail@domain.com" required />
 					</div>
                     {{user_form.email.errors}}			              
 				</div><!-- ./row -->
@@ -84,13 +84,13 @@
 				<div class="row clearfix form-group">
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">    
 						<h6>PASSWORD</h6>
-						<input id="password1" class="form-control input-sm" placeholder="Password" ng-model="user.password" type="password" name="password1" data-ng-class="{'ng-invalid':myForm.password2.$error.match}" />
+						<input id="password1" class="form-control input-xs" placeholder="xxxxxxxxx" ng-model="user.password" type="password" name="password1" data-ng-class="{'ng-invalid':myForm.password2.$error.match}" />
 						<span class="help-block"><small><strong>Minimum of 6 characters</strong></small></span>
 					</div><!-- ./column -->
 	                
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
 						 <h6>RETYPE PASSWORD</h6>
-						<input id="password2" class="form-control input-sm" ng-model="user.passwordConfirm" type="password" data-match="user.password" name="password2" />
+						<input id="password2" class="form-control input-xs" placeholder="xxxxxxxxx" ng-model="user.passwordConfirm" type="password" data-match="user.password" name="password2" />
 					</div><!-- ./column -->	
 					<div data-ng-show="myForm.password2.$error.match">Passwords do not match!</div>	
 					{{user_form.password1.errors}}				
@@ -101,7 +101,7 @@
 				<div class="row clearfix form-group">
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
 						<h6>USERNAME</h6>
-			            <input type="text" class="form-control input-sm" placeholder="Username" name="displayname" id="displayname" ng-model="user.displayname" required>
+			            <input type="text" class="form-control input-xs" placeholder="donvvo" name="displayname" id="displayname" ng-model="user.displayname" required>
 			            {% if user_form.displayname.errors %}
 			                {{user_form.displayname.errors}}
 			            {% endif %}
@@ -156,11 +156,11 @@
 	    	<div class="row clearfix form-group">
 			    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
 			    	<h6>ADDRESS</h6>
-	          		<input type="text" class="form-control input-sm" name="streetaddress" id="streetaddress" placeholder="Address" ng-model="user.streetaddress" required>
+	          		<input type="text" class="form-control input-sm" name="streetaddress" id="streetaddress" placeholder="Street Address, P.O box, company name, etc" ng-model="user.streetaddress" required>
 				</div><!-- ./column -->
 			    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
 			    	<h6>ADDRESS 2</h6>
-	          		<input type="text" class="form-control input-sm" name="streetaddress_2" id="streetaddress_2" placeholder="Address" ng-model="user.streetaddress_2" required>
+	          		<input type="text" class="form-control input-sm" name="streetaddress_2" id="streetaddress_2" placeholder="Apartment, suite, unit, building, floor, etc." ng-model="user.streetaddress_2" required>
 				</div><!-- ./column -->
 		</div><!-- ./row -->
 
