@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% block localhead %}
 <link href={% static "css/sign.css" %} rel="stylesheet">
+<link href={% static "css/intlTelInput.css" %} rel="stylesheet">
 <script src={% static "js/angular.min.js" %}></script>
 {% endblock localhead %}
 {% block content%}
@@ -9,7 +10,7 @@
 {% comment %}
 <div class="container-fluid">
 	<div class="row clearfix">
-		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column" style="margin-top:20px;">
+		<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
 		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column col small" id="customer">
 			
 			<h3>I want to be a user</h3>
@@ -17,7 +18,7 @@
 		</div>
 		<div class="col-xs-12 col-sm-6 col-sm-6 col-md-6 col-lg-6 column col small" id="shipper">
 			<h3>I want to be a shipper</h3>
-			<button class="btn ">Sign Up</button>
+			<button class="btn">Sign Up</button>
 		</div><!-- ./column -->
 	</div><!-- ./column -->
 	</div><!-- ./row -->
@@ -65,8 +66,7 @@
 		<div class="col-md-10 col-md-offset-1 column">
 			
 			<div class="col-xs-12 col-lg-4 col-lg-push-8 column">
-				<hr>
-				<p>Already a member?  Sign in <a href="{% url 'signin' %}">here.</a></p>
+				<small>Already a member?  Sign in <a href="{% url 'signin' %}">here.</a></small>
 			</div><!-- column -->	
 
 			<div class="col-xs-12 col-lg-8 col-lg-pull-4 column">
@@ -159,8 +159,8 @@
 		<!-- PHONE NUMBER -->
 	  		<div class="row clearfix form-group">
 			    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
-
-	          		  <input type="text" class="form-control input-sm" name="phone" id="phone" placeholder="Phone Number" required>
+	          		<input type="tel" class="form-control input-xs" id="phone" required>
+                       <input type="hidden" class="form-control input-xs" id="phoneHidden" name="phone">
 			</div>
 		</div>
 
@@ -709,6 +709,28 @@
   }
 </style>
 
+<script src={% static "js/intlTelInput.min.js" %}></script>
+<script src={% static "js/libphonenumber/build/utils.js" %}></script>
+
+<script type="text/javascript">
+$("#phone").intlTelInput({
+        autoFormat: true,
+        //autoHideDialCode: false,
+        defaultCountry: "ca",
+        nationalMode: true,
+        //numberType: "MOBILE",
+        onlyCountries: ['ca'],
+        //preferredCountries: ['ca'],
+        responsiveDropdown: true
+      });
+
+        $( "#phone" ).focusout(function() {
+            var cleanNumber = $("#phone").intlTelInput("getCleanNumber");
+            document.getElementById('phone').value = cleanNumber;
+            document.getElementById('phoneHidden').value = cleanNumber;
+        });
+</script>
+
 <script type="text/javascript">
      var app = angular.module('myApp', []);
     app.directive('match', function () {
@@ -728,8 +750,5 @@
             }
         };
     });
-</script>
-
-  
 {% block scripts %}
 {% endblock scripts %}
