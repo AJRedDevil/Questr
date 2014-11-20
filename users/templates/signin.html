@@ -1,26 +1,34 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
-    <!-- CSS -->
-    <link href={% static "css/sign.css" %} rel="stylesheet">
-    <script src={% static "js/angular.min.js" %}></script>
+  <!-- CSS -->
+  <style type="text/css">
+  .css-form input.ng-invalid.ng-dirty {
+    border-color: rgba(232,77,60,1.00);
+  }
+
+  .css-form input.ng-valid.ng-dirty {
+    border-color: rgba(47,204,112,1.00);
+  }
+</style>
+  <script src={% static "js/angular.min.js" %}></script>
+
 
 {% endblock localhead %}
 {% block content %} 
 
-
 <div class="container-fluid" ng-app="validation">		
-    <div class="row clearfix">
+    <div class="row clearfix" ng-controller="Validation">
     	<div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 column">
-        <br><br><br>
+       
         <h4 class="text-center">SIGN IN</h4>
-        <hr>
+
         {% if next %}
-        <form action="/user/signin/?next={{next}}" method="post" class="css-form" novalidate>{% csrf_token %}
+        <form name="form" action="/user/signin/?next={{next}}" method="post" class="css-form" novalidate>{% csrf_token %}
                     <!-- Login with Username and Password --> 
-                    <div class="form-group">
+                    <div class="form-group" ng-controller="Validation">
                         <input type="hidden" name="next" value="{{next}}">
-                        <input class="form-control input-xs" id="username" type="email" name="username" ng-model="user.email" placeholder="Email Address" required>
+                        <input class="form-control input-xs" id="username" type="email" name="username" ng-model="user.email" placeholder="Email Address" required />
                       
                         <p> 
                         {% if auth_form.username.errors %}
@@ -29,7 +37,7 @@
                         </p>
             
                         <div class="help-block with-errors"></div>
-                        <input id="password" type="password" class="form-control input-xs" name="password" id="exampleInputPassword1" placeholder="Password" ng-model="user.password" required>
+                        <input id="password" type="password" class="form-control input-xs" name="password" id="exampleInputPassword1" ng-minlength="6" ng-maxlength="20" placeholder="Password" ng-model="user.password" required />
                         <p> 
                       {% if auth_form.password.errors %}
                       {{ auth_form.password.errors }}
@@ -41,23 +49,25 @@
                         
                         <a href="{% url 'reset_password' %}"><small>Forgot password?</small></a>
                     
-                        <center><button type="submit" class="btn btn-lg btn-fatty">SIGN IN</button></center>
+                        <center><button type="submit" class="btn btn-lg btn-fatty text-center" ng-disabled="form.$invalid">SIGN IN</button></center>
                     </div> <!-- ./form-group -->
             </form>
         {% else %}
-        <form action="{%url 'signin'%}" method="post" class="css-form" novalidate>{% csrf_token %}
+        <form action="{%url 'signin'%}" method="post" class="css-form" name="form" novalidate>{% csrf_token %}
                     <!-- Login with Username and Password --> 
-                    <div class="form-group">
-                        <input class="form-control input-xs" id="username" type="email" name="username" ng-model="user.email" placeholder="Email Address" required>
+                    <div class="form-group" ng-controller="Validation">
+                        <input class="form-control input-xs" id="username" type="email" name="username" ng-model="user.email" placeholder="Email Address" required />
                       
                         <p> 
                         {% if auth_form.username.errors %}
                           {{ auth_form.username.errors }}
                         {% endif %}
                         </p>
-            
                         <div class="help-block with-errors"></div>
-                        <input id="password" type="password" class="form-control input-xs" name="password" id="exampleInputPassword1" placeholder="Password" ng-model="user.password" required>
+         
+            
+                       
+                        <input id="password" type="password" class="form-control input-xs" name="password" id="exampleInputPassword1" placeholder="Password" ng-model="user.password" ng-minlength="6" ng-maxlength="20" required />
                         <p> 
                       {% if auth_form.password.errors %}
                       {{ auth_form.password.errors }}
@@ -66,10 +76,11 @@
                           {{ auth_form.non_field_errors }}
                       {% endif %}
                         </p>
+
                         
                         <a href="{% url 'reset_password' %}"><small>Forgot password?</small></a>
                     
-                        <center><button type="submit" class="btn btn-lg btn-fatty">SIGN IN</button></center>
+                        <center><button type="submit" class="btn btn-lg btn-fatty" ng-disabled="form.$invalid || isUnchanged(user)">SIGN IN</button></center>
                     </div> <!-- ./form-group -->
             </form>
         {% endif %}
@@ -77,19 +88,40 @@
     </div><!-- ./row -->  
 </div><!-- ./container -->  
 
-<style type="text/css">
-  .css-form input.ng-invalid.ng-dirty {
-    border-color: rgba(232,77,60,1.00);
-    background-color: transparent;
-  }
+   
+{% comment %}
+  	<center>
+    	<h6>Sign in with</h6>
+              <a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i></button></a>
+              <a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i></button></a>
+            
+            
+            ## This is for google plus based authentication ##
+                {% if plus_id %}
+                <form id="google-plus" method="post" action="{% url 'social:complete' 'google-plus' %}">{% csrf_token %}
+                  <input id="at" type="hidden" name="access_token" value="" />
+                  <input id="code" type="hidden" name="code" value="" />
+    
+                  <div id="signinButton">
+                    <span class="g-signin" data-scope="{{ plus_scope }}"
+                                           data-clientid="{{ plus_id }}"
+                                           data-redirecturi="postmessage"
+                                           data-accesstype="offline"
+                                           data-cookiepolicy="single_host_origin"
+                                           data-callback="signInCallback">
+                    </span>
+                  </div>
+                </form>
+                {% endif %}
+            
+            
+            <a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i></button></a> 
+      	</center>
+{% endcomment %}
 
-  .css-form input.ng-valid.ng-dirty {
-    border-color: rgba(47,204,112,1.00);
-     background-color: transparent;
-  }
-</style>
-
-<script>
+{% endblock %}
+{% block scripts %}
+  <script>
   angular.module('validation', [])
     .controller('Validation', ['$scope', function($scope) {
       $scope.master = {};
@@ -102,41 +134,11 @@
         $scope.user = angular.copy($scope.master);
       };
 
+      $scope.isUnchanged = function(user) {
+      return angular.equals(user, $scope.master);
+    };
+
       $scope.reset();
     }]);
 </script>
-
-       
-{% comment %}
-				    	<center>
-					    	<h6>Sign in with</h6>
-		                    <a href="{% url 'social:begin' 'facebook' %}"><button class="btn btn-facebook"><i class="fa fa-facebook"></i></button></a>
-		                    <a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-twitter"><i class="fa fa-twitter"></i></button></a>
-			                
-			                
-			                ## This is for google plus based authentication ##
-			                    {% if plus_id %}
-			                    <form id="google-plus" method="post" action="{% url 'social:complete' 'google-plus' %}">{% csrf_token %}
-			                      <input id="at" type="hidden" name="access_token" value="" />
-			                      <input id="code" type="hidden" name="code" value="" />
-			        
-			                      <div id="signinButton">
-			                        <span class="g-signin" data-scope="{{ plus_scope }}"
-			                                               data-clientid="{{ plus_id }}"
-			                                               data-redirecturi="postmessage"
-			                                               data-accesstype="offline"
-			                                               data-cookiepolicy="single_host_origin"
-			                                               data-callback="signInCallback">
-			                        </span>
-			                      </div>
-			                    </form>
-			                    {% endif %}
-			                
-			                
-			                <a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-google-plus"><i class="fa fa-google-plus"></i></button></a> 
-		            	</center>
-{% endcomment %}
-
-{% endblock %}
-{% block scripts %}
 {% endblock scripts %}

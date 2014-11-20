@@ -2,16 +2,16 @@
 {% load staticfiles %}
 {% block localhead %}
 <link href={% static "css/sign.css" %} rel="stylesheet">
-<script src={% static "js/angular.min.js" %}></script>
+<link href={% static "css/intlTelInput.css" %} rel="stylesheet">
+
 {% endblock localhead %}
 {% block content%}
 
 {% comment %}
-<div class="container-fluid" style="background:white;">
+<div class="container-fluid">
     <div class="row clearfix">
-        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column" style="margin-top:20px;">
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column col small" id="customer">
-            
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column col small" id="customer">  
             <h3>I want to be a user</h3>
             <button class="btn ">Sign Up</button>
         </div>
@@ -25,11 +25,10 @@
 {% endcomment %}
 
 
-
 <div class="container-fluid">
     <div class="row clearfix">
         <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 column">
-            <h3 class="lead" style="margin-bottom:0;"><span class="glyphicon glyphicon-user"></span> Create a new User here!</h3>
+            <h3><span class="glyphicon glyphicon-user"></span> Create a new user here</h3>
         </div><!-- ./column -->
     </div><!-- ./row -->
    
@@ -39,16 +38,16 @@
       
         <div class="col-md-10 col-md-offset-1 column">
                         <div class="col-xs-12 col-lg-4 col-lg-push-8 column">
-                <hr>
-                <p>Already a member?  Sign in <a href="{% url 'signin' %}">here.</a></p>
+            
+                <small>Already a member?  Sign in <a href="{% url 'signin' %}">here.</a></small>
             </div><!-- column -->   
 
             <div class="col-xs-12 col-lg-8 col-lg-pull-4 column">
-                <hr>
             
                 <div class="row clearfix form-group">
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
-                        <input id="email" name="email" class="form-control input-sm" type="email" ng-model="user.email" placeholder="Email" required />
+                        <h6>EMAIL</h6>
+                        <input id="email" name="email" class="form-control input-sm" type="email" ng-model="user.email" placeholder="email@yourdomain.com" required />
                     </div>
                     {{user_form.email.errors}}                        
                 </div><!-- ./row -->
@@ -56,12 +55,14 @@
                 <!-- PASSWORDS -->          
                 <div class="row clearfix form-group">
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">    
-                        <input id="password1" class="form-control input-sm" placeholder="Password" ng-model="user.password" type="password" name="password1" data-ng-class="{'ng-invalid':myForm.password2.$error.match}" />
+                        <h6>PASSWORD</h6>
+                        <input id="password1" class="form-control input-xs" placeholder="xxxxxxxx" ng-model="user.password" type="password" name="password1" data-ng-class="{'ng-invalid':myForm.password2.$error.match}" />
                         <span class="help-block"><small><strong>Minimum of 6 characters</strong></small></span>
                     </div>
                     
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
-                        <input id="password2" class="form-control input-sm" ng-model="user.passwordConfirm" type="password" data-match="user.password" name="password2" />
+                        <h6>RETYPE PASSWORD</h6>
+                        <input id="password2" class="form-control input-xs" placeholder="xxxxxxxx" ng-model="user.passwordConfirm" type="password" data-match="user.password" name="password2" />
                     </div><!-- ./column --> 
                     <div data-ng-show="myForm.password2.$error.match">Passwords do not match!</div> 
                     {{user_form.password1.errors}}              
@@ -71,7 +72,8 @@
                 <!-- USERNAME -->
                 <div class="row clearfix form-group">
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
-                        <input type="text" class="form-control input-sm" placeholder="Username" name="displayname" id="displayname" ng-model="user.displayname" required>
+                        <h6>USERNAME</h6>
+                        <input type="text" class="form-control input-sm" placeholder="donvvo" name="displayname" id="displayname" ng-model="user.displayname" required>
                         {% if user_form.displayname.errors %}
                             {{user_form.displayname.errors}}
                         {% endif %}
@@ -81,14 +83,16 @@
                 <!-- FIRST AND LAST -->
                 <div class="row clearfix form-group">
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
-                        <input type="text" class="form-control input-sm" name="first_name" id="first_name" placeholder="First Name" ng-model="user.firstname" required>   
+                        <h6>FIRST NAME</h6>
+                        <input type="text" class="form-control input-sm" name="first_name" id="first_name" placeholder="Don" ng-model="user.firstname" required>   
                         {% if user_form.first_name.errors %}
                             {{user_form.first_name.errors}}
                         {% endif %}   
                     </div><!-- ./column -->
 
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
-                        <input type="text" class="form-control input-sm" name="last_name" id="last_name" placeholder="Last Name" ng-model="user.lastname" required>
+                        <h6>LAST NAME</h6>
+                        <input type="text" class="form-control input-sm" name="last_name" id="last_name" placeholder="Smith" ng-model="user.lastname" required>
                         {% if user_form.last_name.errors %}
                             {{user_form.last_name.errors}}
                         {% endif %}
@@ -97,7 +101,7 @@
 
                 <!-- CITY -->
                 <div class="row clearfix form-group">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
+                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column">
                 <!-- CITY DROPDOWN -->
                 <label for="City" class="control-label">City</label>
                 <!-- Location input-->
@@ -112,27 +116,32 @@
                         <option>Oakville</option>
                     </select>
                 </div>  <!-- ./form-group -->
+            </div><!-- ./column -->
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 column">
+                <h6>POSTAL CODE</h6>
+                    <input type="text" class="form-control input-xs" name="postalcode" id="postalcode" placeholder="Postal Code" required>
             </div>
-        </div>
+        </div><!-- ./row -->
 
 
         <!-- ADDRESS AND POSTAL CODE -->
-                <div class="row clearfix form-group">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
-                     <input type="text" class="form-control input-sm" name="streetaddress" id="streetaddress" placeholder="Address" ng-model="user.streetaddress" required>
+                <div class="row clearfix">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column form-group">
+                    <h6>ADDRESS</h6>
+                     <input type="text" class="form-control input-xs" name="streetaddress" id="streetaddress" placeholder="Street Address, P.O box, company name, etc" ng-model="user.streetaddress" required>
             </div>
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
-                     <input type="text" class="form-control input-sm" name="streetaddress_2" id="streetaddress_2" placeholder="Address" ng-model="user.streetaddress_2" required>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
-                    <input type="text" class="form-control input-sm" name="postalcode" id="postalcode" placeholder="Postal Code" required>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column form-group">
+                     <h6>ADDRESS 2</h6>
+                     <input type="text" class="form-control input-xs" name="streetaddress_2" id="streetaddress_2" placeholder="Apartment, suite, unit, building, floor, etc." ng-model="user.streetaddress_2" required>
             </div>
         </div>
 
         <!-- PHONE NUMBER -->
                 <div class="row clearfix form-group">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 column">
-                      <input type="text" class="form-control input-sm" name="phone" id="phone" placeholder="Phone Number" required>
+                    <h6>PHONE</h6>
+                    <input type="tel" class="form-control input-xs" id="phone" required>
+                    <input type="hidden" class="form-control input-xs" id="phoneHidden" name="phone">
             </div>
         </div>
               
@@ -141,7 +150,7 @@
         <div class="col-md-12 column">
             <hr>
             <div class="col-xs-12 col-md-6 column">
-                <button type="submit" class="btn btn-embossed btn-info" id="createAccBtn">Create Account</button>
+                <button type="submit" class="btn btn-fatty btn-lg" id="createAccBtn">CREATE ACCOUNT</button>
             </div>
         </div><!-- ./column -->  
     </form>
@@ -149,6 +158,9 @@
 </div><!-- ./container -->
 
 
+
+{% endblock %}    
+{% block scripts %}
 <style type="text/css">
   .css-form input.ng-invalid.ng-dirty {
     border-color: rgba(232,77,60,1.00);
@@ -158,6 +170,29 @@
     border-color: rgba(47,204,112,1.00);
   }
 </style>
+
+<script src={% static "js/intlTelInput.min.js" %}></script>
+<script src={% static "js/utils.js" %}></script>
+<script src={% static "js/angular.min.js" %}></script>
+
+<script type="text/javascript">
+$("#phone").intlTelInput({
+        autoFormat: true,
+        //autoHideDialCode: false,
+        defaultCountry: "ca",
+        nationalMode: true,
+        //numberType: "MOBILE",
+        onlyCountries: ['ca'],
+        //preferredCountries: ['ca'],
+        responsiveDropdown: true
+      });
+
+        $( "#phone" ).focusout(function() {
+            var cleanNumber = $("#phone").intlTelInput("getCleanNumber");
+            document.getElementById('phone').value = cleanNumber;
+            document.getElementById('phoneHidden').value = cleanNumber;
+        });
+</script>
 
 <script type="text/javascript">
      var app = angular.module('myApp', []);
@@ -179,9 +214,4 @@
         };
     });
 </script>
-
-
-
-{% endblock %}    
-{% block scripts %}
 {% endblock scripts %}

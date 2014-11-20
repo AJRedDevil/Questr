@@ -221,10 +221,10 @@ class CourierManager(object):
     def __init__(self):
         pass
 
-    def getActiveCouriers(self):
+    def getActiveCouriers(self, quest):
         """Returns a list of couriers"""
         try:
-            courierlist = QuestrUserProfile.objects.filter(is_shipper=True, is_superuser=False, is_available=True, is_active=True)
+            courierlist = QuestrUserProfile.objects.filter(is_shipper=True, is_superuser=False, is_available=True, is_active=True, vehicle=quest.size)
         except Exception, e:
             raise e
 
@@ -362,7 +362,7 @@ class CourierManager(object):
         # Update available shippers for a quest only if it's blank
         if len(quest.available_couriers) == 0:
             logger.warn("No available couriers for this quest")
-            activecouriers = self.getActiveCouriers()
+            activecouriers = self.getActiveCouriers(quest)
             if len(activecouriers) == 0:
                 logger.warn("No active couriers in the system now")
                 ##* inform the master couriers

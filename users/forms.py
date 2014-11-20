@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, get_user_model
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import filesizeformat
 
-from .models import QuestrUserProfile
+from .models import QuestrUserProfile, VEHICLE_SELECTION
 from .contrib import user_handler
 
 import os
@@ -45,11 +45,17 @@ class QuestrUserChangeForm(UserChangeForm):
         )
     phone = forms.CharField(required=False)
     avatar = forms.FileField(required=False)
-
+    vehicle = forms.ChoiceField(
+        choices=VEHICLE_SELECTION,
+        error_messages={
+                        'required' : 'Type of the vehicle is required !',
+                        'invalid_choice' : 'Please select one of the options available !'
+                        }
+        )
 
     class Meta:
         model = QuestrUserProfile
-        fields = ['first_name','last_name','displayname','email']
+        fields = ['first_name','last_name','displayname','email','vehicle']
         widgets = {
             'first_name' : forms.TextInput(attrs={'placeholder':'First Name'}),
             'last_name' : forms.TextInput(attrs={'placeholder':'Last Name'}),

@@ -18,6 +18,9 @@ import logging
 # Init Logger
 logger = logging.getLogger(__name__)
 
+VEHICLE_SELECTION = (('car','Sedan'),('minivan','Minivan'))
+
+
 # Create your models here.
 class QuestrUserManager(BaseUserManager):
 
@@ -91,6 +94,8 @@ class QuestrUserProfile(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_available = models.BooleanField(_('is_available'), default=True)
     address = jsonfield.JSONField(_('address'), default='{}', max_length=9999)
+    vehicle = models.CharField(_('vehicle'), max_length=10, default='car', choices=VEHICLE_SELECTION)
+
 
 
     USERNAME_FIELD = 'email'

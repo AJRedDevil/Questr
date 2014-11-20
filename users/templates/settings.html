@@ -4,7 +4,7 @@
 {% block localhead %}
     <!-- Custom CSS -->
     <link href={% static "css/settings.css" %} rel="stylesheet">
-    <link href={% static "css/social-buttons.css" %} rel="stylesheet">
+    <link href={% static "css/intlTelInput.css" %} rel="stylesheet">
 
     <!-- Custom Javascript -->
     <script src={% static "js/angular.min.js" %}></script>
@@ -35,13 +35,25 @@
 
 
 {% block scripts %}
+<script src={% static "js/intlTelInput.min.js" %}></script>
+<script src={% static "js/utils.js" %}></script>
+
 <script>
-	$("select").selectpicker({style: 'btn-sm btn-grad btn-info', menuStyle: 'dropdown-menu'});
+  $("#mobile-number").intlTelInput({
+        autoFormat: true,
+        //autoHideDialCode: false,
+        defaultCountry: "ca",
+        nationalMode: true,
+        //numberType: "MOBILE",
+        onlyCountries: ['ca'],
+        //preferredCountries: ['ca'],
+        responsiveDropdown: true
+      });
 
-// style: select toggle class name (which is .btn)
-// menuStyle: dropdown class name
-
-// You can always select by any other attribute, not just tag name.
-// Also you can leave selectpicker arguments blank to apply defaults.
+    $( "#mobile-number" ).focusout(function() {
+    var cleanNumber = $("#mobile-number").intlTelInput("getCleanNumber");
+    document.getElementById('mobile-number').value = cleanNumber;
+    document.getElementById('phone').value = cleanNumber;
+});
 </script>
 {% endblock scripts %}

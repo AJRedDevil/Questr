@@ -302,6 +302,7 @@ def userSettings(request):
         return render(request,'404.html', locals())
 
     if request.method == "POST":
+        logging.warn(request.POST)
         try:
             user_form = QuestrUserChangeForm(request.POST,request.FILES, instance=request.user)
         except QuestrUserProfile.DoesNotExist:

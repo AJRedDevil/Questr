@@ -8,7 +8,7 @@ from .api import QuestsList, QuestsDetail, PriceCalculator
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = patterns('',
-    # Examples:
+    #Examples:
     url(r'^$', mainview.index, name="index"),
     url(r'^contactus$', mainview.contactus, name='contactus'),
 
