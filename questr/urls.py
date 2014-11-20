@@ -3,9 +3,9 @@ from django.conf import settings
 
 import views as mainview
 import quests.views as questviews
-from .api import QuestsList, QuestsDetail, PriceCalculator
+# from api import views as apiview
 
-from rest_framework.urlpatterns import format_suffix_patterns
+# from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = patterns('',
     #Examples:
@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     # url(r'loadpage/(?P<template>[-_\w/.]+)$', mainview.loadPage, ),    
     url(r'^user/', include('users.urls')),
     url(r'^quest/', include('quests.urls') ),
+    url(r'^api/v1/', include('api.urls') ),
     url(r'^track/', questviews.tracking_number_search, name='trackquest'),
 
     # url(r'^questrreview/', mainview.questrReview, name='questReview' ),
@@ -33,10 +34,5 @@ urlpatterns = patterns('',
     url(r'^help/crowdshipping/', mainview.crowdshipping, name='crowdshipping' ),
     url(r'^help/trust/', mainview.trust, name='trust' ),
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-    url(r'^api/quests/$', QuestsList.as_view()),
-    url(r'^api/quests/(?P<pk>[0-9]+)/$', QuestsDetail.as_view()),
-    url(r'^api/getprice/$', PriceCalculator.as_view()),
-
 )
 
-urlpatterns = format_suffix_patterns(urlpatterns)

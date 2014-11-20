@@ -62,7 +62,9 @@ INSTALLED_APPS = (
     'storages',
     'endless_pagination',
     'djcelery',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken',
+    'api',
 )
 
 # MIDDLERWARE DEFINITIONS
@@ -220,5 +222,8 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }

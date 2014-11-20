@@ -1,3 +1,6 @@
+from django.shortcuts import render
+
+# Create your views here.
 
 
 #All Django Imports
@@ -100,7 +103,7 @@ class QuestsDetail(APIView):
 
     def get(self, request, pk, format=None):
         user = request.user
-        quest = self.get_object(pk, ishidden=False)
+        quest = self.get_object(pk)
         serializer = serializers.QuestSerializer(quest)
         if quest.shipper == str(user.id) or user.is_superuser or quest.questrs_id == user.id:
             return Response(serializer.data)

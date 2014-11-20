@@ -5,7 +5,9 @@ from django.conf import settings
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.core.files import File
 from django.core.files.base import ContentFile
+from django.dispatch import receiver
 from django.db import models
+from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.utils import six
@@ -14,6 +16,7 @@ from django.utils import six
 import hashlib
 import jsonfield
 import logging
+from rest_framework.authtoken.models import Token
 
 # Init Logger
 logger = logging.getLogger(__name__)
@@ -94,7 +97,7 @@ class QuestrUserProfile(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_available = models.BooleanField(_('is_available'), default=True)
     address = jsonfield.JSONField(_('address'), default='{}', max_length=9999)
-    vehicle = models.CharField(_('vehicle'), max_length=10, default='car', choices=VEHICLE_SELECTION)
+    vehicle = models.CharField(_('vehicle'), max_length=10, default='car', choices=VEHICLE_SELECTION, blank=True)
 
 
 
@@ -196,6 +199,12 @@ class QuestrUserProfile(AbstractBaseUser):
             self.create_thumbnail(500)
             # super(QuestrUserProfile, self).save(*args, **kwargs)
             
+
+# Create Token for users when a user is created
+@receiver(post_save, sender=QuestrUserProfile)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
 
 # User transactionl model
 class UserTransactional(models.Model):
