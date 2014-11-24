@@ -237,11 +237,11 @@ class UserTransactional(models.Model):
 # Questr Token
 class QuestrToken(models.Model):
     token_id = models.CharField(_('id'), max_length=20, primary_key=True)
-    timeframe = models.DateTimeField(_('create_date'), default=timezone.now)
+    timeframe = models.DateTimeField(_('timeframe'), default=timezone.now)
 
     def is_alive(self):
         timedelta = timezone.now() - self.timeframe
-        days = 4
+        days = 1
         allowable_time = float(days * 24 * 60 * 60)
         return timedelta.total_seconds() < allowable_time
 

@@ -76,6 +76,27 @@ def prepWelcomeNotification(questr, verf_link):
     logger.debug("Welcome email is prepared")
     return email_details
 
+def prepSignupNotification(signup_link):
+    """
+    Prepare the details for notification emails for new signup invitation
+    """
+    template_name="Invitation_Email"
+    subject="Questr - Join our private beta!"
+    questr_unsubscription_link="http://questr.co/unsub"
+
+    email_details = {
+                        'subject' : subject,
+                        'template_name' : template_name,
+                        'global_merge_vars': {
+                                                'questr_unsubscription_link' : questr_unsubscription_link,
+                                                'company'           : "Questr Co",
+                                                'signup_link'         : signup_link,
+                                                },
+                    }
+
+    logger.debug("Signup invitation email is prepared")
+    return email_details
+
 def prepWelcomeCourierNotification(questr, password):
     """Prepare the details for notification emails after new user registers"""
     template_name="Welcome_Courier_Email"
@@ -118,6 +139,27 @@ def get_verification_url(user=None):
         questr_token.save()
         verf_link = "{0}/user/email/confirm/{1}?questr_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_user_code(), token_id)
     return verf_link
+
+def get_signup_invitation_url(email=None): 
+    """
+        Returns the verification url.
+    """
+    signup_link = ""
+    if email:
+        try:
+            prev_transactional = UserTransactional.objects.get(email = email, status = False)
+            if prev_transactional:
+                prev_transactional.status = True
+                prev_transactional.save()
+        except UserTransactional.DoesNotExist:
+            pass
+        transcational = UserTransactional(email=email)
+        transcational.save()
+        token_id = transcational.get_token_id()
+        questr_token = QuestrToken(token_id=token_id)
+        questr_token.save()
+        signup_link = "{0}/signup/invitation/{1}?questr_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_user_code(), token_id)
+    return signup_link
 
 def getShipper(shipper_id):
     """List shipper information"""

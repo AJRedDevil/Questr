@@ -127,10 +127,11 @@ def createcourier(request):
             userdata.email_status = True
             userdata.is_shipper = True
             userdata.phone = user_form.cleaned_data['phone']
-            import hashlib
-            import uuid
-            hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
-            password = hashstring[:4]+hashstring[-2:]
+            # import hashlib
+            # import uuid
+            # hashstring = hashlib.sha256(str(timezone.now()) + str(timezone.now()) + str(uuid.uuid4())).hexdigest()
+            # password = hashstring[:4]+hashstring[-2:]
+            password = user_form.cleaned_data['password1']
             userdata.set_password(password)
             userdata.save()
             email_details = user_handler.prepWelcomeCourierNotification(userdata, password)
@@ -627,4 +628,78 @@ def changestatus(request):
     elif result['status'] == "fail":
         request.session['alert_message'] = dict(type="Danger",message="Your status cannot be updated!")
         return redirect("home")
+
+@is_superuser
+@login_required
+def send_invitation_email(request):
+    """
+        Sends a signup invitation link to the corresponding email address
+    """
+    user = request.user
+    
+    if request.method == "POST":
+        email = request.POST['email']
+        signup_link = user_handler.get_signup_invitation_url(email)
+        logger.debug("invitation link is %s", signup_link)
+        email_details = user_handler.prepSignupNotification(signup_link)
+        logger.debug("What goes in the email is \n %s", email_details)
+        email_notifier.send_signup_invitation(email, email_details)
+        request.session['alert_message'] = dict(type="success",message="The signup link has been sent to your {0}".format(email))
+        return redirect('home')
+    return render(request, 'signupinvitation.html', locals())
+
+@is_alive
+def signup_by_invitation(request, user_code):
+    """Signup, if request == POST, creates the user"""
+    ## if authenticated redirect to user's homepage directly ##
+    logging.warn(request.POST)
+    user = request.user
+    if request.user.is_authenticated():
+        return redirect('home')
+
+    logger.debug(user_code)
+    if user_code:
+        try:
+            transcational = UserTransactional.objects.get(user_code__regex=r'^%s' % user_code)
+            logger.debug("transactional")
+            logger.debug(transcational)
+            if transcational:
+                logger.debug("transctional status")
+                logger.debug(transcational.status)
+                if not transcational.status:
+                    if request.method == "POST":
+                        user_form = QuestrUserCreationForm(request.POST)
+                        if user_form.is_valid():
+                            useraddress = dict(city=user_form.cleaned_data['city'], streetaddress=user_form.cleaned_data['streetaddress'],\
+                                postalcode=user_form.cleaned_data['postalcode'])
+                            logging.warn(useraddress)
+                            userdata = user_form.save(commit=False)
+                            userdata.address = json.dumps(useraddress)
+                            userdata.phone = user_form.cleaned_data['phone']
+                            userdata.save()
+                            authenticate(username=userdata.email, password=userdata.password)
+                            userdata.backend='django.contrib.auth.backends.ModelBackend'
+                            auth_login(request, userdata)
+                            transcational.status = True
+                            transcational.save()
+                            verf_link = user_handler.get_verification_url(userdata)
+                            logger.debug("verification link is %s", verf_link)
+                            email_details = user_handler.prepWelcomeNotification(userdata, verf_link)
+                            logger.debug("What goes in the email is \n %s", email_details)
+                            email_notifier.send_email_notification(userdata, email_details)
+                            pagetitle = "Please verify your email !"
+                            return redirect('home')
+                        if user_form.errors:
+                            logger.debug("Login Form has errors, %s ", user_form.errors)
+                        pagetitle = "Signup By invitation"
+                        return render(request, 'signupbyinvitation.html', locals())
+                    else:
+                        user_form = QuestrUserCreationForm()
+                        questr_token = request.GET['questr_token']
+                        pagetitle = "Signup"
+                        return render(request, 'signupbyinvitation.html', locals())
+        except UserTransactional.DoesNotExist:
+            return redirect('home')
+    return redirect('home')
+
 
