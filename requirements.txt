@@ -1,6 +1,7 @@
 Django==1.6.2
 Markdown==2.5.1
 Pillow==2.4.0
+PyYAML==3.11
 South==1.0.1
 amqp==1.4.6
 anyjson==0.3.3
@@ -20,6 +21,7 @@ django-ipware==0.1.0
 django-jsonfield==0.9.13
 django-oauth-toolkit==0.7.2
 django-phonenumber-field==0.6
+django-rest-swagger==0.2.1
 django-storages==1.1.8
 django-toolbelt==0.0.1
 djangorestframework==2.4.4

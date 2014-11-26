@@ -65,6 +65,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework.authtoken',
     'api',
+    'rest_framework_swagger',
 )
 
 # MIDDLERWARE DEFINITIONS
@@ -224,6 +225,30 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.TokenAuthentication',
     ]
+}
+
+SWAGGER_SETTINGS = {
+    "exclude_namespaces": [],
+    "api_version": '1',
+    "api_path": "/",
+    "enabled_methods": [
+        'get',
+        'post',
+    ],
+    "api_key": '',
+    "is_authenticated": True,
+    "is_superuser": False,
+    "permission_denied_handler": None,
+    "info": {
+        'contact': 'dev@questr.co',
+        'description': 'This is a API documentation server. '
+                       'To use the API please use your token auth.',
+        'license': 'Copyright Questrco 2014',
+        'licenseUrl': 'http://www.questr.co/terms/',
+        'termsOfServiceUrl': 'http://www.questr.co/terms/',
+        'title': 'Questr Co.',
+    },
 }

@@ -22,10 +22,14 @@ logger = logging.getLogger(__name__)
 
 class QuestsList(APIView):
     """
-    A simple view for listing and creating quests
+    Shipment resource
     """
 
     def get(self, request, format=None):
+        """
+        Returns a list of shipments
+        """
+
         user = request.user
         if user.is_shipper:
             queryset = Quests.objects.filter(shipper=user.id, ishidden=False)
@@ -38,13 +42,10 @@ class QuestsList(APIView):
 
     def post(self, request, format=None):
         """
-        Creates a new quest from data provided
-        title : TextField : title of the quest
-        size : ChoiceField : "car", "minivan"
-        description : TextField : "something about the quest"
-        pickup_time : DateTimeField : Timezone Aware DateTime Field
-        srccity : TextField : Source City
-
+        Creates a new shipment from the provided data
+        ---
+        request_serializer: serializers.NewQuestDataValidationSerializer
+        response_serializer: serializers.NewQuestSerializer
         """
 
         user = request.user
@@ -102,6 +103,9 @@ class QuestsDetail(APIView):
             raise Http404
 
     def get(self, request, pk, format=None):
+        """
+        Returns the details of the shipment
+        """
         user = request.user
         quest = self.get_object(pk)
         serializer = serializers.QuestSerializer(quest)
@@ -111,11 +115,14 @@ class QuestsDetail(APIView):
 
 class PriceCalculator(APIView):
     """
-    Returns with price after receiving relevant fields
+    Price calculator resource
     """
     def post(self, request, format=None):
         """
-        Returns with price after receiving relevant fields
+        Returns with price after receiving shipment information
+        ---
+        request_serializer: serializers.PriceCalcSerializer
+        response_serializer: serializers.PriceCalcSerializer
         """
 
         user = request.user
