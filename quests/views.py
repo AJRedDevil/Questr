@@ -662,12 +662,6 @@ def accept_quest(request, quest_code):
                             courier.save()
                             opptransaction.save()
                             quest.save()
-                            # Setting status of all considered couriers to True
-                            considered_couriers = json.loads(quest.considered_couriers.strip(','))
-                            for courier in considered_couriers:
-                                courier = user_handler.getQuestrDetails(courier)
-                                courier.is_available = True
-                                courier.save()
                             from libs.twilio_handler import twclient
                             tw = twclient()
                             alert_message = tw.load_acceptquest_notif(quest)
@@ -683,6 +677,12 @@ def accept_quest(request, quest_code):
                             extrainfo = dict(designated_courier=courier.id, detail="quest accepted by courier")
                             eventmanager.setevent(quest, 4, extrainfo)
                             request.session['alert_message'] = dict(type="success",message="Congratulations! You have accepted the quest!")
+                            # Setting status of all considered couriers to True
+                            considered_couriers = json.loads(quest.considered_couriers.strip(','))
+                            for courier in considered_couriers:
+                                courier = user_handler.getQuestrDetails(courier)
+                                courier.is_available = True
+                                courier.save()
                             return render(request, 'questaccepted.html',locals())
                             # return redirect('home')
                     except QuestrUserProfile.DoesNotExist:
