@@ -8,6 +8,7 @@ from django.http import Http404
 
 #All local imports (libs, contribs, models)
 from quests.models import Quests
+from users.contrib import user_handler
 import serializers
 
 #All external imports (libs, packages)
@@ -142,11 +143,9 @@ class PriceCalculator(APIView):
             size = data['size']
             pickupdict['city'] = data['srccity']
             pickupdict['address'] = data['srcaddress']
-            pickupdict['address_2'] = data['srcaddress_2']
             pickupdict['postalcode'] = data['srcpostalcode']
             dropoffdict['city'] = data['dstcity']
             dropoffdict['address'] = data['dstaddress']
-            dropoffdict['address_2'] = data['dstaddress_2']
             dropoffdict['postalcode'] = data['dstpostalcode']
             origin = pickupdict['address']+', '+pickupdict['city']+', '+pickupdict['postalcode']
             destination = dropoffdict['address']+', '+dropoffdict['city']+', '+dropoffdict['postalcode']
@@ -155,4 +154,33 @@ class PriceCalculator(APIView):
             fee = price.get_price(distance, shipment_mode=size)
             responsedata=dict(fee=fee)
             return Response(responsedata, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class AvailabilityStatus(APIView):
+    """
+    Courier Status resource
+    """
+
+    def post(self, request, format=None):
+        """
+        Returns with price after receiving shipment information
+        ---
+        request_serializer: serializers.StatusSeralizer
+        """
+
+        user = request.user
+        if not user.is_shipper:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        ##Validate if all the data is available###
+        serializer = serializers.StatusSeralizer(data=request.DATA)
+        if serializer.is_valid():
+            data = request.DATA.copy()
+            userstatus = data['status'] in ['True', 'true', '1']
+            result = user_handler.updateCourierAvailability(user, userstatus)
+            if result['success'] == True:
+                responsedata=dict(status=status.HTTP_200_OK, success=True)                
+            else:
+                responsedata=dict(data="Status already set", status=status.HTTP_409_CONFLICT, success=False)
+            return Response(responsedata)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

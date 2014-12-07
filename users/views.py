@@ -615,10 +615,10 @@ def changestatus(request):
         availability = user.is_available
         if availability:
             # If the user is available, change his status to unavailable
-            result = user_handler.updateCourierAvailability(user, 0)
+            result = user_handler.updateCourierAvailability(user, False)
         else:
             # vice versa
-            result = user_handler.updateCourierAvailability(user, 1)
+            result = user_handler.updateCourierAvailability(user, True)
     else:
         return redirect('home')
 

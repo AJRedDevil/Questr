@@ -69,3 +69,5 @@ class PriceCalcSerializer(serializers.Serializer):
     dstaddress_2 = serializers.CharField(required=False)
     dstpostalcode = serializers.CharField()
 
+class StatusSeralizer(serializers.Serializer):
+    status = serializers.BooleanField()

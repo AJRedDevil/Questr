@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^quests/$', apiview.QuestsList.as_view()),
     url(r'^quests/(?P<pk>[0-9]+)/$', apiview.QuestsDetail.as_view()),
     url(r'^getprice/$', apiview.PriceCalculator.as_view()),
+    url(r'^setstatus/$', apiview.AvailabilityStatus.as_view()),
     url(r'^docs/', include('rest_framework_swagger.urls')),
 )
 

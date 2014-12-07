@@ -239,19 +239,19 @@ def updateCourierAvailability(questr, status):
     """Takes a Questr User Profile object and a status ( 0 | 1 ) and updates the availability status as per the same"""
     status = int(status)
     if userExists(questr.id):
-        if status == 0:
+        if status == False:
             statusupdate = QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=False)
             if statusupdate == 1:
-                return dict(status='success')
-            return dict(status="fail")
-        elif status == 1:
+                return dict(success=True)
+            return dict(success=False)
+        elif status == True:
             statusupdate = QuestrUserProfile.objects.filter(id=questr.id, is_active=True).update(is_available=True)
             if statusupdate == 1:
-                return dict(status='success')
-            return dict(status="fail")
+                return dict(success=True)
+            return dict(success=False)
         else :
-            raise ValueError('Status %d not acceptable, use 0 or 1' % (status))
-    return dict(status='fail')
+            raise ValueError('Status %d not acceptable, use True or False' % (status))
+    return dict(success=False)
 
 
 class CourierManager(object):
@@ -440,7 +440,7 @@ class CourierManager(object):
         designated_courier = getQuestrDetails(couriers_list[0][0])
         if designated_courier.is_available:
             logger.warn("courier %s is available for quest %s, and is informed" % (designated_courier.displayname, quest))
-            updateCourierAvailability(designated_courier, 0) 
+            updateCourierAvailability(designated_courier, False) 
             # designated_courier.is_available = False
             # designated_courier.save()
             eventmanager = quest_handler.QuestEventManager()
