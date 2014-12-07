@@ -12,15 +12,15 @@ from django.shortcuts import render, redirect
 from django.utils import timezone
 
 #All local imports (libs, contribs, models)
-from access.requires import verified, is_alive, is_superuser
+from access.requires import verified, is_alive, is_superuser, is_signup_token_alive
 from contrib import user_handler
 from libs import email_notifier, pricing
 from quests.contrib import quest_handler
 from quests.models import Quests, QuestPricing
 from reviews.contrib import review_handler
 from reviews.models import Review
-from .models import QuestrUserProfile, UserTransactional
-from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, PasswordChangeForm, NotifPrefForm
+from .models import QuestrUserProfile, UserTransactional, UserSignupInvitationToken
+from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, PasswordChangeForm, NotifPrefForm, SignupInvitationForm
 
 #All external imports (libs, packages)
 from ipware.ip import get_real_ip, get_ip
@@ -636,20 +636,27 @@ def send_invitation_email(request):
         Sends a signup invitation link to the corresponding email address
     """
     user = request.user
-    
     if request.method == "POST":
-        email = request.POST['email']
-        signup_link = user_handler.get_signup_invitation_url(email)
-        logger.debug("invitation link is %s", signup_link)
-        email_details = user_handler.prepSignupNotification(signup_link)
-        logger.debug("What goes in the email is \n %s", email_details)
-        email_notifier.send_signup_invitation(email, email_details)
-        request.session['alert_message'] = dict(type="success",message="The signup link has been sent to your {0}".format(email))
-        return redirect('home')
+        user_form = SignupInvitationForm(request.POST)
+        if user_form.is_valid():
+            email = request.POST['email']
+            invitation_type = request.POST['invitation_type']
+            signup_link = user_handler.get_signup_invitation_url(email,invitation_type)
+            logger.debug("invitation link is %s", signup_link)
+            email_details = user_handler.prepSignupNotification(signup_link)
+            logger.debug("What goes in the email is \n %s", email_details)
+            email_notifier.send_signup_invitation(email, email_details)
+            request.session['alert_message'] = dict(type="success",message="The signup link has been sent to your {0}".format(email))
+            return redirect('home')
+
+        if user_form.errors:
+            logger.debug("Form has errors, %s ", user_form.errors)
+
+    user_form = SignupInvitationForm()
     return render(request, 'signupinvitation.html', locals())
 
-@is_alive
-def signup_by_invitation(request, user_code):
+@is_signup_token_alive
+def signup_by_invitation(request):
     """Signup, if request == POST, creates the user"""
     ## if authenticated redirect to user's homepage directly ##
     logging.warn(request.POST)
@@ -657,10 +664,10 @@ def signup_by_invitation(request, user_code):
     if request.user.is_authenticated():
         return redirect('home')
 
-    logger.debug(user_code)
-    if user_code:
+    if request.GET['questr_token']:
+        questr_token = request.GET['questr_token']
         try:
-            transcational = UserTransactional.objects.get(user_code__regex=r'^%s' % user_code)
+            transcational = UserSignupInvitationToken.objects.get(token=questr_token)
             logger.debug("transactional")
             logger.debug(transcational)
             if transcational:
@@ -676,6 +683,13 @@ def signup_by_invitation(request, user_code):
                             userdata = user_form.save(commit=False)
                             userdata.address = json.dumps(useraddress)
                             userdata.phone = user_form.cleaned_data['phone']
+                            if userdata.email != transcational.email:
+                                request.session['alert_message'] = dict(type="warning",message="The email provided was not the email the invitation was sent to!")
+                                return redirect('index')
+                            if transcational.invitation_type=="Courier":
+                                userdata.is_shipper = True
+                            else:
+                                userdata.is_shipper = False
                             userdata.save()
                             authenticate(username=userdata.email, password=userdata.password)
                             userdata.backend='django.contrib.auth.backends.ModelBackend'

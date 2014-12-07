@@ -4,7 +4,7 @@ import logging
 from django.shortcuts import render, redirect
 from django.core.exceptions import PermissionDenied
 
-from users.models import QuestrUserProfile, QuestrToken
+from users.models import QuestrUserProfile, QuestrToken, UserSignupInvitationToken
 from quests.models import QuestToken
 
 def verified(a_view):
@@ -108,4 +108,31 @@ def is_superuser(a_view):
 			except QuestrUserProfile.DoesNotExist:
 				return render(request,'error_pages/something_broke.html', locals())
 		return redirect('signin')
+	return _wrapped_function
+
+def is_signup_token_alive(a_view):
+	"""
+	checks whether the token is alive or dead
+	"""
+	def _wrapped_function(request, *args, **kwargs):
+		questr_token = request.GET['questr_token']
+		if questr_token:
+			try:
+				token = UserSignupInvitationToken.objects.get(token = questr_token)
+				# check whether the token is alive and take dedcision
+				if token:
+					if token.is_alive():
+						return a_view(request, *args, **kwargs)
+					else:
+						success = False
+						request.session['alert_message'] = dict(type="warning",message="The link has expired please contact us to request again!")
+						alert_message = request.session['alert_message']
+						return redirect('index')
+			except QuestrToken.DoesNotExist:
+				success = False
+				request.session['alert_message'] = dict(type="danger",message="Invalid Request !")
+				alert_message = request.session['alert_message']
+				return redirect('index')
+		else:
+			return render(request,'error_pages/something_broke.html', locals())
 	return _wrapped_function

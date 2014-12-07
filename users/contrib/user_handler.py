@@ -11,7 +11,7 @@ from libs import email_notifier, geomaps
 from quests.contrib import quest_handler
 from quests.models import Quests, QuestTransactional
 from quests.tasks import inform_shipper_task
-from users.models import QuestrUserProfile, UserTransactional, QuestrToken, UserEvents
+from users.models import QuestrUserProfile, UserTransactional, QuestrToken, UserEvents, UserSignupInvitationToken
 
 #All external imports (libs, packages)
 from collections import OrderedDict 
@@ -140,25 +140,22 @@ def get_verification_url(user=None):
         verf_link = "{0}/user/email/confirm/{1}?questr_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_user_code(), token_id)
     return verf_link
 
-def get_signup_invitation_url(email=None): 
+def get_signup_invitation_url(email=None, invitation_type=None): 
     """
         Returns the verification url.
     """
     signup_link = ""
-    if email:
+    if email and invitation_type:
         try:
-            prev_transactional = UserTransactional.objects.get(email = email, status = False)
-            if prev_transactional:
-                prev_transactional.status = True
-                prev_transactional.save()
-        except UserTransactional.DoesNotExist:
+            prev_token = UserSignupInvitationToken.objects.get(email = email, status = False)
+            if prev_token:
+                prev_token.status = True
+                prev_token.save()
+        except UserSignupInvitationToken.DoesNotExist:
             pass
-        transcational = UserTransactional(email=email)
-        transcational.save()
-        token_id = transcational.get_token_id()
-        questr_token = QuestrToken(token_id=token_id)
-        questr_token.save()
-        signup_link = "{0}/signup/invitation/{1}?questr_token={2}".format(settings.QUESTR_URL , transcational.get_truncated_user_code(), token_id)
+        signup_token = UserSignupInvitationToken(email=email, invitation_type=invitation_type)
+        signup_token.save()
+        signup_link = "{0}/signup/invitation/?questr_token={1}".format(settings.QUESTR_URL , signup_token.get_token())
     return signup_link
 
 def getShipper(shipper_id):

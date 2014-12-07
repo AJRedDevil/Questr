@@ -16,7 +16,12 @@
             <form action="{%url 'send_invitation_email' %}" method="POST">{% csrf_token %}
             <input id='email' name="email" type="text" placeholder="Email address" class="form-control input-xs ng-pristine ng-invalid">
             <br>
-            <button type="submit" class="btn btn-lg btn-fatty">CONTINUE</button></center>
+                    <select id="invitation_type" class="btn-classic" data-size="5" name="invitation_type">
+                        <option>Courier</option>
+                        <option>Business</option>
+                    </select>
+            <br>
+            <button type="submit" class="btn btn-lg btn-fatty">Send Invitation</button></center>
             </form>
         </div>
     </div>

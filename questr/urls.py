@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     #Examples:
     url(r'^$', mainview.index, name="index"),
     url(r'^contactus$', mainview.contactus, name='contactus'),
-    url(r'^signup/invitation/(?P<user_code>[\w\d]+)', userviews.signup_by_invitation, name='signup_by_invitation'),
+    url(r'^signup/invitation/', userviews.signup_by_invitation, name='signup_by_invitation'),
     # url(r'loadpage/(?P<template>[-_\w/.]+)$', mainview.loadPage, ),    
     url(r'^user/', include('users.urls')),
     url(r'^quest/', include('quests.urls') ),

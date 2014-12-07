@@ -22,6 +22,7 @@ from rest_framework.authtoken.models import Token
 logger = logging.getLogger(__name__)
 
 VEHICLE_SELECTION = (('car','Sedan'),('minivan','Minivan'))
+USERTYPE_SELECTION = (('Courier','Courier'),('Business','Business'))
 
 
 # Create your models here.
@@ -253,6 +254,44 @@ class QuestrToken(models.Model):
         if not self.timeframe:
             self.timeframe = timezone.now()
         super(QuestrToken, self).save(*args, **kwargs)
+
+class UserSignupInvitationToken(models.Model):
+    """
+    Token Model Class for user's verification, password reset and other such services
+    """
+
+    email = models.EmailField(_('email'), max_length=100)
+    token = models.CharField(_('id'), max_length=20, primary_key=True)
+    timeframe = models.DateTimeField(_('timeframe'), default=timezone.now)
+    status = models.BooleanField(_('status'), default=False)
+    invitation_type = models.CharField(_('invitation_type'), max_length=20, default="Courier")
+
+    def is_alive(self):
+        timedelta = timezone.now() - self.timeframe
+        days = 1
+        allowable_time = float(days * 24 * 60 * 60)
+        return timedelta.total_seconds() < allowable_time
+
+    def get_token(self):
+        return self.token
+
+    def generate_token(self):
+        """
+        Generates a token with first 14 hash and last 6 as verification code
+        """
+        import uuid
+        strhash = hashlib.sha256(str(timezone.now()) + str(uuid.uuid4())).hexdigest()[:20]
+        return strhash
+
+    def __unicode__(self):
+        return self.token
+
+    # Overriding
+    def save(self, *args, **kwargs):
+        # Tag all existing tokens from this user as used before creating new
+        UserSignupInvitationToken.objects.filter(email=self.email).update(status=True)
+        self.token = self.generate_token()
+        super(UserSignupInvitationToken, self).save(*args, **kwargs)
 
 class UserEvents(models.Model):
     """Models for Users UserEvents"""

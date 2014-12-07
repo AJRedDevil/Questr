@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, get_user_model
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import filesizeformat
 
-from .models import QuestrUserProfile, VEHICLE_SELECTION
+from .models import QuestrUserProfile, VEHICLE_SELECTION, USERTYPE_SELECTION
 from .contrib import user_handler
 
 import os
@@ -392,4 +392,10 @@ class NotifPrefForm(forms.Form):
     package = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=PACKAGE_SELECTION)
     notif = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=NOTIF_SELECTION)
 
+class SignupInvitationForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(SignupInvitationForm, self).__init__(*args, **kwargs)
+
+    email = forms.EmailField()
+    invitation_type = forms.ChoiceField(choices=USERTYPE_SELECTION)
 
