@@ -71,3 +71,8 @@ class PriceCalcSerializer(serializers.Serializer):
 
 class StatusSeralizer(serializers.Serializer):
     status = serializers.BooleanField()
+
+class QuestStatusSerializer(serializers.Serializer):
+    quest = serializers.IntegerField()
+    event = serializers.IntegerField()
+    extrainfo = serializers.CharField()

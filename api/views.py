@@ -8,6 +8,7 @@ from django.http import Http404
 
 #All local imports (libs, contribs, models)
 from quests.models import Quests
+from quests.contrib import quest_handler
 from users.contrib import user_handler
 import serializers
 
@@ -163,7 +164,7 @@ class AvailabilityStatus(APIView):
 
     def post(self, request, format=None):
         """
-        Returns with price after receiving shipment information
+        Update status of courier
         ---
         request_serializer: serializers.StatusSeralizer
         """
@@ -182,5 +183,35 @@ class AvailabilityStatus(APIView):
                 responsedata=dict(status=status.HTTP_200_OK, success=True)                
             else:
                 responsedata=dict(data="Status already set", status=status.HTTP_409_CONFLICT, success=False)
+            return Response(responsedata)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class QuestStatus(APIView):
+    """
+    Package Status resource
+    """
+    def post(self, request, format=None):
+        """
+        Update status of a shipment
+        ---
+        request_serializer: serializers.QuestStatusSerializer
+        """
+
+        user = request.user
+        if not user.is_shipper:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        serializer = serializers.QuestStatusSerializer(data=request.DATA)
+        if serializer.is_valid():
+            data = request.DATA.copy()
+            quest = data['quest']
+            eventtype = data['event']
+            extrainfo = json.loads(data['extrainfo'])
+            qm = quest_handler.QuestEventManager()
+            result = qm.updatestatus(quest, eventtype, extrainfo)
+            if result['success'] == True:
+                responsedata=dict(status=status.HTTP_200_OK, success=True)                
+            else:
+                responsedata=dict(status=status.HTTP_409_CONFLICT, success=False)
             return Response(responsedata)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

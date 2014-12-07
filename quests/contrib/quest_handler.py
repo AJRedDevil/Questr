@@ -453,3 +453,16 @@ class QuestEventManager(object):
         event = QuestEvents(quest=quest, event=eventtype, extrainfo=extrainfo, updated_on=timezone.now())
         QuestEvents.save(event)
         return "success"
+
+    def updatestatus(self, quest_id, eventtype, extrainfo=None):
+        """
+        Updates the package status of the quest
+        """
+        quest = getQuestDetails(quest_id)
+        event = QuestEvents(quest=quest, event=eventtype, extrainfo=extrainfo, updated_on=timezone.now())
+        try:
+            QuestEvents.save(event)
+            return dict(success=True)
+        except Exception, e:
+            return dict(success=False, data=e)
+
