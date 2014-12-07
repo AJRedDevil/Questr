@@ -1,6 +1,5 @@
 
 
-from celery.utils.log import get_task_logger
 from questr.celery import app 
  
 from quests.models import QuestTransactional
@@ -9,6 +8,7 @@ from quests.contrib import quest_handler
 from django.conf import settings
 
 import logging
+import os
 
 # Init Logger
 logger = logging.getLogger(__name__)
@@ -46,7 +46,7 @@ def inform_shipper_task(quest_id, courier_id):
             # Send the courier a message saying he's timed out
             from libs.twilio_handler import twclient
             tw = twclient()
-            tw.sendmessage(courier.phone, "Sorry. You missed it. Don't worry though, there will be plenty! - Questr")
+            tw.sendmessage(courier.phone, os.environ['SMS_MISSEDQUEST_MSG'])
             available_couriers.pop(str(courier.id), None)
             quest.available_couriers = available_couriers
             ##Save all the details
@@ -109,7 +109,7 @@ def send_complete_quest_link(courier_id, quest_id):
     #Sending the link over SMS to the courier
     from libs.twilio_handler import twclient
     tw = twclient()
-    alert_message="Did you finish the delivery {0}? If so, please click on this link: {1}.".format(quest, complete_url)
+    alert_message=os.environ['SMS_QUERYQUESTCOMPLETION_MSG'].format(quest, complete_url)
     logger.warn(alert_message)
     tw.sendmessage(courier.phone, alert_message)
 

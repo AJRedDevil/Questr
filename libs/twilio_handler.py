@@ -4,6 +4,7 @@ from django.conf import settings
 
 from twilio.rest import TwilioRestClient
 import logging
+import os
 # Init Logger
 logger = logging.getLogger(__name__)
 
@@ -13,7 +14,7 @@ class twclient(object):
         self.__twclient = TwilioRestClient(settings.TWILIO_ACCOUNT_SID, settings.TWILO_AUTH_TOKEN)
 
     def load_newquest_notif(self, quest, accept_url, reject_url):
-        msg = ("New Pkg {0} nearby, ${1} for {2}km(s). Accept: {3} Decline: {4}" )\
+        msg = (os.environ['SMS_NEWQUEST_MSG'])\
         .format(quest.id, quest.reward,\
             quest.distance, accept_url, reject_url)
         #Adding quest message to the detail
@@ -25,7 +26,7 @@ class twclient(object):
         return msg
 
     def load_acceptquest_notif(self, quest):
-        msg = ("You got pkg {0}! Pickup: {1},{2},{3}. {4},{5}  Dropoff: {6},{7},{8}. {9},{10}" )\
+        msg = (os.environ['SMS_ACCEPTQUEST_MSG'])\
         .format(quest.id, quest.pickup['address'], quest.pickup['city'],\
             quest.pickup['postalcode'], quest.pickup['name'], quest.pickup['phone'], quest.dropoff['address'], quest.dropoff['city'],\
             quest.dropoff['postalcode'], quest.dropoff['name'], quest.dropoff['phone'])

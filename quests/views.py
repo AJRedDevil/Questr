@@ -21,6 +21,7 @@ from quests.tasks import init_courier_selection, checkstatus, send_complete_ques
 import logging
 from datetime import datetime, timedelta
 import simplejson as json
+import os
 import pytz
 
 # Init Logger
@@ -494,7 +495,7 @@ def completequest(request, questname, deliverycode):
                     eventmanager.setevent(questdetails, 8, extrainfo)
                     from libs.twilio_handler import twclient
                     tw = twclient()
-                    alert_message="The delivery for {0},{1},{2} is complete.".format(questdetails.dropoff['address'], questdetails.dropoff['city'], questdetails.dropoff['postalcode'])
+                    alert_message=os.environ['SMS_QUESTCOMPLETION_MSG'].format(questdetails.dropoff['address'], questdetails.dropoff['city'], questdetails.dropoff['postalcode'])
                     logger.warn(alert_message)
                     tw.sendmessage(questdetails.questrs.phone, alert_message)
                     request.session['alert_message'] = dict(type="Success",message="The Questr has been notified!")
@@ -667,7 +668,7 @@ def accept_quest(request, quest_code):
                             alert_message = tw.load_acceptquest_notif(quest)
                             logger.warn(alert_message)
                             tw.sendmessage(courier.phone, alert_message)
-                            tw.sendmessage(questr.phone, 'A courier has accepted your request and is en route now. -Questr')
+                            tw.sendmessage(questr.phone, os.environ['SMS_COURIERACCEPTANCE_MSG'])
                             # After 30 minutes send the guy a message asking if the quest is complete
                             send_complete_quest_link.apply_async((courier.id, quest.id), countdown=1800)
                             couriermanager = user_handler.CourierManager()
@@ -734,7 +735,7 @@ def reject_quest(request, quest_code):
                             # logging.warn(available_couriers)
                             from libs.twilio_handler import twclient
                             tw = twclient()
-                            tw.sendmessage(courier.phone, "You rejected the package. - Questr")
+                            tw.sendmessage(courier.phone, os.environ['SMS_REJECTQUEST_MSG'])
                             available_couriers.pop(str(courier.id), None)
                             quest.available_couriers = available_couriers
                             ##Save all the details
