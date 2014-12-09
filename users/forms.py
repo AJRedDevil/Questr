@@ -324,6 +324,8 @@ class SetPasswordForm(forms.Form):
         'password2' : {
             'required' : 'Please provide with a password confirmation !',
         },
+        'password_lowchar' : _("Passwords must be at least 6 characters.")
+
     }
     new_password1 = forms.CharField(label=_("New password"),
                                     widget=forms.PasswordInput)
@@ -343,6 +345,12 @@ class SetPasswordForm(forms.Form):
                     self.error_messages['password_mismatch'],
                     code='password_mismatch',
                 )
+            if len(password1) < 6 or len(password2) < 6:
+               raise forms.ValidationError(
+                   self.error_messages['password_lowchar'],
+                   code='password_lowchar',
+               ) 
+
         return password2
 
     def save(self, commit=True):
@@ -360,9 +368,14 @@ class PasswordChangeForm(SetPasswordForm):
     error_messages = dict(SetPasswordForm.error_messages, **{
         'password_incorrect': _("Your old password was entered incorrectly. "
                                 "Please enter it again."),
+        'password_lowchar' : _("Passwords must be at least 6 characters.")
     })
     old_password = forms.CharField(label=_("Old password"),
                                    widget=forms.PasswordInput)
+    new_password1 = forms.CharField(label=_("New password"),
+                                    widget=forms.PasswordInput)
+    new_password2 = forms.CharField(label=_("New password confirmation"),
+                                    widget=forms.PasswordInput)
 
     def clean_old_password(self):
         """
@@ -375,6 +388,22 @@ class PasswordChangeForm(SetPasswordForm):
                 code='password_incorrect',
             )
         return old_password
+
+    def clean_new_password2(self):
+        password1 = self.cleaned_data.get('new_password1')
+        password2 = self.cleaned_data.get('new_password2')
+        if password1 and password2:
+            if password1 != password2:
+                raise forms.ValidationError(
+                    self.error_messages['password_mismatch'],
+                    code='password_mismatch',
+                )
+            if len(password1) < 6 or len(password2) < 6:
+               raise forms.ValidationError(
+                   self.error_messages['password_lowchar'],
+                   code='password_lowchar',
+               ) 
+        return password2
 
 PasswordChangeForm.base_fields = OrderedDict(
     (k, PasswordChangeForm.base_fields[k])

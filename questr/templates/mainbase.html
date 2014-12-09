@@ -81,39 +81,6 @@
 	{% endif %}
 
 
-	    {% if user.is_authenticated and not user.email_status %}
-		<nav class="navbar navbar-default" role="navigation">
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		      <a class="navbar-brand" href="#">Questr</a>
-		    </div>
-
-		      <ul class="nav navbar-nav navbar-right">
-		        <li class="{% navactive request 'logout' %}"><a href="{% url 'logout' %}">Logout</a></li>
-		      </ul>
-		    </div><!-- /.navbar-collapse -->
-		  </div><!-- /.container-fluid -->
-		</nav>
-		{% if alert_message %}
-			      <!-- ALERT -->
-			
-			  <div class="alert alert-{{alert_message.type}} alert-dismissible" role="alert">
-			    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			    <strong>{{alert_message.type | title}}!</strong> {{alert_message.message}}
-			  </div>
-			
-		{% endif %}
-	{% endif %}
-
-
-
-
-
 	{% if user.is_authenticated and user.email_status %}
 
 	<nav class="navbar navbar-default" role="navigation">
@@ -216,7 +183,7 @@
 	                	Settings
 	                </a>
 	            </li>
-				{% if user.is_shipper %}
+				{% if user.is_shipper and user.email_status %}
 	            <li>
 	        	 <a href="" data-toggle="modal" data-target="#status">
 	        	 	{% if user.is_available %}
@@ -254,6 +221,128 @@
 {% endif %}
 {% endif %}
 
+	{% if user.is_authenticated and not user.email_status %}
+
+	<nav class="navbar navbar-default" role="navigation">
+  <div class="">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+	{% comment %}
+<!-- This is a dummy form -->
+		<form action="{% url 'trackquest' tracking_number %}" role="form" method="get">
+	     	<div class="input-group">
+	        	<input type="text" class="form-control input-sm" name="tracking_number" placeholder="Enter Tracking Code">
+		            <span class="input-group-btn">
+		              <button class="btn btn-default" type="Submit">Enter</button>
+		            </span>
+	        </div><!-- /input-group -->
+	    </form>
+{% endcomment %}
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'home' %}">QUESTR</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">        
+
+     {% comment %}
+    {% if user.is_shipper or user.is_superuser %}
+      <li class="{% navactive request 'myshipments' %}"><a href="{% url 'myshipments' %}">My shipments</a></li>
+      {% else %}
+      <li class="{% navactive request 'myposts' %}"><a href="{% url 'myposts' %}">My Quests</a></li>
+      {% endif %}
+       {% endcomment %}
+    
+        
+      </ul>
+      {% comment %}
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      {% endcomment %}
+      <ul class="nav navbar-nav navbar-right">
+
+      	<li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><i class="fa fa-home" style="font-size:18px;"></i> Home</a></li> 
+
+		<li class="{% navactive request 'trackquest' %}"><a href="{% url 'trackquest' %}"><i class="fa fa-location-arrow" style="font-size:16px;"></i> Track a package</a></li> 
+
+      	<li class="dropdown">
+	          <a href="#" class="dropdown-toggle no-margin no-padding" data-toggle="dropdown">
+
+		      	<!-- PROFILE IMAGE -->
+		   		<div class="" style="width:28px;height:28px;display:inline-block;margin-top:-100px;margin-down:-100px;padding:0;padding-top:8px;">
+		          <span class="ratio img-responsive img-circle" style="background-image: url({{user.get_profile_pic}});margin:0;"></span>
+		      	</div>
+		      	<!-- PROFILE IMAGE -->
+
+		      	{{user.first_name}} {{user.last_name}} 
+		          <i class="fa fa-caret-down"></i>
+		          
+	          </a>
+	       
+
+
+			<ul class="dropdown-menu dropdown-menu-right">
+{% comment %}
+				<li class="{% navactive request 'profile' %}">
+					<a href="{% url 'profile' %}">
+						
+						My profile
+					</a>
+				</li>
+{% endcomment %}
+	            <li>
+	                <a href="{% url 'settings' %}">
+	                	
+	                	Settings
+	                </a>
+	            </li>
+				{% if user.is_shipper and user.email_status %}
+	            <li>
+	        	 <a href="" data-toggle="modal" data-target="#status">
+	        	 	{% if user.is_available %}
+	        			<span class="glyphicon glyphicon-record"></span>
+	        			<span>Mark Unavailable</span>
+	        	 	{% endif %}
+	        	 	{% if not user.is_available %}
+	        			<span class="glyphicon glyphicon-record" style="color:rgba(47,204,112,1.00);"></span>
+	        			<span>Mark Available</span>
+	        	 	{% endif %}
+	        	 </a>
+	            </li>
+		        {% endif %}	        
+	            <li>
+	                <a href="{% url 'logout' %}">
+	                	Logout
+	                </a>
+	            </li>
+	        </ul>
+		</li>
+	        	
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+{% if alert_message %}
+	      <!-- ALERT -->
+	
+	  <div class="alert alert-{{alert_message.type}} alert-dismissible" role="alert">
+	    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	    <strong>{{alert_message.type | title}}!</strong> {{alert_message.message}}
+	  </div>
+	
+{% endif %}
+{% endif %}
 
 {% if user.is_shipper %}
 	<!-- STATUS -->

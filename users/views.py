@@ -293,15 +293,8 @@ def userSettings(request):
     """Change's user's personal settings"""
     pagetype="loggedin"
     user = request.user
-    settingstype="general"
     password = user_handler.passwordExists(user)
     userdetails = user_handler.getQuestrDetails(user.id)
-    try:
-        user = QuestrUserProfile.objects.get(email=request.user)
-    except QuestrUserProfile.DoesNotExist:
-        raise Http404
-        return render(request,'404.html', locals())
-
     if request.method == "POST":
         logging.warn(request.POST)
         try:
@@ -312,9 +305,22 @@ def userSettings(request):
         if user_form.is_valid():
             useraddress = dict(city=user_form.cleaned_data['city'], streetaddress=user_form.cleaned_data['streetaddress'],\
                 streetaddress_2=user_form.cleaned_data['streetaddress_2'], postalcode=user_form.cleaned_data['postalcode'])
-            userdata = user_form.save(commit=False)
-            userdata.address = json.dumps(useraddress)
-            userdata.phone = user_form.cleaned_data['phone']
+            if user_form['email'] != user.email:
+                userdata = user_form.save(commit=False)
+                userdata.email_status = False
+                userdata.save()
+                verf_link = user_handler.get_verification_url(userdata)
+                logger.debug("verification link is %s", verf_link)
+                email_details = user_handler.prepWelcomeNotification(userdata, verf_link)
+                logger.debug("What goes in the email is \n %s", email_details)
+                email_notifier.send_email_notification(userdata, email_details)
+                pagetitle = "Please verify your email !"
+                return redirect('home')
+            else:
+                userdata = user_form.save(commit=False)
+                userdata.address = json.dumps(useraddress)
+                userdata.phone = user_form.cleaned_data['phone']
+
             if user_form.cleaned_data['avatar'] is not None:
                 userdata.avatar = user_form.cleaned_data['avatar']
             else:
@@ -465,7 +471,6 @@ def getUserInfo(request, displayname):
 #     pagetitle = "Create Your Password"
 #     return render(request, "createpassword.html", locals())
 
-@verified
 @login_required
 def changePassword(request):
     """Change's user's personal settings"""
@@ -483,7 +488,7 @@ def changePassword(request):
         if user_form.is_valid():
             user_form.save()
             request.session['alert_message'] = dict(type="success",message="Your password has been changed successfully!")
-            return redirect('home')
+            return redirect('logout')
     pagetitle = "Change Your Password"
     return render(request, "passwordsettings.html",locals())
 
@@ -611,7 +616,7 @@ def resetpassword(request):
 def changestatus(request):
     """Changes the courier's availability from the one that he is currently on"""
     user = request.user
-    if user.is_shipper:
+    if user.is_shipper and user.email_status:
         availability = user.is_available
         if availability:
             # If the user is available, change his status to unavailable
@@ -622,10 +627,10 @@ def changestatus(request):
     else:
         return redirect('home')
 
-    if result['status'] == "success":
+    if result['success'] == "True":
         request.session['alert_message'] = dict(type="Success",message="Your status has been updated!")
         return redirect("home")
-    elif result['status'] == "fail":
+    elif result['success'] == "False":
         request.session['alert_message'] = dict(type="Danger",message="Your status cannot be updated!")
         return redirect("home")
 

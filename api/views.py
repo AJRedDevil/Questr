@@ -170,7 +170,7 @@ class AvailabilityStatus(APIView):
         """
 
         user = request.user
-        if not user.is_shipper:
+        if not user.is_shipper or user.email_status:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
         ##Validate if all the data is available###

@@ -263,7 +263,7 @@ class CourierManager(object):
     def getActiveCouriers(self, quest):
         """Returns a list of couriers"""
         try:
-            courierlist = QuestrUserProfile.objects.filter(is_shipper=True, is_superuser=False, is_available=True, is_active=True, vehicle=quest.size)
+            courierlist = QuestrUserProfile.objects.filter(is_shipper=True, is_superuser=False, is_available=True, is_active=True, email_status=True, vehicle=quest.size)
         except Exception, e:
             raise e
 
