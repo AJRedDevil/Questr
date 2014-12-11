@@ -3,14 +3,11 @@
 #All Django Imports
 from django.conf import settings
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
-from django.core.files import File
-from django.core.files.base import ContentFile
 from django.dispatch import receiver
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
-from django.utils import six
 
 #All external imports (libs, packages)
 import hashlib
@@ -134,12 +131,6 @@ class QuestrUserProfile(AbstractBaseUser):
             return
         file_path = self.avatar.name
         filename_base, filename_ext = os.path.splitext(file_path)
-        # try:
-        #     os.makedirs(os.path.join(settings.MEDIA_ROOT, str(self.id)+'/ppsize'))
-        # except OSError as e:
-        #     if e.errno == 17:
-        #         # Dir already exists. No biggie.
-        #         pass
         avatar_file_path = ('%s'+'_'+self.__generate_hash()[:10]+'.jpg') % (filename_base)
         try:
             if not storage.exists(avatar_file_path):

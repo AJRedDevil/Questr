@@ -66,6 +66,7 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'api',
     'rest_framework_swagger',
+    'debug_toolbar',
 )
 
 # MIDDLERWARE DEFINITIONS
