@@ -3,7 +3,7 @@
 #All Django Imports
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.http import Http404, HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 
@@ -19,7 +19,7 @@ from quests.tasks import init_courier_selection, checkstatus, send_complete_ques
 
 #All external imports (libs, packages)
 import logging
-from datetime import datetime, timedelta
+from datetime import timedelta
 import simplejson as json
 import os
 import pytz
@@ -36,12 +36,12 @@ def listallquests(request):
     # allquests = Quests.objects.all()
     # return render(request, 'listallquest.html', locals())
     pagetitle="home"
+    user = request.user
     return redirect("home")
 
 @verified
 @login_required
 def viewquest(request, questname):
-    pagetype="loggedin"
     user = request.user
     questname=questname
     questdetails = quest_handler.getQuestDetails(questname)
@@ -55,7 +55,6 @@ def viewquest(request, questname):
         if questdetails.questrs.id == request.user.id:
             isOwner = True
         pagetitle=questdetails.title
-        # isShipperForQuest=quest_handler.isShipperForQuest(str(user.id), questname)
         return render(request, 'viewquest.html', locals())
     else:
         return redirect('home')   
@@ -202,10 +201,8 @@ def viewquest(request, questname):
 @login_required
 def newquest(request):
     """creates new quest and sends notification to shippers"""
-    pagetype="loggedin"
     user = request.user
-    userdetails = user_handler.getQuestrDetails(user.id)
-    if userdetails.is_shipper:
+    if user.is_shipper:
         return redirect('home')
 
     if request.method=="POST":
@@ -250,10 +247,8 @@ def newquest(request):
 @login_required
 def confirmquest(request):
     """creates new quest and sends notification to shippers"""
-    pagetype="loggedin"
     user = request.user
-    userdetails = user_handler.getQuestrDetails(user.id)
-    if userdetails.is_shipper:
+    if user.is_shipper:
         return redirect('home')
 
     if request.method=="POST":
@@ -361,7 +356,7 @@ def confirmquest(request):
             eventmanager = quest_handler.QuestEventManager()
             extrainfo = dict(detail="quest created")
             eventmanager.setevent(quest_data, 1, extrainfo)
-            message="Quest {0} has been created by user {1}".format(quest_data.id, userdetails)
+            message="Quest {0} has been created by user {1}".format(quest_data.id, user)
             request.session['alert_message'] = dict(type="Success",message="Your quest has been created!")
             logger.debug(message)
             return redirect('home')
@@ -372,105 +367,27 @@ def confirmquest(request):
     pagetitle = "Confirm your quest details"
     return redirect('home')
 
-##Removed because we are going into automated shipper selection
-# @verified
-# @login_required
-# def applyForQuest(request, questname):
-#     """Takes in applications for a quest"""
-#     pagetype="loggedin"
-#     shipper = request.user # the guy logged in is the shipper
-#     questname = questname
-#     try:
-#         questdetails = Quests.objects.get(id=questname, isaccepted=False)
-#     except Quests.DoesNotExist:
-#         raise Http404
-#         return render(request,'404.html')
-#     # Check if the owner and the user are the same
-#     if questdetails.questrs.id == request.user.id:
-#         return redirect('home')
-
-#     # get questr information
-#     questr = getQuestrDetails(questdetails.questrs_id)
-#     # add a shipper to the quest
-#     quest_handler.addShipper(str(shipper.id), questname)
-#     email_details = quest_handler.prepQuestAppliedNotification(shipper, questr, questdetails)
-#     email_notifier.send_email_notification(questr, email_details)
-
-#     message="Your application has been sent to the quest owner"
-#     logger.debug(message)
-#     return redirect('viewquest', questname=questname)
-
-# @verified
-# @login_required
-# def withdrawFromQuest(request, questname):
-#     """Takes in applications for a quest"""
-#     pagetype="loggedin"
-#     shipper = request.user # the guy logged in is the shipper
-#     questname = questname
-#     try:
-#         questdetails = Quests.objects.get(id=questname, isaccepted=False)
-#     except Quests.DoesNotExist:
-#         raise Http404
-#         return render(request,'404.html')
-#     # Check if the owner and the user are the same
-#     if questdetails.questrs.id == request.user.id:
-#         return redirect('home')
-#     # remove the shipper from the quest
-#     quest_handler.delShipper(str(shipper.id), questname)
-#     message="You have retracted yourself from the quest"
-#     logger.debug(message)
-#     return redirect('viewquest', questname=questname)
-
-# @verified
-# @login_required
-# def deletequest(request, questname):
-#     """Deletes the quest
-#     """
-#     pagetitle="home"
-#     try:
-#         questdetails = Quests.objects.get(id=questname)
-#     except Quests.DoesNotExist:
-#         raise Http404
-#         return render(request,'404.html')
-
-#     if questdetails.questrs.id == request.user.id:
-#         message=""
-#         if questdetails.isaccepted:
-#             message="Your quest has been accepted."
-#         elif questdetails.shipper:
-#             message="Shipper have applied to your quest."
-#         if not message:
-#             try:
-#                 Quests.objects.filter(id=questname).update(ishidden=True)
-#             except Quests.DoesNotExist:
-#                 raise Http404
-#                 return render(request,'404.html')
-#             message = "Your quest has been deleted!"
-#             return redirect('home')
-#         else:
-#             return redirect('viewquest', questname=questname)
-#     return redirect("home")
-
 ##ONLY FOR TWILIO
 @verified
 @login_required
 def completequest(request, questname, deliverycode):
-    """Verify delivery code and set the quest as completed
+    """
+    Verify delivery code and set the quest as completed
     Send the notification to the offerer and also the review link
     """
     #if already completed ignore
     shipper = request.user
     questname = questname
-    if quest_handler.isShipperForQuest(str(shipper.id), questname):            
+    if quest_handler.isShipperForQuest(shipper, questname):            
         questdetails = quest_handler.getQuestDetails(questname)
         if questdetails.isaccepted:
             # Check if the owner and the user are the same
             if questdetails.questrs.id == request.user.id:
-                logger.warn("Attempted complete by the owner himself!")
+                logger.warn("Attempted complete on {0} by the owner {1} himself!".format(questdetails.id, request.user))
                 return redirect('home')
 
             if questdetails.status != 'Accepted':
-                logger.warn("Attempted complete on a unaccepted quest!")
+                logger.warn("Attempted complete on an unaccepted quest {0} by {1}!".format(questdetails.id, request.user))
                 return redirect('home')
             
             delivery_code = deliverycode
@@ -478,7 +395,6 @@ def completequest(request, questname, deliverycode):
             if delivery_code:
                 if questdetails.delivery_code != delivery_code:
                     logger.warn("Provided delivery code \'%s\' doesn't match the one in the quest number %s", delivery_code, questdetails.id)
-                    logger.debug("returned to viewquest page of %s", questname)
                     request.session['alert_message'] = dict(type="Danger",message="Provided delivery code is not correct!")
                     return redirect('viewquest', questname=questname) # return with message
                 else:
@@ -489,7 +405,7 @@ def completequest(request, questname, deliverycode):
                     Quests.objects.filter(id=questname).update(delivery_date=now)
                     ## Reload questdetails to get in the delivery date from quest
                     questdetails = quest_handler.getQuestDetails(questname)
-                    logger.debug("Quest %s has been successfully completed", questdetails.id)
+                    logger.debug("Quest {0} has been successfully completed by {1}".format(questdetails.id, request.user))
                     eventmanager = quest_handler.QuestEventManager()
                     extrainfo = dict(detail="quest complete")
                     eventmanager.setevent(questdetails, 8, extrainfo)
@@ -502,8 +418,7 @@ def completequest(request, questname, deliverycode):
                     return redirect('viewquest', questname=questname) # display message
         return redirect('viewquest', questname=questname)
     else:
-        message = "Imposter detected" # Correct message required
-        logger.debug(message)
+        logger.warn("Attempted complete on an unauthorized quest {0} by {1}!".format(questdetails.id, request.user))
         return redirect('viewquest', questname=questname)
 
 ##OLD WAY
@@ -518,7 +433,7 @@ def completequest(request, questname, deliverycode):
 #     if request.method == "POST":
 #         shipper = request.user
 #         questname = questname
-#         if quest_handler.isShipperForQuest(str(shipper.id), questname):            
+#         if quest_handler.isShipperForQuest(shipper, questname):            
 #             questdetails = quest_handler.getQuestDetails(questname)
 #             if questdetails.isaccepted:
 #                 # Check if the owner and the user are the same

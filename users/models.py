@@ -198,64 +198,22 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
 
-# User transactionl model
-class UserTransactional(models.Model):
-    user_code = models.CharField(_('user_code'), max_length=64, unique=True)
-    email = models.EmailField(_('email'), max_length=100)
-    status = models.BooleanField(_('status'), default=False)
-
-    def generate_hash(self):
-        return hashlib.sha256(str(timezone.now()) + str(self.email)).hexdigest()
-
-    def get_truncated_user_code(self):
-        return self.user_code[:7]
-
-    def get_token_id(self):
-        return self.user_code[-6:]
-
-    REQUIRED_FIELDS = ['user_code', 'id']
-
-    def __unicode__(self):
-        return "{0}:{1} {2}".format(self.user_code, self.id, self.email)
-
-    #Overriding
-    def save(self, *args, **kwargs):
-        #check if the row with this hash already exists.
-        if not self.user_code:
-            self.user_code = self.generate_hash()
-        # self.my_stuff = 'something I want to save in that field'
-        super(UserTransactional, self).save(*args, **kwargs)
-
-# Questr Token
-class QuestrToken(models.Model):
-    token_id = models.CharField(_('id'), max_length=20, primary_key=True)
-    timeframe = models.DateTimeField(_('timeframe'), default=timezone.now)
-
-    def is_alive(self):
-        timedelta = timezone.now() - self.timeframe
-        days = 1
-        allowable_time = float(days * 24 * 60 * 60)
-        return timedelta.total_seconds() < allowable_time
-
-    def __unicode__(self):
-        return "Token verifying ..."
-
-    # Overriding
-    def save(self, *args, **kwargs):
-        if not self.timeframe:
-            self.timeframe = timezone.now()
-        super(QuestrToken, self).save(*args, **kwargs)
-
-class UserSignupInvitationToken(models.Model):
+class UserToken(models.Model):
     """
     Token Model Class for user's verification, password reset and other such services
+
+    token_type codes are 
+    0 : email verify
+    1 : courier signup
+    2 : business signup
+    3 : password reset
     """
 
     email = models.EmailField(_('email'), max_length=100)
-    token = models.CharField(_('id'), max_length=20, primary_key=True)
+    token = models.CharField(_('token'), max_length=20, primary_key=True)
     timeframe = models.DateTimeField(_('timeframe'), default=timezone.now)
     status = models.BooleanField(_('status'), default=False)
-    invitation_type = models.CharField(_('invitation_type'), max_length=20, default="Courier")
+    token_type = models.IntegerField(_('token_type'))
 
     def is_alive(self):
         timedelta = timezone.now() - self.timeframe
@@ -279,10 +237,12 @@ class UserSignupInvitationToken(models.Model):
 
     # Overriding
     def save(self, *args, **kwargs):
-        # Tag all existing tokens from this user as used before creating new
-        UserSignupInvitationToken.objects.filter(email=self.email).update(status=True)
-        self.token = self.generate_token()
-        super(UserSignupInvitationToken, self).save(*args, **kwargs)
+        # Tag all existing tokens for this user and token_type as used before creating new
+        if self.token:
+            UserToken.objects.filter(email=self.email, token_type=self.token_type).update(status=True)
+        else:    
+            self.token = self.generate_token()
+        super(UserToken, self).save(*args, **kwargs)
 
 class UserEvents(models.Model):
     """Models for Users UserEvents"""

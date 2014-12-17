@@ -19,8 +19,9 @@ from quests.contrib import quest_handler
 from quests.models import Quests, QuestPricing
 from reviews.contrib import review_handler
 from reviews.models import Review
-from .models import QuestrUserProfile, UserTransactional, UserSignupInvitationToken
-from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, PasswordChangeForm, NotifPrefForm, SignupInvitationForm
+from .models import QuestrUserProfile, UserToken
+from .forms import QuestrUserChangeForm, QuestrUserCreationForm, QuestrLocalAuthenticationForm, \
+PasswordChangeForm, NotifPrefForm, SignupInvitationForm, SetPasswordForm
 
 #All external imports (libs, packages)
 from ipware.ip import get_real_ip, get_ip
@@ -265,7 +266,7 @@ def profile(request):
         return render(request,'404.html')
 
     try:
-        questsbyuser = quest_handler.getQuestsByUser(user.id)
+        questsbyuser = quest_handler.getQuestsByUser(user)
     except Exception, e:
         raise e
         return render(request,'broke.html')
@@ -338,85 +339,6 @@ def userSettings(request):
     return render(request, "generalsettings.html",locals())
 
 @login_required
-def myTrades(request):
-    # pagetype="loggedin"
-    # user = request.user
-    # pagetitle = "My Trades"
-    # shipperlist = {} #init blank dict
-    
-    # questswithoffers = quest_handler.getQuestsWithOffer(user.id) # list of the logged in user's quest where offers are put
-
-    # for quest in questswithoffers:
-    #     shippers = user_handler.getShippersOfQuest(quest.id) # for each quest get the individual shippers
-    #     shipper_object_list = []
-    #     for shipper_id in shippers:
-    #         # build a dict of quest and shipper objects
-    #         shipper_object_list.append(user_handler.getShipper(shipper_id) )
-        
-    #     shipperlist[quest]=shipper_object_list
-    
-    # # logger.debug(shipperlist)
-    # return render(request, 'trades.html', locals())
-    return redirect('myposts')
-
-# @login_required
-# def acceptOffer(request, quest_id, shipper_id):
-#     """Accepts a bid on a quest from a user"""
-#     pagetype="loggedin"
-#     user = request.user
-#     # if the shipper doesn't exist
-#     if not user_handler.userExists(shipper_id):
-#         logger.debug("User ID : %s not found, quest %s not accepted, returning to mytrades page", shipper_id, quest_id)
-#         return redirect('mytrades')    
-    
-#     try:
-#         Quests.objects.filter(id=quest_id).update(shipper=shipper_id, isaccepted='t')
-#         Quests.objects.filter(id=quest_id).update(status='Accepted')
-#         questdetails = quest_handler.getQuestDetails(quest_id)
-#         shipper = user_handler.getQuestrDetails(shipper_id)
-#         email_details = quest_handler.prepOfferAcceptedNotification(shipper, questdetails)
-#         email_notifier.send_email_notification(shipper, email_details)
-#     except Quests.DoesNotExist:
-#         raise Http404
-#         return render('404.html', locals())
-#     #To display the information of shipper on the trades page
-#     shipper = user_handler.getShipper(shipper_id)    
-    
-#     return redirect('mytrades')
-
-@verified
-@login_required
-def myPosts(request):
-    pagetype="loggedin"
-    user = request.user
-    pagetitle = "My Trades"
-    shipperlist = {} #init blank dict
-    
-    questswithoffers = quest_handler.getQuestsWithOffer(user.id) # list of the logged in user's quest where offers are put
-    questswithoutoffers = quest_handler.getQuestsByUser(user.id) # list of the logged in user's quest where offers aren't put
-
-    for quest in questswithoffers:
-        shippers = user_handler.getShippersOfQuest(quest.id) # for each quest get the individual shippers
-        shipper_object_list = []
-        for shipper_id in shippers:
-            # build a dict of quest and shipper objects
-            shipper_object_list.append(user_handler.getShipper(shipper_id) )
-        
-        shipperlist[quest]=shipper_object_list
-    
-    # logger.debug(shipperlist)
-    return render(request, 'myquests.html', locals())
-
-@verified
-@login_required
-def myShipments(request):
-    pagetype="loggedin"
-    user = request.user
-    pagetitle = "My Shipments"
-    myshipments = quest_handler.getMyShipmnets(user.id)
-    return render(request, 'myshipments.html', locals())
-
-@login_required
 def getUserInfo(request, displayname):
     '''This is used to display user's public profile'''
     pagetype="loggedin"
@@ -428,7 +350,7 @@ def getUserInfo(request, displayname):
         return render(request,'404.html')
 
     try:
-        questsbyuser = quest_handler.getQuestsByUser(publicuser.id)
+        questsbyuser = quest_handler.getQuestsByUser(publicuser)
     except Exception, e:
         raise e
         return render(request,'broke.html')
@@ -452,24 +374,48 @@ def getUserInfo(request, displayname):
     pagetitle = publicuser.first_name+' '+publicuser.last_name
     return render(request,'publicprofile.html', locals())
 
-# @login_required
-# def createPassword(request):
-#     """Create a password for socially logged in user"""
-#     pagetype="loggedin"
-#     user = request.user
-#     settingstype="password"
+@is_alive
+def createpassword(request):
+    """
+    Create a password for socially logged in user
+    """
+    if request.GET['questr_token']:
+        questr_token = request.GET['questr_token']
+        try:
+            prev_token = UserToken.objects.get(token = questr_token, token_type = 3)
+            if prev_token:
+                logger.debug("transctional status")
+                logger.debug(prev_token.status)
+                if not prev_token.status:
+                    try:
+                        userobj = QuestrUserProfile.objects.get(email=prev_token.email)
+                        if request.method=="POST":
+                            user_form = SetPasswordForm(userobj, request.POST)
+                            if user_form.is_valid():
+                                userdata = user_form.save()
+                                prev_token.status = True
+                                prev_token.save()
+                                request.session['alert_message'] = dict(type="success",message="Thankyou for verifying your email! Welcome to Questr! ")
+                                return redirect('home')
+                            if user_form.errors:
+                                logger.debug("Form has errors, %s ", user_form.errors)
+                            questr_token = request.GET['questr_token']
+                            pagetitle = "Reset Your Password"
+                            return render(request, 'createpassword.html', locals())
+                        else:
+                            questr_token = request.GET['questr_token']
+                            pagetitle = "Reset Your Password"
+                            return render(request, 'createpassword.html', locals())
+                    except QuestrUserProfile.DoesNotExist:
+                        logger.debug('User does not exist')
+                        return redirect('home')
+                else:
+                    request.session['alert_message'] = dict(type="warning",message="Please use the latest verification email sent, or click below to send a new email.")
+                    return redirect('home')
+        except prev_token.DoesNotExist:
+            return redirect('home')
+    return redirect('home')
 
-#     if user_handler.passwordExists(request.user):
-#         return redirect('home')
-    
-#     if request.method == "POST":
-#         user_form = SetPasswordForm(user, request.POST)
-#         if user_form.is_valid():
-#             user_form.save()
-#             message="Your password has been created!"
-#             return redirect('home')
-#     pagetitle = "Create Your Password"
-#     return render(request, "createpassword.html", locals())
 
 @login_required
 def changePassword(request):
@@ -491,27 +437,6 @@ def changePassword(request):
             return redirect('logout')
     pagetitle = "Change Your Password"
     return render(request, "passwordsettings.html",locals())
-
-@verified
-@login_required
-def cardSettings(request):
-    """Change's user's personal settings"""
-    pagetype="loggedin"
-    user = request.user
-    settingstype="card"
-    pagetitle = "Card Settings"
-    return render(request, "cardsettings.html",locals())
-
-
-@login_required
-def emailSettings(request):
-    """Change's user's personal settings"""
-    pagetype="loggedin"
-    user = request.user
-    settingstype="email"
-    pagetitle = "Email Settings"
-    user_form = NotifPrefForm()
-    return render(request, "emailsettings.html",locals())
 
 @verified
 @login_required
@@ -537,54 +462,37 @@ def notificationsettings(request):
     pagetitle = "Email Notification Settings"
     return render(request, "emailsettings.html",locals())
 
-# Commented out as we are removing social login for now.
-# def saveUserInfo(request):
-#     """This save's additional user info post the social login is successfull"""
-#     user_data = request.session.get('details')
-#     if request.method == "POST":
-#         user_form = QuestrSocialSignupForm(request.POST)
-#         if user_form.is_valid():
-#             request.session['first_name'] = request.POST['first_name']
-#             request.session['last_name'] = request.POST['last_name']
-#             request.session['email'] = request.POST['email']
-#             request.session['displayname'] = request.POST['displayname']        
-#             backend = request.session['partial_pipeline']['backend']
-#             return redirect('social:complete', backend=backend)
-#         return render(request, "socialsignup.html",locals())
-#     else:
-#         return render(request, "socialsignup.html",locals())
-
 @is_alive
 @login_required
-def verify_email(request, user_code):
+def verify_email(request):
     """
         Verifies email of the user and redirect to the home page
     """
-    logger.debug(user_code)
-    if user_code:
+    if request.GET['questr_token']:
+        questr_token = request.GET['questr_token']
         try:
-            transcational = UserTransactional.objects.get(user_code__regex=r'^%s' % user_code)
-            logger.debug("transactional")
-            logger.debug(transcational)
-            if transcational:
+            prev_token = UserToken.objects.get(token = questr_token)
+            if prev_token:
                 logger.debug("transctional status")
-                logger.debug(transcational.status)
-                if not transcational.status:
+                logger.debug(prev_token.status)
+                if not prev_token.status:
                     try:
-                        user = QuestrUserProfile.objects.get(email=transcational.email)
+                        user = QuestrUserProfile.objects.get(email=prev_token.email)
                         logger.debug(user)
                         if user:
                             user.email_status = True
                             user.save()
-                            transcational.status = True
-                            transcational.save()
+                            prev_token.status = True
+                            prev_token.save()
+                            request.session['alert_message'] = dict(type="success",message="Thankyou for verifying your email! Welcome to Questr! ")
+                            return redirect('home')
                     except QuestrUserProfile.DoesNotExist:
                         logger.debug('User does not exist')
                         return redirect('home')
                 else:
                     request.session['alert_message'] = dict(type="warning",message="Please use the latest verification email sent, or click below to send a new email.")
                     return redirect('home')
-        except UserTransactional.DoesNotExist:
+        except prev_token.DoesNotExist:
             return redirect('home')
     return redirect('home')
 
@@ -600,10 +508,11 @@ def resetpassword(request):
             message ="Bruh, a user with that email doesnt exist!"
             return render(request, "resetpassword.html", locals())
         if user:
-            new_random_password = user_handler.get_random_password()
-            user.set_password(new_random_password)
-            user.save()
-            email_details = user_handler.prepPasswordResetNotification(user, new_random_password)
+            reset_link = user_handler.get_password_reset_url(user.email)
+            # new_random_password = user_handler.get_random_password()
+            # user.set_password(new_random_password)
+            # user.save()
+            email_details = user_handler.prepPasswordResetNotification(user, reset_link)
             email_notifier.send_email_notification(user, email_details)
             message = "Please check your inbox for your new password"
             return redirect('signin')
@@ -646,7 +555,11 @@ def send_invitation_email(request):
         if user_form.is_valid():
             email = request.POST['email']
             invitation_type = request.POST['invitation_type']
-            signup_link = user_handler.get_signup_invitation_url(email,invitation_type)
+            if invitation_type=="Courier":
+                token_type = 1
+            else:
+                token_type = 2
+            signup_link = user_handler.get_signup_invitation_url(email,token_type)
             logger.debug("invitation link is %s", signup_link)
             email_details = user_handler.prepSignupNotification(signup_link)
             logger.debug("What goes in the email is \n %s", email_details)
@@ -672,13 +585,13 @@ def signup_by_invitation(request):
     if request.GET['questr_token']:
         questr_token = request.GET['questr_token']
         try:
-            transcational = UserSignupInvitationToken.objects.get(token=questr_token)
-            logger.debug("transactional")
-            logger.debug(transcational)
-            if transcational:
+            prev_token = UserToken.objects.get(token=questr_token)
+            logger.debug("prev_token")
+            logger.debug(prev_token)
+            if prev_token:
                 logger.debug("transctional status")
-                logger.debug(transcational.status)
-                if not transcational.status:
+                logger.debug(prev_token.status)
+                if not prev_token.status:
                     if request.method == "POST":
                         user_form = QuestrUserCreationForm(request.POST)
                         if user_form.is_valid():
@@ -688,10 +601,10 @@ def signup_by_invitation(request):
                             userdata = user_form.save(commit=False)
                             userdata.address = json.dumps(useraddress)
                             userdata.phone = user_form.cleaned_data['phone']
-                            if userdata.email != transcational.email:
+                            if userdata.email != prev_token.email:
                                 request.session['alert_message'] = dict(type="warning",message="The email provided was not the email the invitation was sent to!")
                                 return redirect('index')
-                            if transcational.invitation_type=="Courier":
+                            if prev_token.token_type==1:
                                 userdata.is_shipper = True
                             else:
                                 userdata.is_shipper = False
@@ -699,8 +612,8 @@ def signup_by_invitation(request):
                             authenticate(username=userdata.email, password=userdata.password)
                             userdata.backend='django.contrib.auth.backends.ModelBackend'
                             auth_login(request, userdata)
-                            transcational.status = True
-                            transcational.save()
+                            prev_token.status = True
+                            prev_token.save()
                             verf_link = user_handler.get_verification_url(userdata)
                             logger.debug("verification link is %s", verf_link)
                             email_details = user_handler.prepWelcomeNotification(userdata, verf_link)
@@ -717,7 +630,7 @@ def signup_by_invitation(request):
                         questr_token = request.GET['questr_token']
                         pagetitle = "Signup"
                         return render(request, 'signupbyinvitation.html', locals())
-        except UserTransactional.DoesNotExist:
+        except prev_token.DoesNotExist:
             return redirect('home')
     return redirect('home')
 

@@ -4,7 +4,7 @@ import logging
 from django.shortcuts import render, redirect
 from django.core.exceptions import PermissionDenied
 
-from users.models import QuestrUserProfile, QuestrToken, UserSignupInvitationToken
+from users.models import QuestrUserProfile, UserToken
 from quests.models import QuestToken
 
 def verified(a_view):
@@ -41,7 +41,7 @@ def is_alive(a_view):
 		questr_token = request.GET['questr_token']
 		if questr_token:
 			try:
-				token = QuestrToken.objects.get(token_id = questr_token)
+				token = UserToken.objects.get(token = questr_token)
 				# check whether the token is alive and take dedcision
 				if token:
 					if token.is_alive():
@@ -51,7 +51,7 @@ def is_alive(a_view):
 						request.session['alert_message'] = dict(type="warning",message="The link has expired please click below to request again!")
 						alert_message = request.session['alert_message']
 						return render(request, 'verification.html', locals())
-			except QuestrToken.DoesNotExist:
+			except UserToken.DoesNotExist:
 				success = False
 				request.session['alert_message'] = dict(type="danger",message="Invalid Request !")
 				alert_message = request.session['alert_message']
@@ -118,7 +118,7 @@ def is_signup_token_alive(a_view):
 		questr_token = request.GET['questr_token']
 		if questr_token:
 			try:
-				token = UserSignupInvitationToken.objects.get(token = questr_token)
+				token = UserToken.objects.get(token = questr_token)
 				# check whether the token is alive and take dedcision
 				if token:
 					if token.is_alive():
@@ -128,7 +128,7 @@ def is_signup_token_alive(a_view):
 						request.session['alert_message'] = dict(type="warning",message="The link has expired please contact us to request again!")
 						alert_message = request.session['alert_message']
 						return redirect('index')
-			except QuestrToken.DoesNotExist:
+			except UserToken.DoesNotExist:
 				success = False
 				request.session['alert_message'] = dict(type="danger",message="Invalid Request !")
 				alert_message = request.session['alert_message']
