@@ -48,7 +48,7 @@ def is_alive(a_view):
 						return a_view(request, *args, **kwargs)
 					else:
 						success = False
-						request.session['alert_message'] = dict(type="warning",message="The link has expired please click below to request again!")
+						request.session['alert_message'] = dict(type="warning",message="The link has expired!")
 						alert_message = request.session['alert_message']
 						return render(request, 'verification.html', locals())
 			except UserToken.DoesNotExist:

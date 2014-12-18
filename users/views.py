@@ -306,8 +306,10 @@ def userSettings(request):
         if user_form.is_valid():
             useraddress = dict(city=user_form.cleaned_data['city'], streetaddress=user_form.cleaned_data['streetaddress'],\
                 streetaddress_2=user_form.cleaned_data['streetaddress_2'], postalcode=user_form.cleaned_data['postalcode'])
-            if user_form['email'] != user.email:
+            if user_form.cleaned_data['email'] != userdetails.email:
                 userdata = user_form.save(commit=False)
+                userdata.address = json.dumps(useraddress)
+                userdata.phone = user_form.cleaned_data['phone']
                 userdata.email_status = False
                 userdata.save()
                 verf_link = user_handler.get_verification_url(userdata)
