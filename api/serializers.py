@@ -22,7 +22,8 @@ class QuestSerializer(serializers.ModelSerializer):
             'pickup_time',
             'reward',
             'distance',
-            ) 
+            'status',
+            )
 
 class NewQuestDataValidationSerializer(serializers.Serializer):
     title = serializers.CharField()
@@ -56,7 +57,7 @@ class NewQuestSerializer(serializers.ModelSerializer):
             'distance',
             'questrs',
             'map_image'
-            ) 
+            )
 
 class PriceCalcSerializer(serializers.Serializer):
     size = serializers.ChoiceField(choices=PACKAGE_SELECTION, default="backpack")
