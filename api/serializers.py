@@ -1,10 +1,11 @@
 
 
-
+from django.utils.translation import ugettext_lazy as _
 
 from quests.models import Quests, PACKAGE_SELECTION, CITY_SELECTION
+from users.models import QuestrUserProfile
 
-from rest_framework import serializers
+from rest_framework import exceptions, serializers
 
 
 class QuestSerializer(serializers.ModelSerializer):
@@ -77,3 +78,37 @@ class QuestStatusSerializer(serializers.Serializer):
     quest = serializers.IntegerField()
     event = serializers.IntegerField()
     extrainfo = serializers.CharField()
+
+
+class CourierSignupSerializer(serializers.ModelSerializer):
+    password1 = serializers.CharField()
+    password2 = serializers.CharField()
+
+    class Meta:
+        model = QuestrUserProfile
+        fields = (
+            'first_name',
+            'last_name',
+            'displayname',
+            'phone',
+            'password1',
+            'password2',
+            'email',
+            )
+
+class CourierSignupValidationSerializer(serializers.Serializer):
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    displayname = serializers.CharField()
+    phone = serializers.CharField()
+    password1 = serializers.CharField()
+    password2 = serializers.CharField()
+    email = serializers.EmailField()
+
+    def validate(self, attrs):
+        password1 = attrs.get('password1')
+        password2 = attrs.get('password2')
+        if password1 and password2 and password1 != password2:
+            msg = _('Passwords do not match.')
+            raise exceptions.ParseError(msg)
+        return password2

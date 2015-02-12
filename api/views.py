@@ -4,18 +4,21 @@ from django.shortcuts import render
 
 
 #All Django Imports
-from django.http import Http404
+from django.http import Http404, HttpResponse
 
 #All local imports (libs, contribs, models)
 from quests.models import Quests
 from quests.contrib import quest_handler
 from users.contrib import user_handler
+from libs import email_notifier
 import serializers
 
 #All external imports (libs, packages)
 import logging
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
+from rest_framework.authtoken.models import Token
 from rest_framework import status
 import simplejson as json
 
@@ -215,3 +218,45 @@ class QuestStatus(APIView):
                 responsedata=dict(status=status.HTTP_409_CONFLICT, success=False)
             return Response(responsedata)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CourierSignup(APIView):
+    """
+    Courier Signup Resource
+    """
+    permission_classes = (AllowAny,)
+    def post(self, request, format=None):
+        """
+        Allows couriers to signup
+        ---
+        request_serializer: serializers.CourierSignupValidationSerializer
+        response_serializer: serializers.CourierSignupSerializer
+        """
+        user = request.user
+        ## Error if user is already authenticated
+        if user.is_authenticated():
+            responsedata = dict (status=status.HTTP_400_BAD_REQUEST, success=False)
+            return HttpResponse(responsedata, content_type="application/json")
+
+        data = request.DATA.copy()
+        serialized_user = serializers.CourierSignupValidationSerializer(data=data)
+        if serialized_user.is_valid():
+            serialized_user = serializers.CourierSignupSerializer(data=data)
+            if serialized_user.is_valid():
+                user = serialized_user.save()
+                user.is_shipper = True
+                user.save()
+                ## Using User hander send out verification code to the user on the phone
+                logging.warn("user {0} is created".format(user.displayname))
+                ## Creating a auth token for the user and return the same as response
+                # token = Token.objects.get(user=user)
+                # tokendata = dict(token=token.key)
+                verf_link = user_handler.get_verification_url(user)
+                logger.debug("verification link is %s", verf_link)
+                email_details = user_handler.prepWelcomeNotification(user, verf_link)
+                logger.debug("What goes in the email is \n %s", email_details)
+                email_notifier.send_email_notification(user, email_details)
+                responsedata = dict(status=status.HTTP_201_CREATED, success=True)
+                return HttpResponse(json.dumps(responsedata), content_type="application/json")
+        responsedata=dict(data=serialized_user.errors,status=status.HTTP_400_BAD_REQUEST, success=False)
+        return HttpResponse(json.dumps(responsedata), content_type="application/json")
