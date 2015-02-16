@@ -9,6 +9,7 @@ from django.http import Http404, HttpResponse
 #All local imports (libs, contribs, models)
 from quests.models import Quests
 from quests.contrib import quest_handler
+from users.models import QuestrUserProfile
 from users.contrib import user_handler
 from libs import email_notifier
 import serializers
@@ -260,3 +261,36 @@ class CourierSignup(APIView):
                 return HttpResponse(json.dumps(responsedata), content_type="application/json")
         responsedata=dict(data=serialized_user.errors,status=status.HTTP_400_BAD_REQUEST, success=False)
         return HttpResponse(json.dumps(responsedata), content_type="application/json")
+
+
+class QuestrProfile(APIView):
+
+    def get(self, request, format=None):
+        user = request.user
+        if not user.is_shipper:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+        profile_data = QuestrUserProfile.objects.get(id=user.id)
+        # logging.warn(profile_data)
+        serialized_users = serializers.QuestrSerializer(profile_data)
+        responsedata = dict(data=serialized_users.data, success=True)
+        return HttpResponse(json.dumps(responsedata),content_type="application/json")
+
+
+    def post(self, request, format=None):
+        """
+        Update userinfo of a shipment
+        ---
+        request_serializer: serializers.QuestrSerializer
+        """
+        user = request.user
+        if not user.is_shipper:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        data = request.DATA
+        profile_data = QuestrUserProfile.objects.get(id=user.id)
+        serializer = serializers.QuestrSerializer(profile_data, data=data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            responsedata=dict(status=status.HTTP_200_OK, success=True)                
+            return Response(responsedata)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

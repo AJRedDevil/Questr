@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^setpkgstatus/$', apiview.QuestStatus.as_view()),
     url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^signup/$', apiview.CourierSignup.as_view()),
+    url(r'^profile/$', apiview.QuestrProfile.as_view()),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)

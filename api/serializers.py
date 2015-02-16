@@ -112,3 +112,15 @@ class CourierSignupValidationSerializer(serializers.Serializer):
             msg = _('Passwords do not match.')
             raise exceptions.ParseError(msg)
         return password2
+
+class QuestrSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuestrUserProfile
+        fields = (
+            'id',
+            'first_name',
+            'last_name',
+            'email',
+            'phone',
+            'avatar',
+            )
