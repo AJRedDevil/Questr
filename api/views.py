@@ -44,7 +44,8 @@ class QuestsList(APIView):
         else:
             queryset = Quests.objects.filter(questrs_id=user)
         serializer = serializers.QuestSerializer(queryset, many=True)
-        return Response(serializer.data)
+        responsedata=dict(data=serializer.data, success=True)
+        return Response(responsedata, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
         """
@@ -98,8 +99,10 @@ class QuestsList(APIView):
             if serializer.is_valid():
                 logging.warn(serializer.data)
                 serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                responsedata=dict(data=serializer.data, success=True)
+                return Response(responsedata, status=status.HTTP_201_CREATED)
+        responsedata=dict(errors=serializer.errors, success=False)        
+        return Response(responsedata, status=status.HTTP_400_BAD_REQUEST)
 
 class QuestsDetail(APIView):
     def get_object(self, pk):
@@ -116,7 +119,8 @@ class QuestsDetail(APIView):
         quest = self.get_object(pk)
         serializer = serializers.QuestSerializer(quest)
         if quest.shipper == str(user.id) or user.is_superuser or quest.questrs_id == user.id:
-            return Response(serializer.data)
+            responsedata=dict(data=serializer.data, success=True)
+            return Response(responsedata, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_403_FORBIDDEN)
 
 class PriceCalculator(APIView):
@@ -159,7 +163,8 @@ class PriceCalculator(APIView):
             fee = price.get_price(distance, shipment_mode=size)
             responsedata=dict(fee=fee)
             return Response(responsedata, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        responsedata=dict(errors=serializer.errors, success=False)
+        return Response(responsedata, status=status.HTTP_400_BAD_REQUEST)
 
 class AvailabilityStatus(APIView):
     """
@@ -184,11 +189,13 @@ class AvailabilityStatus(APIView):
             userstatus = data['status'] in ['True', 'true', '1']
             result = user_handler.updateCourierAvailability(user, userstatus)
             if result['success'] == True:
-                responsedata=dict(status=status.HTTP_200_OK, success=True)                
+                responsedata=dict(success=True)                
+                return Response(responsedata, status=status.HTTP_200_OK)
             else:
-                responsedata=dict(data="Status already set", status=status.HTTP_409_CONFLICT, success=False)
-            return Response(responsedata)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                responsedata=dict(data="Status already set", success=False)
+                return Response(responsedata, status=status.HTTP_409_CONFLICT,)
+        responsedata=dict(errors=serializer.errors, success=False)
+        return Response(responsedata, status=status.HTTP_400_BAD_REQUEST)
 
 class QuestStatus(APIView):
     """
@@ -214,11 +221,13 @@ class QuestStatus(APIView):
             qm = quest_handler.QuestEventManager()
             result = qm.updatestatus(quest, eventtype, extrainfo)
             if result['success'] == True:
-                responsedata=dict(status=status.HTTP_200_OK, success=True)                
+                responsedata=dict(success=True)                
+                return Response(responsedata, status=status.HTTP_200_OK)
             else:
-                responsedata=dict(status=status.HTTP_409_CONFLICT, success=False)
-            return Response(responsedata)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                responsedata=dict(data="Status already set", success=False)
+                return Response(responsedata, status=status.HTTP_409_CONFLICT,)
+        responsedata=dict(errors=serializer.errors, success=False)
+        return Response(responsedata, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CourierSignup(APIView):
@@ -236,8 +245,8 @@ class CourierSignup(APIView):
         user = request.user
         ## Error if user is already authenticated
         if user.is_authenticated():
-            responsedata = dict (status=status.HTTP_400_BAD_REQUEST, success=False)
-            return HttpResponse(responsedata, content_type="application/json")
+            responsedata = dict(success=False)
+            return Response(responsedata, status=status.HTTP_400_BAD_REQUEST)
 
         data = request.DATA.copy()
         serialized_user = serializers.CourierSignupValidationSerializer(data=data)
@@ -257,10 +266,11 @@ class CourierSignup(APIView):
                 email_details = user_handler.prepWelcomeNotification(user, verf_link)
                 logger.debug("What goes in the email is \n %s", email_details)
                 email_notifier.send_email_notification(user, email_details)
-                responsedata = dict(status=status.HTTP_201_CREATED, success=True)
-                return HttpResponse(json.dumps(responsedata), content_type="application/json")
-        responsedata=dict(data=serialized_user.errors,status=status.HTTP_400_BAD_REQUEST, success=False)
-        return HttpResponse(json.dumps(responsedata), content_type="application/json")
+                responsedata = dict(success=True)
+                return Response(responsedata, status=status.HTTP_201_CREATED)
+        responsedata=dict(errors=serialized_user.errors, success=False)
+        return Response(responsedata, status=status.HTTP_400_BAD_REQUEST)
+        # return HttpResponse(json.dumps(responsedata), content_type="application/json")
 
 
 class QuestrProfile(APIView):
@@ -273,7 +283,8 @@ class QuestrProfile(APIView):
         # logging.warn(profile_data)
         serialized_users = serializers.QuestrSerializer(profile_data)
         responsedata = dict(data=serialized_users.data, success=True)
-        return HttpResponse(json.dumps(responsedata),content_type="application/json")
+        return Response(responsedata, status=status.HTTP_200_OK)
+        # return HttpResponse(json.dumps(responsedata),content_type="application/json")
 
 
     def post(self, request, format=None):
@@ -293,4 +304,5 @@ class QuestrProfile(APIView):
             serializer.save()
             responsedata=dict(status=status.HTTP_200_OK, success=True)                
             return Response(responsedata)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        responsedata=dict(errors=serializer.errors, success=False)
+        return Response(responsedata, status=status.HTTP_400_BAD_REQUEST)
