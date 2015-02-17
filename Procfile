@@ -1,1 +1,1 @@
-web: gunicorn questr.wsgi
+worker: celery -A questr.celery worker -B --loglevel=info
