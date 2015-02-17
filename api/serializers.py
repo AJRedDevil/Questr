@@ -99,6 +99,11 @@ class CourierSignupSerializer(serializers.ModelSerializer):
             'email',
             )
 
+    def restore_object(self, attrs, instance=None):
+        instance = super(CourierSignupSerializer, self).restore_object(attrs, instance)
+        instance.set_password(attrs['password2'])
+        return instance
+
 class CourierSignupValidationSerializer(serializers.Serializer):
     first_name = serializers.CharField()
     last_name = serializers.CharField()
@@ -123,7 +128,8 @@ class CourierSignupValidationSerializer(serializers.Serializer):
         return password2
 
 class QuestrSerializer(serializers.ModelSerializer):
-    avatar = serializers.Field('avatar.url')
+    
+    avatar = serializers.Field('get_profile_pic')
 
     class Meta:
         model = QuestrUserProfile
