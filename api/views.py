@@ -291,7 +291,7 @@ class QuestrProfile(APIView):
         """
         Update userinfo of a shipment
         ---
-        request_serializer: serializers.QuestrSerializer
+        request_serializer: serializers.QuestrUpdateSerializer
         """
         user = request.user
         if not user.is_shipper:
@@ -299,7 +299,7 @@ class QuestrProfile(APIView):
 
         data = request.DATA
         profile_data = QuestrUserProfile.objects.get(id=user.id)
-        serializer = serializers.QuestrSerializer(profile_data, data=data, partial=True)
+        serializer = serializers.QuestrUpdateSerializer(profile_data, data=data, files=request.FILES, partial=True)
         if serializer.is_valid():
             serializer.save()
             responsedata=dict(status=status.HTTP_200_OK, success=True)                

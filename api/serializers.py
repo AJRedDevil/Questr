@@ -128,8 +128,22 @@ class CourierSignupValidationSerializer(serializers.Serializer):
         return password2
 
 class QuestrSerializer(serializers.ModelSerializer):
-    
+
     avatar = serializers.Field('get_profile_pic')
+
+    class Meta:
+        model = QuestrUserProfile
+        fields = (
+            'id',
+            'first_name',
+            'last_name',
+            'displayname',
+            'email',
+            'phone',
+            'avatar',
+            )
+
+class QuestrUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = QuestrUserProfile
