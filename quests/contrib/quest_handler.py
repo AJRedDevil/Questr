@@ -316,7 +316,7 @@ def get_reject_url(quest=None, shipper=None):
 def get_pickup_time(nowornotnow=None, whatdate=None, whattime=None):
     # If nothing is given, it returns current time plus 5 minutes
     if not nowornotnow and not whattime and not whatdate:
-        return timezone.now()+timedelta(hours=1)
+        return timezone.now()+timedelta(minutes=1)
 
     # If time is not right now but later today or tomrrow
     if nowornotnow=='not_now' and whatdate and whattime:

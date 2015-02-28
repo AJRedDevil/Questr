@@ -44,13 +44,17 @@ def logout(request):
     return redirect('index')
     
 def signin(request):
-    """Home view, displays login mechanism"""
-    ## if authenticated redirect to user's homepage directly ##
+    """
+    Home view, displays login mechanism
+    """
+    # if authenticated redirect to user's homepage directly
     client_internal_ip = get_real_ip(request)
     client_public_ip = get_ip(request)
+    # for redirects to signin
     if request.GET:  
         next = request.GET['next']
 
+    # for users already signed in
     if request.user.is_authenticated():
         return redirect('home')
 
@@ -61,7 +65,7 @@ def signin(request):
             eventhandler = user_handler.UserEventManager()
             extrainfo = dict(client_public_ip=client_public_ip, client_internal_ip=client_internal_ip)
             eventhandler.setevent(request.user, 1, extrainfo)
-            #Notify the user of his status if he's unavailable
+            # Notify the user of his status if he's unavailable
             if request.user.is_authenticated() and request.user.is_shipper and request.user.is_available == False:
                     request.session['alert_message'] = dict(type="warning",message="Your status is set to unavailable, you might want to set it to available!")
                     if request.POST.get('next'):

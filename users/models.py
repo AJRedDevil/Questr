@@ -33,7 +33,6 @@ class QuestrUserManager(BaseUserManager):
 
         if not email:
             raise ValueError('The given email must be set')
-            
         email = self.normalize_email(email)
         user = self.model(email=email,
                           is_active=True, last_login=now,
@@ -71,8 +70,8 @@ class QuestrUserProfile(AbstractBaseUser):
         return str(folder) + '/' + str(name)
 
     id = models.AutoField(_('id'), primary_key=True)
-    displayname = models.CharField(_('displayname'), max_length=30, unique=True, 
-        error_messages={'unique' : 'The username provided is already taken !'})
+    displayname = models.CharField(_('displayname'), max_length=30, unique=True,
+            error_messages={'unique' : 'The username provided is already taken !'})
     first_name = models.CharField(_('first_name'), max_length=30)
     last_name = models.CharField(_('last_name'), max_length=30)
     email = models.EmailField(_('email'), max_length=100, unique=True,
@@ -106,7 +105,7 @@ class QuestrUserProfile(AbstractBaseUser):
     objects = QuestrUserManager()
 
     def __unicode__(self):
-        return self.email 
+        return self.email
 
     def get_full_name(self):
         return self.first_name + " " + self.last_name
@@ -122,7 +121,7 @@ class QuestrUserProfile(AbstractBaseUser):
         return hashlib.sha256(str(self.date_joined) + str(self.email)).hexdigest()
 
     def create_thumbnail(self, size, quality=None):
-        # invalidate the cache of the thumbnail with the given size first        
+        # invalidate the cache of the thumbnail with the given size first
         import os
         from PIL import Image
         from django.core.files.storage import default_storage as storage
@@ -134,8 +133,8 @@ class QuestrUserProfile(AbstractBaseUser):
         avatar_file_path = ('%s'+'_'+self.__generate_hash()[:10]+'.jpg') % (filename_base)
         try:
             if not storage.exists(avatar_file_path):
-                try:    
-                    orig = storage.open(file_path, 'rb')            
+                try:
+                    orig = storage.open(file_path, 'rb')
                     image = Image.open(orig)
                     quality = quality or settings.AVATAR_THUMB_QUALITY
                     w, h = image.size
@@ -167,7 +166,7 @@ class QuestrUserProfile(AbstractBaseUser):
         if not self.avatar:
             return default_file_path
         file_path = self.avatar.name
-        logger.warn("file path is %s" % file_path)
+        # logger.warn("file path is %s" % file_path)
         filename_base, filename_ext = os.path.splitext(file_path)
         normal_file_path = ('%s'+'_'+self.__generate_hash()[:10]+'.jpg') % (filename_base)
 

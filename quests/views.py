@@ -27,175 +27,30 @@ import pytz
 # Init Logger
 logger = logging.getLogger(__name__)
 
-
-@verified
-@login_required
-def listallquests(request):
-    # pagetype="loggedin"
-    # user = request.user
-    # allquests = Quests.objects.all()
-    # return render(request, 'listallquest.html', locals())
-    pagetitle="home"
-    user = request.user
-    return redirect("home")
-
 @verified
 @login_required
 def viewquest(request, questname):
+    """
+    View details of a Quest
+    """
     user = request.user
-    questname=questname
     questdetails = quest_handler.getQuestDetails(questname)
     pagetitle = questdetails.title
-    alert_message = request.session.get('alert_message')        
-    if request.session.has_key('alert_message'):
+    if 'alert_message' in request.session:
+        alert_message = request.session.get('alert_message')
         del request.session['alert_message']
-    # Only allow a superuser, a shipper assigned for the quest, or the user who created the shipment view the shipment
-    if questdetails.shipper == str(user.id) or user.is_superuser == True or questdetails.questrs_id == user.id:
+    # Only allow a superuser, a shipper assigned for the quest,
+    # or the user who created the shipment view the shipment
+    if (questdetails.shipper == str(user.id) or
+            user.is_superuser is True or questdetails.questrs_id == user.id):
     # Check if the owner and the user are the same
         if questdetails.questrs.id == request.user.id:
             isOwner = True
-        pagetitle=questdetails.title
+        pagetitle = questdetails.title
         return render(request, 'viewquest.html', locals())
     else:
-        return redirect('home')   
+        return redirect('home')
 
-# @verified
-# @login_required
-# def editquest(request, questname):
-#     pagetype="loggedin"
-#     user = request.user
-#     questname=questname
-#     questdetails = quest_handler.getQuestDetails(questname)
-
-#     # If a courier has already been assigned to the shipment, do not let the user edit it
-#     if questdetails.shipper:
-#         request.session['alert_message'] = dict(type="Danger",message="The quest has already been assigned to a courier, it cannot be edited now!")
-#         return redirect('viewquest',questname=questdetails.id)
-
-#     if request.method=="POST":
-#         pagetype="loggedin"
-#         # If the user requesting the edit is the owner
-#         if questdetails.questrs.id == user.id:
-#             instance=get_object_or_404(Quests, id=questname)
-#             user_form = QuestChangeForm(data=request.POST, instance=instance)
-#             if user_form.is_valid():
-#                 title = user_form.cleaned_data['title']
-#                 description = user_form.cleaned_data['description']
-#                 srccity = user_form.cleaned_data['srccity']
-#                 srcaddress = user_form.cleaned_data['srcaddress']
-#                 srcpostalcode = user_form.cleaned_data['srcpostalcode']
-#                 srcname = user_form.cleaned_data['srcname']
-#                 srcphone = user_form.cleaned_data['srcphone']
-#                 dstcity = user_form.cleaned_data['dstcity']
-#                 dstaddress = user_form.cleaned_data['dstaddress']
-#                 dstpostalcode = user_form.cleaned_data['dstpostalcode']
-#                 dstname = user_form.cleaned_data['dstname']
-#                 dstphone = user_form.cleaned_data['dstphone']
-#                 size = user_form.cleaned_data['size']
-#                 # For distance
-#                 # the distance and price has to be set up into a temp database, also the 
-#                 # image file needs to be on a temp folder for processign to reduce API calls
-#                 maps = geomaps.GMaps()
-#                 origin = srcaddress+', '+srccity+', '+srcpostalcode
-#                 destination = dstaddress+', '+dstcity+', '+dstpostalcode
-#                 maps.set_geo_args(dict(origin=origin, destination=destination))
-#                 distance = maps.get_total_distance()
-#                 map_image = maps.fetch_static_map()
-#                 # For price
-#                 price = pricing.WebPricing()
-#                 reward = price.get_price(distance, shipment_mode=size)
-#                 pagetitle = "Confirm your Quest"
-#                 return render(request, 'confirmquestedit.html', locals())  
-#             if user_form.errors:
-#                 logger.debug("Form has errors, %s ", user_form.errors)
-
-#         pagetitle="Edit - " + questdetails.title
-#         return render(request, 'editquest.html', locals())  
-
-#     # Check if the owner and the user are the same
-#     if questdetails.questrs.id == user.id:
-#         pagetitle="Edit - " + questdetails.title
-#         return render(request, 'editquest.html', locals())
-#     else:
-#         return redirect('home')
-
-# @verified
-# @login_required
-# def confirmeditquest(request, questname):
-#     pagetype="loggedin"
-#     user = request.user
-#     questname=questname
-#     questdetails = quest_handler.getQuestDetails(questname)
-
-#     # If a courier has already been assigned to the shipment, do not let the user edit it
-#     if questdetails.shipper:
-#         request.session['alert_message'] = dict(type="Danger",message="The quest has already been assigned to a courier, it cannot be edited now!")
-#         return redirect('viewquest',questname=questdetails.id)
-
-#     if request.method=="POST":
-#         pagetype="loggedin"
-#         if questdetails.questrs.id == user.id:
-#             instance=get_object_or_404(Quests, id=questname)
-#             user_form = QuestConfirmForm(data=request.POST, instance=instance)
-#             if user_form.is_valid():
-#                 pickupdict = {}
-#                 dropoffdict = {}
-#                 size = user_form.cleaned_data['size']
-#                 srccity = user_form.cleaned_data['srccity']
-#                 srcaddress = user_form.cleaned_data['srcaddress']
-#                 quest_data = user_form.save(commit=False)
-#                 srcpostalcode = user_form.cleaned_data['srcpostalcode']
-#                 srcname = user_form.cleaned_data['srcname']
-#                 srcphone = user_form.cleaned_data['srcphone']
-#                 dstcity = user_form.cleaned_data['dstcity']
-#                 dstaddress = user_form.cleaned_data['dstaddress']
-#                 dstpostalcode = user_form.cleaned_data['dstpostalcode']
-#                 dstname = user_form.cleaned_data['dstname']
-#                 dstphone = user_form.cleaned_data['dstphone']
-#                 ## categorizing source and destination info
-#                 pickupdict['city'] = srccity
-#                 pickupdict['address'] = srcaddress
-#                 pickupdict['postalcode'] = srcpostalcode
-#                 pickupdict['name'] = srcname
-#                 pickupdict['phone'] = srcphone
-#                 dropoffdict['city'] = dstcity
-#                 dropoffdict['address'] = dstaddress
-#                 dropoffdict['postalcode'] = dstpostalcode
-#                 dropoffdict['name'] = dstname
-#                 dropoffdict['phone'] = dstphone
-#                 # Recalculate distance and price to prevent any arbitrary false attempt.
-#                 # For distance
-#                 maps = geomaps.GMaps()
-#                 origin = srcaddress+', '+srccity+', '+srcpostalcode
-#                 destination = dstaddress+', '+dstcity+', '+dstpostalcode
-#                 maps.set_geo_args(dict(origin=origin, destination=destination))
-#                 distance = maps.get_total_distance()
-#                 map_image = maps.fetch_static_map()
-#                 # For price
-#                 price = pricing.WebPricing()
-#                 reward = price.get_price(distance, shipment_mode=size)
-#                 quest_data = user_form.save(commit=False)
-#                 quest_data.pickup = json.dumps(pickupdict)
-#                 quest_data.dropoff = json.dumps(dropoffdict)
-#                 quest_data.map_image = map_image
-#                 quest_data.reward=reward
-#                 quest_data.item_images = user_form.cleaned_data['item_images']
-#                 quest_data.map_image = map_image
-#                 quest_data.save()
-#                 pagetitle = "Confirm your Quest"
-#                 return redirect(viewquest, questname=questdetails.id)
-#             if user_form.errors:
-#                 logger.debug("Form has errors, %s ", user_form.errors)
-#         pagetitle="Edit - " + questdetails.title
-#         return redirect('editquest',questname=questdetails.id)
-
-#     # Check if the owner and the user are the same
-#     if questdetails.questrs.id == user.id:
-#         pagetitle="Edit - " + questdetails.title
-#         return redirect('editquest',questname=questdetails.id)
-
-#     raise Http404
-#     return render(request,'404.html')
 
 @verified
 @login_required
@@ -205,7 +60,7 @@ def newquest(request):
     if user.is_shipper:
         return redirect('home')
 
-    if request.method=="POST":
+    if request.method == "POST":
         # logging.warn(request.POST)
         user_form = QuestCreationForm(request.POST)
         if user_form.is_valid():
@@ -230,11 +85,19 @@ def newquest(request):
             destination = dstaddress+', '+dstcity+', '+dstpostalcode
             maps.set_geo_args(dict(origin=origin, destination=destination))
             distance = maps.get_total_distance()
+            logger.warn(distance)
             map_image = maps.fetch_static_map()
-            logger.debug(map_image)
+            logger.warn(map_image)
+            if distance is None or map_image is None:
+                request.session['alert_message'] = dict(type="Danger",message="An error occured while creating your shipment, please try again in a while!")
+                message = "Error occured while creating quest"
+                warnlog = dict(message=message)
+                logger.warn(warnlog)
+                return redirect('home')
             # For price
             price = pricing.WebPricing(user)
             reward = price.get_price(distance, shipment_mode=size)
+            stripereward = reward*100
             pagetitle = "Confirm your Quest"
             return render(request, 'confirmquest.html', locals())  
         if user_form.errors:
@@ -283,7 +146,7 @@ def confirmquest(request):
             dropoffdict['name'] = dstname
             dropoffdict['phone'] = dstphone
             # Pickup Time
-            pickup_time = user_form.cleaned_data['pickup_time'].lower()
+            # pickup_time = user_form.cleaned_data['pickup_time'].lower()
             # Recalculate distance and price to prevent any arbitrary false attempt.
             # For distance
             maps = geomaps.GMaps()
@@ -303,48 +166,42 @@ def confirmquest(request):
             quest_data.reward=reward
             quest_data.item_images = user_form.cleaned_data['item_images']
             quest_data.map_image = map_image
-            pickup_time = user_form.cleaned_data['pickup_time']
-            if pickup_time == 'now':
-                pickup_time = quest_handler.get_pickup_time()
-            elif pickup_time == 'not_now':
-                pickup_when = user_form.cleaned_data['pickup_when']
-                time = user_form.cleaned_data['not_now_pickup_time']
-                pickup_time = quest_handler.get_pickup_time(pickup_time, pickup_when, time)
-                if (pickup_time - timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE))).total_seconds() < 0:
-                    request.session['alert_message'] = dict(type="warning",message="Pickup time cannot be before current time!")
-                    return redirect('home')
-                # If the p
-                if (pickup_time - timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE))).total_seconds() < 3600:
-                    pickup_time = quest_handler.get_pickup_time()
-            else:
-                pickup_time = quest_handler.get_pickup_time()
-            # if pickup_time == "59 minutes":
-            #     quest_data.pickup_time = quest_handler.get_pickup_time()
-            # else:
-            #     try:
-            #         pickup_time == datetime.strptime(pickup_time, '%Y-%m-%d %H:%M:%S')
-            #         pytz.timezone(settings.TIME_ZONE).localize(pickup_time)
-            #     except Exception, e:
-            #         request.session['alert_message'] = dict(type="Danger",message="Invalid pickup time!")
+            # pickup_time = user_form.cleaned_data['pickup_time']
+            # if pickup_time == 'now':
+            #     pickup_time = quest_handler.get_pickup_time()
+            # elif pickup_time == 'not_now':
+            #     pickup_when = user_form.cleaned_data['pickup_when']
+            #     time = user_form.cleaned_data['not_now_pickup_time']
+            #     pickup_time = quest_handler.get_pickup_time(pickup_time, pickup_when, time)
+            #     if (pickup_time - timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE))).total_seconds() < 0:
+            #         request.session['alert_message'] = dict(type="warning",message="Pickup time cannot be before current time!")
             #         return redirect('home')
-            # logging.warn("this is the pickup time")
-            # logging.warn(quest_data.pickup_time)
-            # logging.warn(pickup_time)
-            # elif pickup_time = "not_now":
-            #     quest_data.pickup_time = strf
-            quest_data.pickup_time = pickup_time
-            # return redirect('pay',questname=quest_data)
+            #     # If the p
+            #     if (pickup_time - timezone.now().astimezone(pytz.timezone(settings.TIME_ZONE))).total_seconds() < 3600:
+            #         pickup_time = quest_handler.get_pickup_time()
+            # else:
+            #     pickup_time = quest_handler.get_pickup_time()
+            # quest_data.pickup_time = pickup_time
             try:
-                # shippers = getShippers()
-                # for shipper in shippers: # send notifcations to all the shippers
-                #     email_details = quest_handler.prepNewQuestNotification(shipper, quest_data)
-                #     email_notifier.send_email_notification(shipper, email_details)
-                # couriermanager = user_handler.CourierManager()
-                # couriermanager.informShippers(quest_data)
-                informtime = pickup_time - timedelta(minutes=59)
-                checkstatus.delay()
-                quest_data.save()
-                init_courier_selection.apply_async((quest_data.id,), eta=informtime)
+                chargeme = stripeutils.PayStripe()
+                result = chargeme.charge(request.POST['stripeToken'],int(reward*100))
+                if result['status'] == "pass":
+                    quest_data.save()
+                    # quest_handler.update_resized_image(quest_data.id)
+                    eventmanager = quest_handler.QuestEventManager()
+                    extrainfo = dict(detail="quest created")
+                    eventmanager.setevent(quest_data, 1, extrainfo)
+                    message="Quest {0} has been created by user {1}".format(quest_data.id, user)
+                    request.session['alert_message'] = dict(type="Success",message="Your quest has been created!")
+                    logger.warn(message)
+                    init_courier_selection.apply_async((quest_data.id,), eta=quest_handler.get_pickup_time())
+                    return redirect('home')
+                else:
+                    request.session['alert_message'] = dict(type="Danger",message="An error occured while creating your shipment, please try again in a while!")
+                    message="Error occured while creating quest"
+                    warnlog = dict(message=message, exception=e)
+                    logger.warn(warnlog)
+                    return redirect('home')
             except Exception, e:
                 ##Inform admin of an error
                 request.session['alert_message'] = dict(type="Danger",message="An error occured while creating your shipment, please try again in a while!")
@@ -352,14 +209,6 @@ def confirmquest(request):
                 warnlog = dict(message=message, exception=e)
                 logger.warn(warnlog)
                 return redirect('home')
-            # quest_handler.update_resized_image(quest_data.id)
-            eventmanager = quest_handler.QuestEventManager()
-            extrainfo = dict(detail="quest created")
-            eventmanager.setevent(quest_data, 1, extrainfo)
-            message="Quest {0} has been created by user {1}".format(quest_data.id, user)
-            request.session['alert_message'] = dict(type="Success",message="Your quest has been created!")
-            logger.debug(message)
-            return redirect('home')
 
         if user_form.errors:
             logger.debug("Form has errors, %s ", user_form.errors)
@@ -378,7 +227,7 @@ def completequest(request, questname, deliverycode):
     #if already completed ignore
     shipper = request.user
     questname = questname
-    if quest_handler.isShipperForQuest(shipper, questname):            
+    if quest_handler.isShipperForQuest(shipper, questname):
         questdetails = quest_handler.getQuestDetails(questname)
         if questdetails.isaccepted:
             # Check if the owner and the user are the same
@@ -389,7 +238,6 @@ def completequest(request, questname, deliverycode):
             if questdetails.status != 'Accepted':
                 logger.warn("Attempted complete on an unaccepted quest {0} by {1}!".format(questdetails.id, request.user))
                 return redirect('home')
-            
             delivery_code = deliverycode
             # verify delivery code
             if delivery_code:
@@ -421,74 +269,7 @@ def completequest(request, questname, deliverycode):
         logger.warn("Attempted complete on an unauthorized quest {0} by {1}!".format(questdetails.id, request.user))
         return redirect('viewquest', questname=questname)
 
-##OLD WAY
-# @verified
-# @login_required
-# def completequest(request, questname):
-#     """Verify delivery code and set the quest as completed
-#     Send the notification to the offerer and also the review link
-#     """
-#     #if already completed ignore
-#     pagetype="loggedin"
-#     if request.method == "POST":
-#         shipper = request.user
-#         questname = questname
-#         if quest_handler.isShipperForQuest(shipper, questname):            
-#             questdetails = quest_handler.getQuestDetails(questname)
-#             if questdetails.isaccepted:
-#                 # Check if the owner and the user are the same
-#                 if questdetails.questrs.id == request.user.id:
-#                     logger.warn("Attempted complete by the owner himself")
-#                     return redirect('home')
 
-#                 if questdetails.status != 'Accepted':
-#                     logger.warn("Attempted complete when quest is not complete")
-#                     return redirect('home')
-                
-#                 delivery_code = request.POST['delivery_code']
-#                 # verify delivery code
-#                 if delivery_code:
-#                     if questdetails.delivery_code != delivery_code:
-#                         logger.debug("Provided delivery code \'%s\' doesn't match the one in the quest number %s", delivery_code, questdetails.id)
-#                         logger.debug("returned to viewquest page of %s", questname)
-#                         request.session['alert_message'] = dict(type="Danger",message="Provided delivery code isn't correct!")
-#                         return redirect('viewquest', questname=questname) # return with message
-#                     else:
-#                         Quests.objects.filter(id=questname).update(status='Completed')
-#                         Quests.objects.filter(id=questname).update(is_complete=True)
-#                         ## Update the delivered date
-#                         now = timezone.now()
-#                         Quests.objects.filter(id=questname).update(delivery_date=now)
-
-#                         ## Reload questdetails to get in the delivery date from quest
-#                         questdetails = quest_handler.getQuestDetails(questname)
-
-#                         ## Review option disabled for now
-#                         # ## Send notification to shipper
-#                         # questr_review_link = quest_handler.get_review_link(questname, questr.id)
-#                         # email_details = quest_handler.prepQuestCompleteNotification(shipper, questr, questdetails, questr_review_link)
-#                         # email_notifier.send_email_notification(shipper, email_details)
-#                         # logger.debug("Quest completion email has been sent to %s", shipper.email)
-#                         # ## Send notification to questr
-#                         # shipper_review_link = quest_handler.get_review_link(questname, shipper.id)
-#                         # email_details = quest_handler.prepQuestCompleteNotification(questr, questr, questdetails, shipper_review_link)
-#                         # email_notifier.send_email_notification(questr, email_details)
-#                         # logger.debug("Quest completion email has been sent to %s", questr.email)
-#                         logger.debug("Quest %s has been successfully completed", questdetails.id)
-#                         eventmanager = quest_handler.QuestEventManager()
-#                         extrainfo = dict(detail="quest complete")
-#                         eventmanager.setevent(questdetails, 8, extrainfo)
-#                         request.session['alert_message'] = dict(type="Success",message="The Questr has been notified!")
-#                         return redirect('viewquest', questname=questname) # display message
-#             return redirect('viewquest', questname=questname)
-#         else:
-#             message = "Imposter detected" # Correct message required
-#             logger.debug(message)
-#             return redirect('viewquest', questname=questname)
-#     return redirect('viewquest', questname=questname)
-
-# @verified
-# @login_required
 def getDistanceAndPrice(request):
     if request.method == "POST":
         user_form = DistancePriceForm(request.POST)
@@ -500,9 +281,6 @@ def getDistanceAndPrice(request):
             dstaddress = user_form.cleaned_data['dstaddress']
             dstpostalcode = user_form.cleaned_data['dstpostalcode']
             size = user_form.cleaned_data['size']
-            # For distance
-            #the distance and price hsa to be set up into a temp database, also the 
-            #image file needs to be on a temp folder for processign to reduce API calls
             maps = geomaps.GMaps()
             origin = srcaddress+', '+srccity+', '+srcpostalcode
             destination = dstaddress+', '+dstcity+', '+dstpostalcode
@@ -521,7 +299,6 @@ def getDistanceAndPrice(request):
             resultdict['message'] = "Internal Server Error"
             return HttpResponse(json.dumps(resultdict),content_type="application/json")
 
-## Removed payment module for now, as we are using square readers.
 # @verified
 # @login_required
 # def setnewpayment(request, questname):
@@ -541,7 +318,7 @@ def getDistanceAndPrice(request):
 @login_required
 def accept_quest(request, quest_code):
     """
-        Verifies email of the user and redirect to the home page
+    Verifies email of the user and redirect to the home page
     """
     user = request.user
     logger.debug(quest_code)
@@ -562,15 +339,15 @@ def accept_quest(request, quest_code):
                         courier = QuestrUserProfile.objects.get(id=int(transcational.shipper_id))
                         logger.debug("%s is the requesting user, where %s is the courier for %s quest" % (request.user, courier, quest))
                         if quest and courier and request.user == courier:
-                            ##Set status to true so it won't be used again
+                            # Set status to true so it won't be used again
                             transcational.status = True
-                            ##Set rejection status to true so it won't be used again
+                            # Set rejection status to true so it won't be used again
                             opptransaction.status = True
-                            ##Set Courier status to available so he can accept multiple quests if he wants to.
+                            # Set Courier status to available so he can accept multiple quests if he wants to.
                             courier.is_available = True # change this to False if you want to keep a courier as occupied
-                            ##Set quest's courier to respective courier
+                            # Set quest's courier to respective courier
                             quest.shipper = courier.id
-                            ##Set quest as accepted 
+                            # Set quest as accepted
                             quest.isaccepted = True
                             quest.status = "Accepted"
                             ##Save all the details
@@ -635,17 +412,17 @@ def reject_quest(request, quest_code):
                         courier = QuestrUserProfile.objects.get(id=int(transcational.shipper_id))
                         logger.debug("%s is the requesting user, where %s is the courier for %s quest" % (request.user, courier, quest))
                         if quest and courier and request.user == courier:
-                            ##Set status to true so it won't be used again
+                            # Set status to true so it won't be used again
                             transcational.status = True
-                            ##Set rejection status to true so it won't be used again
+                            # Set rejection status to true so it won't be used again
                             opptransaction.status = True
-                            ##Set courier status to true so he can be used for other quests    
+                            # Set courier status to true so he can be used for other quests    
                             # We will have to figure out another way to do this, perhaps a this courier rejected these quest type of flags
                             courier.is_available = False # This should be False, only put false for today
                             from users.tasks import activate_shipper
-                            ## Any courier who rejects a quest will be put on hold for 5 minutes
+                            # Any courier who rejects a quest will be put on hold for 5 minutes
                             activate_shipper.apply_async((courier.id,), countdown=int(settings.REJECTED_COURIER_HOLD_TIMER))
-                            ##Remove this courier from the current quest's list of available shippers
+                            # Remove this courier from the current quest's list of available shippers
                             available_couriers = quest.available_couriers
                             # logging.warn(available_couriers)
                             from libs.twilio_handler import twclient
@@ -653,13 +430,13 @@ def reject_quest(request, quest_code):
                             tw.sendmessage(courier.phone, os.environ['SMS_REJECTQUEST_MSG'])
                             available_couriers.pop(str(courier.id), None)
                             quest.available_couriers = available_couriers
-                            ##Save all the details
+                            # Save all the details
                             quest.save()
                             transcational.save()
                             courier.save()
                             opptransaction.save()
                             couriermanager = user_handler.CourierManager()
-                            ##Re-run the shipper selection algorithm
+                            # Re-run the shipper selection algorithm
                             quest = Quests.objects.get(id=int(transcational.quest_id))
                             couriermanager.informShippers(quest)
                             eventmanager = quest_handler.QuestEventManager()
@@ -682,7 +459,7 @@ def tracking_number_search(request):
         user = request.user
         pagetype="loggedin"
 
-    if request.GET.has_key('tracking_number'):
+    if 'tracking_number' in request.GET:
             tracking_number = request.GET['tracking_number']
             questdetails = quest_handler.getQuestDetailsByTrackingNumber(tracking_number)
             pagetitle = "Tracking your shipment"
@@ -692,39 +469,46 @@ def tracking_number_search(request):
         pagetitle = "Enter your tracking number"
         return render(request, 'trackingsearchform.html', locals())
 
-
+@verified
+@login_required
 def viewallquests(request):
     """Shows all the active quests so far"""
     pagetype="loggedin"
-    user =  request.user
+    user = request.user
     userdetails = user_handler.getQuestrDetails(user.id)
     pagetitle = "Active Quests"
     if userdetails.is_shipper:
         return redirect('home')
     else:
         quests = Quests.objects.filter(ishidden=False, isaccepted=False, questrs_id=userdetails.id, ).order_by('-creation_date')
-    return render(request,'allquestsviews.html', locals())
+    return render(request, 'allquestsviews.html', locals())
 
+
+@verified
+@login_required
 def viewallactivequests(request):
     """Shows all the active quests so far"""
     pagetype="loggedin"
-    user =  request.user
+    user = request.user
     userdetails = user_handler.getQuestrDetails(user.id)
     pagetitle = "Active Quests"
     if userdetails.is_shipper:
         quests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=userdetails.id, is_complete=False).order_by('-creation_date')
     else:
         quests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id).order_by('-creation_date')
-    return render(request,'allquestsviews.html', locals())
+    return render(request, 'allquestsviews.html', locals())
 
+
+@verified
+@login_required
 def viewallpastquests(request):
     """Shows all the active quests so far"""
-    pagetype="loggedin"
-    user =  request.user
+    pagetype = "loggedin"
+    user = request.user
     userdetails = user_handler.getQuestrDetails(user.id)
     pagetitle = "Active Quests"
     if userdetails.is_shipper:
         quests = Quests.objects.filter(ishidden=False, is_complete=True, isaccepted=True, shipper=userdetails.id).order_by('-creation_date')
     else:
         quests = Quests.objects.filter(ishidden=False, is_complete=True, questrs_id=userdetails.id).order_by('-creation_date')
-    return render(request,'allquestsviews.html', locals())
+    return render(request, 'allquestsviews.html', locals())
