@@ -3,39 +3,222 @@
 {% load active %}
 {% block localhead %}
     <!-- Custom CSS -->
-    <link href={% static "css/settings.css" %} rel="stylesheet">
     <link href={% static "css/intlTelInput.css" %} rel="stylesheet">
 
     <!-- Custom Javascript -->
     <script src={% static "js/angular.min.js" %}></script>
+    
+    
+    <link href={% static "app/css/bootstrap.min.css" %} rel="stylesheet">
+<!-- Toastr style -->
+<link href={% static "app/css/plugins/toastr/toastr.min.css" %} rel="stylesheet">
+  <!-- Gritter --> 
+<link href={% static "app/js/plugins/gritter/jquery.gritter.css" %} rel="stylesheet">  
+  <!-- Cropper --> 
+<link href={% static "app/css/plugins/cropper/cropper.min.css" %} rel="stylesheet">
+  
+    <link href={% static "app/css/animate.css" %} rel="stylesheet">
+    <link href={% static "app/css/style.css" %} rel="stylesheet">
 {% endblock localhead %}
 {% block content %}
-{% block nav-sidebar %}
-    <div class="container-fluid">
-    <div class="row clearfix">
-  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 column">
-        <nav class="nav-sidebar well">
-            <ul class="nav tabs">
-              <li class="{% navactive request 'settings' %}"><a href="{% url 'settings' %}"><strong>ACCOUNT</strong><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-              <li class="{% navactive request 'changepassword' %}"><a href="{% url 'changepassword' %}"><strong>PASSWORD</strong><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-            </ul>
-        </nav>
-      </div>  
-{% endblock nav-sidebar %}
-<!-- tab content -->
-<div class="tab-content">
-{% block tabcontent %}
-{% endblock tabcontent %}
+
+<div class="row  border-bottom white-bg dashboard-header">
+	        
+</div><!-- ./row -->
+
+<div class="row">
+	<div class="col-lg-10">
+                <div class="wrapper wrapper-content animated fadeInUp">
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <center><h5>General Settings</h5></center>
+                        </div>
+                        <div class="ibox-content">
+                            <form method="post" role="form" class="form-horizontal" enctype="multipart/form-data">{% csrf_token %}
+                               	
+                               	<div class="ratio img-responsive img-circle" style="background-image: url({{user.get_profile_pic}});"></div>
+                               	<div class="input-file">
+		                <input type="file" name="avatar" id="file"/>
+		              </div><!-- ./input-file -->
+		              
+		              
+		              <div class="form-group">
+			              
+			              <div class="col-sm-4">
+			              	<label class="control-label">First Name</label>
+			              	<input id="first_name" name="first_name" type="text" placeholder="" value={{user.first_name}} class="form-control">
+			              	<span class="help-block m-b-none">{{ user_form.first_name.errors }}</span>
+			              </div>
+			              
+			              <div class="col-sm-4">
+			              	<label class="control-label">Last Name</label>
+			              	<input id="last_name" name="last_name" type="text" placeholder="" value={{user.last_name}} class="form-control">
+			              	<span class="help-block m-b-none">{{ user_form.last_name.errors }}</span>
+			              </div>
+			              
+			              <div class="col-sm-4">
+			              	<label class="control-label">Username</label>
+			              	<input id="displayname" name="displayname" type="text" placeholder="" class="form-control" value="{{user.displayname}}">
+			              	<span class="help-block m-b-none">{{ user_form.displayname.errors }}</span>
+			              </div>
+			          </div>
+                              
+			          <div class="form-group">
+			              <div class="col-sm-4">
+				            <label class="control-label">Email</label>
+			              	<input id="email" name="email" type="text" placeholder="" class="form-control" value={{user.email}}>
+			              	<span class="help-block m-b-none">{{ user_form.email.errors }}</span>
+			              </div>
+			          
+			              <div class="col-sm-4">
+			              	<label class="control-label">Phone #</label>
+			              	<input id="mobile-number" class="form-control ng-pristine ng-invalid" value={{user.phone}}>
+			              	<input type="hidden" class="form-control" id="phone" name="phone" value={{user.phone}}>
+			              	<span class="help-block m-b-none"></span>
+			              </div>
+			          </div>
+					  
+					  <div class="hr-line-dashed"></div>            
+			          <h4>Location</h4>
+			          <div class="hr-line-dashed"></div>
+			          
+			          
+			          <div class="form-group">
+			              <div class="col-sm-6">
+				            <label class="control-label">Address Line 1</label>
+			              	<input placeholder="Street Address, P.O box, company name, etc" class="form-control input-xs" name="streetaddress" value="{{user.address.streetaddress}}">
+			              	<span class="help-block m-b-none"></span>
+			              </div>
+			              <div class="col-sm-6">
+			              	<label class="control-label">Address Line 2</label>
+			              	<input placeholder="Apartment, suite, unit, building, floor, etc." class="form-control input-xs" name="streetaddress_2" value="{{user.address.streetaddress_2}}">
+			              	<span class="help-block m-b-none"></span>
+			              </div>
+			          </div>
+			          
+			          <div class="form-group">
+			              <div class="col-sm-3">
+				            <label class="control-label">City</label>
+			              	<select class="form-control m-b" data-size="7" name="city">
+				                <option data-icon="glyphicon glyphicon-map-marker theme-colour">{{user.address.city}}</option>
+				                <option>Toronto</option>
+				                <option>Brampton</option>
+				                <option>Markham</option>
+				                <option>Mississauga</option>
+				                <option>Richmond Hill</option>
+				                <option>Vaughan</option>
+				                <option>Oakville</option>
+				             </select>
+			              	<span class="help-block m-b-none"></span>
+			              </div>
+			              <div class="col-sm-3">
+			              
+			              </div>
+			              
+			              <div class="col-sm-3">
+			              	<label class="control-label">Postal Code</label>
+			              	<input placeholder="M8V 0A5" class="form-control input-xs" name="postalcode" value="{{user.address.postalcode}}">
+			              	<span class="help-block m-b-none"></span>
+			              </div>
+			          </div>
+			          
+			          <div class="hr-line-dashed"></div>            
+			          <h4>Shipper Information</h4>
+			          <div class="hr-line-dashed"></div>
+			          
+			          
+			          
+			          <div class="form-group">
+			              <div class="col-sm-3">
+				            <label class="control-label">Vehicle Type</label>
+			              	<select class="form-control m-b" data-size="2" name="vehicle">
+			                 <option value="{{user.vehicle}}" data-icon="glyphicon glyphicon-map-marker theme-colour">{{user.get_vehicle_display}}</option>
+			                <option value="-----------">-----------</option>
+			                <option value="car">Sedan</option>
+			                <option value="minivan">Minivan</option>
+			                </select>
+			              	<span class="help-block m-b-none"></span>
+			              </div>
+			          </div>
+    
+			        
+			        
+					<div class="hr-line-dashed"></div>  
+					<h4>Password</h4>
+					
+					                
+					
+					<div class="form-group">
+			              <div class="col-sm-4">
+				            <label class="control-label">Current Password</label>
+			              	<input id="password" name="old_password" type="password" class="form-control input-xs" placeholder="Old password">
+			              	<span class="help-block m-b-none"></span>
+			              </div>
+			              <div class="col-sm-4">
+				            <label class="control-label">New Password</label>
+			              	<input id="password" name="old_password" type="password" class="form-control input-xs" placeholder="Old password">
+			              	<span class="help-block m-b-none"></span>
+			              </div>
+			              <div class="col-sm-4">
+				            <label class="control-label">Retype Password</label>
+			              	<input id="password" name="old_password" type="password" class="form-control input-xs" placeholder="Old password">
+			              	<span class="help-block m-b-none"></span>
+			              </div>
+			          </div>
+					                
+					                
+					                
+					                
+					       
+					              <div class="hr-line-dashed"></div>
+					              <button type="submit" id="save" class="btn btn-primary">SAVE</button>
+					              
+                            </form>
+                                
+                        </div>
+                    </div>
+                    
+                     
+                </div>
+            </div>
 </div>
-    </div><!-- ./row -->
-   
-</div><!-- ./container -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
 {% endblock content %} 
 
 
 {% block scripts %}
+<!-- Mainly scripts -->
+    <script src={% static "app/js/jquery-2.1.1.js" %}></script>
+    <script src={% static "app/js/bootstrap.min.js" %}></script>
+    <script src={% static "app/js/plugins/metisMenu/jquery.metisMenu.js" %}></script>
+    <script src={% static "app/js/plugins/slimscroll/jquery.slimscroll.min.js" %}></script>
+    
+    <!-- Custom and plugin javascript -->
+    <script src={% static "app/js/inspinia.js" %}></script>
+    <script src={% static "app/js/plugins/pace/pace.min.js" %}></script>
+
+    <!-- jQuery UI -->
+    <script src={% static "app/js/plugins/jquery-ui/jquery-ui.min.js" %}></script>
+
+
 <script src={% static "js/intlTelInput.min.js" %}></script>
 <script src={% static "js/utils.js" %}></script>
+
+<!-- Image cropper -->
+    <script src={% static "app/js/plugins/cropper/cropper.min.js" %}></script>
 
 <script>
   $("#mobile-number").intlTelInput({
@@ -55,4 +238,226 @@
     document.getElementById('phone').value = cleanNumber;
 });
 </script>
+
+<script>
+        $(document).ready(function(){
+
+            var $image = $(".image-crop > img")
+            $($image).cropper({
+                aspectRatio: 1.618,
+                preview: ".img-preview",
+                done: function(data) {
+                    // Output the result data for cropping image.
+                }
+            });
+
+            var $inputImage = $("#inputImage");
+            if (window.FileReader) {
+                $inputImage.change(function() {
+                    var fileReader = new FileReader(),
+                            files = this.files,
+                            file;
+
+                    if (!files.length) {
+                        return;
+                    }
+
+                    file = files[0];
+
+                    if (/^image\/\w+$/.test(file.type)) {
+                        fileReader.readAsDataURL(file);
+                        fileReader.onload = function () {
+                            $inputImage.val("");
+                            $image.cropper("reset", true).cropper("replace", this.result);
+                        };
+                    } else {
+                        showMessage("Please choose an image file.");
+                    }
+                });
+            } else {
+                $inputImage.addClass("hide");
+            }
+
+            $("#download").click(function() {
+                window.open($image.cropper("getDataURL"));
+            });
+
+            $("#zoomIn").click(function() {
+                $image.cropper("zoom", 0.1);
+            });
+
+            $("#zoomOut").click(function() {
+                $image.cropper("zoom", -0.1);
+            });
+
+            $("#rotateLeft").click(function() {
+                $image.cropper("rotate", 45);
+            });
+
+            $("#rotateRight").click(function() {
+                $image.cropper("rotate", -45);
+            });
+
+            $("#setDrag").click(function() {
+                $image.cropper("setDragMode", "crop");
+            });
+
+            $('#data_1 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+            $('#data_2 .input-group.date').datepicker({
+                startView: 1,
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true
+            });
+
+            $('#data_3 .input-group.date').datepicker({
+                startView: 2,
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true
+            });
+
+            $('#data_4 .input-group.date').datepicker({
+                minViewMode: 1,
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true,
+                todayHighlight: true
+            });
+
+            $('#data_5 .input-daterange').datepicker({
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true
+            });
+
+            var elem = document.querySelector('.js-switch');
+            var switchery = new Switchery(elem, { color: '#1AB394' });
+
+            var elem_2 = document.querySelector('.js-switch_2');
+            var switchery_2 = new Switchery(elem_2, { color: '#ED5565' });
+
+            var elem_3 = document.querySelector('.js-switch_3');
+            var switchery_3 = new Switchery(elem_3, { color: '#1AB394' });
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+            $('.demo1').colorpicker();
+
+            var divStyle = $('.back-change')[0].style;
+            $('#demo_apidemo').colorpicker({
+                color: divStyle.backgroundColor
+            }).on('changeColor', function(ev) {
+                        divStyle.backgroundColor = ev.color.toHex();
+                    });
+
+
+        });
+        var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : {allow_single_deselect:true},
+                '.chosen-select-no-single' : {disable_search_threshold:10},
+                '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+                '.chosen-select-width'     : {width:"95%"}
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+
+        $("#ionrange_1").ionRangeSlider({
+            min: 0,
+            max: 5000,
+            type: 'double',
+            prefix: "$",
+            maxPostfix: "+",
+            prettify: false,
+            hasGrid: true
+        });
+
+        $("#ionrange_2").ionRangeSlider({
+            min: 0,
+            max: 10,
+            type: 'single',
+            step: 0.1,
+            postfix: " carats",
+            prettify: false,
+            hasGrid: true
+        });
+
+        $("#ionrange_3").ionRangeSlider({
+            min: -50,
+            max: 50,
+            from: 0,
+            postfix: "°",
+            prettify: false,
+            hasGrid: true
+        });
+
+        $("#ionrange_4").ionRangeSlider({
+            values: [
+                "January", "February", "March",
+                "April", "May", "June",
+                "July", "August", "September",
+                "October", "November", "December"
+            ],
+            type: 'single',
+            hasGrid: true
+        });
+
+        $("#ionrange_5").ionRangeSlider({
+            min: 10000,
+            max: 100000,
+            step: 100,
+            postfix: " km",
+            from: 55000,
+            hideMinMax: true,
+            hideFromTo: false
+        });
+
+        $(".dial").knob();
+
+        $("#basic_slider").noUiSlider({
+            start: 40,
+            behaviour: 'tap',
+            connect: 'upper',
+            range: {
+                'min':  20,
+                'max':  80
+            }
+        });
+
+        $("#range_slider").noUiSlider({
+            start: [ 40, 60 ],
+            behaviour: 'drag',
+            connect: true,
+            range: {
+                'min':  20,
+                'max':  80
+            }
+        });
+
+        $("#drag-fixed").noUiSlider({
+            start: [ 40, 60 ],
+            behaviour: 'drag-fixed',
+            connect: true,
+            range: {
+                'min':  20,
+                'max':  80
+            }
+        });
+
+
+    </script>
 {% endblock scripts %}

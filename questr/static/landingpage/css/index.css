@@ -1,0 +1,606 @@
+@charset "utf-8";
+
+
+body{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight:300;
+	color:rgba(0,0,0,0.8);
+
+	}
+	
+
+	a:hover {
+		text-decoration: none;
+	}
+
+h1{font-size:50px;line-height:60px;margin:25px 0;font-weight: 100;}
+h2{font-size:40px;margin:15px 0;font-weight: 200;}
+h3{font-size:20px;margin:10px 0;font-weight:200;}
+h4{font-size:20px;margin:10px 0;font-weight:400;color: white;}
+h5{font-size:28px;font-weight:400;margin:15px 0;color:#384047;}
+h6{font-size:16px;font-weight:400;margin:10px 0;color:#384047;}
+p{font-size: 16px;font-weight: 300;margin: 7px 0;color: #666;}
+
+
+
+#aboutus {
+	background-image: url('../img/aboutus.jpg');
+}
+
+#small-package {
+	background-image: url('../img/carriables.jpg');
+}
+
+#car {
+	background-image: url('../img/car.jpg');	
+}
+
+#van {
+	background-image: url('../img/van.jpg');	
+}
+
+#blog {
+	background-image: url('../img/blog.jpg');	
+}
+
+#shipper {
+	background-image: url('../img/shipper.jpg');	
+}
+
+
+.grey-transition {
+	-webkit-filter: grayscale(100%);
+-moz-filter: grayscale(100%);
+filter: grayscale(100%);
+opacity: 0.4;
+}
+
+
+.blacknwhite {
+	-webkit-filter: saturate(100%) grayscale(100%) brightness(80%) contrast(100%);
+	-moz-filter: saturate(100%) grayscale(100%) brightness(80%) contrast(100%);
+	filter: saturate(100%) grayscale(100%) brightness(80%) 1contrast(100%);
+	filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
+}
+
+
+
+.small {
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-position: center center;
+}
+
+.col {
+	height: 350px;
+	border-style: solid;
+	border-width: 5px;
+	border-color: white;
+	padding-top: 120px;
+}
+
+.col h3, .col p {
+	-webkit-filter: grayscale(0%);
+	-moz-filter: grayscale(0%);
+	filter: grayscale(0%);
+	filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\' filterRes=\'800\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
+   
+	color: white; 
+	position: relative;
+	text-align: center;	
+	padding: 8px;
+	margin: 0;
+	display: inline-block;
+}
+
+.grey-transition:hover + h2 {
+	background-color: red;
+}
+
+
+/*********************/
+
+.btn-min-block {
+    min-width: 170px;
+    line-height: 26px;
+}
+
+.btn-theme {
+    color: #fff;
+    background-color: transparent;
+    border: 2px solid #fff;
+    margin-right: 15px;
+    font-size: 16px;
+}
+
+.btn-theme:hover {
+    color: #3498db;
+    background-color: #fff;
+    border-color: #fff;
+}
+
+
+
+
+.btn,.btn-lg,.input-lg{border-radius:3px;}
+
+.form-control{
+	border-radius:3px;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	border:0;
+	}
+
+	
+.input-lg{height:55px;}
+
+	
+/*========== MODULE ==============*/
+.section {
+	margin-top: 0px;
+	padding: 50px 50px;
+}
+
+.grey {
+	background: #f9f9f9;
+}
+	
+
+
+/*========== 3. HERO IMAGE ==============*/
+.section-title {
+	text-align:center;
+	margin-bottom:30px;
+}
+.section-title h2 {
+	color:#384047;
+}
+.section-title h4 {
+	color:#8a8a8a;
+}
+.heroimg img, .clientlogo img {
+	max-width:100%;
+}
+/*========== 4. FEATURES ==============*/
+
+.features {
+	margin:25px 0;
+}
+
+/*========== 5. TESTIMONIALS ==============*/
+
+.testblock {
+	width:100%;
+	height:auto;
+	padding:20px;
+	background:#FFF;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-style:italic;
+	position:relative;
+	line-height:28px;
+	font-size:16px;
+}
+.testblock:after {
+	top: 100%;
+	left: 20%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(255, 255, 255, 0);
+	border-top-color: #ffffff;
+	border-width: 15px;
+	margin-left: -15px;
+}
+.clientblock {
+	margin-top:40px;
+	margin-left:10px;
+}
+.clientblock img {
+	float:left;
+	-webkit-border-radius:100%;
+	-moz-border-radius:100%;
+	border-radius:100%;
+}
+.clientblock p {
+	padding-left:80px;
+	padding-top:13px;
+}
+.clientblock p strong {
+	color:#384047;
+	font-size:16px;
+}
+
+/*========== 6. PLANS AND PRICING ==============*/
+.pricing {
+	border: none;
+}
+
+.pricing .panel-heading {
+	background: #5abdff;
+	color: white;
+	border-radius: 1px;
+}
+
+.pricing .panel-body {
+	text-align: center;
+	border-radius: 0;
+}
+
+.pricing .fa {
+	font-size: 60px;
+}
+
+
+
+
+.pricing {
+	text-align:center;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+}
+.pricing .price {
+	font-size:52px;
+	font-weight:300;
+	margin:10px 0;
+}
+.pricing .billing {
+	text-transform:uppercase;
+	color:#FFF;
+	opacity:0.7;
+}
+.pricing .price .curr {
+	display:inline-block;
+	font-size:20px;
+	vertical-align:super;
+}
+.pricing .price .per {
+	display:inline-block;
+	font-size:20px;
+	vertical-align: baseline;
+}
+/* Animation */
+
+.pricing {
+	-moz-transition:all 0.6s ease;
+	-webkit-transition:all 0.6s ease;
+	-ms-transition:all 0.6s ease;
+	-o-transition:all 0.6s ease;
+	transition:all 0.6s ease;
+}
+.pricing:hover {
+	-moz-transform:scale(1.05);
+	-webkit-transform:scale(1.05);
+	-o-transform:scale(1.05);
+	-ms-transform:scale(1.05);
+	transform:scale(1.05);
+	z-index:2;
+}
+
+/*========== 7. FAQ ==============*/
+
+.faq p {
+	margin-bottom:25px;
+}
+
+
+/*========== SAY HI ==============*/
+
+
+
+
+.theme-button, .theme-button:hover {
+	border-width: 2px;
+	border-color: #5abdff;
+	background: #5abdff;
+	border-radius: 10%;
+	color: white;
+	font-weight: 400;
+}
+
+
+
+
+#say-hi input, #say-hi textarea, #say-hi button {
+	margin-top: 3px;
+}
+
+
+
+
+
+
+#what-is .glyphicon {
+	font-size: 50px;
+	font-weight: 300;
+	color: white;
+}
+
+
+
+.embossed-heavy {
+	border: none;	 
+}
+
+
+.theme-highlights {
+	color: #3498DB;
+}
+
+.theme-highlights:hover {
+	color: #5abdff;
+}
+
+.theme-color1 {
+	color: #3498DB;
+}
+
+.theme-color2 {
+	color: #5abdff;
+}
+
+
+.circle {
+  position: relative;
+	  padding-bottom: 100%;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  border: 2px solid #7EC7EA;
+  margin-bottom: 5px;
+}
+
+	.circle__grandparent {
+		  position: absolute;
+		  width: 100%;
+		  height: 100%;
+		  color: rgba(0,0,0,0.8);
+	}
+
+		.circle__parent {
+			  display: table;
+  width:auto;
+  			height: 100%;
+  			width: 100%;
+		}
+
+			.circle__child {
+  				display: table-cell;
+				  vertical-align: middle;
+  				text-align: center;
+  				color: rgba(0,0,0,0.8);
+			}
+
+
+
+
+
+
+.grid {
+	overflow: hidden;
+	list-style: none;
+	text-align: center;
+}
+
+/* Common style */
+.grid figure {
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	overflow: hidden;
+	margin: -0.135em;
+	background: #3085a3;
+	text-align: center;
+	cursor: pointer;
+	color: white;
+}
+
+.grid figure img {
+	-moz-filter: saturate(100%) grayscale(100%) brightness(100%) contrast(100%);
+    -o-filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+     -webkit-filter: saturate(100%) grayscale(100%) brightness(100%) contrast(100%);
+     filter: gray;
+     filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+
+    -webkit-transition: 0.1s; /* For Safari 3.1 to 6.0 */
+    transition:  0.1s;
+}
+
+.grid:hover figure img {
+	-webkit-filter: grayscale(0%);
+	-moz-filter: grayscale(0%);
+	filter: grayscale(0%);
+	filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\' filterRes=\'800\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
+    
+    -webkit-transition: 0.1s; /* For Safari 3.1 to 6.0 */
+    transition:  0.1s;
+}
+
+
+
+
+.grid figure figcaption {
+	padding: 2em;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 1.25em;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.grid figure figcaption::before,
+.grid figure figcaption::after {
+	pointer-events: none;
+}
+
+.grid figure figcaption,
+.grid figure a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* Anchor will cover the whole item by default */
+/* For some effects it will show as a button */
+.grid figure a {
+	z-index: 1000;
+	text-indent: 200%;
+	white-space: nowrap;
+	font-size: 0;
+	opacity: 0;
+}
+
+.grid figure h2 {
+	word-spacing: -0.15em;
+	font-weight: 300;
+	color: white;
+}
+
+.grid figure h2 span {
+	font-weight: 800;
+}
+
+.grid figure h2,
+.grid figure p {
+	margin: 0;
+}
+
+.grid figure p {
+	letter-spacing: 1px;
+	font-size: 68.5%;
+	font-weight: 400;
+}
+
+
+/*---------------*/
+/***** Sadie *****/
+/*---------------*/
+
+figure.effect-sadie figcaption::before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: -webkit-linear-gradient(top, rgba(72,76,97,0) 0%, rgba(72,76,97,0.8) 75%);
+	background: linear-gradient(to bottom, rgba(72,76,97,0) 0%, rgba(72,76,97,0.8) 75%);
+	content: '';
+	opacity: 0;
+	-webkit-transform: translate3d(0,50%,0);
+	transform: translate3d(0,50%,0);
+}
+
+figure.effect-sadie h2 {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	color: white;
+	-webkit-transition: -webkit-transform 0.35s, color 0.35s;
+	transition: transform 0.35s, color 0.35s;
+	-webkit-transform: translate3d(0,-50%,0);
+	transform: translate3d(0,-50%,0);
+}
+
+figure.effect-sadie figcaption::before,
+figure.effect-sadie p {
+	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+	transition: opacity 0.35s, transform 0.35s;
+}
+
+figure.effect-sadie p {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	padding: 2em;
+	width: 100%;
+	opacity: 0;
+	-webkit-transform: translate3d(0,10px,0);
+	transform: translate3d(0,10px,0);
+}
+
+figure.effect-sadie:hover h2 {
+	color: #fff;
+	-webkit-transform: translate3d(0,-50%,0) translate3d(0,-40px,0);
+	transform: translate3d(0,-50%,0) translate3d(0,-40px,0);
+}
+
+figure.effect-sadie:hover figcaption::before ,
+figure.effect-sadie:hover p {
+	opacity: 1;
+	color: white;
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+
+.bg {
+  transition:background-position 500ms ease-in-out;
+  background: url('../img/niceworkfrank.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
+}
+
+.bg div.content {
+	color: white;
+	padding-top: 200px;
+}
+
+
+
+
+
+button{outline: 0;}
+
+
+            #emboss{
+            	width: 217px;
+            	height: 45px;
+            	font-family: HelveticaNeue-Medium;
+                border: 1px solid #74C4EB;
+                font-size: 15px;
+                font-weight: normal;
+                border-radius: 3px;
+                cursor: pointer;
+                padding: 10px 15px;
+                -webkit-font-smoothing: subpixel-antialiased;
+                -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+                transition: border .25s linear, color .25s linear, background-color .25s linear;
+                
+                background-color: #7EC7EA;
+                color: #EDF7FB;                 
+                            
+                /*embossed*/
+                -webkit-box-shadow: inset 0 -1px 0 #67AFD2;
+                box-shadow: inset 0 -1px 0 #67AFD2;
+            }
+            #emboss:hover, #emboss:active,#emboss.active{
+                -webkit-box-shadow: inset 0 1px 0 #67AFD2;
+                box-shadow: inset 0 1px 0 #67AFD2;
+            }
+            
+            button#emboss span.button-name {
+	            margin: auto 30px;
+            }
+           
+
+
+.navbar {
+	margin: 0;
+}
+

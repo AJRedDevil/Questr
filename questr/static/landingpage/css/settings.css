@@ -1,0 +1,45 @@
+.nav-sidebar {
+	padding: 0;
+}
+
+
+.nav-sidebar li {
+	height: auto;
+}
+
+.nav-sidebar li .glyphicon-chevron-right {
+	float: right;
+}
+
+.nav-sidebar ul {
+	padding: 0;
+	margin: 0;
+}
+
+.nav-sidebar a {
+    color: #666;
+    background-color: white;
+    text-align: center;
+    font-size: small;
+    -webkit-transition: all 0.08s linear;
+    -moz-transition: all 0.08s linear;
+    -o-transition: all 0.08s linear;
+    transition: all 0.08s linear;
+}
+.nav-sidebar li.active a { 
+    cursor: default;
+    background-color: #3498db; 
+    color: #fff; 
+    height: auto;
+}
+.nav-sidebar li a:hover, .nav-sidebar .active a:hover {
+    background-color: #3498db; 
+    color: white;  
+}
+.nav-sidebar .text-overflow a,
+.nav-sidebar .text-overflow .media-body {
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis; 
+}

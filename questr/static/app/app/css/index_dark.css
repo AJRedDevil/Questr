@@ -1,0 +1,121 @@
+html, body, #map-canvas { 
+	height: 100%; margin: 0; padding: 0;
+	z-index: -1;
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+}
+
+#slogan {
+	//background-color: rgba(50,0,0,0.3);
+	margin: 15% auto;
+	color: white;
+	z-index: 30;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	text-shadow: 0 1px 1px black;
+}
+
+#footer {
+	//background-color: rgba(50,0,0,0.3);
+	margin-left: auto;
+	margin-right: auto;
+	bottom: 0;
+	color: white;
+	z-index: 32;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	text-shadow: 0 1px 1px black;
+}
+
+h1 {
+	font-weight: 300;
+	font-size: 72pt;
+}
+
+h4 {
+	font-weight: 300;
+	font-size: 24pt;
+}
+
+h5 {
+	font-weight: 300;
+	font-size: 20pt;
+}
+
+h6 {
+	font-weight: 300;
+	font-size: 14pt;
+}
+
+p, a, a:hover, a:active, a:visited {
+	font-weight: 300;
+	font-size: 18pt;
+	text-decoration: none;
+	color: white;
+}
+
+a:hover {
+	color: rgba(150,150,150,1);
+}
+
+.button-shipnow {
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+	font-size: 18pt;
+	color: rgb(64,64,64);
+	width: 460px;
+	height: 60px;
+	border-radius: 5px;
+	border-width: 0;
+	box-shadow: none;
+	background-color: rgba(255,255,255,1);
+	-o-transition: background-color 0.1s ease-in, color 0.1s ease-in;
+	-ms-transition: background-color 0.1s ease-in, color 0.1s ease-in;
+	-moz-transition: background-color 0.1s ease-in, color 0.1s ease-in;
+	-webkit-transition: background-color 0.1s ease-in, color 0.1s ease-in;
+	transition: background-color 0.1s ease-in, color 0.1s ease-in;
+}
+
+.button-shipnow:hover {
+	background-color: rgba(30,30,30, 1);
+	color: white;
+	-o-transition: background-color 0.1s ease-in, color 0.1s ease-in;
+	-ms-transition: background-color 0.1s ease-in, color 0.1s ease-in;
+	-moz-transition: background-color 0.1s ease-in, color 0.1s ease-in;
+	-webkit-transition: background-color 0.1s ease-in, color 0.1s ease-in;
+	transition: background-color 0.1s ease-in, color 0.1s ease-in;
+}
+
+.button-shipnow:active {
+	color: rgb(64,64,64);
+	background-color: rgba(255,255,255,1);
+}
+
+
+input, textarea {
+	width: 400px;
+	height: 40px;
+	padding-left: 10px;
+	margin: 0 auto;
+	border-radius: 3px;
+	border-width: 0;
+	background-color: rgba(230,230,230,1);
+
+}
+
+#sizes {
+	background-color: rgba(230,230,230,1);
+	text-align: center;
+	margin:auto 0px;
+}
+
+.form-group {
+	text-align: center;
+}
+
+hr {
+	border-color: rgba(220,220,220,1);
+}
+

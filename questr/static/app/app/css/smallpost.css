@@ -1,0 +1,40 @@
+    
+.list-group-item {
+	height:auto;
+	min-height: 100px;
+	background: rgba(255,255,255,0.94);
+	border-bottom: 1px;
+	border-top: 1px;
+	border-left: none;
+	border-right: none;
+	border-color: #e9f0f5;
+	border-style: solid;
+}
+
+.list-group-item:hover {
+	background: rgba(95,151,216,0.07);
+}
+
+.list-group-item .post-image {
+	margin: 0;
+}
+
+.list-group-item .col-md-4 p span.money {
+	text-align: center;
+}
+
+.list-group-item .col-md-4 p span.postDate {
+	float: right;
+} 
+
+/*************** Questr Module ******************/
+.postPic {
+	width: 90px;
+	height: 90px;
+}
+
+.smallInfo small {
+	margin: 0;
+	padding: 0;
+}
+

@@ -10,66 +10,33 @@
 	    <meta proptery="og:description" content="Questr, cheapest, fastest, 24/7 delivery within GTA." />
 	    <meta content="text/html; charset=utf-8" http-equiv="content-type">
 	    <meta charset="utf-8">
-	    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-	    <title>Questr - {{pagetitle}}</title>
-	    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-	    <!--[if lt IE 9]>
-	      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	    <![endif]-->
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    
-	    <link href={% static "css/bootstrap-datetimepicker.min.css" %} rel="stylesheet">
-	    <link href={% static "bootstrap/css/bootstrap.min.css" %} rel="stylesheet">
-	    <link href={% static "css/theme.css" %} rel="stylesheet">
-	    <link href={% static "css/normalize.css" %} rel="stylesheet"> 
-	    <link href={% static "css/font-awesome-4.2.0/css/font-awesome.min.css" %} rel="stylesheet">
-	    <!-- Fonts from Google Fonts -->
-		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+	    <title>Questr - {{pagetitle}}</title>
+
+   
+   
+	     <link href={% static "landingpage/img/logo.png" %} rel="shortcut icon">
+	    
+	    <link href={% static "landingpage/css/font-awesome-4.2.0/css/font-awesome.min.css" %} rel="stylesheet">
+ 
+	    <link href={% static "app/css/font-awesome-4.2.0/css/font-awesome.min.css" %} rel="stylesheet">
+
 	    {% block localhead %}
 	    {% endblock localhead %}
 	</head>
 
-	<body id="start">
+	<body>
 	    <!-- This is the overlay DIV that is displayed while loading a new page -->
 
 
 	    {% if not user.is_authenticated %}
-		<nav class="navbar navbar-default" role="navigation">
-		  <div class="">
-		    <!-- Brand and toggle get grouped for better mobile display -->
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		      <a class="navbar-brand" href="{% url 'index' %}">QUESTR</a>
-		    </div>
-		    
-		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		      <ul class="nav navbar-nav">
-	
-		       
+	    
 
-		      </ul>
-		      {% comment %}
-		      <form class="navbar-form navbar-left" role="search">
-		        <div class="form-group">
-		          <input type="text" class="form-control" placeholder="Search">
-		        </div>
-		        <button type="submit" class="btn btn-default">Submit</button>
-		      </form>
-		      {% endcomment %}
-		      <ul class="nav navbar-nav navbar-right">
-		        <li class="{% navactive request 'index' %}"><a href="{% url 'index' %}"><i class="fa fa-home" style="font-size:18px;"></i> Home</a></li>
-		        <li class="{% navactive request 'faq' %}"><a href="{% url 'faq' %}"><i class="fa fa-info-circle" style="font-size:18px;"></i> FAQ</a></li>
-		        <li class="{% navactive request 'signin' %}"><a href="{% url 'signin' %}">Sign in</a></li>
-		      </ul>
-		    </div><!-- /.navbar-collapse -->
-		  </div><!-- /.container-fluid -->
-		</nav>	
+
+
+
+
 		{% if alert_message %}
 			<!-- ALERT -->
 			
@@ -82,71 +49,163 @@
 
 
 	{% if user.is_authenticated and user.email_status %}
+	<div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element"> 
+                        	<span class="inline" style="margin-right:10px;">
+                            	<img alt="image" class="img-circle img-responsive" src="https://igcdn-photos-h-a.akamaihd.net/hphotos-ak-xap1/t51.2885-15/10693317_1484852375131591_493164933_n.jpg" style="width:40px;height:40px;" />
+                             </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle inline" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{user.first_name}} {{user.last_name}} </strong>
+                             </span> <span class="text-muted text-xs block">Courier <b class="caret"></b></span> </span> </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="{% url 'settings' %}">Settings</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{% url 'logout' %}">Log out</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            Q
+                        </div>
+                    </li>
+                    <li class="{% navactive request 'home' %}">
+                        <a href="{% url 'home' %}"><i class="fa fa-home"></i> <span class="nav-label">Home</span> </a>
+                    </li>
+                    <li>
+                        <a href="deliveries.html"><i class="fa fa-road"></i> <span class="nav-label">Deliveries</span> </a>
+                    </li>
+                   
+                    <li>
+                        <a href="#"><i class="fa fa-globe"></i> <span class="nav-label">Miscellaneous</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="{% url 'privacy' %}">Privacy</a></li>
+                            <li><a href="{% url 'terms' %}">Terms</a></li>
+                            <li><a href="#">About Us</a></li>
+				            <li><a href="#">Blog</a></li>
+				            <li><a href="{% url 'faq' %}">FAQ</a></li>
+				            <li><a href="#">Team</a></li>
+				            <li><a href="#">Careers</a></li>
+				            <li><a href="{% url 'contact' %}">Contact</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-	<nav class="navbar navbar-default" role="navigation">
-  <div class="">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-	{% comment %}
-<!-- This is a dummy form -->
-		<form action="{% url 'trackquest' tracking_number %}" role="form" method="get">
-	     	<div class="input-group">
-	        	<input type="text" class="form-control input-sm" name="tracking_number" placeholder="Enter Tracking Code">
-		            <span class="input-group-btn">
-		              <button class="btn btn-default" type="Submit">Enter</button>
-		            </span>
-	        </div><!-- /input-group -->
-	    </form>
-{% endcomment %}
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{% url 'home' %}">QUESTR</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">        
-
-     {% comment %}
-    {% if user.is_shipper or user.is_superuser %}
-      <li class="{% navactive request 'myshipments' %}"><a href="{% url 'myshipments' %}">My shipments</a></li>
-      {% else %}
-      <li class="{% navactive request 'myposts' %}"><a href="{% url 'myposts' %}">My Quests</a></li>
-      {% endif %}
-       {% endcomment %}
-    
-        
-      </ul>
-      {% comment %}
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0;">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      {% endcomment %}
-      <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message"></span>
+                </li>
+                <li>
+                
+	            </li>
+	            {% if not user.is_shipper %}
+                <li class="{% navactive request 'newquest' %}" id="postquest">
+                    <a href="{% url 'newquest' %}">
+                        <i class="fa fa-plus-square" style="color:#23c6c8;"></i> Post a Quest
+                    </a>
+                </li>
+                {% endif %}
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary">6</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                            	
+                                <div class="">
+                                     <img alt="image" class="img-circle img-responsive pull-left" src="https://igcdn-photos-h-a.akamaihd.net/hphotos-ak-xap1/t51.2885-15/10693317_1484852375131591_493164933_n.jpg" style="width:25px;height:25px;" />&nbsp;Don Vo has accepted your quest
+                                    <span class="pull-right text-muted small">4m ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        
+                        <li class="divider"></li>
+                        
+                        <li>
+                            <a href="#">
+                            	
+                                <div class="">
+                                     <img alt="image" class="img-circle img-responsive pull-left" src="https://igcdn-photos-h-a.akamaihd.net/hphotos-ak-xap1/t51.2885-15/10693317_1484852375131591_493164933_n.jpg" style="width:25px;height:25px;" />&nbsp;Don Vo has accepted your quest
+                                    <span class="pull-right text-muted small">4m ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        
+                        <li class="divider"></li>
+                        
+                        <li>
+                            <a href="#">
+                            	
+                                <div class="">
+                                     <img alt="image" class="img-circle img-responsive pull-left" src="https://igcdn-photos-h-a.akamaihd.net/hphotos-ak-xap1/t51.2885-15/10693317_1484852375131591_493164933_n.jpg" style="width:25px;height:25px;" />&nbsp;Don Vo has picked up your package!
+                                    <span class="pull-right text-muted small">4m ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        
+                        <li class="divider"></li>
+                        
+                        <li>
+                            <a href="#">
+                            	
+                                <div class="">
+                                     <img alt="image" class="img-circle img-responsive pull-left" src="https://igcdn-photos-h-a.akamaihd.net/hphotos-ak-xap1/t51.2885-15/10693317_1484852375131591_493164933_n.jpg" style="width:25px;height:25px;" />&nbsp; Rate Don Vo now
+                                    <span class="pull-right text-muted small">4m ago</span>
+                                </div>
+                            </a>
+                        </li>
+                 
+                        <li class="divider"></li>
+                        
+                        <li>
+                            <div class="text-center link-block">
+                                <a href="notifications.html">
+                                    <strong>See All Notifications</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
-      	<li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><i class="fa fa-home" style="font-size:18px;"></i> Home</a></li> 
 
-      	{% if not user.is_shipper %}
-		<li class="{% navactive request 'newquest' %}">
-			<a href="{% url 'newquest' %}">
-	    		<i class="fa fa-compass" style="font-size:18px;"></i> Post a shipment<sup></sup>
-			</a>
-		</li>
-		{% endif %}
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                </li>
+            </ul>
 
-		<li class="{% navactive request 'trackquest' %}"><a href="{% url 'trackquest' %}"><i class="fa fa-location-arrow" style="font-size:16px;"></i> Track a package</a></li> 
+        </nav>
+        </div>
+  
+           
 
-      	<li class="dropdown">
-	          <a href="#" class="dropdown-toggle no-margin no-padding" data-toggle="dropdown">
+            
 
-		          {% if user.is_shipper %}
+        </div>
+    </div>
+	
+
+
+
+{% comment %}
+<li class="{% navactive request 'trackquest' %}"><a href="{% url 'trackquest' %}"><i class="fa fa-location-arrow" style="font-size:16px;"></i> Track a package</a></li> 
+
+
+
+       {% if user.is_shipper %}
 		          	{% if user.is_available %}
 		          	<span class="glyphicon glyphicon-record" style="color:rgba(47,204,112,1.00);"></span>		         	
 		          	{% endif %}
@@ -154,35 +213,8 @@
 		          	 <span class="glyphicon glyphicon-record"></span> 
 		          	{% endif %}
 		          {% endif %}
+		         
 
-		      	<!-- PROFILE IMAGE -->
-		   		<div class="" style="width:28px;height:28px;display:inline-block;margin-top:-100px;margin-down:-100px;padding:0;padding-top:8px;">
-		          <span class="ratio img-responsive img-circle" style="background-image: url({{user.get_profile_pic}});margin:0;"></span>
-		      	</div>
-		      	<!-- PROFILE IMAGE -->
-
-		      	{{user.first_name}} {{user.last_name}} 
-		          <i class="fa fa-caret-down"></i>
-		          
-	          </a>
-	       
-
-
-			<ul class="dropdown-menu dropdown-menu-right">
-{% comment %}
-				<li class="{% navactive request 'profile' %}">
-					<a href="{% url 'profile' %}">
-						
-						My profile
-					</a>
-				</li>
-{% endcomment %}
-	            <li>
-	                <a href="{% url 'settings' %}">
-	                	
-	                	Settings
-	                </a>
-	            </li>
 				{% if user.is_shipper and user.email_status %}
 	            <li>
 	        	 <a href="" data-toggle="modal" data-target="#status">
@@ -196,20 +228,13 @@
 	        	 	{% endif %}
 	        	 </a>
 	            </li>
-		        {% endif %}	        
-	            <li>
-	                <a href="{% url 'logout' %}">
-	                	Logout
-	                </a>
-	            </li>
-	        </ul>
-		</li>
-	        	
-
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+		        {% endif %}	 
+		        {% endcomment %}
+		        
+		        
+		        
+		        
+		        
 {% if alert_message %}
 	      <!-- ALERT -->
 	
@@ -221,23 +246,16 @@
 {% endif %}
 {% endif %}
 
+
+
+
 	{% if user.is_authenticated and not user.email_status %}
 
 	<nav class="navbar navbar-default" role="navigation">
   <div class="">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-	{% comment %}
-<!-- This is a dummy form -->
-		<form action="{% url 'trackquest' tracking_number %}" role="form" method="get">
-	     	<div class="input-group">
-	        	<input type="text" class="form-control input-sm" name="tracking_number" placeholder="Enter Tracking Code">
-		            <span class="input-group-btn">
-		              <button class="btn btn-default" type="Submit">Enter</button>
-		            </span>
-	        </div><!-- /input-group -->
-	    </form>
-{% endcomment %}
+
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -259,16 +277,8 @@
       {% endif %}
        {% endcomment %}
     
-        
       </ul>
-      {% comment %}
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      {% endcomment %}
+
       <ul class="nav navbar-nav navbar-right">
 
       	<li class="{% navactive request 'home' %}"><a href="{% url 'home' %}"><i class="fa fa-home" style="font-size:18px;"></i> Home</a></li> 
@@ -278,11 +288,7 @@
       	<li class="dropdown">
 	          <a href="#" class="dropdown-toggle no-margin no-padding" data-toggle="dropdown">
 
-		      	<!-- PROFILE IMAGE -->
-		   		<div class="" style="width:28px;height:28px;display:inline-block;margin-top:-100px;margin-down:-100px;padding:0;padding-top:8px;">
-		          <span class="ratio img-responsive img-circle" style="background-image: url({{user.get_profile_pic}});margin:0;"></span>
-		      	</div>
-		      	<!-- PROFILE IMAGE -->
+		
 
 		      	{{user.first_name}} {{user.last_name}} 
 		          <i class="fa fa-caret-down"></i>
@@ -292,14 +298,7 @@
 
 
 			<ul class="dropdown-menu dropdown-menu-right">
-{% comment %}
-				<li class="{% navactive request 'profile' %}">
-					<a href="{% url 'profile' %}">
-						
-						My profile
-					</a>
-				</li>
-{% endcomment %}
+
 	            <li>
 	                <a href="{% url 'settings' %}">
 	                	
@@ -320,11 +319,6 @@
 	        	 </a>
 	            </li>
 		        {% endif %}	        
-	            <li>
-	                <a href="{% url 'logout' %}">
-	                	Logout
-	                </a>
-	            </li>
 	        </ul>
 		</li>
 	        	
@@ -370,72 +364,14 @@
 {% endif %}
 
 
+	 {% block content %}    
+      
 
-
-
-
-
-	  
-	  
-	<div id="loader"></div>
-	
-	<div id="wrapper">
-		{% block content %}    
+      
 		{% endblock content %}
-	</div>
-
-	<footer>
-		<div class="row clearfix section">
-			<div class="col-md-12 column"><br></div>
-			<div class="col-md-12 column">
-				
-
-				<div class="col-md-6 col-md-offset-3 column text-center">
-					<a href="{% url 'faq' %}">Frequently Asked Questions</a>
-					<i class="supressed-white">|</i>
-					<a href="{% url 'contact' %}">Contact Us</a>
-					<i class="supressed-white">|</i>
-					<a href="{% url 'terms' %}">Terms of Service</a>
-					<i class="supressed-white">|</i>
-					<a href="{% url 'privacy' %}">Privacy Policy</a>
-
-					{% comment %}
-					<div class="col-md-12 column text-center">
-						<i class="copyright">Copyright © 2014 Questr Inc. All rights reserved.</i>
-					</div>
-					{% endcomment %}
-					
-				</div><!-- ./column -->
-
-				<div class="col-md-4 col-md-offset-4 column text-center">
-					<h4></h4>	
-					<ul>
-							<li>
-						<a class="facebook" target="_blank" href="https://www.facebook.com/questrco"><button class="btn-circle"><i class="fa fa-facebook"></i></button></a>
-							</li>
-							<li>
-						<a class="twitter" target="_blank" href="https://twitter.com/questrco"><button class="btn-circle"><i class="fa fa-twitter"></i></button></a>
-							</li>
-							<li>
-						<a class="linkedin" target="_blank" href="http://linkedin.com/company/questr"><button class="btn-circle"><i class="fa fa-linkedin"></i></button></a>
-							</li>
-							<li>
-						<a class="email" target="_blank" href="mailto:hello@questr.co"><button class="btn-circle"><i class="fa fa-envelope"></i></button></a>
-							</li>
-						</ul>
-				</div><!-- ./column -->
-
-
-				<div class="col-md-2 column text-center no-padding">
-					{% comment %}
-					<h2 class="no-margin">xxxxxx</h2>
-					<h6>packages delivered</h6>
-					{% endcomment %}
-				</div><!-- ./column -->
-			</div><!-- ./column -->
-		</div><!-- ./row -->
-	</footer>
-
+      
+		
+	
 
 	<!-- Google Analytics -->
     <script>
@@ -450,15 +386,6 @@
 
 
 
-		<script src={% static "js/bootstrap-datetimepicker.min.js" %}></script>
-		<script src={% static "js/en-ca.js" %}></script>
-
-
-
-		<script type='text/javascript' src={% static "js/jquery.min.js" %}></script> 
-		<script src={% static "bootstrap/js/bootstrap.min.js" %}></script>
-	    <script src={% static "bootstrap/js/tooltip.js" %}></script>
-	    <script src={% static "js/modernizr.js" %}></script>
 	{% block scripts %}
 
 

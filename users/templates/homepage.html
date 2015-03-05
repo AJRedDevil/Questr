@@ -2,363 +2,473 @@
 {% load staticfiles %}
 {% load tz %}
 {% block localhead %}
-<link href={% static "css/feature.css" %} rel="stylesheet">
-<link href={% static "css/star-rating.css" %} media="all" rel="stylesheet" type="text/css"/>
+<link href={% static "app/css/bootstrap.min.css" %} rel="stylesheet">
+<!-- Toastr style -->
+<link href={% static "app/css/plugins/toastr/toastr.min.css" %} rel="stylesheet">
+  <!-- Gritter --> 
+<link href={% static "app/js/plugins/gritter/jquery.gritter.css" %} rel="stylesheet">  
+<!-- Switchery -->
+  <link href={% static "app/css/plugins/switchery/switchery.css" %} rel="stylesheet">
+  
+    <link href={% static "app/css/animate.css" %} rel="stylesheet">
+    <link href={% static "app/css/style.css" %} rel="stylesheet">
+
 {% endblock localhead %}
 {% block content %}
+<div class="row  border-bottom white-bg dashboard-header">
 
+                    <div class="col-sm-3">
+                        <h2>Welcome {{user.first_name}}</h2>
+                        <small>You have 6 notifications.</small>
+                        
+                    </div>
+                    <div class="col-sm-6">
+                    	
+                       
+                        <div class="row text-left">
+                            <div class="col-xs-4">
+                                <div class=" m-l-md">
+                                <span class="h4 font-bold m-t block">$ 406</span>
+                                <small class="text-muted m-b block">March's Earnings</small>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <span class="h4 font-bold m-t block">23</span>
+                                <small class="text-muted m-b block">Quests completed this month</small>
+                            </div>
+                            <div class="col-xs-4">
+                                <span class="h4 font-bold m-t block">45</span>
+                                <small class="text-muted m-b block">Quests completed total</small>
+                            </div>
 
-<div class="container-fluid">
-    <div class="row clearfix panel-group" id="accordion">
-    
-    
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                       
+                    </div>
+
+            </div>
             
-        {% if not user.is_shipper %}
-        <div class="col-md-4 column">
-        <div class="panel panel-default" id="panel1">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Active Transactions</h3>
-                    <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
-                </div><!-- ./panel-heading -->
-                
-              <div class="panel-body panel-collapse collapse in" id="collapseOne">
+<div class="row" style="margin-bottom:200px;">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content animated fadeInUp">
+
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Your current jobs</h5>
+                            <div class="ibox-tools">
+                                
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            
+
+                            <div class="project-list">
+
+                                <table class="table table-hover">
+                                    <tbody>
+                                    	<!-- ACTIVE QUESTS -->
+                                    	{% for quest in  allquests %}
+                                    	<tr>
+                                        <td class="project-status">
+                                            <span class="label label-primary">Active</span>
+                                        </td>
+                                        <td class="project-title">
+                                            <a href="/quest/{{quest.id}}">{{quest.title | title}}</a>
+                                            <br/>
+                                            <small>Job Accepted on day at time</small>
+                                        </td>
+                                        <td class="project-completion">
+                                            <small>28% Complete</small>
+                                            <div class="progress progress-mini">
+                                                <div style="width: 28%;" class="progress-bar"></div>
+                                            </div>
+                                        </td>
+                              
+                                        <td class="project-actions">
+                                          <small>${{quest.reward}}</small>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    
+                               
+                 {% if not user.is_shipper %}
+   
                     <!-- List group -->
                     {% if allquests %}
                     {% for quest in allquests %}
-                    <a class="no-colour" href="/quest/{{quest.id}}" title="{{quest.title | title}}">
-                    <div class="row clearfix">
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
-                        {% if quest.item_images %}
-                        <img src={{quest.get_item_images_normal_url}} class="img-responsive">              
-                        {% else %}      
-                        <h1><i class="fa fa-picture-o"></i></h1>
-                        {% comment %}
-                        
-                        {% endcomment %}
-                       
-                        {% endif %}
-                      </div>
-                      <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
-                        <h5 class="media-heading">{{quest.title | title}}</h5>
-                        <p class="list-group-item-text postDesc">{{quest.description}}</p>
-                        
-                        <div class="smallInfo">
-                            <small>
-                                <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}
-                            </small>
-                            <div class="clearfix"></div>
-                          <small>${{quest.reward}}</small>
-                      </div><!-- ./smallInfo -->
-                    </div>
-                    </div>
-                    </a>
-                
+                    <tr>
+	                    <td class="project-status">
+	                        <span class="label label-primary">Active</span>
+	                    </td>
+	                    <td class="project-title">
+	                        <a href="/quest/{{quest.id}}">{{quest.title | title}}</a>
+	                        <br/>
+	                        <small>Created {% localtime on%} {{quest.creation_date | timesince }} at {% endlocaltime %}</small>
+	                    </td>
+	                    <td class="project-completion">
+	                        <small>28% Complete</small>
+	                        <div class="progress progress-mini">
+	                            <div style="width: 28%;" class="progress-bar"></div>
+	                        </div>
+	                    </td>
+	          
+	                    <td class="project-actions">
+	                      <small>${{quest.reward}}</small>
+	                    </td>
+	                </tr>
                     {% endfor %}
-                    {% if allquests.count == 10 %}
-                    <div class="row clearfix">
-                        <div class="col-md-12 column text-center">
-                            <a href="{% url 'allquests' %}"><h5>MORE</h5></a>
-                        </div>
-                    </div>          
-                    {% endif %}
-                {% else %}
+                    {% else %}
 
-        
-                <div class="row clearfix">
-                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
-                    <i class="fa fa-check-square-o" style="font-size:35px;"></i>
-                  </div>
-                  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
-                    <h5>You have no active transactions.</h5>
-                  </div>
-                </div><!-- ./row -->
-            
+                    <tr>
+	                    <td class="project-title text-center">
+	                        You have posted no quests.                       
+	                    </td>
+	                </tr>
+  
                 {% endif %}
-
-              </div><!-- ./panel-body -->
-        </div>
-        </div><!-- ./column --> 
         {% endif %}
+                                    
 
-        <div class="col-md-4 column">
-        <div class="panel panel-default" id="panel1">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Pending Transactions</h3>
-                    <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
-                </div><!-- ./panel-heading -->
-                
-              <div class="panel-body panel-collapse collapse in" id="collapseOne">
-                    <!-- List group -->
+
+	
+
+        			<!-- PENDING TRANSACTIONS -->
                     {% if activequests %}
                     {% for quest in activequests %}
-                    <a class="no-colour" href="/quest/{{quest.id}}" title="{{quest.title | title}}">
-                    <div class="row clearfix">
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
-                        {% if quest.item_images %}
-                        <img src={{quest.get_item_images_normal_url}} class="img-responsive">              
-                        {% else %}      
-                        <h1><i class="fa fa-picture-o"></i></h1>
-                        {% comment %}
-                        
-                        {% endcomment %}
-                       
-                        {% endif %}
-                      </div>
-                      <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
-                        <h5 class="media-heading">{{quest.title | title}}</h5>
-                        <p class="list-group-item-text postDesc">{{quest.description}}</p>
-                        
-                        <div class="smallInfo">
-                            <small>
-                                <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}
-                            </small>
-                            <div class="clearfix"></div>
-                          <small>${{quest.reward}}</small>
-                      </div><!-- ./smallInfo -->
-                    </div>
-                    </div>
-                    </a>
+                    <tr>
+	                    <td class="project-status">
+	                        <span class="label label-primary">Active</span>
+	                    </td>
+	                    <td class="project-title">
+	                        <a href="/quest/{{quest.id}}">{{quest.title | title}}</a>
+	                        <br/>
+	                        <small>Job Accepted on day at time</small>
+	                    </td>
+	                    <td class="project-completion">
+	                        <small>28% Complete</small>
+	                        <div class="progress progress-mini">
+	                            <div style="width: 28%;" class="progress-bar"></div>
+	                        </div>
+	                    </td>
+	          
+	                    <td class="project-actions">
+	                      <small>${{quest.reward}}</small>
+	                    </td>
+	                </tr>
                 
                     {% endfor %}
-                    {% if activequests.count == 10 %}
-                    <div class="row clearfix">
-                        <div class="col-md-12 column text-center">
-                            <a href="{% url 'activequests' %}"><h5>MORE</h5></a>
-                        </div>
-                    </div>          
-                    {% endif %}
+         
                 {% else %}
 
-        
-                <div class="row clearfix">
-                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
-                    <i class="fa fa-check-square-o" style="font-size:35px;"></i>
-                  </div>
-                  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
-                    <h5>You have no pending transactions.</h5>
-                  </div>
-                </div><!-- ./row -->
+                	<tr>
+	                    <td class="project-title text-center">
+	                        You have not accepted any quests.                       
+	                    </td>
+	                </tr>
             
                 {% endif %}
-
-              </div><!-- ./panel-body -->
-        </div>
-        </div><!-- ./column -->
-
-       <div class="col-md-4 column">
-        <div class="panel panel-default" id="panel1">
-                <div class="panel-heading">
-                    <h3 class="panel-title">History Transactions</h3>
-                    <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span>
-                </div><!-- ./panel-heading -->
                 
-              <div class="panel-body panel-collapse collapse in" id="collapseOne">
-                    <!-- List group -->
+                
+
+                <!-- HISTORY TRANSACTIONS -->
                     {% if pastquests %}
                     {% for quest in pastquests %}
-                    <a class="no-colour" href="/quest/{{quest.id}}" title="{{quest.title | title}}">
-                    <div class="row clearfix">
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
-                        {% if quest.item_images %}
-                        <img src={{quest.get_item_images_normal_url}} class="img-responsive">              
-                        {% else %}      
-                        <h1><i class="fa fa-picture-o"></i></h1>
-                        {% comment %}
-                        
-                        {% endcomment %}
-                       
-                        {% endif %}
-                      </div>
-                      <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
-                        <h5 class="media-heading">{{quest.title | title}}</h5>
-                        <p class="list-group-item-text postDesc">{{quest.description}}</p>
-                        
-                        <div class="smallInfo">
-                            <small>
-                                <span class="glyphicon glyphicon-map-marker"></span>{{quest.dropoff.address}}, {{quest.dropoff.city}}
-                            </small>
-                            <div class="clearfix"></div>
-                          <small>${{quest.reward}}</small>
-                      </div><!-- ./smallInfo -->
-                    </div>
-                    </div>
-                    </a>
+                    <tr>
+	                    <td class="project-status">
+	                        <span class="label label-primary">Active</span>
+	                    </td>
+	                    <td class="project-title">
+	                        <a href="/quest/{{quest.id}}">{{quest.title | title}}</a>
+	                        <br/>
+	                        <small>Job Accepted on day at time</small>
+	                    </td>
+	                    <td class="project-completion">
+	                        <small>28% Complete</small>
+	                        <div class="progress progress-mini">
+	                            <div style="width: 28%;" class="progress-bar"></div>
+	                        </div>
+	                    </td>
+	          
+	                    <td class="project-actions">
+	                      <small>${{quest.reward}}</small>
+	                    </td>
+	                </tr>
                 
                     {% endfor %}
-                    {% if pastquests.count == 10 %}
-                    <div class="row clearfix">
-                        <div class="col-md-12 column text-center">
-                            <a href="{% url 'pastquests' %}"><h5>MORE</h5></a>
-                        </div>
-                    </div>          
-                    {% endif %}
+         
                 {% else %}
 
-        
-                <div class="row clearfix">
-                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 column text-center">
-                    <i class="fa fa-check-square-o" style="font-size:35px;"></i>
-                  </div>
-                  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 column">
-                    <h5>You have no past transactions.</h5>
-                  </div>
-                </div><!-- ./row -->
+                	<tr>
+	                    <td class="project-title text-center">
+	                        You have not accepted any quests.                       
+	                    </td>
+	                </tr>
             
                 {% endif %}
 
-              </div><!-- ./panel-body -->
-        </div>
-        </div><!-- ./column -->
 
-    </div><!-- ./row -->
+
+
+
+
+
+
+                           
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+<div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content">
+                        <div class="row">
+                        <div class="col-lg-4">
+                            
+                            
+                        </div>
+                            <div class="col-lg-4">
+                               
+
+                            </div>
+                        <div class="col-lg-4">
+                           
+                        </div>
+
+                        </div>
+                </div>
+                <div class="footer">
+                    <div class="pull-right">
+                       
+                    </div>
+                    <div>
+                        Powered by <a href="http://earthand.co/en/" target="_blank">Earth and Co</a> &copy; 2014-2015
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
 
     {% endblock content %}
-</div><!-- ./container -->
 
+{% block scripts %}  
+<!-- Mainly scripts -->
+    <script src={% static "app/js/jquery-2.1.1.js" %}></script>
+    <script src={% static "app/js/bootstrap.min.js" %}></script>
+    <script src={% static "app/js/plugins/metisMenu/jquery.metisMenu.js" %}></script>
+    <script src={% static "app/js/plugins/slimscroll/jquery.slimscroll.min.js" %}></script>
 
+    <!-- Flot -->
+    <script src={% static "app/js/plugins/flot/jquery.flot.js" %}></script>
+    <script src={% static "app/js/plugins/flot/jquery.flot.tooltip.min.js" %}></script>
+    <script src={% static "app/js/plugins/flot/jquery.flot.spline.js" %}></script>
+    <script src={% static "app/js/plugins/flot/jquery.flot.resize.js" %}></script>
+    <script src={% static "app/js/plugins/flot/jquery.flot.pie.js" %}></script>
 
+    <!-- Peity -->
+    <script src={% static "app/js/plugins/peity/jquery.peity.min.js" %}></script>
+    <script src={% static "app/js/demo/peity-demo.js" %}></script>
 
+ 
+    <!-- Custom and plugin javascript -->
+    <script src={% static "app/js/inspinia.js" %}></script>
+    <script src={% static "app/js/plugins/pace/pace.min.js" %}></script>
 
-{% comment %}
-<!-- This is the main container (#scroll-container) -->
-<div class="container-fluid">
-<div class="row clearfix">
+    <!-- jQuery UI -->
+    <script src={% static "app/js/plugins/jquery-ui/jquery-ui.min.js" %}></script>
 
+    <!-- GITTER -->
+    <script src={% static "app/js/plugins/gritter/jquery.gritter.min.js" %}></script>
 
-<div class="col-md-12 column section">
-    <div class="col-md-4 column">
+    <!-- Sparkline -->
+    <script src={% static "app/js/plugins/sparkline/jquery.sparkline.min.js" %}></script>
+
+    <!-- Sparkline demo data  -->
+    <script src={% static "app/js/demo/sparkline-demo.js" %}></script>
+
+    <!-- ChartJS-->
+    <script src={% static "app/js/plugins/chartJs/Chart.min.js" %}></script>
+
+    <!-- Toastr -->
+    <script src={% static "app/js/plugins/toastr/toastr.min.js" %}></script>
     
-        <form role="form">
-          <div class="form-group">
-            <label for="expiry date">Available till</label>
-            <input class="form-control" placeholder="Expiry Date">
-          </div>
-        </form>
-
-    </div><!-- ./column -->
-    <div class="col-md-4 column">
-        <label>Size</label>
-        <div class="form-group" id="size">
-                 <div class="input-group col-md-6 column">  
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
-                        <center>
-                                        
-                            <p>Backpack</p>
-                            <input type="radio" name="size" value="backpack"> 
-                        </center>   
-                    </div><!-- ./column -->  
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
-                        <center>
-                            
-                            <p>Car</p>
-                            <input type="radio" name="size" value="car">
-                        </center>   
-                    </div><!-- ./column -->
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 column">
-                        <center>
-                        
-                            <p>Minivan</p>
-                            <input type="radio" name="size" value="minivan">
-                            </center>   
-                    </div><!-- ./column -->
-                 </div><!-- /input-group -->
-                         </div><!-- ./form-group -->
-    </div><!-- ./column -->
-    <div class="col-md-4 column">
-        <label>Pay</label>
-        <p>slider goes here</p>
-    </div>
-</div><!-- ./grey -->
+    <!-- Switchery -->
+   <script src={% static "app/js/plugins/switchery/switchery.js" %}></script>
 
 
 
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 4000
+                };
+                toastr.success('Same day delivery for everyone', 'Welcome to Questr');
 
-<div class="col-md-12 column">
+            }, 1300);
 
-    <div class="js-masonry" id="post-container" data-masonry-options='{ "columnWidth": 0, "itemSelector": ".post" }'>
+
+            var data1 = [
+                [0,4],[1,8],[2,5],[3,10],[4,4],[5,16],[6,5],[7,11],[8,6],[9,11],[10,30],[11,10],[12,13],[13,4],[14,3],[15,3],[16,6]
+            ];
+            var data2 = [
+                [0,1],[1,0],[2,2],[3,0],[4,1],[5,3],[6,1],[7,5],[8,2],[9,3],[10,2],[11,1],[12,0],[13,2],[14,8],[15,0],[16,0]
+            ];
+            $("#flot-dashboard-chart").length && $.plot($("#flot-dashboard-chart"), [
+                data1, data2
+            ],
+                    {
+                        series: {
+                            lines: {
+                                show: false,
+                                fill: true
+                            },
+                            splines: {
+                                show: true,
+                                tension: 0.4,
+                                lineWidth: 1,
+                                fill: 0.4
+                            },
+                            points: {
+                                radius: 0,
+                                show: true
+                            },
+                            shadowSize: 2
+                        },
+                        grid: {
+                            hoverable: true,
+                            clickable: true,
+                            tickColor: "#d5d5d5",
+                            borderWidth: 1,
+                            color: '#d5d5d5'
+                        },
+                        colors: ["#1ab394", "#464f88"],
+                        xaxis:{
+                        },
+                        yaxis: {
+                            ticks: 4
+                        },
+                        tooltip: false
+                    }
+            );
+
+            var doughnutData = [
+                {
+                    value: 300,
+                    color: "#a3e1d4",
+                    highlight: "#1ab394",
+                    label: "App"
+                },
+                {
+                    value: 50,
+                    color: "#dedede",
+                    highlight: "#1ab394",
+                    label: "Software"
+                },
+                {
+                    value: 100,
+                    color: "#b5b8cf",
+                    highlight: "#1ab394",
+                    label: "Laptop"
+                }
+            ];
+
+            var doughnutOptions = {
+                segmentShowStroke: true,
+                segmentStrokeColor: "#fff",
+                segmentStrokeWidth: 2,
+                percentageInnerCutout: 45, // This is 0 for Pie charts
+                animationSteps: 100,
+                animationEasing: "easeOutBounce",
+                animateRotate: true,
+                animateScale: false,
+            };
+
+            var ctx = document.getElementById("doughnutChart").getContext("2d");
+            var DoughnutChart = new Chart(ctx).Doughnut(doughnutData, doughnutOptions);
+
+            var polarData = [
+                {
+                    value: 300,
+                    color: "#a3e1d4",
+                    highlight: "#1ab394",
+                    label: "App"
+                },
+                {
+                    value: 140,
+                    color: "#dedede",
+                    highlight: "#1ab394",
+                    label: "Software"
+                },
+                {
+                    value: 200,
+                    color: "#b5b8cf",
+                    highlight: "#1ab394",
+                    label: "Laptop"
+                }
+            ];
+
+            var polarOptions = {
+                scaleShowLabelBackdrop: true,
+                scaleBackdropColor: "rgba(255,255,255,0.75)",
+                scaleBeginAtZero: true,
+                scaleBackdropPaddingY: 1,
+                scaleBackdropPaddingX: 1,
+                scaleShowLine: true,
+                segmentShowStroke: true,
+                segmentStrokeColor: "#fff",
+                segmentStrokeWidth: 2,
+                animationSteps: 100,
+                animationEasing: "easeOutBounce",
+                animateRotate: true,
+                animateScale: false,
+            };
+            var ctx = document.getElementById("polarChart").getContext("2d");
+            var Polarchart = new Chart(ctx).PolarArea(polarData, polarOptions);
+
+        });
         
-        {% for quest in  allquests %}
-        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 column post">
-           
-                {% if quest.item_images %}
-                <a  href="/quest/{{quest.id}}"><img src={{quest.get_item_images_normal_url}} class="item-image"></a>                  
-                {% else %}    
-                <a  href="/quest/{{quest.id}}" title="Title">
-                <div class="no-image item-image">
-                    <h1><span class="glyphicon glyphicon-picture"></span></h1>
-                    <span class="pay"><h3>${{quest.reward}}</h3></span>
-                </div>
-                </a>
-                {% endif %}
-                     
-                <div class="row clearfix">
-                    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column title-desc">
-                        <a  href="/quest/{{quest.id}}" class="image"><h5>{{quest.title | title}}</h5></a>
-                        <p>{{quest.description | truncatewords:10  }}</p>
-                    </div><!-- ./column -->
-                </div><!-- ./row -->
-                
-                <hr>                
-                    
-                <div class="row clearfix">
-                    <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column post-info">  
-                        {% if user.is_shipper == True %}
-                         From: {{quest.pickup.address}}, {{quest.pickup.city}}, Canada<br>
-                         To: {{quest.dropoff.address}}, {{quest.dropoff.city}}, Canada<br>
-                        {% endif %} 
-                        <span class="glyphicon glyphicon-time"></span>{% localtime on%} {{quest.creation_date | timesince }} {% endlocaltime %} ago
-                        </p>   
-                      </div><!-- ./column -->
-                </div><!-- ./row -->
-                   
-                <hr>
-      
-                <div class="row clearfix userbox">
-                    <a href="/user/{{quest.questrs.displayname}}" class="username">
-                        <div class="col-xs-4 col-sm-5 col-md-3 col-lg-3 column">
-                            <div class="ratio img-responsive img-circle" style="background-image: url({{quest.questrs.avatar_file_name}});"></div>
-                        </div><!-- column -->
-                        <div class="col-xs-8 col-sm-7 col-md-9 col-lg-9 column no-margin no-padding">
-                            <p class="no-margin">{{quest.questrs.first_name}} {{quest.questrs.last_name}}</p>
-                            <input id="input-21e" value="{{quest.questrs.rating}}" type="number" class="rating no-margin" min=0 max=5 step=0.5 data-size="xl" data-readonly="true" data-show-clear="false" data-show-caption="true" >
-                        </div><!-- column -->
-                    </a>
-                </div><!-- ./row -->  
-                    
-        </div><!-- ./post -->
-           {% endfor %}           
-</div><!-- ./post-container -->
-</div><!-- ./column -->
+        
+        var elem = document.querySelector('.js-switch');
+            var switchery = new Switchery(elem, { color: '#1AB394' });
 
+            var elem_2 = document.querySelector('.js-switch_2');
+            var switchery_2 = new Switchery(elem_2, { color: '#ED5565' });
 
-<div id="pages">
-    <a href="index.html"></a>
-    <a href="loadpage/page2.html"></a>
-    <a href="loadpage/page3.html"></a>
-    <a href="loadpage/page4.html"></a>
-    <a href="loadpage/page5.html"></a>
-    <a href="loadpage/page6.html"></a>
-</div>
-{% endcomment %}
-
-
-
-{% block scripts %}
-<script type="text/javascript">
-        $(document).on('click', '.panel-heading', function(e){
-            var $this = $(this);
-            if(!$this.hasClass('panel-collapsed')) {
-                $this.parents('.panel').find('.panel-body').slideUp();
-                $this.addClass('panel-collapsed');
-                $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-right');
-            } else {
-                $this.parents('.panel').find('.panel-body').slideDown();
-                $this.removeClass('panel-collapsed');
-                $this.find('i').removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
-            }
-        })
+            var elem_3 = document.querySelector('.js-switch_3');
+            var switchery_3 = new Switchery(elem_3, { color: '#1AB394' });
     </script>
-  
+
+   
+   <script>
+     var container = document.querySelector('#post-container');
+    var msnry = new Masonry( post-container, {
+      // options
+      columnWidth: 0,
+      itemSelector: '.post'
+    });
+   </script>
+
+
+
+
+
     <script src={% static "js/star-rating.js" %} type="text/javascript"></script>
     
     {% comment %}
@@ -374,5 +484,10 @@
                })();
            </script>           
     {% endcomment %}
+    
+    
+    
+    
+    
 
 {% endblock scripts %}

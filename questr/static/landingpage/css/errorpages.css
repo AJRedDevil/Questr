@@ -1,0 +1,45 @@
+body {
+	width: auto;
+	height: 100%;
+	background-color: rgba(52,152,219,1); 
+}
+
+#js {
+	width:80%;
+	height: 100%;
+	color: rgba(52,152,219,1);
+	font-family: 'Lato', sans-serif;
+	font-weight: 100;
+	text-align: center;
+	background-color: white;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+
+}
+
+.js-img {
+  	background: url('../img/cat.png') no-repeat center center; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+	width: 350px;
+	height: 350px;
+
+	border-radius:50%; 
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h1, a, a:hover, a:active, a:visited {
+	font-family: 'Lato', sans-serif;
+	font-weight: 200;
+	font-size: 36px;
+	color: rgb(52,152,219);
+	text-decoration: none;
+}
+
+a:hover {
+	color: rgb(22,102,159);
+}

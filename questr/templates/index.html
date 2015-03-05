@@ -1,197 +1,318 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
-    <link href={% static "css/index.css" %} rel="stylesheet"> 
+    <link href={% static "landingpage/flat-ui/bootstrap/css/bootstrap.css" %} rel="stylesheet">
+	     <link href={% static "landingpage/flat-ui/bootstrap/css/bootstrap-responsive.css" %} rel="stylesheet">
+	     <link href={% static "landingpage/flat-ui/css/flat-ui.css" %} rel="stylesheet">
+	    
+	     <!-- Using only with Flat-UI (free)-->
+	     <link href={% static "landingpage/common-files/css/icon-font.css" %} rel="stylesheet">
+	     <!-- end -->
+	     <link href={% static "landingpage/common-files/css/animations.css" %} rel="stylesheet">
+	     
+
+	    <link href={% static "landingpage/css/style.css" %} rel="stylesheet"> 	   
+  
+	     <link href={% static "landingpage/img/logo.png" %} rel="shortcut icon">
+	    
+	    <link href={% static "landingpage/css/font-awesome-4.2.0/css/font-awesome.min.css" %} rel="stylesheet">
+    
 {% endblock localhead %}
 {% block content %}
 
 
-<div class="container-fluid">
-	<div class="row clearfix" style="margin-bottom:0;">
-		<div class="col-md-12 column bg text-center">
-			<div class="col-md-8 col-md-offset-2 column content">
-			<h2>DELIVER ANYTHING ANYTIME IN MINUTES</h2>
-			<a class="btn btn-theme btn-sm btn-min-block" data-toggle="modal" data-target="#signUp">SHIP NOW</a>
-			</div>
-			<!-- Modal -->
-     		<div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-     	  <div class="modal-dialog">
-     	    <div class="modal-content" style="margin-top:48%;">
-     	      <div class="modal-body">
-     	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-     	        <br><br>
-     	        <form class="form-horizontal" role="form" action="{% url 'join'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" novalidate>{% csrf_token %}
-     	            <div class="form-group" style="margin:0 30px;">
-     	                
-     	            <input class="form-control" name="EMAIL" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required" style="width:100%;">
-     	            <span id="result" class="alertMsg"></span>
 
-     	            <br><br>
+<!-- header-1 -->
+        <header class="header-1">
+            <div class="container">
+                <div class="row">
+                    <div class="navbar span12">
+                        <div class="navbar-inner">
+                            <button type="button" class="btn btn-navbar"></button>
+                            	<a class="brand" href="{% url 'index' %}"><!--img src="img/logo@2x.png" width="50" height="50" alt="" --> QUESTR</a>
+                            <div class="nav-collapse collapse">
+                                <form class="navbar-form pull-right">
+	                                <a class="btn btn-primary" href="{% url 'signin' %}">SIGN IN</a>
+	                            </form>
+                                <ul class="nav pull-right">
+                                    <li class="active">
+		                                <a href="{% url 'index' %}">HOME</a>
+		                            </li>
+		                            <li>
+		                                <a href="#">GET A QUOTE</a>
+		                            </li>
+		                            <li>
+		                                <a href="{% url 'trackquest' %}">TRACK DELIVERY</a>
+		                            </li>
+                                </ul>
+                                
+                                <ul class="subnav">
+                                    <li>
+                                        <a href="{% url 'privacy' %}">Privacy</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'terms' %}">Terms</a>
+                                    </li>
+                                    <li>
+						                <a href="#">About Us</a>
+						            </li>
+						            <li>
+						                <a href="#">Blog</a>
+						            </li>
+						            <li>
+						                <a href="{% url 'faq' %}">FAQ</a>
+						            </li>
+						            <li>
+						                <a href="#">Team</a>
+						            </li>
+						            <li>
+						                <a href="#">Careers</a>
+						            </li>
+						            <li>
+						                <a href="{% url 'contact' %}">Contact</a>
+						            </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="header-1-sub">
+            <div id="pt-main" class="page-transitions pt-perspective">
+                <div class="pt-page pt-page-1 bg-midnight-blue">
+                    <div class="background">
+                        &nbsp;
+                    </div>
+                    <div class="caption">
+                        <div class="container">
+                    <h3>Same day delivery for everyone.</h3>
+                    <p class="lead">
+                        Deliver anything 24/7
+                    </p>
+                   
+                </div>
+                    </div>
+                </div>
+               
+            
+            </div>
+        </section>
 
-     	            <center><button type="submit" class="btn no-margin btn-lg big-button">Notify me</button></center>
 
-     	            </div><!--./form-group -->      
-     	        </form>
-     	      </div>
-     	    </div>
-     	  </div>
-     		</div>
-     	</div>
- 	</div><!-- ./row -->
+<!-- logos -->
+<section class="logos">
+    <div class="container">
+        <div>
+        </div>
+        <div>
+        </div>
+        <div>
+        </div>
+        <div>
+        </div>
+        <div>
+        </div>
+    </div>
+</section>
+    
 
- 	{% comment %}
- 	<!-- ******************** MENTIONS ******************** -->	
-    <div class="row clearfix" style="margin:0; padding:0;">
+<!-- content-35  -->
+        <section class="content-35">
+            <div class="background">
+                <div class="container">
+                    <div class="row">
+                        <div class="span4">
+                            <div>
+                                <img src={% static "landingpage/img/whatisquestr.jpg" %}>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="span6 offset5">
+                        <h2>How It Works</h2>
+                        <p class="lead">
+                           Questr is a same day delivery service running in the Greater Toronto Area.  We deliver anything, anytime, within 4 hours or less.  Anyone can apply to be a courier with Questr--all you need is a car or bike.  We provide jobs to couriers on a first come first serve basis.  If a courier is given a job, he or she can choose to accept it or reject it.  If rejected, the job gets passed on to the next person.
+                        </p>
+                        <div class="row columns">
+                            <div class="span3">
+                                <h3>Post a Quest</h3>
+                                <p>
+                                   Post a Quest in no time at all.  Choose from a selection of pre made sizing options--no measurements needed here.
+                                </p>
+                            </div>
+                            <div class="span3">
+                                <h3>Wait to be paired up with a courier</h3>
+                                <p>
+                                    It only takes a few minutes for someone to accept your Quest.  Once your package is picked up, you can track where your package is as it's being delivered (coming soon).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+<!-- content-6 -->
+    <section class="content-6 v-center">
+      <div>
+        <div class="container">
+          <h3 style="margin-left:-150px;"><img src={% static "landingpage/common-files/icons/box@2x.png" %} width="300" height="300" alt=""></h3>
+          <h3>dfsgsdg</h3>
+          <p class="lead">Just some of the benefits of using Questr</p>
+          <div class="row features">
+            <div class="span4 offset2">
+              <h6><i class="fa fa-money"></i> Affordable</h6>
+              <p>Starting from only $5, Questr offers the most affordable same day shipping in Canada.</p>
+            </div>
+            <div class="span4 offset1">
+              <h6><i class="fa fa-clock-o"></i> Available 24/7</h6>
+              <p>86,400 seconds a day, 7 days a week, no matter it's rush hour on Friday or midnight on Christmas Eve.
+              </p>
+            </div>
+          </div>
+          <div class="row features">
+            <div class="span4 offset2">
+              <h6><i class="fa fa-bolt"></i> Lightning Fast</h6>
+              <p>Anywhere in GTA within 1 hour*. Say goodbye to overnight waits.</p>
+            </div>
+            <div class="span4 offset1">
+              <h6><i class="fa fa-smile-o"></i> Great Customer Service</h6>
+              <p>Frank here
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+{% comment %}
+<!-- ******************** MENTIONS ******************** -->	
+<div class="row clearfix" style="margin:0; padding:0;">
 		<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 column" style="padding:0;">
 			<a href="http://skift.com/2014/03/27/daily-travel-startup-watch-opendoor-coexperiences-and-more/">
 				<img src={% static "img/skift.png" %} class="img-responsive grey-transition" style="margin-bottom:40px;">
 			</a>
 		</div><!-- ./column -->
 	</div><!-- ./row -->
-	{% endcomment %}
+{% endcomment %}
 
+<!-- price-2 -->
+        <section class="price-2">
+            <div class="container">
+                <div class="row">
+                    <div class="span8 offset2">
+                        <h3>dasdagbsdg</h3>
+                        <p>
+                            ZFSDFSDF
+                        </p>
+                    </div>
+                </div>
+                <div class="plans">
+                    <div class="plan">
+                        <div class="title">
+                            ENVELOPES, SMALL BOXES
+                            <div class="price">
+                                <span class="currency">$</span>6<span class="period">+$0.75/ KM</span>
+                            </div>
+                            <a class="btn btn-clear btn-small" href="#">GET STARTED</a>
+                        </div>
 
-	<div class="row clearfix section grey" id="what-is" style="margin-top:0;">
-			<div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
-				<div class="section-title">
-					<h2>What is Questr?</h2>
-					<h4>
-						Questr is a crowdshipping platform that provides affordable, fast shipments within GTA.
-					</h4>
-				</div><!-- ./section-title -->
-			</div><!-- ./column -->
-			<div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">	
-				<div class="col-md-4 col-lg-4 column text-center">
-					
-					<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column">
-						<center>
-						<div class="">
-						  <div class="">
-						    <div class="">
-						      <div class="">
-						  		<i class="glyphicon glyphicon-usd" style="color:#7EC7EA;"></i>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-					</center>
-					</div>
+                        <div class="description">
+                            <div class="description-box">
+                                <span class="fui-calendar"></span>same day delivery
+                            </div>
+                            <div class="description-box">
+                                <span class="fui-star"></span><b></b>
+                            </div>
+                            <div class="description-box">
+                                <span class="fui-time"></span><b></b>
+                            </div>
+                        </div>
+                    </div>
 
-					<div class="clearfix"></div>
+                    <div class="plan plan-2">
+                        <div class="title">
+                            DADAS
+                            <div class="price">
+                                <span class="currency">$</span>7<span class="period">+$0.75/ KM</span>
+                            </div>
+                            <a class="btn btn-clear btn-small" href="#">GET STARTED</a>
+                            <div class="ribbon">
+                                NEW
+                            </div>
+                        </div>
 
-				
-						<div class="caption text-center">
-							<h3>Affordable</h3>
-							<p>Starting from only $5, Questr offers the most affordable shipping option available in entire Canada.</p>
-						</div><!-- ./caption -->
-					
-			
-				</div><!--/.column -->
-				<div class="col-md-4 column text-center">
-					<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column">
-					<div class="">
-					  <div class="">
-					    <div class="">
-					      <div class="">
-					  		<i class="glyphicon glyphicon-flash" style="color:#7EC7EA;"></i>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div>
+                        <div class="description">
+                            <div class="description-box">
+                                <span class="fui-calendar"></span>same day delivery
+                            </div>
+                            <div class="description-box">
+                                <span class="fui-star"></span><b>overnight</b> delivery
+                            </div>
+                            <div class="description-box">
+                                <span class="fui-time"></span><b></b>
+                            </div>
+                        </div>
+                    </div>
 
-				<div class="clearfix"></div>
+                    <div class="plan">
+                        <div class="title">
+                            ASFAGSA
+                            <div class="price">
+                                <span class="currency">$</span>9<span class="period">+$0.75/ KM</span>
+                            </div>
+                            <a class="btn btn-clear btn-small" href="#">GET STARTED</a>
+                        </div>
 
-					
-						<div class="caption text-center">
-						
-							<h3>Lightning fast</h3>
-
-							<p>Anywhere in GTA within 1 hour<sup>*</sup>. <br>Say goodbye to overnight waits.</p>
-						</div><!-- ./caption -->
-					
-				</div><!--/.column -->
-				<div class="col-md-4 col-lg-4 column text-center">
-					<div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 column">
-					<div class="">
-					  <div class="">
-					    <div class="">
-					      <div class="">
-					  		<i class="glyphicon glyphicon-time" style="color:#7EC7EA;"></i>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-				</div><!--/.column -->
-
-
-				<div class="clearfix"></div>
-
-			
-						<div class="caption text-center">
-							<h3>24/7</h3>
-							<p>86,400 seconds a day, 7 days a week, no matter it's rush hour on Friday or midnight on Christmas Eve.</p>
-						</div><!-- ./caption -->
-				
-				</div><!--/.column -->
-			</div><!--/.column -->
-		</div><!--/row -->
+                        <div class="description">
+                            <div class="description-box">
+                                <span class="fui-calendar"></span>same day delivery
+                            </div>
+                            <div class="description-box">
+                                <span class="fui-star"></span><b>overnight</b> delivery
+                            </div>
+                            <div class="description-box">
+                                <span class="fui-time"></span><b>4 hours</b> or less
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
 
 
 
-
-	<div class="row clearfix white-bg section">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-		    <div class="section-title">
-		        <h2>Simplistic size options</h2>
-		        <h4>“Life is simple. You just have to stop trying to figure it out.” ― Marty Rubin</h4>
-		    </div><!-- ./section-title -->
-		</div>
-
-
-		<div class="col-md-2 column"></div>
-		<div class="col-md-4 column grid" style="max-height:400px;">
-		
-		<figure class="effect-sadie">
-					<img src={% static "img/car.jpg" %} alt="Car" class="img-responsive">
-					<figcaption>
-						<h2><span>Car</span></h2>
-						<p>$6+$1/km<br>A few moving boxes.
-                    <br>A puppy's crate.
-                    <br>A 47" inch LED.</p>
-						
-					</figcaption>			
-				</figure>
-	</div><!-- ./grid -->
-	<div class="col-md-4 column grid" style="max-height:400px;">
-		<figure class="effect-sadie">
-					<img src={% static "img/van.jpg" %} alt="Van" class="img-responsive">
-					<figcaption>
-						<h2><span>VAN</span></h2>
-						<p>$10+$2/km<br>Many moving boxes.
-                    <br>Furniture at IKEA.
-                    <br>Your wolfpack.</p>
-					</figcaption>			
-				</figure>
-	</div><!-- ./grid -->
-	<div class="col-md-2 column"></div>
-
-</div><!-- ./row -->
+<!-- content-2  -->
+<section class="content-2">
+    <div class="container">
+        <div class="row">
+            <div class="span6">
+                <h3>Start Using Questr</h3>
+                <p>
+                	We are currently in private beta, and only serve the Greater Toronto Area.  If you're interested in using Questr, please apply here.
+                </p>
+                <div class="btns">
+                    <a href="#" class="btn btn-large btn-clear">TRY IT NOW</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 
-
-	<div class="row clearfix section grey">
-		<div class="col-md-12 column">
-			<!-- Button trigger modal -->
-			<center>
-				<button class="btn" id="emboss" data-toggle="modal" data-target="#myModal">Say Hi</button>
-			</center>
-
-			<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+{% comment %}
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content" style="margin-top:48%;">
 			      <div class="modal-body">
@@ -213,20 +334,98 @@
 			    </div>
 			  </div>
 			</div>
-		</div></div><!-- ./row -->
+{% endcomment %}
 
 
 
-
+        
+        
+        
+        <!-- footer-1 -->
+    <footer class="footer-1 bg-midnight-blue">
+      <div class="container">
+        <div class="row">
+          <div class="span4">
+            <p class="lead">We are a proud supporter of the disabled community <i class="fa fa-wheelchair"></i></p>
+            Providing jobs for the disabled since 2014.
+            
+          </div>
+          <nav>
+            <div class="span2 offset1">
+              <h6>Categories</h6>
+              <ul>
+	            <li>
+	                <a href="#">About Us</a>
+	            </li>
+	            <li>
+	                <a href="#">Blog</a>
+	            </li>
+	            <li>
+	                <a href="{% url 'faq' %}">FAQ</a>
+	            </li>
+	            <li>
+	                <a href="#">Team</a>
+	            </li>
+	            <li>
+	                <a href="#">Careers</a>
+	            </li>
+	            <li>
+	                <a href="{% url 'contact' %}">Contact</a>
+	            </li>
+	        </ul>
+            </div>
+            <div class="span2">
+              <h6>Follow Us</h6>
+              <ul>
+                <li><a target="_blank" href="https://www.facebook.com/questrco">Facebook</a>
+                </li>
+                <li><a target="_blank" href="https://twitter.com/questrco">Twitter</a>
+                </li>
+                <li><a href="#">&nbsp;</a></li>
+                <li><a href="#">&nbsp;</a></li>
+                <li><a href="#">&nbsp;</a></li>
+                <li><a href="#">&nbsp;</a></li>
+              </ul>
+            </div>
+            <div class="span3" style="margin-left:0;padding-left:0;">
+            <h6>Subscribe to our newsletter</h6>
+            <form role="form" action="{% url 'join'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_top" novalidate style="width:100%;margin-left:0;padding-left:0;">{% csrf_token %}
+            <div class="control-group" style="width:100%;margin-left:0;padding-left:0;">
+                            <div class="input-append" style="width:100%;margin-left:0;padding-left:0;">
+                                <input name="EMAIL" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required" style="min-width:100%;">
+                                <button class="btn" type="submit">
+                                    <span class="fui-arrow-right"> </span>
+                                </button>
+                            </div>
+                            <span id="result" class="alertMsg"></span>
+                        </div>
+            </form>
+            
+            
+          </div>
+          </nav>
+          
+        </div>
+        <div class="row">
+          <div class="span4 additional-links">
+            <a href="{% url 'terms' %}">Terms of Service</a>
+            <a href="{% url 'privacy' %}">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
 {% endblock content %}
-</div><!-- ./container -->
-
-
-
-
-				
 
 {% block scripts %}
-<!--<script src={% static "js/index.js" %}></script> -->
-    
+<script src={% static "landingpage/common-files/js/jquery-1.10.2.min.js" %}></script>
+	<script src={% static "landingpage/flat-ui/js/bootstrap.min.js" %}></script>
+	<script src={% static "landingpage/common-files/js/modernizr.custom.js" %}></script>
+	<script src={% static "landingpage/common-files/js/page-transitions.js" %}></script>
+	<script src={% static "landingpage/common-files/js/easing.min.js" %}></script>
+	<script src={% static "landingpage/common-files/js/jquery.svg.js" %}></script>
+	<script src={% static "landingpage/common-files/js/jquery.svganim.js" %}></script>
+	<script src={% static "landingpage/common-files/js/startup-kit.js" %}></script>
+	<script src={% static "landingpage/js/script.js" %}></script>
 {% endblock scripts %}
+
+	

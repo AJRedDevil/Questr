@@ -1,0 +1,74 @@
+
+
+
+/***************** SIGNUP CHOICE ******************/
+
+#customer {
+	background-image: url('../img/customer.jpg');
+}
+
+#shipper {
+	background-image: url('../img/carriables.jpg');
+}
+
+.small {
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-position: center center;
+}
+
+.col {
+	height: 350px;
+	border-style: solid;
+	border-width: 5px;
+	border-color: white;
+	padding-top: 100px;
+	text-align: center;
+	color: white;
+}
+
+
+
+/******************* Signup **********************/
+#createAccBtn {
+	float: right;
+	display: inline;
+
+}
+
+#disclaimer {
+	display: inline;
+	float: left;
+}
+
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #f5f5f5;
+	margin: 1em 0;
+	padding: 0;
+}
+
+
+/******************* reset password **********************/
+#reset-pass {
+	background: #34495E;
+}
+
+.panel-heading {
+	background: transparent;
+}
+
+.form-group.last { margin-bottom:0px; }
+
+
+/******************* Signin **********************/
+.panel-default {
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
+	border-radius: 0;
+}

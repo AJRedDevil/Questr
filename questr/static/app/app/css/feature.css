@@ -1,0 +1,92 @@
+a {white-space: nowrap;}
+ 
+img {
+	max-width: 100%;
+	border-top-left-radius: 1px; 
+	border-top-right-radius: 1px; 
+ }
+ 
+ .content {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+#pages {
+    display: none;
+}
+ 
+/************ Feature posts ***************/
+.post {
+	padding: 8px;
+}
+
+.post hr {
+	margin-bottom: 0px;
+	margin-top: 0px;
+ }
+
+.post p {
+	margin: 0;
+}
+
+.post .title-desc {
+	margin-bottom: 4px;
+	margin-top: 4px;
+}
+
+.post .title-desc h5, .post .title-desc p {
+	margin: 0;
+}
+
+.post .post-info {
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.post .post-info p {
+	margin: 0;
+	font-size: 12px;
+}
+
+.post .well {
+	padding: 0;
+	margin: 0;
+}
+
+.post .item-image {
+	margin: 0;
+	
+	border-top-left-radius: 1px;
+	border-top-right-radius: 1px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.post input.rating {
+	margin: 0;
+}
+
+.post a.username, .post a.username p {
+	margin: 0;
+}
+
+.post .userbox {
+	margin: 0;
+	padding: 5px;
+	border-bottom-left-radius: 1px;
+	border-bottom-right-radius: 1px;
+}
+
+.post .userbox .column {
+	margin-bottom: 2px;
+	margin-top: 2px;
+}
+
+.post .userbox:hover {
+	background: #ecf0f1;
+}
+
+
+
+
+
