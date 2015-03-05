@@ -15,7 +15,7 @@ def index(request):
         return redirect('home')
     # plus_id = getattr(settings, 'SOCIAL_AUTH_GOOGLE_PLUS_KEY', None) ###disabled google plus##
     # plus_scope = ' '.join(GooglePlusAuth.DEFAULT_SCOPE) ###disabled google plus##
-    pagetitle = "Affordable, faster, 24/7 shipments in GTA"
+    pagetitle = "Deliver anything anytime in minutes"
     return render(request, 'index.html', locals())
 
 def loadPage(request, template):
