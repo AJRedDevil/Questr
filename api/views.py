@@ -148,7 +148,7 @@ class PriceCalculator(APIView):
             dropoffdict = {}
             from libs import geomaps, pricing
             maps = geomaps.GMaps()
-            price = pricing.WebPricing(user)
+            price = pricing.WebPricing()
             size = data['size']
             pickupdict['city'] = data['srccity']
             pickupdict['address'] = data['srcaddress']
@@ -160,7 +160,7 @@ class PriceCalculator(APIView):
             destination = dropoffdict['address']+', '+dropoffdict['city']+', '+dropoffdict['postalcode']
             maps.set_geo_args(dict(origin=origin, destination=destination))
             distance = maps.get_total_distance()
-            fee = price.get_price(distance, shipment_mode=size)
+            fee = price.get_price(distance, size=size)
             responsedata=dict(fee=fee)
             return Response(responsedata, status=status.HTTP_200_OK)
         responsedata=dict(errors=serializer.errors, success=False)

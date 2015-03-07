@@ -95,8 +95,8 @@ def newquest(request):
                 logger.warn(warnlog)
                 return redirect('home')
             # For price
-            price = pricing.WebPricing(user)
-            reward = price.get_price(distance, shipment_mode=size)
+            price = pricing.WebPricing()
+            reward = price.get_price(distance, size=size)
             stripereward = reward*100
             pagetitle = "Confirm your Quest"
             return render(request, 'confirmquest.html', locals())  
@@ -156,8 +156,8 @@ def confirmquest(request):
             distance = maps.get_total_distance()
             map_image = maps.fetch_static_map()
             # For price
-            price = pricing.WebPricing(user)
-            reward = price.get_price(distance, shipment_mode=size)
+            price = pricing.WebPricing()
+            reward = price.get_price(distance, size=size)
             quest_data = user_form.save(commit=False)
             ##Submit dict to the field
             quest_data.pickup = json.dumps(pickupdict)
@@ -288,7 +288,7 @@ def getDistanceAndPrice(request):
             distance = maps.get_total_distance()
             # For price
             price = pricing.WebPricing()
-            reward = price.get_price(distance, shipment_mode=size)
+            reward = price.get_price(distance, size=size)
             resultdict = {}
             resultdict['distance'] = distance
             resultdict['price'] = reward
