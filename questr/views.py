@@ -174,3 +174,15 @@ def contactus(request):
         # Alert here
         # messageResponse = "Please enter an email address!"
         return redirect('index')
+
+
+def team(request):
+    user = request.user
+    pagetitle = "Team"
+    return render(request, 'team.html', locals())
+
+
+def career(request):
+    user = request.user
+    pagetitle = "Career"
+    return render(request, 'career.html', locals())
