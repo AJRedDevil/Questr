@@ -2,14 +2,22 @@
 {% load staticfiles %}
 {% load active %}
 {% block localhead %}
-<link href={% static "css/bootstrap-datetimepicker.min.css" %} rel="stylesheet">
-<link href={% static "css/intlTelInput.css" %} rel="stylesheet">
 
 
-<link href={% static "app/css/bootstrap.min.css" %} rel="stylesheet">
+ <link href={% static "landingpage/img/logo.png" %} rel="shortcut icon">
+	    <link href={% static "app/css/font-awesome-4.2.0/css/font-awesome.min.css" %} rel="stylesheet">
+	    <link href={% static "app/css/bootstrap.min.css" %} rel="stylesheet">
 <!-- Toastr style -->
 <link href={% static "app/css/plugins/toastr/toastr.min.css" %} rel="stylesheet">
   <!-- Gritter --> 
+<link href={% static "app/js/plugins/gritter/jquery.gritter.css" %} rel="stylesheet">  
+<!-- Switchery -->
+  <link href={% static "app/css/plugins/switchery/switchery.css" %} rel="stylesheet">
+  
+  <!-- Toastr style -->
+<link href={% static "app/css/plugins/toastr/toastr.min.css" %} rel="stylesheet">
+  
+   <!-- Gritter --> 
 <link href={% static "app/js/plugins/gritter/jquery.gritter.css" %} rel="stylesheet">  
 <!-- Switchery -->
   <link href={% static "app/css/plugins/switchery/switchery.css" %} rel="stylesheet">
@@ -18,6 +26,12 @@
   
     <link href={% static "app/css/animate.css" %} rel="stylesheet">
     <link href={% static "app/css/style.css" %} rel="stylesheet">
+	    
+
+
+
+ 
+
     
     <style type="text/css">
   .css-form input.ng-invalid.ng-dirty {
@@ -344,5 +358,52 @@
 
 
 {% block scripts %}
+<!-- Mainly scripts -->
+    <script src={% static "app/js/jquery-2.1.1.js" %}></script>
+    <script src={% static "app/js/bootstrap.min.js" %}></script>
+    <script src={% static "app/js/plugins/metisMenu/jquery.metisMenu.js" %}></script>
+    <script src={% static "app/js/plugins/slimscroll/jquery.slimscroll.min.js" %}></script>
+
+    <!-- Flot -->
+    <script src={% static "app/js/plugins/flot/jquery.flot.js" %}></script>
+    <script src={% static "app/js/plugins/flot/jquery.flot.tooltip.min.js" %}></script>
+    <script src={% static "app/js/plugins/flot/jquery.flot.spline.js" %}></script>
+    <script src={% static "app/js/plugins/flot/jquery.flot.resize.js" %}></script>
+    <script src={% static "app/js/plugins/flot/jquery.flot.pie.js" %}></script>
+
+    <!-- Peity -->
+    <script src={% static "app/js/plugins/peity/jquery.peity.min.js" %}></script>
+    <script src={% static "app/js/demo/peity-demo.js" %}></script>
+
+ 
+    <!-- Custom and plugin javascript -->
+    <script src={% static "app/js/inspinia.js" %}></script>
+    <script src={% static "app/js/plugins/pace/pace.min.js" %}></script>
+
+    <!-- jQuery UI -->
+    <script src={% static "app/js/plugins/jquery-ui/jquery-ui.min.js" %}></script>
+
+    <!-- GITTER -->
+    <script src={% static "app/js/plugins/gritter/jquery.gritter.min.js" %}></script>
+
+    <!-- Sparkline -->
+    <script src={% static "app/js/plugins/sparkline/jquery.sparkline.min.js" %}></script>
+
+    <!-- Sparkline demo data  -->
+    <script src={% static "app/js/demo/sparkline-demo.js" %}></script>
+
+    <!-- ChartJS-->
+    <script src={% static "app/js/plugins/chartJs/Chart.min.js" %}></script>
+
+    <!-- Toastr -->
+    <script src={% static "app/js/plugins/toastr/toastr.min.js" %}></script>
+    
+    <!-- Switchery -->
+   <script src={% static "app/js/plugins/switchery/switchery.js" %}></script>
+   
+   <!-- Input Mask-->
+    <script src={% static "app/js/plugins/jasny/jasny-bootstrap.min.js" %}></script>
+
+  
 
 {% endblock scripts %}
