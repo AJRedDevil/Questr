@@ -19,7 +19,14 @@ import uuid
 # Init Logger
 logger = logging.getLogger(__name__)
 
-PACKAGE_SELECTION = (('0', 'Car'), ('1', 'Backpack'), ('2', 'Minivan'))
+PACKAGE_SELECTION = (
+    ('0', 'Envelope'),
+    ('0', 'Folder'),
+    ('1', 'Suitcase'),
+    ('1', 'Archive'),
+    ('2', 'Cube'),
+)
+
 STATUS_SELECTION = (
     ('new', 'New'),
     ('accepted', 'Accepted'),
