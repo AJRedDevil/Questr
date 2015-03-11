@@ -66,7 +66,7 @@
 							<div class="col-sm-12 col-lg-8 col-lg-offset-1">
 		                                <div class="form-group">
 		                                	<label class="control-label">Description</label>
-		                                    <textarea class="form-control" id="description" name="description" placeholder="" rows="5"></textarea> 
+											{{user_form.description}}
 		                                    <span class="help-block m-b-none"></span>
 		                                </div>
 		                                </div>
@@ -85,14 +85,12 @@
 													  <input type="radio" id="inlineCheckbox1" name="size" ng-model="user.size" value="backpack" ng-model="user.backapck" checked required> CARRIABLES
 													</label>
 							                        {% endcomment %}
-							
+												{% for choice in user_form.size.field.choices %}
 													<label class="radio-inline">
-													  <input type="radio" id="inlineCheckbox2" name="size" value="car" checked>CAR
+													  <input type="radio" id="inlineCheckbox" name="{{user_form.size.name}}" value="{{choice.0}}" checked>{{choice.1}}
 													</label>
-							
-													<label class="radio-inline">
-													  <input type="radio" id="inlineCheckbox3" name="size" value="minivan">VAN
-													</label>
+												{% endfor %}
+
 												</div><!-- /input-group -->
 			                                   
 			                                   
@@ -116,8 +114,9 @@
 			                                    <span class="help-block m-b-none">{{user_form.size.errors}}</span>
 		                                
 			                                    </div>
-		                                </div>
+                            </div>                      
 		                                
+						{% comment %}
 							<div class="col-sm-3">
 		                                <div class="form-group">
 		                                	<label class="control-label">Quantity</label>
@@ -146,84 +145,74 @@
 			                                    </select> 
 			                                    <span class="help-block m-b-none"></span>
 		                                </div>
-		                                </div>
+                            </div>							
+						{% endcomment %}
 							
 							<div class="col-sm-12 col-lg-8 col-lg-offset-1">
-									                                <div class="hr-line-dashed"></div>
-									                                </div>
+                                <div class="hr-line-dashed"></div>
+                            </div>
 							
 							<div class="col-sm-12 col-lg-8 col-lg-offset-1">
-									                                <div class="form-group">
-									                                <label class="control-label">Tell us where to pick up the package.  Click <a id="autofill" onclick="reply_click(this.id)">here</a> to autofill your information.</label> 
-									                                </div>
-									                                </div>
+                                <div class="form-group">
+                                <label class="control-label">Tell us where to pick up the package.  Click <a id="autofill" onclick="reply_click(this.id)">here</a> to autofill your information.</label> 
+                                </div>
+                            </div>
 							
 							<div class="col-sm-12 col-lg-8 col-lg-offset-1">
-									                                <div class="hr-line-dashed"></div>
-									                                </div>
+                                <div class="hr-line-dashed"></div>
+                            </div>
 									                                     
 	                        <div class="col-sm-5">
-		                                <div class="form-group">
-		                                	<label class="control-label" for="srcname">Name of Sender</label>
-		                                    
-		                                    <input type="text" class="form-control input-lg" id="srcname" name="srcname" type="text" placeholder="Gaurav Gaumire" required> 
-		                                    <span class="help-block m-b-none" >{{user_form.srcname.errors}}</span>
-		                                </div>
-		                                </div>                               	
+	                            <div class="form-group">
+	                            	<label class="control-label" for="srcname">Name of Sender</label>
+	                                {{user_form.srcname}}
+	                                <span class="help-block m-b-none" >{{user_form.srcname.errors}}</span>
+	                            </div>
+                            </div>                               	
 
 		                                	
                             <div class="col-sm-5">
-		                                	<div class="form-group">
-		                                    <label class="control-label">Phone #</label>
-		                                    <input class="form-control input-lg" id="srcphone" type="text" data-mask="(999) 999-9999" placeholder="" required> 
-		                                    <span class="help-block m-b-none">{{user_form.srcphone.errors}}</span>
-		                                	</div>
-		                                </div>
+                            	<div class="form-group">
+                                <label class="control-label">Phone #</label>
+                                {{user_form.srcphone}}
+                                <span class="help-block m-b-none">{{user_form.srcphone.errors}}</span>
+                            	</div>
+                            </div>
 
                             <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-		                                <div class="hr-line-dashed"></div>
-		                                </div>
+                                <div class="hr-line-dashed"></div>
+                            </div>
      
                             <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-		                                <div class="form-group">
-		                                	<label class="control-label" for="srcaddress">Address Line 1</label>
-		                                	<input type="text" class="form-control input-lg" id="srcaddress" name="srcaddress" type="text" placeholder="Street Address, P.O box, company name, etc" required> 
-		                                	<span class="help-block m-b-none">{{user_form.srcaddress.errors}}</span>
-		                                </div>
-		                                </div>
+		                        <div class="form-group">
+		                        	<label class="control-label" for="srcaddress">Address Line 1</label>
+									{{user_form.srcaddress}}
+		                        	<span class="help-block m-b-none">{{user_form.srcaddress.errors}}</span>
+		                        </div>
+                            </div>
 
                             <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-		                                 <div class="form-group">
-		                                	<label class="control-label" for="srcaddress_2">Address Line 2</label>
-		                                    <input type="text" class="form-control input-lg" id="srcaddress_2" name="srcaddress_2" type="text" placeholder="Apartment, suite, unit, building, floor, etc." required> <span class="help-block m-b-none">{{user_form.srcaddress_2.errors}}</span>
-		                                 </div>
-		                                </div>
+	                             <div class="form-group">
+	                            	<label class="control-label" for="srcaddress_2">Address Line 2</label>
+	                            	{{user_form.srcaddress_2}}
+	                                <span class="help-block m-b-none">{{user_form.srcaddress_2.errors}}</span>
+	                             </div>
+                            </div>
                      
                             <div class="col-sm-12 col-lg-8 col-lg-offset-1">
 		                                <div class="form-group">
 		                                	<label class="control-label" for="srccity">City</label>
-		                                    
-		                                    <select class="form-control m-b" data-size="5" name="srccity" id="srccity" required>
-		                                        <option>Toronto</option>
-												<option>Brampton</option>
-												<option>Markham</option>
-												<option>Mississauga</option>
-												<option>Richmond Hill</option>
-												<option>Vaughan</option>
-												<option>Oakville</option>
-		                                    </select>
+		                                	{{user_form.srccity}}
 		                                    <span class="help-block m-b-none">{{user_form.srccity.errors}}</span>
 		                                </div>
-		                                </div>
-                            	
-                            	
-                            	
+                            </div>
                             	
                             <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-                            <div class="form-group">
-                                <label class="control-label" for="srcpostalcode">Postal Code</label>
-                                <input type="text" class="form-control input-lg" id="srcpostalcode" name="srcpostalcode" type="text" placeholder="M8V 0A5" required> <span class="help-block m-b-none">{{user_form.srcpostalcode.errors}}</span>
-                            </div>
+	                            <div class="form-group">
+	                                <label class="control-label" for="srcpostalcode">Postal Code</label>
+									{{user_form.srcpostalcode}}
+	                                <span class="help-block m-b-none">{{user_form.srcpostalcode.errors}}</span>
+	                            </div>
                             </div>
                             
                             <div class="col-sm-12 col-lg-8 col-lg-offset-1">
@@ -243,50 +232,43 @@
                             <div class="col-sm-12 col-lg-8 col-lg-offset-1">
                             <div class="form-group">
                             	<label class="control-label" for="dstname">Name of Reciever</label>
-                                <input class="form-control input-lg" id="dstname" name="dstname" type="text" placeholder="Gaurav Gaumire" class="form-control" required>
-                                 <span class="help-block m-b-none">{{user_form.dstname.errors}}</span>
+                            	{{user_form.dstname}}
+                                <span class="help-block m-b-none">{{user_form.dstname.errors}}</span>
                             </div>
-                          </div>
+                         </div>
                             	
-                            <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-                            <div class="form-group">
-                                <label class="control-label" for="dstphone">Phone #</label>
-                                <input id="dstphone" class="form-control input-lg" type="text" data-mask="(999) 999-9999" placeholder="" required> <span class="help-block m-b-none">{{user_form.dstphone.errors}}</span>
-                            </div>
-                          </div>
+                        	<div class="col-sm-12 col-lg-8 col-lg-offset-1">
+	                            <div class="form-group">
+	                                <label class="control-label" for="dstphone">Phone #</label>
+									{{user_form.dstphone}}
+	                                <span class="help-block m-b-none">{{user_form.dstphone.errors}}</span>
+	                            </div>
+                          	</div>
                       
                             <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-                            <div class="hr-line-dashed"></div>
-                          </div>
+	                            <div class="hr-line-dashed"></div>
+	                        </div>
 
                             <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-                            <div class="form-group">
-                            	<label class="control-label" for="dstaddress">Address Line 1</label>
-                                <input class="form-control input-lg" id="dstaddress" name="dstaddress" type="text" placeholder="Street Address, P.O box, company name, etc" required> 
-                                <span class="help-block m-b-none">{{user_form.dstaddress.errors}}</span>		                                	
-                            </div>
-                          </div>
+	                            <div class="form-group">
+	                            	<label class="control-label" for="dstaddress">Address Line 1</label>
+	                            	{{user_form.dstaddress}}
+	                                <span class="help-block m-b-none">{{user_form.dstaddress.errors}}</span>	
+	                            </div>
+                          	</div>
                
                             <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-                            <div class="form-group">
-                            	<label class="control-label" for="dstaddress_2">Address Line 2</label>
-                                <input class="form-control input-lg" id="dstaddress_2" name="dstaddress_2" type="text" placeholder="Apartment, suite, unit, building, floor, etc." required> 
-                                <span class="help-block m-b-none">{{user_form.dstaddress_2.errors}}</span>
-                            </div>
-                          </div>
+	                            <div class="form-group">
+	                            	<label class="control-label" for="dstaddress_2">Address Line 2</label>
+									{{user_form.dstaddress_2}}
+	                                <span class="help-block m-b-none">{{user_form.dstaddress_2.errors}}</span>
+	                            </div>
+                          	</div>
       
                             <div class="col-sm-5">
                             <div class="form-group">
                             	<label class="control-label">City</label>
-                                <select class="form-control m-b" data-size="5" name="dstcity">
-                                    <option>Toronto</option>
-									<option>Brampton</option>
-									<option>Markham</option>
-									<option>Mississauga</option>
-									<option>Richmond Hill</option>
-									<option>Vaughan</option>
-									<option>Oakville</option>
-                                </select>
+								{{user_form.dstcity}}
                                 <span class="help-block m-b-none">{{user_form.dstcity.errors}}</span>
                             </div> 
                           </div>
@@ -294,7 +276,8 @@
                             <div class="col-sm-5">
                             <div class="form-group">
                                 <label class="control-label">Postal Code</label>
-                                <input class="form-control input-lg" id="dstpostalcode" name="dstpostalcode" type="text" placeholder="M8V 0A5" required> 												<span class="help-block m-b-none">{{user_form.dstpostalcode.errors}}</span>
+								{{user_form.dstpostalcode}}
+                                <span class="help-block m-b-none">{{user_form.dstpostalcode.errors}}</span>
                             </div>
                             </div>
                             

@@ -514,3 +514,13 @@ def viewallpastquests(request):
     else:
         quests = Quests.objects.filter(ishidden=False, is_complete=True, questrs_id=userdetails.id).order_by('-creation_date')
     return render(request, 'allquestsviews.html', locals())
+
+@verified
+@login_required
+def viewDeliveries(request):
+    """Shows all the active quests so far"""
+    pagetype="loggedin"
+    user = request.user
+    userdetails = user_handler.getQuestrDetails(user.id)
+    pagetitle = "Deliveries Quests"
+    return render(request, 'deliveries.html', locals())

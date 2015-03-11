@@ -3,6 +3,7 @@ from django.conf.urls import patterns, url
 import views as questviews
 
 urlpatterns = patterns('',
+    url(r'^$', questviews.viewDeliveries, name='viewDeliveries'),
     url(r'^new/$', questviews.newquest, name='newquest'),
     url(r'^confirm/$', questviews.confirmquest, name='confirmquest'),
     url(r'^getdistanceandprice/$', questviews.getDistanceAndPrice, name='getdistanceandprice'),    
