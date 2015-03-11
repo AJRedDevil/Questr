@@ -436,11 +436,12 @@ def changePassword(request):
 
     if request.method == "POST":
         user_form = PasswordChangeForm(user, request.POST)
-        logger.debug(user_form.errors)
         if user_form.is_valid():
             user_form.save()
             request.session['alert_message'] = dict(type="success",message="Your password has been changed successfully!")
             return redirect('logout')
+        if user_form.errors:
+            logger.debug("Form has errors, %s ", user_form.errors)
     pagetitle = "Change Your Password"
     return render(request, "passwordsettings.html",locals())
 
