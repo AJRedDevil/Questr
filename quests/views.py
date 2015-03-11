@@ -98,6 +98,7 @@ def newquest(request):
             price = pricing.WebPricing()
             reward = price.get_price(distance, size=size)
             stripereward = reward*100
+            stripekey = os.environ['STRIPE_KEY']
             pagetitle = "Confirm your Quest"
             return render(request, 'confirmquest.html', locals())  
         if user_form.errors:
