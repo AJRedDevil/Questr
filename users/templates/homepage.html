@@ -1,6 +1,5 @@
 {% extends "mainbase.html" %}
-{% load staticfiles %}
-{% load tz %}
+{% load staticfiles endless tz %}
 {% block localhead %}
 
 
@@ -8,382 +7,314 @@
 {% block content %}
 <div class="row dashboard-header">
 
-                    <div class="col-sm-3">
-                        <h2>Welcome {{user.first_name}}</h2>
-                        <small>You have 6 notifications.</small>
-                        
-                    </div>
-                    <div class="col-sm-6">
-                    	
-                       
-                        <div class="row text-left">
-                            <div class="col-xs-4">
-                                <div class=" m-l-md">
-                                <span class="h4 font-bold m-t block">$ 406</span>
-                                <small class="text-muted m-b block">March's Earnings</small>
-                                </div>
-                            </div>
-                            <div class="col-xs-4">
-                                <span class="h4 font-bold m-t block">23</span>
-                                <small class="text-muted m-b block">Quests completed this month</small>
-                            </div>
-                            <div class="col-xs-4">
-                                <span class="h4 font-bold m-t block">45</span>
-                                <small class="text-muted m-b block">Quests completed total</small>
-                            </div>
+    <div class="col-sm-3">
+        <h2>Welcome {{user.first_name}}</h2>
+        <small>You have 6 notifications.</small>
 
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                       
-                    </div>
+    </div>
+    {% if user.is_shipper %}
+    <div class="col-sm-6">
 
+
+        <div class="row text-left">
+            <div class="col-xs-4">
+                <div class=" m-l-md">
+                    <span class="h4 font-bold m-t block">$ 406</span>
+                    <small class="text-muted m-b block">March's Earnings</small>
+                </div>
             </div>
-            
+            <div class="col-xs-4">
+                <span class="h4 font-bold m-t block">23</span>
+                <small class="text-muted m-b block">Quests completed this month</small>
+            </div>
+            <div class="col-xs-4">
+                <span class="h4 font-bold m-t block">45</span>
+                <small class="text-muted m-b block">Quests completed total</small>
+            </div>
+
+        </div>
+    </div>
+    {% else %}
+    <div class="col-sm-6">
+        <div class="row text-left">
+            <div class="col-xs-4">
+                <div class=" m-l-md">
+                    <span class="h4 font-bold m-t block">$ 406</span>
+                    <small class="text-muted m-b block">March's Expense</small>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <span class="h4 font-bold m-t block">23</span>
+                <small class="text-muted m-b block">Quests created this month</small>
+            </div>
+            <div class="col-xs-4">
+                <span class="h4 font-bold m-t block">45</span>
+                <small class="text-muted m-b block">Quests created in total</small>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+    <div class="col-sm-3">
+
+    </div>
+
+</div>
+
 <div class="row" style="margin-bottom:200px;">
-            <div class="col-lg-12">
-                <div class="wrapper wrapper-content animated fadeInUp">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInUp">
 
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Your current jobs</h5>
-                            <div class="ibox-tools">
-                                
-                            </div>
-                        </div>
-                        <div class="ibox-content">
-                            
-
-                            <div class="project-list">
-
-                                <table class="table table-hover">
-                                    <tbody>
-                                    	<!-- ACTIVE QUESTS -->
-                                    	{% for quest in  allquests %}
-                                    	<tr>
-                                        <td class="project-status">
-                                            <span class="label label-primary">Active</span>
-                                        </td>
-                                        <td class="project-title">
-                                            <a href="/quest/{{quest.id}}">{{quest.title | title}}</a>
-                                            <br/>
-                                            <small>Job Accepted on day at time</small>
-                                        </td>
-                                        <td class="project-completion">
-                                            <small>28% Complete</small>
-                                            <div class="progress progress-mini">
-                                                <div style="width: 28%;" class="progress-bar"></div>
-                                            </div>
-                                        </td>
-                              
-                                        <td class="project-actions">
-                                          <small>${{quest.reward}}</small>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                    
-                               
-                 {% if not user.is_shipper %}
-   
-                    <!-- List group -->
-                    {% if allquests %}
-                    {% for quest in allquests %}
-                    <tr>
-	                    <td class="project-status">
-	                        <span class="label label-primary">Active</span>
-	                    </td>
-	                    <td class="project-title">
-	                        <a href="/quest/{{quest.id}}">{{quest.title | title}}</a>
-	                        <br/>
-	                        <small>Created {% localtime on%} {{quest.creation_date | timesince }} at {% endlocaltime %}</small>
-	                    </td>
-	                    <td class="project-completion">
-	                        <small>28% Complete</small>
-	                        <div class="progress progress-mini">
-	                            <div style="width: 28%;" class="progress-bar"></div>
-	                        </div>
-	                    </td>
-	          
-	                    <td class="project-actions">
-	                      <small>${{quest.reward}}</small>
-	                    </td>
-	                </tr>
-                    {% endfor %}
+            <div class="ibox">
+                <div class="ibox-title">
+                    {% if user.is_shipper %}
+                    <h5>Your current jobs.</h5>
                     {% else %}
+                    <h5>Your current deliveries.</h5>
+                    {% endif %}
+                    <div class="ibox-tools">
 
-                    <tr>
-	                    <td class="project-title text-center">
-	                        You have posted no quests.                       
-	                    </td>
-	                </tr>
-  
-                {% endif %}
-        {% endif %}
-                                    
-
-
-	
-
-        			<!-- PENDING TRANSACTIONS -->
-                    {% if activequests %}
-                    {% for quest in activequests %}
-                    <tr>
-	                    <td class="project-status">
-	                        <span class="label label-primary">Active</span>
-	                    </td>
-	                    <td class="project-title">
-	                        <a href="/quest/{{quest.id}}">{{quest.title | title}}</a>
-	                        <br/>
-	                        <small>Job Accepted on day at time</small>
-	                    </td>
-	                    <td class="project-completion">
-	                        <small>28% Complete</small>
-	                        <div class="progress progress-mini">
-	                            <div style="width: 28%;" class="progress-bar"></div>
-	                        </div>
-	                    </td>
-	          
-	                    <td class="project-actions">
-	                      <small>${{quest.reward}}</small>
-	                    </td>
-	                </tr>
-                
-                    {% endfor %}
-         
-                {% else %}
-
-                	<tr>
-	                    <td class="project-title text-center">
-	                        You have not accepted any quests.                       
-	                    </td>
-	                </tr>
-            
-                {% endif %}
-                
-                
-
-                <!-- HISTORY TRANSACTIONS -->
-                    {% if pastquests %}
-                    {% for quest in pastquests %}
-                    <tr>
-	                    <td class="project-status">
-	                        <span class="label label-primary">Active</span>
-	                    </td>
-	                    <td class="project-title">
-	                        <a href="/quest/{{quest.id}}">{{quest.title | title}}</a>
-	                        <br/>
-	                        <small>Job Accepted on day at time</small>
-	                    </td>
-	                    <td class="project-completion">
-	                        <small>28% Complete</small>
-	                        <div class="progress progress-mini">
-	                            <div style="width: 28%;" class="progress-bar"></div>
-	                        </div>
-	                    </td>
-	          
-	                    <td class="project-actions">
-	                      <small>${{quest.reward}}</small>
-	                    </td>
-	                </tr>
-                
-                    {% endfor %}
-         
-                {% else %}
-
-                	<tr>
-	                    <td class="project-title text-center">
-	                        You have not accepted any quests.                       
-	                    </td>
-	                </tr>
-            
-                {% endif %}
-
-
-
-
-
-
-
-
-                           
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-            
+                <div class="ibox-content">
+
+
+                    <div class="project-list">
+
+                        <table class="table table-hover">
+                            <tbody>
+                                {% if not user.is_shipper %}
+                                <!-- List group -->
+                                {% if allquests %}
+                                {% for unacceptedquests in allquests %}
+                                <tr>
+                                   <td class="project-status">
+                                       <span class="label label-primary">Active</span>
+                                   </td>
+                                   <td class="project-title">
+                                       <a href="/quest/{{unacceptedquests.id}}">{{unacceptedquests.title | title}}</a>
+                                       <br/>
+                                       <small>Created {% localtime on%} {{unacceptedquests.creation_date | timesince }} ago {% endlocaltime %}</small>
+                                   </td>
+                                   <td class="project-completion">
+                                       <small>28% Complete</small>
+                                       <div class="progress progress-mini">
+                                           <div style="width: 28%;" class="progress-bar"></div>
+                                       </div>
+                                   </td>
+
+                                   <td class="project-actions">
+                                     <small>${{unacceptedquests.reward}}</small>
+                                 </td>
+                             </tr>
+                             {% endfor %}  
+                             {% else %}
+                             {% if not activequests and not allquests %}
+                             <tr>
+                                 <td class="project-title text-center">
+                                     Create new deliveries <a href={% url 'newquest' %}>here</a>
+                                 </td>
+                             </tr>
+                             {% endif %}
+
+                            {% endif %}
+                            <!-- PENDING TRANSACTIONS -->
+                            {% if activequests %}
+                            {% for acceptedquests in activequests %}
+                            <tr>
+                                <td class="project-status">
+                                    <span class="label label-primary">Active</span>
+                                </td>
+                                <td class="project-title">
+                                    <a href="/quest/{{acceptedquests.id}}">{{acceptedquests.title | title}}</a>
+                                    <br/>
+                                    <small>Job Accepted on day at time</small>
+                                </td>
+                                <td class="project-completion">
+                                    <small>28% Complete</small>
+                                    <div class="progress progress-mini">
+                                        <div style="width: 28%;" class="progress-bar"></div>
+                                    </div>
+                                </td>
+
+                                <td class="project-actions">
+                                  <small>${{acceptedquests.reward}}</small>
+                              </td>
+                          </tr>
+                          {% endfor %}
+                          {% endif %}
+                          {% endif %}
+
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+
 <div class="row">
-            <div class="col-lg-12">
-                <div class="wrapper wrapper-content">
-                        <div class="row">
-                        <div class="col-lg-4">
-                            
-                            
-                        </div>
-                            <div class="col-lg-4">
-                               
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content">
+            <div class="row">
+                <div class="col-lg-4">
 
-                            </div>
-                        <div class="col-lg-4">
-                           
-                        </div>
 
-                        </div>
                 </div>
-                <div class="footer">
-                    <div class="pull-right">
-                       
-                    </div>
-                    <div>
-                        Powered by <a href="http://earthand.co/en/" target="_blank">Earth and Co</a> &copy; 2014-2015
-                    </div>
+                <div class="col-lg-4">
+
+
                 </div>
+                <div class="col-lg-4">
+
+                </div>
+
             </div>
         </div>
+        <div class="footer">
+            <div class="pull-right">
+
+            </div>
+            <div>
+                Powered by <a href="http://earthand.co/en/" target="_blank">Earth and Co</a> &copy; 2014-2015
+            </div>
+        </div>
+    </div>
+</div>
 
 
-
-
-
-
-
-
-
-
-    {% endblock content %}
+{% endblock content %}
 
 {% block scripts %}  
 <!-- Mainly scripts -->
-    <script src={% static "app/js/jquery-2.1.1.js" %}></script>
-    <script src={% static "app/js/bootstrap.min.js" %}></script>
-    <script src={% static "app/js/plugins/metisMenu/jquery.metisMenu.js" %}></script>
-    <script src={% static "app/js/plugins/slimscroll/jquery.slimscroll.min.js" %}></script>
+<script src={% static "app/js/jquery-2.1.1.js" %}></script>
+<script src={% static "app/js/bootstrap.min.js" %}></script>
+<script src={% static "app/js/plugins/metisMenu/jquery.metisMenu.js" %}></script>
+<script src={% static "app/js/plugins/slimscroll/jquery.slimscroll.min.js" %}></script>
 
-    <!-- Flot -->
-    <script src={% static "app/js/plugins/flot/jquery.flot.js" %}></script>
-    <script src={% static "app/js/plugins/flot/jquery.flot.tooltip.min.js" %}></script>
-    <script src={% static "app/js/plugins/flot/jquery.flot.spline.js" %}></script>
-    <script src={% static "app/js/plugins/flot/jquery.flot.resize.js" %}></script>
-    <script src={% static "app/js/plugins/flot/jquery.flot.pie.js" %}></script>
+<!-- Flot -->
+<script src={% static "app/js/plugins/flot/jquery.flot.js" %}></script>
+<script src={% static "app/js/plugins/flot/jquery.flot.tooltip.min.js" %}></script>
+<script src={% static "app/js/plugins/flot/jquery.flot.spline.js" %}></script>
+<script src={% static "app/js/plugins/flot/jquery.flot.resize.js" %}></script>
+<script src={% static "app/js/plugins/flot/jquery.flot.pie.js" %}></script>
 
-    <!-- Peity -->
-    <script src={% static "app/js/plugins/peity/jquery.peity.min.js" %}></script>
-    <script src={% static "app/js/demo/peity-demo.js" %}></script>
-
- 
-    <!-- Custom and plugin javascript -->
-    <script src={% static "app/js/inspinia.js" %}></script>
-    <script src={% static "app/js/plugins/pace/pace.min.js" %}></script>
-
-    <!-- jQuery UI -->
-    <script src={% static "app/js/plugins/jquery-ui/jquery-ui.min.js" %}></script>
-
-    <!-- GITTER -->
-    <script src={% static "app/js/plugins/gritter/jquery.gritter.min.js" %}></script>
-
-    <!-- Sparkline -->
-    <script src={% static "app/js/plugins/sparkline/jquery.sparkline.min.js" %}></script>
-
-    <!-- Sparkline demo data  -->
-    <script src={% static "app/js/demo/sparkline-demo.js" %}></script>
-
-    <!-- ChartJS-->
-    <script src={% static "app/js/plugins/chartJs/Chart.min.js" %}></script>
-
-    <!-- Toastr -->
-    <script src={% static "app/js/plugins/toastr/toastr.min.js" %}></script>
-    
-    <!-- Switchery -->
-   <script src={% static "app/js/plugins/switchery/switchery.js" %}></script>
+<!-- Peity -->
+<script src={% static "app/js/plugins/peity/jquery.peity.min.js" %}></script>
+<script src={% static "app/js/demo/peity-demo.js" %}></script>
 
 
+<!-- Custom and plugin javascript -->
+<script src={% static "app/js/inspinia.js" %}></script>
+<script src={% static "app/js/plugins/pace/pace.min.js" %}></script>
 
-    <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 4000
-                };
-                toastr.success('Same day delivery for everyone', 'Welcome to Questr');
+<!-- jQuery UI -->
+<script src={% static "app/js/plugins/jquery-ui/jquery-ui.min.js" %}></script>
 
-            }, 1300);
+<!-- GITTER -->
+<script src={% static "app/js/plugins/gritter/jquery.gritter.min.js" %}></script>
+
+<!-- Sparkline -->
+<script src={% static "app/js/plugins/sparkline/jquery.sparkline.min.js" %}></script>
+
+<!-- Sparkline demo data  -->
+<script src={% static "app/js/demo/sparkline-demo.js" %}></script>
+
+<!-- ChartJS-->
+<script src={% static "app/js/plugins/chartJs/Chart.min.js" %}></script>
+
+<!-- Toastr -->
+<script src={% static "app/js/plugins/toastr/toastr.min.js" %}></script>
+
+<!-- Switchery -->
+<script src={% static "app/js/plugins/switchery/switchery.js" %}></script>
 
 
-            var data1 = [
-                [0,4],[1,8],[2,5],[3,10],[4,4],[5,16],[6,5],[7,11],[8,6],[9,11],[10,30],[11,10],[12,13],[13,4],[14,3],[15,3],[16,6]
-            ];
-            var data2 = [
-                [0,1],[1,0],[2,2],[3,0],[4,1],[5,3],[6,1],[7,5],[8,2],[9,3],[10,2],[11,1],[12,0],[13,2],[14,8],[15,0],[16,0]
-            ];
-            $("#flot-dashboard-chart").length && $.plot($("#flot-dashboard-chart"), [
-                data1, data2
+
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                showMethod: 'slideDown',
+                timeOut: 4000
+            };
+            toastr.success('Same day delivery for everyone', 'Welcome to Questr');
+
+        }, 1300);
+
+
+        var data1 = [
+        [0,4],[1,8],[2,5],[3,10],[4,4],[5,16],[6,5],[7,11],[8,6],[9,11],[10,30],[11,10],[12,13],[13,4],[14,3],[15,3],[16,6]
+        ];
+        var data2 = [
+        [0,1],[1,0],[2,2],[3,0],[4,1],[5,3],[6,1],[7,5],[8,2],[9,3],[10,2],[11,1],[12,0],[13,2],[14,8],[15,0],[16,0]
+        ];
+        $("#flot-dashboard-chart").length && $.plot($("#flot-dashboard-chart"), [
+            data1, data2
             ],
-                    {
-                        series: {
-                            lines: {
-                                show: false,
-                                fill: true
-                            },
-                            splines: {
-                                show: true,
-                                tension: 0.4,
-                                lineWidth: 1,
-                                fill: 0.4
-                            },
-                            points: {
-                                radius: 0,
-                                show: true
-                            },
-                            shadowSize: 2
-                        },
-                        grid: {
-                            hoverable: true,
-                            clickable: true,
-                            tickColor: "#d5d5d5",
-                            borderWidth: 1,
-                            color: '#d5d5d5'
-                        },
-                        colors: ["#1ab394", "#464f88"],
-                        xaxis:{
-                        },
-                        yaxis: {
-                            ticks: 4
-                        },
-                        tooltip: false
-                    }
+            {
+                series: {
+                    lines: {
+                        show: false,
+                        fill: true
+                    },
+                    splines: {
+                        show: true,
+                        tension: 0.4,
+                        lineWidth: 1,
+                        fill: 0.4
+                    },
+                    points: {
+                        radius: 0,
+                        show: true
+                    },
+                    shadowSize: 2
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: true,
+                    tickColor: "#d5d5d5",
+                    borderWidth: 1,
+                    color: '#d5d5d5'
+                },
+                colors: ["#1ab394", "#464f88"],
+                xaxis:{
+                },
+                yaxis: {
+                    ticks: 4
+                },
+                tooltip: false
+            }
             );
 
-            var doughnutData = [
-                {
-                    value: 300,
-                    color: "#a3e1d4",
-                    highlight: "#1ab394",
-                    label: "App"
-                },
-                {
-                    value: 50,
-                    color: "#dedede",
-                    highlight: "#1ab394",
-                    label: "Software"
-                },
-                {
-                    value: 100,
-                    color: "#b5b8cf",
-                    highlight: "#1ab394",
-                    label: "Laptop"
-                }
-            ];
+var doughnutData = [
+{
+    value: 300,
+    color: "#a3e1d4",
+    highlight: "#1ab394",
+    label: "App"
+},
+{
+    value: 50,
+    color: "#dedede",
+    highlight: "#1ab394",
+    label: "Software"
+},
+{
+    value: 100,
+    color: "#b5b8cf",
+    highlight: "#1ab394",
+    label: "Laptop"
+}
+];
 
-            var doughnutOptions = {
-                segmentShowStroke: true,
-                segmentStrokeColor: "#fff",
-                segmentStrokeWidth: 2,
+var doughnutOptions = {
+    segmentShowStroke: true,
+    segmentStrokeColor: "#fff",
+    segmentStrokeWidth: 2,
                 percentageInnerCutout: 45, // This is 0 for Pie charts
                 animationSteps: 100,
                 animationEasing: "easeOutBounce",
@@ -395,24 +326,24 @@
             var DoughnutChart = new Chart(ctx).Doughnut(doughnutData, doughnutOptions);
 
             var polarData = [
-                {
-                    value: 300,
-                    color: "#a3e1d4",
-                    highlight: "#1ab394",
-                    label: "App"
-                },
-                {
-                    value: 140,
-                    color: "#dedede",
-                    highlight: "#1ab394",
-                    label: "Software"
-                },
-                {
-                    value: 200,
-                    color: "#b5b8cf",
-                    highlight: "#1ab394",
-                    label: "Laptop"
-                }
+            {
+                value: 300,
+                color: "#a3e1d4",
+                highlight: "#1ab394",
+                label: "App"
+            },
+            {
+                value: 140,
+                color: "#dedede",
+                highlight: "#1ab394",
+                label: "Software"
+            },
+            {
+                value: 200,
+                color: "#b5b8cf",
+                highlight: "#1ab394",
+                label: "Laptop"
+            }
             ];
 
             var polarOptions = {
@@ -434,34 +365,34 @@
             var Polarchart = new Chart(ctx).PolarArea(polarData, polarOptions);
 
         });
-        
-        
-        var elem = document.querySelector('.js-switch');
-            var switchery = new Switchery(elem, { color: '#1AB394' });
 
-            var elem_2 = document.querySelector('.js-switch_2');
-            var switchery_2 = new Switchery(elem_2, { color: '#ED5565' });
 
-            var elem_3 = document.querySelector('.js-switch_3');
-            var switchery_3 = new Switchery(elem_3, { color: '#1AB394' });
-    </script>
+var elem = document.querySelector('.js-switch');
+var switchery = new Switchery(elem, { color: '#1AB394' });
 
-   
-   <script>
-     var container = document.querySelector('#post-container');
-    var msnry = new Masonry( post-container, {
+var elem_2 = document.querySelector('.js-switch_2');
+var switchery_2 = new Switchery(elem_2, { color: '#ED5565' });
+
+var elem_3 = document.querySelector('.js-switch_3');
+var switchery_3 = new Switchery(elem_3, { color: '#1AB394' });
+</script>
+
+
+<script>
+   var container = document.querySelector('#post-container');
+   var msnry = new Masonry( post-container, {
       // options
       columnWidth: 0,
       itemSelector: '.post'
-    });
-   </script>
+  });
+</script>
 
 
 
 
 
-    <script src={% static "js/star-rating.js" %} type="text/javascript"></script>
-    
+<script src={% static "js/star-rating.js" %} type="text/javascript"></script>
+
     {% comment %}
     ## This is for google plus based authentication ##
            <script type="text/javascript">
@@ -474,11 +405,11 @@
                    s.parentNode.insertBefore(po, s);
                })();
            </script>           
-    {% endcomment %}
-    
-    
-    
-    
-    
+           {% endcomment %}
 
-{% endblock scripts %}
+
+
+
+
+
+           {% endblock scripts %}

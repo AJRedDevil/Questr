@@ -39,7 +39,7 @@ class QuestCreationForm(forms.ModelForm):
         },
         widget=forms.Select(
             attrs={
-                'class': 'form-control m-b',
+                'class': 'form-control input-lg',
                 'data-size': '5',
                 'required': 'true'
             }
@@ -64,7 +64,7 @@ class QuestCreationForm(forms.ModelForm):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control m-b',
+                'class': 'form-control input-lg',
                 'placeholder': 'Apartment, suite, unit, building, floor, etc.',
                 'required': 'true'
             }
@@ -117,7 +117,7 @@ class QuestCreationForm(forms.ModelForm):
         },
         widget=forms.Select(
             attrs={
-                'class': 'form-control m-b',
+                'class': 'form-control input-lg',
                 'data-size': '5',
                 'required': 'true',
             }
@@ -142,7 +142,7 @@ class QuestCreationForm(forms.ModelForm):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control m-b',
+                'class': 'form-control input-lg',
                 'placeholder': 'Apartment, suite, unit, building, floor, etc.',
             }
         )
@@ -192,8 +192,17 @@ class QuestCreationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(QuestCreationForm, self).__init__(*args, **kwargs)
-        self.fields['title'].widget.attrs = {'class': 'form-control input-lg', 'required': 'true',}
-        self.fields['description'].widget.attrs = {'class': 'form-control', 'rows': '5', 'required': 'true'}
+        self.fields['title'].widget.attrs = {
+            'class': 'form-control input-lg',
+            'required': 'true',
+            'placeholder': 'Name of your shipment.'
+        }
+        self.fields['description'].widget.attrs = {
+            'class': 'form-control',
+            'rows': '5',
+            'required': 'true',
+            'placeholder': 'Tell us about your shipment.'
+        }
 
 
 class QuestConfirmForm(forms.ModelForm):

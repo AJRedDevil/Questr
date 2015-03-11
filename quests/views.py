@@ -521,6 +521,28 @@ def viewDeliveries(request):
     """Shows all the active quests so far"""
     pagetype="loggedin"
     user = request.user
+    # userdetails = user_handler.getQuestrDetails(user.id)
+    pagetitle = "Deliveries"
     userdetails = user_handler.getQuestrDetails(user.id)
-    pagetitle = "Deliveries Quests"
+    if userdetails.is_shipper:
+        alert_message = request.session.get('alert_message')
+        if request.session.has_key('alert_message'):
+            del request.session['alert_message']
+        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=userdetails.id, is_complete=False).order_by('-creation_date')[:10]
+        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, isaccepted=True, shipper=userdetails.id).order_by('-creation_date')[:10]
+
+        return render(request,'deliveries.html', locals())
+    elif userdetails.is_superuser:
+        alert_message = request.session.get('alert_message')
+        if request.session.has_key('alert_message'):
+            del request.session['alert_message']
+        allquests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=0).order_by('-creation_date')[:10]
+        return render(request,'deliveries.html', locals())
+    else:
+        alert_message = request.session.get('alert_message')        
+        if request.session.has_key('alert_message'):
+            del request.session['alert_message']
+        activequests = Quests.objects.filter(ishidden=False, isaccepted=True, is_complete=False, questrs_id=userdetails.id).order_by('-creation_date')[:10]
+        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, questrs_id=userdetails.id).order_by('-creation_date')[:10]
+        return render(request,'deliveries.html', locals())
     return render(request, 'deliveries.html', locals())

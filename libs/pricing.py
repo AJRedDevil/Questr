@@ -52,15 +52,15 @@ class WebPricing(object):
         elif distance > 50:
             charge += self.pricing_minutes[9] * float(distance % 5)
 
-        #Round the shipping fee to 2 decimal places
+        # #Round the shipping fee to 2 decimal places
         charge = round(charge, 2)
 
         #Sizes
         if size == 0:  # filing bag
-            return charge*0.8
+            return round((charge*0.8), 2)
         elif size == 1:  # moving box
-            return charge
+            return round(charge, 2)
         elif size == 2:  # extra large
-            return charge*1.2
+            return round((charge*1.2), 2)
         else:
-            return charge*0
+            return round((charge*0), 2)

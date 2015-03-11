@@ -4,328 +4,342 @@
 {% block localhead %}
 
 
- <link href={% static "landingpage/img/logo.png" %} rel="shortcut icon">
-	    <link href={% static "app/css/font-awesome-4.2.0/css/font-awesome.min.css" %} rel="stylesheet">
-	    <link href={% static "app/css/bootstrap.min.css" %} rel="stylesheet">
+<link href={% static "landingpage/img/logo.png" %} rel="shortcut icon">
+<link href={% static "app/css/font-awesome-4.2.0/css/font-awesome.min.css" %} rel="stylesheet">
+<link href={% static "app/css/bootstrap.min.css" %} rel="stylesheet">
 <!-- Toastr style -->
 <link href={% static "app/css/plugins/toastr/toastr.min.css" %} rel="stylesheet">
-  <!-- Gritter --> 
+<!-- Gritter --> 
 <link href={% static "app/js/plugins/gritter/jquery.gritter.css" %} rel="stylesheet">  
 <!-- Switchery -->
-  <link href={% static "app/css/plugins/switchery/switchery.css" %} rel="stylesheet">
-  
-  <!-- Toastr style -->
+<link href={% static "app/css/plugins/switchery/switchery.css" %} rel="stylesheet">
+
+<!-- Toastr style -->
 <link href={% static "app/css/plugins/toastr/toastr.min.css" %} rel="stylesheet">
-  
-   <!-- Gritter --> 
+
+<!-- Gritter --> 
 <link href={% static "app/js/plugins/gritter/jquery.gritter.css" %} rel="stylesheet">  
 <!-- Switchery -->
-  <link href={% static "app/css/plugins/switchery/switchery.css" %} rel="stylesheet">
-  
-  <link href={% static "app/css/plugins/jasny/jasny-bootstrap.min.css" %} rel="stylesheet">
-  
-  
-    <link href={% static "app/css/animate.css" %} rel="stylesheet">
-    <link href={% static "app/css/style.css" %} rel="stylesheet">
-	    
+<link href={% static "app/css/plugins/switchery/switchery.css" %} rel="stylesheet">
+
+<link href={% static "app/css/plugins/jasny/jasny-bootstrap.min.css" %} rel="stylesheet">
+
+<link href={% static "app/css/animate.css" %} rel="stylesheet">
+<link href={% static "app/css/style.css" %} rel="stylesheet">
+
+
+
+
+
+
+
+<style type="text/css">
+	.css-form input.ng-invalid.ng-dirty {
+		border-color: rgba(232,77,60,1.00);
+
+	}
+
+	.css-form input.ng-valid.ng-dirty {
+		border-color: rgba(47,204,112,1.00);
+
+	}
+</style>
+
+<style>
+	#radioBtn a.btn {
+		margin-bottom: 5px;
+		margin-right: 5px;
+		border-radius: 999em;
+	}
+</style>
 {% endblock localhead %}
 {% block content %}
 <div class="row  border-bottom white-bg dashboard-header">
 
-                    <div class="col-sm-12">
-                        <h2>Start delivering in minutes ..</h2>
-                        
-                        
-                    </div>
-              
+	<div class="col-sm-12">
+		<h2>Start delivering in minutes ..</h2>
 
-            </div>
-            
-<div class="row" style="margin-bottom:200px;">
-	<form role="form" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" class="form-horizontal">{% csrf_token %}
-            <div class="col-lg-12">
-                <div class="wrapper wrapper-content animated fadeInUp">
 
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Create your new quest</h5>
-                            <div class="ibox-tools">
-                            	<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </div>
-                        </div>
-                        <div class="ibox-content">
-		                            
-							<div class="col-sm-12 col-lg-8 col-lg-offset-1">
-		                                <div class="form-group">
-		                                	<label class="control-label" for="">Title</label>
-		                                	{{user_form.title}}
-		                                	<span class="help-block m-b-none">{{user_form.title.errors}}</span>
-		                                </div>
-		                            </div>
-							
-							<div class="col-sm-12 col-lg-8 col-lg-offset-1">
-		                                <div class="form-group">
-		                                	<label class="control-label">Description</label>
-											{{user_form.description}}
-		                                    <span class="help-block m-b-none"></span>
-		                                </div>
-		                                </div>
-							
-							<div class="col-sm-12 col-lg-8 col-lg-offset-1">
-		                                <div class="hr-line-dashed"></div>
-		                                </div>
-							
-							<div class="col-sm-12 col-lg-8 col-lg-offset-1">
-		                                <div class="form-group">
-		                                	<label class="control-label">Size</label>
+	</div>
 
-			                                  	<div class="input-group form-inline">
-							                        {% comment %}
-													<label class="radio-inline">
-													  <input type="radio" id="inlineCheckbox1" name="size" ng-model="user.size" value="backpack" ng-model="user.backapck" checked required> CARRIABLES
-													</label>
-							                        {% endcomment %}
-												{% for choice in user_form.size.field.choices %}
-													<label class="radio-inline">
-													  <input type="radio" id="inlineCheckbox" name="{{user_form.size.name}}" value="{{choice.0}}" checked>{{choice.1}}
-													</label>
-												{% endfor %}
 
-												</div><!-- /input-group -->
-			                                   
-			                                   
-			                                    {% comment %}
-			                                    <div id="radioBtn" class="btn-group">
-    					<a class="btn btn-primary btn-sm active" data-toggle="fun" data-title="envelope" type="radio" id="inlineCheckbox2" name="size" ng-model="user.size" value="car" ng-model="user.car" required checked><i class="fa fa-envelope-o"></i> Envelope</a>
-    					
-    					<a class="btn btn-primary btn-sm" data-toggle="fun" data-title="foodbag" type="radio" id="inlineCheckbox2" name="size" ng-model="user.size" value="car" ng-model="user.car" required><i class="fa fa-cutlery"></i> Bag of food</a>
-    					
-    					<a class="btn btn-primary btn-sm" data-toggle="fun" data-title="folder" type="radio" id="inlineCheckbox2" name="size" ng-model="user.size" value="car" ng-model="user.car" required><i class="fa fa-folder-o"></i> Folder</a>
-    					
-    					<a class="btn btn-primary btn-sm" data-toggle="fun" data-title="suitcase" type="radio" id="inlineCheckbox2" name="size" ng-model="user.size" value="car" ng-model="user.car" required><i class="fa fa-suitcase"></i> Suitcase</a>
-    					
-    					<a class="btn btn-primary btn-sm" data-toggle="fun" data-title="filingbox" type="radio" id="inlineCheckbox2" name="size" ng-model="user.size" value="car" ng-model="user.car" required><i class="fa fa-archive"></i> Filing Box</a>
-    					
-    					<a class="btn btn-primary btn-sm" data-toggle="fun" data-title="movingbox" type="radio" id="inlineCheckbox2" name="size" ng-model="user.size" value="car" ng-model="user.car" required><i class="fa fa-cube"></i> Moving Box (dimensions and over)</a>
-    					
-                        <a class="btn btn-primary btn-sm notActive" data-toggle="fun" data-title="X" type="radio" id="inlineCheckbox3" name="size" ng-model="user.size" value="minivan" ng-model="user.van" required>VAN</a>
-			                                    </div>		
-			                                    {% endcomment %}
-			                                    <span class="help-block m-b-none">{{user_form.size.errors}}</span>
-		                                
-			                                    </div>
-                            </div>                      
-		                                
-						{% comment %}
-							<div class="col-sm-3">
-		                                <div class="form-group">
-		                                	<label class="control-label">Quantity</label>
-		                                    
-		                                    	<select class="form-control m-b" data-size="20" name="quantity" id="quantity" required>
-			                                        <option>1</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-													<option>5</option>
-													<option>6</option>
-													<option>7</option>
-													<option>8</option>
-													<option>9</option>
-													<option>10</option>
-													<option>11</option>
-													<option>12</option>
-													<option>13</option>
-													<option>14</option>
-													<option>15</option>
-													<option>16</option>
-													<option>17</option>
-													<option>18</option>
-													<option>19</option>
-													<option>20</option>
-			                                    </select> 
-			                                    <span class="help-block m-b-none"></span>
-		                                </div>
-                            </div>							
-						{% endcomment %}
-							
-							<div class="col-sm-12 col-lg-8 col-lg-offset-1">
-                                <div class="hr-line-dashed"></div>
-                            </div>
-							
-							<div class="col-sm-12 col-lg-8 col-lg-offset-1">
-                                <div class="form-group">
-                                <label class="control-label">Tell us where to pick up the package.  Click <a id="autofill" onclick="reply_click(this.id)">here</a> to autofill your information.</label> 
-                                </div>
-                            </div>
-							
-							<div class="col-sm-12 col-lg-8 col-lg-offset-1">
-                                <div class="hr-line-dashed"></div>
-                            </div>
-									                                     
-	                        <div class="col-sm-5">
-	                            <div class="form-group">
-	                            	<label class="control-label" for="srcname">Name of Sender</label>
-	                                {{user_form.srcname}}
-	                                <span class="help-block m-b-none" >{{user_form.srcname.errors}}</span>
-	                            </div>
-                            </div>                               	
-
-		                                	
-                            <div class="col-sm-5">
-                            	<div class="form-group">
-                                <label class="control-label">Phone #</label>
-                                {{user_form.srcphone}}
-                                <span class="help-block m-b-none">{{user_form.srcphone.errors}}</span>
-                            	</div>
-                            </div>
-
-                            <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-                                <div class="hr-line-dashed"></div>
-                            </div>
-     
-                            <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-		                        <div class="form-group">
-		                        	<label class="control-label" for="srcaddress">Address Line 1</label>
-									{{user_form.srcaddress}}
-		                        	<span class="help-block m-b-none">{{user_form.srcaddress.errors}}</span>
-		                        </div>
-                            </div>
-
-                            <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-	                             <div class="form-group">
-	                            	<label class="control-label" for="srcaddress_2">Address Line 2</label>
-	                            	{{user_form.srcaddress_2}}
-	                                <span class="help-block m-b-none">{{user_form.srcaddress_2.errors}}</span>
-	                             </div>
-                            </div>
-                     
-                            <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-		                                <div class="form-group">
-		                                	<label class="control-label" for="srccity">City</label>
-		                                	{{user_form.srccity}}
-		                                    <span class="help-block m-b-none">{{user_form.srccity.errors}}</span>
-		                                </div>
-                            </div>
-                            	
-                            <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-	                            <div class="form-group">
-	                                <label class="control-label" for="srcpostalcode">Postal Code</label>
-									{{user_form.srcpostalcode}}
-	                                <span class="help-block m-b-none">{{user_form.srcpostalcode.errors}}</span>
-	                            </div>
-                            </div>
-                            
-                            <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-                            <div class="hr-line-dashed"></div>
-                            </div>
-                            
-                            <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-                            <div class="form-group">
-                            <label class="control-label">Tell us where to drop off the package, and who we should give it to.</label> 
-                            </div>
-                            </div>
-                            
-                            <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-                            <div class="hr-line-dashed"></div>	
-                            </div>	                                
-                            
-                            <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-                            <div class="form-group">
-                            	<label class="control-label" for="dstname">Name of Reciever</label>
-                            	{{user_form.dstname}}
-                                <span class="help-block m-b-none">{{user_form.dstname.errors}}</span>
-                            </div>
-                         </div>
-                            	
-                        	<div class="col-sm-12 col-lg-8 col-lg-offset-1">
-	                            <div class="form-group">
-	                                <label class="control-label" for="dstphone">Phone #</label>
-									{{user_form.dstphone}}
-	                                <span class="help-block m-b-none">{{user_form.dstphone.errors}}</span>
-	                            </div>
-                          	</div>
-                      
-                            <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-	                            <div class="hr-line-dashed"></div>
-	                        </div>
-
-                            <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-	                            <div class="form-group">
-	                            	<label class="control-label" for="dstaddress">Address Line 1</label>
-	                            	{{user_form.dstaddress}}
-	                                <span class="help-block m-b-none">{{user_form.dstaddress.errors}}</span>	
-	                            </div>
-                          	</div>
-               
-                            <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-	                            <div class="form-group">
-	                            	<label class="control-label" for="dstaddress_2">Address Line 2</label>
-									{{user_form.dstaddress_2}}
-	                                <span class="help-block m-b-none">{{user_form.dstaddress_2.errors}}</span>
-	                            </div>
-                          	</div>
-      
-                            <div class="col-sm-5">
-                            <div class="form-group">
-                            	<label class="control-label">City</label>
-								{{user_form.dstcity}}
-                                <span class="help-block m-b-none">{{user_form.dstcity.errors}}</span>
-                            </div> 
-                          </div>
-
-                            <div class="col-sm-5">
-                            <div class="form-group">
-                                <label class="control-label">Postal Code</label>
-								{{user_form.dstpostalcode}}
-                                <span class="help-block m-b-none">{{user_form.dstpostalcode.errors}}</span>
-                            </div>
-                            </div>
-                            
-                            <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-                              <div class="hr-line-dashed"></div>
-                            </div>
-                            
-                            <div class="col-sm-12 col-lg-8 col-lg-offset-1">
-                            <div class="form-group">
-                                	 <button type="submit" class="btn btn-lg btn-info" id="continue">CONTINUE</button>   
-                            </div>
-                            </div>
-
-		                </div>
-                    </div>
-                </div>
-            </div>
-          </form>       
 </div>
-            
+
+<div class="row" style="margin-bottom:200px;" ng-app="validation">
+	<form role="form" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" class="form-horizontal" novalidate>{% csrf_token %}
+		<div class="col-lg-8 css-form" novalidate>
+			<div class="wrapper wrapper-content animated fadeInUp">
+
+				<div class="ibox">
+					<div class="ibox-title">
+						<h5>Create your new quest</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link">
+								<i class="fa fa-chevron-up"></i>
+							</a>
+						</div>
+					</div>
+					<div class="ibox-content">
+
+						<div class="form-group"><label class="col-sm-2 control-label">Title</label>
+							<div class="col-sm-10">
+								{{user_form.title}}
+								<span class="help-block m-b-none">{{user_form.title.errors}}</span>
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+
+						<div class="form-group"><label class="col-sm-2 control-label">Description</label>
+							<div class="col-sm-10">
+								{{user_form.description}}
+								<span class="help-block m-b-none"></span>
+							</div>
+						</div>
+
+						<div class="hr-line-dashed"></div>
+
+						<div class="form-group"><label class="col-sm-2 control-label">Size</label>
+							<div class="col-sm-10">
+								<div class="input-group">
+									<div class="input-group form-inline">
+	                        {% comment %}
+							<label class="radio-inline">
+							  <input type="radio" id="inlineCheckbox1" name="size" ng-model="user.size" value="backpack" ng-model="user.backapck" checked required> CARRIABLES
+							</label>
+							{% endcomment %}
+									{% for choice in user_form.size.field.choices %}
+									<label class="radio-inline">
+										<input type="radio" id="inlineCheckbox" name="{{user_form.size.name}}" value="{{choice.0}}" checked>{{choice.1}}
+									</label>
+									{% endfor %}
+
+
+									</div><!-- /input-group -->
+												                                    {% comment %}
+												                                    <div id="radioBtn" class="btn-group">
+									    					<a class="btn btn-primary btn-sm active" data-toggle="fun" data-title="envelope" type="radio" id="inlineCheckbox2" name="size" ng-model="user.size" value="car" ng-model="user.car" required checked><i class="fa fa-envelope-o"></i> Envelope</a>
+									    					
+									    					<a class="btn btn-primary btn-sm" data-toggle="fun" data-title="foodbag" type="radio" id="inlineCheckbox2" name="size" ng-model="user.size" value="car" ng-model="user.car" required><i class="fa fa-cutlery"></i> Bag of food</a>
+									    					
+									    					<a class="btn btn-primary btn-sm" data-toggle="fun" data-title="folder" type="radio" id="inlineCheckbox2" name="size" ng-model="user.size" value="car" ng-model="user.car" required><i class="fa fa-folder-o"></i> Folder</a>
+									    					
+									    					<a class="btn btn-primary btn-sm" data-toggle="fun" data-title="suitcase" type="radio" id="inlineCheckbox2" name="size" ng-model="user.size" value="car" ng-model="user.car" required><i class="fa fa-suitcase"></i> Suitcase</a>
+									    					
+									    					<a class="btn btn-primary btn-sm" data-toggle="fun" data-title="filingbox" type="radio" id="inlineCheckbox2" name="size" ng-model="user.size" value="car" ng-model="user.car" required><i class="fa fa-archive"></i> Filing Box</a>
+									    					
+									    					<a class="btn btn-primary btn-sm" data-toggle="fun" data-title="movingbox" type="radio" id="inlineCheckbox2" name="size" ng-model="user.size" value="car" ng-model="user.car" required><i class="fa fa-cube"></i> Moving Box (dimensions and over)</a>
+									    					
+									                        <a class="btn btn-primary btn-sm notActive" data-toggle="fun" data-title="X" type="radio" id="inlineCheckbox3" name="size" ng-model="user.size" value="minivan" ng-model="user.van" required>VAN</a>
+									    					
+									    				</div>
+									    				{% endcomment %}
+				    			</div>
+    							<span class="help-block m-b-none">{{user_form.size.errors}}</span>
+				    		</div>
+						</div>
+
+						{% comment %}
+							<div class="form-group"><label class="col-sm-2 control-label">Quantity</label>
+								<div class="col-sm-4">
+									<select class="form-control m-b" data-size="5" name="quantity" id="quantity">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+										<option>10</option>
+										<option>11</option>
+										<option>12</option>
+										<option>13</option>
+										<option>14</option>
+										<option>15</option>
+										<option>16</option>
+										<option>17</option>
+										<option>18</option>
+										<option>19</option>
+										<option>20</option>
+									</select> 
+									<span class="help-block m-b-none"></span>
+								</div>
+							</div>
+						{% endcomment %}
+
+				    	<div class="hr-line-dashed"></div>
+
+				    	<div class="form-group">
+					    	<label class="col-lg-12 control-label" style="text-align:center;">
+					    	Tell us where to pick up the package.  Click 
+					    	<a id="autofill" onclick="reply_click(this.id)">here</a> to autofill your information.
+					    	</label> 
+				    	</div>
+
+				    	<div class="hr-line-dashed"></div>
+
+				    	<div class="form-group">
+					    	<label class="col-sm-2 control-label">Name of Sender</label>
+				    		<div class="col-sm-4">
+					    		{{user_form.srcname}}	
+					    		<span class="help-block m-b-none">{{user_form.srcname.errors}}</span>
+				    		</div>
+				    		<label class="col-sm-2 control-label">Phone #</label>
+				    		<div class="col-sm-4">
+								{{user_form.srcphone}}
+					    		<span class="help-block m-b-none">{{user_form.srcphone.errors}}</span>
+				    		</div>
+				    	</div>
+
+				    	<div class="hr-line-dashed"></div>
+
+				    	<div class="form-group">
+					    	<label class="col-sm-2 control-label">Address Line 1</label>
+				    		<div class="col-sm-10">
+				    			{{user_form.srcaddress}}
+					    		<span class="help-block m-b-none">{{user_form.srcaddress.errors}}</span>
+				    		</div>
+				    	</div>
+
+
+				    	<div class="form-group">
+					    	<label class="col-sm-2 control-label">Address Line 2</label>
+					    		<div class="col-sm-10">
+									{{user_form.srcaddress_2}}
+						    		<span class="help-block m-b-none">{{user_form.srcaddress_2.errors}}</span>
+					    		</div>
+				    	</div>
+
+
+				    	<div class="form-group"><label class="col-sm-2 control-label">City</label>
+				    		<div class="col-sm-4">
+								{{user_form.srccity}}
+				    			<span class="help-block m-b-none">{{user_form.srccity.errors}}</span>
+				    		</div>
+				    		<label class="col-sm-2 control-label">Postal Code</label>
+				    		<div class="col-sm-4">
+					    		{{user_form.srcpostalcode}}
+					    		<span class="help-block m-b-none">{{user_form.srcpostalcode.errors}}</span>
+				    		</div>
+				    	</div>
+
+
+				    	<div class="hr-line-dashed"></div>
+
+				    	<div class="form-group">
+					    	<label class="col-lg-12 control-label" style="text-align:center;">
+					    	Tell us where to drop off the package, and who we should give it to.
+					    	</label> 
+				    	</div>
+
+
+				    	<div class="hr-line-dashed"></div>		                                
+
+
+				    	<div class="form-group">
+					    	<label class="col-sm-2 control-label">Name of Reciever</label>
+				    		<div class="col-sm-4">
+								{{user_form.dstname}}
+					    		<span class="help-block m-b-none">{{user_form.dstname.errors}}</span>
+				    		</div>
+
+				    		<label class="col-sm-2 control-label">Phone #</label>
+				    		<div class="col-sm-4">
+								{{user_form.dstphone}}
+						    	<span class="help-block m-b-none">{{user_form.dstphone.errors}}</span>
+				    		</div>
+				    	</div>
+
+
+				    	<div class="hr-line-dashed"></div>
+
+
+				    	<div class="form-group">
+					    	<label class="col-sm-2 control-label">Address Line 1</label>
+				    		<div class="col-sm-10">
+								{{user_form.dstaddress}}
+								<span class="help-block m-b-none">{{user_form.dstaddress.errors}}</span>
+				    		</div>
+				    	</div>
+
+
+				    	<div class="form-group">
+					    	<label class="col-sm-2 control-label">Address Line 2</label>
+				    		<div class="col-sm-10">
+								{{user_form.dstaddress_2}}
+					    		<span class="help-block m-b-none">{{user_form.dstaddress_2.errors}}</span>
+				    		</div>
+				    	</div>
+
+				    	<div class="form-group"><label class="col-sm-2 control-label">City</label>
+				    		<div class="col-sm-4">
+								{{user_form.dstcity}}
+				    			<span class="help-block m-b-none">{{user_form.dstcity.errors}}</span>
+				    		</div>
+				    		<label class="col-sm-2 control-label">Postal Code</label>
+				    		<div class="col-sm-4">
+								{{user_form.dstpostalcode}}
+					    		<span class="help-block m-b-none">{{user_form.dstpostalcode.errors}}</span>
+				    		</div>
+				    	</div>
+
+				    </div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-4">
+			<div class="wrapper wrapper-content animated fadeInUp">
+
+				<div class="ibox">
+					<div class="ibox-title">
+						<h5>TOTAL</h5>
+						<div class="ibox-tools">
+
+						</div>
+					</div>
+					<div class="ibox-content">
+
+
+
+						<center><button type="submit" class="btn btn-lg btn-rounded" id="continue" ng-disabled="form.$invalid || isUnchanged(user)">CONTINUE</button></center>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
 <div class="row">
-            <div class="col-lg-12">
-                <div class="wrapper wrapper-content">
-                        <div class="row">
-                        <div class="col-lg-4">
-                            
-                            
-                        </div>
-                            <div class="col-lg-4">
-                               
+	<div class="col-lg-12">
+		<div class="wrapper wrapper-content">
+			<div class="row">
+				<div class="col-lg-4">
 
-                            </div>
-                        <div class="col-lg-4">
-                           
-                        </div>
 
-                        </div>
-                </div>
-                <div class="footer">
-                    <div class="pull-right">
-                       
-                    </div>
-                    <div>
-                        Powered by <a href="http://earthand.co/en/" target="_blank">Earth and Co</a> &copy; 2014-2015
-                    </div>
-                </div>
-            </div>
-        </div>
+				</div>
+				<div class="col-lg-4">
+
+
+				</div>
+				<div class="col-lg-4">
+
+				</div>
+
+			</div>
+		</div>
+		<div class="footer">
+			<div class="pull-right">
+
+			</div>
+			<div>
+				Powered by <a href="http://earthand.co/en/" target="_blank">Earth and Co</a> &copy; 2014-2015
+			</div>
+		</div>
+	</div>
+</div>
 
 
 
@@ -350,53 +364,52 @@
 
 
 {% block scripts %}
-
-
 <!-- Mainly scripts -->
-    <script src={% static "app/js/jquery-2.1.1.js" %}></script>
-    <script src={% static "app/js/bootstrap.min.js" %}></script>
-    <script src={% static "app/js/plugins/metisMenu/jquery.metisMenu.js" %}></script>
-    <script src={% static "app/js/plugins/slimscroll/jquery.slimscroll.min.js" %}></script>
+<script src={% static "app/js/jquery-2.1.1.js" %}></script>
+<script src={% static "app/js/bootstrap.min.js" %}></script>
+<script src={% static "app/js/plugins/metisMenu/jquery.metisMenu.js" %}></script>
+<script src={% static "app/js/plugins/slimscroll/jquery.slimscroll.min.js" %}></script>
 
-    <!-- Flot -->
-    <script src={% static "app/js/plugins/flot/jquery.flot.js" %}></script>
-    <script src={% static "app/js/plugins/flot/jquery.flot.tooltip.min.js" %}></script>
-    <script src={% static "app/js/plugins/flot/jquery.flot.spline.js" %}></script>
-    <script src={% static "app/js/plugins/flot/jquery.flot.resize.js" %}></script>
-    <script src={% static "app/js/plugins/flot/jquery.flot.pie.js" %}></script>
+<!-- Flot -->
+<script src={% static "app/js/plugins/flot/jquery.flot.js" %}></script>
+<script src={% static "app/js/plugins/flot/jquery.flot.tooltip.min.js" %}></script>
+<script src={% static "app/js/plugins/flot/jquery.flot.spline.js" %}></script>
+<script src={% static "app/js/plugins/flot/jquery.flot.resize.js" %}></script>
+<script src={% static "app/js/plugins/flot/jquery.flot.pie.js" %}></script>
 
-    <!-- Peity -->
-    <script src={% static "app/js/plugins/peity/jquery.peity.min.js" %}></script>
-    <script src={% static "app/js/demo/peity-demo.js" %}></script>
+<!-- Peity -->
+<script src={% static "app/js/plugins/peity/jquery.peity.min.js" %}></script>
+<script src={% static "app/js/demo/peity-demo.js" %}></script>
 
- 
-    <!-- Custom and plugin javascript -->
-    <script src={% static "app/js/inspinia.js" %}></script>
-    <script src={% static "app/js/plugins/pace/pace.min.js" %}></script>
 
-    <!-- jQuery UI -->
-    <script src={% static "app/js/plugins/jquery-ui/jquery-ui.min.js" %}></script>
+<!-- Custom and plugin javascript -->
+<script src={% static "app/js/inspinia.js" %}></script>
+<script src={% static "app/js/plugins/pace/pace.min.js" %}></script>
 
-    <!-- GITTER -->
-    <script src={% static "app/js/plugins/gritter/jquery.gritter.min.js" %}></script>
+<!-- jQuery UI -->
+<script src={% static "app/js/plugins/jquery-ui/jquery-ui.min.js" %}></script>
 
-    <!-- Sparkline -->
-    <script src={% static "app/js/plugins/sparkline/jquery.sparkline.min.js" %}></script>
+<!-- GITTER -->
+<script src={% static "app/js/plugins/gritter/jquery.gritter.min.js" %}></script>
 
-    <!-- Sparkline demo data  -->
-    <script src={% static "app/js/demo/sparkline-demo.js" %}></script>
+<!-- Sparkline -->
+<script src={% static "app/js/plugins/sparkline/jquery.sparkline.min.js" %}></script>
 
-    <!-- ChartJS-->
-    <script src={% static "app/js/plugins/chartJs/Chart.min.js" %}></script>
+<!-- Sparkline demo data  -->
+<script src={% static "app/js/demo/sparkline-demo.js" %}></script>
 
-    <!-- Toastr -->
-    <script src={% static "app/js/plugins/toastr/toastr.min.js" %}></script>
-    
-    <!-- Switchery -->
-   <script src={% static "app/js/plugins/switchery/switchery.js" %}></script>
-   
-   <!-- Input Mask-->
-    <script src={% static "app/js/plugins/jasny/jasny-bootstrap.min.js" %}></script>
-     
+<!-- ChartJS-->
+<script src={% static "app/js/plugins/chartJs/Chart.min.js" %}></script>
+
+<!-- Toastr -->
+<script src={% static "app/js/plugins/toastr/toastr.min.js" %}></script>
+
+<!-- Switchery -->
+<script src={% static "app/js/plugins/switchery/switchery.js" %}></script>
+
+<!-- Input Mask-->
+<script src={% static "app/js/plugins/jasny/jasny-bootstrap.min.js" %}></script>
+
+
 
 {% endblock scripts %}
