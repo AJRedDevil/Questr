@@ -17,10 +17,19 @@
    
    
 	     <link href={% static "landingpage/img/logo.png" %} rel="shortcut icon">
-	    
-	    <link href={% static "landingpage/css/font-awesome-4.2.0/css/font-awesome.min.css" %} rel="stylesheet">
- 
 	    <link href={% static "app/css/font-awesome-4.2.0/css/font-awesome.min.css" %} rel="stylesheet">
+	    <link href={% static "app/css/bootstrap.min.css" %} rel="stylesheet">
+<!-- Toastr style -->
+<link href={% static "app/css/plugins/toastr/toastr.min.css" %} rel="stylesheet">
+  <!-- Gritter --> 
+<link href={% static "app/js/plugins/gritter/jquery.gritter.css" %} rel="stylesheet">  
+<!-- Switchery -->
+  <link href={% static "app/css/plugins/switchery/switchery.css" %} rel="stylesheet">
+  
+    <link href={% static "app/css/animate.css" %} rel="stylesheet">
+    <link href={% static "app/css/style.css" %} rel="stylesheet">
+	    
+	    
 
 	    {% block localhead %}
 	    {% endblock localhead %}
@@ -95,7 +104,7 @@
         <div class="row border-bottom">
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0;">
         <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <a class="navbar-minimalize minimalize-styl-2 btn" href="#"><i class="fa fa-bars fa-2x" style="color: #404b55;"></i> </a>
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
@@ -105,12 +114,13 @@
                 
 	            </li>
 	            {% if not user.is_shipper %}
-                <li class="{% navactive request 'newquest' %}" id="postquest">
+                <li id="postquest">
                     <a href="{% url 'newquest' %}">
                         <i class="fa fa-plus-square" style="color:#23c6c8;"></i> Post a Quest
                     </a>
                 </li>
                 {% endif %}
+                {% comment %}
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell"></i>  <span class="label label-primary">6</span>
@@ -174,7 +184,7 @@
                         </li>
                     </ul>
                 </li>
-
+                {% endcomment %}
 
                 <li>
                     <a href="{% url 'logout' %}">

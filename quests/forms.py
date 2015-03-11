@@ -1,5 +1,4 @@
 
-
 from django import forms
 from .models import Quests
 
@@ -53,23 +52,7 @@ class QuestCreationForm(forms.ModelForm):
         exclude = ['questrs','status','creation_date','isaccepted', 'shipper', 'delivery_code', 'reward', \
             'item_images', 'distance', 'pickup', 'dropoff', 'delivery_date', 'map_image','available_couriers','tracking_number', 
             'pickup_time','considered_couriers']
-        widget = {
-            'description' : forms.TextInput(attrs = { 'placeholder': "Description"}),
-            'title' : forms.TextInput(attrs = { 'placeholder': 'Title'}),
-            'size' : forms.RadioSelect(attrs = { 'default': "backpack"}),
-            'srccity' : forms.Select(attrs = { 'placeholder': "toronto"}),
-            'srcaddress' : forms.TextInput(attrs = { 'placeholder': "Departure Address"}),
-            'srcaddress_2' : forms.TextInput(attrs = { 'placeholder': "Departure Address"}),
-            'srcname' : forms.TextInput(attrs = { 'placeholder': "John Doe"}),
-            'srcphone' : forms.TextInput(attrs = { 'placeholder': "+111-222-333"}),
-            'srcpostal' : forms.TextInput(attrs = { 'placeholder': "+111-222-333"}),
-            'dstcity' : forms.Select(attrs = { 'placeholder': "toronto"}),
-            'dstaddress' : forms.TextInput(attrs = { 'placeholder': "Delivery Address"}),
-            'dstaddress_2' : forms.TextInput(attrs = { 'placeholder': "Delivery Address"}),
-            'dstname' : forms.TextInput(attrs = { 'placeholder': "John Doe"}),
-            'dstphone' : forms.TextInput(attrs = { 'placeholder': "+111-222-333"}),
-            'dstpostalcode' : forms.TextInput(attrs = { 'placeholder': "+111-222-333"}),
-        }
+
         error_messages = {
             'size' : {
                 'required' : 'We need to know how you like your item to be shipped!',
@@ -79,6 +62,11 @@ class QuestCreationForm(forms.ModelForm):
                 'required' : 'A title is required !',
             },
         }
+        
+    def	__init__(self, *args, **kwargs):
+        super(QuestCreationForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs = {'class' :'form-control input-lg'}
+        
 
 class QuestConfirmForm(forms.ModelForm):
     """

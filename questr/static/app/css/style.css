@@ -12,9 +12,14 @@ h4,
 h5,
 h6 {
   font-weight: 100;
+  color: #555459;
+}
+p {
+	color: #555459;	
 }
 h1 {
   font-size: 30px;
+  font-weight: 500;
 }
 h2 {
   font-size: 24px;
@@ -43,7 +48,7 @@ h5 {
   padding: 14px 20px 14px 25px;
 }
 .nav.navbar-right > li > a {
-  color: #999c9e;
+  color: #404b55;
 }
 .nav > li.active > a {
   color: #ffffff;
@@ -164,7 +169,7 @@ h5 {
   transition: all 0.5s;
 }
 .nav > li.active {
-  border-left: 4px solid #F62459;
+  border-left: 4px solid #439fe0;
   background: #293846;
 }
 .nav.nav-second-level > li.active {
@@ -313,7 +318,8 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
 }
 .navbar-fixed-top,
 .navbar-static-top {
-  background: #f3f3f4;
+  background: white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
 }
 
 .navbar-static-top .navbar-top-links li#postquest a i  {
@@ -359,7 +365,7 @@ body.mini-navbar .logo-element {
 }
 body.mini-navbar .nav-header {
   padding: 0;
-  background-color: #1ab394;
+  background-color: #439fe0;
 }
 body.mini-navbar #page-wrapper {
   margin: 0 0 0 70px;
@@ -1685,8 +1691,8 @@ table.dataTable thead .sorting:after {
 .single-line {
   background-color: #FFFFFF;
   background-image: none;
-  border: 1px solid #e5e6e7;
-  border-radius: 1px;
+  border: 1px solid #c5c5c5;
+  border-radius: 3px;
   color: inherit;
   display: block;
   padding: 6px 12px;
@@ -2723,7 +2729,7 @@ body {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #2f4050;
   font-size: 13px;
-  color: #676a6c;
+  color: #555459;
   overflow-x: hidden;
 }
 body.boxed-layout {
@@ -3726,6 +3732,7 @@ body.modal-open {
 .dashboard-header {
   border-top: 0;
   padding: 20px 20px 20px 20px;
+  margin-bottom: 0;
 }
 .dashboard-header h2 {
   margin-top: 10px;
@@ -5004,6 +5011,7 @@ body.skin-3 {
     display: inline;
     float: left;
   }
+
   .sidebard-panel {
     z-index: 2;
     position: relative;

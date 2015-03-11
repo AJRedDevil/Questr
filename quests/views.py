@@ -102,7 +102,9 @@ def newquest(request):
             return render(request, 'confirmquest.html', locals())  
         if user_form.errors:
             logger.debug("Form has errors, %s ", user_form.errors)
-
+            return render(request, 'newquest.html', locals())
+           
+    user_form = QuestCreationForm()
     pagetitle = "Create your Quest"
     return render(request, 'newquest.html', locals())  
 
