@@ -12,14 +12,6 @@
 <div class="container-fluid">
   
    
-    <div class="row clearfix">
-      <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
-          <div class="col-xs-12 col-lg-8 column">
-          <h3><span class="glyphicon glyphicon-user"></span> Request a shipment</h3>
-          
-        </div><!-- ./column -->
-    </div>
-  </div><!-- ./row -->
   
 
   <div class="row clearfix">
@@ -45,24 +37,22 @@
     {% if dstphone %}
     <input type="hidden" name="dstphone" value="{{dstphone}}">      
     {% endif %}
-
-
-    <div class="col-xs-12 col-sm-12 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 column">
-      
-          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 column">
-
-        <!-- POSTAL CODE INPUT -->
-        <div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column">
+    
+    
+    
+    
+      <!-- POSTAL CODE INPUT -->
+        <div class="form-group col-xs-6 col-sm-6 col-md-3 col-lg-3 column" style="display:none;">
                     <div class="radio">       
           <label>
             <input class="radio-inline" type="radio" name="pickup_time" id="inlineRadio1" value="now" checked>
                       Now
           </label>
                 </div>
-        </div><!-- POSTAL CODE INPUT -->  
-
-        <!-- PHONE NUMBER -->
-        <div class="form-group col-xs-12 col-sm-12 col-md-5 col-lg-5 column">
+        </div><!-- POSTAL CODE INPUT --> 
+    
+    <!-- PHONE NUMBER -->
+        <div class="form-group col-xs-12 col-sm-12 col-md-5 col-lg-5 column" style="display:none;">
                     <div class="radio">
                <label>
                         <input class="radio-inline" type="radio" name="pickup_time" id="customTime" value="not_now">
@@ -83,52 +73,19 @@
                     </div><!-- radio -->        
         </div><!-- PHONE NUMBER -->
 
-    
+<div class="row">
+	<div class="col-lg-10">
+                <div class="wrapper wrapper-content animated fadeInUp">
 
-
-          </div><!-- column -->
-      <div class="well col-xs-12 col-sm-12 col-md-4 col-lg-4 column">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                           <h5>Confirm your delivery</h5>
+                        </div>
+                        <div class="ibox-content">
+                        
+                            
          <img class="img-responsive" src="{{map_image}}">
-         {% comment %}
-            <div class="no-image text-center">
-            <div class="no-image item-image text-center">
-                <span style="width:30px;height:30px;display:block;position:absolute;right:20px;margin:7px;"><a><i class="fa fa-paint-brush"></a></i></span>
-                <img class="img-responsive" src="{{map_image}}">
-                <h1 style="font-size:50px;"><i class="fa fa-picture-o"></i></h1>   
-            </div>
-            {% endcomment %}
-
-            {% comment %}
-            <h4>Title will go here</h4>
-            {% endcomment %}
-
-            {% comment %}
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-              <!-- Indicators -->
-              <ol class="carousel-indicators">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-              </ol>
-
-              <!-- Wrapper for slides -->
-              <div class="carousel-inner">
-                <div class="item active">
-                  <img src="..." alt="...">
-                  <div class="carousel-caption">
-                    ...
-                  </div>
-                </div>
-                <div class="item">
-                  <img src="..." alt="...">
-                  <div class="carousel-caption">
-                    ...
-                  </div>
-                </div>
-                ...
-              </div>
-              {% endcomment %}
-           
+  
 
             <h4>{{title|title}}</h4>
              <p>{{description}}</p>
@@ -191,27 +148,6 @@
             </div>
             {% endcomment %}
 
-            {% comment %}
-            <!-- PROMO CODE -->
-            <div class="row clearfix">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-
-
-            <div class="panel panel-default" id="panel1">
-                <div class="panel-heading">
-                    <a>Coupon Code</a>
-                </div><!-- ./panel-heading --> 
-                  <div class="panel-body panel-collapse collapse in" id="collapseOne">
-                    <div class="form-inline"> 
-                        <input id="promocode" name="promocode" type="text" placeholder="" class="form-control input-xs">
-                        <button class="btn btn-default">Apply</button>
-                    </div>
-                  </div><!-- ./panel-body -->
-                </div>
-                </div>
-            </div>
-             <hr>
-            {% endcomment %}
            
            
             <!-- PROMO CODE -->
@@ -235,44 +171,30 @@
               data-currency="cad"
               data-amount="{{stripereward}}">
             </script>
-      </div><!-- ./well -->
-     </div>
+
+                                
+                        </div>
+                    </div>
+                    
+                     
+                </div>
+            </div>
+</div>
+
+
+      
+
+      
+
   </form>
 </div><!-- ./row -->
-    {% endblock content %}
+    
 </div><!-- ./container -->
 
-
+{% endblock content %}
 {% block scripts %}
 
-<script src={% static "js/moment.js" %}></script>
-<script src={% static "js/bootstrap-datetimepicker.js" %}></script>
-<script src={% static "js/jquery.timepicker.js" %}></script>
 
-<script type="text/javascript">
-        $(document).on('click', '.panel-heading', function(e){
-            var $this = $(this);
-            if(!$this.hasClass('panel-collapsed')) {
-                $this.parents('.panel').find('.panel-body').slideUp();
-                $this.addClass('panel-collapsed');
-                $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-right');
-            } else {
-                $this.parents('.panel').find('.panel-body').slideDown();
-                $this.removeClass('panel-collapsed');
-                $this.find('i').removeClass('glyphicon-chevron-right').addClass('glyphicon-chevron-down');
-            }
-        })
-    </script>
-
-<script type="text/javascript">
-            $(function () {
-                $('#datetimepicker4').datetimepicker({
-                    pickDate: false,
-                    use24hours: true,
-                    format: 'HH:mm'
-                });
-            });
-        </script>
 
 <script type="text/javascript">
     function reply_click(clicked_id)

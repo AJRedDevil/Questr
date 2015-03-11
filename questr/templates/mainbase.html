@@ -60,10 +60,13 @@
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element"> 
-                        	<span class="inline" style="margin-right:10px;">
-                            	<img alt="image" class="img-circle img-responsive" src="https://igcdn-photos-h-a.akamaihd.net/hphotos-ak-xap1/t51.2885-15/10693317_1484852375131591_493164933_n.jpg" style="width:40px;height:40px;" />
-                             </span>
-                            <a data-toggle="dropdown" class="dropdown-toggle inline" href="#">
+                        	
+                        		{% comment %}
+                            	<img alt="image" class="img-circle img-responsive" src="" style="width:40px;height:40px;" />
+                            	{% endcomment %}
+                              
+                              
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{user.first_name}} {{user.last_name}} </strong>
                              </span> <span class="text-muted text-xs block">
                             {% if user.is_shipper %}
@@ -394,8 +397,8 @@
 
 	{% block scripts %}
 
-
-
+	
+	
 
 	{% endblock scripts %}
 	</body>	    

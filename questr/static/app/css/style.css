@@ -49,6 +49,7 @@ h5 {
 }
 .nav.navbar-right > li > a {
   color: #404b55;
+  font-size: 16px;
 }
 .nav > li.active > a {
   color: #ffffff;
@@ -163,7 +164,7 @@ h5 {
 }
 .nav-header {
   padding: 33px 25px;
-  background-image: url("../patterns/header-profile.png") no-repeat;
+  background: url("patterns/header-profile.png") no-repeat;
 }
 .pace-done .nav-header {
   transition: all 0.5s;
@@ -539,6 +540,9 @@ body-small.fixed-sidebar.mini-navbar .top-navigation #page-wrapper {
   .menu-visible-lg {
     display: block !important;
   }
+}
+select.form-control {
+	min-height: 46px;	
 }
 .btn {
   border-radius: 3px;
@@ -2777,7 +2781,7 @@ a:focus {
   border-right: 1px solid #e7eaec;
 }
 .hr-line-dashed {
-  border-top: 1px dashed #e7eaec;
+  border-top: 1px dashed #e8e8e8;
   color: #ffffff;
   background-color: #ffffff;
   height: 1px;
@@ -3118,6 +3122,12 @@ code {
   margin-bottom: 25px;
   margin-top: 0;
   padding: 0;
+  
+  border-radius: 0 0 .25rem .25rem;
+  -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.25);
+  -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.25);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.25);
+    border: 1px solid #e8e8e8;
 }
 .ibox:after,
 .ibox:before {
@@ -3141,7 +3151,7 @@ code {
 .ibox-content {
   background-color: #ffffff;
   color: inherit;
-  padding: 15px 20px 20px 20px;
+  padding: 2rem 4rem 1rem;
   border-color: #e7eaec;
   border-image: none;
   border-style: solid solid none;

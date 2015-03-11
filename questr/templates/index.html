@@ -312,7 +312,7 @@
                 	We are currently in private beta, and only serve the Greater Toronto Area. If you're interested in using Questr, please let us know.
                 </p>
                 <div class="btns">
-                    <a href="#" class="btn btn-large btn-clear">TRY IT NOW</a>
+                    <a href="#" class="btn btn-large btn-clear" data-toggle="modal" data-target="#myModal">TRY IT NOW</a>
                 </div>
             </div>
         </div>
@@ -321,31 +321,39 @@
 
 
 
-{% comment %}
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content" style="margin-top:48%;">
-			      <div class="modal-body">
-			      	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			      	<br><br>
-
-			    	<form action="{% url 'contactus'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_top" role="form" novalidate>{% csrf_token %}
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Get an invitation to be a beta tester</h4>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'contactus'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-horizontal" target="_top" role="form" novalidate>{% csrf_token %}
 
 
 						<div class="form-group">
 							<input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Name">
+							<br><br>
 							<input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-							<textarea name="message" class="form-control" rows="3" placeholder="Message" style="min-height:200px;"></textarea>
+							<br><br>
+							<textarea name="message" class="form-control" rows="3" placeholder="Message"></textarea>
 						</div><!-- ./form-group -->
-						<br>
-						<center><button type="submit" class="btn btn-default theme-button">Send</button></center>
+						
+						
 					</form>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-{% endcomment %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-info">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
 

@@ -29,46 +29,15 @@
 
 
 
-
-
-
-
-<style type="text/css">
-	.css-form input.ng-invalid.ng-dirty {
-		border-color: rgba(232,77,60,1.00);
-
-	}
-
-	.css-form input.ng-valid.ng-dirty {
-		border-color: rgba(47,204,112,1.00);
-
-	}
-</style>
-
-<style>
-	#radioBtn a.btn {
-		margin-bottom: 5px;
-		margin-right: 5px;
-		border-radius: 999em;
-	}
-</style>
 {% endblock localhead %}
 {% block content %}
-<div class="row  border-bottom white-bg dashboard-header">
-
-	<div class="col-sm-12">
-		<h2>Start delivering in minutes ..</h2>
 
 
-	</div>
-
-
-</div>
-
-<div class="row" style="margin-bottom:200px;" ng-app="validation">
-	<form role="form" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" class="form-horizontal" novalidate>{% csrf_token %}
-		<div class="col-lg-8 css-form" novalidate>
+<div class="row" style="margin-bottom:200px;">
+	<form role="form" action="{% url 'newquest' %}" method="post" enctype="multipart/form-data" class="form-horizontal">{% csrf_token %}
+		<div class="col-lg-10">
 			<div class="wrapper wrapper-content animated fadeInUp">
+
 
 				<div class="ibox">
 					<div class="ibox-title">
@@ -80,27 +49,28 @@
 						</div>
 					</div>
 					<div class="ibox-content">
-
-						<div class="form-group"><label class="col-sm-2 control-label">Title</label>
-							<div class="col-sm-10">
+						<div class="form-group">
+							
+							<div class="col-sm-12">
+								<label class="control-label">Title</label>
 								{{user_form.title}}
 								<span class="help-block m-b-none">{{user_form.title.errors}}</span>
 							</div>
+							
+							<div class="col-sm-12">
+								<label class="control-label">Description</label>
+									{{user_form.description}}
+									<span class="help-block m-b-none"></span>
+							</div>	
+							
+							
+	
 						</div>
-						<div class="hr-line-dashed"></div>
-
-						<div class="form-group"><label class="col-sm-2 control-label">Description</label>
-							<div class="col-sm-10">
-								{{user_form.description}}
-								<span class="help-block m-b-none"></span>
-							</div>
-						</div>
-
-						<div class="hr-line-dashed"></div>
-
-						<div class="form-group"><label class="col-sm-2 control-label">Size</label>
-							<div class="col-sm-10">
-								<div class="input-group">
+						
+						<div class="form-group">
+							<div class="col-sm-12">
+							<label class="control-label">Size</label>
+							<div class="input-group">
 									<div class="input-group form-inline">
 	                        {% comment %}
 							<label class="radio-inline">
@@ -114,9 +84,9 @@
 							{% endcomment %}
 									{% for choice in user_form.size.field.choices %}
 									<label class="radio-inline">
-										<input type="radio" id="inlineCheckbox{{choice.count}}" name="{{user_form.size.name}}" value="{{choice.0}}" checked>
+										<input type="radio" id="inlineCheckbox{{choice.count}}" name="{{user_form.size.name}}" value="{{choice.0}}" checked style="visibility:hidden;">
 										<div id="radioBtn" class="btn-group">
-									    <a class="btn btn-primary btn-sm active" data-toggle="fun" data-title="{{choice.1}}" checked>
+									    <a class="btn btn-info btn-sm active" data-toggle="fun" data-title="{{choice.1}}" checked>
 									    <i class="fa fa-{{choice.1.lower}}"></i> {{choice.1}}
 									   	</a>									
 									</div><!-- /input-group -->
@@ -147,6 +117,147 @@
     							<span class="help-block m-b-none">{{user_form.size.errors}}</span>
 				    		</div>
 						</div>
+						
+						
+						<div class="col-sm-12">
+							<div class="hr-line-dashed"></div>
+					    	<label class="control-label">
+					    	Tell us where to pick up the package.  Click 
+					    	<a id="autofill" onclick="reply_click(this.id)">here</a> to autofill your information.
+					    	</label> 
+					    	<div class="hr-line-dashed"></div>
+						</div>
+						
+						
+						
+						<div class="col-sm-6">
+					    	<label class="control-label">Name of Sender</label>
+				    		
+					    		{{user_form.srcname}}	
+					    		<span class="help-block m-b-none">{{user_form.srcname.errors}}</span>
+						</div>
+						
+						<div class="col-sm-6">
+							<label class="control-label">Phone #</label>
+				    		
+								{{user_form.srcphone}}
+					    		<span class="help-block m-b-none">{{user_form.srcphone.errors}}</span>	
+						</div>
+						
+						
+						<div class="col-sm-12">
+					    	<label class="control-label">Address Line 1</label>
+				    		
+				    			{{user_form.srcaddress}}
+					    		<span class="help-block m-b-none">{{user_form.srcaddress.errors}}</span>
+						</div>
+						
+						
+						<div class="col-sm-12">
+				    	
+					    	<label class="control-label">Address Line 2</label>
+					    		
+									{{user_form.srcaddress_2}}
+						    		<span class="help-block m-b-none">{{user_form.srcaddress_2.errors}}</span>
+						</div>
+						
+						
+						
+						<div class="col-sm-4">
+				    		<label class="control-label">City</label>
+				    		
+								{{user_form.srccity}}
+				    			<span class="help-block m-b-none">{{user_form.srccity.errors}}</span>
+				    	
+				    		
+				    	</div>
+				    	
+				    	<div class="col-sm-4">
+				    	
+				    	</div>
+				    	
+				    	<div class="col-sm-4">
+				    		<label class="control-label">Postal Code</label>
+				    		
+					    		{{user_form.srcpostalcode}}
+					    		<span class="help-block m-b-none">{{user_form.srcpostalcode.errors}}</span>
+				    	</div>
+				    	
+				    	
+				    	
+				    	<div class="col-sm-12">
+				    		<div class="hr-line-dashed"></div>
+					    	<label class="control-label">
+					    	Tell us where to drop off the package, and who we should give it to.
+					    	</label> 
+					    	<div class="hr-line-dashed"></div>
+				    	</div>
+				    	
+				    	
+				    	
+				    	<div class="col-sm-6">
+					    	<label class="control-label">Name of Reciever</label>
+				    		
+								{{user_form.dstname}}
+					    		<span class="help-block m-b-none">{{user_form.dstname.errors}}</span>
+				    	</div>
+				    	
+				    	
+				    	<div class="col-sm-6">
+				    		<label class="control-label">Phone #</label>
+				    		
+								{{user_form.dstphone}}
+						    	<span class="help-block m-b-none">{{user_form.dstphone.errors}}</span>
+				    	</div>
+				    	
+				    	
+				    	
+				    	<div class="col-sm-12">
+				    	
+					    	<label class="control-label">Address Line 1</label>
+				    		
+								{{user_form.dstaddress}}
+								<span class="help-block m-b-none">{{user_form.dstaddress.errors}}</span>
+				    	
+				    	</div>
+				    	
+				    	<div class="col-sm-12">
+				    	
+					    	<label class="control-label">Address Line 2</label>
+				    		
+								{{user_form.dstaddress_2}}
+					    		<span class="help-block m-b-none">{{user_form.dstaddress_2.errors}}</span>
+				    	</div>
+
+				    	
+				    	<div class="col-sm-4">
+					    	<label class="control-label">City</label>
+				    		
+								{{user_form.dstcity}}
+				    			<span class="help-block m-b-none">{{user_form.dstcity.errors}}</span>
+				    	</div>
+				    	
+				    	<div class="col-sm-4"></div>
+				    			
+				    			<div class="col-sm-4">
+				    
+				    		<label class="control-label">Postal Code</label>
+				    
+								{{user_form.dstpostalcode}}
+					    		<span class="help-block m-b-none">{{user_form.dstpostalcode.errors}}</span>
+			
+				    			</div>
+				    	
+		
+						</div>
+
+
+					
+					
+						
+
+
+
 
 						{% comment %}
 							<div class="form-group"><label class="col-sm-2 control-label">Quantity</label>
@@ -178,149 +289,28 @@
 							</div>
 						{% endcomment %}
 
-				    	<div class="hr-line-dashed"></div>
 
-				    	<div class="form-group">
-					    	<label class="col-lg-12 control-label" style="text-align:center;">
-					    	Tell us where to pick up the package.  Click 
-					    	<a id="autofill" onclick="reply_click(this.id)">here</a> to autofill your information.
-					    	</label> 
-				    	</div>
-
-				    	<div class="hr-line-dashed"></div>
-
-				    	<div class="form-group">
-					    	<label class="col-sm-2 control-label">Name of Sender</label>
-				    		<div class="col-sm-4">
-					    		{{user_form.srcname}}	
-					    		<span class="help-block m-b-none">{{user_form.srcname.errors}}</span>
-				    		</div>
-				    		<label class="col-sm-2 control-label">Phone #</label>
-				    		<div class="col-sm-4">
-								{{user_form.srcphone}}
-					    		<span class="help-block m-b-none">{{user_form.srcphone.errors}}</span>
-				    		</div>
-				    	</div>
-
-				    	<div class="hr-line-dashed"></div>
-
-				    	<div class="form-group">
-					    	<label class="col-sm-2 control-label">Address Line 1</label>
-				    		<div class="col-sm-10">
-				    			{{user_form.srcaddress}}
-					    		<span class="help-block m-b-none">{{user_form.srcaddress.errors}}</span>
-				    		</div>
-				    	</div>
-
-
-				    	<div class="form-group">
-					    	<label class="col-sm-2 control-label">Address Line 2</label>
-					    		<div class="col-sm-10">
-									{{user_form.srcaddress_2}}
-						    		<span class="help-block m-b-none">{{user_form.srcaddress_2.errors}}</span>
-					    		</div>
-				    	</div>
-
-
-				    	<div class="form-group"><label class="col-sm-2 control-label">City</label>
-				    		<div class="col-sm-4">
-								{{user_form.srccity}}
-				    			<span class="help-block m-b-none">{{user_form.srccity.errors}}</span>
-				    		</div>
-				    		<label class="col-sm-2 control-label">Postal Code</label>
-				    		<div class="col-sm-4">
-					    		{{user_form.srcpostalcode}}
-					    		<span class="help-block m-b-none">{{user_form.srcpostalcode.errors}}</span>
-				    		</div>
-				    	</div>
-
-
-				    	<div class="hr-line-dashed"></div>
-
-				    	<div class="form-group">
-					    	<label class="col-lg-12 control-label" style="text-align:center;">
-					    	Tell us where to drop off the package, and who we should give it to.
-					    	</label> 
-				    	</div>
-
-
-				    	<div class="hr-line-dashed"></div>		                                
-
-
-				    	<div class="form-group">
-					    	<label class="col-sm-2 control-label">Name of Reciever</label>
-				    		<div class="col-sm-4">
-								{{user_form.dstname}}
-					    		<span class="help-block m-b-none">{{user_form.dstname.errors}}</span>
-				    		</div>
-
-				    		<label class="col-sm-2 control-label">Phone #</label>
-				    		<div class="col-sm-4">
-								{{user_form.dstphone}}
-						    	<span class="help-block m-b-none">{{user_form.dstphone.errors}}</span>
-				    		</div>
-				    	</div>
-
-
-				    	<div class="hr-line-dashed"></div>
-
-
-				    	<div class="form-group">
-					    	<label class="col-sm-2 control-label">Address Line 1</label>
-				    		<div class="col-sm-10">
-								{{user_form.dstaddress}}
-								<span class="help-block m-b-none">{{user_form.dstaddress.errors}}</span>
-				    		</div>
-				    	</div>
-
-
-				    	<div class="form-group">
-					    	<label class="col-sm-2 control-label">Address Line 2</label>
-				    		<div class="col-sm-10">
-								{{user_form.dstaddress_2}}
-					    		<span class="help-block m-b-none">{{user_form.dstaddress_2.errors}}</span>
-				    		</div>
-				    	</div>
-
-				    	<div class="form-group"><label class="col-sm-2 control-label">City</label>
-				    		<div class="col-sm-4">
-								{{user_form.dstcity}}
-				    			<span class="help-block m-b-none">{{user_form.dstcity.errors}}</span>
-				    		</div>
-				    		<label class="col-sm-2 control-label">Postal Code</label>
-				    		<div class="col-sm-4">
-								{{user_form.dstpostalcode}}
-					    		<span class="help-block m-b-none">{{user_form.dstpostalcode.errors}}</span>
-				    		</div>
-				    	</div>
-
-				    </div>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-lg-4">
-			<div class="wrapper wrapper-content animated fadeInUp">
-
-				<div class="ibox">
-					<div class="ibox-title">
-						<h5>TOTAL</h5>
-						<div class="ibox-tools">
-
-						</div>
-					</div>
-					<div class="ibox-content">
-
-
-
-						<center><button type="submit" class="btn btn-lg btn-rounded" id="continue" ng-disabled="form.$invalid || isUnchanged(user)">CONTINUE</button></center>
-
+						
+						<div class="hr-line-dashed"></div>
+						<button type="submit" class="btn btn-lg btn-info" id="continue" ng-disabled="form.$invalid || isUnchanged(user)">CONTINUE</button>
+				    			
+				    			
+				    		
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>	
+	
+
+		
 	</form>
 </div>
+
+
+
+
+
+
 
 <div class="row">
 	<div class="col-lg-12">

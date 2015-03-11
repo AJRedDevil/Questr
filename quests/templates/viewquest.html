@@ -1,213 +1,147 @@
 {% extends "mainbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
-    <!-- Custom CSS -->
-    <link href={% static "css/quest.css" %} rel="stylesheet">
-    <link href={% static "css/star-rating.css" %} media="all" rel="stylesheet" type="text/css"/>
-    
-    <!-- Custom Javascript -->
-    <script src={% static "js/validator.js" %}></script>  
-    <script src={% static "js/lightbox.js" %}></script>
-    <script src={% static "js/star-rating.js" %} type="text/javascript"></script> 
-    <script src={% static "bootstrap/js/tooltip.js" %} type="text/javascript"></script>
+
     
     
 {% endblock localhead %}
 {% block content %}
-  <div class="container">
-		<div class="row clearfix">
-	
-					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 column text-center">
-						<div class="well">					
-							{% if not questdetails.item_images %}
-					        <h1 style="font-size:50px;"><i class="fa fa-picture-o"></i></h1>
-							{% else %}
-			            
-				            <a data-target="#lightbox" data-toggle="modal" href="#">
-					            <img alt="itemImage" class="itemImage img-rounded" src="{{questdetails.get_item_images_normal_url}}">
-				            </a>
-				            {% endif %}
-							
-							<hr>
-							<div class="clearfix"></div>
-							<h6 class="inline">Size: </h6>
-							<p class="inline">{{questdetails.size}}</p>
+<div class="row">
+	<div class="col-lg-10">
+                <div class="wrapper wrapper-content animated fadeInUp">
 
-							 
-							 <div class="row clearfix"  id="imageSelector">
-								<div class="col-xs-4 col-sm-4 col-md-4 column"> 
-							    	<img class="itemImage" src="{{questdetails.get_item_images_normal_url}}">
-							    </div><!-- ./column -->
-							    <div class="col-xs-4 col-sm-4 col-md-4 column"> 
-							    	
-							    </div><!-- ./column -->
-							    <div class="col-xs-4 col-sm-4 col-md-4 column"> 
-							    	
-							    </div><!-- ./column -->
-							    
-								</div><!-- ./row -->
-	
-
-							<div class="modal fade" id="lightbox" tabindex="-1">
-								<div class="modal-dialog">
-									<button class="close hidden" data-dismiss="modal" type="button">×</button>
-	
-									<div class="modal-content">
-										<div class="modal-body"><img alt="" src=""></div>
-									</div><!-- ./modal-content -->
-								</div><!-- ./modal-dialog -->
-							</div><!-- ./modal -->						
-			
-						</div><!-- ./well -->
-					</div>	<!-- End of column -->
-					
-
-					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 column well">
-					
-							<h5>{% if isOwner %}
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                           
+                        </div>
+                        <div class="ibox-content">
+                        <div class="row">
+                        
+                        	<div class="col-lg-3">
+	                        		{% if not questdetails.item_images %}
+						        <h1 style="font-size:50px;"><i class="fa fa-picture-o"></i></h1>
+								{% else %}
+				            
+					            <a data-target="#lightbox" data-toggle="modal" href="#">
+						            <img alt="itemImage" class="itemImage img-rounded" src="{{questdetails.get_item_images_normal_url}}">
+					            </a>
+					            {% endif %}
+								
+								<h6 class="inline">Size: </h6>
+								<p class="inline">{{questdetails.size}}</p>
+                        	</div>
+	                       
+	                        <div class="col-lg-6">
+		                        <h5>{% if isOwner %}
 									<span class="label label-info no-margin">{{questdetails.status}} </span>
 								{% endif %}
 								</h5>
 								<h4 class="inline">{{questdetails.title}}</h4>
-								<div class="clearfix"></div>
+								
 					   
 					   
-						    {# Only allowing shippers to view addresses #}
-							{% if user.is_shipper or isOwner %}
-
-							<div class="clearfix"></div> 
-							<h6 class="inline">Pays:</h6>
-							<p class="inline">${{questdetails.reward}}</p>
-
-							<div class="clearfix"></div>
-							<h6 class="inline">Delivery Code: </h6>
-							<p class="inline">{{questdetails.delivery_code}}</p>
-						
-							<hr>
-
-							<div class="clearfix"></div>
-							<h6 class="inline">Departure Address: </h6>
-							<p class="inline">{{questdetails.pickup.address}}, {{questdetails.pickup.city}}</p>
-							
-							<div class="clearfix"></div>
-							<h6 class="inline">Destination Address: </h6>
-							<p class="inline">{{questdetails.dropoff.address}}, {{questdetails.dropoff.city}}</p>
-
-
-							<div class="panel-group col-md-12 column" id="accordion">
-								<div class="panel panel-default" id="panel1">
-									<div class="panel-heading col-md-2 column" style="border:none;">
-										<strong class="panel-title" style="font-size:10px;"><a data-toggle="collapse" href="#collapseOne" data-parent="#accordion">map</a></strong>
-									</div><!-- ./panel-heading -->
+									    {# Only allowing shippers to view addresses #}
+										{% if user.is_shipper or isOwner %}
+										<br>
+										
+										<h6 class="inline">Pays:</h6>
+										<p class="inline">${{questdetails.reward}}</p>
+										<br>
+										
+										<h6 class="inline">Delivery Code: </h6>
+										<p class="inline">{{questdetails.delivery_code}}</p>
+										<br>
+			
+										<h6 class="inline">Departure Address: </h6>
+										<p class="inline">{{questdetails.pickup.address}}, {{questdetails.pickup.city}}</p>
+										<br>
 									
-									<div id="collapseOne" class="panel-collapse collapse col-md-12 column">
-										<div class="panel-body" style="border:none;">
-											<div id="map-collapse">
-												{# <a href="#"><small class="light-grey" id="btn-map">view map <i class="fa fa-caret-down"></i></small></a> #}
-												<img alt="itemImage" class="itemImage img-rounded" src="{{questdetails.map_image}}">
-												{% endif %}
-											</div><!-- #map -->
-										</div><!-- ./panel-body -->
-									</div><!-- ./panel-collapse -->
-								</div><!-- ./panel-default -->			
-							</div><!-- ./panel-group -->
-
-							<hr>
-							<div class="clearfix"></div> 
-							<h6 class="inline">Description:</h6>
-							<p>{{questdetails.description}}</p>
-					</div><!-- ./column -->
-				
-				
-
-
-
-
-
-
-
-				
-
-	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 column" id="side-profile">
-		<div class="well">
-			<div class="row clearfix">
-				{% comment %}
-					<a href="/user/{{questdetails.questrs.displayname}}"></a>	
-				{% endcomment %}
-				<div class="col-xs-2 col-sm-3 col-md-3 col-lg-3 column">
-					<div class="ratio img-responsive img-circle" style="background-image: url({{user.get_profile_pic}});"></div>
-				</div>
-				
-				<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9 column">
-					<strong id="username">{{questdetails.questrs.first_name}} {{questdetails.questrs.last_name}}</strong>
-					{% comment %}
-					<input id="input-21e" value="0" type="number" class="rating" min=0 max=100 step=0.5 data-size="xs" data-readonly="true" data-show-clear="false" data-show-caption="true" >
-					{% endcomment %}
-				</div><!-- ./column -->
-
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 column">
-					<hr>
-					<h6 class="inline"><i class="fa fa-clock-o"></i> {{questdetails.creation_date}}</h6>
-					<h6><span class="glyphicon glyphicon-map-marker"></span> {{questdetails.location}}, Canada</h6> 
-					<h6>{{questdetails.questrs.phone}}</h6>
-				</div><!-- column -->
+										<h6 class="inline">Destination Address: </h6>
+										<p class="inline">{{questdetails.dropoff.address}}, {{questdetails.dropoff.city}}</p>
+										{# <a href="#"><small class="light-grey" id="btn-map">view map <i class="fa fa-caret-down"></i></small></a> #}
+															<img alt="itemImage" class="img-responsive" src="{{questdetails.map_image}}">
+															{% endif %}
+			
+			
+			
+										 
+										<h6 class="inline">Description:</h6>
+										<p>{{questdetails.description}}</p>
+	                        </div>
+	                                 
+	                        <div class="col-lg-3">
+		                        {% comment %}
+									<a href="/user/{{questdetails.questrs.displayname}}"></a>	
+								{% endcomment %}
+								
+								
+									<strong id="username">{{questdetails.questrs.first_name}} {{questdetails.questrs.last_name}}</strong>
+							
+								
+									<h6 class="inline"><i class="fa fa-clock-o"></i> {{questdetails.creation_date}}</h6>
+									<h6><span class="glyphicon glyphicon-map-marker"></span> {{questdetails.location}}, Canada</h6> 
+									<h6>{{questdetails.questrs.phone}}</h6>
+					           </div>
+                                
+                                
+                        </div>
+                                
+                        </div>
+                    </div>
+                    
+                     
+                </div>
+            </div>
+</div>
 
 
-			</div><!-- ./row -->
-		</div><!-- ./well -->
-	</div>	<!-- ./column -->
-	
-
-					
-		</div><!-- ./row -->
-	</div><!-- ./container -->
-	
-	
-	
-	
-	    <div class="row">
-	        <div id="myModal{{shipper.0.id}}" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	        <div class="modal-dialog">
-	            <div class="modal-content col-md-6 col-md-offset-3 column">
-	                <div class="well">
-	                <p>Are you sure you want to delete this Quest?</p>
-	                <div class="modal-footer">
-	                    <div class="btn-group">
-		                    <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
-		                </div>
-		             </div> <!--/.modal-footer -->
-	                </div><!-- ./well -->
-	            </div><!-- /.modal-content -->
-	        </div><!-- /.modal-dalog -->
-			</div><!-- /.modal -->
-	    </div><!-- ./row -->
-	    {% endblock content %}
-  				
+	    
+	    {% endblock content %}		
 
 {% block scripts %} 
-<script>	  
-jQuery(document).ready(function () {
-	$(".rating-kv").rating();
+<!-- Mainly scripts -->
+<script src={% static "app/js/jquery-2.1.1.js" %}></script>
+<script src={% static "app/js/bootstrap.min.js" %}></script>
+<script src={% static "app/js/plugins/metisMenu/jquery.metisMenu.js" %}></script>
+<script src={% static "app/js/plugins/slimscroll/jquery.slimscroll.min.js" %}></script>
 
-  	
-  	// Stop carousel
-	$('.carousel').carousel({
-		interval: false
-		});
-		
-		$(".popover-right").popover({
-			placement: 'right'
-		});
-});			
-</script>   
+<!-- Flot -->
+<script src={% static "app/js/plugins/flot/jquery.flot.js" %}></script>
+<script src={% static "app/js/plugins/flot/jquery.flot.tooltip.min.js" %}></script>
+<script src={% static "app/js/plugins/flot/jquery.flot.spline.js" %}></script>
+<script src={% static "app/js/plugins/flot/jquery.flot.resize.js" %}></script>
+<script src={% static "app/js/plugins/flot/jquery.flot.pie.js" %}></script>
 
-<script>
-$( '#map' ).click(function () {
-  if ( $( "div:first" ).is( ":hidden" ) ) {
-    $( "div" ).slideDown( "slow" );
-  } else {
-    $( "div" ).hide();
-  }
-});
-</script>
+<!-- Peity -->
+<script src={% static "app/js/plugins/peity/jquery.peity.min.js" %}></script>
+<script src={% static "app/js/demo/peity-demo.js" %}></script>
+
+
+<!-- Custom and plugin javascript -->
+<script src={% static "app/js/inspinia.js" %}></script>
+<script src={% static "app/js/plugins/pace/pace.min.js" %}></script>
+
+<!-- jQuery UI -->
+<script src={% static "app/js/plugins/jquery-ui/jquery-ui.min.js" %}></script>
+
+<!-- GITTER -->
+<script src={% static "app/js/plugins/gritter/jquery.gritter.min.js" %}></script>
+
+<!-- Sparkline -->
+<script src={% static "app/js/plugins/sparkline/jquery.sparkline.min.js" %}></script>
+
+<!-- Sparkline demo data  -->
+<script src={% static "app/js/demo/sparkline-demo.js" %}></script>
+
+<!-- ChartJS-->
+<script src={% static "app/js/plugins/chartJs/Chart.min.js" %}></script>
+
+<!-- Toastr -->
+<script src={% static "app/js/plugins/toastr/toastr.min.js" %}></script>
+
+<!-- Switchery -->
+<script src={% static "app/js/plugins/switchery/switchery.js" %}></script>
+
+
+
 {% endblock scripts %}
