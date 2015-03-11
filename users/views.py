@@ -240,7 +240,7 @@ def home(request):
         if request.session.has_key('alert_message'):
             del request.session['alert_message']
         activequests = Quests.objects.filter(ishidden=False, isaccepted=True, shipper=userdetails.id, is_complete=False).order_by('-creation_date')[:10]
-        pastquests = Quests.objects.filter(ishidden=False, is_complete=True, isaccepted=True, shipper=userdetails.id).order_by('-creation_date')[:10]
+        # pastquests = Quests.objects.filter(ishidden=False, is_complete=True, isaccepted=True, shipper=userdetails.id).order_by('-creation_date')[:10]
 
         return render(request,'homepage.html', locals())
     elif userdetails.is_superuser:

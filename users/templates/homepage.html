@@ -83,41 +83,41 @@
 
                         <table class="table table-hover">
                             <tbody>
-                                {% if not user.is_shipper %}
+                            {% if not user.is_shipper %}
                                 <!-- List group -->
                                 {% if allquests %}
-                                {% for unacceptedquests in allquests %}
-                                <tr>
-                                   <td class="project-status">
-                                       <span class="label label-primary">Active</span>
-                                   </td>
-                                   <td class="project-title">
-                                       <a href="/quest/{{unacceptedquests.id}}">{{unacceptedquests.title | title}}</a>
-                                       <br/>
-                                       <small>Created {% localtime on%} {{unacceptedquests.creation_date | timesince }} ago {% endlocaltime %}</small>
-                                   </td>
-                                   <td class="project-completion">
-                                       <small>28% Complete</small>
-                                       <div class="progress progress-mini">
-                                           <div style="width: 28%;" class="progress-bar"></div>
-                                       </div>
-                                   </td>
+                                  {% for unacceptedquests in allquests %}
+                                  <tr>
+                                     <td class="project-status">
+                                         <span class="label label-primary">Active</span>
+                                     </td>
+                                     <td class="project-title">
+                                         <a href="/quest/{{unacceptedquests.id}}">{{unacceptedquests.title | title}}</a>
+                                         <br/>
+                                         <small>Created {% localtime on%} {{unacceptedquests.creation_date | timesince }} ago {% endlocaltime %}</small>
+                                     </td>
+                                     <td class="project-completion">
+                                         <small>28% Complete</small>
+                                         <div class="progress progress-mini">
+                                             <div style="width: 28%;" class="progress-bar"></div>
+                                         </div>
+                                     </td>
 
-                                   <td class="project-actions">
-                                     <small>${{unacceptedquests.reward}}</small>
-                                 </td>
-                             </tr>
-                             {% endfor %}  
-                             {% else %}
-                             {% if not activequests and not allquests %}
-                             <tr>
-                                 <td class="project-title text-center">
-                                     Create new deliveries <a href={% url 'newquest' %}>here</a>
-                                 </td>
-                             </tr>
-                             {% endif %}
+                                     <td class="project-actions">
+                                       <small>${{unacceptedquests.reward}}</small>
+                                     </td>
+                                   </tr>
+                                  {% endfor %}
+                                {% else %}
+                                 {% if not activequests and not allquests %}
+                                 <tr>
+                                     <td class="project-title text-center">
+                                         Create new deliveries <a href={% url 'newquest' %}>here</a>
+                                     </td>
+                                 </tr>
+                                 {% endif %}                                
+                               {% endif %}
 
-                            {% endif %}
                             <!-- PENDING TRANSACTIONS -->
                             {% if activequests %}
                             {% for acceptedquests in activequests %}
@@ -143,7 +143,42 @@
                           </tr>
                           {% endfor %}
                           {% endif %}
-                          {% endif %}
+                          {% else %}
+                              <!-- PENDING TRANSACTIONS -->
+                              {% if activequests %}
+                              {% for acceptedquests in activequests %}
+                              <tr>
+                                  <td class="project-status">
+                                      <span class="label label-primary">Active</span>
+                                  </td>
+                                  <td class="project-title">
+                                      <a href="/quest/{{acceptedquests.id}}">{{acceptedquests.title | title}}</a>
+                                      <br/>
+                                      <small>Job Accepted on day at time</small>
+                                  </td>
+                                  <td class="project-completion">
+                                      <small>28% Complete</small>
+                                      <div class="progress progress-mini">
+                                          <div style="width: 28%;" class="progress-bar"></div>
+                                      </div>
+                                  </td>
+
+                                  <td class="project-actions">
+                                    <small>${{acceptedquests.reward}}</small>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                             {% else %}
+                              {% if not activequests and not allquests %}
+                              <tr>
+                                  <td class="project-title text-center">
+                                      You are not assigned with any delivery jobs as of now!
+                                  </td>
+                              </tr>
+                              {% endif %}                                
+                            {% endif %}
+                            {% endif %}
+
 
                       </tbody>
                   </table>
