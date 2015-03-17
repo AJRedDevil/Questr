@@ -66,7 +66,7 @@ class QuestCreationForm(forms.ModelForm):
             attrs={
                 'class': 'form-control input-lg',
                 'placeholder': 'Apartment, suite, unit, building, floor, etc.',
-                'required': 'true'
+                'required': 'false'
             }
         )
     )
