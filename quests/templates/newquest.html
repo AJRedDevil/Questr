@@ -52,6 +52,7 @@
 						<div class="form-group">
 							
 							<div class="col-sm-12">
+								<p>* are required fields</p>
 								<label class="control-label">Title</label>
 								{{user_form.title}}
 								<span class="help-block m-b-none">{{user_form.title.errors}}</span>
@@ -69,7 +70,7 @@
 						
 						<div class="form-group">
 							<div class="col-sm-12">
-							<label class="control-label">Size</label>
+							<label class="control-label">Size *</label>
 							<div class="input-group">
 									<div class="input-group form-inline">
 	                        {% comment %}
@@ -131,14 +132,14 @@
 						
 						
 						<div class="col-sm-6">
-					    	<label class="control-label">Name of Sender</label>
+					    	<label class="control-label">Name of Sender *</label>
 				    		
 					    		{{user_form.srcname}}	
 					    		<span class="help-block m-b-none">{{user_form.srcname.errors}}</span>
 						</div>
 						
 						<div class="col-sm-6">
-							<label class="control-label">Phone #</label>
+							<label class="control-label">Phone # *</label>
 				    		
 								{{user_form.srcphone}}
 					    		<span class="help-block m-b-none">{{user_form.srcphone.errors}}</span>	
@@ -146,7 +147,7 @@
 						
 						
 						<div class="col-sm-12">
-					    	<label class="control-label">Address Line 1</label>
+					    	<label class="control-label">Address Line 1 *</label>
 				    		
 				    			{{user_form.srcaddress}}
 					    		<span class="help-block m-b-none">{{user_form.srcaddress.errors}}</span>
@@ -164,7 +165,7 @@
 						
 						
 						<div class="col-sm-4">
-				    		<label class="control-label">City</label>
+				    		<label class="control-label">City *</label>
 				    		
 								{{user_form.srccity}}
 				    			<span class="help-block m-b-none">{{user_form.srccity.errors}}</span>
@@ -177,7 +178,7 @@
 				    	</div>
 				    	
 				    	<div class="col-sm-4">
-				    		<label class="control-label">Postal Code</label>
+				    		<label class="control-label">Postal Code *</label>
 				    		
 					    		{{user_form.srcpostalcode}}
 					    		<span class="help-block m-b-none">{{user_form.srcpostalcode.errors}}</span>
@@ -196,7 +197,7 @@
 				    	
 				    	
 				    	<div class="col-sm-6">
-					    	<label class="control-label">Name of Reciever</label>
+					    	<label class="control-label">Name of Reciever *</label>
 				    		
 								{{user_form.dstname}}
 					    		<span class="help-block m-b-none">{{user_form.dstname.errors}}</span>
@@ -204,7 +205,7 @@
 				    	
 				    	
 				    	<div class="col-sm-6">
-				    		<label class="control-label">Phone #</label>
+				    		<label class="control-label">Phone # *</label>
 				    		
 								{{user_form.dstphone}}
 						    	<span class="help-block m-b-none">{{user_form.dstphone.errors}}</span>
@@ -214,7 +215,7 @@
 				    	
 				    	<div class="col-sm-12">
 				    	
-					    	<label class="control-label">Address Line 1</label>
+					    	<label class="control-label">Address Line 1 *</label>
 				    		
 								{{user_form.dstaddress}}
 								<span class="help-block m-b-none">{{user_form.dstaddress.errors}}</span>
@@ -231,7 +232,7 @@
 
 				    	
 				    	<div class="col-sm-4">
-					    	<label class="control-label">City</label>
+					    	<label class="control-label">City *</label>
 				    		
 								{{user_form.dstcity}}
 				    			<span class="help-block m-b-none">{{user_form.dstcity.errors}}</span>
@@ -241,7 +242,7 @@
 				    			
 				    			<div class="col-sm-4">
 				    
-				    		<label class="control-label">Postal Code</label>
+				    		<label class="control-label">Postal Code *</label>
 				    
 								{{user_form.dstpostalcode}}
 					    		<span class="help-block m-b-none">{{user_form.dstpostalcode.errors}}</span>
