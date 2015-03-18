@@ -4,6 +4,56 @@
 {% block localhead %}
 <link href={% static "css/bootstrap-datetimepicker.min.css" %} rel="stylesheet">
 
+<style>
+      #map-canvas {
+        height: 600px;
+        width: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script>
+  var directionsDisplay;
+  var directionsService = new google.maps.DirectionsService();
+  var map;
+
+
+  function initialize() {
+    directionsDisplay = new google.maps.DirectionsRenderer();
+
+    var mapOptions = {
+      zoom:7,
+      center: new google.maps.LatLng(-3.0758, 37.3533),
+      disableDefaultUI: true,
+      scrollwheel: false,
+      zoomControl:true
+    };
+
+
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    directionsDisplay.setMap(map);
+
+      var request = {
+        origin: "{{srcaddress}}, {{srccity}}, {{srcpostalcode}}",
+        destination: "{{dstaddress}}, {{dstcity}}, {{dstpostalcode}}",
+        travelMode: google.maps.TravelMode.DRIVING
+    };
+    directionsService.route(request, function(response, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(response);
+      }
+    });
+  }
+
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+    </script>
+
+
 {% endblock localhead %}
 {% block content %}
 
@@ -84,8 +134,8 @@
                         <div class="ibox-content">
                         
                             
-         <img class="img-responsive" src="{{map_image}}">
-  
+    <div id="map-canvas"></div>
+
 
             <h4>{{title|title}}</h4>
              <p>{{description}}</p>
@@ -197,6 +247,7 @@
 
 
 <script type="text/javascript">
+
     function reply_click(clicked_id)
     {
         if(clicked_id == "autofill")

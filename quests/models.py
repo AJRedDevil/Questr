@@ -21,10 +21,8 @@ logger = logging.getLogger(__name__)
 
 PACKAGE_SELECTION = (
     ('0', 'Envelope'),
-    ('0', 'Folder'),
-    ('1', 'Suitcase'),
-    ('1', 'Archive'),
-    ('2', 'Cube'),
+    ('1', 'Box'),
+    ('2', 'Grande'),
 )
 
 STATUS_SELECTION = (
