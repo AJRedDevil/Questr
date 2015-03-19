@@ -20,9 +20,9 @@ import uuid
 logger = logging.getLogger(__name__)
 
 PACKAGE_SELECTION = (
-    ('0', 'Envelope'),
-    ('1', 'Box'),
-    ('2', 'Grande'),
+    ('car', 'Car'),
+    ('van', 'Van'),
+    ('minivan', 'Minivan'),
 )
 
 STATUS_SELECTION = (

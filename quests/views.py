@@ -85,7 +85,6 @@ def newquest(request):
             destination = dstaddress+', '+dstcity+', '+dstpostalcode
             maps.set_geo_args(dict(origin=origin, destination=destination))
             distance = maps.get_total_distance()
-            logger.warn(distance)
             map_image = maps.fetch_static_map()
             logger.warn(map_image)
             if distance is None or map_image is None:
