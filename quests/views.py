@@ -85,7 +85,6 @@ def newquest(request):
             destination = dstaddress+', '+dstcity+', '+dstpostalcode
             maps.set_geo_args(dict(origin=origin, destination=destination))
             distance = maps.get_total_distance()
-            logger.warn(distance)
             map_image = maps.fetch_static_map()
             logger.warn(map_image)
             if distance is None or map_image is None:
@@ -100,14 +99,14 @@ def newquest(request):
             stripereward = reward*100
             stripekey = os.environ['STRIPE_KEY']
             pagetitle = "Confirm your Quest"
-            return render(request, 'confirmquest.html', locals())  
+            return render(request, 'confirmquest.html', locals())
         if user_form.errors:
             logger.debug("Form has errors, %s ", user_form.errors)
             return render(request, 'newquest.html', locals())
-           
+
     user_form = QuestCreationForm()
     pagetitle = "Create your Quest"
-    return render(request, 'newquest.html', locals())  
+    return render(request, 'newquest.html', locals())
 
 @verified
 @login_required

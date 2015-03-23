@@ -27,8 +27,8 @@ class WebPricing(object):
         self.pricing_Minutes_large    =   [10.0,  1.0,     1.0,      1.0,      1.0,      0.8,      0.8,      0.8,      0.8,      0.8]
 
 
-    def get_price(self, distance, size=0):
-        SIZE = int(size)
+    def get_price(self, distance, size='car'):
+        SIZE = str(size).lower()
         """
         Returns price depending on the type of shipment and distance.
         size 0 = filing bag
@@ -37,7 +37,7 @@ class WebPricing(object):
         """
         charge = 0.0
 
-        if SIZE is 0:
+        if SIZE == 'car':
             if distance <= 5.0:
                 charge = 6.0
             else:
@@ -59,7 +59,7 @@ class WebPricing(object):
             #Round the shipping fee to 2 decimal places
             charge = round(charge, 2)
 
-        elif SIZE is 1:
+        elif SIZE == 'van':
             if distance <= 5.0:
                 charge = 8.0
             else:
@@ -81,7 +81,7 @@ class WebPricing(object):
             #Round the shipping fee to 2 decimal places
             charge = round(charge, 2)
 
-        elif SIZE is 2:
+        elif SIZE == 'minivan':
             if distance <= 5.0:
                 charge = 12.0
             else:
