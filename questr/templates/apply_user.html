@@ -1,0 +1,97 @@
+{% extends "landingbase.html" %}
+{% load staticfiles %}
+{% block localhead %}
+  
+<link href={% static "app/css/bootstrap.min.css" %} rel="stylesheet">
+    <link href={% static "app/css/animate.css" %} rel="stylesheet">
+    <link href={% static "app/css/style.css" %} rel="stylesheet">
+
+{% endblock localhead %}
+{% block content %} 
+<form class="form-horizontal" role="form" name="form" action="/user/signin/?next={{next}}" method="post" >
+  <div class="wrapper wrapper-content animated fadeInUp col-lg-8 col-lg-offset-2">
+    <div class="ibox white-bg" >
+      <div class="ibox-title">
+        <h5>We are currently invite-only, please fill in the form and we will get back to you.</h5>
+        
+      </div>
+      <div class="ibox-content">
+        <div class="form-group" required>
+          Which type of customer will you use us as?
+          <br>
+          <input type="radio" name="user_type" value="individual"> Individual<br>
+          <input type="radio" name="user_type" value="business"> Business<br>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="name" name="name" placeholder="Name" required />
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email" required />
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" maxlength="10" required />
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="postalcode" name="postalcode" placeholder="Postal code" maxlength="10" required />
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group" required>
+          Do you send packages locally (within Greater Toronto Area) regularly?
+          <br>
+          <input type="radio" name="regular_delivery" value="occasionally"> Occasionally<br>
+          <input type="radio" name="regular_delivery" value="1-10"> 1~10/month<br>
+          <input type="radio" name="regular_delivery" value="11-30"> 11-30/month<br>
+          <input type="radio" name="regular_delivery" value="31-50"> 31-50/month<br>
+          <input type="radio" name="regular_delivery" value="51"> 51+/month<br>
+        </div>
+
+        <div class="form-group" required>
+          Which of the following best describes your average packages?
+          <br>
+          <input type="radio" name="avg_pkg_size" value="envelope"> Documents, prints<br>
+          <input type="radio" name="avg_pkg_size" value="box"> Items that can fit in a moving box<br>
+          <input type="radio" name="avg_pkg_size" value="grande"> Items that are larger (or longer, wider) than a moving box<br>
+        </div>
+
+        <div class="form-group" required>
+          Which of the following concerns you more?
+          <br>
+          <input type="radio" name="service_concern" value="speed"> Delivery speed<br>
+          <input type="radio" name="service_concern" value="money"> Budget<br>
+          </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="other_job" name="other_job" placeholder="If part-time, what is your other job?" />
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group" required>
+          <input type="text" class="form-control" id="msg" name="msg" placeholder="Anything you would like to share with us"/>
+          <div class="help-block with-errors"></div>
+        </div>
+         
+        <button type="submit" class="btn btn-info block full-width m-b" ng-disabled="form.$invalid">Submit</button>
+        
+        
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+</form>
+
+
+{% endblock %}
+{% block scripts %}
+
+
+<script src={% static "app/js/jquery-2.1.1.js" %}></script>
+    <script src={% static "app/js/bootstrap.min.js" %}></script>
+{% endblock scripts %}
