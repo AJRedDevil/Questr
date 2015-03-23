@@ -1,16 +1,6 @@
-{% extends "mainbase.html" %}
+{% extends "landingbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
-  <!-- CSS -->
-  <style type="text/css">
-  .css-form input.ng-invalid.ng-dirty {
-    border-color: rgba(232,77,60,1.00);
-  }
-
-  .css-form input.ng-valid.ng-dirty {
-    border-color: rgba(47,204,112,1.00);
-  } 
-</style>
   
 <link href={% static "app/css/bootstrap.min.css" %} rel="stylesheet">
     <link href={% static "app/css/animate.css" %} rel="stylesheet">
@@ -18,20 +8,25 @@
 
 {% endblock localhead %}
 {% block content %} 
+<form class="form-horizontal" role="form" name="form" action="/user/signin/?next={{next}}" method="post" >
+<div class="wrapper wrapper-content animated fadeInUp col-lg-8 col-lg-offset-2">
 
 
+				<div class="ibox white-bg" >
+					<div class="ibox-title">
+						<h5>Become a Questr Courier</h5>
+					
+					</div>
+					<div class="ibox-content">
+						<div class="form-group">
+							
+							
+								
+								<input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" required />
+								<span class="help-block with-errors"></span>
 
-<div class="middle-box text-center loginscreen  animated fadeInDown" ng-app="validation">
-  <div ng-controller="Validation">
-    <div></div>
-    <h3>Become a Questr courier</h3>
-    <p></p>
-    <p></p>
-
-
-
-    <form class="m-t css-form" role="form" name="form" action="/user/signin/?next={{next}}" method="post" novalidate >
-      <div class="form-group">
+						</div>
+						<div class="form-group">
         <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" required />
         <div class="help-block with-errors"></div>
       </div>
@@ -164,37 +159,48 @@
         <input type="radio" name="accessibility_permit" value="other"> Other<br>
       </div>
 
-      <button type="submit" class="btn btn-primary block full-width m-b" ng-disabled="form.$invalid">Submit</button>
+      <button type="submit" class="btn btn-info block full-width m-b" ng-disabled="form.$invalid">Submit</button>
+						
+						
+
+					
+					
+						
 
 
-    </form>
+				    		
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			
+			
+			
+			
+</form>
 
-  </div>
-</div>
+
+
+
+
+
+
+
+
+    
+      
+
+
+   
+
+ 
 
 
 {% endblock %}
 {% block scripts %}
-  <script>
-  angular.module('validation', [])
-    .controller('Validation', ['$scope', function($scope) {
-      $scope.master = {};
 
-      $scope.update = function(user) {
-        $scope.master = angular.copy(user);
-      };
-
-      $scope.reset = function() {
-        $scope.user = angular.copy($scope.master);
-      };
-
-      $scope.isUnchanged = function(user) {
-      return angular.equals(user, $scope.master);
-    };
-
-      $scope.reset();
-    }]);
-</script>
 
 <script src={% static "app/js/jquery-2.1.1.js" %}></script>
     <script src={% static "app/js/bootstrap.min.js" %}></script>
