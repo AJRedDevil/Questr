@@ -1,0 +1,154 @@
+{% extends "landingbase.html" %}
+{% load staticfiles %}
+{% block localhead %}
+  
+<link href={% static "app/css/bootstrap.min.css" %} rel="stylesheet">
+    <link href={% static "app/css/animate.css" %} rel="stylesheet">
+    <link href={% static "app/css/style.css" %} rel="stylesheet">
+
+{% endblock localhead %}
+{% block content %} 
+<form class="form-horizontal" role="form" name="form" action="/user/signin/?next={{next}}" method="post" >
+  <div class="wrapper wrapper-content animated fadeInUp col-lg-8 col-lg-offset-2">
+    <div class="ibox white-bg" >
+      <div class="ibox-title">
+        <h5>Become a Questr Courier</h5>
+        
+      </div>
+      <div class="ibox-content">
+        <div class="form-group">
+          <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" required />
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" required />
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email" required />
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" maxlength="10" required />
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="city" name="city" placeholder="Location (Scarborough, Markham, etc)" maxlength="10" required />
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group" required>
+          What type of cellphone do you own?
+          <br>
+          <input type="radio" name="phone_type" value="ios"> iOS<br>
+          <input type="radio" name="phone_type" value="android"> Android<br>
+          <input type="radio" name="phone_type" value="other"> Other<br>
+        </div>
+        <div class="form-group" required>
+          If you do not own an iPhone, are you willing to get an iPhone with a data plan?
+          <br>
+          <input type="radio" name="ios_accessible" value="yes"> Yes<br>
+          <input type="radio" name="ios_accessible" value="no"> No<br>
+        </div>
+        <div class="form-group" required>
+          Do you own a motorized vehicle?
+          <br>
+          <input type="radio" name="car_accessible" value="yes"> Yes<br>
+          <input type="radio" name="car_accessible" value="no"> No<br>
+          <input type="radio" name="car_accessible" value="other"> No, but I own a bike, a motorcycle, or a scooter<br>
+        </div>
+        <div class="form-group" required>
+          What type of vehicle do you have?
+          <br>
+          <select>
+            <option name="vehicle_type" value="coupe">Coupe</option>
+            <option name="vehicle_type" value="minivan">Minivan</option>
+            <option name="vehicle_type" value="pickup">Pickup truck</option>
+            <option name="vehicle_type" value="sedan">Sedan</option>
+            <option name="vehicle_type" value="suv">Suv</option>
+            <option name="vehicle_type" value="van">Van</option>
+            <option name="vehicle_type" value="wagen">Wagen</option>
+            <option name="vehicle_type" value="hatchback">Hatchback of any kind</option>
+            <option name="vehicle_type" value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group" required>
+          Can your backseats be taken out?
+          <br>
+          <input type="radio" name="backseats_down" value="yes"> Yes<br>
+          <input type="radio" name="backseats_down" value="no"> No<br>
+        </div>
+        <div class="form-group" required>
+          What class of license do you have?
+          <br>
+          <input type="radio" name="license_type" value="G"> G<br>
+          <input type="radio" name="license_type" value="M"> M<br>
+          <input type="radio" name="license_type" value="G2"> G2<br>
+          <input type="text"  name="license_type" placeholder="Other, please specify"><br>
+        </div>
+        <div class="form-group" required>
+          What is your availability in general? (Check all that apply)
+          <br>
+          <input type="checkbox" name="available_days" value="monday"> Monday<br>
+          <input type="checkbox" name="available_days" value="tuesday"> Tuesday<br>
+          <input type="checkbox" name="available_days" value="wednesday"> Wednesday<br>
+          <input type="checkbox" name="available_days" value="thursday"> Thursday<br>
+          <input type="checkbox" name="available_days" value="friday"> Friday<br>
+          <input type="checkbox" name="available_days" value="saturday"> Saturday<br>
+          <input type="checkbox" name="available_days" value="sunday"> Sunday<br>
+        </div>
+        <div class="form-group" required>
+          During which hours are you planning to deliver for Questr? (Check all that apply)
+          <br>
+          <input type="checkbox" name="available_hours" value="00000559"> 00:00 - 05:59<br>
+          <input type="checkbox" name="available_hours" value="06001159"> 06:00 - 11:59<br>
+          <input type="checkbox" name="available_hours" value="12001759"> 12:00 - 17:59<br>
+          <input type="checkbox" name="available_hours" value="18002359"> 18:00 - 23:59<br>
+        </div>
+        <div class="form-group" required>
+          Will you be working full-time or part-time?
+          <br>
+          <input type="radio" name="fulltime_or_parttime" value="fulltime"> Full-time<br>
+          <input type="radio" name="fulltime_or_parttime" value="partime"> Part-time<br>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="previous_job" name="previous_job" placeholder="If full-time, what was your previous job?" />
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="other_job" name="other_job" placeholder="If part-time, what is your other job?" />
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group" required>
+          Do you have an accessibility parking permit?
+          <br>
+          <input type="radio" name="accessibility_permit" value="yes"> Yes<br>
+          <input type="radio" name="accessibility_permit" value="no"> No<br>
+          <input type="radio" name="accessibility_permit" value="other"> Other<br>
+        </div>
+        <button type="submit" class="btn btn-info block full-width m-b" ng-disabled="form.$invalid">Submit</button>
+        
+        
+        
+        
+        
+        
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+</form>
+
+
+{% endblock %}
+{% block scripts %}
+
+
+<script src={% static "app/js/jquery-2.1.1.js" %}></script>
+    <script src={% static "app/js/bootstrap.min.js" %}></script>
+{% endblock scripts %}
