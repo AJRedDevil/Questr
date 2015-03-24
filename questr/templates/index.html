@@ -39,11 +39,13 @@
 		                                <a href="{% url 'index' %}">HOME</a>
 		                            </li>
 		                            <li>
-		                                <a href="#">PRICING</a>
+		                                <a href="#pricing">PRICING</a>
 		                            </li>
+                                    {% comment %}
 		                            <li>
 		                                <a href="{% url 'trackquest' %}">TRACK A PACKAGE</a>
 		                            </li>
+                                    {% endcomment %}
                                 </ul>
                                 
                                 <ul class="subnav">
@@ -89,7 +91,10 @@
                             <h3>Deliver anything, anytime, in minutes</h3>
                             <p class="lead">
                                 24-hour rush delivery within GTA
+                                <br><br>
+                                <a class="btn btn-primary" href="{% url 'signin' %}">Ship now</a>
                             </p>
+                         
                         </div>
                     </div>
                     
@@ -209,7 +214,9 @@
 {% endcomment %}
 
 <!-- price-2 -->
+<a name="pricing">
         <section class="price-2">
+
             <div class="container">
                 <div class="row">
                     <div class="span8 offset2">
@@ -292,10 +299,6 @@
 
 
 
-
-
-
-
 <!-- content-2  -->
 <section class="content-2">
     <div class="container">
@@ -313,46 +316,6 @@
     </div>
 </section>
 
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Get an invitation to be a beta tester</h4>
-      </div>
-      <div class="modal-body">
-        <form action="{% url 'contactus'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-horizontal" target="_top" role="form" novalidate>{% csrf_token %}
-
-
-						<div class="form-group">
-							<input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Name">
-							<br><br>
-							<input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-							<br><br>
-							<textarea name="message" class="form-control" rows="3" placeholder="Message"></textarea>
-						</div><!-- ./form-group -->
-						
-						
-					</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-info">Submit</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-        
-        
         
         <!-- footer-1 -->
     <footer class="footer-1 bg-midnight-blue">
@@ -365,26 +328,32 @@
           </div>
           <nav>
             <div class="span2 offset1">
-              <h6>Categories</h6>
+              <h6>More</h6>
               <ul>
+                {% comment %}
 	            <li>
 	                <a href="#">About Us</a>
 	            </li>
 	            <li>
 	                <a href="#">Blog</a>
 	            </li>
+                <li>
+                    <a href={% url 'career' %}>Careers</a>
+                </li>
+
+                {% endcomment %}
 	            <li>
-	                <a href="{% url 'faq' %}">FAQ</a>
-	            </li>
+                    <a href="{% url 'faq' %}">FAQ</a>
+                </li>
 	            <li>
 	                <a href={% url 'team' %}>Team</a>
 	            </li>
 	            <li>
-	                <a href={% url 'career' %}>Careers</a>
-	            </li>
-	            <li>
 	                <a href="{% url 'contact' %}">Contact</a>
 	            </li>
+                <li>
+                    <a href="{% url 'contact' %}">Become a courier</a>
+                </li>
 	        </ul>
             </div>
             <div class="span2">
