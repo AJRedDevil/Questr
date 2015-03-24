@@ -1,0 +1,122 @@
+{% extends "landingbase.html" %}
+{% load staticfiles %}
+{% block localhead %}
+  
+<link href={% static "app/css/bootstrap.min.css" %} rel="stylesheet">
+    <link href={% static "app/css/animate.css" %} rel="stylesheet">
+    <link href={% static "app/css/style.css" %} rel="stylesheet">
+
+    <style>
+      ul {
+        list-style-type: none;
+        }
+    </style>
+
+{% endblock localhead %}
+{% block content %} 
+<form class="form-horizontal" role="form" name="form" action="{% url 'applyAsCourier' %}" method="post" >{% csrf_token %}
+  <div class="wrapper wrapper-content animated fadeInUp col-lg-8 col-lg-offset-2">
+    <div class="ibox white-bg" >
+      <div class="ibox-title">
+        <h5>Become a Questr Courier</h5>
+        
+      </div>
+      <div class="ibox-content">
+        <div class="form-group">
+          {{user_form.name}}
+          <div class="help-block with-errors">{{user_form.name.errors}}</div>
+        </div>
+        <div class="form-group">
+          {{user_form.email}}
+          <div class="help-block with-errors">
+            {{user_form.email.errors}}
+          </div>
+        </div>
+        <div class="form-group">
+          {{user_form.phone}}
+          <div class="help-block with-errors">
+            {{user_form.phone.errors}}
+          </div>
+        </div>
+        <div class="form-group">
+          {{user_form.postalcode}}
+          <div class="help-block with-errors">
+              {{user_form.postalcode.errors}}
+          </div>
+        </div>
+        <div class="form-group" required>
+          What type of cellphone do you own?
+          <br>
+          {{user_form.phone_type}}
+        </div>
+        <div class="form-group" required>
+          If you do not own an iPhone, are you willing to get an iPhone with a data plan?
+          <br>
+          {{user_form.ios_accessible}}
+        </div>
+        <div class="form-group" required>
+          Do you own a motorized vehicle?
+          <br>
+          {{user_form.car_accessible}}
+          </div>
+        <div class="form-group" required>
+          What type of vehicle do you have?
+          <br>
+          {{user_form.vehicle_type}}
+          </div>
+        <div class="form-group" required>
+          Can your backseats be taken out?
+          <br>
+          {{user_form.backseats_down}}
+        </div>
+        <div class="form-group" required>
+          What class of license do you have?
+          <br>
+          {{user_form.license_type}}
+        </div>
+        <div class="form-group" required>
+          What is your availability in general? (Check all that apply)
+          <br>
+          {{user_form.available_days}}
+        </div>
+        <div class="form-group" required>
+          During which hours are you planning to deliver for Questr? (Check all that apply)
+          <br>
+          {{user_form.available_hours}}
+        </div>
+        <div class="form-group" required>
+          Will you be working full-time?
+          <br>
+          {{user_form.fulltime_or_parttime}}
+        </div>
+        <div class="form-group">
+          {{user_form.previous_job}}
+          <div class="help-block with-errors">
+              {{user_form.previous_job.errors}}
+          </div>
+        </div>
+        <div class="form-group">
+          {{user_form.other_job}}
+          <div class="help-block with-errors">
+              {{user_form.other_job.errors}}
+          </div>
+        </div>
+        <div class="form-group" required>
+          Do you have an accessibility parking permit?
+          <br>
+          {{user_form.accessibility_permit}}
+        </div>
+        <button type="submit" class="btn btn-info block full-width m-b" ng-disabled="form.$invalid">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+{% endblock %}
+{% block scripts %}
+
+
+<script src={% static "app/js/jquery-2.1.1.js" %}></script>
+    <script src={% static "app/js/bootstrap.min.js" %}></script>
+{% endblock scripts %}

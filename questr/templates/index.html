@@ -92,7 +92,7 @@
                             <p class="lead">
                                 24-hour rush delivery within GTA
                                 <br><br>
-                                <a class="btn btn-primary" href="{% url 'signin' %}">Ship now</a>
+                                <a class="btn btn-primary" href="{% url 'applyAsUser' %}">Ship now</a>
                             </p>
                          
                         </div>
@@ -309,7 +309,7 @@
                 	We are currently in private beta, and only serve the Greater Toronto Area. If you're interested in using Questr, please let us know.
                 </p>
                 <div class="btns">
-                    <a href="#" class="btn btn-large btn-clear" data-toggle="modal" data-target="#myModal">TRY IT NOW</a>
+                    <a href="{% url 'applyAsUser' %}" class="btn btn-large btn-clear">TRY IT NOW</a>
                 </div>
             </div>
         </div>
@@ -331,9 +331,7 @@
               <h6>More</h6>
               <ul>
                 {% comment %}
-	            <li>
-	                <a href="#">About Us</a>
-	            </li>
+	            
 	            <li>
 	                <a href="#">Blog</a>
 	            </li>
@@ -342,6 +340,9 @@
                 </li>
 
                 {% endcomment %}
+                <li>
+                    <a href="{% url 'about' %}">About Us</a>
+                </li>
 	            <li>
                     <a href="{% url 'faq' %}">FAQ</a>
                 </li>
@@ -352,7 +353,7 @@
 	                <a href="{% url 'contact' %}">Contact</a>
 	            </li>
                 <li>
-                    <a href="{% url 'contact' %}">Become a courier</a>
+                    <a href="{% url 'applyAsCourier' %}">Become a courier</a>
                 </li>
 	        </ul>
             </div>

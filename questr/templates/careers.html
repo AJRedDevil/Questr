@@ -114,27 +114,34 @@
           </div>
           <nav>
             <div class="span2 offset1">
-              <h6>Categories</h6>
+              <h6>More</h6>
               <ul>
-	            <li>
-	                <a href="#">About Us</a>
-	            </li>
-	            <li>
-	                <a href="#">Blog</a>
-	            </li>
-	            <li>
-	                <a href="{% url 'faq' %}">FAQ</a>
-	            </li>
-	            <li>
-	                <a href="#">Team</a>
-	            </li>
-	            <li>
-	                <a href="#">Careers</a>
-	            </li>
-	            <li>
-	                <a href="{% url 'contact' %}">Contact</a>
-	            </li>
-	        </ul>
+                {% comment %}
+                
+                <li>
+                    <a href="#">Blog</a>
+                </li>
+                <li>
+                    <a href={% url 'career' %}>Careers</a>
+                </li>
+
+                {% endcomment %}
+                <li>
+                    <a href="{% url 'about' %}">About Us</a>
+                </li>
+                <li>
+                    <a href="{% url 'faq' %}">FAQ</a>
+                </li>
+                <li>
+                    <a href={% url 'team' %}>Team</a>
+                </li>
+                <li>
+                    <a href="{% url 'contact' %}">Contact</a>
+                </li>
+                <li>
+                    <a href="{% url 'applyAsCourier' %}">Become a courier</a>
+                </li>
+            </ul>
             </div>
             <div class="span2">
               <h6>Follow Us</h6>

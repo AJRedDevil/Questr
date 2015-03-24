@@ -28,14 +28,14 @@ def loadPage(request, template):
 def contact(request):
     """Returns the contactus page"""
     user = request.user
-    pagetitle = "Contact US"
+    pagetitle = "Contact us"
     return render(request, 'contact.html', locals())
 
 
 def about(request):
     """Returns the about us page"""
     user = request.user
-    pagetitle = "About Us"
+    pagetitle = "About us"
     return render(request, 'about.html', locals())
 
 

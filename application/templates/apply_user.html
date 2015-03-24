@@ -1,0 +1,78 @@
+{% extends "landingbase.html" %}
+{% load staticfiles %}
+{% block localhead %}
+  
+<link href={% static "app/css/bootstrap.min.css" %} rel="stylesheet">
+    <link href={% static "app/css/animate.css" %} rel="stylesheet">
+    <link href={% static "app/css/style.css" %} rel="stylesheet">
+    <style>
+      ul {
+        list-style-type: none;
+        }
+    </style>
+{% endblock localhead %}
+{% block content %} 
+<form class="form-horizontal" role="form" name="form" action="{% url 'applyAsUser' %}" method="post" >{% csrf_token %}
+  <div class="wrapper wrapper-content animated fadeInUp col-lg-8 col-lg-offset-2">
+    <div class="ibox white-bg" >
+      <div class="ibox-title">
+        <h5>We are currently invite-only, please fill in the form and we will get back to you within an hour.</h5>
+        
+      </div>
+      <div class="ibox-content">
+        <div class="form-group">
+          {{user_form.name}}
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          {{user_form.email}}
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          {{user_form.phone}}
+          <div class="help-block with-errors"></div>
+        </div>
+        <div class="form-group">
+          {{user_form.postalcode}}
+          <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group" required>
+          How often do you send packages locally (within Greater Toronto Area)?
+          <br>
+          {{user_form.regular_delivery}}
+        </div>
+
+        <div class="form-group" required>
+          Which of the following best describes your average packages?
+          <br>
+           {{user_form.avg_pkg_size}}
+        </div>
+
+        <div class="form-group" required>
+          {{user_form.msg}}
+        </div>
+         
+        <button type="submit" class="btn btn-info block full-width m-b" ng-disabled="form.$invalid">Send</button>
+        
+        
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+</form>
+
+
+{% endblock %}
+{% block scripts %}
+
+
+<script src={% static "app/js/jquery-2.1.1.js" %}></script>
+    <script src={% static "app/js/bootstrap.min.js" %}></script>
+{% endblock scripts %}
