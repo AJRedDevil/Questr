@@ -67,6 +67,7 @@ INSTALLED_APPS = (
     'api',
     'rest_framework_swagger',
     'debug_toolbar',
+    'application',
 )
 
 # MIDDLERWARE DEFINITIONS

@@ -27,6 +27,8 @@ urlpatterns = patterns('',
     url(r'^help/faq/', mainview.faq, name='faq' ),
     url(r'^help/crowdshipping/', mainview.crowdshipping, name='crowdshipping' ),
     url(r'^help/trust/', mainview.trust, name='trust' ),
+    url(r'^apply/', include('application.urls')),
+    url(r'^about/', mainview.about, name='about' ),
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
 

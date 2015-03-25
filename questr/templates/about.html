@@ -1,93 +1,243 @@
 {% extends "landingbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
-  <link href={% static "css/static.css" %} rel="stylesheet"> 
-	<script src={% static "assets/js/pace.js" %}></script>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600' rel='stylesheet' type='text/css'>
-	
-	<script src={% static "bootstrap/js/tooltip.js" %} type="text/javascript"></script>
+<link href={% static "landingpage/flat-ui/bootstrap/css/bootstrap.css" %} rel="stylesheet">
+	     <link href={% static "landingpage/flat-ui/bootstrap/css/bootstrap-responsive.css" %} rel="stylesheet">
+	     <link href={% static "landingpage/flat-ui/css/flat-ui.css" %} rel="stylesheet">
+	    
+	     <!-- Using only with Flat-UI (free)-->
+	     <link href={% static "landingpage/common-files/css/icon-font.css" %} rel="stylesheet">
+	     <!-- end -->
+	     <link href={% static "landingpage/common-files/css/animations.css" %} rel="stylesheet">
+	     
+
+	    <link href={% static "landingpage/css/style.css" %} rel="stylesheet"> 	   
+
+	     <link href={% static "landingpage/img/logo.png" %} rel="shortcut icon">
+	    
+	    <link href={% static "landingpage/css/font-awesome-4.2.0/css/font-awesome.min.css" %} rel="stylesheet">
 {% endblock localhead %}
 
 {% block content %}
-<div class="banner">
-  <div class="banner title">
-    <h1>About Questr</h1>
-  </div>
-</div>    
 
-<div class="container mtb">
-  <div class="row">
-  	<p>
-  	<b>Our story</b>
-  	<br>
-	It all starts with many times of frustration. Not knowing when couriers will come, not knowing when they will come next time, you keep missing them, and you end up having to go to the sorting facility yourself. It is a hassle measuring your boxes, height, width, length, weight, container. It should be simpler than that. That’s why we built Questr, to alleviate the frustration and to simplify the process. 
-	<br>
-	<br>
-	<b>What we do</b>
-	<br>
-	<i>What we do for people</i>
-	<br>
-	We provide crowdsourced rush delivery for the Greater Toronto Area. What usually is delivered overnight can now be delivered within an hour. Questr does not collect your packages and throw them in a warehouse and then dump them into a truck. What a waste of time. Our couriers picks up your packages and start driving to destination right away. When the packages are taking a private trip, you can also locate them anytime you want in real time. 
-	<br>
-	<br>
-	<i>What we do for businesses</i>
-	<br>
-	Your business is growing. More people are purchasing on your e-commerce site. What are you selling though? Do you sell things that people want to try out really soon? Who wouldn’t like to have their orders delivered as soon as possible?  Questr helps you build an on-demand, elite-of-the-industry image by integrating our shipping option to your store. And you will never need to sign a contract with us, we always offer you the best price for your need.
-	<br>
-	<br>
-	<i>What we do for the society</i>
-	<br>
-	We mentioned we are crowdsourced. What does that mean? That means your packages are delivered by people who are in need. A student eager to pay off their debts, a disabled who works hard to provide for themselves, and more. Every honest person deserves to achieve self-realization and Questr is proud to be a part of it. 
-	<br>
-	<br>
-	<b>What we believe </b>
-	<br>
-	<i>Grow with your customer</i>
-	<br>
-	Company isn’t always about profit, and a premium service doesn’t have to come with a premium price tag. We are here because we strive to provide a better service everyone in the 21st century deserves, and it is in Questr’s interest to see more successful businesses because, after all, we are customers ourselves and we would love to see a more commercially abundant society. 
-	<br>
-	<br>
-	<i>Efficiency is everything</i>
-	<br>
-	We’ve heard so much about our precious time. Life is short, time is money, etc. Corporations keep things the way it is to keep a profitable margin, Questr boosts efficiency to prove that efficiency not only can be done, but also a necessity. Customers need to get their things faster to make their lives better, businesses need to ship their things faster to focus on more important things. Odds and ends like shipping? Leave it to us, that’s what Questr does.
-	<br>
-	</p>
+<!-- header-1 -->
+        <header class="header-1">
+            <div class="container">
+                <div class="row">
+                    <div class="navbar span12">
+                        <div class="navbar-inner">
+                            <button type="button" class="btn btn-navbar"></button>
+                            	<a class="brand" href="{% url 'index' %}"><!--img src="img/logo@2x.png" width="50" height="50" alt="" --> QUESTR</a>
+                            <div class="nav-collapse collapse">
+                                <ul class="nav pull-right">
+                                    <li class="active">
+		                                <a href="{% url 'index' %}">HOME</a>
+		                            </li>
+		                            <li>
+		                                <a href="#">GET A QUOTE</a>
+		                            </li>
+		                            <li>
+		                                <a href="{% url 'trackquest' %}">TRACK DELIVERY</a>
+		                            </li>
+                                </ul>
+                                <ul class="subnav">
+                                    <li>
+                                        <a href="#">Privacy</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Terms</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Advertise</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Affiliates</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Newsletter</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">About</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Contact Us</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="header-1-sub">
+            <div id="pt-main" class="page-transitions pt-perspective">
+                <div class="pt-page pt-page-1 bg-midnight-blue">
+                    <div class="background">
+                        &nbsp;
+                    </div>
+                    <div class="caption">
+                        <div class="container">
+                    <h3>Same day delivery for everyone.</h3>
+                    <p class="lead">
+                        Deliver anything 24/7
+                    </p>
+                   
+                </div>
+                    </div>
+                </div>
+               
+            
+            </div>
+        </section>
+
+<!-- faq -->
+    <section class="crew-1">
+      <div class="container">
+        <div class="row">
+	        <div class="span12">
+	        	<p>
+			  	<h6>Our story</h6>
+			  	<br>
+				It all starts with many times of frustration. Not knowing when couriers will come, not knowing when they will come next time, you keep missing them, and you end up having to go to the sorting facility yourself. It is a hassle measuring your boxes, height, width, length, weight, container. It should be simpler than that. That’s why we built Questr, to alleviate the frustration and to simplify the process. 
+				<br>
+				<br>
+				<h6>What we do</h6>
+				<br>
+				<b><i>What we do for people</i></b>
+				<br>
+				We provide crowdsourced rush delivery for the Greater Toronto Area. What usually is delivered overnight can now be delivered within an hour. Questr does not collect your packages and throw them in a warehouse and then dump them into a truck. What a waste of time. Our couriers picks up your packages and start driving to destination right away. When the packages are taking a private trip, you can also locate them anytime you want in real time. 
+				<br>
+				<br>
+				<b><i>What we do for businesses</i></b>
+				<br>
+				Your business is growing. More people are purchasing on your e-commerce site. What are you selling though? Do you sell things that people want to try out really soon? Who wouldn’t like to have their orders delivered as soon as possible?  Questr helps you build an on-demand, elite-of-the-industry image by integrating our shipping option to your store. And you will never need to sign a contract with us, we always offer you the best price for your need.
+				<br>
+				<br>
+				<b><i>What we do for the society</i></b>
+				<br>
+				We mentioned we are crowdsourced. What does that mean? That means your packages are delivered by people who are in need. A student eager to pay off their debts, a disabled who works hard to provide for themselves, and more. Every honest person deserves to achieve self-realization and Questr is proud to be a part of it. 
+				<br>
+				<br>
+				<h6>What we believe </h6>
+				<br>
+				<b><i>Grow with your customer</i></b>
+				<br>
+				Company isn’t always about profit, and a premium service doesn’t have to come with a premium price tag. We are here because we strive to provide a better service everyone in the 21st century deserves, and it is in Questr’s interest to see more successful businesses because, after all, we are customers ourselves and we would love to see a more commercially abundant society. 
+				<br>
+				<br>
+				<b><i>Efficiency is everything</i></b>
+				<br>
+				We’ve heard so much about our precious time. Life is short, time is money, etc. Corporations keep things the way it is to keep a profitable margin, Questr boosts efficiency to prove that efficiency not only can be done, but also a necessity. Customers need to get their things faster to make their lives better, businesses need to ship their things faster to focus on more important things. Odds and ends like shipping? Leave it to us, that’s what Questr does.
+				<br>
+				</p>
+
+	        </div>
+        </div>
+      </div>
+      <!--/.container-->
+    </section>
+    
+    
+    <!-- footer-1 -->
+    <footer class="footer-1 bg-midnight-blue">
+      <div class="container">
+        <div class="row">
+          <div class="span4">
+            <p class="lead">We are a proud supporter of the disabled community <i class="fa fa-wheelchair"></i></p>
+            Providing jobs for the disabled since 2014.
+            
+          </div>
+          <nav>
+            <div class="span2 offset1">
+              <h6>More</h6>
+              <ul>
+                {% comment %}
+                
+                <li>
+                    <a href="#">Blog</a>
+                </li>
+                <li>
+                    <a href={% url 'career' %}>Careers</a>
+                </li>
+
+                {% endcomment %}
+                <li>
+                    <a href="{% url 'about' %}">About Us</a>
+                </li>
+                <li>
+                    <a href="{% url 'faq' %}">FAQ</a>
+                </li>
+                <li>
+                    <a href={% url 'team' %}>Team</a>
+                </li>
+                <li>
+                    <a href="{% url 'contact' %}">Contact</a>
+                </li>
+                <li>
+                    <a href="{% url 'applyAsCourier' %}">Become a courier</a>
+                </li>
+            </ul>
+            </div>
+            <div class="span2">
+              <h6>Follow Us</h6>
+              <ul>
+                <li><a target="_blank" href="https://www.facebook.com/questrco">Facebook</a>
+                </li>
+                <li><a target="_blank" href="https://twitter.com/questrco">Twitter</a>
+                </li>
+                <li><a href="#">&nbsp;</a></li>
+                <li><a href="#">&nbsp;</a></li>
+                <li><a href="#">&nbsp;</a></li>
+                <li><a href="#">&nbsp;</a></li>
+              </ul>
+            </div>
+            <div class="span3" style="margin-left:0;padding-left:0;">
+            <h6>Subscribe to our newsletter</h6>
+            <form role="form" action="{% url 'join'%}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_top" novalidate style="width:100%;margin-left:0;padding-left:0;">{% csrf_token %}
+            <div class="control-group" style="width:100%;margin-left:0;padding-left:0;">
+                            <div class="input-append" style="width:100%;margin-left:0;padding-left:0;">
+                                <input name="EMAIL" type="email" id="address" placeholder="Enter your email" data-validate="validate(required, email)" required="required" style="min-width:100%;">
+                                <button class="btn" type="submit">
+                                    <span class="fui-arrow-right"> </span>
+                                </button>
+                            </div>
+                            <span id="result" class="alertMsg"></span>
+                        </div>
+            </form>
+            
+            
+          </div>
+          </nav>
+          
+        </div>
+        <div class="row">
+          <div class="span4 additional-links">
+            <a href="{% url 'terms' %}">Terms of Service</a>
+            <a href="{% url 'privacy' %}">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
 
 
- </div><! --/row -->
-</div><! --/container -->
 
 
 
-{% endblock content %}
 
-{% block scripts %}
-<script src={% static "assets/js/jquery.js" %}></script>
-<script src={% static "assets/js/bootstrap.js" %}></script>
-<script src={% static "assets/js/easing.js" %}></script>
 
  
-<script>
- $(function() {
-    $('.scrollto, .gototop').bind('click',function(event){
-		 var $anchor = $(this);
-		 $('html, body').stop().animate({
-         scrollTop: $($anchor.attr('href')).offset().top
-          }, 1500,'easeInOutExpo');
-     event.preventDefault();
-      });
-  });
-
-  var img = '<img src="{% static "img/contacts/wechat.jpeg" %}"/>';
   
-  $(".popover-right").popover({
-			placement: 'right', 
-      title: 'Add Questr or scan the QR code below', 
-      content: img, 
-      html:true 
-		});
-
-</script>
-
-    
+	
+			
+{% endblock content %}
+{% block scripts %} 
+<script src={% static "landingpage/common-files/js/jquery-1.10.2.min.js" %}></script>
+	<script src={% static "landingpage/flat-ui/js/bootstrap.min.js" %}></script>
+	<script src={% static "landingpage/common-files/js/modernizr.custom.js" %}></script>
+	<script src={% static "landingpage/common-files/js/page-transitions.js" %}></script>
+	<script src={% static "landingpage/common-files/js/easing.min.js" %}></script>
+	<script src={% static "landingpage/common-files/js/jquery.svg.js" %}></script>
+	<script src={% static "landingpage/common-files/js/jquery.svganim.js" %}></script>
+	<script src={% static "landingpage/common-files/js/startup-kit.js" %}></script>
+	<script src={% static "landingpage/js/script.js" %}></script> 
 {% endblock scripts %}

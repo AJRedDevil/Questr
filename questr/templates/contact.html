@@ -1,4 +1,4 @@
-{% extends "mainbase.html" %}
+{% extends "landingbase.html" %}
 {% load staticfiles %}
 {% block localhead %}
 <link href={% static "landingpage/flat-ui/bootstrap/css/bootstrap.css" %} rel="stylesheet">
@@ -101,10 +101,10 @@
         <div class="row">
           <div class="span6">
             <form action="{% url 'contactus' %}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form" target="_top" role="form" novalidate>{% csrf_token %}
-              <label class="h6">Name / Last Name</label>
+              <label class="h6">Name</label>
               <input type="text" name="name" id="exampleInputName" placeholder="John Smith">
               <label class="h6">E-mail</label>
-              <input type="email" name="email" id="exampleInputEmail1" placeholder="johnsmitty@email.com">
+              <input type="email" name="email" id="exampleInputEmail1" placeholder="johnsmitty@example.com">
               <label class="h6">Message</label>
               <textarea name="message" rows="7" placeholder="Write stuff here..."></textarea>
               <button type="submit" class="btn btn-primary"><span class="fui-mail"></span>
@@ -114,8 +114,7 @@
           <div class="span4 offset1">
             <div class="additional">
               <h6>Need Help?</h6>
-              <p>Don’t hestiate to ask us something. Email us at <a href="#">hello@questr.co</a> or call us at <b>+1 (800) 277-0748</b>. You can checkout our <a href="#">FAQ</a> and <a href="#">Help</a>
-page to get more information about our services.</p>
+              <p>Don’t hestiate to ask us something. Email us at <a href="#">hello@questr.co</a> or call us at <b>+1 (800) 277-0748</b>. You can checkout our <a href="#">FAQ</a> page to get more information about our services.</p>
             </div>
             <div class="additional">
               <h6>Message Us @</h6>
@@ -132,7 +131,7 @@ page to get more information about our services.</p>
             </div>
             <div class="phone">
               <big>+1 (800) 277-0748</big>
-AVAILABLE 9AM - 9PM
+AVAILABLE 9AM - 11PM
             </div>
           </div>
         </div>
@@ -142,7 +141,7 @@ AVAILABLE 9AM - 9PM
     
       
     <!-- footer-1 -->
-    <footer class="footer-1 bg-midnight-blue">
+<footer class="footer-1 bg-midnight-blue">
       <div class="container">
         <div class="row">
           <div class="span4">
@@ -152,25 +151,34 @@ AVAILABLE 9AM - 9PM
           </div>
           <nav>
             <div class="span2 offset1">
-              <h6>Categories</h6>
+              <h6>More</h6>
               <ul>
-	            <li>
-	                <a href="#">About Us</a>
-	            </li>
-	   
-	            <li>
-	                <a href="{% url 'faq' %}">FAQ</a>
-	            </li>
-	            <li>
-	                <a href="#">Team</a>
-	            </li>
-	            <li>
-	                <a href="#">Careers</a>
-	            </li>
-	            <li>
-	                <a href="{% url 'contact' %}">Contact</a>
-	            </li>
-	        </ul>
+                {% comment %}
+              
+              <li>
+                  <a href="#">Blog</a>
+              </li>
+                <li>
+                    <a href={% url 'career' %}>Careers</a>
+                </li>
+
+                {% endcomment %}
+                <li>
+                    <a href="{% url 'about' %}">About Us</a>
+                </li>
+              <li>
+                    <a href="{% url 'faq' %}">FAQ</a>
+                </li>
+              <li>
+                  <a href={% url 'team' %}>Team</a>
+              </li>
+              <li>
+                  <a href="{% url 'contact' %}">Contact</a>
+              </li>
+                <li>
+                    <a href="{% url 'applyAsCourier' %}">Become a courier</a>
+                </li>
+          </ul>
             </div>
             <div class="span2">
               <h6>Follow Us</h6>
